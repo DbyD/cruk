@@ -135,21 +135,74 @@
 }
 .fillHeight{
 	height: 100%;
+	position: relative;
 }
 .panel.callout.white{
 	background: #fff;
+}
+@media only screen and (min-width: 1200px){
+.contentFill{
+	height: 605px;
+}
 }
 /* @end */
 /* @group Nominate */
 .nominateButton{
 	font-size: 20px;
 	text-align: center;
-	padding: 170px 20px;
+	padding: 170px 20px 0 0;
 }
 .nominateButton i{
 	font-size: 100px;
 	display: block;
 	margin-bottom: 30px;
+}
+/* @end */
+/* @group My Awards */
+.subTitle{
+	color: #00b6ed;
+	font-size: 13px;
+}
+.accountAwards{
+	background: #3b03af;
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	width: 100%;
+}
+.accountAwardsTitle p{
+	padding: 11px 0 0 17px;
+	color: #fff !important;
+	margin: 0;
+	height: 38px;
+	border-bottom: 1px solid #4703d2;
+}
+.accountAwardsAmounts{
+	float: right;
+	background: #2e008b;
+	padding: 9px 0 0;
+	font-size: 14px;
+	text-align: center;
+	color: #fff;
+	width: 75px;
+	height: 37px;
+}
+.tableTitle{
+	font-size: 12px;
+	font-weight: bold;
+	padding: 14px 0;
+	text-align: center;
+	background: #2e008b;
+	color: #fff;
+}
+.tableRow{
+	font-size: 12px;
+	padding: 14px 0;
+	text-align: center;
+}
+.tableColumn-4{
+	width: 24.7%;
+	display: inline-table;
 }
 /* @end */
 
@@ -165,5 +218,7 @@
 	text-align: center;
 	padding: 20px;
 }
-
+.fillHeight{
+	min-height: 300px;
+}
 }

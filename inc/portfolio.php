@@ -3,5 +3,5 @@
 	<a href="upload-photo.php" class="uploadPhoto"><i class="icon-icons_person"></i></a>
 </div>
 <div class="title">
-	Hello <?=$_SESSION['user']->Fname?>!
+	Hello <?=trim($_SESSION['user']->Fname)?>!
 </div>
