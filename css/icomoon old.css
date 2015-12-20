@@ -1,0 +1,87 @@
+@font-face {
+	font-family: 'icomoon';
+	src:url('fonts/icomoon.eot?rsx560');
+	src:url('fonts/icomoon.eot?rsx560#iefix') format('embedded-opentype'),
+		url('fonts/icomoon.ttf?rsx560') format('truetype'),
+		url('fonts/icomoon.woff?rsx560') format('woff'),
+		url('fonts/icomoon.svg?rsx560#icomoon') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+	font-family: 'icomoon' !important;
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	font-size: 20px;
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.icon-icons_account:before {
+	content: "\e90c";
+}
+.icon-icons_admin:before {
+	content: "\e900";
+}
+.icon-icons_nominate:before {
+	content: "\e901";
+}
+.icon-icons_tick:before {
+	content: "\e902";
+}
+.icon-icons_bubble:before {
+	content: "\e903";
+}
+.icon-icons_person:before {
+	content: "\e904";
+}
+.icon-icons_question:before {
+	content: "\e905";
+}
+.icon-icons_questionmark:before {
+	content: "\e906";
+}
+.icon-icons_report:before {
+	content: "\e907";
+}
+.icon-icons_settings:before {
+	content: "\e908";
+}
+.icon-icons_team:before {
+	content: "\e909";
+}
+.icon-icons_trophy:before {
+	content: "\e90a";
+}
+.icon-icons_winners:before {
+	content: "\e90b";
+}
+.icon-icons_bubbles:before {
+	content: "\e91d";
+}
+.icon-icons_group:before {
+	content: "\e91e";
+}
+.icon-icons_home:before {
+	content: "\e91f";
+}
+.icon-icons_info:before {
+	content: "\e920";
+}
+.icon-icons_mail:before {
+	content: "\e921";
+}
+.icon-icons_redeem:before {
+	content: "\e922";
+}
+.icon-icons_search:before {
+	content: "\e923";
+}
+

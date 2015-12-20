@@ -12,6 +12,16 @@
 <link rel="shortcut icon" href="favicon.ico">
 </head>
 <body>
+
+<div id="alert" class="">
+	<div class="alertbox">
+		<div id="alertContent">
+			<?php include 'alerts/my-award-details.php'; ?>
+		</div>
+		<div id="closealert" data-type="close" class="clickAble closealert" /><i class="icon-icons_close"></i></div>
+	</div>
+</div>
+
 <nav class="top-bar hide-for-small" data-topbar role="navigation">
 	<ul class="title-area">
 		<li class="name">

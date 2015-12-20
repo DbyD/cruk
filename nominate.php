@@ -5,18 +5,21 @@
 		<div class="title">
 			Nominate
 		</div>
+		<div class="callout panel" id="nominate1">
+			<div class="image">&nbsp;</div>
+		</div>
 		<div class="row contentFill">
-			<div class="medium-6 columns leftnp fillHeight">
-				<div class="callout panel fillHeight white">
-					<div class="nominateButton clickAble" data-url="nominate-colleague.php">
-						<i class="icon-icons_person"></i>Nominate a Colleague
+			<div class="medium-6 columns leftnp">
+				<div class="callout panel white">
+					<div class="nominateButton clickAble" data-type="gourl" data-url="nominate-colleague.php">
+						Nominate a Colleague
 					</div>
 				</div>
 			</div>
-			<div class="medium-6 columns rightnp fillHeight">
-				<div class="callout panel fillHeight white">
-					<div class="nominateButton clickAble" data-url="nominate-team.php">
-						<i class="icon-icons_team"></i>Nominate a Team
+			<div class="medium-6 columns rightnp">
+				<div class="callout panel white">
+					<div class="nominateButton clickAble" data-type="gourl" data-url="nominate-team.php">
+						Nominate a Team
 					</div>
 				</div>
 			</div>
