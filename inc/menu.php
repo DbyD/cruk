@@ -1,13 +1,13 @@
 
-<li><a href="home.php"><i class="icon-icons_home"></i>Home</a></li>
-<li><a href="nominate.php"><i class="icon-icons_nominate"></i>Nominate</a></li>
-<li><a href="history.php"><i class="icon-icons_account"></i>My Account</a></li>
-<li><a href="winners-wall.php"><i class="icon-icons_winners"></i>Winners Wall</a></li>
-<li><a href="redeem.php"><i class="icon-icons_redeem"></i>Redeem</a></li>
+<li class="clickAble" data-url="home.php"><i class="icon-icons_home"></i>Home</li>
+<li class="clickAble" data-url="nominate.php"><i class="icon-icons_nominate"></i>Nominate</li>
+<li class="clickAble" data-url="my-account.php"><i class="icon-icons_account"></i>My Account</li>
+<li class="clickAble" data-url="winners-wall.php"><i class="icon-icons_winners"></i>Winners Wall</li>
+<li class="clickAble" data-url="redeem.php"><i class="icon-icons_redeem"></i>Redeem</li>
 <?php if($_SESSION['user']->approver() == 'YES') { ?>
-<li><a href="approvals.php"><i class="icon-icons_trophy"></i>Approvals</a></li>
-<li><a href="reports.php"><i class="icon-icons_report"></i>Reports</a></li>
+<li class="clickAble" data-url="approvals.php"><i class="icon-icons_trophy"></i>Approvals</li>
+<li class="clickAble" data-url="reports.php"><i class="icon-icons_report"></i>Reports</li>
 <?php }
 	if($_SESSION['user']->SuperUser == 'YES') { ?>
-<li><a href="admin"><i class="icon-icons_admin"></i>Admin</a></li>
+<li class="clickAble" data-url="admin"><i class="icon-icons_admin"></i>Admin</li>
 <?php } ?>

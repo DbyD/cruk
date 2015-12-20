@@ -177,12 +177,12 @@ input[type=submit], .blueButton {
 	text-transform: uppercase;
 	border-radius: 16px;
 }
-/*.panel.callout a:not(.button){
+#content .panel.callout a:not(.button){
 	color: #00b6ed;
 }
-.panel.callout a:not(.button):hover, .panel.callout a:not(.button):focus{
+#content.panel.callout a:not(.button):hover, #content .panel.callout a:not(.button):focus{
 	color: #2e008b;
-}*/
+}
 .row .row {
 	margin: inherit;
 }
@@ -263,6 +263,13 @@ input[type=submit], .blueButton {
 	float: right;
 	font-size: 24px;
 }
+ul.off-canvas-list li{
+	color: #fff;
+	padding: 0.66667rem;
+}
+ul.off-canvas-list li:first-child{
+	padding: 0;
+}
 ul.off-canvas-list img{
 	margin-top: -5px;
 }
@@ -285,10 +292,13 @@ ul.off-canvas-list li a:hover,ul.off-canvas-list li a:active {
 }
 ul.off-canvas-list .title{
 	display: inline-block;
-    height: 100px;
+    width: 145px;
+    vertical-align: top;
+    padding: 10px;
 }
 ul.off-canvas-list .photo{
-	float: left;
+	display: inline-block;
+    vertical-align: top;
 }
 .photo img{
 	max-width: 100px;
