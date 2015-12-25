@@ -23,12 +23,12 @@
 				</div>
 				<div class="medium-6 columns leftnp">
 					<div>
-						<div class="callout panel clickAble" data-url="redeem.php" id="home4">
+						<div class="callout panel clickAble" data-type="gourl" data-url="redeem.php" id="home4">
 							<div class="image">
 								<p>Redeem</p>
 							</div>
 						</div>
-						<div class="callout panel faq clickAble" data-url="faq.php">
+						<div class="callout panel faq clickAble" data-type="gourl" data-url="faq.php">
 							<p>FAQs <i class="icon-icons_question"></i></p>
 						</div>
 					</div>

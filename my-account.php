@@ -8,7 +8,7 @@
 				<div class="row contentFill">
 					<div class="medium-6 columns leftnp fillHeight">
 						<div class="callout panel fillHeight white">
-							<div class="nominateButton clickAble" data-url="my-awards.php">
+							<div class="nominateButton clickAble" data-type="gourl" data-url="my-awards.php">
 								<i class="icon-icons_trophy"></i>My Awards
 							</div>
 							<div class="accountAwards">
@@ -35,7 +35,7 @@
 					</div>
 					<div class="medium-6 columns rightnp fillHeight">
 						<div class="callout panel fillHeight white">
-							<div class="nominateButton clickAble" data-url="my-nominees.php">
+							<div class="nominateButton clickAble" data-type="gourl" data-url="my-nominees.php">
 								<i class="icon-icons_trophy"></i>Awards I've Nominated
 							</div>
 							<div class="accountAwards">
