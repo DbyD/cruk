@@ -4,23 +4,23 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Our Heroes</title>
-<link rel="stylesheet" href="css/foundation.css" />
-<link rel="stylesheet" href="css/styles.css">
-<link rel="stylesheet" href="css/sitespecific.css">
+<link rel="stylesheet" href="<?=$path?>css/foundation.css" />
+<link rel="stylesheet" href="<?=$path?>css/styles.css">
+<link rel="stylesheet" href="<?=$path?>css/sitespecific.css">
 <script src="js/vendor/modernizr.js"></script>
-<link rel="shortcut icon" href="favicon.ico">
+<link rel="shortcut icon" href="<?=$path?>favicon.ico">
 </head>
 <body id="login">
 <nav class="top-bar" data-topbar role="navigation">
 	<ul class="title-area">
 		<li class="name">
-			<h1><a href="#"><img src="images/Cancer-Research-UK-Logo.svg" alt="Cancer Research UK" /></a></h1>
+			<h1><a href="#"><img src="<?=$path?>images/Cancer-Research-UK-Logo.svg" alt="Cancer Research UK" /></a></h1>
 		</li>
 	</ul>
 	<!-- <section class="top-bar-section">
 		Right Nav Section 
 		<ul class="right">
-			<li><a href="logout.php">Logout</a></li>
+			<li><a href="<?=$path?>logout.php">Logout</a></li>
 			<li class="has-dropdown"> </li>
 		</ul>
 	</section>--> 
@@ -29,7 +29,7 @@
 	<div id="left-column" class="large-2 columns">
 		<div id="payoff" class="callout panel">
 			<span class="helper"></span>
-			<img src="images/our-heroes.svg" alt="Cancer Research UK" />
+			<img src="<?=$path?>images/our-heroes.svg" alt="Cancer Research UK" />
 		</div>
 	</div>
 	<div id="content" class="large-10 columns">
@@ -73,11 +73,11 @@
 							<form>
 								<h1>First time users</h1>
 								<p>If you are new to the Recognition portal, register here.</p>
-								<div class="medium-6 columns">
-									<p><a href="forgotten_password.php" class="blueButton">Forgot password?</a></p>
+								<div class="medium-6 columns LoginPadding">
+									<a href="<?=$path?>forgotten_password.php" class="blueButton">Forgot password?</a>
 								</div>
-								<div class="medium-6 columns">
-									<p><a href="register.php" class="pinkButton">Register now</a></p>
+								<div class="medium-6 columns LoginPadding">
+									<p><a href="<?=$path?>register.php" class="pinkButton LoginPadding">Register now</a></p>
 								</div>
 							</form>
 						</div>

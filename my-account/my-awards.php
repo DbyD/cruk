@@ -1,9 +1,10 @@
 <?php
-	include_once('inc/header.php');
+	$path="../";
+	include_once($path.'inc/header.php');
 ?>
 			<div id="content" class="large-8 large-push-2 columns MyAccount">
 				<div class="title withStar">
-					<a href="#" data-type="alert" data-url="alerts/my-award-details.php" data-id="3" class="clickAble purpleButton right">View Details</a>
+					<a href="#" data-type="popup" data-url="<?=$path?>alerts/my-award-details.php" data-id="3" class="clickAble purpleButton right">View Details</a>
 					My Account <i class="icon-icons_thickrightarrow smalli"></i> <span class="subTitle">My Awards</span> 
 					<div class="awardStar"><i class="icon-icons_star"></i><span>3</span></div>
 				</div>
@@ -72,6 +73,4 @@
 					</div>
 				</div>
 			</div>
-<?php
-	include_once('inc/footer.php');
-?>
+<?php include_once($path.'inc/footer.php'); ?>

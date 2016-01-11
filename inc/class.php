@@ -37,6 +37,40 @@ class AdminUsers{
     }
 }
 
+class AllUsers{
+	protected $db;
+	public function __construct(PDO $db){
+		$this->db = $db;
+	}
+    public function getAllUsers() {
+        return $this->db->query('SELECT * FROM tblempall');
+    }
+}
+
+class searchAllUsers{
+	protected $db;
+	public function __construct(PDO $db){
+		$this->db = $db;
+	}
+    public function getAllUserSearch($search) {
+        $result = $this->db->query("SELECT * FROM tblempall WHERE (Fname LIKE '%$search%' OR Sname LIKE '%$search%') AND EmpNum <> '".$_SESSION['user']->EmpNum."'");
+		return $result;
+    }
+}
+
+class searchUsers{
+	protected $db;
+	public function __construct(PDO $db){
+		$this->db = $db;
+	}
+    public function getAllSearch($search) {
+        $result = $this->db->query("SELECT * FROM tblempall WHERE (Fname LIKE '%$search%' OR Sname LIKE '%$search%'
+									OR CONCAT(Fname,' ',Sname) like '%".str_replace(" ","%",$search)."%')
+									AND EmpNum <> '".$_SESSION['user']->EmpNum."'");
+		return $result;
+    }
+}
+
 class Encryption {
 	var $skey 	= "SuPerEncKey2010"; // you can change it
     public  function safe_b64encode($string) {
