@@ -4,32 +4,66 @@ $.ajaxPrefilter(function( options, originalOptions, jqXHR ) {
 //----------------------------------------------------------------------------------
 //$(function(){
 $(function(){
-     $("#searchColleague").validate();
-	 $("#nominateColleague").validate({
-            rules: {
-               EmpNum: { required: true }
-            },
-            messages: {
-               EmpNum: { required: "Please select a Colleague" }
-            },
-			errorPlacement: function(error, element) {
-				$("#alertContent").load("../alerts/alert-popup.php", {'error' : error.html() });
-				$("#alertbox").addClass('smallAlert');
-				$("#alert").css('display', 'block');
-			}
-         });
-	 $("#uploadPhoto").validate({
-            rules: {
-               photo: { required: true }
-            },
-            messages: {
-               photo: { required: "Please select a photo" }
-            },
+	$("#searchColleague").validate();
+	$("#nominateColleague").validate({
+		rules: {
+			EmpNum: "required"
+		},
+		messages: {
+			EmpNum: "Please select a Colleague"
+		},
 			errorPlacement: function(error, element) {
 				$("#alertContent").load("../alerts/alert-popup.php", {'error' : error.html() });
 				$("#alert").css('display', 'block');
 			}
-         });
+	});
+	$("#uploadPhoto").validate({
+		rules: {
+			photo: "required"
+		},
+		messages: {
+			photo: "Please select a photo"
+		},
+			errorPlacement: function(error, element) {
+				$("#alertContent").load("../alerts/alert-popup.php", {'error' : error.html() });
+				$("#alert").css('display', 'block');
+			}
+	});
+	$("#nominateColleague2").validate({
+		ignore: [],
+		rules: {
+			BeliefID: "required",
+			personalMessage: "required"
+		},
+		messages: {
+			BeliefID: "Please select a Belief",
+			personalMessage: "Please add a Personal Message",
+			nominateBoth: "Please select a Belief and add a Personal Message"
+		},
+			groups: {
+				nominateBoth: "BeliefID personalMessage"
+			},
+			errorPlacement: function(error, element) {
+				if (element.attr("name") == "BeliefID" || element.attr("name") == "personalMessage"){
+					$("#alertContent").load("../alerts/alert-popup.php", {'error' : error.html()});
+				} else {
+					$("#alertContent").load("../alerts/alert-popup.php", {'error' : error.html() });
+				}
+				$("#alert").css('display', 'block');
+			}
+	});
+	$("#volunteerForm").validate({
+		rules: {
+			volunteer: "required"
+		},
+		messages: {
+			volunteer: "Please add in the volunteer's full name."
+		},
+			errorPlacement: function(error, element) {
+				$("#alertContent").load("../alerts/alert-popup.php", {'error' : error.html() });
+				$("#alert").css('display', 'block');
+			}
+	});
 });
 	
 	$('.clickAble').click(function() {
@@ -107,7 +141,7 @@ $('.custom-upload input[type=file]').change(function(){
 });
 //----------------------------------------------------------------------------------
 var maxLength = 200;
-$('#message').keyup(function() {
+$('#personalMessage').keyup(function() {
 	var length = $(this).val().length;
 	var length = maxLength-length;
 	$('#chars').text(length);
@@ -117,9 +151,9 @@ $('#message').keyup(function() {
 //----------------------------------------------------------------------------------
 	$(document).foundation();
 //----------------------------------------------------------------------------------
-    (function($){
-        $(window).load(function(){
-            $(".content").mCustomScrollbar();
-        });
-    })(jQuery);
+(function($){
+	$(window).load(function(){
+		$(".content").mCustomScrollbar();
+	});
+})(jQuery);
 //----------------------------------------------------------------------------------

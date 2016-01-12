@@ -228,7 +228,7 @@
 	border: 0;
 	border-radius: 23px;
 }
-.hiddenTick input[type=radio],.hiddenTick input[type=checkbox] {
+.hiddenTick input[type=radio], .hiddenTick input[type=checkbox] {
 	margin: 0;
 	visibility: hidden;
 	position: absolute;
@@ -247,13 +247,14 @@
 	border: 1px solid #cac8c9;
 	border-radius: 12px;
 	margin: 0;
+	right: 5px;
 }
 .smallTick input[type="radio"] + label, .smallTick input[type="checkbox"] + label{
 	width: 18px;
 	height: 18px;
 	border-radius: 12px;
 }
-.smallTick label:after {
+.hiddenTick label:after {
 	cursor: pointer;
 	content: '';
 	position: absolute;
@@ -271,7 +272,7 @@
 	-ms-transform: rotate(-45deg);
 	transform: rotate(-45deg);
 }
-.hiddenTick label:after {
+.smallTick label:after {
 	width: 10px;
 	height: 6px;
 	top: 4px;
@@ -306,9 +307,9 @@
 	height: 45px;
 	border: 2px solid #2e008b;
 	border-radius: 23px;
-	-moz-box-shadow: 0 0 3px #ccc;
+/*	-moz-box-shadow: 0 0 3px #ccc;
 	-webkit-box-shadow: 0 0 3px #ccc;
-	box-shadow: 0 0 3px #ccc;
+	box-shadow: 0 0 3px #ccc; */
 }
 .selectBelief {
 	padding: 15px 20px;
@@ -358,6 +359,10 @@
 	margin: 0 10px;
 	vertical-align: middle;
 }
+#nominateColleague2 .buttonRow{
+	margin-top: 30px;
+	border: 0;
+}
 @media only screen and (max-width: 1199px) {
 #nominate1 .image {
 	height: 412px;
@@ -365,6 +370,9 @@
 }
 .height515 {
 	height: 465px;
+}
+.withPadding {
+    padding: 7px 10px;
 }
 }
 @media only screen and (max-width: 1023px) {
@@ -452,7 +460,7 @@
 	font-style: normal;
 }
 .smallPopupTitle {
-	padding: 10px !important;
+	padding: 10px 0px !important;
 }
 .smallPopupTitle i {
 	font-size: 28px;

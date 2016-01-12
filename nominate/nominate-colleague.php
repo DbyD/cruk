@@ -5,7 +5,7 @@
 ?>
 
 <div id="content" class="large-8 large-push-2 columns">
-	<form action="nominate-colleague.php" method="post" name="nominateColleague" id="nominateColleague">
+	<form action="nominate-colleague.php" method="post" name="nominateColleague2" id="nominateColleague2">
 		<div class="title">
 			Nominate <i class="icon-icons_thickrightarrow smalli"></i> <span class="subTitle">Colleague</span>
 			<i class="icon-icons_thickrightarrow smalli"></i> <span class="subSubTitle"><?=$nominee->full_name();?></span>
@@ -52,7 +52,7 @@
 				</div>
 			</div>
 			<select name="BeliefID" id="BeliefID">
-				<option value="">Select Behaviour</option>
+				<option value=""></option>
 				<option value="belief1">belief1</option>
 				<option value="belief2">belief2</option>
 				<option value="belief3">belief3</option>
@@ -61,7 +61,7 @@
 		<?php
 				
 	?>
-		<div class="callout panel white" id="nominateOptions">
+		<div class="callout panel white contentFill" id="nominateOptions">
 			<div class="row withPadding noMargin">
 				<div class="medium-12 columns">
 					Personal Message <span class="required">*</span>
@@ -70,7 +70,7 @@
 			</div>
 			<div class="row withPadding noMargin">
 				<div class="medium-12 columns">
-					<textarea name="message" id="message" placeholder="Example: Your dedication and passion is infectious, I am proud of you. Keep up the good work."></textarea>
+					<textarea name="personalMessage" id="personalMessage" placeholder="Example: Your dedication and passion is infectious, I am proud of you. Keep up the good work."></textarea>
 					<div class="charctersRemaining">
 						Characters remaining: <span id="chars">200</span>
 					</div>
@@ -90,7 +90,7 @@
 				<div class="medium-12 columns textRight">
 					<i class="icon-icons_i clickAble" data-type="alert" data-url="<?=$path?>alerts/alert-volunteer.php"></i>
 					Nominating for a volunteer
-					<div class="hiddenTick inline smallTick">
+					<div class="hiddenTick inline smallTick clickAble" data-type="popup" data-url="<?=$path?>alerts/alert-volunteer.php">
 						<input type="checkbox" value="" name="volunteer" id="volunteer">
 						<label for="volunteer"></label>
 					</div>
@@ -106,7 +106,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="row withPadding noMargin">
+			<div class="row withPadding noMargin buttonRow">
 				<div class="medium-8 columns">
 					<a href="#" class="blueButton clickAble" data-type="gourl" data-url="<?=$path?>home.php">Cancel</a>
 				</div>
@@ -114,7 +114,7 @@
 					<a href="#" class="blueButton clickAble" data-type="goback">Go Back</a>
 				</div>
 				<div class="medium-2 columns textRight ">
-					<a href="#" class="pinkButton clickAble" data-type="submit" data-url="nominateColleague">Next</a>
+					<a href="#" class="pinkButton clickAble" data-type="submit" data-url="nominateColleague2">Next</a>
 				</div>
 			</div>
 		</div>
