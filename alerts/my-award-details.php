@@ -83,4 +83,4 @@
 		</div>
 	</div>
 </div>
-<script src="js/cruk.js"></script>
+<script src="../js/cruk.js"></script>

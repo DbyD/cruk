@@ -1,0 +1,1 @@
+<iframe src="../alerts/upload-photo.php" class="photoIframe"></iframe>

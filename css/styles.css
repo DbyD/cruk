@@ -13,7 +13,7 @@ body{
 .top-bar{
 	background: #2e008b;
 	height: 50px;
-	margin-bottom: 30px;
+	margin-bottom: 10px;
 }
 .top-bar {
 	-moz-box-shadow: 0px 2px 2px 2px rgba(0, 0, 0, 0.3);
@@ -24,6 +24,9 @@ body{
 .top-bar-section li:not(.has-form) a:not(.button),
 .top-bar-section li:not(.has-form) a:not(.button):hover {
 	background: none;
+}
+.off-canvas-wrap{
+	padding: 30px 0 0;
 }
 .panel.callout{
 	margin-bottom: 3%;
@@ -54,6 +57,13 @@ body{
 	padding: 12px 15px;
 	color: #fff;
 }
+.subTitle{
+	font-size: 13px;
+}
+.subSubTitle{
+	color: #00b6ed;
+	font-size: 13px;
+}
 #messages{
 	background-color: #fff;
 	height: 53%;
@@ -77,7 +87,7 @@ body{
 .photo img {
     display: block;
     max-width:240px;
-    max-height:230px;
+    max-height:240px;
     width: auto;
     height: auto;
 }
@@ -112,6 +122,9 @@ ul{
 	height: 100px;
 	text-align: center;
 	font-size: 12px;
+}
+#mainmenu li.selected{
+	color: #00b6ed;
 }
 #mainmenu i{
 	font-size: 32px;
@@ -154,14 +167,35 @@ p{
 	margin-bottom: 1rem;
 	line-height: 1.3;
 }
-input[type=text],input[type=password],input[type=email]{
+input[type=text],input[type=password],input[type=email], textarea{
 	background: #ebebeb;
 	border-radius: 16px;
-	font-size: 14px;
+	font-size: 12px;
 	color: #2e008b;
-	padding: 7px 15px;
+	padding: 5px 15px;
 	height: auto;
 	margin: 0.5rem 0;
+}
+textarea{
+	border-radius: 8px;
+}
+::-webkit-input-placeholder {
+	color: #a7a8aa;
+}
+:-moz-placeholder {
+	color: #a7a8aa;
+}
+::-moz-placeholder {
+	color: #a7a8aa;
+}
+:-ms-input-placeholder {
+	color: #a7a8aa;
+}
+::-ms-input-placeholder {
+	color: #a7a8aa;
+}
+:placeholder-shown {
+	color: #a7a8aa;
 }
 input[type=submit], .blueButton {
 	background-color: #2e008b;
@@ -205,6 +239,55 @@ input[type=submit], .blueButton {
 .clickAble{
 	cursor: pointer;
 }
+.textLeft{
+	text-align: left;
+}
+.textRight{
+	text-align: right;
+}
+.textCenter{
+	text-align: center;
+}
+.valign-middle {
+    display: table;
+}
+.valign-middle .columns {
+    display: table-cell;
+    vertical-align: middle;
+}
+.valign-middle .columns,
+.valign-middle [class*="column"] + [class*="column"]:last-child {
+    float: none;
+}
+.mCSB_inside>.mCSB_container {
+    margin-right: 0px;
+}
+.mCSB_scrollTools{
+	width: 8px;
+	opacity: 1;
+}
+.mCS-dark-2.mCSB_scrollTools .mCSB_draggerRail{
+	background-color: #e5e5e5;
+	width: 8px;
+}
+.mCS-dark-2.mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar{
+	background-color: #b2b2b2;
+}
+li.ui-menu-item { font-size:12px !important; }
+.required{
+	color: #f0393e;
+	font-size: 16px;
+	padding: 0 3px;
+}
+.withPadding{
+	padding: 10px;
+}
+.row .row.noMargin{
+	margin: 0;
+}
+.icon-icons_i{
+	margin: 0 5px;
+}
 /* @end */
 
 /* @group Content */
@@ -222,7 +305,7 @@ input[type=submit], .blueButton {
 
 
 /* @group Alert Popup */
-#alert, #viewEcard{
+#alert, #viewEcard, #popup1, #popup2{
 	background-color: rgba(0,0,0,0.7);
 	display: none;
 	z-index: 99;
@@ -232,7 +315,7 @@ input[type=submit], .blueButton {
 	bottom: 0;
 	right: 0;
 }
-.alertbox{
+#alertbox, #popupbox1, #popupbox2{
 	z-index: 99;
 	position: fixed;
 	left: 50%;
@@ -248,6 +331,9 @@ input[type=submit], .blueButton {
 	-webkit-box-shadow:  0px 0px 3px #000;
 	box-shadow:  0px 0px 3px #000;
 }
+#alertbox{
+	min-height: 200px;
+}
 .closealert {
 	position: absolute;
 	top: -12px;
@@ -256,7 +342,7 @@ input[type=submit], .blueButton {
 	color: #fff;
 	font-size: 22px;
 }
-#alertContent{	
+#alertContent, #popupContent1, #popupContent2{	
 	padding: 0px;
 }
 #alertTitle{	
@@ -273,12 +359,6 @@ input[type=submit], .blueButton {
 #alertBody .tableRow{
 	border-bottom: 1px solid #e9e9e9;
 	padding: 20px;
-}
-.textLeft{
-	text-align: left;
-}
-.textRight{
-	text-align: right;
 }
 .expandArrow i{
 	position: absolute;
