@@ -8,6 +8,9 @@
 	font-size: 10px;
 	padding-top: 5px;
 }
+.smaller{
+	font-size: smaller;
+}
 #content .firsttime {
 	background: #cfcecf;
 }
@@ -57,7 +60,7 @@
 }
 #home2 span {
 	color: #2e008b;
-	font-size: 12px;
+	font-size: 13px;
 }
 #home3 .image {
 	height: 184px;
@@ -136,7 +139,7 @@
 	margin-bottom: 10px;
 	min-height: 45px;
 }
-.withStar {
+.title .withStar {
 	padding: 4px 15px;
 }
 .smalli {
@@ -160,23 +163,42 @@
 	margin: 5px 30px 0 0;
 }
 .awardStar {
+	display: block;
+	position: relative;
+	top: 5px;
+}
+.awardStar i {
+	font-size: 30px;
+}
+.awardStar span {
+	font-size: 12px;
+	position: relative;
+	left: -18px;
+	top: -7px;
+	z-index: 1;
+	color: #fff;
+	text-align: center;
+	display: inline-block;
+}
+.title .awardStar {
 	display: inline-block;
 	position: relative;
 	margin-left: 10px;
 	top: 5px;
 }
-.awardStar i {
+.title .awardStar i {
 	font-size: 26px;
 }
-.awardStar span {
-	font-size: 12px;
-	position: absolute;
-	left: 0px;
-	top: 8px;
+.title .awardStar span {
+	font-size: 11px;
+	position: relative;
+	left: -26px;
+	top: -6px;
 	width: 26px;
 	z-index: 1;
 	color: #2e008b;
-	text-align: center
+	text-align: center;
+	display: inline-block;
 }
 @media only screen and (min-width: 1200px) {
 .contentFill {
@@ -238,7 +260,7 @@
 .disabled .hiddenTick {
 	display: none;
 }
-.hiddenTick input[type="radio"] + label, .hiddenTick input[type="checkbox"] + label {
+.hiddenTick input[type="radio"] + label, .hiddenTick input[type="checkbox"] + label, .circleTick label {
 	cursor: pointer;
 	position: relative;
 	width: 24px;
@@ -249,12 +271,12 @@
 	margin: 0;
 	right: 5px;
 }
-.smallTick input[type="radio"] + label, .smallTick input[type="checkbox"] + label{
+.smallTick input[type="radio"] + label, .smallTick input[type="checkbox"] + label, .circleTick label{
 	width: 18px;
 	height: 18px;
 	border-radius: 12px;
 }
-.hiddenTick label:after {
+.hiddenTick label:after, .circleTick label:after {
 	cursor: pointer;
 	content: '';
 	position: absolute;
@@ -272,17 +294,17 @@
 	-ms-transform: rotate(-45deg);
 	transform: rotate(-45deg);
 }
-.smallTick label:after {
+.smallTick label:after, .circleTick label:after {
 	width: 10px;
 	height: 6px;
 	top: 4px;
 	left: 3px;
 }
-.hiddenTick input[type=radio] + label:hover, .hiddenTick input[type=checkbox] + label:hover {
+.hiddenTick input[type=radio] + label:hover, .hiddenTick input[type=checkbox] + label:hover, .circleTick label:hover {
 	border: 1px solid #e20086;
 	background: #ed018a;
 }
-.hiddenTick input[type=radio]:checked + label, .hiddenTick input[type=checkbox]:checked + label {
+.hiddenTick input[type=radio]:checked + label, .hiddenTick input[type=checkbox]:checked + label, .circleTickChecked label {
 	border: 1px solid #e20086;
 	background: #ed018a;
 }
@@ -297,6 +319,9 @@
 }
 .height515 {
 	height: 515px;
+}
+.height555 {
+	height: 555px;
 }
 .titlePhoto {
 	position: absolute;
@@ -345,8 +370,19 @@
 #BeliefID{
 	display: none;
 }
+#beliefs span {
+	background: rgba(0,182,237,0.8);
+	color: #fff;
+	height: 145px;
+	text-align: left;
+	padding: 5px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 1;
+}
 #nominateOptions textarea{
-	height: 95px;
+	height: 90px;
 	margin: 0;
 }
 .charctersRemaining{
@@ -360,8 +396,18 @@
 	vertical-align: middle;
 }
 #nominateColleague2 .buttonRow{
-	margin-top: 30px;
+	margin-top: 40px;
 	border: 0;
+}
+#volunteerName{
+	color: #383838;
+	margin: 3px 40px 0 0;
+	height: 15px;
+}
+#volunteerName i{
+	color: #a7a8aa;
+	margin-left: 5px;
+	cursor: pointer;
 }
 @media only screen and (max-width: 1199px) {
 #nominate1 .image {
@@ -370,6 +416,9 @@
 }
 .height515 {
 	height: 465px;
+}
+.height555 {
+	height: 505px;
 }
 .withPadding {
     padding: 7px 10px;
@@ -387,6 +436,12 @@
 }
 /* @end */
 /* @group My Awards */
+.awardButton{
+	font-size: 20px;
+	text-align: center;
+	padding: 35px 0 0;
+	height: 125px;
+}
 .accountAwards {
 	background: #3b03af;
 	position: absolute;
@@ -412,17 +467,24 @@
 	height: 37px;
 }
 .tableTitle {
-	font-size: 12px;
-	font-weight: bold;
+	font-size: 13px;
 	padding: 14px 0;
 	text-align: center;
 	background: #2e008b;
 	color: #fff;
 }
 .tableRow {
-	font-size: 12px;
+	font-size: 13px;
 	padding: 14px 0;
 	text-align: center;
+}
+.tableColumn-6 {
+	width: 16%;
+	display: inline-table;
+}
+.tableColumn-5 {
+	width: 19%;
+	display: inline-table;
 }
 .tableColumn-4 {
 	width: 24%;

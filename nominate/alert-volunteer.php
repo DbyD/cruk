@@ -1,15 +1,14 @@
 <div id="alertTitle" class="title smallPopupTitle">
 	<div class="row withPadding">
 		<div class="medium-12 columns">
-			<i class="icon-icons_info"></i>
+			Nominating for a volunteer
 		</div>
 	</div>
 </div>
 <div id="alertBody" class="alertBody">
 	<div class="row withPadding">
 		<div class="medium-12 columns">
-			<?php echo $_POST['error']; ?>
+			Please tell us if a volunteer has asked you to complete a nomination on their behalf.
 		</div>
 	</div>
 </div>
-<script src="../js/cruk.js"></script>

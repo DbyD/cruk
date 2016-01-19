@@ -2,9 +2,21 @@
 // Global settings
 	error_reporting(E_ERROR | E_WARNING | E_PARSE);
 	//error_reporting(E_ALL);
+	
+////////////////////////////////////////////////////////////////////////////////////
+// DEFINE ROOT PATHS
+////////////////////////////////////////////////////////////////////////////////////
+		// this is for my machine must remove /cruk/
+	define("RELATIVE_PATH_ROOT", '');
+	define("LOCAL_PATH_ROOT", $_SERVER["DOCUMENT_ROOT"] . '/cruk/');
+	define("HTTP_PATH_ROOT", isset($_SERVER["HTTP_HOST"]) ? $_SERVER["HTTP_HOST"] : (isset($_SERVER["SERVER_NAME"]) ? $_SERVER["SERVER_NAME"] : '_UNKNOWN_'));
+	define("HTTP_PATH", 'http://'. HTTP_PATH_ROOT . '/cruk/');
+////////////////////////////////////////////////////////////////////////////////////
 	$xexecEmail = "alec@dbyd.co.za";
 	$localServer = "http://".$_SERVER['HTTP_HOST']."/cruk/";
 ////////////////////////////////////////////////////////////////////////////////////
+
+	$strFrom = "From: CRUK <noreply@ourheroes.co.uk> \r\nContent-type: text/html; charset=us-ascii";
 
 ////////////////////////////////////////////////////////////////////////////////////
 // Server Setup
