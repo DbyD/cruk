@@ -1,6 +1,5 @@
 <?php
-	$path = "";
-	include_once($path.'inc/header.php');
+	include_once('inc/header.php');
 ?>
 			<div id="content" class="large-8 large-push-2 columns">
 				<div class="callout panel" id="home1">
@@ -44,5 +43,5 @@
 			</div>
 			<?php //print_r($_SESSION['user']); ?>
 <?php
-	include_once($path.'inc/footer.php');
+	include_once('inc/footer.php');
 ?>

@@ -13,6 +13,7 @@ class User {
 		return $this->LMFname . ' ' . $this->LMSname;
 	}
 	public function full_App_name(){
+		// this is not always correct
 		return $this->AppFname . ' ' . $this->AppSname;
 	}
 	public function approver(){
@@ -26,47 +27,63 @@ class User {
 		}
 	}
 }
-
-class AdminUsers{
-	protected $db;
-	public function __construct(PDO $db){
-		$this->db = $db;
-	}
-    public function getAlladmin() {
-        return $this->db->query('SELECT * FROM tbladmin');
+class NominationsList{
+    public function getAllNominationsList($empnum) {
+		global $db;
+		$stmt = $db->prepare('SELECT * FROM tblnominations WHERE NominatorEmpNum = :empnum ORDER BY NomDate DESC');
+		$stmt->execute(array('empnum' => $empnum));
+		$result = $stmt->fetchAll(PDO::FETCH_OBJ);
+		return $result;
     }
 }
 
-class AllUsers{
-	protected $db;
-	public function __construct(PDO $db){
-		$this->db = $db;
-	}
-    public function getAllUsers() {
-        return $this->db->query('SELECT * FROM tblempall');
+class MyNominationsList{
+    public function getAllMyNominationsList($empnum) {
+		global $db;
+		$stmt = $db->prepare('SELECT * FROM tblnominations WHERE NominatedEmpNum = :empnum AND AprStatus=1 ORDER BY NomDate DESC');
+		$stmt->execute(array('empnum' => $empnum));
+		$result = $stmt->fetchAll(PDO::FETCH_OBJ);
+		return $result;
     }
 }
-
 class searchAllUsers{
-	protected $db;
-	public function __construct(PDO $db){
-		$this->db = $db;
-	}
     public function getAllUserSearch($search) {
-        $result = $this->db->query("SELECT * FROM tblempall WHERE (Fname LIKE '%$search%' OR Sname LIKE '%$search%') AND EmpNum <> '".$_SESSION['user']->EmpNum."'");
+		global $db;
+		$stmt = $db->prepare("SELECT * FROM tblempall WHERE (Fname LIKE '%$search%' OR Sname LIKE '%$search%') AND EmpNum <> :empnum");
+		$stmt->execute(array('empnum' => $_SESSION['user']->EmpNum));
+		$result = $stmt->fetchAll(PDO::FETCH_OBJ);
 		return $result;
     }
 }
 
 class searchUsers{
-	protected $db;
-	public function __construct(PDO $db){
-		$this->db = $db;
-	}
     public function getAllSearch($search) {
-        $result = $this->db->query("SELECT * FROM tblempall WHERE (Fname LIKE '%$search%' OR Sname LIKE '%$search%'
+		global $db;
+		$stmt = $db->prepare("SELECT * FROM tblempall WHERE (Fname LIKE '%$search%' OR Sname LIKE '%$search%'
 									OR CONCAT(Fname,' ',Sname) like '%".str_replace(" ","%",$search)."%')
-									AND EmpNum <> '".$_SESSION['user']->EmpNum."'");
+									AND EmpNum <> :empnum");
+		$stmt->execute(array('empnum' => $_SESSION['user']->EmpNum));
+		$result = $stmt->fetchAll(PDO::FETCH_OBJ);
+		return $result;
+    }
+}
+
+class AdminUsers{
+    public function getAlladmin() {
+		global $db;
+		$stmt = $db->prepare('SELECT * FROM tbladmin');
+		$stmt->execute();
+		$result = $stmt->fetchAll(PDO::FETCH_OBJ);
+		return $result;
+    }
+}
+
+class AllUsers{
+    public function getAllUsers() {
+		global $db;
+		$stmt = $db->prepare('SELECT * FROM tblempall');
+		$stmt->execute();
+		$result = $stmt->fetchAll(PDO::FETCH_OBJ);
 		return $result;
     }
 }

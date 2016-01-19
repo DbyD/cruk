@@ -5,13 +5,13 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Our Heroes</title>
-<link rel="stylesheet" href="<?=$path?>css/foundation.css" />
-<link rel="stylesheet" href="<?=$path?>css/jquery.mCustomScrollbar.min.css">
-<link rel="stylesheet" href="<?=$path?>css/smoothness/jquery-ui-1.8.2.custom.css" /> 
-<link rel="stylesheet" href="<?=$path?>css/styles.css">
-<link rel="stylesheet" href="<?=$path?>css/sitespecific.css">
-<script src="<?=$path?>js/vendor/modernizr.js"></script>
-<link rel="shortcut icon" href="<?=$path?>favicon.ico"> 
+<link rel="stylesheet" href="<?=HTTP_PATH?>css/foundation.css" />
+<link rel="stylesheet" href="<?=HTTP_PATH?>css/jquery.mCustomScrollbar.min.css">
+<link rel="stylesheet" href="<?=HTTP_PATH?>css/smoothness/jquery-ui-1.8.2.custom.css" /> 
+<link rel="stylesheet" href="<?=HTTP_PATH?>css/styles.css">
+<link rel="stylesheet" href="<?=HTTP_PATH?>css/sitespecific.css">
+<script src="<?=HTTP_PATH?>js/vendor/modernizr.js"></script>
+<link rel="shortcut icon" href="<?=HTTP_PATH?>favicon.ico"> 
 </head>
 <body>
 <div id="popup1" class="">
@@ -36,13 +36,13 @@
 <nav class="top-bar hide-for-small" data-topbar role="navigation">
 	<ul class="title-area">
 		<li class="name">
-			<h1><a href="#"><img src="<?=$path?>images/Cancer-Research-UK-Logo.svg" alt="Cancer Research UK" /></a></h1>
+			<h1><a href="#"><img src="<?=HTTP_PATH?>images/Cancer-Research-UK-Logo.svg" alt="Cancer Research UK" /></a></h1>
 		</li>
 	</ul>
 	<section class="top-bar-section">
 		<!-- Right Nav Section -->
 		<ul class="right">
-			<li><a href="<?=$path?>inc/logout.php">Logout</a></li>
+			<li><a href="<?=HTTP_PATH?>inc/logout.php">Logout</a></li>
 			<li class="has-dropdown"> <a href="#">&nbsp;</a>
 				<ul class="dropdown">
 					<li><a href="#">some stuff will go here</a></li>
@@ -58,7 +58,7 @@
 				<a class="left-off-canvas-toggle menu-icon" href="#"><span></span></a>
 			</section>
 			<section class="right tab-bar-section">
-                <h1><img src="<?=$path?>images/Cancer-Research-UK-Logo.png" alt="Cancer Research UK" /></h1>
+                <h1><img src="<?=HTTP_PATH?>images/Cancer-Research-UK-Logo.png" alt="Cancer Research UK" /></h1>
             </section>
 		</nav>
 		<aside class="left-off-canvas-menu">

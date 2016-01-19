@@ -2,7 +2,7 @@
 			<div id="left-column" class="large-2 large-pull-8 columns">
 				<div id="payoff" class="callout panel">
 					<span class="helper"></span>
-					<img src="<?=$path?>images/our-heroes.svg" alt="Cancer Research UK" />
+					<img src="<?=HTTP_PATH?>images/our-heroes.svg" alt="Cancer Research UK" />
 				</div>
 				<div id="messages" class="callout panel">
 					<div class="title">
@@ -35,12 +35,12 @@
 		<a class="exit-off-canvas"></a>
 	</div>
 </div>
-<script src="<?=$path?>js/vendor/jquery.js"></script>
+<script src="<?=HTTP_PATH?>js/vendor/jquery.js"></script>
 <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
-<script src="<?=$path?>js/jquery.mCustomScrollbar.concat.min.js"></script>
-<script src="<?=$path?>js/jquery.validate.min.js"></script>
-<script src="<?=$path?>js/foundation.min.js"></script>
-<script src="<?=$path?>js/cruk.js"></script>
+<script src="<?=HTTP_PATH?>js/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="<?=HTTP_PATH?>js/jquery.validate.min.js"></script>
+<script src="<?=HTTP_PATH?>js/foundation.min.js"></script>
+<script src="<?=HTTP_PATH?>js/cruk.js"></script>
 </body>
 </html>

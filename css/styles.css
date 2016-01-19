@@ -2,7 +2,7 @@
 /* @group Structure */
 body{
 	background-color: #eaedf2;
-	font: 12px Arial;
+	font: 13px Arial;
 	color: #2e008b;
 }
 .panel.callout, .panel.callout h1, .panel.callout h2, .panel.callout h3, .panel.callout h4,
@@ -50,7 +50,7 @@ body{
 	box-shadow: none;
 }
 #payoff img{
-	height: 60%;
+	height: 70%;
 }
 .title{
 	background-color: #2e008b;
@@ -121,7 +121,7 @@ ul{
 	width: 48%;
 	height: 100px;
 	text-align: center;
-	font-size: 12px;
+	font-size: 13px;
 }
 #mainmenu li.selected{
 	color: #00b6ed;
@@ -170,7 +170,7 @@ p{
 input[type=text],input[type=password],input[type=email], textarea{
 	background: #ebebeb;
 	border-radius: 16px;
-	font-size: 12px;
+	font-size: 13px;
 	color: #2e008b;
 	padding: 5px 15px;
 	height: auto;
@@ -178,6 +178,8 @@ input[type=text],input[type=password],input[type=email], textarea{
 }
 textarea{
 	border-radius: 8px;
+	line-height: 20px;
+	padding: 10px 15px;
 }
 ::-webkit-input-placeholder {
 	color: #a7a8aa;
@@ -273,7 +275,7 @@ input[type=submit], .blueButton {
 .mCS-dark-2.mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar{
 	background-color: #b2b2b2;
 }
-li.ui-menu-item { font-size:12px !important; }
+li.ui-menu-item { font-size:13px !important; }
 .required{
 	color: #f0393e;
 	font-size: 16px;
@@ -282,11 +284,27 @@ li.ui-menu-item { font-size:12px !important; }
 .withPadding{
 	padding: 10px;
 }
+.withSidePadding{
+	padding: 0px 10px;
+}
 .row .row.noMargin{
 	margin: 0;
 }
 .icon-icons_i{
 	margin: 0 5px;
+}
+.hidden{
+	display: none;
+}
+.lightBlue{
+	color: #00b6ed;
+}
+.pink{
+	color: #ecoo8c;
+}
+.inlineDiv{
+	display: inline-block;
+	vertical-align: middle;
 }
 /* @end */
 
@@ -325,7 +343,7 @@ li.ui-menu-item { font-size:12px !important; }
 	margin-left: -225px;
 	min-height: 250px;
 	max-height: 500px;
-	font-size: 12px;
+	font-size: 13px;
 	color: #333;
 	background-color: #fff;
 	-moz-box-shadow: 0px 0px 3px #000;
@@ -353,7 +371,7 @@ li.ui-menu-item { font-size:12px !important; }
 	height: auto;
 }
 #alertBody{	
-	font-size: 12px;
+	font-size: 13px;
 	height: auto;
 	color: #2e008b;
 }
