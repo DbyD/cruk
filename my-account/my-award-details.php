@@ -1,6 +1,4 @@
-<?php
-?>
-
+<?php include '../inc/dbconn.php'; ?>
 <div id="alertTitle" class="title">
 	My Award Details
 </div>
@@ -10,7 +8,7 @@
 			Awards I've recieved:
 		</div>
 		<div class="tableColumn-2 textRight">
-			5
+			<?php echo getTotalAwards($_SESSION['user']->EmpNum) ?>
 		</div>
 	</div>
 	<div id="AwardsClaimed">
@@ -22,6 +20,9 @@
 				5
 			</div>
 		</div>
+		<?php
+			// get list of all awards
+		?>
 		<div class="tableRow claimedAwardsExpanded">
 			<div class="row subTitle">
 				<div class="tableColumn-2 textLeft">
@@ -80,6 +81,22 @@
 					John Lewis
 				</div>
 			</div>
+		</div>
+	</div>
+	<div class="tableRow">
+		<div class="tableColumn-2 textLeft">
+			Available to spend:
+		</div>
+		<div class="tableColumn-2 textRight">
+			<?php echo getTotalAwards($_SESSION['user']->EmpNum) ?>
+		</div>
+	</div>
+	<div class="tableRow">
+		<div class="tableColumn-2 textLeft">
+			Unclaimed awards:
+		</div>
+		<div class="tableColumn-2 textRight">
+			<?php echo getTotalAwards($_SESSION['user']->EmpNum) ?>
 		</div>
 	</div>
 </div>
