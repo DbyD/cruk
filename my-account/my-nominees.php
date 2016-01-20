@@ -14,13 +14,13 @@
 		<div class="medium-12 columns leftnp rightnp fillHeight">
 			<div class="callout panel fillHeight white">
 				<div class="tableTitle">
-					<div class="tableColumn-4">
+					<div class="tableColumn-3">
 						My Nominees
 					</div>
-					<div class="tableColumn-4">
+					<div class="tableColumn-3">
 						Date
 					</div>
-					<div class="tableColumn-4">
+					<div class="tableColumn-2">
 						Award
 					</div>
 					<div class="tableColumn-4">
@@ -35,16 +35,16 @@
 					foreach ($nomList as $list){
 					?>
 					<div class="tableRow">
-						<div class="tableColumn-4">
+						<div class="tableColumn-3">
 							<?=getName($list->NominatedEmpNum)?>
 						</div>
-						<div class="tableColumn-4">
+						<div class="tableColumn-3">
 							<?=getConvertedDate($list->NomDate)?>
 						</div>
-						<div class="tableColumn-6">
-							<a href="#" data-url="view.php" data-id="<?=$list->ID?>">View</a>
+						<div class="tableColumn-2">
+							<div class="viewButton inlineDiv clickAble" data-type="popup" data-url="<?=HTTP_PATH?>alerts/view-ecard.php" data-id="<?=$list->ID?>">View</div>
 						</div>
-						<div class="tableColumn-3">
+						<div class="tableColumn-4">
 							<?php
 							if($list->AprStatus == 0){
 								echo '<div class="lightBlue">Pending <span class="smaller">('.getName($list->ApproverEmpNum).'</span>)</div>';

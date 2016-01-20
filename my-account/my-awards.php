@@ -15,16 +15,16 @@
 		<div class="medium-12 columns leftnp rightnp fillHeight">
 			<div class="callout panel fillHeight white">
 				<div class="tableTitle">
-					<div class="tableColumn-4">
+					<div class="tableColumn-3">
 						Nominated by
 					</div>
-					<div class="tableColumn-4">
+					<div class="tableColumn-3">
 						Date
 					</div>
-					<div class="tableColumn-4">
+					<div class="tableColumn-3">
 						Certificate
 					</div>
-					<div class="tableColumn-4">
+					<div class="tableColumn-3">
 						A Little Extra
 					</div>
 				</div>
@@ -36,16 +36,16 @@
 					foreach ($nomList as $list){
 					?>
 					<div class="tableRow">
-						<div class="tableColumn-4">
+						<div class="tableColumn-3">
 							<?=getName($list->NominatorEmpNum)?>
 						</div>
-						<div class="tableColumn-4">
+						<div class="tableColumn-3">
 							<?=getConvertedDate($list->NomDate)?>
 						</div>
-						<div class="tableColumn-4">
+						<div class="tableColumn-3">
 							<a href="#" data-url="view.php" data-id="<?=$list->ID?>">View</a>
 						</div>
-						<div class="tableColumn-4">
+						<div class="tableColumn-3">
 							<?php
 							if($list->littleExtra == 'Yes'){
 								if($list->AwardClaimed == 'No'){

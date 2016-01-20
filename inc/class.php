@@ -27,6 +27,58 @@ class User {
 		}
 	}
 }
+
+class Award {
+	public $NominatorEmpNum;
+	public $NominatedEmpNum;
+	public $ApproverEmpNum;
+	public function nominator(){
+		global $db;
+		$stmt = $db->prepare('SELECT Fname, Sname, Eaddress FROM tblempall WHERE EmpNum = :NominatorEmpNum');
+		$stmt->execute(array('NominatorEmpNum' => $this->NominatorEmpNum));
+		$result = $stmt->fetch(PDO::FETCH_OBJ);
+		$result->full_name = $result->Fname. ' ' . $result->Sname;
+		return $result;
+	}
+	public function nominee(){
+		global $db;
+		$stmt = $db->prepare('SELECT Fname, Sname, Eaddress FROM tblempall WHERE EmpNum = :NominatedEmpNum');
+		$stmt->execute(array('NominatedEmpNum' => $this->NominatedEmpNum));
+		$result = $stmt->fetch(PDO::FETCH_OBJ);
+		$result->full_name = $result->Fname. ' ' . $result->Sname;
+		return $result;
+	}
+	public function approver(){
+		global $db;
+		$stmt = $db->prepare('SELECT Fname, Sname, Eaddress FROM tblempall WHERE EmpNum = :ApproverEmpNum');
+		$stmt->execute(array('ApproverEmpNum' => $this->ApproverEmpNum));
+		$result = $stmt->fetch(PDO::FETCH_OBJ);
+		$result->full_name = $result->Fname. ' ' . $result->Sname;
+		return $result;
+	}
+}
+
+
+class MyApprovalsList{
+    public function getAllMyApprovalsList($empnum) {
+		global $db;
+		$stmt = $db->prepare("SELECT * FROM tblnominations WHERE ApproverEmpNum = :empnum AND AprStatus=0 AND littleExtra='Yes' ORDER BY NomDate DESC");
+		$stmt->execute(array('empnum' => $empnum));
+		$result = $stmt->fetchAll(PDO::FETCH_OBJ);
+		return $result;
+    }
+}
+
+class claimedAwardsList{
+    public function getAllclaimedAwardsList($empnum) {
+		global $db;
+		$stmt = $db->prepare("SELECT * FROM tblnominations WHERE NominatedEmpNum = :empnum AND AprStatus=1 AND AwardClaimed='Yes' ORDER BY amount ASC, NomDate DESC");
+		$stmt->execute(array('empnum' => $empnum));
+		$result = $stmt->fetchAll(PDO::FETCH_OBJ);
+		return $result;
+    }
+}
+
 class NominationsList{
     public function getAllNominationsList($empnum) {
 		global $db;
