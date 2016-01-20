@@ -313,6 +313,10 @@
 	filter: alpha(opacity=100);
 	opacity: 1;
 }
+.circleTick.disabled label:hover {
+	border: 1px solid #cac8c9;
+	background: #cfcfcf;
+}
 .buttonRow {
 	padding-top: 5px;
 	border-top: 1px solid #ccc;
@@ -478,27 +482,67 @@
 	padding: 14px 0;
 	text-align: center;
 }
-.tableColumn-6 {
-	width: 16%;
-	display: inline-table;
-}
-.tableColumn-5 {
-	width: 19%;
-	display: inline-table;
-}
-.tableColumn-4 {
-	width: 24%;
-	display: inline-table;
-}
-.tableColumn-3 {
-	width: 32%;
+.tableColumn-1 {
+	width: 8%;
 	display: inline-table;
 }
 .tableColumn-2 {
+	width: 16%;
+	display: inline-table;
+}
+.tableColumn-3 {
+	width: 24%;
+	display: inline-table;
+}
+.tableColumn-4 {
+	width: 32%;
+	display: inline-table;
+}
+.tableColumn-5 {
+	width: 41%;
+	display: inline-table;
+}
+.tableColumn-6 {
 	width: 49%;
 	display: inline-table;
 }
+.tableColumn-7 {
+	width: 58%;
+	display: inline-table;
+}
+.tableColumn-8 {
+	width: 66%;
+	display: inline-table;
+}
+.tableColumn-9 {
+	width: 75%;
+	display: inline-table;
+}
+.tableColumn-10 {
+	width: 83%;
+	display: inline-table;
+}
+.tableColumn-11 {
+	width: 91%;
+	display: inline-table;
+}
+.tableColumn-12 {
+	width: 100%;
+	display: inline-table;
+}
 /* @end */
+/* @group My Approvals */
+.title .smaller{
+	font-size: 12px;
+	margin-left: 20px;
+}
+.tableRow.largerText {
+	padding: 10px 20px !important;
+	font-size: 17px;
+}
+/* @end */
+
+
 /* @group Alert Popup */
 .claimedAwardsExpanded {
 	display: none;

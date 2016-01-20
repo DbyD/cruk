@@ -5,7 +5,7 @@
 <li class="clickAble" data-type="gourl" data-url="<?=HTTP_PATH?>winners-wall.php"><i class="icon-icons_winners"></i>Winners Wall</li>
 <li class="clickAble" data-type="gourl" data-url="<?=HTTP_PATH?>redeem"><i class="icon-icons_redeem"></i>Redeem</li>
 <?php if($_SESSION['user']->approver() == 'YES') { ?>
-<li class="clickAble" data-type="gourl" data-url="<?=HTTP_PATH?>approvals.php"><i class="icon-icons_trophy"></i>Approvals</li>
+<li class="clickAble" data-type="gourl" data-url="<?=HTTP_PATH?>approvals"><i class="icon-icons_trophy"></i>Approvals</li>
 <li class="clickAble" data-type="gourl" data-url="<?=HTTP_PATH?>reports.php"><i class="icon-icons_report"></i>Reports</li>
 <?php }
 	if($_SESSION['user']->SuperUser == 'YES') { ?>

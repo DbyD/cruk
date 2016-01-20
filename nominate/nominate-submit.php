@@ -5,9 +5,9 @@
 	
 	$stmt = $db->prepare("INSERT INTO tblnominations(
 							awardType, NominatorEmpNum, NominatedEmpNum, Volunteer, ApproverEmpNum, Team, Section, Department, Directorate,
-							littleExtra, amount, personalMessage, Reason, BeliefID, dReason, NomDate, AprStatus, awardPrivate) 
+							littleExtra, amount, personalMessage, Reason, BeliefID, dReason, NomDate, AprDate, AprStatus, awardPrivate) 
 							VALUES (:awardType, :NominatorEmpNum, :NominatedEmpNum, :Volunteer, :ApproverEmpNum, :Team, :Section, :Department, :Directorate, 
-							:littleExtra, :amount, :personalMessage, :Reason, :BeliefID, :dReason, NOW(), :AprStatus, :awardPrivate)");
+							:littleExtra, :amount, :personalMessage, :Reason, :BeliefID, :dReason, NOW(), :AprDate, :AprStatus, :awardPrivate)");
 	$stmt->bindParam(':awardType', $a = 1);
     $stmt->bindParam(':NominatorEmpNum', $_SESSION['user']->EmpNum);
     $stmt->bindParam(':NominatedEmpNum', $_SESSION['nominee']->EmpNum);
@@ -30,11 +30,13 @@
 		// check if nominee is also approver
 		if($_SESSION['nominee']->AppEmpNum == $_SESSION['user']->EmpNum){
 			$stmt->bindParam(':AprStatus', $a = 1);
+			$stmt->bindParam(':AprDate', 'NOW()');
 		}else {
 			$stmt->bindParam(':AprStatus', $a = 0);
 		}
 	} else {
 		$stmt->bindParam(':AprStatus', $a = 1);
+		$stmt->bindParam(':AprDate', 'NOW()');
 		$stmt->bindParam(':amount', $a = 0);
 	}
     $stmt->bindParam(':awardPrivate', $_SESSION['awardPrivate']->AprDate);

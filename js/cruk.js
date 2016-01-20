@@ -96,6 +96,23 @@ $(function(){
 			});
 		}
 	});
+	$("#approveAward").validate({
+		rules: {dReason: "required"},
+		messages: {dReason: "Please add in a reason for the decline."},
+		errorPlacement: function(error, element) {
+			$("#alertContent").load("../alerts/alert-popup.php", {'error' : error.html() });
+			$("#alert").css('display', 'block');
+		},
+		submitHandler: function(form) { 
+			$.post('individual-award-update.php', $("#approveAward").serialize(), function(data) {
+				if (data = 'declined') {
+					$("#popup1").css('display', 'none');
+					$("#popupContent1").empty();
+					location.reload();
+				}
+			});
+		}
+	});
 });
 //----------------------------------------------------------------------------------
 	$('.clickAble').click(function() {
@@ -157,6 +174,12 @@ $(function(){
 				$("#"+id+" .expandArrow i" ).attr( "data-type", "expand" );
 				$("#"+id+" .expandArrow i" ).removeClass('icon-icons_pointdown').addClass('icon-icons_pointright');
 				$("#"+id+" .claimedAwardsExpanded").css('display', 'none');
+				break;
+			case 'submitNoValidate':
+				$("#dReason").html();
+				$("#"+url).validate().cancelSubmit = true
+				$("#"+url).submit();
+				location.reload();
 				break;
 			case 'submit':
 				if ($("#"+url).valid()) {
