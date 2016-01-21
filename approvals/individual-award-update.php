@@ -1,5 +1,5 @@
 <?php
-	include '../inc/dbconn.php';
+	include '../inc/config.php';
 	// upload data and create emails
 	echo "start".$_POST['ID']."--";
 	if($_POST['dReason'] == '') {

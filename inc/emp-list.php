@@ -1,5 +1,5 @@
 <?php
-include 'dbconn.php';
+include 'config.php';
 if ( !isset($_REQUEST['term']) )
 	exit;
 	$data = array();

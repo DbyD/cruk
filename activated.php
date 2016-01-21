@@ -1,5 +1,5 @@
 <?php 
-	include 'inc/dbconn.php';
+	include 'inc/config.php';
 ?>
 <!doctype html>
 <html class="no-js" lang="en">

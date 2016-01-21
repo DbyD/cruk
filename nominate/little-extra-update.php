@@ -1,5 +1,5 @@
 <?php
-	include '../inc/dbconn.php';
+	include '../inc/config.php';
 	if ($_GET['clear'] == "yes"){
 		$_SESSION['nominee']->Volunteer = "";
 		unset($_SESSION['nominee']->Volunteer);

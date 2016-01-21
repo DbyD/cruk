@@ -1,7 +1,4 @@
-<?php
-	$path="../";
-	include_once($path.'inc/header.php');
-?>
+<?php include_once('../inc/header.php'); ?>
 
 <div id="content" class="large-8 large-push-2 columns">
 	<div class="title">
@@ -78,7 +75,7 @@
 	</div>
 </div>
 <?php
-	include_once($path.'inc/footer.php');
+	include_once('../inc/footer.php');
 	if ($_GET['searchAuto']){
 ?>
 <script>$('#buttonRow').removeClass('hidden'); </script>

@@ -1,4 +1,4 @@
-<?php include '../inc/dbconn.php'; ?>
+<?php include '../inc/config.php'; ?>
 
 <div id="alertTitle" class="title">
 	Approve/Decline Colleague Nomination
@@ -9,7 +9,7 @@
 			If approved, this colleague will be able to choose one of the following awards. Please remove options only if there’s a good reason to do so.
 		</div>
 	</div>
-	<form action="individual-award-update.php" method="post" name="approveAward" id="approveAward" novalidate="novalidate">
+	<form action="individual-award-update.php" method="post" name="approveAward" id="approveAward" novalidate>
 		<input type="hidden" name="ID" value="<?=$_GET['id']?>">
 		<div class="tableRow largerText">
 			<div class="tableColumn-6 textLeft">

@@ -1,5 +1,5 @@
 <?php
-	include '../inc/dbconn.php';
+	include '../inc/config.php';
 	if($_POST['formName'] == 'nominateColleague'){
 		createNominee($_POST['EmpNum']);
 	}

@@ -1,5 +1,5 @@
 <?php 
-	include 'inc/dbconn.php';
+	include 'inc/config.php';
 ?>
 <!doctype html>
 <html class="no-js" lang="en">
@@ -59,7 +59,7 @@
 											$sendEmail->emailTo = $_POST["Eaddress"];
 											$sendEmail->subject = "CRUK Website activation";
 											$sendEmail->Content ='<p>Hi '.$_POST['Fname'].'<p>
-															<p>Please click on the link to activate your account. Please <a href="<?=HTTP_PATH?>'.$localServer.'activate.php?activate=yes&EmpNum='.$encrypt->encode($EmpNum).'">click here</a> to activate your account</p>' ;
+															<p>Please click on the link to activate your account. Please <a href="'.HTTP_PATH.'activate.php?activate=yes&EmpNum='.$encrypt->encode($EmpNum).'">click here</a> to activate your account</p>' ;
 											$reply = sendEmail($sendEmail);
 											if($reply="success"){
 												$msg = "<p>Thank you for your registration.</p>

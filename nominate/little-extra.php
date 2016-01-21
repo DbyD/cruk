@@ -1,4 +1,4 @@
-<?php include '../inc/dbconn.php'; ?>
+<?php include '../inc/config.php'; ?>
 <div id="alertTitle" class="title smallPopupTitle">
 	<div class="row withPadding">
 		<div class="medium-12 columns">

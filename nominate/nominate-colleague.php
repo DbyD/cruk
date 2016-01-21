@@ -1,7 +1,4 @@
-<?php
-	$path="../";
-	include_once($path.'inc/header.php');
-?>
+<?php include_once('../inc/header.php'); ?>
 
 <div id="content" class="large-8 large-push-2 columns">
 	<form action="nominate-colleague-submit.php" method="post" name="nominateColleague2" id="nominateColleague2">
@@ -129,7 +126,5 @@
 		</div>
 	</form>
 </div>
-<?php
-	include_once($path.'inc/footer.php');
-?>
+<?php include_once('../inc/footer.php'); ?>
 			<? print_r($_SESSION['nominee']);?>
