@@ -1,5 +1,5 @@
 <?php
-	include '../inc/dbconn.php';
+	include '../inc/config.php';
 	echo $_GET['id'];
 	$ecard = getEcard($_GET['id']);
 ?>

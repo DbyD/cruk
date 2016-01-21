@@ -1,5 +1,5 @@
 <?php
-	include '../inc/dbconn.php';
+	include '../inc/config.php';
 	require_once('ImageManipulator.php');
 	if ($_FILES) {
 		$validExtensions = array('.jpg', '.jpeg', '.gif', '.png');

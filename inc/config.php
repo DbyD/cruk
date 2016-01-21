@@ -13,7 +13,6 @@
 	define("HTTP_PATH", 'http://'. HTTP_PATH_ROOT . '/cruk/');
 ////////////////////////////////////////////////////////////////////////////////////
 	$xexecEmail = "alec@dbyd.co.za";
-	$localServer = "http://".$_SERVER['HTTP_HOST']."/cruk/";
 ////////////////////////////////////////////////////////////////////////////////////
 
 	$strFrom = "From: CRUK <noreply@ourheroes.co.uk> \r\nContent-type: text/html; charset=us-ascii";
@@ -34,7 +33,11 @@
 ////////////////////////////////////////////////////////////////////////////////////
 // General include files
 	include 'class.php';
-	include 'function.php';
+	include 'global-functions.php';
+	include 'nominate-functions.php';
+	include 'approve-functions.php';
+	include 'account-functions.php';
+	include 'redeem-functions.php';
 ////////////////////////////////////////////////////////////////////////////////////
 	$encrypt = new Encryption;
 	session_start();

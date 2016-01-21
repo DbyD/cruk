@@ -1,5 +1,5 @@
 <?php 
-	include 'inc/dbconn.php';
+	include 'inc/config.php';
 	If ($_GET["activate"]=='yes'){
 		$EmpNum = $_GET["EmpNum"];
 		echo $EmpNum."<br>";

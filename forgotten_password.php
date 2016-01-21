@@ -1,5 +1,5 @@
 <?php 
-	include 'inc/dbconn.php';
+	include 'inc/config.php';
 	If ($_POST['sEaddress']) {
 		$sEaddress = $_POST['sEaddress'];
 		$stmt = $db->prepare('SELECT * FROM tblempall WHERE Eaddress = :sEaddress');
@@ -11,7 +11,7 @@
 				$sendEmail->emailTo = $sEaddress;
 				$sendEmail->subject = "CRUK Website password reminder";
 				$sendEmail->Content = '<p>Hi '.$user['Fname'].'<p><p>Your Password is: '.$user['sPassword'].'</p>
-									<p>If you would like to change your password please <a href="<?=HTTP_PATH?>'.$localServer.'change_password.php">click here</a>';
+									<p>If you would like to change your password please <a href="'.HTTP_PATH.'change_password.php">click here</a>';
 				$reply = sendEmail($sendEmail);
 				if($reply=="success"){
 					$msg = "Your login information has been sent. Please check your mail box.";

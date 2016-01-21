@@ -1,5 +1,5 @@
 <?php
-	include '../inc/dbconn.php';
+	include '../inc/config.php';
 	// upload data and create emails
 	print_r($_SESSION['nominee']);
 	
