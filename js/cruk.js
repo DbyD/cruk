@@ -176,7 +176,7 @@ $(function(){
 				$("#"+id+" .claimedAwardsExpanded").css('display', 'none');
 				break;
 			case 'submitNoValidate':
-				$("#dReason").html();
+				$("#dReason").val('');
 				$("#"+url).validate().cancelSubmit = true
 				$("#"+url).submit();
 				location.reload();
