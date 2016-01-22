@@ -586,8 +586,8 @@ p.alertText {
 .custom-upload {
 	position: relative;
 	height: 40px;
-	width: 350px;
-	margin: 30px;
+	width: 340px;
+	margin: 30px 10px 30px 80px;
 }
 .custom-upload input[type=file] {
 	outline: none;
@@ -601,11 +601,11 @@ p.alertText {
 	height: 100%;
 }
 .custom-upload .fake-file {
-	background: url(http://www.fold3.com/i/upload-icon.png) center right no-repeat;
+	background: url(../images/fake-browse.png) no-repeat right 5px;
 	position: absolute;
 	top: 0px;
 	left: 0px;
-	width: 350px;
+	width: 335px;
 	padding: 0;
 	margin: 0;
 	z-index: 1;
@@ -614,7 +614,8 @@ p.alertText {
 .custom-upload .fake-file input {
 	font-size: 16px;
 	height: 40px;
-	width: 300px;
+	width: 250px;
+	background-position: right;
 }
 #cropContainerHeader {
 	width: 250px;
