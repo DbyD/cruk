@@ -42,7 +42,7 @@ class Award {
 	}
 	public function nominee(){
 		global $db;
-		$stmt = $db->prepare('SELECT Fname, Sname, Eaddress, Shop, JobTitle FROM tblempall WHERE EmpNum = :NominatedEmpNum');
+		$stmt = $db->prepare('SELECT Fname, Sname, Eaddress, Shop, JobTitle, LMEmpNum FROM tblempall WHERE EmpNum = :NominatedEmpNum');
 		$stmt->execute(array('NominatedEmpNum' => $this->NominatedEmpNum));
 		$result = $stmt->fetch(PDO::FETCH_OBJ);
 		$result->full_name = $result->Fname. ' ' . $result->Sname;
@@ -55,6 +55,14 @@ class Award {
 		global $db;
 		$stmt = $db->prepare('SELECT Fname, Sname, Eaddress FROM tblempall WHERE EmpNum = :ApproverEmpNum');
 		$stmt->execute(array('ApproverEmpNum' => $this->ApproverEmpNum));
+		$result = $stmt->fetch(PDO::FETCH_OBJ);
+		$result->full_name = $result->Fname. ' ' . $result->Sname;
+		return $result;
+	}
+	public function lineManager(){
+		global $db;
+		$stmt = $db->prepare('SELECT Fname, Sname, Eaddress FROM tblempall WHERE EmpNum = :LMEmpNum');
+		$stmt->execute(array('LMEmpNum' => $this->nominee()->LMEmpNum));
 		$result = $stmt->fetch(PDO::FETCH_OBJ);
 		$result->full_name = $result->Fname. ' ' . $result->Sname;
 		return $result;

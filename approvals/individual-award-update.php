@@ -5,10 +5,7 @@
 	
 	// get award details
 	$ID = $_POST['ID'];
-	$stmt = $db->prepare('SELECT * FROM tblnominations WHERE ID = :ID');
-	$stmt->execute(array('ID' => $ID));
-	$stmt->setFetchMode(PDO::FETCH_CLASS, 'Award');
-	$award = $stmt->fetch();
+	$award = getNomination($ID);
 		
 	if($_POST['dReason'] == '') {
 		
