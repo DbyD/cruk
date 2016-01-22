@@ -113,6 +113,23 @@ $(function(){
 			});
 		}
 	});
+	$("#claimAward").validate({
+		rules: {award: "required"},
+		messages: {award: "Please select one award or click the close x to cancel."},
+		errorPlacement: function(error, element) {
+			$("#alertContent").load("../alerts/alert-popup.php", {'error' : error.html() });
+			$("#alert").css('display', 'block');
+		},
+		submitHandler: function(form) { 
+			$.post('claim-award-update.php', $("#claimAward").serialize(), function(data) {
+				if (data = 'updated') {
+					$("#popup1").css('display', 'none');
+					$("#popupContent1").empty();
+					location.reload();
+				}
+			});
+		}
+	});
 });
 //----------------------------------------------------------------------------------
 	$('.clickAble').click(function() {

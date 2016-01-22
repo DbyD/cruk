@@ -46,7 +46,9 @@
 							<?php
 							if($list->littleExtra == 'Yes'){
 								if($list->AwardClaimed == 'No'){
-									echo '<a href="#" data-type="popup" data-id="'.$list->ID.'" class="clickAble pinkButton">Claim</a>';
+								?>
+									<a href="#" data-type="popup" data-id="<?=$list->ID?>" class="clickAble pinkButton" data-url="<?=HTTP_PATH?>my-account/claim-award.php">Claim</a>
+								<?php
 								} else {
 									if($list->amount == '20'){
 										echo '£20 voucher';
