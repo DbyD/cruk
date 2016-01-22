@@ -12,14 +12,18 @@
 		<div class="callout panel white contentFill">
 			<div class="row withPadding ">
 				<div class="medium-12 columns">
+					<?php if ($_SESSION['nominee']->Volunteer !='') {?>
+					<p>Thank You for nominating <?=$_SESSION['nominee']->full_name();?> on behalf of <?=$_SESSION['nominee']->Volunteer;?></p>
+					<?php } else { ?>
 					<p>Thank You for nominating <?=$_SESSION['nominee']->full_name();?></p>
+					<?php } ?>
 					<?php	if($_SESSION['nominee']->littleExtra=='Yes' && ($_SESSION['nominee']->AppEmpNum != $_SESSION['user']->EmpNum)){ ?>
 					<p>As you've added 'A Little Extra', your award has gone to <?=$_SESSION['nominee']->full_App_name();?> for approval</p>
 					<p>You will be notified of the result</p>
 					<?php	} else { ?>
 					<p>Your e-card will be sent to <?=$_SESSION['nominee']->full_name();?></p>
 					<?php	} ?>
-					<? print_r($_SESSION['nominee']);?>
+					<? //print_r($_SESSION['nominee']);?>
 				</div>
 			</div>
 		</div>

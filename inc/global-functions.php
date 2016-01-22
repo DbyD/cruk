@@ -7,13 +7,14 @@ function sendEmail($email){
 	$message = '<!DOCTYPE HTML><html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     			<title>CRUK Our Heroes</title>
 				<style type=text/css>
-					body,div {background:#eaedf2;margin:0px;padding:0px}
+					body,div {margin:0px;padding:0px}
 					.emailText {font-size:9pt;font-family:Arial;line-height:12pt;color:#2e008b;background:#fff;width:560px;min-height:360px;padding:20px;text-align:left}
 					img{display:block}
 				</style></head><body><div align="center"><div class="emailText">';
 				
 	$message .= $email->Content;
-	$message .= "</div></div></body></html>";
+	$message .= '<p>Regards</p><p><b>Cancer Research</b>
+				</div></div></body></html>';
 	
 	if (mail($email->emailTo, $email->subject, $message, $strFrom)){
 		$reply = "success";
@@ -34,10 +35,14 @@ function sendEcardEmail($ecard){
 	// need to fix this so we can email anytime
 	global $strFrom;
 	$subject = "Our Heroes E-Card";
-	if ($ecard->Eaddress) {
-		$emailTo = $ecard->Eaddress;
+	if ($emailTo = $ecard->offline == 'YES'){
+		$emailTo = $ecard->shopMEaddress;
 	} else {
-		$emailTo = $ecard->nominee()->Eaddress;
+		if ($ecard->Eaddress) {
+			$emailTo = $ecard->Eaddress;
+		} else {
+			$emailTo = $ecard->nominee()->Eaddress;
+		}
 	}
 	// need to fully design e-card
 	$message = '<!DOCTYPE HTML><html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -47,8 +52,7 @@ function sendEcardEmail($ecard){
 					.emailText {font-size:9pt;font-family:Arial;line-height:12pt;color:#2e008b;background:#fff;width:560px;min-height:360px;padding:20px;text-align:left}
 					img{display:block}
 				</style></head><body><div align="center"><div class="emailText">';
-				
-	$message .= $ecard->personalMessage;
+	$message .= $ecard->content;
 	$message .= '<p>Regards</p><p><b>Cancer Research</b>
 				</div></div></body></html>';
 	if (mail($emailTo, $subject, $message, $strFrom)){
@@ -117,7 +121,26 @@ function getTotalNominationsList($empnum){
 	}
 }
 ////////////////////////////////////////////////////////////////////////////////////
+function indEcardText($ecard){
+	$ecardText = "<p>Hello ".$ecard->Fname."</p>
+				<p>Congratulations!</p>
+				<p>".$ecard->NomFull_name." would like to thank you for the amazing work you have performed here at Cancer Research.</p>
+				<p>".$ecard->personalMessage."</p>
+				<p>The CRUK Belief most closely associated with your achievement is: ".$ecard->BeliefID.".</p>
+				<p>Congratulations again and many thanks for your contribution to Cancer Research UK.</p>";
+	return $ecardText;
+}
 ////////////////////////////////////////////////////////////////////////////////////
+function indEcardExtraText($ecard){
+	$ecardText = "<p>Hello ".$ecard->Fname."</p>
+				<p>Congratulations!</p>
+				<p>".$ecard->NomFull_name." would like to thank you for the amazing work you have performed here at Cancer Research.</p>
+				<p>".$ecard->personalMessage."</p>
+				<p>The CRUK Belief most closely associated with your achievement is: ".$ecard->BeliefID.".</p>
+				<p>As part of your award, you've also been given a 'Little Extra'. Please log onto the <a href='http://http://cruk.xexec.dev/'>Our Heroes Portal</a> to view and claim your Little Extra something.</p>
+				<p>Congratulations again and many thanks for your contribution to Cancer Research UK.</p>";
+	return $ecardText;
+}
 ////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////

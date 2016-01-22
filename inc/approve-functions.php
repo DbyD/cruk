@@ -7,4 +7,11 @@ function getWorkAwards(){
 	return $stmt->fetchAll(PDO::FETCH_OBJ);
 }
 ////////////////////////////////////////////////////////////////////////////////////
+function workAwardType($id){
+	global $db;
+	$stmt = $db->prepare('SELECT type FROM tblworkawards WHERE id = :id');
+	$stmt->execute(array('id' => $id));
+	return $stmt->fetch(PDO::FETCH_OBJ);
+}
+////////////////////////////////////////////////////////////////////////////////////
 ?>
