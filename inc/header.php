@@ -20,10 +20,10 @@
 		<div id="closepopup1" data-type="close" data-id="1" class="clickAble closealert" /><i class="icon-icons_close"></i></div>
 	</div>
 </div>
-<div id="popup2" class="">
-	<div id="popupbox2">
-		<div id="popupContent2"></div>
-		<div id="closepopup2" data-type="close" data-id="2" class="clickAble closealert" /><i class="icon-icons_close"></i></div>
+<div id="ecardPopup" class="">
+	<div id="ecardbox">
+		<div id="popupEcard"></div>
+		<div id="closeEcard" data-type="close" data-id="2" class="clickAble closealert" /><i class="icon-icons_close"></i></div>
 	</div>
 </div>
 <div id="alert" class="">

@@ -1,21 +1,32 @@
 <?php
 ////////////////////////////////////////////////////////////////////////////////////
-// send email
-function sendEmail($email){
-	global $strFrom;
-	
-	$message = '<!DOCTYPE HTML><html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+function startEmail(){
+	$startemail = '<!DOCTYPE HTML><html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     			<title>CRUK Our Heroes</title>
 				<style type=text/css>
 					body,div {margin:0px;padding:0px}
-					.emailText {font-size:9pt;font-family:Arial;line-height:12pt;color:#2e008b;background:#fff;width:560px;min-height:360px;padding:20px;text-align:left}
+					.emailText {font-size:9pt;font-family:Arial;line-height:12pt;color:#2e008b;background:#fff;width:600px;padding:0 20px;text-align:left}
 					img{display:block}
-				</style></head><body><div align="center"><div class="emailText">';
-				
-	$message .= $email->Content;
-	$message .= '<p>Regards</p><p><b>Cancer Research</b>
+					.emailOurheroes {text-align: left;}
+					.emailCruklogo {float: right;}
+				</style></head><body><div align="center"><div class="emailText">
+				<div class="ourheroes"><img src="'.HTTP_PATH.'images/emails/our-heroes.png" alt="Cancer Research UK"></div>';
+	return  $startemail;
+}
+////////////////////////////////////////////////////////////////////////////////////
+function endEmail(){
+	$endemail .= '<img class="emailCruklogo" src="'.HTTP_PATH.'images/emails/Cancer-Research-UK.png" alt="Cancer Research UK">';
+	$endemail .= '<p>Regards</p><p><b>Cancer Research</b></p>
 				</div></div></body></html>';
-	
+	return $endemail;
+}
+////////////////////////////////////////////////////////////////////////////////////
+// send email
+function sendEmail($email){
+	global $strFrom;
+	$message = startEmail();
+	$message .= $email->Content;
+	$message .= endEmail();
 	if (mail($email->emailTo, $email->subject, $message, $strFrom)){
 		$reply = "success";
 	} else {
@@ -45,16 +56,9 @@ function sendEcardEmail($ecard){
 		}
 	}
 	// need to fully design e-card
-	$message = '<!DOCTYPE HTML><html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    			<title>CRUK Our Heroes</title>
-				<style type=text/css>
-					body,div {margin:0px;padding:0px}
-					.emailText {font-size:9pt;font-family:Arial;line-height:12pt;color:#2e008b;background:#fff;width:560px;min-height:360px;padding:20px;text-align:left}
-					img{display:block}
-				</style></head><body><div align="center"><div class="emailText">';
+	$message = startEmail();
 	$message .= $ecard->content;
-	$message .= '<p>Regards</p><p><b>Cancer Research</b>
-				</div></div></body></html>';
+	$message .= endEmail();
 	if (mail($emailTo, $subject, $message, $strFrom)){
 		$reply = "ecard sent";
 	} else {
@@ -77,17 +81,6 @@ function getName($empnum){
 function getConvertedDate($date){
 	$date = new DateTime($date);
 	return date_format($date, 'd F Y');
-}
-////////////////////////////////////////////////////////////////////////////////////
-function getEcard($id){
-	global $db;
-	$stmt = $db->prepare('SELECT * FROM tblnominations WHERE ID = :ID');
-	$stmt->execute(array('ID' => $id));
-	if ($result = $stmt->fetch(PDO::FETCH_OBJ)){
-		return $result;
-	} else{
-		return "N/A";
-	}
 }
 ////////////////////////////////////////////////////////////////////////////////////
 function in_object($val, $obj){
@@ -122,7 +115,9 @@ function getTotalNominationsList($empnum){
 }
 ////////////////////////////////////////////////////////////////////////////////////
 function indEcardText($ecard){
-	$ecardText = "<p>Hello ".$ecard->Fname."</p>
+	$ecardImage = str_replace(' ','-',strtolower($ecard->BeliefID));
+	$ecardText = '<img src="'.HTTP_PATH.'images/emails/'.$ecardImage.'.png" alt="'.$ecard->BeliefID.'">';
+	$ecardText .= "<p>Hello ".$ecard->Fname."</p>
 				<p>Congratulations!</p>
 				<p>".$ecard->NomFull_name." would like to thank you for the amazing work you have performed here at Cancer Research.</p>
 				<p>".$ecard->personalMessage."</p>
@@ -132,7 +127,9 @@ function indEcardText($ecard){
 }
 ////////////////////////////////////////////////////////////////////////////////////
 function indEcardExtraText($ecard){
-	$ecardText = "<p>Hello ".$ecard->Fname."</p>
+	$ecardImage = str_replace(' ','-',strtolower($ecard->BeliefID));
+	$ecardText = '<img src="'.HTTP_PATH.'images/emails/'.$ecardImage.'.png" alt="'.$ecard->BeliefID.'">';
+	$ecardText .= "<p>Hello ".$ecard->Fname."</p>
 				<p>Congratulations!</p>
 				<p>".$ecard->NomFull_name." would like to thank you for the amazing work you have performed here at Cancer Research.</p>
 				<p>".$ecard->personalMessage."</p>
