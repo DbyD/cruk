@@ -215,13 +215,8 @@
 }
 /* @end */
 /* @group Nominate */
-#nominate1 {
-	margin-bottom: 15px;
-}
-#nominate1 .image {
-	height: 465px;
+.nominateHome .image{
 	background: url(../images/nominate-home.jpg);
-	background-size: auto 465px;
 }
 .nominateButton {
 	font-size: 20px;
@@ -416,10 +411,7 @@
 	cursor: pointer;
 }
 @media only screen and (max-width: 1199px) {
-#nominate1 .image {
-	height: 412px;
-	background-size: auto 412px;
-}
+
 .height515 {
 	height: 465px;
 }
@@ -431,10 +423,6 @@
 }
 }
 @media only screen and (max-width: 1023px) {
-#nominate1 .image {
-	height: 200px;
-	background-size: 100% auto;
-}
 .nominateButton {
 	padding: 40px 0;
 	height: auto;
@@ -460,7 +448,10 @@
 }
 }
 /* @end */
-/* @group My Awards */
+/* @group My Account */
+.accountHome .image{
+	background: url(../images/nominate-home.jpg);
+}
 .awardButton {
 	font-size: 20px;
 	text-align: center;
@@ -512,7 +503,7 @@
 	display: inline-table;
 }
 .tableColumn-3 {
-	width: 24%;
+	width: 24.6%;
 	display: inline-table;
 }
 .tableColumn-4 {
@@ -558,10 +549,110 @@
 	margin-left: 20px;
 }
 .tableRow.largerText {
-	padding: 10px 20px !important;
+	padding: 8px 20px !important;
 	font-size: 17px;
 }
+#subPopupbox h3{
+	font-size: 14px;
+}
 /* @end */
+
+/* @group Admin */
+.adminHome .image{
+	background: url(../images/admin-home.jpg);
+}
+/* @end */
+
+/* @group Reports */
+#subHome.reportHome{
+	margin-bottom: 8px;
+}
+.tableReports {
+	font-size: 13px;
+	padding: 0;
+	text-align: center;
+	background: #2e008b;
+	color: #fff;
+}
+.tableReportsHead{
+	padding: 14px 0;
+	border-right: 1px solid #5833a2;
+}
+.tableReportsHead.white{
+	background: #fff;
+	color: #2e008b;
+}
+.dashboardGraphs{
+    padding: 0 20px;
+    height: 320px;
+}
+.pieLegend{
+	font-size: 11px;
+	text-align: left;
+	padding: 5px 20px;
+	text-transform: uppercase;
+}
+.pieLegend i{
+	padding: 0 5px;
+	margin-right: 10px;
+}
+.piePending{
+	color: #00b6ed;
+}
+.piePending i{
+	background: #00b6ed;
+}
+.pieApproved{
+	color: #ec008c;
+}
+.pieApproved i{
+	background: #ec008c;
+}
+.pieDeclined{
+	color: #5833a2;
+}
+.pieDeclined i{
+	background: #5833a2;
+}
+.panel.callout.reportLikes{
+	background: #5833a2;
+	color: #fff;
+	height: 200px;
+	padding: 15px;
+	font-size: 20px;
+	text-align: center;
+}
+.reportLikes i{
+	font-size: 60px;
+	display: block;
+	padding: 20px;
+}
+.likeHead{
+	text-align: left;
+	width: 100%;
+	font-size: 14px;
+}
+#reportTop10{
+	background: #fff;
+	height: 200px;
+}
+#reportTop10 .tableTitle{
+	background: #5833a2;
+	color: #fff;
+	padding: 9px 15px;
+	text-align: left;
+}
+#reportTop10 .tableRow {
+    font-size: 13px;
+    padding: 7px 15px;
+    text-align: left;
+    border-bottom: 1px solid #cfcecf;
+}
+.borderRight{
+    border-right: 1px solid #cfcecf;
+}
+}/* @end */
+
 /* @group Alert Popup */
 .claimedAwardsExpanded {
 	display: none;

@@ -17,19 +17,19 @@
 <div id="popup1" class="">
 	<div id="popupbox1">
 		<div id="popupContent1"></div>
-		<div id="closepopup1" data-type="close" data-id="1" class="clickAble closealert" /><i class="icon-icons_close"></i></div>
+		<div id="closepopup1" data-type="close" data-id="1" class="clickAble closealert"><i class="icon-icons_close"></i></div>
 	</div>
 </div>
 <div id="ecardPopup" class="">
 	<div id="ecardbox">
 		<div id="popupEcard"></div>
-		<div id="closeEcard" data-type="close" data-id="2" class="clickAble closealert" /><i class="icon-icons_close"></i></div>
+		<div id="closeEcard" data-type="close" data-id="2" class="clickAble closealert"><i class="icon-icons_close"></i></div>
 	</div>
 </div>
 <div id="alert" class="">
 	<div id="alertbox">
 		<div id="alertContent"></div>
-		<div id="closealert" data-type="close" data-id="3" class="clickAble closealert" /><i class="icon-icons_close"></i></div>
+		<div id="closealert" data-type="close" data-id="3" class="clickAble closealert"><i class="icon-icons_close"></i></div>
 	</div>
 </div>
 

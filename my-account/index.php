@@ -3,7 +3,7 @@
 		<div class="title">
 			My Account
 		</div>
-		<div class="callout panel" id="nominate1">
+		<div class="callout panel accountHome" id="subHome">
 			<div class="image">&nbsp;</div>
 		</div>
 		<div class="row contentFill">

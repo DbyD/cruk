@@ -161,6 +161,9 @@ $(function(){
 						$("#alert").css('display', 'none');
 						$("#alertContent").empty();
 						break;
+					case '4':
+						$("#subPopup").css('display', 'none');
+						break;
 				}
 				break;
 			case 'clear': 
@@ -178,6 +181,11 @@ $(function(){
 				$("#popupContent1").load(url+"?id="+id);
 				$("#popup1").css('display', 'block');
 				break;
+			case 'subPopup': 
+				var top = $(this).position().top + 30
+				$("#subPopup").css('display', 'block');
+				$("#subPopupbox").css('top', top);
+				break;
 			case 'ecard': 
 				$("#popupEcard").load(url+"?id="+id);
 				$("#ecardPopup").css('display', 'block');
@@ -186,13 +194,13 @@ $(function(){
 				$("#alertContent").load(url);
 				$("#alert").css('display', 'block');
 				break;
-			case 'expand': 
-				$("#"+id+" .expandArrow i" ).attr( "data-type", "colapse" );
+			case 'expandArrow': 
+				$("#"+id+" .expandArrow i" ).attr( "data-type", "colapseArrow" );
 				$("#"+id+" .expandArrow i" ).removeClass('icon-icons_pointright').addClass('icon-icons_pointdown');
 				$("#"+id+" .claimedAwardsExpanded").css('display', 'block');
 				break;
-			case 'colapse': 
-				$("#"+id+" .expandArrow i" ).attr( "data-type", "expand" );
+			case 'colapseArrow': 
+				$("#"+id+" .expandArrow i" ).attr( "data-type", "expandArrow" );
 				$("#"+id+" .expandArrow i" ).removeClass('icon-icons_pointdown').addClass('icon-icons_pointright');
 				$("#"+id+" .claimedAwardsExpanded").css('display', 'none');
 				break;
