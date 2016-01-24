@@ -235,6 +235,8 @@
 .searchInput input[type=text] {
 	padding: 5px 15px 5px 32px;
 	margin: -3px 0 0;
+	width: 50%;
+	float: right;
 	background: #ebebeb url(../images/search-icon.png) no-repeat 12px 4px;
 }
 .searchResult {
@@ -436,6 +438,25 @@
 .nominateButton {
 	padding: 40px 0;
 	height: auto;
+}
+.height515 {
+	height: auto;
+}
+.searchInput input[type=text] {
+	width: 100%;
+}
+.searchInput .medium-10{
+	width: 77%;
+}
+.searchInput .medium-2{
+	width: 22%;
+}
+.valign-middle .columns {
+	display: block;
+}
+.searchResult .medium-2{
+	float: left;
+	width: 20%;
 }
 }
 /* @end */

@@ -392,6 +392,7 @@ li.ui-menu-item { font-size:13px !important; }
 	position: absolute;
 	left: 6px;
 }
+
 /* @end */
 @media only screen and (min-width: 1024px){
 .row{
@@ -437,6 +438,9 @@ li.ui-menu-item { font-size:13px !important; }
 }
 }
 @media only screen and (max-width: 1023px){
+.off-canvas-wrap{
+	padding: 0;
+}
 #payoff, #portfolio{
 	display: none;
 }
@@ -497,5 +501,12 @@ ul.off-canvas-list .photo{
 }
 #content .columns{
 	padding: 2px 0;
+}
+}
+@media only screen and (max-width: 500px){
+#alertbox, #popupbox1, #ecardbox{
+	left: 10px;
+	width: 90%;
+	margin-left: 0px;
 }
 }
