@@ -154,8 +154,8 @@ $(function(){
 						$("#popupContent1").empty();
 						break;
 					case '2':
-						$("#popup2").css('display', 'none');
-						$("#popupContent2").empty();
+						$("#ecardPopup").css('display', 'none');
+						$("#popupEcard").empty();
 						break;
 					case '3':
 						$("#alert").css('display', 'none');
@@ -177,6 +177,10 @@ $(function(){
 				if(id=='littleExtra') $('#littleExtra').prop('checked', false);
 				$("#popupContent1").load(url+"?id="+id);
 				$("#popup1").css('display', 'block');
+				break;
+			case 'ecard': 
+				$("#popupEcard").load(url+"?id="+id);
+				$("#ecardPopup").css('display', 'block');
 				break;
 			case 'alert': 
 				$("#alertContent").load(url);
@@ -211,7 +215,7 @@ $(function(){
 							$('#beliefs div').removeClass('selectedecard');
 							$(this).addClass('selectedecard');
 							$('#BeliefID option').removeAttr("selected");
-							$('#BeliefID option[value='+divID+']').prop('selected', 'selected');
+							$("#BeliefID option[value='"+divID+"']").prop('selected', 'selected');
 						}
 					break;
 				}
@@ -241,10 +245,10 @@ $('#personalMessage').keypress(function(e) {
 $(function() {
 	$('#beliefs div.clickAble').hover(function(){
 		var divID = this.id + "Text";
-		$("#"+divID).removeClass('hidden');
+		$("[id='"+divID+"']").removeClass('hidden');
 	},function(){
 		var divID = this.id + "Text";
-		$("#"+divID).addClass('hidden');
+		$("[id='"+divID+"']").addClass('hidden');
 	});
 });
 //----------------------------------------------------------------------------------

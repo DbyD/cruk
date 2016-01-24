@@ -9,8 +9,7 @@
 			<div class="row ">
 				<div class="title searchInput">
 					<form action="colleague.php" method="GET" name="searchColleague" id="searchColleague">
-						<div class="medium-5 columns">&nbsp;</div>
-						<div class="medium-5 columns">
+						<div class="medium-10 columns">
 							<input type="text" name="searchAuto" id="searchAuto" value="" class="search" />
 						</div>
 						<div class="medium-2 columns">
@@ -42,7 +41,7 @@
 						<div class="medium-5 columns">
 							<?php echo $list->Team; ?>
 						</div>
-						<div class="medium-1 columns">
+						<div class="medium-1 columns textRight">
 							<div class="hiddenTick">
 								<input type="radio" value="<?=$list->EmpNum?>" name="EmpNum" id="EmpNum<?=$x?>" required>
 								<label for="EmpNum<?=$x?>"></label>

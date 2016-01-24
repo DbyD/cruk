@@ -323,7 +323,7 @@ li.ui-menu-item { font-size:13px !important; }
 
 
 /* @group Alert Popup */
-#alert, #viewEcard, #popup1, #popup2{
+#alert, #viewEcard, #popup1, #ecardPopup{
 	background-color: rgba(0,0,0,0.7);
 	display: none;
 	z-index: 99;
@@ -333,7 +333,7 @@ li.ui-menu-item { font-size:13px !important; }
 	bottom: 0;
 	right: 0;
 }
-#alertbox, #popupbox1, #popupbox2{
+#alertbox, #popupbox1, #ecardbox{
 	z-index: 99;
 	position: fixed;
 	left: 50%;
@@ -350,6 +350,12 @@ li.ui-menu-item { font-size:13px !important; }
 	-webkit-box-shadow:  0px 0px 3px #000;
 	box-shadow:  0px 0px 3px #000;
 }
+#ecardbox{
+    top: 50px;
+	width: 610px;
+	margin-left: -305px;
+	max-height: none;
+}
 #alertbox{
 	min-height: 200px;
 }
@@ -361,8 +367,11 @@ li.ui-menu-item { font-size:13px !important; }
 	color: #fff;
 	font-size: 22px;
 }
-#alertContent, #popupContent1, #popupContent2{	
+#alertContent, #popupContent1{	
 	padding: 0px;
+}
+#popupEcard{	
+	padding: 5px;
 }
 #alertTitle{	
 	padding: 25px 20px;
@@ -383,6 +392,7 @@ li.ui-menu-item { font-size:13px !important; }
 	position: absolute;
 	left: 6px;
 }
+
 /* @end */
 @media only screen and (min-width: 1024px){
 .row{
@@ -428,6 +438,9 @@ li.ui-menu-item { font-size:13px !important; }
 }
 }
 @media only screen and (max-width: 1023px){
+.off-canvas-wrap{
+	padding: 0;
+}
 #payoff, #portfolio{
 	display: none;
 }
@@ -488,5 +501,12 @@ ul.off-canvas-list .photo{
 }
 #content .columns{
 	padding: 2px 0;
+}
+}
+@media only screen and (max-width: 500px){
+#alertbox, #popupbox1, #ecardbox{
+	left: 10px;
+	width: 90%;
+	margin-left: 0px;
 }
 }
