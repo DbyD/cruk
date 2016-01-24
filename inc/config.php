@@ -38,6 +38,7 @@
 	include 'approve-functions.php';
 	include 'account-functions.php';
 	include 'redeem-functions.php';
+	include 'report-functions.php';
 ////////////////////////////////////////////////////////////////////////////////////
 	$encrypt = new Encryption;
 	session_start();

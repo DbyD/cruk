@@ -69,6 +69,15 @@ class Award {
 	}
 }
 
+class allApprovalsList{
+    public function getAllApprovalsList() {
+		global $db;
+		$stmt = $db->prepare("SELECT * FROM tblnominations WHERE AprStatus=0 AND littleExtra='Yes' ORDER BY NomDate DESC");
+		$stmt->execute();
+		$result = $stmt->fetchAll(PDO::FETCH_OBJ);
+		return $result;
+    }
+}
 
 class MyApprovalsList{
     public function getAllMyApprovalsList($empnum) {
@@ -109,6 +118,7 @@ class MyNominationsList{
 		return $result;
     }
 }
+
 class searchAllUsers{
     public function getAllUserSearch($search) {
 		global $db;
