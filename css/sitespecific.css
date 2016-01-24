@@ -240,7 +240,7 @@
 	border-bottom: 1px solid #ebebeb;
 }
 .noBorder {
-	border: 0;
+	border: 0 !important;
 }
 .searchResult img {
 	height: 45px;
