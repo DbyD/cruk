@@ -47,7 +47,7 @@
 							<form action="inc/login.php" method="post" name="login" id="login">
 								<h1>Employee Login</h1>
 								<p>Login below to send a 'Thank you' card or a gift to a colleague.</p>
-								<?php if($_GET['alert']) echo '<p class="alert">You have entered an incorrect Username or Password</p>'; ?>
+								<?php if(isset( $_GET['alert'] ) ) echo '<p class="alert">You have entered an incorrect Username or Password</p>'; ?>
 								<div class="medium-6 columns">
 									Username: (Employee number)
 									<input type="text" name="sUsername" autocomplete="off" />

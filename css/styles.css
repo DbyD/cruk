@@ -5,6 +5,27 @@ body{
 	font: 13px Arial;
 	color: #2e008b;
 }
+
+.size-12 { font-size: 12px; }
+      
+.size-14 { font-size: 14px; }
+
+.size-16 { font-size: 16px; }
+
+.size-18 { font-size: 18px; }
+
+.size-21 { font-size: 21px; }
+
+.size-24 { font-size: 24px; }
+
+.size-36 { font-size: 36px; }
+
+.size-48 { font-size: 48px; }
+
+.size-60 { font-size: 60px; }
+
+.size-72 { font-size: 72px; }
+
 .panel.callout, .panel.callout h1, .panel.callout h2, .panel.callout h3, .panel.callout h4,
 .panel.callout h5, .panel.callout h6, .panel.callout p, .panel.callout li,
 .panel.callout dl {
@@ -134,6 +155,111 @@ ul{
 	display: block;
 	margin: 0 auto 5px;
 }
+#nominateEmployeeImage {
+	padding: 20px;
+    background-color: #fff;
+}
+
+#nominateEmployeeImage img {
+	border-radius:50%;
+}
+
+#nominateEmployeeImage p {
+	color: #31DAE2;
+    text-align: center;
+    font-size: 18px;
+    padding-top: 20px;
+}
+
+#content-nominate {
+	background-color: #FF3FC4;
+	padding:10px;
+}
+
+#content-nominate > p{
+	color:#fff;
+}
+
+
+#content-nominate > p:nth-child(even){
+	font-weight: 600;
+}
+
+#modalForSendMail {
+	display:none;
+}
+
+.sendMail {
+	cursor:pointer;
+}
+
+#messages {
+	height: 400px;
+}
+
+#messages > ul{
+	list-style:none;
+	overflow-x:hidden;
+	overflow-y:scroll;
+	height: 200px;
+}
+
+#messages > ul p.text {
+	color:#333;
+}
+
+
+.winners-header > h2{
+	background-color: #2E008B;
+    color: #fff;
+    padding: 20px;
+    font-weight: 600;
+    margin-top: 0px;
+}
+
+
+#messageEmploye {
+	background-color: #8367BB;
+}
+
+#messageEmploye > p {
+	color: #fff;
+}
+
+#listNominators {
+	list-style: none;
+    height: 130px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+#listNominators li {
+	border-top:1px solid #4B2073;
+}
+
+#listNominators p {
+	color: #2DBADA;
+    font-weight: 700;
+}
+
+#listNominators i {
+	color:#fff;
+}
+
+#listNominators i.fi-torso-business {
+	padding: 5px 15px;
+	color:#fff;
+	float:left;
+}
+
+.hide {
+	display:none;
+}
+
+.error {
+	color:red;
+}
+
 .tab-bar{
 	background-color: #2e008b;
 	margin-bottom: 20px;
@@ -402,8 +528,8 @@ li.ui-menu-item { font-size:13px !important; }
 	color: #2e008b;
 }
 #alertBody .tableRow{
-	border-bottom: 1px solid #ebebeb;
-	padding: 15px 20px;
+	border-bottom: 1px solid #e9e9e9;
+	padding: 20px;
 }
 .expandArrow i{
 	position: absolute;
@@ -498,16 +624,7 @@ li.ui-menu-item { font-size:13px !important; }
 	height: 660px;
 }
 }
-@media only screen and (max-width: 1199px) {
-#subHome .image {
-	height: 412px;
-	background-size: auto;
-}
-}
 @media only screen and (max-width: 1023px){
-.off-canvas-wrap{
-	padding: 0;
-}
 #payoff, #portfolio{
 	display: none;
 }
@@ -568,16 +685,5 @@ ul.off-canvas-list .photo{
 }
 #content .columns{
 	padding: 2px 0;
-}
-#subHome .image {
-	height: 200px;
-	background-size: 100% auto;
-}
-}
-@media only screen and (max-width: 500px){
-#alertbox, #popupbox1, #ecardbox{
-	left: 10px;
-	width: 90%;
-	margin-left: 0px;
 }
 }

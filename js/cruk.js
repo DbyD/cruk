@@ -132,10 +132,13 @@ $(function(){
 	});
 });
 //----------------------------------------------------------------------------------
-	$('.clickAble').click(function() {
+	$('.clickAble').click(function(e) {
+		
 		var url = $(this).attr('data-url');
 		var type = $(this).attr('data-type');
 		var id = $(this).attr('data-id');
+
+		
 		switch (type) { 
 			case 'goback': 
 				history.back();
@@ -269,3 +272,47 @@ $(function() {
 	});
 })(jQuery);
 //----------------------------------------------------------------------------------
+
+$(document).ready(function(){
+	$(".sendMail").click(function(){
+
+		var sender = $($(this).siblings()[0]).val();
+		var recipient = $($(this).siblings()[1]).val();
+
+		$('#modalForSendMail').click();
+
+		console.log(sender);
+		console.log(recipient);
+
+		$("#senderModal").val(sender);
+		$("#recipientModal").val(recipient);
+	});
+
+	$("#sendButton").click(function(){
+		var recipient = $("#recipientModal").val();
+		var sender = $("#senderModal").val();
+		var text = $("#mailToEmploye").val();
+		var siblings = $("#mailToEmploye").siblings();
+		
+
+		if( $.trim(text) != '' ){
+			siblings.addClass("hide");
+			$(".close-reveal-modal").click();
+			$.ajax({
+			  type:'post',
+			  url: "inc/global-functions.php?name=message",
+			  data:  { 
+			  	recipient : recipient,
+			  	sender : sender,
+			  	text : text
+			  } ,
+			  success: function(data){
+			  		console.log(data);
+			  }
+			});
+		} else {
+			siblings.removeClass("hide");
+		}
+
+	});
+});

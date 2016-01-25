@@ -139,6 +139,83 @@ function indEcardExtraText($ecard){
 	return $ecardText;
 }
 ////////////////////////////////////////////////////////////////////////////////////
+function getAllEmployees(){
+	global $db;
+
+	//Photo,Fname,Belief,NominatedEmpNum
+
+	$sql = "
+SELECT  e.Fname AS name,
+		e.EmpNum AS EmpNum,
+		e.Photo AS Photo,
+		e.Belief AS Belief,
+		n.NominatedEmpNum AS NominatedEmpNum
+FROM 
+	tblnominations AS n
+		INNER JOIN
+	tblempall AS e
+			ON n.NominatorEmpNum = e.EmpNum GROUP BY n.NominatorEmpNum";
+
+	$stmt = $db->prepare( $sql );
+	
+	$stmt->execute();
+
+	$arr = array();
+	while($result = $stmt->fetch(PDO::FETCH_ASSOC)){
+		$arr[] = $result;
+	}
+
+	if( count($arr) == 0){
+		return 0;
+	}
+
+	return $arr;
+}
+
+function getMyMessages( $empnum ) {
+	global $db;
+
+	$stmt = $db->prepare('SELECT * FROM tblmessage WHERE recipient = :recipient');
+	$stmt->execute(array('recipient' => $empnum));
+
+	while($result = $stmt->fetch( PDO::FETCH_ASSOC )) {
+		$arr[] = $result;
+	}
+
+	if(count($arr) == 0){
+		return 0;
+	}
+
+	return $arr;
+}
+
+if(isset($_GET['name']) && $_GET['name'] == 'message'){
+	$db_server = 'Localhost';
+	$db_database = 'cruk21-01-201610-44 AM';
+	$db_user = 'root';
+	$db_passwd = '';
+	
+	try {
+		$db = new PDO("mysql:host=$db_server;dbname=$db_database", $db_user, $db_passwd);
+		$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	} catch (PDOException $e) {
+		print "Error!: " . $e->getMessage() . "<br/>";
+		die();
+	}
+
+	$stmt = $db->prepare("INSERT INTO tblmessage (recipient, sender, text, date) VALUES (:recipient, :sender, :text, :date)");
+	
+	$NominatedEmpNum = $_POST["recipient"];
+	$EmpNum = $_POST["sender"];
+	$text = $_POST["text"];
+	$date = date('Y-m-d H:i:s');
+
+	$stmt->bindValue(':recipient',$NominatedEmpNum, PDO::PARAM_STR);
+	$stmt->bindValue(':sender', $EmpNum, PDO::PARAM_STR);
+	$stmt->bindValue(':text',$text , PDO::PARAM_STR);
+	$stmt->bindValue(':date',$date , PDO::PARAM_STR);
+	$stmt->execute();
+}
 ////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////
