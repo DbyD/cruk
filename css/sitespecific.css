@@ -783,40 +783,96 @@ p.alertText {
 
 .size-72 { font-size: 72px; }
 
-#nominateEmployeeImage {
-	padding: 20px;
+#winnerswall .panel.callout{
+	margin: 1%;
+}
+#winnerswall .panel.callout:first-child, #winnerswall .panel.callout:nth-child(1n+4){
+	margin-left: 0;
+}
+#winnerswall .panel.callout:nth-child(4n+4){
+	margin-right: 0;
+}
+#winnerswall .tableColumn-3{
+	width: 23.4%;
+}
+#winnerswall div {
+	position: relative;
+}
+#winnerswall span {
+	background: rgba(0,182,237,0.8);
+	color: #fff;
+	height: 170px;
+	text-align: left;
+	padding: 10px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 1;
+	width: 100%;
+}
+.height590{
+	height: 590px;
+}
+.nominateEmployeeImage {
+    padding: 15px 5px;
     background-color: #fff;
-}
-
-#nominateEmployeeImage img {
-	border-radius:50%;
-}
-
-#nominateEmployeeImage p {
-	color: #31DAE2;
     text-align: center;
-    font-size: 18px;
-    padding-top: 20px;
+    height: 170px;
 }
-
-#content-nominate {
-	background-color: #FF3FC4;
+.nominateEmployeeImage img {
+	border-radius: 50%;
+    width: 100px;
+}
+.nominateEmployeeImage p {
+    font-size: 16px;
+    padding: 15px 0 0;
+}
+.content-nominate {
 	padding:10px;
 }
-
-#content-nominate > p{
-	color:#fff;
+.content-nominate > p{
+	color:#fff !important;
+	margin: 3px;
 }
-
-
-#content-nominate > p:nth-child(even){
-	font-weight: 600;
+.content-nominate > p:nth-child(even){
+	font-weight: bold;
 }
-
+.content-nominate > p:nth-child(odd){
+	margin: 7px 3px 3px;
+}
+.content-nominate i{
+	font-size: 17px;
+}
 #modalForSendMail {
 	display:none;
 }
-
+.BeBrave .nominateEmployeeImage p{
+	color: #00b6ed !important;
+}
+.BeBrave .content-nominate {
+	background-color: #ec008c;
+}
+.BeBrave  span.showbehaviour{
+	background: rgba(236,0,140,0.8) !important;
+}
+.BeUnited .nominateEmployeeImage p{
+	color: #5833a2 !important;
+}
+.BeUnited .content-nominate {
+	background-color: #5833a2;
+}
+.BeUnited  span.showbehaviour{
+	background: rgba(88,51,162,0.8) !important;
+}
+.BeSharp .nominateEmployeeImage p{
+	color: #00b6ed !important;
+}
+.BeSharp .content-nominate {
+	background-color: #00b6ed;
+}
+.BeSharp  span.showbehaviour{
+	background: rgba(0,182,237,0.8) !important;
+}
 .sendMail {
 	cursor:pointer;
 }
@@ -910,3 +966,28 @@ p.alertText {
 	height: 120px;
 }
 /* @end */
+#myModal{
+	top: 90px;
+    width: 450px;
+    padding: 0px;
+    height: 300px;
+}
+#myModal h2{
+	background: #2e008b;
+    padding: 15px;
+    color: #fff;
+}
+#myModal a{
+	position: absolute;
+    top: -12px;
+    right: -12px;
+    line-height: 0;
+}
+#myModal i{
+	font-size: 22px;
+    color: #fff;
+}
+button:hover, button:focus, .button:hover, .button:focus{
+	background: #2e008b;
+	
+}

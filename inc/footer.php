@@ -17,7 +17,7 @@
 							if(isset($count_awwards)):?>
 								<div id='messageEmployee'>
 									<i class="icon-icons_tickinbox"></i> <span class="right"><?=date("l m/d")?></span>
-									<div>You have a <? echo $count_awwards; ?> awards to aprove</div>
+									<div class="clickAble" data-type="gourl" data-url="<?=HTTP_PATH?>approvals">You have a <? echo $count_awwards; ?> awards to aprove</div>
 								</div>
 						<?php endif ;
 							?>
@@ -55,7 +55,7 @@
 							</div>
 							<div class="medium-10 columns">
 								Individual
-								<p><?php echo $value['name']; ?></p>
+								<p><?php echo $value['name'].' '.$value['sname']; ?></p>
 							</div>
 						</div>
 					<?php	}

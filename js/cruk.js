@@ -133,13 +133,12 @@ $(function(){
 });
 //----------------------------------------------------------------------------------
 	$('.clickAble').click(function(e) {
-		
 		var url = $(this).attr('data-url');
 		var type = $(this).attr('data-type');
-		var id = $(this).attr('data-id');
-
-		
+		var id = $(this).attr('data-id');		
 		switch (type) { 
+			case 'donothing': 
+				break; 
 			case 'goback': 
 				history.back();
 				break;
@@ -263,7 +262,6 @@ $(function() {
 	});
 });
 //----------------------------------------------------------------------------------
-//----------------------------------------------------------------------------------
 	$(document).foundation();
 //----------------------------------------------------------------------------------
 (function($){
@@ -272,35 +270,27 @@ $(function() {
 	});
 })(jQuery);
 //----------------------------------------------------------------------------------
-
 $(document).ready(function(){
 	$(".sendMail").click(function(){
-
 		var sender = $($(this).siblings()[0]).val();
 		var recipient = $($(this).siblings()[1]).val();
-
 		$('#modalForSendMail').click();
-
 		console.log(sender);
 		console.log(recipient);
-
 		$("#senderModal").val(sender);
 		$("#recipientModal").val(recipient);
 	});
-
 	$("#sendButton").click(function(){
 		var recipient = $("#recipientModal").val();
 		var sender = $("#senderModal").val();
-		var text = $("#mailToEmploye").val();
-		var siblings = $("#mailToEmploye").siblings();
-		
-
+		var text = $("#mailToEmployee").val();
+		var siblings = $("#mailToEmployee").siblings();
 		if( $.trim(text) != '' ){
-			siblings.addClass("hide");
+			siblings.addClass("hidden");
 			$(".close-reveal-modal").click();
 			$.ajax({
 			  type:'post',
-			  url: "inc/global-functions.php?name=message",
+			  url: "message-submit.php?name=message",
 			  data:  { 
 			  	recipient : recipient,
 			  	sender : sender,
@@ -311,8 +301,18 @@ $(document).ready(function(){
 			  }
 			});
 		} else {
-			siblings.removeClass("hide");
+			siblings.removeClass("hidden");
 		}
-
 	});
 });
+//----------------------------------------------------------------------------------
+$(function() {
+	$('#winnerswall div.clickAble').hover(function(){
+		var divID = this.id + "Text";
+		$("[id='"+divID+"']").removeClass('hidden');
+	},function(){
+		var divID = this.id + "Text";
+		$("[id='"+divID+"']").addClass('hidden');
+	});
+});
+//----------------------------------------------------------------------------------

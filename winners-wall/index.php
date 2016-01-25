@@ -1,5 +1,5 @@
 <?php
-	include_once('inc/header.php');
+	include_once('../inc/header.php');
 ?>
 			<div id="content" class="large-8 large-push-2 columns">
 				<div class="row winners-header">
@@ -19,7 +19,7 @@
 					<div class="callout panel tableColumn-3 <?=$class?>">
 						<div class="clickAble" id="wall<?php echo $employee["ID"]; ?>" data-type="donothing">
 							<div class="nominateEmployeeImage">
-								<img src="<?php echo $employee["Photo"];?>">
+								<img src="<?php echo HTTP_PATH.$employee["Photo"];?>">
 								<p><?php echo $employee["name"].' '.$employee["Sname"]; ?></p>
 							</div>
 							<div class="content-nominate">
@@ -49,22 +49,22 @@
 								<div class="large-12 columns">
 									<label>
 									Your message <textarea placeholder="" id="mailToEmployee"></textarea>
-									<p class="hide error">Please type a message or close to cancel.</p>
+									<p id="messageError" class="hidden error">Textarea is empty!</p>
 									</label>
 								</div>
 							</div>
+							<input type="hidden" id="senderModal">
+							<input type="hidden" id="recipientModal">
+						</form>
 							<div class="row">
 								<div class="large-12 columns">
-									<input type="hidden" id="senderModal">
-									<input type="hidden" id="recipientModal">
 									<button id="sendButton" class="right blueButton">Send</button>
 								</div>
 							</div>
-						</form>
 					</div>
 					<a class="close-reveal-modal" aria-label="Close"><i class="icon-icons_close"></i></a>
 				</div>
 			</div>
 <?php
-	include_once('inc/footer.php');
+	include_once('../inc/footer.php');
 ?>
