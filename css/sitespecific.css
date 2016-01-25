@@ -760,3 +760,153 @@ p.alertText {
 	line-height: 16px;
 }
 /* @end */
+
+/* @group Messages */
+
+.size-12 { font-size: 12px; }
+      
+.size-14 { font-size: 14px; }
+
+.size-16 { font-size: 16px; }
+
+.size-18 { font-size: 18px; }
+
+.size-21 { font-size: 21px; }
+
+.size-24 { font-size: 24px; }
+
+.size-36 { font-size: 36px; }
+
+.size-48 { font-size: 48px; }
+
+.size-60 { font-size: 60px; }
+
+.size-72 { font-size: 72px; }
+
+#nominateEmployeeImage {
+	padding: 20px;
+    background-color: #fff;
+}
+
+#nominateEmployeeImage img {
+	border-radius:50%;
+}
+
+#nominateEmployeeImage p {
+	color: #31DAE2;
+    text-align: center;
+    font-size: 18px;
+    padding-top: 20px;
+}
+
+#content-nominate {
+	background-color: #FF3FC4;
+	padding:10px;
+}
+
+#content-nominate > p{
+	color:#fff;
+}
+
+
+#content-nominate > p:nth-child(even){
+	font-weight: 600;
+}
+
+#modalForSendMail {
+	display:none;
+}
+
+.sendMail {
+	cursor:pointer;
+}
+#messageList{
+	padding: 0 !important;
+    overflow: auto;
+}
+#messageList .row{
+	border-bottom: 1px solid #cfcfcf;
+}
+.height225 {
+	height: 225px;
+}
+.height300 {
+	height: 300px;
+}
+#messageList p.text {
+	color:#383838;
+	margin: 8px 0 2px;
+}
+#awardList{
+	padding: 0 !important;
+	overflow: auto;
+}
+.height163{
+	height: 163px;
+}
+#awardList .row{
+	border-bottom: 1px solid #4001c4;
+}
+#awardList div div{
+	padding: 0;
+}
+#awardList p{
+	color: #00b6ed;
+	margin: 2px 0 2px;
+}
+#awardList i{
+	font-size: 20px;
+	margin-left: 5px;
+}
+
+.winners-header > h2{
+	background-color: #2E008B;
+    color: #fff;
+    padding: 20px;
+    font-weight: 600;
+    margin-top: 0px;
+}
+
+
+#messageEmployee {
+	background-color: #8367BB;
+	color: #fff;
+}
+
+#listNominators {
+	list-style: none;
+    height: 130px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+#listNominators li {
+	border-top:1px solid #4B2073;
+}
+
+#listNominators p {
+	color: #2DBADA;
+    font-weight: 700;
+}
+
+#listNominators i {
+	color:#fff;
+}
+
+#listNominators i.fi-torso-business {
+	padding: 5px 15px;
+	color:#fff;
+	float:left;
+}
+
+.hide {
+	display:none;
+}
+
+.error {
+	color:red;
+}
+.height120{
+	height: 120px;
+}
+/* @end */

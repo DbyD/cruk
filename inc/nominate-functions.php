@@ -56,7 +56,7 @@ function getTotalNominations($empnum){
 ////////////////////////////////////////////////////////////////////////////////////
 function getTotalPendingNominations($empnum){
 	global $db;
-	$stmt = $db->prepare('SELECT * FROM tblnominations WHERE NominatorEmpNum = :EmpNum AND AprStatus=0');
+	$stmt = $db->prepare('SELECT * FROM tblnominations WHERE ApproverEmpNum = :EmpNum AND AprStatus=0');
 	$stmt->execute(array('EmpNum' => $empnum));
 	if ($result = $stmt->fetch()){
 		return $stmt->rowCount();

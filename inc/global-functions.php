@@ -174,18 +174,14 @@ FROM
 
 function getMyMessages( $empnum ) {
 	global $db;
-
-	$stmt = $db->prepare('SELECT * FROM tblmessage WHERE recipient = :recipient');
+	$stmt = $db->prepare('SELECT * FROM tblmessage WHERE recipient = :recipient ORDER BY date DESC');
 	$stmt->execute(array('recipient' => $empnum));
-
 	while($result = $stmt->fetch( PDO::FETCH_ASSOC )) {
 		$arr[] = $result;
 	}
-
 	if(count($arr) == 0){
 		return 0;
 	}
-
 	return $arr;
 }
 
