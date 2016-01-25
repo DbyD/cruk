@@ -46,9 +46,10 @@
 							if($list->AprStatus == 0){
 								echo '<div class="lightBlue">Pending <span class="smaller">('.getName($list->ApproverEmpNum).'</span>)</div>';
 							} else {
-								echo "Approved";
 								if($list->amount != 0){
-									echo " (".getName($list->ApproverEmpNum).")";
+									echo "Approved (".getName($list->ApproverEmpNum).")";
+								} else {
+									echo '-';
 								}
 							}
 						?>

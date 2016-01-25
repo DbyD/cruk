@@ -169,11 +169,13 @@
 }
 .awardStar i {
 	font-size: 30px;
+	margin-left: 15px;
 }
 .awardStar span {
 	font-size: 12px;
 	position: relative;
-	left: -18px;
+	width: 30px;
+	left: -30px;
 	top: -7px;
 	z-index: 1;
 	color: #fff;
@@ -192,7 +194,7 @@
 .title .awardStar span {
 	font-size: 11px;
 	position: relative;
-	left: -26px;
+	left: -27px;
 	top: -6px;
 	width: 26px;
 	z-index: 1;
@@ -493,6 +495,7 @@
 	font-size: 13px;
 	padding: 14px 0;
 	text-align: center;
+	border-bottom: 1px solid #ebebeb;
 }
 .tableColumn-1 {
 	width: 8%;
@@ -670,7 +673,6 @@
 	font-style: italic;
 }
 .claimedAwardsExpanded .subTitle {
-	;
 	color: #2e008b;
 	font-weight: normal;
 	font-style: normal;
