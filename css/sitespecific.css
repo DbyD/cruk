@@ -786,16 +786,19 @@ p.alertText {
 #winnerswall .panel.callout{
 	margin: 1%;
 }
-#winnerswall .panel.callout:first-child, #winnerswall .panel.callout:nth-child(1n+4){
+#winnerswall .panel.callout:nth-child(-n+4){
+	margin-top: 0;
+}
+#winnerswall .panel.callout:first-child, #winnerswall .panel.callout:nth-child(4n+1){
 	margin-left: 0;
 }
-#winnerswall .panel.callout:nth-child(4n+4){
+#winnerswall .panel.callout:nth-child(4n){
 	margin-right: 0;
 }
 #winnerswall .tableColumn-3{
-	width: 23.4%;
+	width: 23%;
 }
-#winnerswall div {
+.BeBrave, .BeSharp, .BeUnited {
 	position: relative;
 }
 #winnerswall span {
@@ -882,12 +885,25 @@ p.alertText {
 }
 #messageList .row{
 	border-bottom: 1px solid #cfcfcf;
+	padding: 10px;
 }
-.height225 {
+.height217 {
 	height: 225px;
 }
-.height300 {
-	height: 300px;
+.height306 {
+	height: 306px;
+}
+#messageEmployee {
+	background-color: #8367BB;
+	color: #fff;
+	padding: 10px;
+}
+#messageEmployee span{
+	padding-top: 4px;
+}
+#messageEmployee div{
+	padding: 4px;
+	text-align: center;
 }
 #messageList p.text {
 	color:#383838;
@@ -902,6 +918,7 @@ p.alertText {
 }
 #awardList .row{
 	border-bottom: 1px solid #4001c4;
+	padding: 10px;
 }
 #awardList div div{
 	padding: 0;
@@ -924,10 +941,7 @@ p.alertText {
 }
 
 
-#messageEmployee {
-	background-color: #8367BB;
-	color: #fff;
-}
+
 
 #listNominators {
 	list-style: none;
@@ -965,7 +979,6 @@ p.alertText {
 .height120{
 	height: 120px;
 }
-/* @end */
 #myModal{
 	top: 90px;
     width: 450px;
@@ -991,3 +1004,19 @@ button:hover, button:focus, .button:hover, .button:focus{
 	background: #2e008b;
 	
 }
+@media only screen and (max-width: 1199px) {
+	
+.height590{
+	height: 540px;
+}
+.height217 {
+	height: 162px;
+}
+.height306 {
+	height: 280px;
+}
+.height163{
+	height: 148px;
+}
+}
+/* @end */

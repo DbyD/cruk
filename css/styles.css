@@ -76,7 +76,7 @@ body{
 	height: 30%;
 	color: #fff;
 }
-#messages div, #awards div, #mainmenu div{
+#mainmenu div{
 	padding: 10px;
 }
 #portfolio{
@@ -498,6 +498,12 @@ li.ui-menu-item { font-size:13px !important; }
 	height: 660px;
 }
 }
+@media screen and (min-width: 1024px) and (max-width: 1200px) {
+#mainmenu li{
+	height: 90px;
+}
+}
+
 @media only screen and (max-width: 1023px){
 #payoff, #portfolio{
 	display: none;

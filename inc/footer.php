@@ -21,10 +21,10 @@
 								</div>
 						<?php endif ;
 							?>
-					<div id="messageList" class="row height225" data-mcs-theme="dark-2">
+					<div id="messageList" class="row mCustomScrollbar height217" data-mcs-theme="dark-2">
 					<?php
 						} else { ?>
-					<div id="messageList" class="row height300" data-mcs-theme="dark-2">
+					<div id="messageList" class="row mCustomScrollbar height306" data-mcs-theme="dark-2">
 					<?php }
 								$query = getMyMessages($_SESSION['user']->EmpNum );
 								if($query != 0):?>
@@ -43,7 +43,7 @@
 						<!-- <i class="icon-icons_trophy"></i> -->
 						Most Recent Awards
 					</div>
-					<div id="awardList" class="height163" data-mcs-theme="dark-2">
+					<div id="awardList" class="mCustomScrollbar height163" data-mcs-theme="dark-2">
 					<?php
 						$res = getEmployeFnameAndSname();
 						if( $res != 0 ){
