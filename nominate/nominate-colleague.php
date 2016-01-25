@@ -1,7 +1,7 @@
 <?php include_once('../inc/header.php'); ?>
 
 <div id="content" class="large-8 large-push-2 columns">
-	<form action="nominate-colleague-submit.php" method="post" name="nominateColleague2" id="nominateColleague2">
+	<form action="nominate-submit.php" method="post" name="nominateColleague2" id="nominateColleague2">
 		<input type="hidden" name="formName" value="nominateColleague2">
 		<div class="title">
 			Nominate <i class="icon-icons_thickrightarrow smalli"></i> <span class="subTitle">Colleague</span>
