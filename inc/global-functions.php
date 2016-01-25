@@ -191,9 +191,9 @@ function getMyMessages( $empnum ) {
 
 if(isset($_GET['name']) && $_GET['name'] == 'message'){
 	$db_server = 'Localhost';
-	$db_database = 'cruk21-01-201610-44 AM';
-	$db_user = 'root';
-	$db_passwd = '';
+	$db_database = 'cruk';
+	$db_user = 'DbyDcruk';
+	$db_passwd = 'dbd#01master';
 	
 	try {
 		$db = new PDO("mysql:host=$db_server;dbname=$db_database", $db_user, $db_passwd);
