@@ -84,7 +84,7 @@
 		$_SESSION['nominee']->content = indEcardText($_SESSION['nominee']);
 		// test if offline
 		if ($_SESSION['nominee']->offline == 'YES'){
-			// they in a shop so considered offline. need to fix email with all requirements. will need to get from Jamie
+			// they in a shop so considered offline. need to fix email with all requirements. will need to get wording from Jamie
 			$sendEmail = new StdClass();
 			$sendEmail->emailTo = $xexecEmail;
 			$sendEmail->subject = 'E-Card Award Notification';
