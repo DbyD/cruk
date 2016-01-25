@@ -36,7 +36,7 @@
 <nav class="top-bar hide-for-small" data-topbar role="navigation">
 	<ul class="title-area">
 		<li class="name">
-			<h1><a href="#"><img src="<?=HTTP_PATH?>images/Cancer-Research-UK-Logo.svg" alt="Cancer Research UK" /></a></h1>
+			<h1><a href="<?=HTTP_PATH?>home.php"><img src="<?=HTTP_PATH?>images/Cancer-Research-UK-Logo.svg" alt="Cancer Research UK" /></a></h1>
 		</li>
 	</ul>
 	<section class="top-bar-section">
@@ -58,7 +58,7 @@
 				<a class="left-off-canvas-toggle menu-icon" href="#"><span></span></a>
 			</section>
 			<section class="right tab-bar-section">
-                <h1><img src="<?=HTTP_PATH?>images/Cancer-Research-UK-Logo.png" alt="Cancer Research UK" /></h1>
+                <h1><img src="<?=HTTP_PATH?>images/Cancer-Research-UK-Logo.svg" alt="Cancer Research UK" /></h1>
             </section>
 		</nav>
 		<aside class="left-off-canvas-menu">
