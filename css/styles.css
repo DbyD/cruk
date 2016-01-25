@@ -76,6 +76,9 @@ body{
 	height: 30%;
 	color: #fff;
 }
+#awards .title{
+	border-bottom: 1px solid #4001c4;
+}
 #mainmenu div{
 	padding: 10px;
 }

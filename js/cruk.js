@@ -11,6 +11,14 @@ $(function(){
 			$("#alert").css('display', 'block');
 		}
 	});
+	$("#editStaff").validate({
+		rules: {EmpNum: "required"},
+		messages: {EmpNum: "Please select a Staff Member"},
+		errorPlacement: function(error, element) {
+			$("#alertContent").load("../alerts/alert-popup.php", {'error' : error.html() });
+			$("#alert").css('display', 'block');
+		}
+	});
 	$("#nominateColleague").validate({
 		rules: {EmpNum: "required"},
 		messages: {EmpNum: "Please select a Colleague"},

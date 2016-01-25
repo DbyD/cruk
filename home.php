@@ -15,7 +15,7 @@
 					</div>
 				</div>
 				<div class="medium-6 columns rightnp">
-					<div class="callout panel clickAble" id="home3" data-type="gourl" data-url="winners-wall.php">
+					<div class="callout panel clickAble" id="home3" data-type="gourl" data-url="winners-wall">
 						<div class="image">
 							<p>Winners<br>Wall</p>
 						</div>

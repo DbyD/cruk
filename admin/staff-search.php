@@ -2,13 +2,16 @@
 
 <div id="content" class="large-8 large-push-2 columns">
 	<div class="title">
-		Nominate <i class="icon-icons_thickrightarrow smalli"></i> <span class="subSubTitle">Colleague</span>
+		<div class="inlineDiv clickAble" data-type="gourl" data-url="index.php">
+			Admin
+		</div>
+		<i class="icon-icons_thickrightarrow smalli"></i> <span class="subSubTitle">Staff Data</span>
 	</div>
-	<div class="row">
+	<div class="row contentFill">
 		<div class="callout panel white contentFill">
 			<div class="row ">
 				<div class="title searchInput">
-					<form action="colleague.php" method="GET" name="searchColleague" id="searchColleague">
+					<form action="staff-search.php" method="GET" name="searchColleague" id="searchColleague">
 						<div class="medium-10 columns">
 							<input type="text" name="searchAuto" id="searchAuto" value="" class="search" />
 						</div>
@@ -18,8 +21,8 @@
 					</form>
 				</div>
 			</div>
-			<form action="nominate-colleague.php" method="post" name="nominateColleague" id="nominateColleague">
-				<input type="hidden" name="formName" value="nominateColleague">
+			<form action="staff-edit.php" method="post" name="editStaff" id="editStaff">
+				<input type="hidden" name="formName" value="editStaff">
 				<div class="row mCustomScrollbar height515" data-mcs-theme="dark-2">
 				<?php
 					if ($_GET['searchAuto']){
@@ -59,18 +62,13 @@
 					</div>
 						<?php
 						}
-					} else { ?>
-					<div class="row searchResult valign-middle">
-						<div class="medium-12 columns">
-							<p>Please enter the name of the colleague you would like to nominate in the Search box above.</p>
-						</div>
-					</div>
-				<?php } ?>
+					}
+					?>
 				</div>
 				<div id="buttonRow" class="row buttonRow hidden">
 					<div class="row searchResult noBorder valign-middle">
 						<div class="medium-12 columns textRight ">
-							<a href="#" class="pinkButton clickAble" data-type="submit" data-url="nominateColleague">Nominate Individual</a>
+							<a href="#" class="pinkButton clickAble" data-type="submit" data-url="editStaff">Select Employee</a>
 						</div>
 					</div>
 				</div>

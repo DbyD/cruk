@@ -564,6 +564,18 @@
 .adminHome .image{
 	background: url(../images/admin-home.jpg);
 }
+#uploadStaff .custom-upload{
+	height: auto;
+	width: auto;
+	margin: 10px 10px 30px 0px;
+}
+
+#updateStaff input[type=text],#updateStaff input[type=password], #updateStaff input[type=email], #updateStaff  textarea{
+	border-radius: 14px;
+	font-size: 12px;
+	padding: 4px 5px;
+	margin: 7px 3px;
+}
 /* @end */
 
 /* @group Reports */
@@ -728,6 +740,7 @@ p.alertText {
 	height: 40px;
 	width: 250px;
 	background-position: right;
+	border-radius: 16px;
 }
 #cropContainerHeader {
 	width: 250px;
