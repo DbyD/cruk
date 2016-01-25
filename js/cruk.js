@@ -63,8 +63,8 @@ $(function(){
 			$("#alert").css('display', 'block');
 		},
 		submitHandler: function(form) { 
-			$.post('nominate-submit.php', $("#nominateColleague2").serialize(), function(data) {
-				window.location.href = 'nominate-done.php';
+			$.post('edit-nominee.php', $("#nominateColleague2").serialize(), function(data) {
+				window.location.href = 'nominate-submit.php';
 			});
 		}
 	});
