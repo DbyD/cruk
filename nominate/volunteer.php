@@ -14,10 +14,10 @@
 			</div>
 		</div>
 		<div class="row withPadding valign-middle">
-			<div class="medium-3 columns">
+			<div class="medium-4 columns">
 				Add Name:
 			</div>
-			<div class="medium-9 columns">
+			<div class="medium-8 columns">
 				<input type="text" name="volunteer" id="volunteer" value="<?=$_SESSION['nominee']->Volunteer?>" />
 			</div>
 		</div>

@@ -40,13 +40,15 @@
 							<?=getConvertedDate($list->NomDate)?>
 						</div>
 						<div class="tableColumn-3">
-							<a href="#" data-url="view.php" data-id="<?=$list->ID?>">View</a>
+							<div class="viewButton inlineDiv clickAble" data-type="ecard" data-url="<?=HTTP_PATH?>alerts/view-ecard.php" data-id="<?=$list->ID?>">View</div>
 						</div>
 						<div class="tableColumn-3">
 							<?php
 							if($list->littleExtra == 'Yes'){
 								if($list->AwardClaimed == 'No'){
-									echo '<a href="#" data-type="popup" data-id="'.$list->ID.'" class="clickAble pinkButton">Claim</a>';
+								?>
+									<a href="#" data-type="popup" data-id="<?=$list->ID?>" class="clickAble pinkButton" data-url="<?=HTTP_PATH?>my-account/claim-award.php">Claim</a>
+								<?php
 								} else {
 									if($list->amount == '20'){
 										echo '£20 voucher';

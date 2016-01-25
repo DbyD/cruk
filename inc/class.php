@@ -42,7 +42,7 @@ class Award {
 	}
 	public function nominee(){
 		global $db;
-		$stmt = $db->prepare('SELECT Fname, Sname, Eaddress, Shop, JobTitle FROM tblempall WHERE EmpNum = :NominatedEmpNum');
+		$stmt = $db->prepare('SELECT Fname, Sname, Eaddress, Shop, JobTitle, LMEmpNum FROM tblempall WHERE EmpNum = :NominatedEmpNum');
 		$stmt->execute(array('NominatedEmpNum' => $this->NominatedEmpNum));
 		$result = $stmt->fetch(PDO::FETCH_OBJ);
 		$result->full_name = $result->Fname. ' ' . $result->Sname;
@@ -59,8 +59,25 @@ class Award {
 		$result->full_name = $result->Fname. ' ' . $result->Sname;
 		return $result;
 	}
+	public function lineManager(){
+		global $db;
+		$stmt = $db->prepare('SELECT Fname, Sname, Eaddress FROM tblempall WHERE EmpNum = :LMEmpNum');
+		$stmt->execute(array('LMEmpNum' => $this->nominee()->LMEmpNum));
+		$result = $stmt->fetch(PDO::FETCH_OBJ);
+		$result->full_name = $result->Fname. ' ' . $result->Sname;
+		return $result;
+	}
 }
 
+class allApprovalsList{
+    public function getAllApprovalsList() {
+		global $db;
+		$stmt = $db->prepare("SELECT * FROM tblnominations WHERE AprStatus=0 AND littleExtra='Yes' ORDER BY NomDate DESC");
+		$stmt->execute();
+		$result = $stmt->fetchAll(PDO::FETCH_OBJ);
+		return $result;
+    }
+}
 
 class MyApprovalsList{
     public function getAllMyApprovalsList($empnum) {
@@ -101,6 +118,7 @@ class MyNominationsList{
 		return $result;
     }
 }
+
 class searchAllUsers{
     public function getAllUserSearch($search) {
 		global $db;

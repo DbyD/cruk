@@ -16,46 +16,43 @@
 		</div>
 		<div id="beliefs" class="row">
 			<div class="medium-4 columns leftnp">
-				<div class="callout panel white textCenter clickAble <?php if($_SESSION['nominee']->BeliefID=='belief1') echo "selectedecard"; ?>" id="belief1" data-type="select" data-id="beliefs">
+				<div class="callout panel white textCenter clickAble <?php if($_SESSION['nominee']->BeliefID=='Be Brave') echo "selectedecard"; ?>" id="Be Brave" data-type="select" data-id="beliefs">
 					<div class="tickedbox">
 						<i class="icon-icons_tickinbox"></i>
 					</div>
 					<div class="image">
-						<img src="../images/belief1.png" alt="belief1" />
+						<img src="../images/be-brave.png" alt="Be Brave" />
 					</div>
-					A Storymaker
-					<span id="belief1Text" class="showbehaviour hidden">Some text goes here so we can write a lot more</span>
+					<span id="Be BraveText" class="showbehaviour hidden">Some text goes here so we can write a lot more</span>
 				</div>
 			</div>
 			<div class="medium-4 columns">
-				<div class="callout panel white textCenter clickAble <?php if($_SESSION['nominee']->BeliefID=='belief2') echo "selectedecard"; ?>" id="belief2" data-type="select" data-id="beliefs">
+				<div class="callout panel white textCenter clickAble <?php if($_SESSION['nominee']->BeliefID=='Be Sharp') echo "selectedecard"; ?>" id="Be Sharp" data-type="select" data-id="beliefs">
 					<div class="tickedbox">
 						<i class="icon-icons_tickinbox"></i>
 					</div>
 					<div class="image">
-						<img src="../images/belief2.png" alt="belief2" />
+						<img src="../images/be-sharp.png" alt="Be Sharp" />
 					</div>
-					United Strength
-					<span id="belief2Text" class="showbehaviour hidden">Some text goes here so we can write a lot more</span>
+					<span id="Be SharpText" class="showbehaviour hidden">Some text goes here so we can write a lot more</span>
 				</div>
 			</div>
 			<div class="medium-4 columns rightnp">
-				<div class="callout panel white textCenter clickAble <?php if($_SESSION['nominee']->BeliefID=='belief3') echo "selectedecard"; ?>" id="belief3" data-type="select" data-id="beliefs">
+				<div class="callout panel white textCenter clickAble <?php if($_SESSION['nominee']->BeliefID=='Be United') echo "selectedecard"; ?>" id="Be United" data-type="select" data-id="beliefs">
 					<div class="tickedbox">
 						<i class="icon-icons_tickinbox"></i>
 					</div>
 					<div class="image">
-						<img src="../images/belief3.png" alt="belief3" />
+						<img src="../images/be-united.png" alt="Be United" />
 					</div>
-					An Accelerator
-					<span id="belief3Text" class="showbehaviour hidden">Some text goes here so we can write a lot more</span>
+					<span id="Be UnitedText" class="showbehaviour hidden">Some text goes here so we can write a lot more</span>
 				</div>
 			</div>
 			<select name="BeliefID" id="BeliefID">
 				<option value=""></option>
-				<option <?php if($_SESSION['nominee']->BeliefID=='belief1') echo "selected"; ?> value="belief1">belief1</option>
-				<option <?php if($_SESSION['nominee']->BeliefID=='belief2') echo "selected"; ?> value="belief2">belief2</option>
-				<option <?php if($_SESSION['nominee']->BeliefID=='belief2') echo "selected"; ?> value="belief3">belief3</option>
+				<option <?php if($_SESSION['nominee']->BeliefID=='Be Brave') echo "selected"; ?> value="Be Brave">Be Brave</option>
+				<option <?php if($_SESSION['nominee']->BeliefID=='Be Sharp') echo "selected"; ?> value="Be Sharp">Be Sharp</option>
+				<option <?php if($_SESSION['nominee']->BeliefID=='Be Sharp') echo "selected"; ?> value="Be United">Be United</option>
 			</select>
 		</div>
 		<?php
@@ -127,4 +124,4 @@
 	</form>
 </div>
 <?php include_once('../inc/footer.php'); ?>
-			<? print_r($_SESSION['nominee']);?>
+			<? //print_r($_SESSION['nominee']);?>

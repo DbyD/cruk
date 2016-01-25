@@ -8,7 +8,7 @@
 	font-size: 10px;
 	padding-top: 5px;
 }
-.smaller{
+.smaller {
 	font-size: smaller;
 }
 #content .firsttime {
@@ -169,11 +169,13 @@
 }
 .awardStar i {
 	font-size: 30px;
+	margin-left: 15px;
 }
 .awardStar span {
 	font-size: 12px;
 	position: relative;
-	left: -18px;
+	width: 30px;
+	left: -30px;
 	top: -7px;
 	z-index: 1;
 	color: #fff;
@@ -192,7 +194,7 @@
 .title .awardStar span {
 	font-size: 11px;
 	position: relative;
-	left: -26px;
+	left: -27px;
 	top: -6px;
 	width: 26px;
 	z-index: 1;
@@ -215,13 +217,8 @@
 }
 /* @end */
 /* @group Nominate */
-#nominate1 {
-	margin-bottom: 15px;
-}
-#nominate1 .image {
-	height: 465px;
+.nominateHome .image{
 	background: url(../images/nominate-home.jpg);
-	background-size: auto 465px;
 }
 .nominateButton {
 	font-size: 20px;
@@ -235,6 +232,8 @@
 .searchInput input[type=text] {
 	padding: 5px 15px 5px 32px;
 	margin: -3px 0 0;
+	width: 50%;
+	float: right;
 	background: #ebebeb url(../images/search-icon.png) no-repeat 12px 4px;
 }
 .searchResult {
@@ -243,7 +242,7 @@
 	border-bottom: 1px solid #ebebeb;
 }
 .noBorder {
-	border: 0;
+	border: 0 !important;
 }
 .searchResult img {
 	height: 45px;
@@ -254,8 +253,8 @@
 	margin: 0;
 	visibility: hidden;
 	position: absolute;
-    top: 0;
-    right: 0;
+	top: 0;
+	right: 0;
 }
 .disabled .hiddenTick {
 	display: none;
@@ -271,7 +270,7 @@
 	margin: 0;
 	right: 5px;
 }
-.smallTick input[type="radio"] + label, .smallTick input[type="checkbox"] + label, .circleTick label{
+.smallTick input[type="radio"] + label, .smallTick input[type="checkbox"] + label, .circleTick label {
 	width: 18px;
 	height: 18px;
 	border-radius: 12px;
@@ -344,34 +343,34 @@
 	padding: 15px 20px;
 	font-size: 14px;
 }
-#beliefs .callout{
-	padding: 40px 10px;
+#beliefs .callout {
+	padding: 10px;
 	margin-bottom: 10px;
 	height: 145px;
 	text-transform: uppercase;
 }
-#beliefs .image{
+#beliefs .image {
 	height: 60px;
 }
-#beliefs div .tickedbox{
-    position: absolute;
-    width: 15px;
-    height: 15px;
-    bottom: 20px;
-    right: 15px;
-    display: none;
+#beliefs div .tickedbox {
+	position: absolute;
+	width: 15px;
+	height: 15px;
+	bottom: 20px;
+	right: 15px;
+	display: none;
 	color: #5833a2;
 }
-#beliefs div.rightnp .tickedbox{
-    right: 8px;
+#beliefs div.rightnp .tickedbox {
+	right: 8px;
 }
 #beliefs i {
 	font-size: 18px;
 }
-#beliefs div.selectedecard .tickedbox{
+#beliefs div.selectedecard .tickedbox {
 	display: block;
 }
-#BeliefID{
+#BeliefID {
 	display: none;
 }
 #beliefs span {
@@ -385,39 +384,36 @@
 	left: 0;
 	z-index: 1;
 }
-#nominateOptions textarea{
+#nominateOptions textarea {
 	height: 90px;
 	margin: 0;
 }
-.charctersRemaining{
+.charctersRemaining {
 	float: right;
 	color: #cfcecf;
 	padding: 10px 0;
 }
-.inline{
+.inline {
 	display: inline-block;
 	margin: 0 10px;
 	vertical-align: middle;
 }
-#nominateColleague2 .buttonRow{
+#nominateColleague2 .buttonRow {
 	margin-top: 40px;
 	border: 0;
 }
-#volunteerName{
+#volunteerName {
 	color: #383838;
 	margin: 3px 40px 0 0;
 	height: 15px;
 }
-#volunteerName i{
+#volunteerName i {
 	color: #a7a8aa;
 	margin-left: 5px;
 	cursor: pointer;
 }
 @media only screen and (max-width: 1199px) {
-#nominate1 .image {
-	height: 412px;
-	background-size: auto 412px;
-}
+
 .height515 {
 	height: 465px;
 }
@@ -425,22 +421,40 @@
 	height: 505px;
 }
 .withPadding {
-    padding: 7px 10px;
+	padding: 7px 10px;
 }
 }
 @media only screen and (max-width: 1023px) {
-#nominate1 .image {
-	height: 200px;
-	background-size: 100% auto;
-}
 .nominateButton {
 	padding: 40px 0;
 	height: auto;
 }
+.height515 {
+	height: auto;
+}
+.searchInput input[type=text] {
+	width: 100%;
+}
+.searchInput .medium-10{
+	width: 77%;
+}
+.searchInput .medium-2{
+	width: 22%;
+}
+.valign-middle .columns {
+	display: block;
+}
+.searchResult .medium-2{
+	float: left;
+	width: 20%;
+}
 }
 /* @end */
-/* @group My Awards */
-.awardButton{
+/* @group My Account */
+.accountHome .image{
+	background: url(../images/nominate-home.jpg);
+}
+.awardButton {
 	font-size: 20px;
 	text-align: center;
 	padding: 35px 0 0;
@@ -481,6 +495,7 @@
 	font-size: 13px;
 	padding: 14px 0;
 	text-align: center;
+	border-bottom: 1px solid #ebebeb;
 }
 .tableColumn-1 {
 	width: 8%;
@@ -491,7 +506,7 @@
 	display: inline-table;
 }
 .tableColumn-3 {
-	width: 24%;
+	width: 24.6%;
 	display: inline-table;
 }
 .tableColumn-4 {
@@ -532,16 +547,114 @@
 }
 /* @end */
 /* @group My Approvals */
-.title .smaller{
+.title .smaller {
 	font-size: 12px;
 	margin-left: 20px;
 }
 .tableRow.largerText {
-	padding: 10px 20px !important;
+	padding: 8px 20px !important;
 	font-size: 17px;
+}
+#subPopupbox h3{
+	font-size: 14px;
 }
 /* @end */
 
+/* @group Admin */
+.adminHome .image{
+	background: url(../images/admin-home.jpg);
+}
+/* @end */
+
+/* @group Reports */
+#subHome.reportHome{
+	margin-bottom: 8px;
+}
+.tableReports {
+	font-size: 13px;
+	padding: 0;
+	text-align: center;
+	background: #2e008b;
+	color: #fff;
+}
+.tableReportsHead{
+	padding: 14px 0;
+	border-right: 1px solid #5833a2;
+}
+.tableReportsHead.white{
+	background: #fff;
+	color: #2e008b;
+}
+.dashboardGraphs{
+    padding: 0 20px;
+    height: 320px;
+}
+.pieLegend{
+	font-size: 11px;
+	text-align: left;
+	padding: 5px 20px;
+	text-transform: uppercase;
+}
+.pieLegend i{
+	padding: 0 5px;
+	margin-right: 10px;
+}
+.piePending{
+	color: #00b6ed;
+}
+.piePending i{
+	background: #00b6ed;
+}
+.pieApproved{
+	color: #ec008c;
+}
+.pieApproved i{
+	background: #ec008c;
+}
+.pieDeclined{
+	color: #5833a2;
+}
+.pieDeclined i{
+	background: #5833a2;
+}
+.panel.callout.reportLikes{
+	background: #5833a2;
+	color: #fff;
+	height: 200px;
+	padding: 15px;
+	font-size: 20px;
+	text-align: center;
+}
+.reportLikes i{
+	font-size: 60px;
+	display: block;
+	padding: 20px;
+}
+.likeHead{
+	text-align: left;
+	width: 100%;
+	font-size: 14px;
+}
+#reportTop10{
+	background: #fff;
+	height: 200px;
+}
+#reportTop10 .tableTitle{
+	background: #5833a2;
+	color: #fff;
+	padding: 9px 15px;
+	text-align: left;
+}
+#reportTop10 .tableRow {
+    font-size: 13px;
+    padding: 7px 15px;
+    text-align: left;
+    border-bottom: 1px solid #cfcecf;
+}
+.borderRight{
+    border-right: 1px solid #cfcecf;
+}
+}/* @end */
 
 /* @group Alert Popup */
 .claimedAwardsExpanded {
@@ -560,7 +673,6 @@
 	font-style: italic;
 }
 .claimedAwardsExpanded .subTitle {
-	;
 	color: #2e008b;
 	font-weight: normal;
 	font-style: normal;
@@ -577,7 +689,7 @@ p.alertText {
 }
 /* @end */
 /* @group File Upload */
-.photoIframe{
+.photoIframe {
 	border: 0;
 	width: 100%;
 	height: 500px;
@@ -586,8 +698,8 @@ p.alertText {
 .custom-upload {
 	position: relative;
 	height: 40px;
-	width: 350px;
-	margin: 30px;
+	width: 340px;
+	margin: 30px 10px 30px 80px;
 }
 .custom-upload input[type=file] {
 	outline: none;
@@ -601,11 +713,11 @@ p.alertText {
 	height: 100%;
 }
 .custom-upload .fake-file {
-	background: url(http://www.fold3.com/i/upload-icon.png) center right no-repeat;
+	background: url(../images/fake-browse.png) no-repeat right 5px;
 	position: absolute;
 	top: 0px;
 	left: 0px;
-	width: 350px;
+	width: 335px;
 	padding: 0;
 	margin: 0;
 	z-index: 1;
@@ -614,11 +726,37 @@ p.alertText {
 .custom-upload .fake-file input {
 	font-size: 16px;
 	height: 40px;
-	width: 300px;
+	width: 250px;
+	background-position: right;
 }
 #cropContainerHeader {
 	width: 250px;
 	height: 250px;
-	position:relative; /* or fixed or absolute */
+	position: relative;
+/* or fixed or absolute */
+}
+/* @end */
+/* @group Emails */
+.emailText {
+	font-size: 9pt;
+	font-family: Arial;
+	line-height: 12pt;
+	color: #2e008b;
+	background: #fff;
+	width: 560px;
+	padding: 0 20px;
+	text-align: left
+}
+.emailCruklogo {
+	float: right;
+}
+.emailCruklogo {
+	float: right;
+}
+.ecardPadding{
+	padding: 5px;
+	color: #2e008b;
+	font-size: 12px;
+	line-height: 16px;
 }
 /* @end */

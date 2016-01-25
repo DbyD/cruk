@@ -39,16 +39,17 @@
 							<?=getConvertedDate($list->NomDate)?>
 						</div>
 						<div class="tableColumn-2">
-							<div class="viewButton inlineDiv clickAble" data-type="popup" data-url="<?=HTTP_PATH?>alerts/view-ecard.php" data-id="<?=$list->ID?>">View</div>
+							<div class="viewButton inlineDiv clickAble" data-type="ecard" data-url="<?=HTTP_PATH?>alerts/view-ecard.php" data-id="<?=$list->ID?>">View</div>
 						</div>
 						<div class="tableColumn-4">
 							<?php
 							if($list->AprStatus == 0){
 								echo '<div class="lightBlue">Pending <span class="smaller">('.getName($list->ApproverEmpNum).'</span>)</div>';
 							} else {
-								echo "Approved";
 								if($list->amount != 0){
-									echo " (".getName($list->ApproverEmpNum).")";
+									echo "Approved (".getName($list->ApproverEmpNum).")";
+								} else {
+									echo '-';
 								}
 							}
 						?>

@@ -17,26 +17,26 @@
 <div id="popup1" class="">
 	<div id="popupbox1">
 		<div id="popupContent1"></div>
-		<div id="closepopup1" data-type="close" data-id="1" class="clickAble closealert" /><i class="icon-icons_close"></i></div>
+		<div id="closepopup1" data-type="close" data-id="1" class="clickAble closealert"><i class="icon-icons_close"></i></div>
 	</div>
 </div>
-<div id="popup2" class="">
-	<div id="popupbox2">
-		<div id="popupContent2"></div>
-		<div id="closepopup2" data-type="close" data-id="2" class="clickAble closealert" /><i class="icon-icons_close"></i></div>
+<div id="ecardPopup" class="">
+	<div id="ecardbox">
+		<div id="popupEcard"></div>
+		<div id="closeEcard" data-type="close" data-id="2" class="clickAble closealert"><i class="icon-icons_close"></i></div>
 	</div>
 </div>
 <div id="alert" class="">
 	<div id="alertbox">
 		<div id="alertContent"></div>
-		<div id="closealert" data-type="close" data-id="3" class="clickAble closealert" /><i class="icon-icons_close"></i></div>
+		<div id="closealert" data-type="close" data-id="3" class="clickAble closealert"><i class="icon-icons_close"></i></div>
 	</div>
 </div>
 
 <nav class="top-bar hide-for-small" data-topbar role="navigation">
 	<ul class="title-area">
 		<li class="name">
-			<h1><a href="#"><img src="<?=HTTP_PATH?>images/Cancer-Research-UK-Logo.svg" alt="Cancer Research UK" /></a></h1>
+			<h1><a href="<?=HTTP_PATH?>home.php"><img src="<?=HTTP_PATH?>images/Cancer-Research-UK-Logo.svg" alt="Cancer Research UK" /></a></h1>
 		</li>
 	</ul>
 	<section class="top-bar-section">
@@ -58,7 +58,7 @@
 				<a class="left-off-canvas-toggle menu-icon" href="#"><span></span></a>
 			</section>
 			<section class="right tab-bar-section">
-                <h1><img src="<?=HTTP_PATH?>images/Cancer-Research-UK-Logo.png" alt="Cancer Research UK" /></h1>
+                <h1><img src="<?=HTTP_PATH?>images/Cancer-Research-UK-Logo.svg" alt="Cancer Research UK" /></h1>
             </section>
 		</nav>
 		<aside class="left-off-canvas-menu">
