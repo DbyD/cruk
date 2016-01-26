@@ -11,14 +11,6 @@ $(function(){
 			$("#alert").css('display', 'block');
 		}
 	});
-	$("#editStaff").validate({
-		rules: {EmpNum: "required"},
-		messages: {EmpNum: "Please select a Staff Member"},
-		errorPlacement: function(error, element) {
-			$("#alertContent").load("../alerts/alert-popup.php", {'error' : error.html() });
-			$("#alert").css('display', 'block');
-		}
-	});
 	$("#nominateColleague").validate({
 		rules: {EmpNum: "required"},
 		messages: {EmpNum: "Please select a Colleague"},
@@ -33,8 +25,8 @@ $(function(){
 		}
 	});
 	$("#uploadPhoto").validate({
-		rules: {myphoto: "required"},
-		messages: {myphoto: "Please select a photo"},
+		rules: {photo: "required"},
+		messages: {photo: "Please select a photo"},
 		errorPlacement: function(error, element) {
 			$("#alertContent").load("../alerts/alert-popup.php", {'error' : error.html() });
 			$("#alert").css('display', 'block');
@@ -61,6 +53,11 @@ $(function(){
 				$("#alertContent").load("../alerts/alert-popup.php", {'error' : error.html() });
 			}
 			$("#alert").css('display', 'block');
+		},
+		submitHandler: function(form) { 
+			$.post('edit-nominee.php', $("#nominateColleague2").serialize(), function(data) {
+				window.location.href = 'nominate-submit.php';
+			});
 		}
 	});
 	$("#volunteerForm").validate({
@@ -83,8 +80,8 @@ $(function(){
 		}
 	});
 	$("#LittleExtraForm").validate({
-		rules: {reason: "required"},
-		messages: {reason: "Please add in a reason for the little exra."},
+		rules: {Reason: "required"},
+		messages: {Reason: "Please add in a reason for the little exra."},
 		errorPlacement: function(error, element) {
 			$("#alertContent").load("../alerts/alert-popup.php", {'error' : error.html() });
 			$("#alert").css('display', 'block');
@@ -136,12 +133,13 @@ $(function(){
 });
 //----------------------------------------------------------------------------------
 	$('.clickAble').click(function(e) {
+		
 		var url = $(this).attr('data-url');
 		var type = $(this).attr('data-type');
-		var id = $(this).attr('data-id');		
+		var id = $(this).attr('data-id');
+
+		
 		switch (type) { 
-			case 'donothing': 
-				break; 
 			case 'goback': 
 				history.back();
 				break;
@@ -265,6 +263,7 @@ $(function() {
 	});
 });
 //----------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------
 	$(document).foundation();
 //----------------------------------------------------------------------------------
 (function($){
@@ -273,20 +272,25 @@ $(function() {
 	});
 })(jQuery);
 //----------------------------------------------------------------------------------
+
 $(document).ready(function(){
 	$(".sendMail").click(function(){
+
 		var sender = $($(this).siblings()[0]).val();
 		var recipient = $($(this).siblings()[1]).val();
 		var senderName = $($(this).siblings()[2]).val();
 		var recipientName = $($(this).siblings()[3]).val();
 		$('#modalForSendMail').click();
+
 		console.log(sender);
 		console.log(recipient);
+
 		$("#senderModal").val(sender);
 		$("#recipientModal").val(recipient);
 		$("#mailToEmployee").val('Hi '+recipientName+'. I saw your "Our Heroes" award on the Wall of Fame. Congratulations! '+ senderName);
 		$("#messageModal").html('Hi '+recipientName+'. I saw your "Our Heroes" award on the Wall of Fame. Congratulations! '+ senderName);
 	});
+
 	$("#sendButton").click(function(){
 		var recipient = $("#recipientModal").val();
 		var sender = $("#senderModal").val();
@@ -310,9 +314,66 @@ $(document).ready(function(){
 		} else {
 			siblings.removeClass("hidden");
 		}
+
 	});
 });
-//----------------------------------------------------------------------------------
+
+
+
+	function _byId(el){
+
+		return document.getElementById(el);
+	}
+	function _byClas(el){
+		return document.getElementsByClassName(el)
+	}
+
+	//_byId("adding_new").onchange = 
+	function AddHeadMenu(el, folder, parent){
+		var newItem = el.value;
+
+		console.log(newItem ,  folder, parent);
+
+		$.ajax({
+				type:"POST",
+				url:"action.php",
+				data:{newItem:newItem,folder:folder,parent:parent },
+				success:function(d){
+					console.log(d);
+					_byId("menu_container").innerHTML = d;
+				}
+			});
+		el.value = "";
+	}
+
+
+	function updateLabel(el, id)
+	{
+		
+
+		var upLabel = el.value;
+
+		$.ajax({
+				type:"POST",
+				url:"action.php",
+				data:{
+					upLabel:upLabel,
+					id:id 
+				},
+				success:function(d){
+					
+				}
+			});
+	}
+
+	function openSubmenu(el)
+	{
+		var menuItems = _byClas("menu-item-holder");
+		for(var m = 0; m<menuItems.length ; m++){
+			menuItems[m].setAttribute('class', 'menu-item-holder'); 
+		}
+		_byId("holder_of_"+el.id).setAttribute('class', 'menu-item-holder activated'); 
+	}//----------------------------------------------------------------------------------
 $(function() {
 	$('#winnerswall div.clickAble').hover(function(){
 		var divID = this.id + "Text";

@@ -23,6 +23,7 @@
 	$db_database = 'cruk';
 	$db_user = 'DbyDcruk';
 	$db_passwd = 'dbd#01master';
+	
 	try {
 		$db = new PDO("mysql:host=$db_server;dbname=$db_database", $db_user, $db_passwd);
 		$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -39,6 +40,7 @@
 	include 'account-functions.php';
 	include 'redeem-functions.php';
 	include 'report-functions.php';
+	include 'library/upload_file.php';
 	include 'winners-wall-functions.php';
 ////////////////////////////////////////////////////////////////////////////////////
 	$encrypt = new Encryption;
