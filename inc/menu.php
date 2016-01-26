@@ -1,7 +1,5 @@
-<?php
-	//echo basename(getcwd()) . "\n";
-?><? //=getCurrentFolder()?>
-<li class="clickAble " data-type="gourl" data-url="<?=HTTP_PATH?>home.php"><i class="icon-icons_home"></i>Home</li>
+
+<li class="clickAble" data-type="gourl" data-url="<?=HTTP_PATH?>home.php"><i class="icon-icons_home"></i>Home</li>
 <li class="clickAble" data-type="gourl" data-url="<?=HTTP_PATH?>nominate"><i class="icon-icons_nominate"></i>Nominate</li>
 <li class="clickAble" data-type="gourl" data-url="<?=HTTP_PATH?>my-account"><i class="icon-icons_account"></i>My Account</li>
 <li class="clickAble" data-type="gourl" data-url="<?=HTTP_PATH?>winners-wall"><i class="icon-icons_winners"></i>Wall of Fame</li>

@@ -1,10 +1,5 @@
-<<<<<<< HEAD
 <?php 
 	include_once('inc/config.php');
-=======
-<?php
-	include_once 'inc/config.php';
->>>>>>> origin/master
 	include_once('inc/header.php');
 ?>
 			<div id="content" class="large-8 large-push-2 columns">

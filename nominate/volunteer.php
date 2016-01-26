@@ -22,18 +22,13 @@
 			</div>
 		</div>
 		<div class="row withPadding">
-<<<<<<< HEAD
 			<div class="medium-5 columns">
 				<a href="#" class="blueButton clickAble" data-type="cancelPopup" data-id="Volunteer">Cancel</a>
-=======
-		<!--	<div class="medium-5 columns">
-				<a href="#" class="blueButton clickAble" data-type="cancelPopup" data-id="volunteer">Cancel</a>
->>>>>>> origin/master
 			</div>
 			<div class="medium-3 columns textRight">
 				<a id="testtttt" href="#" class="blueButton clickAble" data-type="clear" data-id="volunteerForm">Clear</a>
-			</div> -->
-			<div class="medium-12 columns textRight ">
+			</div>
+			<div class="medium-4 columns textRight ">
 				<a href="#" class="pinkButton clickAble" data-type="submit" data-url="volunteerForm">Confirm</a>
 			</div>
 		</div>
