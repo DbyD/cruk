@@ -36,7 +36,11 @@ if(isset( $_POST["submit"] ) ){
 
 <?php 
 	$val = $_SESSION['user']->SuperUser;
+<<<<<<< HEAD
 	if( $val == "NO" ){
+=======
+	if( $val == "YES" ){
+>>>>>>> 583563fd21099138ae54b7c9dc990c4a9378fd31
 		include('../admin/products.php');
 	} else {
 ?>
@@ -127,6 +131,7 @@ if(isset( $_POST["submit"] ) ){
 				<div  class="callout panel" id="menu_container">
 					<?php $menus = getMenuAllRows(); ?>
 					<!-- <pre><?php var_dump($menus); ?></pre> -->
+<<<<<<< HEAD
 					
 					<section class="block-list">
 						<ul class="left-bar-nav">
@@ -144,6 +149,22 @@ if(isset( $_POST["submit"] ) ){
 							<?php endforeach; ?>
 						</ul>
 					</section>
+=======
+					<ul class="left-bar-nav">
+						<?php foreach ($menus as $v): ?>
+							<?php if ($v["parent"] == 0): ?>
+								<li><?php echo $v["label"]; ?></li>
+									<ul>
+										<?php foreach ($menus as $val): ?>
+											<?php if ($v["id"] == $val["parent"]): ?>
+												<li><?php echo $val["label"]; ?></li>
+											<?php endif; ?>
+										<?php endforeach; ?>
+									</ul>
+							<?php endif; ?>
+						<?php endforeach; ?>
+					</ul>
+>>>>>>> 583563fd21099138ae54b7c9dc990c4a9378fd31
 				</div>
 				
 			</div>
