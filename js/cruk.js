@@ -64,8 +64,8 @@ $(function(){
 		}
 	});
 	$("#volunteerForm").validate({
-		rules: {volunteer: "required"},
-		messages: {volunteer: "Please add in the volunteer's full name."},
+		rules: {Volunteer: "required"},
+		messages: {Volunteer: "Please add in the volunteer's full name."},
 		errorPlacement: function(error, element) {
 			$("#alertContent").load("../alerts/alert-popup.php", {'error' : error.html() });
 			$("#alert").css('display', 'block');

@@ -30,7 +30,7 @@
 			</div>
 			<div class="tableColumn-2 textRight">
 				<div id="" class="circleTick inline smallTick disabled">
-					<label for="volunteer"></label>
+					<label for="Volunteer"></label>
 				</div>
 			</div>
 		</div>

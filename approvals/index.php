@@ -1,4 +1,5 @@
 <?php
+	include_once('../inc/config.php');
 	include_once('../inc/header.php');
 	$_SESSION['alreadydone'] = 'no';
 ?>

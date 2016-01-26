@@ -1,4 +1,5 @@
-<?php
+<?php 
+	include_once('inc/config.php');
 	include_once('inc/header.php');
 ?>
 			<div id="content" class="large-8 large-push-2 columns">

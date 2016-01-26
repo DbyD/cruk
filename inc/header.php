@@ -1,6 +1,3 @@
-<?php 
-include_once 'config.php';
-?>
 <!doctype html>
 <html class="no-js" lang="en">
 <head>

@@ -103,9 +103,10 @@ body{
 	right: 12px;
 }
 .uploadPhoto i{
-	border: 3px dashed #fff;
+	border: 3px dashed #2e008b;
 	padding: 3px;
 	font-size: 18px;
+	color: #2e008b;
 }
 #portfolio .title{
 	text-align: right;
