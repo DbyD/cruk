@@ -1,4 +1,7 @@
-<?php include_once('../inc/header.php'); ?>
+<?php
+	include_once('../inc/config.php');
+	include_once('../inc/header.php');
+?>
 
 <div id="content" class="large-8 large-push-2 columns MyAccount">
 	<div class="title withStar">
@@ -36,7 +39,13 @@
 							<?=getName($list->NominatedEmpNum)?>
 						</div>
 						<div class="tableColumn-3">
-							<?=getName($list->NominatorEmpNum)?>
+						<?php
+							if ($list->Volunteer != '') {
+								echo $list->Volunteer;
+							} else {
+								echo getName($list->NominatorEmpNum);
+							}
+						?>
 						</div>
 						<div class="tableColumn-3">
 							<?=getConvertedDate($list->NomDate)?>

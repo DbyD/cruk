@@ -71,7 +71,7 @@
 	padding: 10px 20px 0;
 	font-size: 14px;
 	text-transform: uppercase;
-	letter-spacing: 0.3em;
+	letter-spacing: 0.1em;
 }
 #home4 .image {
 	height: 118px;
@@ -347,7 +347,6 @@
 	padding: 10px;
 	margin-bottom: 10px;
 	height: 145px;
-	text-transform: uppercase;
 }
 #beliefs .image {
 	height: 60px;
@@ -374,15 +373,19 @@
 	display: none;
 }
 #beliefs span {
-	background: rgba(0,182,237,0.8);
+	background: rgba(0,182,237,0.9);
 	color: #fff;
 	height: 145px;
 	text-align: left;
-	padding: 5px;
+	padding: 10px;
 	position: absolute;
 	top: 0;
 	left: 0;
 	z-index: 1;
+}
+#beliefs span>p{
+	color: #fff;
+	text-transform: uppercase;
 }
 #nominateOptions textarea {
 	height: 90px;
@@ -564,6 +567,18 @@
 .adminHome .image{
 	background: url(../images/admin-home.jpg);
 }
+#uploadStaff .custom-upload{
+	height: auto;
+	width: auto;
+	margin: 10px 10px 30px 0px;
+}
+
+#updateStaff input[type=text],#updateStaff input[type=password], #updateStaff input[type=email], #updateStaff  textarea{
+	border-radius: 14px;
+	font-size: 12px;
+	padding: 4px 5px;
+	margin: 7px 3px;
+}
 /* @end */
 
 /* @group Reports */
@@ -689,17 +704,24 @@ p.alertText {
 }
 /* @end */
 /* @group File Upload */
+#alertbox.forPhoto{
+	width: 300px;
+	margin-left: -150px;
+}
 .photoIframe {
 	border: 0;
 	width: 100%;
 	height: 500px;
 	overflow: hidden;
 }
+#alertBody img{
+	width: 240px;
+}
 .custom-upload {
 	position: relative;
 	height: 40px;
-	width: 340px;
-	margin: 30px 10px 30px 80px;
+	width: 240px;
+	margin: 30px auto;
 }
 .custom-upload input[type=file] {
 	outline: none;
@@ -713,21 +735,22 @@ p.alertText {
 	height: 100%;
 }
 .custom-upload .fake-file {
-	background: url(../images/fake-browse.png) no-repeat right 5px;
+/*	background: url(../images/fake-browse.png) no-repeat 30px 60px;
+	height: 100px; */
 	position: absolute;
 	top: 0px;
 	left: 0px;
-	width: 335px;
+	width: 240px;
 	padding: 0;
 	margin: 0;
 	z-index: 1;
-	line-height: 100%;
 }
 .custom-upload .fake-file input {
 	font-size: 16px;
 	height: 40px;
-	width: 250px;
+	width: 240px;
 	background-position: right;
+	border-radius: 16px;
 }
 #cropContainerHeader {
 	width: 250px;
@@ -758,5 +781,265 @@ p.alertText {
 	color: #2e008b;
 	font-size: 12px;
 	line-height: 16px;
+}
+/* @end */
+
+/* @group Messages */
+
+.size-12 { font-size: 12px; }
+      
+.size-14 { font-size: 14px; }
+
+.size-16 { font-size: 16px; }
+
+.size-18 { font-size: 18px; }
+
+.size-21 { font-size: 21px; }
+
+.size-24 { font-size: 24px; }
+
+.size-36 { font-size: 36px; }
+
+.size-48 { font-size: 48px; }
+
+.size-60 { font-size: 60px; }
+
+.size-72 { font-size: 72px; }
+
+#winnerswall .panel.callout{
+	margin: 1%;
+}
+#winnerswall .panel.callout:nth-child(-n+4){
+	margin-top: 0;
+}
+#winnerswall .panel.callout:first-child, #winnerswall .panel.callout:nth-child(4n+1){
+	margin-left: 0;
+}
+#winnerswall .panel.callout:nth-child(4n){
+	margin-right: 0;
+}
+#winnerswall .tableColumn-3{
+	width: 23%;
+}
+.BeBrave, .BeSharp, .BeUnited {
+	position: relative;
+}
+#winnerswall span {
+	background: rgba(0,182,237,0.8);
+	color: #fff;
+	height: 170px;
+	text-align: left;
+	padding: 10px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 1;
+	width: 100%;
+}
+.height590{
+	height: 590px;
+}
+.nominateEmployeeImage {
+    padding: 15px 5px;
+    background-color: #fff;
+    text-align: center;
+    height: 170px;
+}
+.nominateEmployeeImage img {
+	border-radius: 50%;
+    width: 100px;
+}
+.nominateEmployeeImage p {
+    font-size: 16px;
+    padding: 15px 0 0;
+}
+.content-nominate {
+	padding:10px;
+}
+.content-nominate > p{
+	color:#fff !important;
+	margin: 3px;
+}
+.content-nominate > p:nth-child(even){
+	font-weight: bold;
+}
+.content-nominate > p:nth-child(odd){
+	margin: 7px 3px 3px;
+}
+.content-nominate i{
+	font-size: 17px;
+}
+#modalForSendMail {
+	display:none;
+}
+.BeBrave .nominateEmployeeImage p{
+	color: #00b6ed !important;
+}
+.BeBrave .content-nominate {
+	background-color: #ec008c;
+}
+.BeBrave  span.showbehaviour, #beliefs span[id='Be BraveText']{
+	background: rgba(236,0,140,0.8) !important;
+}
+.BeUnited .nominateEmployeeImage p{
+	color: #5833a2 !important;
+}
+.BeUnited .content-nominate {
+	background-color: #5833a2;
+}
+.BeUnited  span.showbehaviour, #beliefs span[id='Be UnitedText']{
+	background: rgba(88,51,162,0.8) !important;
+}
+.BeSharp .nominateEmployeeImage p{
+	color: #00b6ed !important;
+}
+.BeSharp .content-nominate {
+	background-color: #00b6ed;
+}
+.BeSharp  span.showbehaviour, #beliefs span[id='Be SharpText']{
+	background: rgba(0,182,237,0.8) !important;
+}
+.sendMail {
+	cursor:pointer;
+}
+#messageList{
+	padding: 0 !important;
+    overflow: auto;
+}
+#messageList .row{
+	border-bottom: 1px solid #cfcfcf;
+	padding: 10px;
+}
+.height217 {
+	height: 225px;
+}
+.height306 {
+	height: 306px;
+}
+#messageEmployee {
+	background-color: #8367BB;
+	color: #fff;
+	padding: 10px;
+}
+#messageEmployee span{
+	padding-top: 4px;
+}
+#messageEmployee div{
+	padding: 4px;
+	text-align: center;
+}
+#messageList p.text {
+	color:#383838;
+	margin: 8px 0 2px;
+}
+#awardList{
+	padding: 0 !important;
+	overflow: auto;
+}
+.height163{
+	height: 163px;
+}
+#awardList .row{
+	border-bottom: 1px solid #4001c4;
+	padding: 10px;
+}
+#awardList div div{
+	padding: 0;
+}
+#awardList p{
+	color: #00b6ed;
+	margin: 2px 0 2px;
+}
+#awardList i{
+	font-size: 20px;
+	margin-left: 5px;
+}
+
+.winners-header > h2{
+	background-color: #2E008B;
+    color: #fff;
+    padding: 20px;
+    font-weight: 600;
+    margin-top: 0px;
+}
+
+
+
+
+#listNominators {
+	list-style: none;
+    height: 130px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+#listNominators li {
+	border-top:1px solid #4B2073;
+}
+
+#listNominators p {
+	color: #2DBADA;
+    font-weight: 700;
+}
+
+#listNominators i {
+	color:#fff;
+}
+
+#listNominators i.fi-torso-business {
+	padding: 5px 15px;
+	color:#fff;
+	float:left;
+}
+
+.hide {
+	display:none;
+}
+
+.error {
+	color:red;
+}
+.height120{
+	height: 120px;
+}
+#myModal{
+	top: 90px;
+    width: 450px;
+    padding: 0px;
+    height: 300px;
+}
+#myModal h2{
+	background: #2e008b;
+    padding: 15px;
+    color: #fff;
+}
+#myModal a{
+	position: absolute;
+    top: -12px;
+    right: -12px;
+    line-height: 0;
+}
+#myModal i{
+	font-size: 22px;
+    color: #fff;
+}
+button:hover, button:focus, .button:hover, .button:focus{
+	background: #2e008b;
+	
+}
+@media only screen and (max-width: 1199px) {
+	
+.height590{
+	height: 540px;
+}
+.height217 {
+	height: 162px;
+}
+.height306 {
+	height: 280px;
+}
+.height163{
+	height: 148px;
+}
 }
 /* @end */

@@ -39,6 +39,7 @@
 	include 'account-functions.php';
 	include 'redeem-functions.php';
 	include 'report-functions.php';
+	include 'winners-wall-functions.php';
 ////////////////////////////////////////////////////////////////////////////////////
 	$encrypt = new Encryption;
 	session_start();

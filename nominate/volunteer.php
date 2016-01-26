@@ -18,12 +18,12 @@
 				Add Name:
 			</div>
 			<div class="medium-8 columns">
-				<input type="text" name="volunteer" id="volunteer" value="<?=$_SESSION['nominee']->Volunteer?>" />
+				<input type="text" name="Volunteer" id="Volunteer" value="<?=$_SESSION['nominee']->Volunteer?>" />
 			</div>
 		</div>
 		<div class="row withPadding">
 			<div class="medium-5 columns">
-				<a href="#" class="blueButton clickAble" data-type="cancelPopup" data-id="volunteer">Cancel</a>
+				<a href="#" class="blueButton clickAble" data-type="cancelPopup" data-id="Volunteer">Cancel</a>
 			</div>
 			<div class="medium-3 columns textRight">
 				<a id="testtttt" href="#" class="blueButton clickAble" data-type="clear" data-id="volunteerForm">Clear</a>

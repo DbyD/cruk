@@ -78,4 +78,15 @@ function getTopTen($limit) {
 }
 	
 ////////////////////////////////////////////////////////////////////////////////////
+function getTotalLikes(){
+	global $db;
+	$stmt = $db->prepare('SELECT * FROM tblmessage');
+	$stmt->execute();
+	if ($result = $stmt->fetch()){
+		return $stmt->rowCount();
+	} else{
+		return 0;
+	}
+}
+////////////////////////////////////////////////////////////////////////////////////
 ?>

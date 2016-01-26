@@ -11,6 +11,14 @@ $(function(){
 			$("#alert").css('display', 'block');
 		}
 	});
+	$("#editStaff").validate({
+		rules: {EmpNum: "required"},
+		messages: {EmpNum: "Please select a Staff Member"},
+		errorPlacement: function(error, element) {
+			$("#alertContent").load("../alerts/alert-popup.php", {'error' : error.html() });
+			$("#alert").css('display', 'block');
+		}
+	});
 	$("#nominateColleague").validate({
 		rules: {EmpNum: "required"},
 		messages: {EmpNum: "Please select a Colleague"},
@@ -25,8 +33,8 @@ $(function(){
 		}
 	});
 	$("#uploadPhoto").validate({
-		rules: {photo: "required"},
-		messages: {photo: "Please select a photo"},
+		rules: {myphoto: "required"},
+		messages: {myphoto: "Please select a photo"},
 		errorPlacement: function(error, element) {
 			$("#alertContent").load("../alerts/alert-popup.php", {'error' : error.html() });
 			$("#alert").css('display', 'block');
@@ -53,16 +61,11 @@ $(function(){
 				$("#alertContent").load("../alerts/alert-popup.php", {'error' : error.html() });
 			}
 			$("#alert").css('display', 'block');
-		},
-		submitHandler: function(form) { 
-			$.post('edit-nominee.php', $("#nominateColleague2").serialize(), function(data) {
-				window.location.href = 'nominate-submit.php';
-			});
 		}
 	});
 	$("#volunteerForm").validate({
-		rules: {volunteer: "required"},
-		messages: {volunteer: "Please add in the volunteer's full name."},
+		rules: {Volunteer: "required"},
+		messages: {Volunteer: "Please add in the volunteer's full name."},
 		errorPlacement: function(error, element) {
 			$("#alertContent").load("../alerts/alert-popup.php", {'error' : error.html() });
 			$("#alert").css('display', 'block');
@@ -132,11 +135,13 @@ $(function(){
 	});
 });
 //----------------------------------------------------------------------------------
-	$('.clickAble').click(function() {
+	$('.clickAble').click(function(e) {
 		var url = $(this).attr('data-url');
 		var type = $(this).attr('data-type');
-		var id = $(this).attr('data-id');
+		var id = $(this).attr('data-id');		
 		switch (type) { 
+			case 'donothing': 
+				break; 
 			case 'goback': 
 				history.back();
 				break;
@@ -260,7 +265,6 @@ $(function() {
 	});
 });
 //----------------------------------------------------------------------------------
-//----------------------------------------------------------------------------------
 	$(document).foundation();
 //----------------------------------------------------------------------------------
 (function($){
@@ -268,4 +272,54 @@ $(function() {
 		$(".content").mCustomScrollbar();
 	});
 })(jQuery);
+//----------------------------------------------------------------------------------
+$(document).ready(function(){
+	$(".sendMail").click(function(){
+		var sender = $($(this).siblings()[0]).val();
+		var recipient = $($(this).siblings()[1]).val();
+		var senderName = $($(this).siblings()[2]).val();
+		var recipientName = $($(this).siblings()[3]).val();
+		$('#modalForSendMail').click();
+		console.log(sender);
+		console.log(recipient);
+		$("#senderModal").val(sender);
+		$("#recipientModal").val(recipient);
+		$("#mailToEmployee").val('Hi '+recipientName+'. I saw your "Our Heroes" award on the Wall of Fame. Congratulations! '+ senderName);
+		$("#messageModal").html('Hi '+recipientName+'. I saw your "Our Heroes" award on the Wall of Fame. Congratulations! '+ senderName);
+	});
+	$("#sendButton").click(function(){
+		var recipient = $("#recipientModal").val();
+		var sender = $("#senderModal").val();
+		var text = $("#mailToEmployee").val();
+		var siblings = $("#mailToEmployee").siblings();
+		if( $.trim(text) != '' ){
+			siblings.addClass("hidden");
+			$(".close-reveal-modal").click();
+			$.ajax({
+			  type:'post',
+			  url: "message-submit.php?name=message",
+			  data:  { 
+			  	recipient : recipient,
+			  	sender : sender,
+			  	text : text
+			  } ,
+			  success: function(data){
+			  		console.log(data);
+			  }
+			});
+		} else {
+			siblings.removeClass("hidden");
+		}
+	});
+});
+//----------------------------------------------------------------------------------
+$(function() {
+	$('#winnerswall div.clickAble').hover(function(){
+		var divID = this.id + "Text";
+		$("[id='"+divID+"']").removeClass('hidden');
+	},function(){
+		var divID = this.id + "Text";
+		$("[id='"+divID+"']").addClass('hidden');
+	});
+});
 //----------------------------------------------------------------------------------

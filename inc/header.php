@@ -1,4 +1,3 @@
-<?php include 'config.php'; ?>
 <!doctype html>
 <html class="no-js" lang="en">
 <head>
@@ -10,10 +9,12 @@
 <link rel="stylesheet" href="<?=HTTP_PATH?>css/smoothness/jquery-ui-1.8.2.custom.css" /> 
 <link rel="stylesheet" href="<?=HTTP_PATH?>css/styles.css">
 <link rel="stylesheet" href="<?=HTTP_PATH?>css/sitespecific.css">
+<link rel="stylesheet" href="<?=HTTP_PATH?>css/foundation-icons.css">
 <script src="<?=HTTP_PATH?>js/vendor/modernizr.js"></script>
 <link rel="shortcut icon" href="<?=HTTP_PATH?>favicon.ico"> 
 </head>
 <body>
+	<!--POPUP-->
 <div id="popup1" class="">
 	<div id="popupbox1">
 		<div id="popupContent1"></div>
@@ -33,6 +34,7 @@
 	</div>
 </div>
 
+
 <nav class="top-bar hide-for-small" data-topbar role="navigation">
 	<ul class="title-area">
 		<li class="name">
@@ -43,11 +45,11 @@
 		<!-- Right Nav Section -->
 		<ul class="right">
 			<li><a href="<?=HTTP_PATH?>inc/logout.php">Logout</a></li>
-			<li class="has-dropdown"> <a href="#">&nbsp;</a>
+			<!--<li class="has-dropdown"> <a href="#">&nbsp;</a>
 				<ul class="dropdown">
 					<li><a href="#">some stuff will go here</a></li>
 				</ul>
-			</li>
+			</li>-->
 		</ul>
 	</section>
 </nav>

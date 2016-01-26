@@ -8,7 +8,7 @@
 <div id="alertBody" class="alertBody">
 	<div class="row withPadding">
 		<div class="medium-12 columns">
-			Please tell us if a volunteer has asked you to complete a nomination on their behalf.
+			Please select this option if you are nominating a colleague on behalf of a Volunteer.
 		</div>
 	</div>
 </div>

@@ -48,9 +48,9 @@
 					<div class="callout panel colleaguelogin">
 					<?php 
 					if ($_GET['status']=='done'){
-						echo '<p>Thank you for activating your account.</p><p>You can now <a href="<?=HTTP_PATH?>index.php">click here </a> to log in to access the portal.</p>';
+						echo '<p>Thank you for activating your account.</p><p>You can now <a href="'.HTTP_PATH.'index.php">click here </a> to log in to access the portal.</p>';
 					} else {
-						echo '<p>We were unable to activate your account.</p><p>Please contact the help desk on 012345678 or email: <a href="<?=HTTP_PATH?>mailto:help@xexec.com">help@xexec.com</a> to assist.</p>';
+						echo '<p>We were unable to activate your account.</p><p>Please contact the help desk on 012345678 or email: <a href="mailto:help@xexec.com">help@xexec.com</a> to assist.</p>';
 					}
 					?>
 					</div>

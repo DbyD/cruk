@@ -1,4 +1,5 @@
 <?php
+	include_once('../inc/config.php');
 	include_once('../inc/header.php');
 	$startdate=new DateTime('first day of this month'); 
 	$enddate=new DateTime('last day of this month'); 
@@ -102,7 +103,7 @@
 			<div class="callout panel reportLikes">
 				<div class="likeHead">Likes</div>
 				<i class="icon-icons_mail"></i>
-				365
+				<?php echo getTotalLikes() ?>
 			</div>
 		</div>
 		<div class="medium-8 columns leftnp rightnp" id="reportTop10">

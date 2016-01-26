@@ -5,8 +5,8 @@
 		unset($_SESSION['nominee']->Volunteer);
 		echo "removed";
 	} else {
-		if ($_POST['volunteer']){
-			$_SESSION['nominee']->Volunteer = $_POST['volunteer'];
+		if ($_POST['Volunteer']){
+			$_SESSION['nominee']->Volunteer = $_POST['Volunteer'];
 			echo $_SESSION['nominee']->Volunteer;
 		}
 	}
