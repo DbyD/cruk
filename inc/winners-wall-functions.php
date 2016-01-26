@@ -35,7 +35,24 @@ FROM
 ////////////////////////////////////////////////////////////////////////////////////
 function getMyMessages( $empnum ) {
 	global $db;
-	$stmt = $db->prepare('SELECT * FROM tblmessage WHERE recipient = :recipient ORDER BY date DESC');
+	$sql = 'SELECT
+				sender			AS sender,
+				recipient		AS recipient,
+				text			AS text,
+				date			AS date
+			FROM tblmessage
+			WHERE recipient = :recipient
+			UNION
+			SELECT
+				NominatorEmpNum	AS sender,
+				NominatedEmpNum	AS recipient,
+				personalMessage	AS text,
+				NomDate			AS date
+			FROM tblnominations
+			WHERE NominatedEmpNum = :recipient
+			ORDER BY date DESC';
+//	$stmt = $db->prepare('SELECT * FROM tblmessage WHERE recipient = :recipient ORDER BY date DESC');
+	$stmt = $db->prepare($sql);
 	$stmt->execute(array('recipient' => $empnum));
 	while($result = $stmt->fetch( PDO::FETCH_ASSOC )) {
 		$arr[] = $result;

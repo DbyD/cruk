@@ -117,7 +117,7 @@
 					<a href="#" class="blueButton clickAble" data-type="goback">Go Back</a>
 				</div>
 				<div class="medium-2 columns textRight ">
-					<a href="#" class="pinkButton clickAble" data-type="submit" data-url="nominateColleague2">Next</a>
+					<a href="#" class="pinkButton clickAble" data-type="submit" data-url="nominateColleague2">Submit Nomination</a>
 				</div>
 			</div>
 		</div>

@@ -33,7 +33,7 @@
 				?>
 					<div class="row searchResult valign-middle">
 						<div class="medium-2 columns">
-							<img src="<?=$list->Photo?>" alt="" onerror="this.src='<?=HTTP_PATH?>images/no-photo.png'"/>
+							<img src="<?=HTTP_PATH.$list->Photo?>" alt="" onerror="this.src='<?=HTTP_PATH?>images/no-photo.png'"/>
 						</div>
 						<div class="medium-4 columns">
 							<?php echo $list->Fname.' '.$list->Sname; ?>

@@ -3,7 +3,7 @@
 ?>
 			<div id="content" class="large-8 large-push-2 columns">
 				<div class="row winners-header">
-					<h2>Winners Wall</h2>
+					<h2>Our Heroes Wall of Fame</h2>
 				</div>
 				<div id="winnerswall" class="row mCustomScrollbar height590" data-mcs-theme="dark-2">
 				<?php 
@@ -27,8 +27,10 @@
 								<p><?php echo $employee["BeliefID"]; ?></p>
 								<p>Nominated By:</p>
 								<p><?php echo getname($employee["NominatedEmpNum"]); ?>
-									<input type="hidden" id="sender" value="<?php echo $_SESSION['user']->EmpNum ?>">
+									<input type="hidden" id="sender" value="<?php echo $_SESSION['user']->EmpNum; ?>">
 									<input type="hidden" id="recipient" value="<?php echo $employee["EmpNum"]; ?>">
+									<input type="hidden" id="senderName" value="<?php echo getName($_SESSION['user']->EmpNum); ?>">
+									<input type="hidden" id="recipientName" value="<?php echo getName($employee["EmpNum"]); ?>">
 									<i class="icon-icons_mail right sendMail"></i> </p>
 							</div>
 							<span id="wall<?php echo $employee["ID"]; ?>Text" class="showbehaviour hidden"><?php echo $employee["personalMessage"]; ?></span>
@@ -48,7 +50,9 @@
 							<div class="row">
 								<div class="large-12 columns">
 									<label>
-									Your message <textarea placeholder="" id="mailToEmployee"></textarea>
+									Your message:
+									<div id="messageModal"></div>
+									 <textarea placeholder="" id="mailToEmployee" class="hide">Hi name. I saw your "Our Heroes" award on the Wall of Fame. Congratulations! [Name of Sender]</textarea>
 									<p id="messageError" class="hidden error">Textarea is empty!</p>
 									</label>
 								</div>

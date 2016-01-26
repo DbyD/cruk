@@ -26,16 +26,24 @@
 						} else { ?>
 					<div id="messageList" class="row mCustomScrollbar height306" data-mcs-theme="dark-2">
 					<?php }
-								$query = getMyMessages($_SESSION['user']->EmpNum );
-								if($query != 0):?>
-							<?php foreach($query as $mess):?>
+							$query = getMyMessages($_SESSION['user']->EmpNum );
+							if($query != 0){
+								foreach($query as $mess){?>
 								<div class="row">
 									<i class="icon-icons_bubble"></i><span class="right"><?=date("l m/d", strtotime($mess["date"]))?></span>
 									<p class="text"> <?php echo  $mess["text"]?></p>
 								</div>
-							<?php endforeach; ?>
-							<?php endif;
-					?>
+						<?php }
+							} else { ?>
+							<div class="row">
+								<i class="icon-icons_bubble"></i><span class="right"><?=date("l m/d")?></span>
+								<p class="text">Welcome to the Our Heroes portal where you can nominate colleagues in recognition of their contribution to Cancer Research.</p>
+							</div>
+							<div class="row">
+								<i class="icon-icons_bubble"></i><span class="right"><?=date("l m/d")?></span>
+								<p class="text">Click on the FAQs link to the right to find out more about using this site.</p>
+							</div>
+						<?php } ?>
 					</div>
 				</div>
 				<div id="awards" class="callout panel">

@@ -11,7 +11,8 @@
 	<form action="claim-award-update.php" method="post" name="claimAward" id="claimAward" novalidate>
 		<input type="hidden" name="ID" value="<?=$_GET['id']?>">
 		<?php // get list of work related
-			$workawards = getWorkAwards($_GET['id']);
+			$workawards = getMyWorkAwards($_GET['id']);
+			if ($workawards) {
 			foreach($workawards as $list){ 
 		?>
 		<div class="tableRow largerText">
@@ -25,7 +26,12 @@
 				</div>
 			</div>
 		</div>
-		<?php  } ?>
+		<?php  } 
+			} else {?>
+			<div class="tableRow largerText">
+				You do not have any work related awards available to you
+			</div>
+			<?php } ?>
 		<div class="tableRow">
 			<div class="tableColumn-12 textRight">
 				<a href="#" class="pinkButton clickAble cancel" data-type="submit" data-url="claimAward" formnovalidate >claim</a>

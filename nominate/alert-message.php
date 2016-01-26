@@ -8,7 +8,7 @@
 <div id="alertBody" class="alertBody">
 	<div class="row withPadding">
 		<div class="medium-12 columns">
-			Please type in a personal message to your colleague.
+			Please write a personal message to your colleague. This message will appear in their Thank You Certificate and in the Wall of Fame.
 		</div>
 	</div>
 </div>

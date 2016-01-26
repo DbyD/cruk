@@ -1,4 +1,7 @@
-<?php include_once('../inc/header.php'); ?>
+<?php
+	include_once('../inc/header.php');
+	$_SESSION['alreadydone'] = 'no';
+?>
 
 <div id="content" class="large-8 large-push-2 columns MyAccount">
 	<div class="title withStar">
@@ -19,7 +22,7 @@
 					</div>
 					<div class="tableColumn-3 doubleLine">
 						Category
-						<div class="smaller">click to approve/decline</div>
+						<div class="smaller">Click to approve/decline</div>
 					</div>
 				</div>
 				<div class="row mCustomScrollbar height555" data-mcs-theme="dark-2">

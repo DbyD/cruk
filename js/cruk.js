@@ -277,11 +277,15 @@ $(document).ready(function(){
 	$(".sendMail").click(function(){
 		var sender = $($(this).siblings()[0]).val();
 		var recipient = $($(this).siblings()[1]).val();
+		var senderName = $($(this).siblings()[2]).val();
+		var recipientName = $($(this).siblings()[3]).val();
 		$('#modalForSendMail').click();
 		console.log(sender);
 		console.log(recipient);
 		$("#senderModal").val(sender);
 		$("#recipientModal").val(recipient);
+		$("#mailToEmployee").val('Hi '+recipientName+'. I saw your "Our Heroes" award on the Wall of Fame. Congratulations! '+ senderName);
+		$("#messageModal").html('Hi '+recipientName+'. I saw your "Our Heroes" award on the Wall of Fame. Congratulations! '+ senderName);
 	});
 	$("#sendButton").click(function(){
 		var recipient = $("#recipientModal").val();

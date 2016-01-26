@@ -58,6 +58,7 @@
 	
 		$stmt->execute();
 		$id = $db->lastInsertId();
+		$_SESSION['alreadydone'] = 'yes';
 		
 		if($_SESSION['nominee']->littleExtra=='Yes' && ($_SESSION['nominee']->AppEmpNum != $_SESSION['user']->EmpNum)){
 			$sendEmail = new StdClass();
