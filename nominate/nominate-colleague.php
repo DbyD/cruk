@@ -23,7 +23,7 @@
 					<div class="image">
 						<img src="../images/be-brave.png" alt="Be Brave" />
 					</div>
-					<span id="Be BraveText" class="showbehaviour hidden">Some text goes here so we can write a lot more</span>
+					<span id="Be BraveText" class="showbehaviour hidden"><p>Be Brave</p>Our heroes act with conviction and push for better results.</span>
 				</div>
 			</div>
 			<div class="medium-4 columns">
@@ -34,7 +34,7 @@
 					<div class="image">
 						<img src="../images/be-sharp.png" alt="Be Sharp" />
 					</div>
-					<span id="Be SharpText" class="showbehaviour hidden">Some text goes here so we can write a lot more</span>
+					<span id="Be SharpText" class="showbehaviour hidden"><p>Be Sharp</p>Our heroes are smart, innovative thinkers.</span>
 				</div>
 			</div>
 			<div class="medium-4 columns rightnp">
@@ -45,7 +45,7 @@
 					<div class="image">
 						<img src="../images/be-united.png" alt="Be United" />
 					</div>
-					<span id="Be UnitedText" class="showbehaviour hidden">Some text goes here so we can write a lot more</span>
+					<span id="Be UnitedText" class="showbehaviour hidden"><p>Be United</p>Our heroes are outstanding team players – building strong, productive and collaborative relationships inside and outside the organisation.</span>
 				</div>
 			</div>
 			<select name="BeliefID" id="BeliefID">

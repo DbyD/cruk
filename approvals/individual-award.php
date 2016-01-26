@@ -19,7 +19,7 @@
 	<div class="tableRow">
 		<div class="greyText textLeft">
 			If approved, this colleague will be able to choose one of the following awards. Please remove options only if there’s a good reason to do so.
-			<i class="icon-icons_i clickAble blueText" data-type="subPopup" data-url="work-awards.php"></i>
+			<i class="icon-icons_i clickAble blueText" data-type="subPopup"></i>
 		</div>
 	</div>
 	<form action="individual-award-update.php" method="post" name="approveAward" id="approveAward" novalidate>

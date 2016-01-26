@@ -272,6 +272,7 @@ input[type=submit], .blueButton {
 .mCSB_scrollTools{
 	width: 8px;
 	opacity: 1;
+	z-index: 5;
 }
 .mCS-dark-2.mCSB_scrollTools .mCSB_draggerRail{
 	background-color: #e5e5e5;
@@ -449,6 +450,9 @@ li.ui-menu-item { font-size:13px !important; }
 	top: -15px;
 	left: 110px;
 	background-color: #fff;
+}
+.UpArrowRight{
+	left: 125px;
 }
 #subPopupbox i{
 	font-size: 20px;

@@ -78,6 +78,17 @@ function getName($empnum){
 	}
 }
 ////////////////////////////////////////////////////////////////////////////////////
+function getFirstName($empnum){
+	global $db;
+	$stmt = $db->prepare('SELECT Fname FROM tblempall WHERE EmpNum = :EmpNum');
+	$stmt->execute(array('EmpNum' => $empnum));
+	if ($result = $stmt->fetch(PDO::FETCH_OBJ)){
+		return $result->Fname;
+	} else{
+		return "N/A";
+	}
+}
+////////////////////////////////////////////////////////////////////////////////////
 function getConvertedDate($date){
 	$date = new DateTime($date);
 	return date_format($date, 'd F Y');
