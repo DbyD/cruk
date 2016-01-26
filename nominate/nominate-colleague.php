@@ -87,9 +87,9 @@
 			<div class="row withPadding noMargin">
 				<div class="medium-12 columns textRight">
 					<i class="icon-icons_i clickAble" data-type="alert" data-url="alert-volunteer.php"></i>
-					Nominating for a volunteer
+					Nominating for a Volunteer
 					<div id="volunteerTick" class="circleTick inline smallTick clickAble <?php if($_SESSION['nominee']->Volunteer) echo 'circleTickChecked'; ?>" data-type="popup" data-url="volunteer.php">
-						<label for="volunteer"></label>
+						<label for="Volunteer"></label>
 					</div>
 					<div id="volunteerName">
 						<div <?php if(!$_SESSION['nominee']->Volunteer) echo 'class="hidden"'; ?> >
@@ -110,13 +110,13 @@
 				</div>
 			</div>
 			<div class="row withPadding noMargin buttonRow">
-				<div class="medium-8 columns">
+				<div class="medium-5 columns">
 					<a href="#" class="blueButton clickAble" data-type="gourl" data-url="<?=HTTP_PATH?>home.php">Cancel</a>
 				</div>
-				<div class="medium-2 columns textRight ">
+				<div class="medium-3 columns textRight ">
 					<a href="#" class="blueButton clickAble" data-type="goback">Go Back</a>
 				</div>
-				<div class="medium-2 columns textRight ">
+				<div class="medium-4 columns textRight ">
 					<a href="#" class="pinkButton clickAble" data-type="submit" data-url="nominateColleague2">Submit Nomination</a>
 				</div>
 			</div>
