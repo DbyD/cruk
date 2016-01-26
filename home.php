@@ -16,9 +16,9 @@
 					</div>
 				</div>
 				<div class="medium-6 columns rightnp">
-					<div class="callout panel clickAble" id="home3" data-type="gourl" data-url="winners-wall.php">
+					<div class="callout panel clickAble" id="home3" data-type="gourl" data-url="winners-wall">
 						<div class="image">
-							<p>Winners<br>Wall</p>
+							<p>Wall of Fame</p>
 						</div>
 					</div>
 				</div>
@@ -35,7 +35,7 @@
 					</div>
 				</div>
 				<div class="medium-6 columns rightnp">
-					<div class="callout panel clickAble" id="home5" data-type="gourl" data-url="passion-talks.php">
+					<div class="callout panel clickAble" id="home5" data-type="gourl" data-url="https://crukip.cancerresearchuk.org/portal/server.pt/community/passion_talks/2530">
 						<div class="image">
 							<p>Passion Talks</p>
 						</div>

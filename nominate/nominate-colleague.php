@@ -1,7 +1,7 @@
 <?php include_once('../inc/header.php'); ?>
 
 <div id="content" class="large-8 large-push-2 columns">
-	<form action="nominate-colleague-submit.php" method="post" name="nominateColleague2" id="nominateColleague2">
+	<form action="nominate-submit.php" method="post" name="nominateColleague2" id="nominateColleague2">
 		<input type="hidden" name="formName" value="nominateColleague2">
 		<div class="title">
 			Nominate <i class="icon-icons_thickrightarrow smalli"></i> <span class="subTitle">Colleague</span>
@@ -23,7 +23,7 @@
 					<div class="image">
 						<img src="../images/be-brave.png" alt="Be Brave" />
 					</div>
-					<span id="Be BraveText" class="showbehaviour hidden">Some text goes here so we can write a lot more</span>
+					<span id="Be BraveText" class="showbehaviour hidden"><p>Be Brave</p>Our heroes act with conviction and push for better results.</span>
 				</div>
 			</div>
 			<div class="medium-4 columns">
@@ -34,7 +34,7 @@
 					<div class="image">
 						<img src="../images/be-sharp.png" alt="Be Sharp" />
 					</div>
-					<span id="Be SharpText" class="showbehaviour hidden">Some text goes here so we can write a lot more</span>
+					<span id="Be SharpText" class="showbehaviour hidden"><p>Be Sharp</p>Our heroes are smart, innovative thinkers.</span>
 				</div>
 			</div>
 			<div class="medium-4 columns rightnp">
@@ -45,7 +45,7 @@
 					<div class="image">
 						<img src="../images/be-united.png" alt="Be United" />
 					</div>
-					<span id="Be UnitedText" class="showbehaviour hidden">Some text goes here so we can write a lot more</span>
+					<span id="Be UnitedText" class="showbehaviour hidden"><p>Be United</p>Our heroes are outstanding team players – building strong, productive and collaborative relationships inside and outside the organisation.</span>
 				</div>
 			</div>
 			<select name="BeliefID" id="BeliefID">
@@ -117,7 +117,7 @@
 					<a href="#" class="blueButton clickAble" data-type="goback">Go Back</a>
 				</div>
 				<div class="medium-2 columns textRight ">
-					<a href="#" class="pinkButton clickAble" data-type="submit" data-url="nominateColleague2">Next</a>
+					<a href="#" class="pinkButton clickAble" data-type="submit" data-url="nominateColleague2">Submit Nomination</a>
 				</div>
 			</div>
 		</div>

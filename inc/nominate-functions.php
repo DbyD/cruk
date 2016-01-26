@@ -78,34 +78,34 @@ function getTotalApprovedNominations($empnum){
 ////////////////////////////////////////////////////////////////////////////////////
 function getEmployeFnameAndSname () {
 
-	global $db;
+ global $db;
 
-	$sql = '
+ $sql = '
 SELECT e.Fname AS name,
       e.Sname AS sname,
         e.id AS EmpNum
 FROM 
-	tblnominations AS n
-	INNER JOIN
-	tblempall AS e
-	ON n.NominatorEmpNum = e.EmpNum
-WHERE n.awardType=1 AND n.AprStatus=1 ORDER BY n.NomDate ASC';
+ tblnominations AS n
+ INNER JOIN
+ tblempall AS e
+ ON n.NominatorEmpNum = e.EmpNum
+WHERE n.awardType=1 AND n.AprStatus=1 ORDER BY n.NomDate ASC LIMIT 10';
 
-	$stmt = $db->prepare( $sql );
-	
-	$stmt->execute();
+ $stmt = $db->prepare( $sql );
+ 
+ $stmt->execute();
 
-	$arr = array();
+ $arr = array();
 
-	while($result = $stmt->fetch( PDO::FETCH_ASSOC )) {
-		$arr[] = $result;
-	}
+ while($result = $stmt->fetch( PDO::FETCH_ASSOC )) {
+  $arr[] = $result;
+ }
 
-	if(count($arr) == 0){
-		return 0;
-	}
+ if(count($arr) == 0){
+  return 0;
+ }
 
-	return $arr;
+ return $arr;
 }
 
 ?>

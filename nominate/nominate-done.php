@@ -1,4 +1,7 @@
-<?php include_once('../inc/header.php'); ?>
+<?php
+	include_once('../inc/header.php');
+	$_SESSION['alreadydone'] = 'no';
+?>
 
 <div id="content" class="large-8 large-push-2 columns">
 	<div class="title">
@@ -12,16 +15,17 @@
 		<div class="callout panel white contentFill">
 			<div class="row withPadding ">
 				<div class="medium-12 columns">
+					<p>&nbsp;</p>
 					<?php if ($_SESSION['nominee']->Volunteer !='') {?>
-					<p>Thank You for nominating <?=$_SESSION['nominee']->full_name();?> on behalf of <?=$_SESSION['nominee']->Volunteer;?></p>
+					<p>Thank You for nominating <?=$_SESSION['nominee']->full_name();?> on behalf of <?=$_SESSION['nominee']->Volunteer;?>.</p>
 					<?php } else { ?>
-					<p>Thank You for nominating <?=$_SESSION['nominee']->full_name();?></p>
+					<p>Thank You for nominating <?=$_SESSION['nominee']->full_name();?>.</p>
 					<?php } ?>
 					<?php	if($_SESSION['nominee']->littleExtra=='Yes' && ($_SESSION['nominee']->AppEmpNum != $_SESSION['user']->EmpNum)){ ?>
-					<p>As you've added 'A Little Extra', your award has gone to <?=$_SESSION['nominee']->full_App_name();?> for approval</p>
-					<p>You will be notified of the result</p>
+					<p>As you've added 'A Little Extra', your award has gone to <?=$_SESSION['nominee']->full_App_name();?> for approval.</p>
+					<p>You will be notified of the result.</p>
 					<?php	} else { ?>
-					<p>Your e-card will be sent to <?=$_SESSION['nominee']->full_name();?></p>
+					<p>Your e-card will be sent to <?=$_SESSION['nominee']->full_name();?>.</p>
 					<?php	} ?>
 					<? //print_r($_SESSION['nominee']);?>
 				</div>

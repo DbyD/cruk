@@ -34,7 +34,13 @@
 					?>
 					<div class="tableRow">
 						<div class="tableColumn-3">
-							<?=getName($list->NominatorEmpNum)?>
+						<?php
+							if ($list->Volunteer != '') {
+								echo $list->Volunteer;
+							} else {
+								echo getName($list->NominatorEmpNum);
+							}
+						?>
 						</div>
 						<div class="tableColumn-3">
 							<?=getConvertedDate($list->NomDate)?>

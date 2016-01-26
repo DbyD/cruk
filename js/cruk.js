@@ -137,6 +137,7 @@ $(function(){
 		var url = $(this).attr('data-url');
 		var type = $(this).attr('data-type');
 		var id = $(this).attr('data-id');
+
 		
 		switch (type) { 
 			case 'goback': 
@@ -277,7 +278,8 @@ $(document).ready(function(){
 
 		var sender = $($(this).siblings()[0]).val();
 		var recipient = $($(this).siblings()[1]).val();
-
+		var senderName = $($(this).siblings()[2]).val();
+		var recipientName = $($(this).siblings()[3]).val();
 		$('#modalForSendMail').click();
 
 		console.log(sender);
@@ -285,21 +287,21 @@ $(document).ready(function(){
 
 		$("#senderModal").val(sender);
 		$("#recipientModal").val(recipient);
+		$("#mailToEmployee").val('Hi '+recipientName+'. I saw your "Our Heroes" award on the Wall of Fame. Congratulations! '+ senderName);
+		$("#messageModal").html('Hi '+recipientName+'. I saw your "Our Heroes" award on the Wall of Fame. Congratulations! '+ senderName);
 	});
 
 	$("#sendButton").click(function(){
 		var recipient = $("#recipientModal").val();
 		var sender = $("#senderModal").val();
-		var text = $("#mailToEmploye").val();
-		var siblings = $("#mailToEmploye").siblings();
-		
-
+		var text = $("#mailToEmployee").val();
+		var siblings = $("#mailToEmployee").siblings();
 		if( $.trim(text) != '' ){
-			siblings.addClass("hide");
+			siblings.addClass("hidden");
 			$(".close-reveal-modal").click();
 			$.ajax({
 			  type:'post',
-			  url: "inc/global-functions.php?name=message",
+			  url: "message-submit.php?name=message",
 			  data:  { 
 			  	recipient : recipient,
 			  	sender : sender,
@@ -310,7 +312,7 @@ $(document).ready(function(){
 			  }
 			});
 		} else {
-			siblings.removeClass("hide");
+			siblings.removeClass("hidden");
 		}
 
 	});
@@ -371,4 +373,14 @@ $(document).ready(function(){
 			menuItems[m].setAttribute('class', 'menu-item-holder'); 
 		}
 		_byId("holder_of_"+el.id).setAttribute('class', 'menu-item-holder activated'); 
-	}
+	}//----------------------------------------------------------------------------------
+$(function() {
+	$('#winnerswall div.clickAble').hover(function(){
+		var divID = this.id + "Text";
+		$("[id='"+divID+"']").removeClass('hidden');
+	},function(){
+		var divID = this.id + "Text";
+		$("[id='"+divID+"']").addClass('hidden');
+	});
+});
+//----------------------------------------------------------------------------------

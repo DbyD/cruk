@@ -46,11 +46,11 @@
 		<!-- Right Nav Section -->
 		<ul class="right">
 			<li><a href="<?=HTTP_PATH?>inc/logout.php">Logout</a></li>
-			<li class="has-dropdown"> <a href="#">&nbsp;</a>
+			<!--<li class="has-dropdown"> <a href="#">&nbsp;</a>
 				<ul class="dropdown">
 					<li><a href="#">some stuff will go here</a></li>
 				</ul>
-			</li>
+			</li>-->
 		</ul>
 	</section>
 </nav>
