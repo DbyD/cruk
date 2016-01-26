@@ -542,7 +542,26 @@ li.ui-menu-item { font-size:13px !important; }
 	width: 200px;
 }
 
+.left-bar-nav {
+	list-style: none;
+    background-color: #8367BB;
+}
 
+.left-bar-nav > li {
+
+}
+
+.left-bar-nav > li > a {
+	display: block;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 3px 10px;
+}
+
+.left-bar-nav > li > a:hover {
+	background-color: #A38FCA;
+    color: #64469E !important; 
+}
 
 /* @end*/
 

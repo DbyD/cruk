@@ -36,7 +36,7 @@ if(isset( $_POST["submit"] ) ){
 
 <?php 
 	$val = $_SESSION['user']->SuperUser;
-	if( $val == "YES" ){
+	if( $val == "NO" ){
 		include('../admin/products.php');
 	} else {
 ?>
@@ -98,7 +98,7 @@ if(isset( $_POST["submit"] ) ){
 				<div id="awards" class="callout panel">
 					<div class="title">
 						<!-- <i class="icon-icons_trophy"></i> -->
-						Most Recent Awards
+						Avable to spend
 					</div>
 					<div>
 						<?php
@@ -127,20 +127,23 @@ if(isset( $_POST["submit"] ) ){
 				<div  class="callout panel" id="menu_container">
 					<?php $menus = getMenuAllRows(); ?>
 					<!-- <pre><?php var_dump($menus); ?></pre> -->
-					<ul class="left-bar-nav">
-						<?php foreach ($menus as $v): ?>
-							<?php if ($v["parent"] == 0): ?>
-								<li><?php echo $v["label"]; ?></li>
-									<ul>
-										<?php foreach ($menus as $val): ?>
-											<?php if ($v["id"] == $val["parent"]): ?>
-												<li><?php echo $val["label"]; ?></li>
-											<?php endif; ?>
-										<?php endforeach; ?>
-									</ul>
-							<?php endif; ?>
-						<?php endforeach; ?>
-					</ul>
+					
+					<section class="block-list">
+						<ul class="left-bar-nav">
+							<?php foreach ($menus as $v): ?>
+								<?php if ($v["parent"] == 0): ?>
+									<li><a href="<?php echo "?menu_id=" . $v['id'] ; ?>"><?php echo $v["label"]; ?></a></li>
+										<ul class="hide">
+											<?php foreach ($menus as $val): ?>
+												<?php if ($v["id"] == $val["parent"]): ?>
+													<li><?php echo $val["label"]; ?></li>
+												<?php endif; ?>
+											<?php endforeach; ?>
+										</ul>
+								<?php endif; ?>
+							<?php endforeach; ?>
+						</ul>
+					</section>
 				</div>
 				
 			</div>

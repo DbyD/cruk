@@ -316,6 +316,10 @@ $(document).ready(function(){
 		}
 
 	});
+
+	$(".left-bar-nav").click(function(){
+		console.log("click");
+	});
 });
 
 
