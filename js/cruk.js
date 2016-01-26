@@ -137,7 +137,6 @@ $(function(){
 		var url = $(this).attr('data-url');
 		var type = $(this).attr('data-type');
 		var id = $(this).attr('data-id');
-
 		
 		switch (type) { 
 			case 'goback': 
@@ -316,3 +315,60 @@ $(document).ready(function(){
 
 	});
 });
+
+
+
+	function _byId(el){
+
+		return document.getElementById(el);
+	}
+	function _byClas(el){
+		return document.getElementsByClassName(el)
+	}
+
+	//_byId("adding_new").onchange = 
+	function AddHeadMenu(el, folder, parent){
+		var newItem = el.value;
+
+		console.log(newItem ,  folder, parent);
+
+		$.ajax({
+				type:"POST",
+				url:"action.php",
+				data:{newItem:newItem,folder:folder,parent:parent },
+				success:function(d){
+					console.log(d);
+					_byId("menu_container").innerHTML = d;
+				}
+			});
+		el.value = "";
+	}
+
+
+	function updateLabel(el, id)
+	{
+		
+
+		var upLabel = el.value;
+
+		$.ajax({
+				type:"POST",
+				url:"action.php",
+				data:{
+					upLabel:upLabel,
+					id:id 
+				},
+				success:function(d){
+					
+				}
+			});
+	}
+
+	function openSubmenu(el)
+	{
+		var menuItems = _byClas("menu-item-holder");
+		for(var m = 0; m<menuItems.length ; m++){
+			menuItems[m].setAttribute('class', 'menu-item-holder'); 
+		}
+		_byId("holder_of_"+el.id).setAttribute('class', 'menu-item-holder activated'); 
+	}

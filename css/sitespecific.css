@@ -147,10 +147,9 @@
 	margin: 0 5px;
 }
 .contentFill {
-	height: 555px;
+	
 }
 .fillHeight {
-	height: 100%;
 	position: relative;
 }
 .panel.callout.white {
@@ -204,7 +203,7 @@
 }
 @media only screen and (min-width: 1200px) {
 .contentFill {
-	height: 605px;
+	
 }
 }
 @media only screen and (max-width: 1023px) {

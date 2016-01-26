@@ -81,7 +81,9 @@ function getEmployeFnameAndSname () {
 	global $db;
 
 	$sql = '
-SELECT e.Fname AS name,e.id AS EmpNum
+SELECT e.Fname AS name,
+      e.Sname AS sname,
+        e.id AS EmpNum
 FROM 
 	tblnominations AS n
 	INNER JOIN

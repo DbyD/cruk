@@ -1,6 +1,4 @@
-<?php 
-include_once 'inc/config.php';
-?>
+
 <!doctype html>
 <html class="no-js" lang="en">
 <head>
