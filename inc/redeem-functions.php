@@ -67,6 +67,115 @@ VALUES
 
 	$stmt->execute();
 } 
+
+function getMenuAllRows(){
+	global $db;
+
+
+	$stmt = $db->prepare("SELECT * FROM tblmenuleft ORDER BY qu");
+
+	$stmt->execute();
+
+	$arr = array();
+	while($result = $stmt->fetch(PDO::FETCH_ASSOC)){
+		$arr[] = $result;
+	}
+
+	if( count($arr) == 0){
+		return 0;
+	}
+
+	return $arr;
+}
+
+function getMenuRows(){
+	global $db;
+
+
+	$stmt = $db->prepare("SELECT * FROM tblmenuleft WHERE parent='0' ORDER BY qu");
+
+	$stmt->execute();
+
+	$arr = array();
+	while($result = $stmt->fetch(PDO::FETCH_ASSOC)){
+		$arr[] = $result;
+	}
+
+	if( count($arr) == 0){
+		return 0;
+	}
+
+	return $arr;
+}
+
+function getMenuWhereParent( $m_id ){
+
+	global $db;
+
+
+	$stmt = $db->prepare("SELECT * FROM tblmenuleft WHERE parent=:parent ORDER BY qu");
+	$stmt->bindValue(':parent',$m_id, PDO::PARAM_INT);
+	$stmt->execute();
+
+	$arr = array();
+	while($result = $stmt->fetch(PDO::FETCH_ASSOC)){
+		$arr[] = $result;
+	}
+
+	if( count($arr) == 0){
+		return 0;
+	}
+
+	return $arr;
+}
+
+function insertSub($label, $parent){
+
+	global $db;
+
+	
+	$stmt = $db->prepare("INSERT INTO tblmenuleft (label, parent) VALUES (:label, :parent)");
+	
+
+	$stmt->bindValue(':label',$label, PDO::PARAM_STR);
+	$stmt->bindValue(':parent', $parent, PDO::PARAM_INT);
+	
+
+	$stmt->execute(); 
+}
+
+function insertMenu( $label ){
+
+	global $db;
+
+
+	$stmt = $db->prepare("
+INSERT INTO tblmenuleft 
+	(label) 
+VALUES 
+	(:label)");
+	
+
+	$stmt->bindValue(':label',$label, PDO::PARAM_STR);
+	
+
+	$stmt->execute(); 
+}
+
+function updateMenuLeft($label, $id){
+	global $db;
+
+	$sql = "
+UPDATE tblmenuleft 
+SET label = :label
+WHERE id = :id";	
+	$stmt = $db->prepare($sql);
+
+	$stmt->bindValue(':label',$label, PDO::PARAM_STR);
+	$stmt->bindValue(':id',$id, PDO::PARAM_INT);
+
+	$stmt->execute(); 
+}
 ////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////
 ?>

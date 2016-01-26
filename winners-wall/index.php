@@ -1,5 +1,7 @@
 <?php
+	include_once('../inc/config.php');
 	include_once('../inc/header.php');
+
 ?>
 			<div id="content" class="large-8 large-push-2 columns">
 				<div class="row winners-header">
@@ -7,8 +9,13 @@
 				</div>
 				<div id="winnerswall" class="row mCustomScrollbar height590" data-mcs-theme="dark-2">
 				<?php 
+				echo "<pre>";
+					var_dump("___________________________________________________________________________________________");
+					echo "</pre>";
 				if(function_exists('getAllEmployees')){
+
 					$employees = getAllEmployees();
+
 					if( $employees != 0 ){
 						foreach ($employees as  $employee){
 							$class = str_replace(' ','',$employee["BeliefID"]);
