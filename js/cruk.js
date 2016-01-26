@@ -61,11 +61,6 @@ $(function(){
 				$("#alertContent").load("../alerts/alert-popup.php", {'error' : error.html() });
 			}
 			$("#alert").css('display', 'block');
-		},
-		submitHandler: function(form) { 
-			$.post('edit-nominee.php', $("#nominateColleague2").serialize(), function(data) {
-				window.location.href = 'nominate-submit.php';
-			});
 		}
 	});
 	$("#volunteerForm").validate({

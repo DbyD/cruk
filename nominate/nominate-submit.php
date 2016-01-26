@@ -2,6 +2,18 @@
 	include '../inc/config.php';
 	// upload data and create emails
 	$today = date("Y-m-d H:i:s", strtotime(date ("Y-m-d H:i:s")));
+		$_SESSION['nominee']->BeliefID = $_POST['BeliefID'];
+		$_SESSION['nominee']->personalMessage = $_POST['personalMessage'];
+		if($_POST['littleExtra']){
+			$_SESSION['nominee']->littleExtra = 'Yes';
+		} else {
+			$_SESSION['nominee']->littleExtra = 'No';
+		}
+		if($_POST['awardPrivate']){
+			$_SESSION['nominee']->awardPrivate = 'Yes';
+		} else {
+			$_SESSION['nominee']->awardPrivate = 'No';
+		}
 	print_r($_SESSION['nominee']);
 	$stmt = $db->prepare("INSERT INTO tblnominations(
 							awardType, NominatorEmpNum, NominatedEmpNum, Volunteer, ApproverEmpNum, Team, Section, Department, Directorate,
