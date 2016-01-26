@@ -33,8 +33,8 @@ $(function(){
 		}
 	});
 	$("#uploadPhoto").validate({
-		rules: {photo: "required"},
-		messages: {photo: "Please select a photo"},
+		rules: {myphoto: "required"},
+		messages: {myphoto: "Please select a photo"},
 		errorPlacement: function(error, element) {
 			$("#alertContent").load("../alerts/alert-popup.php", {'error' : error.html() });
 			$("#alert").css('display', 'block');

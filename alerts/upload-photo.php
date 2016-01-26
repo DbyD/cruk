@@ -43,6 +43,12 @@
 <link rel="shortcut icon" href="<?=HTTP_PATH?>favicon.ico"> 
 </head>
 <body>
+<div id="alert" class="">
+	<div id="alertbox" class="forPhoto">
+		<div id="alertContent"></div>
+		<div id="closealert" data-type="close" data-id="3" class="clickAble closealert"><i class="icon-icons_close"></i></div>
+	</div>
+</div>
 <div id="alertTitle" class="title smallPopupTitle">
 	<div class="row withPadding">
 		<div class="medium-12 columns">
@@ -57,10 +63,10 @@
 			<div class="custom-upload">
 				<input type="file" name="myphoto" id="myphoto">
 				<div class="fake-file">
-					<input disabled="disabled" name="thisphoto" this="thisphoto" value="">
+					<input disabled="disabled" name="thisphoto" this="thisphoto" value="" placeholder="Click to Browse">
 				</div>
 			</div>
-			<div class="row valign-middle textRight">
+			<div class="row valign-middle">
 				<a href="#" class="purpleButton clickAble" data-type="submit" data-url="uploadPhoto">Upload</a>
 			</div>
 		</form>
