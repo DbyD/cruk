@@ -317,9 +317,29 @@ $(document).ready(function(){
 
 	});
 
-	$(".left-bar-nav").click(function(){
-		console.log("click");
+
+	$("#price").click(function(e){
+		var parentUL = $(this).children()[1];
+		$(parentUL).children().toggleClass('hide');
 	});
+
+	$('.price-list').click(function(e){
+		var currentPrice = $(e.target).text();
+		$("#price").find('p').html(currentPrice + '<i class="fi-arrow-down right">');
+		$("#aPrice").val(currentPrice);
+	});
+
+	$(".basket-item-remove").click(function(){
+		var baID = $(this).siblings().val();
+		$("#baIDdel").val(baID);
+		$("#modalButton").click();
+	});
+
+	$("#close-basket-del").click(function(){
+		$(".close-reveal-modal").click();
+	});
+
+
 });
 
 

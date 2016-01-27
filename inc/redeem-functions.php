@@ -176,6 +176,61 @@ WHERE id = :id";
 
 	$stmt->execute(); 
 }
+
+function getProductByID( $prID ){
+	global $db;
+	$stmt = $db->prepare('SELECT * FROM tblproducts WHERE prID = :prID');
+	$stmt->execute(array('prID' => $prID));
+	if ($result = $stmt->fetch( PDO::FETCH_ASSOC )){
+		return $result;
+	} else{
+		return 0;
+	}
+}
+
+function addBasket( $data ){
+	
+	global $db;
+
+	
+	$stmt = $db->prepare("INSERT INTO tblbasket (prID, aPrice, employeID) VALUES (:prID, :aPrice, :employeID)");
+	
+
+	$stmt->bindValue(':prID',$data["prID"], PDO::PARAM_INT);
+	$stmt->bindValue(':aPrice', $data["aPrice"], PDO::PARAM_INT);
+	$stmt->bindValue(':employeID', $data["employeID"], PDO::PARAM_INT);
+	
+
+	return $stmt->execute(); 
+}
+
+function getBasket( $empID ){
+	global $db;
+
+
+	$stmt = $db->prepare("SELECT * FROM tblbasket WHERE employeID=:employeID");
+	$stmt->bindValue(':employeID',$empID, PDO::PARAM_INT);
+	$stmt->execute();
+
+	$arr = array();
+	while($result = $stmt->fetch(PDO::FETCH_ASSOC)){
+		$arr[] = $result;
+	}
+
+	if( count($arr) == 0){
+		return 0;
+	}
+
+	return $arr;
+}
+
+function deleteBasketItem( $baID ){
+	global $db;
+	$stmt = $db->prepare("DELETE FROM tblbasket WHERE baID = :baID");
+	$stmt->bindValue(':baID',$baID, PDO::PARAM_INT);
+	$res = $stmt->execute();
+	return $res;
+}
 ////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////
 ?>

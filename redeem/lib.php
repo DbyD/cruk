@@ -20,11 +20,7 @@ public function Menu($field = "")
 	
 	$listt = getMenuRows();
 
-<<<<<<< HEAD
-=======
 
-
->>>>>>> 583563fd21099138ae54b7c9dc990c4a9378fd31
 	foreach($listt as $m){
 		$m_id = $m['id'];
 		$html .="
