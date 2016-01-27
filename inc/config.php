@@ -40,6 +40,7 @@
 	include 'redeem-functions.php';
 	include 'report-functions.php';
 	include 'winners-wall-functions.php';
+	include 'library/upload_file.php';
 ////////////////////////////////////////////////////////////////////////////////////
 	$encrypt = new Encryption;
 	session_start();
