@@ -1,6 +1,6 @@
 <div id="content" class="large-8 large-push-2 columns">
 	<div class="title withStar">
-		Redeem
+		Redeem Admin
 	</div>
 	<div class="row contentFill">
 		<div class="medium-12 columns leftnp rightnp fillHeight">
@@ -42,8 +42,7 @@
 			  
 
 			</div>
-		</div>	
-	</div>
+			
 	<?php if(isset($sub_id)):?>
 	<div class="row">
 		<div class="small-12 large-12 columns form-prduct">
@@ -108,6 +107,8 @@
 		</div>
 	</div>
 	<?php endif;?>
+		</div>	
+	</div>
 
 </div>
 
