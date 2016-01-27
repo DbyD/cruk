@@ -232,5 +232,12 @@ function deleteBasketItem( $baID ){
 	return $res;
 }
 ////////////////////////////////////////////////////////////////////////////////////
+function deleteMenu( $id ){
+	global $db;
+	$stmt = $db->prepare("DELETE FROM tblmenuleft WHERE id = :id");
+	$stmt->bindValue(':id',$id, PDO::PARAM_INT);
+	$res = $stmt->execute();
+	return $res;
+}
 ////////////////////////////////////////////////////////////////////////////////////
 ?>

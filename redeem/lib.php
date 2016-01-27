@@ -1,6 +1,5 @@
 <?php
 
-
 class MenuGenerator {
 
 public $menu='tblmenuleft';
@@ -46,7 +45,9 @@ public function Menu($field = "")
 				</div>
 				<div class='large-2 columns'>
 					<a href='?menu_id=".$m_id."'><img src='img/update.png' class='act-icon'/></a>
-					<span><img src='img/DeleteRed.png' class='act-icon'  class='del-item' data-del_id='".$m_id."'/></span>
+					<span>
+						<img src='img/DeleteRed.png' class='act-icon del-item' data-del_id='".$m_id."'/>
+					</span>
 				</div>
 			</div>
 
@@ -56,8 +57,6 @@ public function Menu($field = "")
 
 			<div class='sub-menu-area' >
 			";
-
-			$sub_listt = mysql_query("SELECT * FROM $menu WHERE parent='".$m_id."' ORDER BY qu ");
 
 			$sub_listt = getMenuWhereParent( $m_id );
 
@@ -71,7 +70,7 @@ public function Menu($field = "")
 
 						<input type='text' value='".$s_m['label']."' class='prod-menu-item' data-menu_id='".$s_m_id."' onchange='updateLabel(this, ".$s_m_id.")'/>
 						<a href='?menu_id=".$m_id."&sub_id=".$s_m_id."'><img src='img/update.png' class='act-icon'/></a>
-						<span><img src='img/DeleteRed.png' class='act-icon' class='del-item' data-del_id='".$s_m_id."'/></span>
+						<span><img src='img/DeleteRed.png' class='act-icon del-item' data-del_id='".$s_m_id."'/></span>
 
 					</div>";
 			    }
@@ -136,12 +135,18 @@ public function UpdateMenu()
 	updateMenuLeft($_POST['upLabel'], $_POST['id']);
 }
 
+public function DeleteMenu(){
+	deleteMenu($_POST['del_id']);
+}
+
  public function SaveAction()
  {
  	if(isset($_POST['newItem']))
  		return $this->AddNewMenu();
  	if(isset($_POST['upLabel']))
  		return $this->UpdateMenu();
+ 	if(isset($_POST['del_id']))
+ 		return $this->DeleteMenu();
  }
 
 }

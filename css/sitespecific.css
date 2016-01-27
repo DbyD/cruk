@@ -1,4 +1,4 @@
-/* @group Login */
+ @group Login */
 #content .colleaguelogin, #content .firsttime {
 	padding: 10px;
 	background: #fff;
@@ -478,7 +478,20 @@
 #awards {
 	position: relative;
 }
+
+.del-item {
+	cursor:pointer;
+}
+
 /* @end*/
+
+/* @product styles */
+
+.product > img {
+	cursor:pointer;
+}
+
+/* @end */
 
 
 /* @group Nominate */
@@ -1307,4 +1320,4 @@ button:hover, button:focus, .button:hover, .button:focus{
 	height: 148px;
 }
 }
-/* @end */
+/* @end 

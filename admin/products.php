@@ -15,15 +15,21 @@
 						} else {
 							$sub_id = null;
 						}
-
+						
 						$res = getMenuProducts( $menu_id, $sub_id);
+
+					} else if(isset( $_GET["prID"] )){
+						$res = getProductByID( $_GET["prID"] );
 					} else {
 						$res = getTotalProducts();
 					}
 
+
+					
 					if( $res != 0){
 						$products = $res;
 					}
+
 					
 				?>
 				
@@ -32,15 +38,16 @@
 						<div class="small-2 large-4 columns">
 					  		<div class="product">
 
-					  			<p><?php echo $product['aTitle']; ?></p>
+					  			<p>
+					  				<?php echo $product['aTitle']; 
+					  				?>
+								</p>
 
-					  			<img src="<?php echo HTTP_PATH . $product["Image_name"]; ?>" class="product-img">
+					  			<a href="<?php echo HTTP_PATH . 'redeem/products.php?prID=' . $product['prID']; ?>"><img src="<?php echo HTTP_PATH . $product["Image_name"]; ?>" class="product-img"></a>
 					  		</div>
 					    </div>
 					<?php endforeach;?>
 				<?php endif;?>
-			  
-
 			</div>
 		</div>	
 	</div>
@@ -117,35 +124,22 @@
 					<span class="helper"></span>
 					<img src="<?=HTTP_PATH?>images/our-heroes.svg" alt="Cancer Research UK" />
 				</div>
+
 				<div id="awards" class="callout panel">
 					<div class="title">
 						<!-- <i class="icon-icons_trophy"></i> -->
-						Most Recent Awards
+						Avable to spend
 					</div>
-					<div>
-						<?php
-							if(isset($enpnum)){
-								if(function_exists( 'getEmployeFnameAndSname' )){
-									$res = getEmployeFnameAndSname();
-
-									if( $res != 0 ):?>
-									<ul id="listNominators">
-										<?php 
-										foreach ($res as $key => $value):?>
-											<li>
-												<i class="fi-torso-business size-24"></i>
-												<i>Individual</i>
-												<p><?php echo $value['name']; ?></p>
-											</li>
-
-								  <?php endforeach; ?>
-									</ul>
-									<?php endif;
-								}
-							} 
-						?>
+					<div class="price-panel">
+						<!-- <i class="icon-icons_trophy"></i> -->
+						$300
+					</div>
+					<div class="unlaimed-panel">
+						<!-- <i class="icon-icons_trophy"></i> -->
+						+2 Unclaimed
 					</div>
 				</div>
+
 				<div  class="callout panel" id="menu_container">
 					
 	

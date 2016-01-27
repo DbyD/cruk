@@ -282,8 +282,6 @@ $(document).ready(function(){
 		var recipientName = $($(this).siblings()[3]).val();
 		$('#modalForSendMail').click();
 
-		console.log(sender);
-		console.log(recipient);
 
 		$("#senderModal").val(sender);
 		$("#recipientModal").val(recipient);
@@ -337,6 +335,22 @@ $(document).ready(function(){
 
 	$("#close-basket-del").click(function(){
 		$(".close-reveal-modal").click();
+	});
+
+	$(".del-item").click(function(el){
+		var del_id = $(this).attr('data-del_id');
+		
+		$.ajax({
+				type:"POST",
+				url:"action.php",
+				data:{del_id:del_id},
+				success:function(d){
+					
+				}
+			});
+		el.value = "";
+
+		$(this).closest( ".menu-item-holder" ).hide();
 	});
 
 
@@ -393,11 +407,25 @@ $(document).ready(function(){
 	function openSubmenu(el)
 	{
 		var menuItems = _byClas("menu-item-holder");
+
 		for(var m = 0; m<menuItems.length ; m++){
 			menuItems[m].setAttribute('class', 'menu-item-holder'); 
 		}
-		_byId("holder_of_"+el.id).setAttribute('class', 'menu-item-holder activated'); 
-	}//----------------------------------------------------------------------------------
+
+		var s = _byId("holder_of_"+el.id);
+		var curClass = s.getAttribute("className");
+
+		if(curClass == "menu-item-holder activated" ){
+			_byId("holder_of_"+el.id).setAttribute('class', 'menu-item-holder'); 
+		}else{
+			_byId("holder_of_"+el.id).setAttribute('class', 'menu-item-holder activated'); 	
+		}
+		
+		
+	}
+
+
+
 $(function() {
 	$('#winnerswall div.clickAble').hover(function(){
 		var divID = this.id + "Text";

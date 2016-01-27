@@ -37,7 +37,7 @@ if(isset( $_POST["submit"] ) ){
 <?php 
 	$val = $_SESSION['user']->SuperUser;
 
-	if( $val == "YES" ){
+	if( $val == "NO" ){
 
 		include('../admin/products.php');
 	} else {
@@ -130,7 +130,7 @@ if(isset( $_POST["submit"] ) ){
 							<?php foreach ($menus as $v): ?>
 								<?php if ($v["parent"] == 0): ?>
 									<li><a href="<?php echo "?menu_id=" . $v['id'] ; ?>"><?php echo $v["label"]; ?></a></li>
-										<ul class="sub-menu <?php if(isset($menu_id) && $menu_id != $v["id"]) echo 'hide';?>">
+										<ul class="sub-menu <?php if( ( isset($menu_id) && $menu_id != $v["id"]) || (!isset($menu_id)) ) echo 'hide';?>">
 											<?php foreach ($menus as $val): ?>
 												<?php if ($v["id"] == $val["parent"]): ?>
 													<li><a href="<?php echo "?menu_id=" . $v['id'] . "&sub_id=" . $val['id'] ; ?>"><?php echo $val["label"]; ?></a></li>
