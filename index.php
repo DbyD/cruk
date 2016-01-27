@@ -57,7 +57,7 @@
 									<input type="password" name="sPassword" autocomplete="off" />
 								</div>
 								<div class="medium-9 columns small">
-									By logging in, you agree to abide by the Bupa Saudi Arabia<br>
+									By logging in, you agree to abide by CRUK<br>
 									Terms and Conditions. See link below
 								</div>
 								<div class="medium-3 columns">
