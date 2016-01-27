@@ -313,6 +313,10 @@ $(document).ready(function(){
 			siblings.removeClass("hidden");
 		}
 	});
+
+	$(".left-bar-nav").click(function(){
+		console.log("click");
+	});
 });
 //----------------------------------------------------------------------------------
 $(function() {

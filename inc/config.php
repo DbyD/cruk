@@ -7,10 +7,10 @@
 // DEFINE ROOT PATHS
 ////////////////////////////////////////////////////////////////////////////////////
 		// this is for my machine must remove /cruk/
-	define("RELATIVE_PATH_ROOT", '');
+	define("RELATIVE_PATH_ROOT", '/');
 	define("LOCAL_PATH_ROOT", $_SERVER["DOCUMENT_ROOT"] . '/');
 	define("HTTP_PATH_ROOT", isset($_SERVER["HTTP_HOST"]) ? $_SERVER["HTTP_HOST"] : (isset($_SERVER["SERVER_NAME"]) ? $_SERVER["SERVER_NAME"] : '_UNKNOWN_'));
-	define("HTTP_PATH", 'http://'. HTTP_PATH_ROOT . '/');
+	define("HTTP_PATH", 'http://'. HTTP_PATH_ROOT . '/cruk/');
 ////////////////////////////////////////////////////////////////////////////////////
 	$xexecEmail = "alec@dbyd.co.za";
 ////////////////////////////////////////////////////////////////////////////////////
