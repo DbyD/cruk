@@ -188,8 +188,10 @@ $(function(){
 				break;
 			case 'subPopup': 
 				var top = $(this).position().top + 30
+				var left = $(this).position().left - 7
 				$("#subPopup").css('display', 'block');
 				$("#subPopupbox").css('top', top);
+				$(".whiteUpArrow").css('left', left);
 				break;
 			case 'ecard': 
 				$("#popupEcard").load(url+"?id="+id);

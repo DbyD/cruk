@@ -550,6 +550,9 @@
 }
 /* @end */
 /* @group My Approvals */
+.approvalHome .image{
+	background: url(../images/nominate-home.jpg);
+}
 .title .smaller {
 	font-size: 12px;
 	margin-left: 20px;
@@ -701,6 +704,9 @@
 p.alertText {
 	padding: 30px;
 	font-size: 16px;
+}
+.popupLastRow{
+	padding: 0 0 30px !important;
 }
 /* @end */
 /* @group File Upload */
