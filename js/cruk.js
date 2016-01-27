@@ -314,10 +314,90 @@ $(document).ready(function(){
 		}
 	});
 
-	$(".left-bar-nav").click(function(){
-		console.log("click");
+
+	$("#price").click(function(e){
+		var parentUL = $(this).children()[1];
+		$(parentUL).children().toggleClass('hide');
 	});
+
+	$('.price-list').click(function(e){
+		var currentPrice = $(e.target).text();
+		$("#price").find('p').html(currentPrice + '<i class="fi-arrow-down right">');
+		$("#aPrice").val(currentPrice);
+	});
+
+	$(".basket-item-remove").click(function(){
+		var baID = $(this).siblings().val();
+		$("#baIDdel").val(baID);
+		$("#modalButton").click();
+	});
+
+	$("#close-basket-del").click(function(){
+		$(".close-reveal-modal").click();
+	});
+
+
 });
+
+
+
+	function _byId(el){
+
+		return document.getElementById(el);
+	}
+	function _byClas(el){
+		return document.getElementsByClassName(el)
+	}
+
+	//_byId("adding_new").onchange = 
+	function AddHeadMenu(el, folder, parent){
+		var newItem = el.value;
+
+		console.log(newItem ,  folder, parent);
+
+		$.ajax({
+				type:"POST",
+				url:"action.php",
+				data:{newItem:newItem,folder:folder,parent:parent },
+				success:function(d){
+					console.log(d);
+					_byId("menu_container").innerHTML = d;
+				}
+			});
+		el.value = "";
+	}
+
+
+	function updateLabel(el, id)
+	{
+		
+
+		var upLabel = el.value;
+
+		$.ajax({
+				type:"POST",
+				url:"action.php",
+				data:{
+					upLabel:upLabel,
+					id:id 
+				},
+				success:function(d){
+					
+				}
+			});
+	}
+
+	function openSubmenu(el)
+	{
+		var menuItems = _byClas("menu-item-holder");
+		for(var m = 0; m<menuItems.length ; m++){
+			menuItems[m].setAttribute('class', 'menu-item-holder'); 
+		}
+		_byId("holder_of_"+el.id).setAttribute('class', 'menu-item-holder activated'); 
+	}
+//----------------------------------------------------------------------------------
+	
+
 //----------------------------------------------------------------------------------
 $(function() {
 	$('#winnerswall div.clickAble').hover(function(){

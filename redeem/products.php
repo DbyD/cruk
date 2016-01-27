@@ -34,7 +34,7 @@ if(isset( $_POST["submit"] ) ){
 ?>
 
 <div id="content" class="large-8 large-push-2 columns">
-	<div class="title">
+	<div class="title withStar">
 		Redeem
 	</div>
 	<div class="row contentFill">
