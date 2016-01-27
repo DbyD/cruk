@@ -26,6 +26,8 @@
 						} else { ?>
 					<div id="messageList" class="row mCustomScrollbar height306" data-mcs-theme="dark-2">
 					<?php }
+					
+
 							$query = getMyMessages($_SESSION['user']->EmpNum );
 							if($query != 0){
 								foreach($query as $mess){?>

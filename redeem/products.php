@@ -3,17 +3,13 @@ include_once '../inc/config.php';
 include_once '../inc/header.php';
 include "lib.php";
 $menu = new MenuGenerator;
-
 if(isset( $_POST["submit"] ) ){
 	if( empty( $_POST["title"] ) || empty( $_POST["point"] ) || empty( $_POST["Delivery"] ) || empty( $_POST["content"] ) || empty( $_FILES ) ){
 		$error_message = "<div class='error'>Please fill in all fields</div>";
 	} else {
 		
 		$file_path = insertFile( $_FILES , $_POST["menu_id"], $_POST["sub_id"]);
-
-
 		if($file_path != 'error'){
-
 			$data = array(
 				'aTitle' => $_POST["title"],
 				'aPrice' => $_POST["point"],
@@ -21,45 +17,49 @@ if(isset( $_POST["submit"] ) ){
 				'aContent' => $_POST["content"],
 				'menuID' => $_POST["menu_id"],
 				'subID' => $_POST["sub_id"],
-				'Image_name' => $file_path,
+				'Image_name' => $file_path
 			);
-
-
-
 			insertProduct( $data );
 		}
-
 		
 	}
 }
 ?>
 
-
-
+<?php 
+	$val = $_SESSION['user']->SuperUser;
+	if( $val == "YES" ){
+		include('../admin/products.php');
+	} else {
+?>
 
 <div id="content" class="large-8 large-push-2 columns">
-	<div class="title withStar">
+	<div class="title">
 		Redeem
 	</div>
 	<div class="row contentFill">
 		<div class="medium-12 columns leftnp rightnp fillHeight">
+
+			<div class="row">
+				<a id="viewBasket" class='<?php if($basket_isset) echo 'view-basket';?>' href="<?php echo HTTP_PATH . "redeem/product-basket.php?basket=true&menu_id=" . $menu_id; ?>">
+				<p><i class="fi-shopping-bag medium left"></i>&nbsp;&nbsp;View basket</p>
+			</a>
+			</div>
+
 			<div class="row products">
 				<?php 
 					$res = 0;
 					if( isset( $_GET["menu_id"] ) ) {
 						$menu_id = $_GET["menu_id"];
-
 						if( isset( $_GET["sub_id"] ) ){
 							$sub_id = $_GET["sub_id"];
 						} else {
 							$sub_id = null;
 						}
-
 						$res = getMenuProducts( $menu_id, $sub_id);
 					} else {
 						$res = getTotalProducts();
 					}
-
 					if( $res != 0){
 						$products = $res;
 					}
@@ -68,12 +68,15 @@ if(isset( $_POST["submit"] ) ){
 				
 				<?php if( isset( $products ) ):?>
 					<?php foreach( $products as $product ):?>
+
 						<div class="small-2 large-4 columns">
 					  		<div class="product">
 
 					  			<p><?php echo $product['aTitle']; ?></p>
 
-					  			<img src="<?php echo HTTP_PATH . $product["Image_name"]; ?>" class="product-img">
+					  			<a href="<?php echo HTTP_PATH . "redeem/product-basket.php?prID=" . $product["prID"] . "&menu_id=" . $menu_id; ?>">
+					  				<img src="<?php echo HTTP_PATH . $product["Image_name"]; ?>" class="product-img">
+					  			</a>
 					  		</div>
 					    </div>
 					<?php endforeach;?>
@@ -83,71 +86,6 @@ if(isset( $_POST["submit"] ) ){
 			</div>
 		</div>	
 	</div>
-	<?php if(isset($sub_id)):?>
-	<div class="row">
-		<div class="small-12 large-12 columns form-prduct">
-			
-			<form method="post" action="" enctype="multipart/form-data">
-				<?php if(isset($error_message)) echo $error_message;?>
-		      <h2>Add / Edit Products</h2>
-			  <div class="row">
-			    <div class="large-3 columns">
-			      <label>Title: </label></div>
-			        <div class="large-9 columns"><input type="text" placeholder="" name="title"/>
-			    </div>
-			  </div>
-			  <div class="row">
-			    <div class="large-3 columns">
-			      <label>Image name: </label></div>
-			        <div class="large-9 columns"><input type="file" placeholder=""  name="fileImage"/>
-			    </div>
-			  </div>
-			  <div class="row">
-			    <div class="large-3 columns">
-			      <label>Value Options Points: </label></div>
-			        <div class="large-9 columns"><input type="text" placeholder="" name="point"/>
-			    </div>
-			  </div>	
-			  
-			  <div class="row">
-			    <div class="large-3 columns">
-			      <label>Delivery: </label></div>
-			     <div class="large-9 columns"> <input type="radio" name="Delivery" value="no" id="pokemonRed" checked><label for="pokemonRed">No</label>
-			      <input type="radio" name="Delivery" value="yes" id="pokemonBlue"><label for="pokemonBlue">Yes</label>
-			    </div>
-			  </div>
-			  <script type="text/javascript" src="http://js.nicedit.com/nicEdit-latest.js"></script> <script type="text/javascript">
-			    bkLib.onDomLoaded(function() { nicEditors.allTextAreas() });
-			  </script>
-			  <div class="row">
-			  		<div class="large-3 columns">
-			  			<label>Main Content: </label>
-			  		</div>
-			 	 	<div class="large-9 columns">
-			 	 	 	<textarea name="content" cols="40"></textarea>
-			  		</div>
-			  </div>
-			  
-			  	<input type="hidden" value="<?php echo $menu_id; ?>" name="menu_id"/>
-			  		
-			  	<input type="hidden" value="<?php echo $sub_id; ?>" name="sub_id"/>
-			  		
-			  
-			  <div class="row">
-			 	 	<div class="large-12 columns">
-			 	 	 	<input type="submit" value="Save" name="submit"/>
-			  		</div>
-			  </div>
-
-			</form>
-			<hr />
-
-
-
-		</div>
-	</div>
-	<?php endif;?>
-
 </div>
 
 		
@@ -159,42 +97,40 @@ if(isset( $_POST["submit"] ) ){
 				<div id="awards" class="callout panel">
 					<div class="title">
 						<!-- <i class="icon-icons_trophy"></i> -->
-						Most Recent Awards
+						Avable to spend
 					</div>
-					<div>
-						<?php
-							if(isset($enpnum)){
-								if(function_exists( 'getEmployeFnameAndSname' )){
-									$res = getEmployeFnameAndSname();
-
-									if( $res != 0 ):?>
-									<ul id="listNominators">
-										<?php 
-										foreach ($res as $key => $value):?>
-											<li>
-												<i class="fi-torso-business size-24"></i>
-												<i>Individual</i>
-												<p><?php echo $value['name']; ?></p>
-											</li>
-
-								  <?php endforeach; ?>
-									</ul>
-									<?php endif;
-								}
-							} 
-						?>
+					<div class="price-panel">
+						<!-- <i class="icon-icons_trophy"></i> -->
+						$300
+					</div>
+					<div class="unlaimed-panel">
+						<!-- <i class="icon-icons_trophy"></i> -->
+						+2 Unclaimed
 					</div>
 				</div>
 				<div  class="callout panel" id="menu_container">
+					<?php $menus = getMenuAllRows(); ?>
+					<!-- <pre><?php var_dump($menus); ?></pre> -->
 					
-	
-				<?php
-				echo  $menu->Menu();
-				?>
+					<section class="block-list">
+						<ul class="left-bar-nav">
+							<?php foreach ($menus as $v): ?>
+								<?php if ($v["parent"] == 0): ?>
+									<li><a href="<?php echo "?menu_id=" . $v['id'] ; ?>"><?php echo $v["label"]; ?></a></li>
+										<ul class="sub-menu <?php if(isset($menu_id) && $menu_id != $v["id"]) echo 'hide';?>">
+											<?php foreach ($menus as $val): ?>
+												<?php if ($v["id"] == $val["parent"]): ?>
+													<li><a href="<?php echo "?menu_id=" . $v['id'] . "&sub_id=" . $val['id'] ; ?>"><?php echo $val["label"]; ?></a></li>
+												<?php endif; ?>
+											<?php endforeach; ?>
+										</ul>
+								<?php endif; ?>
+							<?php endforeach; ?>
+						</ul>
+					</section>
 
+					
 
-					
-					
 				</div>
 				
 			</div>
@@ -224,4 +160,4 @@ if(isset( $_POST["submit"] ) ){
 </body>
 </html>
 
-
+<?php } ?>
