@@ -3,17 +3,13 @@ include_once '../inc/config.php';
 include_once '../inc/header.php';
 include "lib.php";
 $menu = new MenuGenerator;
-
 if(isset( $_POST["submit"] ) ){
 	if( empty( $_POST["title"] ) || empty( $_POST["point"] ) || empty( $_POST["Delivery"] ) || empty( $_POST["content"] ) || empty( $_FILES ) ){
 		$error_message = "<div class='error'>Please fill in all fields</div>";
 	} else {
 		
 		$file_path = insertFile( $_FILES , $_POST["menu_id"], $_POST["sub_id"]);
-
-
 		if($file_path != 'error'){
-
 			$data = array(
 				'aTitle' => $_POST["title"],
 				'aPrice' => $_POST["point"],
@@ -23,12 +19,8 @@ if(isset( $_POST["submit"] ) ){
 				'subID' => $_POST["sub_id"],
 				'Image_name' => $file_path
 			);
-
-
-
 			insertProduct( $data );
 		}
-
 		
 	}
 }
@@ -36,38 +28,38 @@ if(isset( $_POST["submit"] ) ){
 
 <?php 
 	$val = $_SESSION['user']->SuperUser;
-<<<<<<< HEAD
-	if( $val == "NO" ){
-=======
 	if( $val == "YES" ){
->>>>>>> 583563fd21099138ae54b7c9dc990c4a9378fd31
 		include('../admin/products.php');
 	} else {
 ?>
 
 <div id="content" class="large-8 large-push-2 columns">
-	<div class="title withStar">
+	<div class="title">
 		Redeem
 	</div>
 	<div class="row contentFill">
 		<div class="medium-12 columns leftnp rightnp fillHeight">
+
+			<div class="row">
+				<a id="viewBasket" class='<?php if($basket_isset) echo 'view-basket';?>' href="<?php echo HTTP_PATH . "redeem/product-basket.php?basket=true&menu_id=" . $menu_id; ?>">
+				<p><i class="fi-shopping-bag medium left"></i>&nbsp;&nbsp;View basket</p>
+			</a>
+			</div>
+
 			<div class="row products">
 				<?php 
 					$res = 0;
 					if( isset( $_GET["menu_id"] ) ) {
 						$menu_id = $_GET["menu_id"];
-
 						if( isset( $_GET["sub_id"] ) ){
 							$sub_id = $_GET["sub_id"];
 						} else {
 							$sub_id = null;
 						}
-
 						$res = getMenuProducts( $menu_id, $sub_id);
 					} else {
 						$res = getTotalProducts();
 					}
-
 					if( $res != 0){
 						$products = $res;
 					}
@@ -76,12 +68,15 @@ if(isset( $_POST["submit"] ) ){
 				
 				<?php if( isset( $products ) ):?>
 					<?php foreach( $products as $product ):?>
+
 						<div class="small-2 large-4 columns">
 					  		<div class="product">
 
 					  			<p><?php echo $product['aTitle']; ?></p>
 
-					  			<img src="<?php echo HTTP_PATH . $product["Image_name"]; ?>" class="product-img">
+					  			<a href="<?php echo HTTP_PATH . "redeem/product-basket.php?prID=" . $product["prID"] . "&menu_id=" . $menu_id; ?>">
+					  				<img src="<?php echo HTTP_PATH . $product["Image_name"]; ?>" class="product-img">
+					  			</a>
 					  		</div>
 					    </div>
 					<?php endforeach;?>
@@ -104,44 +99,28 @@ if(isset( $_POST["submit"] ) ){
 						<!-- <i class="icon-icons_trophy"></i> -->
 						Avable to spend
 					</div>
-					<div>
-						<?php
-							if(isset($enpnum)){
-								if(function_exists( 'getEmployeFnameAndSname' )){
-									$res = getEmployeFnameAndSname();
-
-									if( $res != 0 ):?>
-									<ul id="listNominators">
-										<?php 
-										foreach ($res as $key => $value):?>
-											<li>
-												<i class="fi-torso-business size-24"></i>
-												<i>Individual</i>
-												<p><?php echo $value['name']; ?></p>
-											</li>
-
-								  <?php endforeach; ?>
-									</ul>
-									<?php endif;
-								}
-							} 
-						?>
+					<div class="price-panel">
+						<!-- <i class="icon-icons_trophy"></i> -->
+						$300
+					</div>
+					<div class="unlaimed-panel">
+						<!-- <i class="icon-icons_trophy"></i> -->
+						+2 Unclaimed
 					</div>
 				</div>
 				<div  class="callout panel" id="menu_container">
 					<?php $menus = getMenuAllRows(); ?>
 					<!-- <pre><?php var_dump($menus); ?></pre> -->
-<<<<<<< HEAD
 					
 					<section class="block-list">
 						<ul class="left-bar-nav">
 							<?php foreach ($menus as $v): ?>
 								<?php if ($v["parent"] == 0): ?>
 									<li><a href="<?php echo "?menu_id=" . $v['id'] ; ?>"><?php echo $v["label"]; ?></a></li>
-										<ul class="hide">
+										<ul class="sub-menu <?php if(isset($menu_id) && $menu_id != $v["id"]) echo 'hide';?>">
 											<?php foreach ($menus as $val): ?>
 												<?php if ($v["id"] == $val["parent"]): ?>
-													<li><?php echo $val["label"]; ?></li>
+													<li><a href="<?php echo "?menu_id=" . $v['id'] . "&sub_id=" . $val['id'] ; ?>"><?php echo $val["label"]; ?></a></li>
 												<?php endif; ?>
 											<?php endforeach; ?>
 										</ul>
@@ -149,22 +128,9 @@ if(isset( $_POST["submit"] ) ){
 							<?php endforeach; ?>
 						</ul>
 					</section>
-=======
-					<ul class="left-bar-nav">
-						<?php foreach ($menus as $v): ?>
-							<?php if ($v["parent"] == 0): ?>
-								<li><?php echo $v["label"]; ?></li>
-									<ul>
-										<?php foreach ($menus as $val): ?>
-											<?php if ($v["id"] == $val["parent"]): ?>
-												<li><?php echo $val["label"]; ?></li>
-											<?php endif; ?>
-										<?php endforeach; ?>
-									</ul>
-							<?php endif; ?>
-						<?php endforeach; ?>
-					</ul>
->>>>>>> 583563fd21099138ae54b7c9dc990c4a9378fd31
+
+					
+
 				</div>
 				
 			</div>
