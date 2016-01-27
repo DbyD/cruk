@@ -291,6 +291,9 @@ li.ui-menu-item { font-size:13px !important; }
 .withPadding{
 	padding: 10px;
 }
+.noPadding{
+	padding: 0;
+}
 .withSidePadding{
 	padding: 0px 10px;
 }
