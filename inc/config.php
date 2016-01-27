@@ -43,4 +43,10 @@
 ////////////////////////////////////////////////////////////////////////////////////
 	$encrypt = new Encryption;
 	session_start();
+////////////////////////////////////////////////////////////////////////////////////
+	// added to help find js errors
+	require_once "Bugsnag/Autoload.php";
+	$bugsnag = new Bugsnag_Client("9e88a1ad7fe6aaa1904e008f1dc5edcd");
+	set_error_handler(array($bugsnag, "errorHandler"));
+	set_exception_handler(array($bugsnag, "exceptionHandler"));
 ?>
