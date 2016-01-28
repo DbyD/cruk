@@ -13,15 +13,12 @@
 					if( $employees != 0 ){
 						foreach ($employees as  $employee){
 							$class = str_replace(' ','',$employee["BeliefID"]);
-							if(!file_exists($employee["Photo"])){
-								$employee["Photo"] =  "images/no-photo.png";
-							}
 				?>
 					<div class="callout panel tableColumn-3 <?=$class?>">
 						<div class="clickAble" id="wall<?php echo $employee["ID"]; ?>" data-type="donothing">
 							<div class="nominateEmployeeImage">
-								<img src="<?php echo HTTP_PATH.$employee["Photo"];?>">
-								<p><?php echo getname($employee["NominatedEmpNum"]); ?></p>
+								<img src="<?php echo HTTP_PATH.$employee["Photo"];?>" onerror="this.src='<?=HTTP_PATH?>images/no-photo.png'">
+								<p><?php echo $employee["name"].' '.$employee["Sname"]; ?></p>
 							</div>
 							<div class="content-nominate">
 								<p>Belief
@@ -32,7 +29,7 @@
 									<i class="icon-icons_mail right sendMail"></i></p>
 								<p><?php echo $employee["BeliefID"]; ?></p>
 								<p>Nominated By:</p>
-								<p><?php echo $employee["name"].' '.$employee["Sname"]; ?></p>
+								<p><?php echo getname($employee["NominatorEmpNum"]); ?></p>
 							</div>
 							<span id="wall<?php echo $employee["ID"]; ?>Text" class="showbehaviour hidden"><?php echo $employee["personalMessage"]; ?></span>
 						</div>
