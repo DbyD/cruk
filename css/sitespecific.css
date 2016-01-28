@@ -71,7 +71,7 @@
 	padding: 10px 20px 0;
 	font-size: 14px;
 	text-transform: uppercase;
-	letter-spacing: 0.1em;
+	letter-spacing: 0.3em;
 }
 #home4 .image {
 	height: 118px;
@@ -715,10 +715,6 @@ p.alertText {
 }
 /* @end */
 /* @group File Upload */
-#alertbox.forPhoto{
-	width: 300px;
-	margin-left: -150px;
-}
 .photoIframe {
 	border: 0;
 	width: 100%;
@@ -746,8 +742,7 @@ p.alertText {
 	height: 100%;
 }
 .custom-upload .fake-file {
-/*	background: url(../images/fake-browse.png) no-repeat 30px 60px;
-	height: 100px; */
+	background: url(../images/fake-browse.png) no-repeat 30px 60px;
 	position: absolute;
 	top: 0px;
 	left: 0px;
@@ -755,6 +750,7 @@ p.alertText {
 	padding: 0;
 	margin: 0;
 	z-index: 1;
+	height: 100px;
 }
 .custom-upload .fake-file input {
 	font-size: 16px;
