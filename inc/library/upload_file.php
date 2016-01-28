@@ -37,7 +37,7 @@ function insertFile( $menu_id, $sub_id ){
 	    echo "Sorry, your file was not uploaded.";
 	// if everything is ok, try to upload file
 	} else {
-		$target_dir = "../images/menu_".$menu_id."/sub_".$sub_id . "/";
+		$target_dir = "../images/menu_".$menu_id."/sub_".$sub_id . "/products/";
 		
 		
 		$time = time();
@@ -62,6 +62,44 @@ function insertFile( $menu_id, $sub_id ){
 	        return end($arr);
 	    }
 	    
+	}
+}
+
+function insertImageSub( $file, $sub_id, $menu_id){
+
+	$error = false;
+	$arr = explode( '.', $file["name"] );
+
+	$imageFileType = end( $arr );
+
+	if ( $file["size"] > 500000 ) {
+	    $error = true;
+	}
+
+	if( $imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif" ) {
+	    $error = true;
+	}
+
+	if ( !$error ){
+		$target_dir = "../images/menu_" . $menu_id. "/sub_".$sub_id . "/";
+
+		$target_file = $target_dir  . "logo.".$imageFileType;//
+		
+		if (!file_exists($target_dir)) {
+			mkdir($target_dir, 0777, true);
+		}
+
+		if (file_exists($target_file)) {
+		    unlink($target_file);
+		}
+
+	    if (move_uploaded_file($file["tmp_name"], $target_file)) {
+	        $arr = explode("../", $target_file);
+	        return end( $arr );
+	    }
+		
+	} else {
+		return false;
 	}
 }
 
