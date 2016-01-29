@@ -1,7 +1,4 @@
-<?php
-	include_once('../inc/config.php');
-	include_once('../inc/header.php');
-?>
+<?php include_once('../inc/header.php'); ?>
 
 <div id="content" class="large-8 large-push-2 columns">
 	<form action="nominate-submit.php" method="post" name="nominateColleague2" id="nominateColleague2">
@@ -90,7 +87,7 @@
 			<div class="row withPadding noMargin">
 				<div class="medium-12 columns textRight">
 					<i class="icon-icons_i clickAble" data-type="alert" data-url="alert-volunteer.php"></i>
-					Nominating for a volunteer
+					Nominating for a Volunteer
 					<div id="volunteerTick" class="circleTick inline smallTick clickAble <?php if($_SESSION['nominee']->Volunteer) echo 'circleTickChecked'; ?>" data-type="popup" data-url="volunteer.php">
 						<label for="Volunteer"></label>
 					</div>
@@ -113,11 +110,13 @@
 				</div>
 			</div>
 			<div class="row withPadding noMargin buttonRow">
-				<div class="medium-6 columns">
+				<div class="medium-5 columns">
 					<a href="#" class="blueButton clickAble" data-type="gourl" data-url="<?=HTTP_PATH?>home.php">Cancel</a>
 				</div>
-				<div class="medium-6 columns textRight">
-					<a href="#" class="blueButton clickAble" data-type="goback">Go Back</a> &nbsp; 
+				<div class="medium-3 columns textRight ">
+					<a href="#" class="blueButton clickAble" data-type="goback">Go Back</a>
+				</div>
+				<div class="medium-4 columns textRight ">
 					<a href="#" class="pinkButton clickAble" data-type="submit" data-url="nominateColleague2">Submit Nomination</a>
 				</div>
 			</div>
@@ -125,4 +124,4 @@
 	</form>
 </div>
 <?php include_once('../inc/footer.php'); ?>
-			<? print_r($_SESSION['nominee']);?>
+			<? //print_r($_SESSION['nominee']);?>

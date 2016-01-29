@@ -80,7 +80,7 @@
 											<p>".$_SESSION['user']->Fname." has nominated ".$_SESSION['nominee']->full_name()." to receive 'A Little Extra' as part of an Our Heroes Award.</p>
 											<p>".$_SESSION['user']->Fname." has given the following reason for the nomination:</p>
 											<p>".$_SESSION['nominee']->Reason."</p>
-											<p>Please login to the <a href='".HTTP_PATH."'>Our Heroes Portal</a> to view the details of the proposed nomination and to approve or decline the award.</p>
+											<p>Please login to the <a href='http://cruk.xexec.dev/'>Our Heroes Portal</a> to view the details of the proposed nomination and to approve or decline the award.</p>
 											<p>If no decision is made within the next 30 days, the nomination will automatically be approved.</p>
 											<p>The nomination code for future correspondence is: NO".$id."</p>";
 					$email = sendEmail($sendEmail);

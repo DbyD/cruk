@@ -118,12 +118,9 @@ public function Menu($field = "")
 
  public function AddNewMenu()
  {
-	 
  	$menu = $this->menu;
  	//folder,parent
-	
-	
-	if($_POST['folder']=="sub")
+ 	if($_POST['folder']=="sub")
  		insertSub( $_POST['newItem'] , $_POST['parent']);
  	else 
  		insertMenu( $_POST['newItem'] );
@@ -144,7 +141,6 @@ public function DeleteMenu(){
 
  public function SaveAction()
  {
-	 //return 'Welcome ';
  	if(isset($_POST['newItem']))
  		return $this->AddNewMenu();
  	if(isset($_POST['upLabel']))

@@ -1,7 +1,7 @@
 <div id="alertTitle" class="title smallPopupTitle">
 	<div class="row withPadding">
 		<div class="medium-12 columns">
-			Nominating for a volunteer
+			Nominating for a Volunteer
 		</div>
 	</div>
 </div>
