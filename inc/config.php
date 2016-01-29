@@ -20,7 +20,7 @@
 ////////////////////////////////////////////////////////////////////////////////////
 // Server Setup
 	$db_server = 'Localhost';
-	$db_database = 'cruk';
+	$db_database = 'DbyDcruk';
 	$db_user = 'DbyDcruk';
 	$db_passwd = 'dbd#01master';
 	try {
