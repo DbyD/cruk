@@ -1,1 +1,0 @@
-<iframe src="<?=$_GET['id']?>/alerts/upload-photo.php?>" class="photoIframe"></iframe>
