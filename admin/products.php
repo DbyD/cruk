@@ -1,48 +1,153 @@
+<?php 
+	$res = 0;
+	if( isset( $_GET["menu_id"] ) ) {
+		$menu_id = $_GET["menu_id"];
+
+		if( isset( $_POST['submit'] ) && isset( $_POST["sub_id"] ) ) {
+			if( $_FILES['imageSub'] != null ){
+
+				$res = insertImageSub( $_FILES['imageSub'], $_POST["sub_id"], $menu_id );
+				if( $res ){
+					updateSubImage( $res, $_POST["sub_id"] );
+				}
+
+			}
+		}
+
+
+		if( isset( $_GET["sub_id"] ) ){
+			$sub_id = $_GET["sub_id"];
+			$res = getMenuProducts( $menu_id, $sub_id);
+		} else {
+			$sub_id = null;
+			$subs = getMenuSubs( $menu_id );
+			$res = 0;
+		}
+		
+
+	} else if(isset( $_GET["prID"] )){
+		// $res = getProductByID( $_GET["prID"] );
+		$res = getTotalProducts();
+	}
+
+
+
+	
+	if( $res != 0){
+		$products = $res;
+	}
+
+
+
+
+	
+
+?>
+
 <div id="content" class="large-8 large-push-2 columns">
 	<div class="title withStar">
-		Redeem Admin
+		Redeem
 	</div>
 	<div class="row contentFill">
 		<div class="medium-12 columns leftnp rightnp fillHeight">
-			<div class="row products">
-				<?php 
-					$res = 0;
-					if( isset( $_GET["menu_id"] ) ) {
-						$menu_id = $_GET["menu_id"];
 
-						if( isset( $_GET["sub_id"] ) ){
-							$sub_id = $_GET["sub_id"];
-						} else {
-							$sub_id = null;
-						}
+				<?php if(isset($subs) && count($subs) > 0 ): ?>
 
-						$res = getMenuProducts( $menu_id, $sub_id);
-					} else {
-						$res = getTotalProducts();
-					}
+					<div class="row subs">
+						<div class="small-12 large-12 columns" id="subsTitle">
+							Subs
+						</div>
+						<?php foreach($subs as $sub): ?>
 
-					if( $res != 0){
-						$products = $res;
-					}
-					
-				?>
+							<?php if( is_array( $sub ) ):?>
+								
+									<div class="small-4 large-6 columns">
+										<div class="sub-menu">
+											<p>
+								  				<?php echo $sub['label']; ?>
+											</p>
+											<?php if($sub["sub_image"] == ""):?>
+												<span>Not Image.</span>
+											<?php else:?>
+												<img src="<?php echo HTTP_PATH . $sub["sub_image"]; ?>">
+											<?php endif;?>
+
+											<form action="" method="post" enctype="multipart/form-data">
+
+											  <div class="row">
+											    <div class="large-12 columns">
+											      <label>Image choose.
+											        <input type="file" name="imageSub" />
+											      </label>
+											    </div>
+											  </div>
+
+											  <input type="hidden" name="sub_id" value="<?php echo $sub["id"]; ?>"/>
+
+											  <div class="row">
+											    <div class="large-12 columns">
+											      <label>
+											        <input type="submit" name="submit" value="update" class="right"/>
+											      </label>
+											    </div>
+											  </div>
+
+											</form>
+										</div>
+									</div>
+		
+								
+							<?php endif; ?>
+
+						<?php endforeach;?>
+					</div>	
+				<?php endif; ?>
+
+
+
+
+
+
+
+
+
+
 				
 				<?php if( isset( $products ) ):?>
+				<div class="row products">
 					<?php foreach( $products as $product ):?>
-						<div class="small-2 large-4 columns">
-					  		<div class="product">
+						
+							<div class="small-2 large-4 columns">
+						  		<div class="product">
 
-					  			<p><?php echo $product['aTitle']; ?></p>
+						  			<p>
+						  				<?php echo $product['aTitle']; ?>
+									</p>
 
-					  			<img src="<?php echo HTTP_PATH . $product["Image_name"]; ?>" class="product-img">
-					  		</div>
-					    </div>
+						  			<a href="<?php echo HTTP_PATH . 'redeem/products.php?prID=' . $product['prID']; ?>"><img src="<?php echo HTTP_PATH . $product["Image_name"]; ?>" class="product-img"></a>
+						  		</div>
+						    </div>
+						
 					<?php endforeach;?>
+					</div>
 				<?php endif;?>
-			  
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 			</div>
-			
+		
+	</div>
 	<?php if(isset($sub_id)):?>
 	<div class="row">
 		<div class="small-12 large-12 columns form-prduct">
@@ -107,8 +212,6 @@
 		</div>
 	</div>
 	<?php endif;?>
-		</div>	
-	</div>
 
 </div>
 
@@ -118,35 +221,22 @@
 					<span class="helper"></span>
 					<img src="<?=HTTP_PATH?>images/our-heroes.svg" alt="Cancer Research UK" />
 				</div>
+
 				<div id="awards" class="callout panel">
 					<div class="title">
 						<!-- <i class="icon-icons_trophy"></i> -->
-						Most Recent Awards
+						Avable to spend
 					</div>
-					<div>
-						<?php
-							if(isset($enpnum)){
-								if(function_exists( 'getEmployeFnameAndSname' )){
-									$res = getEmployeFnameAndSname();
-
-									if( $res != 0 ):?>
-									<ul id="listNominators">
-										<?php 
-										foreach ($res as $key => $value):?>
-											<li>
-												<i class="fi-torso-business size-24"></i>
-												<i>Individual</i>
-												<p><?php echo $value['name']; ?></p>
-											</li>
-
-								  <?php endforeach; ?>
-									</ul>
-									<?php endif;
-								}
-							} 
-						?>
+					<div class="price-panel">
+						<!-- <i class="icon-icons_trophy"></i> -->
+						$300
+					</div>
+					<div class="unlaimed-panel">
+						<!-- <i class="icon-icons_trophy"></i> -->
+						+2 Unclaimed
 					</div>
 				</div>
+
 				<div  class="callout panel" id="menu_container">
 					
 	
