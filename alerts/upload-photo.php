@@ -67,7 +67,7 @@
 				</div>
 			</div>
 			<div class="row valign-middle">
-				<a href="#" class="purpleButton clickAble" data-type="submit" data-url="uploadPhoto">Upload</a>
+				<a href="#" class="blueButton clickAble" data-type="submit" data-url="uploadPhoto">Upload</a>
 			</div>
 		</form>
 	</div>

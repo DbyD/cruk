@@ -6,7 +6,7 @@ function createNominee($empnum){
 	$stmt->execute(array('EmpNum' => $empnum));
 	$stmt->setFetchMode(PDO::FETCH_CLASS, 'User');
 	if ($result = $stmt->fetch()){
-		if ($result->Shop != '' && $result->JobTitle != 'Shop Mgr'){
+		if (($result->Shop != '' && $result->Shop != 'N/A') && $result->JobTitle != 'Shop Mgr'){
 			$result->offline = 'YES';
 			// find Shop Mgr
 			$stmt = $db->prepare('SELECT * FROM tblempall WHERE Shop = :Shop AND JobTitle= :JobTitle');
@@ -56,7 +56,7 @@ function getTotalNominations($empnum){
 ////////////////////////////////////////////////////////////////////////////////////
 function getTotalPendingNominations($empnum){
 	global $db;
-	$stmt = $db->prepare('SELECT * FROM tblnominations WHERE NominatorEmpNum = :EmpNum AND AprStatus=0');
+	$stmt = $db->prepare('SELECT * FROM tblnominations WHERE ApproverEmpNum = :EmpNum AND AprStatus=0');
 	$stmt->execute(array('EmpNum' => $empnum));
 	if ($result = $stmt->fetch()){
 		return $stmt->rowCount();

@@ -7,14 +7,15 @@ SELECT  n.ID AS ID,
 		e.Sname AS Sname,
 		e.EmpNum AS EmpNum,
 		e.Photo AS Photo,
+		n.Volunteer AS Volunteer,
 		n.personalMessage AS personalMessage,
 		n.BeliefID AS BeliefID,
-		n.NominatedEmpNum AS NominatedEmpNum
+		n.NominatorEmpNum AS NominatorEmpNum
 FROM 
 	tblnominations AS n
 		INNER JOIN
 	tblempall AS e
-			ON n.NominatorEmpNum = e.EmpNum ORDER BY AprDate DESC LIMIT 20";
+			ON n.NominatedEmpNum = e.EmpNum ORDER BY AprDate DESC LIMIT 20";
 ///			ON n.NominatorEmpNum = e.EmpNum GROUP BY n.NominatorEmpNum";
 
 	$stmt = $db->prepare( $sql );
@@ -39,7 +40,8 @@ function getMyMessages( $empnum ) {
 				sender			AS sender,
 				recipient		AS recipient,
 				text			AS text,
-				date			AS date
+				date			AS date,
+				"m"				AS award
 			FROM tblmessage
 			WHERE recipient = :recipient
 			UNION
@@ -47,7 +49,8 @@ function getMyMessages( $empnum ) {
 				NominatorEmpNum	AS sender,
 				NominatedEmpNum	AS recipient,
 				personalMessage	AS text,
-				NomDate			AS date
+				NomDate			AS date,
+				"a"				AS award
 			FROM tblnominations
 			WHERE NominatedEmpNum = :recipient
 			ORDER BY date DESC';

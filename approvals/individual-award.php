@@ -18,7 +18,8 @@
 	</div>
 	<div class="tableRow">
 		<div class="greyText textLeft">
-			If approved, this colleague will be able to choose one of the following awards. Please remove options only if there’s a good reason to do so.
+			If approved, this colleague will be able to choose one of the following awards. Please remove options only if there’s a good reason to do so.<br>
+			Please note that all awards will be paid from a central budget and will not need to come out of your Department/Function budget.
 			<i class="icon-icons_i clickAble blueText" data-type="subPopup"></i>
 		</div>
 	</div>
@@ -30,7 +31,7 @@
 			</div>
 			<div class="tableColumn-2 textRight">
 				<div id="" class="circleTick inline smallTick disabled">
-					<label for="volunteer"></label>
+					<label for="Volunteer"></label>
 				</div>
 			</div>
 		</div>
@@ -55,7 +56,7 @@
 				If declining this award, please enter a reason below. The reason you give will be sent to the nominator for their information. <textarea id="dReason" name="dReason" required ></textarea>
 			</div>
 		</div>
-		<div class="tableRow noBorder">
+		<div class="tableRow noBorder popupLastRow">
 			<div class="tableColumn-8 textRight">
 				<a href="#" class="blueButton clickAble" data-type="submit" data-url="approveAward">Decline</a>
 			</div>
