@@ -7,15 +7,14 @@ SELECT  n.ID AS ID,
 		e.Sname AS Sname,
 		e.EmpNum AS EmpNum,
 		e.Photo AS Photo,
-		n.Volunteer AS Volunteer,
 		n.personalMessage AS personalMessage,
 		n.BeliefID AS BeliefID,
-		n.NominatorEmpNum AS NominatorEmpNum
+		n.NominatedEmpNum AS NominatedEmpNum
 FROM 
 	tblnominations AS n
 		INNER JOIN
 	tblempall AS e
-			ON n.NominatedEmpNum = e.EmpNum ORDER BY AprDate DESC LIMIT 20";
+			ON n.NominatorEmpNum = e.EmpNum ORDER BY AprDate DESC LIMIT 20";
 ///			ON n.NominatorEmpNum = e.EmpNum GROUP BY n.NominatorEmpNum";
 
 	$stmt = $db->prepare( $sql );

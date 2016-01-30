@@ -7,7 +7,6 @@
 	} else {
 		if ($_POST['Reason']){
 			$_SESSION['nominee']->Reason = $_POST['Reason'];
-			$_SESSION['nominee']->littleExtra = 'Yes';
 			echo "added";
 		}
 	}

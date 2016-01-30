@@ -1,5 +1,4 @@
 <?php
-	include_once('../inc/config.php');
 	include_once('../inc/header.php');
 	$startdate=new DateTime('first day of this month'); 
 	$enddate=new DateTime('last day of this month'); 

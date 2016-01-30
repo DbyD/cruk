@@ -36,7 +36,7 @@
 											<p>Your nomination of ".$award->nominee()->full_name." for an Our Heroes Award has been approved by ".$award->approver()->full_name.".</p>
 											<p>The Thank You certificate you prepared when nominating this award has been sent by email to ".$award->nominee()->full_name." with details of the award.</p>
 											<p>The nomination code for future correspondence is: NO".$ID."</p>
-											<p>A record of all the nominations you have made and their current status can be viewed on the <a href='".HTTP_PATH."'>My Account</a> section of the Our Heroes portal.</p>
+											<p>A record of all the nominations you have made and their current status can be viewed on the <a href='http://cruk.xexec.dev/'>My Account</a> section of the Our Heroes portal.</p>
 											<p>Thank you for helping to create a more engaged workplace at Cancer Research.</p>";
 					$email = sendEmail($sendEmail);
 					$_SESSION['alreadydone'] = 'yes';
@@ -66,9 +66,9 @@
 										
 				$sendEmail->Content .= "<br>Cancer Research Belief: ".$award->nominator()->BeliefID."</p>
 										<p>The nomination code for future correspondence is: NO".$ID."</p>
-										<p>For details of any other nominations awaiting your approval, please visit <a href='".HTTP_PATH."'>My Account</a> 
+										<p>For details of any other nominations awaiting your approval, please visit <a href='http://cruk.xexec.dev/'>My Account</a> 
 										on the Our Heroes portal. For details of all historical nomination activity in your operational jurisdiction, please visit the 
-										<a href='".HTTP_PATH."'>Reports</a> section of the Our Heroes portal.</p>";
+										<a href='http://cruk.xexec.dev/'>Reports</a> section of the Our Heroes portal.</p>";
 				$email = sendEmail($sendEmail);
 				$_SESSION['alreadydone'] = 'yes';
 			}
@@ -124,7 +124,7 @@
 										<p>".$award->nominee()->full_name." has not been notified of the declined nomination.</p>
 										<p>The nomination code for future correspondence is: NO".$ID."</p>
 										<p>Thank you for participating in the Our Heroes recognition programme. We strongly encourage you to submit other 
-										nominations in the future via the <a href='".HTTP_PATH."'>Our Heroes</a> portal.</p>";
+										nominations in the future via the <a href='http://cruk.xexec.dev/'>Our Heroes</a> portal.</p>";
 				$email = sendEmail($sendEmail);
 				//echo $sendEmail->Content;
 				$_SESSION['alreadydone'] = 'yes';
