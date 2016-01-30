@@ -60,7 +60,7 @@
 											$sendEmail->subject = "CRUK Website activation";
 											$sendEmail->Content ='<p>Hi '.$_POST['Fname'].'<p>
 															<p>Please click on the link to activate your account. Please <a href="'.HTTP_PATH.'activate.php?activate=yes&EmpNum='.$encrypt->encode($EmpNum).'">click here</a> to activate your account</p>' ;
-											$reply = sendEmail($sendEmail);
+											$reply = sendEmail($sendEmail,'');
 											if($reply="success"){
 												$msg = "<p>Thank you for your registration.</p>
 														<p>A confirmation email has been sent to your CRUK email address.</p>

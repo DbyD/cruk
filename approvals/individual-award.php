@@ -23,7 +23,7 @@
 			<i class="icon-icons_i clickAble blueText" data-type="subPopup"></i>
 		</div>
 	</div>
-	<form action="individual-award-update.php" method="post" name="approveAward" id="approveAward" novalidate>
+	<form action="../approvals/individual-award-update.php" method="post" name="approveAward" id="approveAward" novalidate>
 		<input type="hidden" name="ID" value="<?=$_GET['id']?>">
 		<div class="tableRow largerText">
 			<div class="tableColumn-10 textLeft">

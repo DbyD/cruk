@@ -9,26 +9,34 @@
 						Messages
 					</div>
 					<?php 
-						if( $_SESSION['user']->approver() =='YES'){
 							$enpnum = $_SESSION['user'];
 							if( function_exists( 'getTotalPendingNominations' ) ) {
-								$count_awwards = getTotalPendingNominations($enpnum->EmpNum);
+								$count_nomination = getTotalPendingNominations($enpnum->EmpNum);
 							}
-							if(isset($count_awwards)):?>
-								<div id='messageEmployee'>
-									<i class="icon-icons_tickinbox"></i> <span class="right"><?=date("l d/m/y")?></span>
-									<div class="clickAble" data-type="gourl" data-url="<?=HTTP_PATH?>approvals/pending.php">You have a <? echo $count_awwards; ?> awards to aprove</div>
-								</div>
-						<?php endif ;
-							?>
-					<div id="messageList" class="row mCustomScrollbar height217" data-mcs-theme="dark-2">
-					<?php
-						} else { ?>
-					<div id="messageList" class="row mCustomScrollbar height306" data-mcs-theme="dark-2">
+							if( function_exists( 'getTotalNewNominations' ) ) {
+								$count_newAwards = getTotalNewNominations($enpnum->EmpNum);
+							}
+							if($count_nomination > 0 || $count_newAwards > 0){
+					?>
+						<div id='messageEmployee'>
+							<i class="icon-icons_tickinbox"></i> <span class="right"><?=date("l d/m/y")?></span>
+							<?php if($count_nomination > 0){?>
+								<div class="clickAble" data-type="gourl" data-url="<?=HTTP_PATH?>approvals/pending.php">You have a <? echo $count_nomination; ?> award<?php if($count_nomination>1) echo "s"; ?> to aprove</div>
+							<?php } ?>
+							<?php if($count_newAwards > 0){?>
+								<div class="clickAble" data-type="gourl" data-url="<?=HTTP_PATH?>my-account/my-awards.php">You have <? echo $count_newAwards; ?> new award<?php if($count_newAwards>1) echo "s"; ?></div>
+							<?php } ?>
+						</div>
+					<?php if($count_nomination > 0 && $count_newAwards > 0){ ?>
+					<div id="messageList" class="row mCustomScrollbar height233" data-mcs-theme="dark-2">
+					<?php } else { ?>
+					<div id="messageList" class="row mCustomScrollbar height252" data-mcs-theme="dark-2">
 					<?php }
-					
-
-							$query = getMyMessages($_SESSION['user']->EmpNum );
+							} else { ?>
+							
+					<div id="messageList" class="row mCustomScrollbar height306" data-mcs-theme="dark-2">
+					<?php	}
+							$query = getMyMessages($_SESSION['user']->EmpNum,$_SESSION['user']->Department);
 							if($query != 0){
 								foreach($query as $mess){?>
 								<div class="row">
@@ -41,7 +49,7 @@
 									<p class="text"> <?php echo $mess["text"]; ?></p>
 								</div>
 						<?php }
-							} else { ?>
+							}?>
 							<div class="row">
 								<i class="icon-icons_bubble"></i><span class="right"><?=date("l d/m/y")?></span>
 								<p class="text">Welcome to the Our Heroes portal where you can nominate colleagues in recognition of their contribution to Cancer Research.</p>
@@ -50,7 +58,6 @@
 								<i class="icon-icons_bubble"></i><span class="right"><?=date("l d/m/y")?></span>
 								<p class="text">Click on the FAQs link to the right to find out more about using this site.</p>
 							</div>
-						<?php } ?>
 					</div>
 				</div>
 				<div id="awards" class="callout panel">

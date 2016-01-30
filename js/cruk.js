@@ -11,6 +11,14 @@ $(function(){
 			$("#alert").css('display', 'block');
 		}
 	});
+	$("#searchAdminColleague").validate({
+		rules: {searchAdmin: "required"},
+		messages: {searchAdmin: "Search Field cannot be empty. Please type in Colleague's First or Last name."},
+		errorPlacement: function(error, element) {
+			$("#alertContent").load("../alerts/alert-popup.php", {'error' : error.html() });
+			$("#alert").css('display', 'block');
+		}
+	});
 	$("#editStaff").validate({
 		rules: {EmpNum: "required"},
 		messages: {EmpNum: "Please select a Staff Member"},
@@ -107,7 +115,7 @@ $(function(){
 			$("#alert").css('display', 'block');
 		},
 		submitHandler: function(form) { 
-			$.post('individual-award-update.php', $("#approveAward").serialize(), function(data) {
+			$.post('../approvals/individual-award-update.php', $("#approveAward").serialize(), function(data) {
 				if (data = 'declined') {
 					$("#popup1").css('display', 'none');
 					$("#popupContent1").empty();
@@ -242,6 +250,8 @@ $(function(){
 //----------------------------------------------------------------------------------
 $('#searchAuto').autocomplete({source:'../inc/emp-list.php'});
 //----------------------------------------------------------------------------------
+$('#searchAdmin').autocomplete({source:'../inc/emp-admin-list.php'});
+//----------------------------------------------------------------------------------
 $('.custom-upload input[type=file]').change(function(){
     $(this).next().find('input').val($(this).val());
 });
@@ -281,20 +291,24 @@ $(document).ready(function(){
 		var recipient = $($(this).siblings()[1]).val();
 		var senderName = $($(this).siblings()[2]).val();
 		var recipientName = $($(this).siblings()[3]).val();
+		var Department = $($(this).siblings()[4]).val();
 		$('#modalForSendMail').click();
 		$("#senderModal").val(sender);
 		$("#recipientModal").val(recipient);
+		$("#DepartmentModal").val(Department);
 		$("#mailToEmployee").val('Hi '+recipientName+'. I saw your "Our Heroes" award on the Wall of Fame. Congratulations! '+ senderName);
 		$("#messageModal").html('Hi '+recipientName+'. I saw your "Our Heroes" award on the Wall of Fame. Congratulations! '+ senderName);
 		console.log(sender);
 		console.log(recipient);
 		console.log(senderName);
 		console.log(recipientName);
+		console.log(Department);
 	});
 	$("#sendButton").click(function(){
 		var recipient = $("#recipientModal").val();
 		var sender = $("#senderModal").val();
 		var text = $("#mailToEmployee").val();
+		var Department = $("#DepartmentModal").val();
 		var siblings = $("#mailToEmployee").siblings();
 		if( $.trim(text) != '' ){
 			//siblings.addClass("hidden");
@@ -305,7 +319,8 @@ $(document).ready(function(){
 			  data:  { 
 			  	recipient : recipient,
 			  	sender : sender,
-			  	text : text
+			  	text : text,
+			  	Department : Department
 			  } ,
 			  success: function(data){
 			  		console.log(data);

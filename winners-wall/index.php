@@ -25,7 +25,8 @@
 									<input type="hidden" id="sender" value="<?php echo $_SESSION['user']->EmpNum; ?>">
 									<input type="hidden" id="recipient" value="<?php echo $employee["EmpNum"]; ?>">
 									<input type="hidden" id="senderName" value="<?php echo getName($_SESSION['user']->EmpNum); ?>">
-									<input type="hidden" id="recipientName" value="<?php echo getName($employee["EmpNum"]); ?>"> 
+									<input type="hidden" id="recipientName" value="<?php echo $employee["name"]; ?>"> 
+									<input type="hidden" id="Department" value="<?php echo $employee["Department"]; ?>"> 
 									<i class="icon-icons_mail right sendMail"></i></p>
 								<p><?php echo $employee["BeliefID"]; ?></p>
 								<p>Nominated By:</p>
@@ -57,6 +58,7 @@
 							</div>
 							<input type="hidden" id="senderModal">
 							<input type="hidden" id="recipientModal">
+							<input type="hidden" id="DepartmentModal">
 						</form>
 						<p>&nbsp;</p>
 						<div class="row">

@@ -54,6 +54,17 @@ function getTotalNominations($empnum){
 	}
 }
 ////////////////////////////////////////////////////////////////////////////////////
+function getTotalNewNominations($empnum){
+	global $db;
+	$stmt = $db->prepare("SELECT * FROM tblnominations WHERE NominatedEmpNum = :EmpNum AND AprStatus=1 AND AwardClaimed = 'No'");
+	$stmt->execute(array('EmpNum' => $empnum));
+	if ($result = $stmt->fetch()){
+		return $stmt->rowCount();
+	} else{
+		return 0;
+	}
+}
+////////////////////////////////////////////////////////////////////////////////////
 function getTotalPendingNominations($empnum){
 	global $db;
 	$stmt = $db->prepare('SELECT * FROM tblnominations WHERE ApproverEmpNum = :EmpNum AND AprStatus=0');

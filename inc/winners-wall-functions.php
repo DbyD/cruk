@@ -7,6 +7,7 @@ SELECT  n.ID AS ID,
 		e.Sname AS Sname,
 		e.EmpNum AS EmpNum,
 		e.Photo AS Photo,
+		e.Department AS Department,
 		n.Volunteer AS Volunteer,
 		n.personalMessage AS personalMessage,
 		n.BeliefID AS BeliefID,
@@ -19,29 +20,26 @@ FROM
 ///			ON n.NominatorEmpNum = e.EmpNum GROUP BY n.NominatorEmpNum";
 
 	$stmt = $db->prepare( $sql );
-	
 	$stmt->execute();
-
 	$arr = array();
 	while($result = $stmt->fetch(PDO::FETCH_ASSOC)){
 		$arr[] = $result;
 	}
-
 	if( count($arr) == 0){
 		return 0;
 	}
-
 	return $arr;
 }
 ////////////////////////////////////////////////////////////////////////////////////
-function getMyMessages( $empnum ) {
+function getMyMessages($empnum,$department) {
 	global $db;
 	$sql = 'SELECT
 				sender			AS sender,
 				recipient		AS recipient,
 				text			AS text,
 				date			AS date,
-				"m"				AS award
+				"m"				AS award,
+				Department		AS Department
 			FROM tblmessage
 			WHERE recipient = :recipient
 			UNION
@@ -50,13 +48,14 @@ function getMyMessages( $empnum ) {
 				NominatedEmpNum	AS recipient,
 				personalMessage	AS text,
 				NomDate			AS date,
-				"a"				AS award
+				"a"				AS award,
+				Department		AS Department
 			FROM tblnominations
 			WHERE NominatedEmpNum = :recipient
-			ORDER BY date DESC';
+			ORDER BY Department = :Department ,date DESC';
 //	$stmt = $db->prepare('SELECT * FROM tblmessage WHERE recipient = :recipient ORDER BY date DESC');
 	$stmt = $db->prepare($sql);
-	$stmt->execute(array('recipient' => $empnum));
+	$stmt->execute(array('recipient' => $empnum,'Department' => $department));
 	while($result = $stmt->fetch( PDO::FETCH_ASSOC )) {
 		$arr[] = $result;
 	}

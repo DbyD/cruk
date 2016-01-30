@@ -46,7 +46,7 @@
 						?>
 						</div>
 						<div class="tableColumn-3">
-							<?=getConvertedDate($list->NomDate)?>
+							<?=getConvertedDate($list->AprDate)?>
 						</div>
 						<div class="tableColumn-3">
 							<div class="viewButton inlineDiv clickAble" data-type="ecard" data-url="<?=HTTP_PATH?>alerts/view-ecard.php" data-id="<?=$list->ID?>">View</div>

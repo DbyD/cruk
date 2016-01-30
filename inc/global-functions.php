@@ -14,19 +14,22 @@ function startEmail(){
 	return  $startemail;
 }
 ////////////////////////////////////////////////////////////////////////////////////
-function endEmail(){
+function endEmail($noid){
 	$endemail .= '<img class="emailCruklogo" src="'.HTTP_PATH.'images/emails/Cancer-Research-UK.png" alt="Cancer Research UK">';
-	$endemail .= '<p>Regards</p><p><b>Cancer Research</b></p>
-				</div></div></body></html>';
+	$endemail .= '<p>Regards</p><p><b>Cancer Research</b></p>';
+	if($noid != ''){
+			$endemail .= '<p>For future reference, if you need to contact our recognition partner, Xexec, about this nomination, please quote nomination code NO'.$noid.'</p>';
+	}
+	$endemail .= '</div></div></body></html>';
 	return $endemail;
 }
 ////////////////////////////////////////////////////////////////////////////////////
 // send email
-function sendEmail($email){
+function sendEmail($email,$noid){
 	global $strFrom;
 	$message = startEmail();
 	$message .= $email->Content;
-	$message .= endEmail();
+	$message .= endEmail($noid);
 	if (mail($email->emailTo, $email->subject, $message, $strFrom)){
 		$reply = "success";
 	} else {

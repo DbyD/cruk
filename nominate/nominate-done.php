@@ -18,9 +18,11 @@
 				<div class="medium-12 columns">
 					<p>&nbsp;</p>
 					<?php if ($_SESSION['nominee']->Volunteer !='') {?>
-					<p>Thank You for nominating <?=$_SESSION['nominee']->full_name();?> on behalf of <?=$_SESSION['nominee']->Volunteer;?>.</p>
+					<p>Thank You for completing this award on behalf of <?=$_SESSION['nominee']->Volunteer;?>.</p>
+					<p>The Thank you Certificate has been sent to <?=$_SESSION['nominee']->full_name();?>.</p>
 					<?php } else { ?>
-					<p>Thank You for nominating <?=$_SESSION['nominee']->full_name();?>.</p>
+					<p>Thank You for completing this award.</p>
+					<p>Your Thank you Certificate has been sent to <?=$_SESSION['nominee']->full_name();?>.</p>
 					<?php } ?>
 					<?php	if($_SESSION['nominee']->littleExtra=='Yes' && ($_SESSION['nominee']->AppEmpNum != $_SESSION['user']->EmpNum)){ ?>
 					<p>As you've added 'A Little Extra', your award has gone to <?=$_SESSION['nominee']->full_App_name();?> for approval.</p>

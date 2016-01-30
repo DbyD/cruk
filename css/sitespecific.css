@@ -916,8 +916,11 @@ p.alertText {
 	border-bottom: 1px solid #cfcfcf;
 	padding: 10px;
 }
-.height217 {
-	height: 225px;
+.height233 {
+	height: 233px;
+}
+.height252 {
+	height: 252px;
 }
 .height306 {
 	height: 306px;
@@ -931,7 +934,7 @@ p.alertText {
 	padding-top: 4px;
 }
 #messageEmployee div{
-	padding: 4px;
+	padding-top: 4px;
 	text-align: center;
 }
 #messageList p.text {
@@ -1038,11 +1041,14 @@ button:hover, button:focus, .button:hover, .button:focus{
 .height590{
 	height: 540px;
 }
-.height217 {
-	height: 162px;
+.height233 {
+	height: 206px;
+}
+.height252 {
+	height: 225px;
 }
 .height306 {
-	height: 280px;
+	height: 284px;
 }
 .height163{
 	height: 148px;

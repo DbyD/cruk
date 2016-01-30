@@ -4,7 +4,7 @@
 ?>
 	<div id="content" class="large-8 large-push-2 columns">
 		<div class="title">
-			Nominate <i class="icon-icons_thickrightarrow smalli"></i> <span class="subTitle">Team</span>
+			<div class="inlineDiv clickAble" data-type="gourl" data-url="index.php">Nominate</div> <i class="icon-icons_thickrightarrow smalli"></i> <span class="subSubTitle">Team</span>
 		</div>
 		<div class="row contentFill">
 			
