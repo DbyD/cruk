@@ -11,6 +11,22 @@ $(function(){
 			$("#alert").css('display', 'block');
 		}
 	});
+	$("#searchAdminColleague").validate({
+		rules: {searchAdmin: "required"},
+		messages: {searchAdmin: "Search Field cannot be empty. Please type in Colleague's First or Last name."},
+		errorPlacement: function(error, element) {
+			$("#alertContent").load("../alerts/alert-popup.php", {'error' : error.html() });
+			$("#alert").css('display', 'block');
+		}
+	});
+	$("#editStaff").validate({
+		rules: {EmpNum: "required"},
+		messages: {EmpNum: "Please select a Staff Member"},
+		errorPlacement: function(error, element) {
+			$("#alertContent").load("../alerts/alert-popup.php", {'error' : error.html() });
+			$("#alert").css('display', 'block');
+		}
+	});
 	$("#nominateColleague").validate({
 		rules: {EmpNum: "required"},
 		messages: {EmpNum: "Please select a Colleague"},
@@ -25,8 +41,8 @@ $(function(){
 		}
 	});
 	$("#uploadPhoto").validate({
-		rules: {photo: "required"},
-		messages: {photo: "Please select a photo"},
+		rules: {myphoto: "required"},
+		messages: {myphoto: "Please select a photo"},
 		errorPlacement: function(error, element) {
 			$("#alertContent").load("../alerts/alert-popup.php", {'error' : error.html() });
 			$("#alert").css('display', 'block');
@@ -53,11 +69,6 @@ $(function(){
 				$("#alertContent").load("../alerts/alert-popup.php", {'error' : error.html() });
 			}
 			$("#alert").css('display', 'block');
-		},
-		submitHandler: function(form) { 
-			$.post('edit-nominee.php', $("#nominateColleague2").serialize(), function(data) {
-				window.location.href = 'nominate-submit.php';
-			});
 		}
 	});
 	$("#volunteerForm").validate({
@@ -104,7 +115,7 @@ $(function(){
 			$("#alert").css('display', 'block');
 		},
 		submitHandler: function(form) { 
-			$.post('individual-award-update.php', $("#approveAward").serialize(), function(data) {
+			$.post('../approvals/individual-award-update.php', $("#approveAward").serialize(), function(data) {
 				if (data = 'declined') {
 					$("#popup1").css('display', 'none');
 					$("#popupContent1").empty();
@@ -133,13 +144,12 @@ $(function(){
 });
 //----------------------------------------------------------------------------------
 	$('.clickAble').click(function(e) {
-		
 		var url = $(this).attr('data-url');
 		var type = $(this).attr('data-type');
-		var id = $(this).attr('data-id');
-
-		
+		var id = $(this).attr('data-id');		
 		switch (type) { 
+			case 'donothing': 
+				break; 
 			case 'goback': 
 				history.back();
 				break;
@@ -186,8 +196,10 @@ $(function(){
 				break;
 			case 'subPopup': 
 				var top = $(this).position().top + 30
+				var left = $(this).position().left - 7
 				$("#subPopup").css('display', 'block');
 				$("#subPopupbox").css('top', top);
+				$(".whiteUpArrow").css('left', left);
 				break;
 			case 'ecard': 
 				$("#popupEcard").load(url+"?id="+id);
@@ -238,6 +250,8 @@ $(function(){
 //----------------------------------------------------------------------------------
 $('#searchAuto').autocomplete({source:'../inc/emp-list.php'});
 //----------------------------------------------------------------------------------
+$('#searchAdmin').autocomplete({source:'../inc/emp-admin-list.php'});
+//----------------------------------------------------------------------------------
 $('.custom-upload input[type=file]').change(function(){
     $(this).next().find('input').val($(this).val());
 });
@@ -263,7 +277,6 @@ $(function() {
 	});
 });
 //----------------------------------------------------------------------------------
-//----------------------------------------------------------------------------------
 	$(document).foundation();
 //----------------------------------------------------------------------------------
 (function($){
@@ -272,30 +285,33 @@ $(function() {
 	});
 })(jQuery);
 //----------------------------------------------------------------------------------
-
 $(document).ready(function(){
 	$(".sendMail").click(function(){
-
 		var sender = $($(this).siblings()[0]).val();
 		var recipient = $($(this).siblings()[1]).val();
 		var senderName = $($(this).siblings()[2]).val();
 		var recipientName = $($(this).siblings()[3]).val();
+		var Department = $($(this).siblings()[4]).val();
 		$('#modalForSendMail').click();
-
-
 		$("#senderModal").val(sender);
 		$("#recipientModal").val(recipient);
+		$("#DepartmentModal").val(Department);
 		$("#mailToEmployee").val('Hi '+recipientName+'. I saw your "Our Heroes" award on the Wall of Fame. Congratulations! '+ senderName);
 		$("#messageModal").html('Hi '+recipientName+'. I saw your "Our Heroes" award on the Wall of Fame. Congratulations! '+ senderName);
+		console.log(sender);
+		console.log(recipient);
+		console.log(senderName);
+		console.log(recipientName);
+		console.log(Department);
 	});
-
 	$("#sendButton").click(function(){
 		var recipient = $("#recipientModal").val();
 		var sender = $("#senderModal").val();
 		var text = $("#mailToEmployee").val();
+		var Department = $("#DepartmentModal").val();
 		var siblings = $("#mailToEmployee").siblings();
 		if( $.trim(text) != '' ){
-			siblings.addClass("hidden");
+			//siblings.addClass("hidden");
 			$(".close-reveal-modal").click();
 			$.ajax({
 			  type:'post',
@@ -303,16 +319,16 @@ $(document).ready(function(){
 			  data:  { 
 			  	recipient : recipient,
 			  	sender : sender,
-			  	text : text
+			  	text : text,
+			  	Department : Department
 			  } ,
 			  success: function(data){
 			  		console.log(data);
 			  }
 			});
 		} else {
-			siblings.removeClass("hidden");
+			//siblings.removeClass("hidden");
 		}
-
 	});
 
 
@@ -424,8 +440,7 @@ $(document).ready(function(){
 		
 	}
 
-
-
+//----------------------------------------------------------------------------------
 $(function() {
 	$('#winnerswall div.clickAble').hover(function(){
 		var divID = this.id + "Text";

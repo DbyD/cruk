@@ -5,27 +5,6 @@ body{
 	font: 13px Arial;
 	color: #2e008b;
 }
-
-.size-12 { font-size: 12px; }
-      
-.size-14 { font-size: 14px; }
-
-.size-16 { font-size: 16px; }
-
-.size-18 { font-size: 18px; }
-
-.size-21 { font-size: 21px; }
-
-.size-24 { font-size: 24px; }
-
-.size-36 { font-size: 36px; }
-
-.size-48 { font-size: 48px; }
-
-.size-60 { font-size: 60px; }
-
-.size-72 { font-size: 72px; }
-
 .panel.callout, .panel.callout h1, .panel.callout h2, .panel.callout h3, .panel.callout h4,
 .panel.callout h5, .panel.callout h6, .panel.callout p, .panel.callout li,
 .panel.callout dl {
@@ -48,7 +27,6 @@ body{
 }
 .off-canvas-wrap{
 	padding: 30px 0 0;
-	overflow: visible;
 }
 .panel.callout{
 	margin-bottom: 3%;
@@ -145,10 +123,10 @@ ul{
 #mainmenu li{
 	list-style-type: none;
 	display: inline-block;
-	padding: 10px;
+	padding: 30px 10px 10px;
 	color: #fff;
 	width: 48%;
-	height: 100px;
+	height: 90px;
 	text-align: center;
 	font-size: 13px;
 }
@@ -160,119 +138,6 @@ ul{
 	display: block;
 	margin: 0 auto 5px;
 }
-
-.tab-bar{
-    background-color: #2e008b;
-    margin-bottom: 20px;
-}
-
-#nominateEmployeeImage {
-	padding: 20px;
-    background-color: #fff;
-}
-
-#nominateEmployeeImage img {
-	border-radius:50%;
-}
-
-#nominateEmployeeImage p {
-	color: #31DAE2;
-    text-align: center;
-    font-size: 18px;
-    padding-top: 20px;
-}
-
-#content-nominate {
-	background-color: #FF3FC4;
-	padding:10px;
-}
-
-#content-nominate > p{
-	color:#fff;
-}
-
-
-#content-nominate > p:nth-child(even){
-	font-weight: 600;
-}
-
-#modalForSendMail {
-	display:none;
-}
-
-.sendMail {
-	cursor:pointer;
-}
-
-#messages {
-	height: 400px;
-}
-
-#messages > ul{
-	list-style:none;
-	overflow-x:hidden;
-	overflow-y:scroll;
-	height: 200px;
-}
-
-#messages > ul p.text {
-	color:#333;
-}
-
-
-.winners-header > h2{
-	background-color: #2E008B;
-    color: #fff;
-    padding: 20px;
-    font-weight: 600;
-    margin-top: 0px;
-}
-
-
-#messageEmploye {
-	background-color: #8367BB;
-}
-
-#messageEmploye > p {
-	color: #fff;
-}
-
-#listNominators {
-	list-style: none;
-    height: 130px;
-    overflow-y: scroll;
-    overflow-x: hidden;
-}
-
-#listNominators li {
-	border-top:1px solid #4B2073;
-}
-
-#listNominators p {
-	color: #2DBADA;
-    font-weight: 700;
-}
-
-#listNominators i {
-	color:#fff;
-}
-
-#listNominators i.fi-torso-business {
-	padding: 5px 15px;
-	color:#fff;
-	float:left;
-}
-
-.hide {
-	display:none;
-}
-
-.error {
-	color:red;
-	font-weight: 600;
-	font-size:14px;
-}
-
 .tab-bar{
 	background-color: #2e008b;
 	margin-bottom: 20px;
@@ -310,7 +175,13 @@ p{
 	line-height: 1.3;
 }
 input[type=text],input[type=password],input[type=email], textarea{
-
+	background: #ebebeb;
+	border-radius: 16px;
+	font-size: 13px;
+	color: #2e008b;
+	padding: 5px 15px;
+	height: auto;
+	margin: 0.5rem 0;
 }
 textarea{
 	border-radius: 8px;
@@ -421,6 +292,9 @@ li.ui-menu-item { font-size:13px !important; }
 .withPadding{
 	padding: 10px;
 }
+.noPadding{
+	padding: 0;
+}
 .withSidePadding{
 	padding: 0px 10px;
 }
@@ -470,8 +344,6 @@ li.ui-menu-item { font-size:13px !important; }
 	background-size: auto 465px;
 }
 /* @end */
-
-
 
 
 /* @group Alert Popup */
@@ -594,6 +466,7 @@ li.ui-menu-item { font-size:13px !important; }
     border-radius: 10px;
 }
 /* @end */
+
 @media only screen and (min-width: 1024px){
 .row{
 	max-width: 98%;
@@ -637,6 +510,17 @@ li.ui-menu-item { font-size:13px !important; }
 	height: 660px;
 }
 }
+@media screen and (min-width: 1024px) and (max-width: 1200px) {
+#mainmenu li{
+	height: 80px;
+	padding: 25px 10px 10px;
+}
+#subHome .image {
+	height: 415px;
+	background-size: auto 425px;
+}
+}
+
 @media only screen and (max-width: 1023px){
 #payoff, #portfolio{
 	display: none;

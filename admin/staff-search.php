@@ -1,4 +1,7 @@
-<?php include_once('../inc/header.php'); ?>
+<?php
+	include_once('../inc/config.php');
+	include_once('../inc/header.php');
+?>
 
 <div id="content" class="large-8 large-push-2 columns">
 	<div class="title">
@@ -11,12 +14,12 @@
 		<div class="callout panel white contentFill">
 			<div class="row ">
 				<div class="title searchInput">
-					<form action="staff-search.php" method="GET" name="searchColleague" id="searchColleague">
+					<form action="staff-search.php" method="GET" name="searchAdminColleague" id="searchAdminColleague">
 						<div class="medium-10 columns">
-							<input type="text" name="searchAuto" id="searchAuto" value="" class="search" />
+							<input type="text" name="searchAdmin" id="searchAdmin" value="" class="search" />
 						</div>
 						<div class="medium-2 columns">
-							<a href="#" class="purpleButton clickAble" data-type="submit" data-url="searchColleague">Search</a>
+							<a href="#" class="purpleButton clickAble" data-type="submit" data-url="searchAdminColleague">Search</a>
 						</div>
 					</form>
 				</div>
@@ -25,10 +28,10 @@
 				<input type="hidden" name="formName" value="editStaff">
 				<div class="row mCustomScrollbar height515" data-mcs-theme="dark-2">
 				<?php
-					if ($_GET['searchAuto']){
-						$search = $_GET['searchAuto'];
+					if ($_GET['searchAdmin']){
+						$search = $_GET['searchAdmin'];
 						$searchUsers = new searchUsers($db);
-						$searchList = $searchUsers->getAllSearch($search);
+						$searchList = $searchUsers->getAdminAllSearch($search);
 						$x = 0 ;
 						if ($searchList){
 							foreach ($searchList as $list){
@@ -36,7 +39,7 @@
 				?>
 					<div class="row searchResult valign-middle">
 						<div class="medium-2 columns">
-							<img src="<?=$list->Photo?>" alt="" onerror="this.src='<?=HTTP_PATH?>images/no-photo.png'"/>
+							<img src="<?=HTTP_PATH.$list->Photo?>" alt="" onerror="this.src='<?=HTTP_PATH?>images/no-photo.png'"/>
 						</div>
 						<div class="medium-4 columns">
 							<?php echo $list->Fname.' '.$list->Sname; ?>
@@ -78,7 +81,7 @@
 </div>
 <?php
 	include_once('../inc/footer.php');
-	if ($_GET['searchAuto']){
+	if ($_GET['searchAdmin']){
 ?>
 <script>$('#buttonRow').removeClass('hidden'); </script>
 <?php } ?>

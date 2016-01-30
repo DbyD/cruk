@@ -14,19 +14,22 @@ function startEmail(){
 	return  $startemail;
 }
 ////////////////////////////////////////////////////////////////////////////////////
-function endEmail(){
+function endEmail($noid){
 	$endemail .= '<img class="emailCruklogo" src="'.HTTP_PATH.'images/emails/Cancer-Research-UK.png" alt="Cancer Research UK">';
-	$endemail .= '<p>Regards</p><p><b>Cancer Research</b></p>
-				</div></div></body></html>';
+	$endemail .= '<p>Regards</p><p><b>Cancer Research</b></p>';
+	if($noid != ''){
+			$endemail .= '<p>For future reference, if you need to contact our recognition partner, Xexec, about this nomination, please quote nomination code NO'.$noid.'</p>';
+	}
+	$endemail .= '</div></div></body></html>';
 	return $endemail;
 }
 ////////////////////////////////////////////////////////////////////////////////////
 // send email
-function sendEmail($email){
+function sendEmail($email,$noid){
 	global $strFrom;
 	$message = startEmail();
 	$message .= $email->Content;
-	$message .= endEmail();
+	$message .= endEmail($noid);
 	if (mail($email->emailTo, $email->subject, $message, $strFrom)){
 		$reply = "success";
 	} else {
@@ -145,11 +148,15 @@ function indEcardExtraText($ecard){
 				<p>".$ecard->NomFull_name." would like to thank you for the amazing work you have performed here at Cancer Research.</p>
 				<p>".$ecard->personalMessage."</p>
 				<p>The CRUK Belief most closely associated with your achievement is: ".$ecard->BeliefID.".</p>
-				<p>As part of your award, you've also been given a 'Little Extra'. Please log onto the <a href='http://http://cruk.xexec.dev/'>Our Heroes Portal</a> to view and claim your Little Extra something.</p>
+				<p>As part of your award, you've also been given a 'Little Extra'. Please log onto the <a href='".HTTP_PATH."'>Our Heroes Portal</a> to view and claim your Little Extra something.</p>
 				<p>Congratulations again and many thanks for your contribution to Cancer Research UK.</p>";
 	return $ecardText;
 }
 ////////////////////////////////////////////////////////////////////////////////////
+function getCurrentFolder($name){
+	$folder = basename(getcwd());
+	if ($folder == $name) echo 'selected';
+}
 ////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////

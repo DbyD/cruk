@@ -1,4 +1,7 @@
-<?php include_once('../inc/header.php'); ?>
+<?php
+	include_once('../inc/config.php');
+	include_once('../inc/header.php');
+?>
 
 <div id="content" class="large-8 large-push-2 columns MyAccount">
 	<div class="title withStar">
@@ -43,7 +46,7 @@
 						?>
 						</div>
 						<div class="tableColumn-3">
-							<?=getConvertedDate($list->NomDate)?>
+							<?=getConvertedDate($list->AprDate)?>
 						</div>
 						<div class="tableColumn-3">
 							<div class="viewButton inlineDiv clickAble" data-type="ecard" data-url="<?=HTTP_PATH?>alerts/view-ecard.php" data-id="<?=$list->ID?>">View</div>

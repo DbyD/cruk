@@ -1,4 +1,4 @@
- @group Login */
+/* @group Login */
 #content .colleaguelogin, #content .firsttime {
 	padding: 10px;
 	background: #fff;
@@ -147,9 +147,10 @@
 	margin: 0 5px;
 }
 .contentFill {
-	
+	height: 555px;
 }
 .fillHeight {
+	height: 100%;
 	position: relative;
 }
 .panel.callout.white {
@@ -203,7 +204,7 @@
 }
 @media only screen and (min-width: 1200px) {
 .contentFill {
-	
+	height: 605px;
 }
 }
 @media only screen and (max-width: 1023px) {
@@ -215,18 +216,6 @@
 }
 }
 /* @end */
-
-
-
-/* @product styles */
-
-.product > img {
-	cursor:pointer;
-}
-
-/* @end */
-
-
 /* @group Nominate */
 .nominateHome .image{
 	background: url(../images/nominate-home.jpg);
@@ -561,6 +550,9 @@
 }
 /* @end */
 /* @group My Approvals */
+.approvalHome .image{
+	background: url(../images/nominate-home.jpg);
+}
 .title .smaller {
 	font-size: 12px;
 	margin-left: 20px;
@@ -712,6 +704,9 @@
 p.alertText {
 	padding: 30px;
 	font-size: 16px;
+}
+.popupLastRow{
+	padding: 0 0 30px !important;
 }
 /* @end */
 /* @group File Upload */
@@ -921,8 +916,11 @@ p.alertText {
 	border-bottom: 1px solid #cfcfcf;
 	padding: 10px;
 }
-.height217 {
-	height: 225px;
+.height233 {
+	height: 233px;
+}
+.height252 {
+	height: 252px;
 }
 .height306 {
 	height: 306px;
@@ -936,7 +934,7 @@ p.alertText {
 	padding-top: 4px;
 }
 #messageEmployee div{
-	padding: 4px;
+	padding-top: 4px;
 	text-align: center;
 }
 #messageList p.text {
@@ -1043,26 +1041,22 @@ button:hover, button:focus, .button:hover, .button:focus{
 .height590{
 	height: 540px;
 }
-.height217 {
-	height: 162px;
+.height233 {
+	height: 206px;
+}
+.height252 {
+	height: 225px;
 }
 .height306 {
-	height: 280px;
+	height: 284px;
 }
 .height163{
 	height: 148px;
 }
 }
-/* @end 
+/* @end */
 
-
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-/* Redeem page css */
-
+/* @group Redeem */
 .static-redeem,.products {
 	
 }
@@ -1323,45 +1317,4 @@ button:hover, button:focus, .button:hover, .button:focus{
 #awards {
 	position: relative;
 }
-
-.del-item {
-	cursor:pointer;
-}
-
-.sub-menu {
-	background-color: #fff;
-    height: 300px;
-    text-align: center;
-    position: relative;
-}
-
-.sub-menu > P {
-	background-color: #662696;
-    color: #fff;
-    padding: 10px;
-    text-align: center;
-    font-weight: bold;
-}
-
-.sub-menu > form {
-	position: absolute;
-    bottom: 10px;
-    padding: 0px 10px;
-    text-align: left;
-
-}
-
-.sub-menu img {
-	width:135px;
-}
-
-#subsTitle {
-	padding: 20px;
-    text-align: right;
-    font-size: 24px;
-}
-
-
-
-
 /* @end*/

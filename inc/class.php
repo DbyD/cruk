@@ -89,6 +89,16 @@ class MyApprovalsList{
     }
 }
 
+class MyApprovalsHistory{
+    public function getAllMyApprovalsHistory($empnum) {
+		global $db;
+		$stmt = $db->prepare("SELECT * FROM tblnominations WHERE ApproverEmpNum = :empnum AND AprStatus<>0 AND littleExtra='Yes' ORDER BY NomDate DESC");
+		$stmt->execute(array('empnum' => $empnum));
+		$result = $stmt->fetchAll(PDO::FETCH_OBJ);
+		return $result;
+    }
+}
+
 class claimedAwardsList{
     public function getAllclaimedAwardsList($empnum) {
 		global $db;
@@ -112,7 +122,7 @@ class NominationsList{
 class MyNominationsList{
     public function getAllMyNominationsList($empnum) {
 		global $db;
-		$stmt = $db->prepare('SELECT * FROM tblnominations WHERE NominatedEmpNum = :empnum AND AprStatus=1 ORDER BY NomDate DESC');
+		$stmt = $db->prepare('SELECT * FROM tblnominations WHERE NominatedEmpNum = :empnum AND AprStatus=1 ORDER BY AprDate DESC');
 		$stmt->execute(array('empnum' => $empnum));
 		$result = $stmt->fetchAll(PDO::FETCH_OBJ);
 		return $result;
@@ -127,6 +137,13 @@ class searchAllUsers{
 		$result = $stmt->fetchAll(PDO::FETCH_OBJ);
 		return $result;
     }
+    public function getAllAdminSearch($search) {
+		global $db;
+		$stmt = $db->prepare("SELECT * FROM tblempall WHERE (Fname LIKE '%$search%' OR Sname LIKE '%$search%') LIMIT 20");
+		$stmt->execute();
+		$result = $stmt->fetchAll(PDO::FETCH_OBJ);
+		return $result;
+    }
 }
 
 class searchUsers{
@@ -136,6 +153,14 @@ class searchUsers{
 									OR CONCAT(Fname,' ',Sname) like '%".str_replace(" ","%",$search)."%')
 									AND EmpNum <> :empnum");
 		$stmt->execute(array('empnum' => $_SESSION['user']->EmpNum));
+		$result = $stmt->fetchAll(PDO::FETCH_OBJ);
+		return $result;
+    }
+    public function getAdminAllSearch($search) {
+		global $db;
+		$stmt = $db->prepare("SELECT * FROM tblempall WHERE (Fname LIKE '%$search%' OR Sname LIKE '%$search%'
+									OR CONCAT(Fname,' ',Sname) like '%".str_replace(" ","%",$search)."%')");
+		$stmt->execute();
 		$result = $stmt->fetchAll(PDO::FETCH_OBJ);
 		return $result;
     }
