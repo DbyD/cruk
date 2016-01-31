@@ -1,4 +1,9 @@
 
 .idea/
 inc/config.php
+<<<<<<< HEAD
+=======
+
+SAML/inc/config.php
+>>>>>>> origin/maksdev
 photos/1453938359_72755698cc66d136b72ca8bf9fa03f4a22df6713feb9711540b9f99c4096409027a347c2.jpg
