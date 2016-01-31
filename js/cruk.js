@@ -99,10 +99,13 @@ $(function(){
 		},
 		submitHandler: function(form) { 
 			$.post('little-extra-update.php', $("#LittleExtraForm").serialize(), function(data) {
-				if (data = 'added') {
-					$('#littleExtra').prop('checked', true);
+				if (data != 'removed') {
+					$('#littleExtraTick').addClass('circleTickChecked');
 					$("#popup1").css('display', 'none');
 					$("#popupContent1").empty();
+					$("#littleExtra").val('Yes');
+					$("#littleExtraMessage span").html(data);
+					$("#littleExtraMessage div").removeClass('hidden');
 				}
 			});
 		}
@@ -180,17 +183,32 @@ $(function(){
 				}
 				break;
 			case 'clear': 
-				$.post('volunteer-update.php?clear=yes', $("#volunteerForm").serialize(), function(data) {
-					if (data == 'removed') {
-						$('#volunteerTick').removeClass('circleTickChecked');
-						$("#popup1").css('display', 'none');
-						$("#popupContent1").empty();
-						$("#volunteerName div").addClass('hidden');
-					}
-				});
+				if(id=='v'){
+					$.post('volunteer-update.php?clear=yes', $("#volunteerForm").serialize(), function(data) {
+						if (data == 'removed') {
+							$('#volunteerTick').removeClass('circleTickChecked');
+							$("#volunteerName span").html('');
+							$("#popup1").css('display', 'none');
+							$("#popupContent1").empty();
+							$("#volunteerName div").addClass('hidden');
+						}
+					});
+				}
+				if(id=='lexm'){
+					$.post('little-extra-update.php?clear=yes', $("#LittleExtraForm").serialize(), function(data) {
+						if (data == 'removed') {
+							$('#littleExtraTick').removeClass('circleTickChecked');
+							$("#littleExtraMessage span").html('');
+							$("#littleExtra").val('No');
+							$("#popup1").css('display', 'none');
+							$("#popupContent1").empty();
+							$("#littleExtraMessage div").addClass('hidden');
+						}
+					});
+				}
 				break;
 			case 'popup': 
-				if(id=='littleExtra') $('#littleExtra').prop('checked', false);
+				//if(id=='littleExtra') $('#littleExtra').prop('checked', false);
 				$("#popupContent1").load(url+"?id="+id);
 				$("#popup1").css('display', 'block');
 				break;

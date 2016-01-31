@@ -55,7 +55,7 @@
 				<option value=""></option>
 				<option <?php if($_SESSION['nominee']->BeliefID=='Be Brave') echo "selected"; ?> value="Be Brave">Be Brave</option>
 				<option <?php if($_SESSION['nominee']->BeliefID=='Be Sharp') echo "selected"; ?> value="Be Sharp">Be Sharp</option>
-				<option <?php if($_SESSION['nominee']->BeliefID=='Be Sharp') echo "selected"; ?> value="Be United">Be United</option>
+				<option <?php if($_SESSION['nominee']->BeliefID=='Be United') echo "selected"; ?> value="Be United">Be United</option>
 			</select>
 		</div>
 		<?php
@@ -80,10 +80,15 @@
 				<div class="medium-12 columns">
 					<i class="icon-icons_i clickAble" data-type="alert" data-url="alert-little-extra.php"></i>
 					Add 'A Little Extra'
-					<!--<div id="littleExtraTick" class="circleTick inline smallTick clickAble" data-type="popup" data-url="little-extra.php">-->
-					<div id="littleExtraTick" class="hiddenTick inline smallTick clickAble" data-type="popup" data-url="little-extra.php" data-id="littleExtra">
-						<input type="checkbox" value="Yes" name="littleExtra" id="littleExtra" <?php if($_SESSION['nominee']->littleExtra=='Yes') echo "checked"; ?>>
-						<label for="littleExtra"></label>
+					<div id="littleExtraTick" class="circleTick inline smallTick clickAble <?php if($_SESSION['nominee']->littleExtra=='Yes') echo 'circleTickChecked'; ?>" data-type="popup" data-url="little-extra.php">
+						<label for="Volunteer"></label>
+					</div>
+					<div id="littleExtraMessage">
+						<input type="hidden" value="<?php if($_SESSION['nominee']->littleExtra=='Yes') echo 'Yes'; ?>" name="littleExtra" id="littleExtra"> 
+						<div <?php if($_SESSION['nominee']->littleExtra!='Yes') echo 'class="hidden"'; ?> >
+							<span><?=$_SESSION['nominee']->Reason;?></span> 
+							<i class="icon-icons_close clickAble" data-type="clear" data-id="lexm"></i>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -97,7 +102,7 @@
 					<div id="volunteerName">
 						<div <?php if(!$_SESSION['nominee']->Volunteer) echo 'class="hidden"'; ?> >
 							<span><?=$_SESSION['nominee']->Volunteer;?></span> 
-							<i class="icon-icons_close clickAble" data-type="clear"></i>
+							<i class="icon-icons_close clickAble" data-type="clear" data-id="v"></i>
 						</div>
 					</div>
 				</div>
