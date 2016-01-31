@@ -7,7 +7,7 @@
 // DEFINE ROOT PATHS
 ////////////////////////////////////////////////////////////////////////////////////
 		// this is for my machine must remove /cruk/
-	define("RELATIVE_PATH_ROOT", '');
+	define("RELATIVE_PATH_ROOT", '/');
 	define("LOCAL_PATH_ROOT", $_SERVER["DOCUMENT_ROOT"] . '/');
 	define("HTTP_PATH_ROOT", isset($_SERVER["HTTP_HOST"]) ? $_SERVER["HTTP_HOST"] : (isset($_SERVER["SERVER_NAME"]) ? $_SERVER["SERVER_NAME"] : '_UNKNOWN_'));
 	define("HTTP_PATH", 'http://'. HTTP_PATH_ROOT . '/');
@@ -40,7 +40,14 @@
 	include 'redeem-functions.php';
 	include 'report-functions.php';
 	include 'winners-wall-functions.php';
+	include 'library/upload_file.php';
 ////////////////////////////////////////////////////////////////////////////////////
 	$encrypt = new Encryption;
 	session_start();
+////////////////////////////////////////////////////////////////////////////////////
+	// added to help find js errors
+	require_once "Bugsnag/Autoload.php";
+	$bugsnag = new Bugsnag_Client("9e88a1ad7fe6aaa1904e008f1dc5edcd");
+	set_error_handler(array($bugsnag, "errorHandler"));
+	set_exception_handler(array($bugsnag, "exceptionHandler"));
 ?>
