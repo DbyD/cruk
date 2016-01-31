@@ -6,7 +6,7 @@
 				</div>
 				<div id="messages" class="callout panel">
 					<div class="title">
-						<i class="icon-icons_mail large"></i>
+						Messages
 					</div>
 					<?php 
 						if( $_SESSION['user']->approver() =='YES'){
@@ -16,8 +16,8 @@
 							}
 							if(isset($count_awwards)):?>
 								<div id='messageEmployee'>
-									<i class="icon-icons_tickinbox"></i> <span class="right"><?=date("l m/d")?></span>
-									<div class="clickAble" data-type="gourl" data-url="<?=HTTP_PATH?>approvals">You have a <? echo $count_awwards; ?> awards to aprove</div>
+									<i class="icon-icons_tickinbox"></i> <span class="right"><?=date("l d/m/y")?></span>
+									<div class="clickAble" data-type="gourl" data-url="<?=HTTP_PATH?>approvals/pending.php">You have a <? echo $count_awwards; ?> awards to aprove</div>
 								</div>
 						<?php endif ;
 							?>
@@ -32,17 +32,22 @@
 							if($query != 0){
 								foreach($query as $mess){?>
 								<div class="row">
-									<i class="icon-icons_bubble"></i><span class="right"><?=date("l m/d", strtotime($mess["date"]))?></span>
-									<p class="text"> <?php echo  $mess["text"]?></p>
+									<?php if($mess["award"]=='m'){ ?>
+									<i class="icon-icons_mail"></i>
+									<?php } else { ?>
+									<i class="icon-icons_star"></i>
+									<?php } ?>
+									<span class="right"><?=date("l d/m/y", strtotime($mess["date"]))?></span>
+									<p class="text"> <?php echo $mess["text"]; ?></p>
 								</div>
 						<?php }
 							} else { ?>
 							<div class="row">
-								<i class="icon-icons_bubble"></i><span class="right"><?=date("l m/d")?></span>
+								<i class="icon-icons_bubble"></i><span class="right"><?=date("l d/m/y")?></span>
 								<p class="text">Welcome to the Our Heroes portal where you can nominate colleagues in recognition of their contribution to Cancer Research.</p>
 							</div>
 							<div class="row">
-								<i class="icon-icons_bubble"></i><span class="right"><?=date("l m/d")?></span>
+								<i class="icon-icons_bubble"></i><span class="right"><?=date("l d/m/y")?></span>
 								<p class="text">Click on the FAQs link to the right to find out more about using this site.</p>
 							</div>
 						<?php } ?>
@@ -95,7 +100,5 @@
 <script src="<?=HTTP_PATH?>js/jquery.validate.min.js"></script>
 <script src="<?=HTTP_PATH?>js/foundation.min.js"></script>
 <script src="<?=HTTP_PATH?>js/cruk.js"></script>
-
-
 </body>
 </html>

@@ -1,7 +1,5 @@
 <?php 
 	include 'config.php';
-
-
 	
 	$sUsername = $_POST['sUsername'];
 	$sPassword = $_POST['sPassword'];

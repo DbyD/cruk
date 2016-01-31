@@ -1,4 +1,4 @@
- @group Login */
+/* @group Login */
 #content .colleaguelogin, #content .firsttime {
 	padding: 10px;
 	background: #fff;
@@ -71,7 +71,7 @@
 	padding: 10px 20px 0;
 	font-size: 14px;
 	text-transform: uppercase;
-	letter-spacing: 0.3em;
+	letter-spacing: 0.1em;
 }
 #home4 .image {
 	height: 118px;
@@ -147,9 +147,10 @@
 	margin: 0 5px;
 }
 .contentFill {
-	
+	height: 555px;
 }
 .fillHeight {
+	height: 100%;
 	position: relative;
 }
 .panel.callout.white {
@@ -203,7 +204,7 @@
 }
 @media only screen and (min-width: 1200px) {
 .contentFill {
-	
+	height: 605px;
 }
 }
 @media only screen and (max-width: 1023px) {
@@ -215,18 +216,6 @@
 }
 }
 /* @end */
-
-
-
-/* @product styles */
-
-.product > img {
-	cursor:pointer;
-}
-
-/* @end */
-
-
 /* @group Nominate */
 .nominateHome .image{
 	background: url(../images/nominate-home.jpg);
@@ -561,6 +550,9 @@
 }
 /* @end */
 /* @group My Approvals */
+.approvalHome .image{
+	background: url(../images/nominate-home.jpg);
+}
 .title .smaller {
 	font-size: 12px;
 	margin-left: 20px;
@@ -713,8 +705,15 @@ p.alertText {
 	padding: 30px;
 	font-size: 16px;
 }
+.popupLastRow{
+	padding: 0 0 30px !important;
+}
 /* @end */
 /* @group File Upload */
+#alertbox.forPhoto{
+	width: 300px;
+	margin-left: -150px;
+}
 .photoIframe {
 	border: 0;
 	width: 100%;
@@ -742,7 +741,8 @@ p.alertText {
 	height: 100%;
 }
 .custom-upload .fake-file {
-	background: url(../images/fake-browse.png) no-repeat 30px 60px;
+/*	background: url(../images/fake-browse.png) no-repeat 30px 60px;
+	height: 100px; */
 	position: absolute;
 	top: 0px;
 	left: 0px;
@@ -750,7 +750,6 @@ p.alertText {
 	padding: 0;
 	margin: 0;
 	z-index: 1;
-	height: 100px;
 }
 .custom-upload .fake-file input {
 	font-size: 16px;
@@ -1049,16 +1048,9 @@ button:hover, button:focus, .button:hover, .button:focus{
 	height: 148px;
 }
 }
-/* @end 
+/* @end */
 
-
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-/* Redeem page css */
-
+/* @group Redeem */
 .static-redeem,.products {
 	
 }
@@ -1319,45 +1311,4 @@ button:hover, button:focus, .button:hover, .button:focus{
 #awards {
 	position: relative;
 }
-
-.del-item {
-	cursor:pointer;
-}
-
-.sub-menu {
-	background-color: #fff;
-    height: 300px;
-    text-align: center;
-    position: relative;
-}
-
-.sub-menu > P {
-	background-color: #662696;
-    color: #fff;
-    padding: 10px;
-    text-align: center;
-    font-weight: bold;
-}
-
-.sub-menu > form {
-	position: absolute;
-    bottom: 10px;
-    padding: 0px 10px;
-    text-align: left;
-
-}
-
-.sub-menu img {
-	width:135px;
-}
-
-#subsTitle {
-	padding: 20px;
-    text-align: right;
-    font-size: 24px;
-}
-
-
-
-
 /* @end*/

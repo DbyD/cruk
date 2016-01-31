@@ -1,6 +1,6 @@
 <?php
 // Global settings
-	// error_reporting(E_ERROR | E_WARNING | E_PARSE);
+	error_reporting(E_ERROR | E_WARNING | E_PARSE);
 	//error_reporting(E_ALL);
 	
 ////////////////////////////////////////////////////////////////////////////////////
@@ -10,8 +10,7 @@
 	define("RELATIVE_PATH_ROOT", '/');
 	define("LOCAL_PATH_ROOT", $_SERVER["DOCUMENT_ROOT"] . '/');
 	define("HTTP_PATH_ROOT", isset($_SERVER["HTTP_HOST"]) ? $_SERVER["HTTP_HOST"] : (isset($_SERVER["SERVER_NAME"]) ? $_SERVER["SERVER_NAME"] : '_UNKNOWN_'));
-	define("HTTP_PATH", 'http://'. HTTP_PATH_ROOT . '/cruk/');
-
+	define("HTTP_PATH", 'http://'. HTTP_PATH_ROOT . '/');
 ////////////////////////////////////////////////////////////////////////////////////
 	$xexecEmail = "alec@dbyd.co.za";
 ////////////////////////////////////////////////////////////////////////////////////
@@ -21,10 +20,9 @@
 ////////////////////////////////////////////////////////////////////////////////////
 // Server Setup
 	$db_server = 'Localhost';
-	$db_database = 'cruk21-01-201610-44 AM';
-	$db_user = 'root';
-	$db_passwd = '';
-	
+	$db_database = 'cruk';
+	$db_user = 'DbyDcruk';
+	$db_passwd = 'dbd#01master';
 	try {
 		$db = new PDO("mysql:host=$db_server;dbname=$db_database", $db_user, $db_passwd);
 		$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -41,9 +39,15 @@
 	include 'account-functions.php';
 	include 'redeem-functions.php';
 	include 'report-functions.php';
-	include 'library/upload_file.php';
 	include 'winners-wall-functions.php';
+	include 'library/upload_file.php';
 ////////////////////////////////////////////////////////////////////////////////////
 	$encrypt = new Encryption;
 	session_start();
+////////////////////////////////////////////////////////////////////////////////////
+	// added to help find js errors
+	require_once "Bugsnag/Autoload.php";
+	$bugsnag = new Bugsnag_Client("9e88a1ad7fe6aaa1904e008f1dc5edcd");
+	set_error_handler(array($bugsnag, "errorHandler"));
+	set_exception_handler(array($bugsnag, "exceptionHandler"));
 ?>

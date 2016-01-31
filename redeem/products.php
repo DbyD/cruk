@@ -3,17 +3,13 @@ include_once '../inc/config.php';
 include_once '../inc/header.php';
 include "lib.php";
 $menu = new MenuGenerator;
-
 if(isset( $_POST["submit"] ) ){
 	if( empty( $_POST["title"] ) || empty( $_POST["point"] ) || empty( $_POST["Delivery"] ) || empty( $_POST["content"] ) || empty( $_FILES ) ){
 		$error_message = "<div class='error'>Please fill in all fields</div>";
 	} else {
 		
 		$file_path = insertFile( $_FILES , $_POST["menu_id"], $_POST["sub_id"]);
-
-
 		if($file_path != 'error'){
-
 			$data = array(
 				'aTitle' => $_POST["title"],
 				'aPrice' => $_POST["point"],
@@ -23,12 +19,8 @@ if(isset( $_POST["submit"] ) ){
 				'subID' => $_POST["sub_id"],
 				'Image_name' => $file_path
 			);
-
-
-
 			insertProduct( $data );
 		}
-
 		
 	}
 }
@@ -36,9 +28,7 @@ if(isset( $_POST["submit"] ) ){
 
 <?php 
 	$val = $_SESSION['user']->SuperUser;
-
-	if( $val == "NO" ){
-
+	if( $val == "YES" ){
 		include('../admin/products.php');
 	} else {
 ?>
@@ -61,18 +51,15 @@ if(isset( $_POST["submit"] ) ){
 					$res = 0;
 					if( isset( $_GET["menu_id"] ) ) {
 						$menu_id = $_GET["menu_id"];
-
 						if( isset( $_GET["sub_id"] ) ){
 							$sub_id = $_GET["sub_id"];
 						} else {
 							$sub_id = null;
 						}
-
 						$res = getMenuProducts( $menu_id, $sub_id);
 					} else {
 						$res = getTotalProducts();
 					}
-
 					if( $res != 0){
 						$products = $res;
 					}
@@ -130,7 +117,7 @@ if(isset( $_POST["submit"] ) ){
 							<?php foreach ($menus as $v): ?>
 								<?php if ($v["parent"] == 0): ?>
 									<li><a href="<?php echo "?menu_id=" . $v['id'] ; ?>"><?php echo $v["label"]; ?></a></li>
-										<ul class="sub-menu <?php if( ( isset($menu_id) && $menu_id != $v["id"]) || (!isset($menu_id)) ) echo 'hide';?>">
+										<ul class="sub-menu <?php if(isset($menu_id) && $menu_id != $v["id"]) echo 'hide';?>">
 											<?php foreach ($menus as $val): ?>
 												<?php if ($v["id"] == $val["parent"]): ?>
 													<li><a href="<?php echo "?menu_id=" . $v['id'] . "&sub_id=" . $val['id'] ; ?>"><?php echo $val["label"]; ?></a></li>

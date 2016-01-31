@@ -1,5 +1,4 @@
 <?php 
-	include_once 'inc/config.php';
 	include 'inc/config.php';
 ?>
 <!doctype html>

@@ -11,6 +11,14 @@ $(function(){
 			$("#alert").css('display', 'block');
 		}
 	});
+	$("#editStaff").validate({
+		rules: {EmpNum: "required"},
+		messages: {EmpNum: "Please select a Staff Member"},
+		errorPlacement: function(error, element) {
+			$("#alertContent").load("../alerts/alert-popup.php", {'error' : error.html() });
+			$("#alert").css('display', 'block');
+		}
+	});
 	$("#nominateColleague").validate({
 		rules: {EmpNum: "required"},
 		messages: {EmpNum: "Please select a Colleague"},
@@ -25,8 +33,8 @@ $(function(){
 		}
 	});
 	$("#uploadPhoto").validate({
-		rules: {photo: "required"},
-		messages: {photo: "Please select a photo"},
+		rules: {myphoto: "required"},
+		messages: {myphoto: "Please select a photo"},
 		errorPlacement: function(error, element) {
 			$("#alertContent").load("../alerts/alert-popup.php", {'error' : error.html() });
 			$("#alert").css('display', 'block');
@@ -53,11 +61,6 @@ $(function(){
 				$("#alertContent").load("../alerts/alert-popup.php", {'error' : error.html() });
 			}
 			$("#alert").css('display', 'block');
-		},
-		submitHandler: function(form) { 
-			$.post('edit-nominee.php', $("#nominateColleague2").serialize(), function(data) {
-				window.location.href = 'nominate-submit.php';
-			});
 		}
 	});
 	$("#volunteerForm").validate({
@@ -133,13 +136,12 @@ $(function(){
 });
 //----------------------------------------------------------------------------------
 	$('.clickAble').click(function(e) {
-		
 		var url = $(this).attr('data-url');
 		var type = $(this).attr('data-type');
-		var id = $(this).attr('data-id');
-
-		
+		var id = $(this).attr('data-id');		
 		switch (type) { 
+			case 'donothing': 
+				break; 
 			case 'goback': 
 				history.back();
 				break;
@@ -186,8 +188,10 @@ $(function(){
 				break;
 			case 'subPopup': 
 				var top = $(this).position().top + 30
+				var left = $(this).position().left - 7
 				$("#subPopup").css('display', 'block');
 				$("#subPopupbox").css('top', top);
+				$(".whiteUpArrow").css('left', left);
 				break;
 			case 'ecard': 
 				$("#popupEcard").load(url+"?id="+id);
@@ -263,7 +267,6 @@ $(function() {
 	});
 });
 //----------------------------------------------------------------------------------
-//----------------------------------------------------------------------------------
 	$(document).foundation();
 //----------------------------------------------------------------------------------
 (function($){
@@ -272,30 +275,29 @@ $(function() {
 	});
 })(jQuery);
 //----------------------------------------------------------------------------------
-
 $(document).ready(function(){
 	$(".sendMail").click(function(){
-
 		var sender = $($(this).siblings()[0]).val();
 		var recipient = $($(this).siblings()[1]).val();
 		var senderName = $($(this).siblings()[2]).val();
 		var recipientName = $($(this).siblings()[3]).val();
 		$('#modalForSendMail').click();
-
-
 		$("#senderModal").val(sender);
 		$("#recipientModal").val(recipient);
 		$("#mailToEmployee").val('Hi '+recipientName+'. I saw your "Our Heroes" award on the Wall of Fame. Congratulations! '+ senderName);
 		$("#messageModal").html('Hi '+recipientName+'. I saw your "Our Heroes" award on the Wall of Fame. Congratulations! '+ senderName);
+		console.log(sender);
+		console.log(recipient);
+		console.log(senderName);
+		console.log(recipientName);
 	});
-
 	$("#sendButton").click(function(){
 		var recipient = $("#recipientModal").val();
 		var sender = $("#senderModal").val();
 		var text = $("#mailToEmployee").val();
 		var siblings = $("#mailToEmployee").siblings();
 		if( $.trim(text) != '' ){
-			siblings.addClass("hidden");
+			//siblings.addClass("hidden");
 			$(".close-reveal-modal").click();
 			$.ajax({
 			  type:'post',
@@ -310,9 +312,8 @@ $(document).ready(function(){
 			  }
 			});
 		} else {
-			siblings.removeClass("hidden");
+			//siblings.removeClass("hidden");
 		}
-
 	});
 
 
@@ -335,22 +336,6 @@ $(document).ready(function(){
 
 	$("#close-basket-del").click(function(){
 		$(".close-reveal-modal").click();
-	});
-
-	$(".del-item").click(function(el){
-		var del_id = $(this).attr('data-del_id');
-		
-		$.ajax({
-				type:"POST",
-				url:"action.php",
-				data:{del_id:del_id},
-				success:function(d){
-					
-				}
-			});
-		el.value = "";
-
-		$(this).closest( ".menu-item-holder" ).hide();
 	});
 
 
@@ -407,25 +392,15 @@ $(document).ready(function(){
 	function openSubmenu(el)
 	{
 		var menuItems = _byClas("menu-item-holder");
-
 		for(var m = 0; m<menuItems.length ; m++){
 			menuItems[m].setAttribute('class', 'menu-item-holder'); 
 		}
-
-		var s = _byId("holder_of_"+el.id);
-		var curClass = s.getAttribute("className");
-
-		if(curClass == "menu-item-holder activated" ){
-			_byId("holder_of_"+el.id).setAttribute('class', 'menu-item-holder'); 
-		}else{
-			_byId("holder_of_"+el.id).setAttribute('class', 'menu-item-holder activated'); 	
-		}
-		
-		
+		_byId("holder_of_"+el.id).setAttribute('class', 'menu-item-holder activated'); 
 	}
+//----------------------------------------------------------------------------------
+	
 
-
-
+//----------------------------------------------------------------------------------
 $(function() {
 	$('#winnerswall div.clickAble').hover(function(){
 		var divID = this.id + "Text";
