@@ -20,13 +20,13 @@
 			
 			// loop to add workawards
 			foreach ($_POST as $key => $value){
-			   if (strstr($key, 'workAward')){
+				if (strstr($key, 'workAward')){
 					echo $value.$award->NominatedEmpNum;
 					$stmt = $db->prepare("INSERT INTO tblworknominations(nominationID, workawardsID) VALUES (:nominationID, :workawardsID)");
 					$stmt->bindParam(':nominationID', $ID);
 					$stmt->bindParam(':workawardsID', $value);
 					$stmt->execute();
-			   }
+				}
 			}
 			
 			// set approver if approver is SU
@@ -151,7 +151,7 @@
 				$sendEmail->subject = 'Award Notification';
 				$sendEmail->Bcc = '';
 				$sendEmail->Content = "<p>Hello ".$award->nominator()->Fname."</p>
-										<p>You recently nominated ".$award->nominee()->full_name." ] for an Our Heroes Extraordinary People, Extraordinary effort award.</p>
+										<p>You recently nominated ".$award->nominee()->full_name." for an Our Heroes Extraordinary People, Extraordinary effort award.</p>
 										<p>The nomination has been reviewed by ".$approver_name." and has unfortunately been declined.</p>
 										<p>The following reason was given:<br>".$_POST['dReason']."
 										<p>".$award->nominee()->full_name." has not been notified of the declined nomination.</p>

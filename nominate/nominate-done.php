@@ -17,19 +17,19 @@
 			<div class="row withPadding ">
 				<div class="medium-12 columns">
 					<p>&nbsp;</p>
-					<?php if ($_SESSION['nominee']->Volunteer !='') {?>
+					<?php	if ($_SESSION['nominee']->Volunteer !='') {?>
 					<p>Thank You for completing this award on behalf of <?=$_SESSION['nominee']->Volunteer;?>.</p>
-					<p>The Thank you Certificate has been sent to <?=$_SESSION['nominee']->full_name();?>.</p>
-					<?php } else { ?>
+					<?php	} else { ?>
 					<p>Thank You for completing this award.</p>
-					<p>Your Thank you Certificate has been sent to <?=$_SESSION['nominee']->full_name();?>.</p>
-					<?php } ?>
+					<?php	} ?>
 					<?php	if($_SESSION['nominee']->littleExtra=='Yes' && ($_SESSION['nominee']->AppEmpNum != $_SESSION['user']->EmpNum)){ ?>
 					<p>As you've added 'A Little Extra', your award has gone to <?=$_SESSION['nominee']->full_App_name();?> for approval.</p>
 					<p>You will be notified of the result.</p>
-					<?php	} else { ?>
-					<p>Your e-card will be sent to <?=$_SESSION['nominee']->full_name();?>.</p>
-					<?php	} ?>
+					<?php	} elseif($_SESSION['nominee']->littleExtra=='Yes' && ($_SESSION['nominee']->AppEmpNum == $_SESSION['user']->EmpNum)){?>
+					<p>As you are also the assigned Approver for this nomination, this award has automatically be approved and your Thank you Certificate has been sent to <?=$_SESSION['nominee']->full_name();?>.</p>
+					<?php } else { ?>
+					<p>Your Thank you Certificate has been sent to <?=$_SESSION['nominee']->full_name();?>.</p>
+					<?php } ?>
 					<? //print_r($_SESSION['nominee']);?>
 				</div>
 			</div>

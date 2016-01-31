@@ -18,7 +18,7 @@
 	</div>
 	<div class="tableRow">
 		<div class="greyText textLeft">
-			If approved, this colleague will be able to choose one of the following awards. Please remove options only if there’s a good reason to do so.<br>
+			<p>If approved, this colleague will be able to choose one of the following awards. Please remove options only if there’s a good reason to do so.</p>
 			Please note that all awards will be paid from a central budget and will not need to come out of your Department/Function budget.
 			<i class="icon-icons_i clickAble blueText" data-type="subPopup"></i>
 		</div>
@@ -30,7 +30,7 @@
 				£20 Voucher <span class="small">(Cannot remove this option)</span>
 			</div>
 			<div class="tableColumn-2 textRight">
-				<div id="" class="circleTick inline smallTick disabled">
+				<div id="" class="circleTick inline smallTick disabled circleTickChecked">
 					<label for="Volunteer"></label>
 				</div>
 			</div>

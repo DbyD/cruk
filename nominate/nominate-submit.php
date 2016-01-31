@@ -6,11 +6,11 @@
 		
 		$_SESSION['nominee']->BeliefID = $_POST['BeliefID'];
 		$_SESSION['nominee']->personalMessage = $_POST['personalMessage'];
-		if($_POST['littleExtra']){
+		/*if($_POST['littleExtra']){
 			$_SESSION['nominee']->littleExtra = 'Yes';
 		} else {
 			$_SESSION['nominee']->littleExtra = 'No';
-		}
+		}*/
 		if($_POST['awardPrivate']){
 			$_SESSION['nominee']->awardPrivate = 'Yes';
 		} else {
@@ -59,7 +59,18 @@
 		$stmt->execute();
 		$id = $db->lastInsertId();
 		$_SESSION['alreadydone'] = 'yes';
-		
+		// add in work awards if app = nom
+		if(($_SESSION['nominee']->AppEmpNum == $_SESSION['user']->EmpNum)){
+			foreach ($_SESSION['nominee']->workAward as $key => $value){
+				if (strstr($key, 'workAward')){
+					$stmt = $db->prepare("INSERT INTO tblworknominations(nominationID, workawardsID) VALUES (:nominationID, :workawardsID)");
+					$stmt->bindParam(':nominationID', $id);
+					$stmt->bindParam(':workawardsID', $value);
+					$stmt->execute();
+				}
+			}
+		}
+			
 		if($_SESSION['nominee']->littleExtra=='Yes' && ($_SESSION['nominee']->AppEmpNum != $_SESSION['user']->EmpNum)){
 			$sendEmail = new StdClass();
 			$sendEmail->subject = 'Award Notification';
@@ -90,6 +101,31 @@
 			}
 			$_SESSION['alreadydone'] = 'yes';
 		} else {
+			if(($_SESSION['nominee']->AppEmpNum == $_SESSION['user']->EmpNum)){
+				// email to approver
+				if(filter_var($_SESSION['user']->Eaddress, FILTER_VALIDATE_EMAIL)){
+					$sendEmail = new StdClass();
+					$sendEmail->emailTo = $_SESSION['user']->Eaddress;
+					$sendEmail->subject = 'Award Notification';
+					$sendEmail->Bcc = '';
+					$sendEmail->Content = "<p>Dear ".$_SESSION['user']->Fname."</p>
+											<p>Thank you for approving 'A Little Extra' award for ".$_SESSION['nominee']->full_name().". The details of this award are as follows:<p>
+											<p>Nominator: ".$_SESSION['user']->full_name."<br>
+											Award Options: &pound;20 voucher";
+					foreach ($_SESSION['nominee']->workAward as $key => $value){
+					   if (strstr($key, 'workAward')){
+						   $awardtype = workAwardType($value);
+						   echo $awardtype->type;
+						   $sendEmail->Content .= ", ".$awardtype->type;
+					   }
+					}
+					$sendEmail->Content .= "<br>Award category: ".$_SESSION['nominee']->BeliefID."</p>
+											<p>Any other nominations awaiting your approval can be found in the <a href='".HTTP_PATH."'>My Approvals</a> section of the Our Heroes Portal. 
+											You can also find a history of nominations in the <a href='".HTTP_PATH."'>Reports</a> section.</p>";
+					$email = sendEmail($sendEmail,$id);
+					$_SESSION['alreadydone'] = 'yes';
+				}
+			}
 			// send email to nominee
 			if ($_SESSION['nominee']->Volunteer !='') {
 				$_SESSION['nominee']->NomFull_name = $_SESSION['nominee']->Volunteer;
