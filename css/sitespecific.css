@@ -216,6 +216,14 @@
 }
 }
 /* @end */
+/* @group Portfolio */
+#portfolio .title .awardStar{
+    position: absolute;
+    margin-left: 0px;
+    top: 5px;
+    left: 5px;
+}
+/* @end */
 /* @group Nominate */
 .nominateHome .image{
 	background: url(../images/nominate-home.jpg);

@@ -3,5 +3,5 @@
 	<a href="#" data-type="popup" data-id="<?=HTTP_PATH?>" data-url="<?=HTTP_PATH?>alerts/photo-upload.php" class="clickAble uploadPhoto"><i class="icon-icons_person"></i></a>
 </div>
 <div class="title">
-	Hello <?=trim($_SESSION['user']->Fname)?>!
+	<div class="awardStar"><i class="icon-icons_star"></i><span><?php echo getTotalAwards($_SESSION['user']->EmpNum) ?></span></div> Hello <?=trim($_SESSION['user']->Fname)?>!
 </div>
