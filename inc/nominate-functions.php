@@ -87,19 +87,18 @@ function getTotalApprovedNominations($empnum){
 	}
 }
 ////////////////////////////////////////////////////////////////////////////////////
-function getEmployeFnameAndSname() {
+function getEmployeFnameAndSname () {
 	global $db;
-	$sql = 'SELECT	e.Fname AS name,
+	$sql = 'SELECT e.Fname AS name,
 				e.Sname AS sname,
-				e.id AS EmpNum
+				n.id AS id
 			FROM 
 				tblnominations AS n
 			INNER JOIN
 				tblempall AS e
-			ON n.NominatorEmpNum = e.EmpNum
-			WHERE
-				n.awardType=1 AND n.AprStatus=1 ORDER BY n.NomDate ASC LIMIT 10';
-	$stmt = $db->prepare($sql);
+			ON n.NominatedEmpNum = e.EmpNum
+			WHERE n.awardType=1 AND n.AprStatus=1 ORDER BY n.AprDate DESC LIMIT 20';
+	$stmt = $db->prepare( $sql );
 	$stmt->execute();
 	$arr = array();
 	while($result = $stmt->fetch( PDO::FETCH_ASSOC )) {
@@ -126,4 +125,5 @@ function getAllTeamsMembers($teamID) {
 	$result = $stmt->fetchAll(PDO::FETCH_OBJ);
 	return $result;
 }
+////////////////////////////////////////////////////////////////////////////////////
 ?>
