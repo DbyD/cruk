@@ -9,6 +9,7 @@ function startEmail(){
 					img{display:block}
 					.emailOurheroes {text-align: left;}
 					.emailCruklogo {float: right;}
+					.small{font-size:8pt;}
 				</style></head><body><div align="center"><div class="emailText">
 				<div class="ourheroes"><img src="'.HTTP_PATH.'images/emails/our-heroes.png" alt="Cancer Research UK"></div>';
 	return  $startemail;
@@ -18,7 +19,7 @@ function endEmail($noid){
 	$endemail .= '<img class="emailCruklogo" src="'.HTTP_PATH.'images/emails/Cancer-Research-UK.png" alt="Cancer Research UK">';
 	$endemail .= '<p>Regards</p><p><b>Cancer Research</b></p>';
 	if($noid != ''){
-			$endemail .= '<p>For future reference, if you need to contact our recognition partner, Xexec, about this nomination, please quote nomination code NO'.$noid.'</p>';
+			$endemail .= '<p class="small">For future reference, if you need to contact our recognition partner, Xexec, about this nomination, please quote nomination code NO'.$noid.'</p>';
 	}
 	$endemail .= '</div></div></body></html>';
 	return $endemail;

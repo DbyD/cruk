@@ -14,9 +14,9 @@
 		</div>
 		<i class="icon-icons_thickrightarrow smalli"></i> <span class="subSubTitle">Dashboard</span>
 	</div>
-	<div class="row">
+	<div class="row contentFill">
 		<div class="medium-12 columns leftnp rightnp">
-			<div class="callout panel fillHeight white">
+			<div class="callout panel white">
 				<div class="tableReports">
 					<div class="tableReportsHead tableColumn-3 clickAble white" data-type="gourl" data-url="index.php">
 						Dashboard

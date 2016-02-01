@@ -110,4 +110,20 @@ function getEmployeFnameAndSname () {
 	return $arr;
 }
 ////////////////////////////////////////////////////////////////////////////////////
+function getmyTeams($empnum){
+	global $db;
+	$stmt = $db->prepare('SELECT * FROM tblteams WHERE EmpNum = :EmpNum ');
+	$stmt->execute(array('EmpNum' => $empnum));
+	$stmt->execute();
+	return $stmt->fetchAll(PDO::FETCH_OBJ);
+}
+////////////////////////////////////////////////////////////////////////////////////
+function getAllTeamsMembers($teamID) {
+	global $db;
+	$stmt = $db->prepare("SELECT * FROM tblteamusers tu INNER JOIN tblempall e ON tu.EmpNum=e.EmpNum WHERE tu.teamID = :teamID");
+	$stmt->execute(array('teamID' => $teamID));
+	$result = $stmt->fetchAll(PDO::FETCH_OBJ);
+	return $result;
+}
+////////////////////////////////////////////////////////////////////////////////////
 ?>
