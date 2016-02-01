@@ -473,6 +473,9 @@
 	width: 20%;
 }
 }
+.tableReportsHeadButton{
+	padding: 5px 0;
+}
 /* @end */
 /* @group My Account */
 .accountHome .image{
@@ -554,7 +557,7 @@
 	display: inline-table;
 }
 .tableColumn-9 {
-	width: 75%;
+	width: 74.5%;
 	display: inline-table;
 }
 .tableColumn-10 {
