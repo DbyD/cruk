@@ -436,6 +436,15 @@
 	margin-left: 5px;
 	cursor: pointer;
 }
+.tableReportsHeadButton{
+	padding: 5px 0;
+}
+#searchTeam .purpleButton{
+	margin: 0.5rem 0;
+}
+.noRightBorder{
+	border-right: 0;
+}
 @media only screen and (max-width: 1199px) {
 
 .height515 {
@@ -472,9 +481,6 @@
 	float: left;
 	width: 20%;
 }
-}
-.tableReportsHeadButton{
-	padding: 5px 0;
 }
 /* @end */
 /* @group My Account */

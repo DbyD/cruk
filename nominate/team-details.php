@@ -8,10 +8,10 @@
 		<div class="medium-12 columns">
 			<div class="">
 				<form action="colleague.php" method="GET" name="searchTeam" id="searchTeam">
-					<div class="medium-10 columns noPadding">
+					<div class="medium-9 columns noPadding">
 						<input type="text" name="searchAuto" id="searchAuto" value="" class="search" />
 					</div>
-					<div class="medium-2 columns noPadding">
+					<div class="medium-3 columns noPadding">
 						<div class="purpleButton clickAble" data-type="submit" data-url="searchTeam">Search</div>
 					</div>
 				</form>

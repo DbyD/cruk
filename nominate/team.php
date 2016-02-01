@@ -22,13 +22,18 @@
 							</div>
 						</div>
 						<?php // get list of work related
+								$i= 0;
 								$myTeams = getmyTeams($_SESSION['user']->EmpNum);
 								foreach($myTeams as $list){ 
+								$i ++;
 							?>
 						<div class="tableReportsHead tableColumn-2 clickAble <?php if ($myteam==$list->id) echo "white" ?>" data-type="gourl" data-url="<?=HTTP_PATH?>nominate/team.php?team=<?=$list->id;?>">
 							<?=$list->TeamName;?>
 						</div>
-						<?php  } ?>
+						<?php  }
+						// fix header. 
+							echo fixMenuSpace($i);
+						?>
 					</form>
 				</div>
 				<?php
