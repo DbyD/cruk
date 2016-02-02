@@ -35,7 +35,7 @@ FROM
 ////////////////////////////////////////////////////////////////////////////////////
 function getMyMessages($empnum,$department) {
 	global $db;
-	$sql = 'SELECT
+	$sql = 'SELECT X.* FROM (SELECT
 				sender			AS sender,
 				recipient		AS recipient,
 				text			AS text,
@@ -49,12 +49,12 @@ function getMyMessages($empnum,$department) {
 				NominatorEmpNum	AS sender,
 				NominatedEmpNum	AS recipient,
 				personalMessage	AS text,
-				NomDate			AS date,
+				AprDate			AS date,
 				"a"				AS award,
 				Department		AS Department
 			FROM tblnominations
-			WHERE NominatedEmpNum = :recipient
-			ORDER BY Department = :Department ,date DESC';
+			WHERE NominatedEmpNum = :recipient) X
+			ORDER BY Department = :Department DESC, date DESC';
 //	$stmt = $db->prepare('SELECT * FROM tblmessage WHERE recipient = :recipient ORDER BY date DESC');
 	$stmt = $db->prepare($sql);
 	$stmt->execute(array('recipient' => $empnum,'Department' => $department));

@@ -29,7 +29,7 @@
 			$sendEmail->Content = "<p>Hello ".$recipient->Fname."</p>
 									<p>".$sender->Fname." has sent you a message from the Our Heroes Portal.</p>
 									<p>Message: ".$_POST["text"]."</p>
-									<p>Please login to the <a href='".HTTP_PATH."'>Our Heroes Portal</a> to view the message.</p>";
+									<p>To see who else has recently won awards or to nominate a colleague, please login to the <a href='".HTTP_PATH."'>Our Heroes Portal</a>.</p>";
 			$email = sendEmail($sendEmail,'');
 			echo "success";
 		} else {
