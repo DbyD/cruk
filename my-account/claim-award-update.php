@@ -17,7 +17,7 @@
 		print_r($sendEmail);
 		
 		if($sendEmail->amount == '20'){
-			$voucher = '£'.$sendEmail->amount;
+			$voucher = '&pound;'.$sendEmail->amount;
 		} else {
 			$voucher = $sendEmail->amount;
 		}
