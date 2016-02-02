@@ -5,12 +5,46 @@
 
 		if( isset( $_POST['submit'] ) && isset( $_POST["sub_id"] ) ) {
 			if( $_FILES['imageSub'] != null ){
-
 				$res = insertImageSub( $_FILES['imageSub'], $_POST["sub_id"], $menu_id );
 				if( $res ){
 					updateSubImage( $res, $_POST["sub_id"] );
 				}
+			}
+		}
 
+		if(isset( $_POST["submit"] ) ){
+			if( empty( $_POST["title"] ) || empty( $_POST["point"] ) || empty( $_POST["Delivery"] ) || empty( $_POST["content"] ) || empty( $_FILES["fileImage"] ) ){
+				$error_message = "<div class='error'>Please fill in all fields</div>";
+			} else {
+
+				$file_path = insertFile( $_FILES , $_POST["menu_id"], $_POST["sub_id"]);
+
+
+				if($file_path != 'error'){
+
+					$data = array(
+						'aTitle' => $_POST["title"],
+						'aPrice' => $_POST["point"],
+						'delivery' => $_POST["Delivery"],
+						'aContent' => $_POST["content"],
+						'menuID' => $_POST["menu_id"],
+						'subID' => $_POST["sub_id"],
+						'Image_name' => $file_path
+					);
+
+
+
+					if( isset( $_POST["prID"] ) ) {
+						$data['prID'] = $_POST["prID"];
+						updateProduct( $data );
+
+					} else {
+						insertProduct( $data );
+					}
+					
+				}
+
+				
 			}
 		}
 
@@ -23,25 +57,21 @@
 			$subs = getMenuSubs( $menu_id );
 			$res = 0;
 		}
-		
 
-	} else if(isset( $_GET["prID"] )){
-		// $res = getProductByID( $_GET["prID"] );
+
+
+		if( isset( $_GET["prID"] ) ){
+			$pr = getProductByID( $_GET["prID"] );
+		}
+
+
+	} else {
 		$res = getTotalProducts();
 	}
 
-
-
-	
 	if( $res != 0){
 		$products = $res;
 	}
-
-
-
-
-	
-
 ?>
 
 <div id="content" class="large-8 large-push-2 columns">
@@ -51,12 +81,13 @@
 	<div class="row contentFill">
 		<div class="medium-12 columns leftnp rightnp fillHeight">
 
-				<?php if(isset($subs) && count($subs) > 0 ): ?>
+				<?php if( isset($subs) && count($subs) > 0 ): ?>
 
 					<div class="row subs">
 						<div class="small-12 large-12 columns" id="subsTitle">
 							Subs
 						</div>
+
 						<?php foreach($subs as $sub): ?>
 
 							<?php if( is_array( $sub ) ):?>
@@ -73,6 +104,7 @@
 											<?php endif;?>
 
 											<form action="" method="post" enctype="multipart/form-data">
+												
 
 											  <div class="row">
 											    <div class="large-12 columns">
@@ -124,7 +156,7 @@
 						  				<?php echo $product['aTitle']; ?>
 									</p>
 
-						  			<a href="<?php echo HTTP_PATH . 'redeem/products.php?prID=' . $product['prID']; ?>"><img src="<?php echo HTTP_PATH . $product["Image_name"]; ?>" class="product-img"></a>
+						  			<a href="<?php echo HTTP_PATH . 'redeem/products.php?menu_id=' . $menu_id . '&sub_id=' . $sub_id . '&prID=' . $product['prID']; ?>"><img src="<?php echo HTTP_PATH . $product["Image_name"]; ?>" class="product-img"></a>
 						  		</div>
 						    </div>
 						
@@ -151,14 +183,13 @@
 	<?php if(isset($sub_id)):?>
 	<div class="row">
 		<div class="small-12 large-12 columns form-prduct">
-			
 			<form method="post" action="" enctype="multipart/form-data">
 				<?php if(isset($error_message)) echo $error_message;?>
 		      <h2>Add / Edit Products</h2>
 			  <div class="row">
 			    <div class="large-3 columns">
 			      <label>Title: </label></div>
-			        <div class="large-9 columns"><input type="text" placeholder="" name="title"/>
+			        <div class="large-9 columns"><input type="text" placeholder="" name="title" value="<?php echo isset( $pr['aTitle'] ) ? $pr['aTitle'] : ''; ?>"/>
 			    </div>
 			  </div>
 			  <div class="row">
@@ -170,15 +201,19 @@
 			  <div class="row">
 			    <div class="large-3 columns">
 			      <label>Value Options Points: </label></div>
-			        <div class="large-9 columns"><input type="text" placeholder="" name="point"/>
+			        <div class="large-9 columns">
+			        	<input type="text" placeholder="" name="point" value="<?php echo isset( $pr['aPrice'] ) ? $pr['aPrice'] : ''; ?>" />
 			    </div>
 			  </div>	
 			  
 			  <div class="row">
 			    <div class="large-3 columns">
-			      <label>Delivery: </label></div>
-			     <div class="large-9 columns"> <input type="radio" name="Delivery" value="no" id="pokemonRed" checked><label for="pokemonRed">No</label>
-			      <input type="radio" name="Delivery" value="yes" id="pokemonBlue"><label for="pokemonBlue">Yes</label>
+			     <label>Delivery: </label></div>
+			     <div class="large-9 columns"> 
+			     	<input type="radio" name="Delivery" value="no" id="pokemonRed" <?php echo ( isset( $pr['delivery'] ) && $pr['delivery'] == 'no') ? 'checked' : ''; ?> >
+			     <label for="pokemonRed">No</label>
+			      	<input type="radio" name="Delivery" value="yes" id="pokemonBlue" <?php echo ( isset( $pr['delivery'] ) && $pr['delivery'] == 'yes') ? 'checked' : ''; ?> >
+			      	<label for="pokemonBlue">Yes</label>
 			    </div>
 			  </div>
 			  <script type="text/javascript" src="http://js.nicedit.com/nicEdit-latest.js"></script> <script type="text/javascript">
@@ -189,9 +224,15 @@
 			  			<label>Main Content: </label>
 			  		</div>
 			 	 	<div class="large-9 columns">
-			 	 	 	<textarea name="content" cols="40"></textarea>
+			 	 	 	<textarea name="content" cols="40">
+			 	 	 		<?php echo isset( $pr['aContent'] ) ? $pr['aContent'] : ''; ?>
+			 	 	 	</textarea>
 			  		</div>
 			  </div>
+
+			  	<?php if( isset( $pr['prID']) ):?>
+			  		<input type="hidden" value="<?php echo $pr['prID']; ?>" name="prID"/>
+			  	<?php endif;?>
 			  
 			  	<input type="hidden" value="<?php echo $menu_id; ?>" name="menu_id"/>
 			  		

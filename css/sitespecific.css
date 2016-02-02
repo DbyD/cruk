@@ -1137,6 +1137,10 @@ button:hover, button:focus, .button:hover, .button:focus{
     padding-left: 10px;
 }
 
+
+.product > img {
+	cursor:pointer;
+}
 .product-img {
 	width: 125px;
     height: 125px;
@@ -1368,5 +1372,42 @@ button:hover, button:focus, .button:hover, .button:focus{
 
 #awards {
 	position: relative;
+}
+
+.del-item {
+	cursor:pointer;
+}
+
+.sub-menu {
+	background-color: #fff;
+    height: 300px;
+    text-align: center;
+    position: relative;
+}
+
+.sub-menu > P {
+	background-color: #662696;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.sub-menu > form {
+	position: absolute;
+    bottom: 10px;
+    padding: 0px 10px;
+    text-align: left;
+
+}
+
+.sub-menu img {
+	width:135px;
+}
+
+#subsTitle {
+	padding: 20px;
+    text-align: right;
+    font-size: 24px;
 }
 /* @end*/
