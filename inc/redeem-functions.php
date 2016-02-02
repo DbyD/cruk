@@ -12,7 +12,7 @@ function getTotalProducts(){
 	if( count($arr) == 0){
 		return 0;
 	}
-
+	
 	return $arr;
 }
 
@@ -64,6 +64,36 @@ VALUES
 	$stmt->bindValue(':menuID',$data["menuID"] , PDO::PARAM_INT);
 	$stmt->bindValue(':subID',$data["subID"] , PDO::PARAM_INT);
 	$stmt->bindValue(':Image_name',$data["Image_name"] , PDO::PARAM_STR);
+
+	$stmt->execute();
+} 
+
+function updateProduct( $data ){
+	global $db;
+
+	$sql = "
+UPDATE tblproducts 
+SET aTitle = :aTitle,
+	aPrice = :aPrice,
+	delivery = :delivery,
+	aContent = :aContent,
+	menuID = :menuID,
+	subID = :subID,
+	Image_name = :Image_name
+WHERE prID = :prID";
+
+	$stmt = $db->prepare( $sql );
+	
+	
+	$stmt->bindValue(':aTitle',$data["aTitle"], PDO::PARAM_STR);
+	$stmt->bindValue(':aPrice', $data["aPrice"], PDO::PARAM_STR);
+	$stmt->bindValue(':delivery',$data["delivery"] , PDO::PARAM_STR);
+	$stmt->bindValue(':aContent',$data["aContent"] , PDO::PARAM_STR);
+	$stmt->bindValue(':menuID',$data["menuID"] , PDO::PARAM_INT);
+	$stmt->bindValue(':subID',$data["subID"] , PDO::PARAM_INT);
+	$stmt->bindValue(':Image_name',$data["Image_name"] , PDO::PARAM_STR);
+	$stmt->bindValue(':prID',$data["prID"] , PDO::PARAM_INT);
+	
 
 	$stmt->execute();
 } 

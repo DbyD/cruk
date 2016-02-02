@@ -3,41 +3,12 @@ include_once '../inc/config.php';
 include_once '../inc/header.php';
 include "lib.php";
 $menu = new MenuGenerator;
-
-if(isset( $_POST["submit"] ) ){
-	if( empty( $_POST["title"] ) || empty( $_POST["point"] ) || empty( $_POST["Delivery"] ) || empty( $_POST["content"] ) || empty( $_FILES ) ){
-		$error_message = "<div class='error'>Please fill in all fields</div>";
-	} else {
-		
-		$file_path = insertFile( $_FILES , $_POST["menu_id"], $_POST["sub_id"]);
-
-
-		if($file_path != 'error'){
-
-			$data = array(
-				'aTitle' => $_POST["title"],
-				'aPrice' => $_POST["point"],
-				'delivery' => $_POST["Delivery"],
-				'aContent' => $_POST["content"],
-				'menuID' => $_POST["menu_id"],
-				'subID' => $_POST["sub_id"],
-				'Image_name' => $file_path
-			);
-
-
-
-			insertProduct( $data );
-		}
-
-		
-	}
-}
 ?>
 
 <?php 
 	$val = $_SESSION['user']->SuperUser;
 
-	if( $val == "NO" ){
+	if( $val == "YES" ){
 
 		include('../admin/products.php');
 	} else {
