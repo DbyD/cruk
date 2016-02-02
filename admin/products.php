@@ -76,10 +76,10 @@
 
 <div id="content" class="large-8 large-push-2 columns">
 	<div class="title withStar">
-		Redeem
+		Redeem Admin 
 	</div>
-	<div class="row contentFill">
-		<div class="medium-12 columns leftnp rightnp fillHeight">
+	<div class="row contentFill mCustomScrollbar height590 " data-mcs-theme="dark-2">
+		<div class="medium-12 columns leftnp rightnp fillHeight productCats">
 
 				<?php if( isset($subs) && count($subs) > 0 ): ?>
 
@@ -92,8 +92,8 @@
 
 							<?php if( is_array( $sub ) ):?>
 								
-									<div class="small-4 large-6 columns">
-										<div class="sub-menu">
+									<div class="small-2 large-4 columns">
+										<div class="callout panel product">
 											<p>
 								  				<?php echo $sub['label']; ?>
 											</p>
@@ -179,7 +179,6 @@
 
 			</div>
 		
-	</div>
 	<?php if(isset($sub_id)):?>
 	<div class="row">
 		<div class="small-12 large-12 columns form-prduct">
@@ -216,7 +215,8 @@
 			      	<label for="pokemonBlue">Yes</label>
 			    </div>
 			  </div>
-			  <script type="text/javascript" src="http://js.nicedit.com/nicEdit-latest.js"></script> <script type="text/javascript">
+			  <script type="text/javascript" src="http://js.nicedit.com/nicEdit-latest.js"></script>
+			  <script type="text/javascript">
 			    bkLib.onDomLoaded(function() { nicEditors.allTextAreas() });
 			  </script>
 			  <div class="row">
@@ -256,6 +256,7 @@
 
 </div>
 
+	</div>
 		
 			<div id="left-column" class="large-2 large-pull-8 columns">
 				<div id="payoff" class="callout panel">
