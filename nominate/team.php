@@ -22,19 +22,24 @@
 							</div>
 						</div>
 						<?php // get list of work related
+								$i= 0;
 								$myTeams = getmyTeams($_SESSION['user']->EmpNum);
 								foreach($myTeams as $list){ 
+								$i ++;
 							?>
 						<div class="tableReportsHead tableColumn-2 clickAble <?php if ($myteam==$list->id) echo "white" ?>" data-type="gourl" data-url="<?=HTTP_PATH?>nominate/team.php?team=<?=$list->id;?>">
 							<?=$list->TeamName;?>
 						</div>
-						<?php  } ?>
+						<?php  }
+						// fix header. 
+							echo fixMenuSpace($i);
+						?>
 					</form>
 				</div>
 				<?php
 					if ($myteam){ ?>
-				<form action="nominate-team.php" method="post" name="nominateColleague" id="nominateColleague">
-					<input type="hidden" name="formName" value="nominateColleague">
+				<form action="nominate-team.php" method="post" name="nominateTeam" id="nominateTeam">
+					<input type="hidden" name="formName" value="nominateTeam">
 					<div class="row mCustomScrollbar height515" data-mcs-theme="dark-2">
 					<?php	$searchList = getAllTeamsMembers($myteam);
 						if ($searchList){
@@ -58,13 +63,13 @@
 					<div id="buttonRow" class="row buttonRow">
 						<div class="row searchResult noBorder valign-middle">
 							<div class="medium-3 columns">
-								<a href="#" class="blueButton clickAble" data-type="submit" data-url="nominateColleague">Delete Team</a>
+								<a href="#" class="blueButton clickAble" data-type="submit" data-url="nominateTeam">Delete Team</a>
 							</div>
 							<div class="medium-3 columns">
-								<a href="#" class="blueButton clickAble" data-type="popup" data-url="nominateColleague">Edit Team</a>
+								<a href="#" class="blueButton clickAble" data-type="popup" data-url="nominateTeam">Edit Team</a>
 							</div>
 							<div class="medium-6 columns textRight ">
-								<a href="#" class="pinkButton clickAble" data-type="submit" data-url="nominateColleague">Nominate Team</a>
+								<a href="#" class="pinkButton clickAble" data-type="submit" data-url="nominateTeam">Nominate Team</a>
 							</div>
 						</div>
 					</div>

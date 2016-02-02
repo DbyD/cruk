@@ -11,6 +11,20 @@ $(function(){
 			$("#alert").css('display', 'block');
 		}
 	});
+	$("#searchTeam").validate({
+		rules: {searchTeamAuto: "required"},
+		messages: {searchTeamAuto: "Search Field cannot be empty. Please type in a Team name or Colleague's First or Last name."},
+		errorPlacement: function(error, element) {
+			$("#alertContent").load("../alerts/alert-popup.php", {'error' : error.html() });
+			$("#alert").css('display', 'block');
+		},
+		submitHandler: function(form) {
+			$("#popupContent1").load(
+				'team-details.php',
+				$('#searchTeam').serialize()
+			);
+		}
+	});
 	$("#searchAdminColleague").validate({
 		rules: {searchAdmin: "required"},
 		messages: {searchAdmin: "Search Field cannot be empty. Please type in Colleague's First or Last name."},
@@ -270,6 +284,8 @@ $('#searchAuto').autocomplete({source:'../inc/emp-list.php'});
 //----------------------------------------------------------------------------------
 $('#searchAdmin').autocomplete({source:'../inc/emp-admin-list.php'});
 //----------------------------------------------------------------------------------
+$('#searchTeamAuto').autocomplete({source:'../inc/emp-team-list.php'});
+//----------------------------------------------------------------------------------
 $('.custom-upload input[type=file]').change(function(){
     $(this).next().find('input').val($(this).val());
 });
@@ -299,9 +315,10 @@ $(function() {
 //----------------------------------------------------------------------------------
 (function($){
 	$(window).load(function(){
-		$(".content").mCustomScrollbar();
+		//$(".content").mCustomScrollbar();
 	});
 })(jQuery);
+$("#scrollBar").mCustomScrollbar();
 //----------------------------------------------------------------------------------
 $(document).ready(function(){
 	$(".sendMail").click(function(){

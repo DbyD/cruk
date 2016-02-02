@@ -1,6 +1,7 @@
 <?php
 	include_once('../inc/config.php');
 	include_once('../inc/header.php');
+	$_SESSION['alreadydone']='no'
 ?>
 
 <div id="content" class="large-8 large-push-2 columns">
