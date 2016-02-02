@@ -6,11 +6,11 @@
 		
 		$_SESSION['nominee']->BeliefID = $_POST['BeliefID'];
 		$_SESSION['nominee']->personalMessage = $_POST['personalMessage'];
-		/*if($_POST['littleExtra']){
+		if($_POST['littleExtra']){
 			$_SESSION['nominee']->littleExtra = 'Yes';
 		} else {
 			$_SESSION['nominee']->littleExtra = 'No';
-		}*/
+		}
 		if($_POST['awardPrivate']){
 			$_SESSION['nominee']->awardPrivate = 'Yes';
 		} else {
@@ -60,7 +60,7 @@
 		$id = $db->lastInsertId();
 		$_SESSION['alreadydone'] = 'yes';
 		// add in work awards if app = nom
-		if(($_SESSION['nominee']->AppEmpNum == $_SESSION['user']->EmpNum)){
+		if($_SESSION['nominee']->littleExtra=='Yes' && ($_SESSION['nominee']->AppEmpNum == $_SESSION['user']->EmpNum)){
 			foreach ($_SESSION['nominee']->workAward as $key => $value){
 				if (strstr($key, 'workAward')){
 					$stmt = $db->prepare("INSERT INTO tblworknominations(nominationID, workawardsID) VALUES (:nominationID, :workawardsID)");

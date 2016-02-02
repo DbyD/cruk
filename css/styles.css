@@ -284,6 +284,9 @@ input[type=submit], .blueButton {
 .mCS-dark-2.mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar{
 	background-color: #b2b2b2;
 }
+.ui-menu{
+	z-index: 11;
+}
 li.ui-menu-item { font-size:13px !important; }
 .required{
 	color: #f0393e;
@@ -324,6 +327,9 @@ li.ui-menu-item { font-size:13px !important; }
 .blueText{
 	color: #2e008b !important;
 }
+.greyBox{
+	background: #ebebeb;
+}
 /* @end */
 
 /* @group Content */
@@ -351,7 +357,7 @@ li.ui-menu-item { font-size:13px !important; }
 #alert, #viewEcard, #popup1, #ecardPopup{
 	background-color: rgba(0,0,0,0.7);
 	display: none;
-	z-index: 99;
+	z-index: 10;
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -359,7 +365,7 @@ li.ui-menu-item { font-size:13px !important; }
 	right: 0;
 }
 #alertbox, #popupbox1, #ecardbox{
-	z-index: 99;
+	z-index: 10;
 	position: fixed;
 	left: 50%;
     top: 90px;

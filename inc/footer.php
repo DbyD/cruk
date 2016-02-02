@@ -51,11 +51,11 @@
 						<?php }
 							}?>
 							<div class="row">
-								<i class="icon-icons_bubble"></i><span class="right"><?=date("l d/m/y")?></span>
+								<i class="icon-icons_mail"></i><span class="right"><?=date("l d/m/y")?></span>
 								<p class="text">Welcome to the Our Heroes portal where you can nominate colleagues in recognition of their contribution to Cancer Research.</p>
 							</div>
 							<div class="row">
-								<i class="icon-icons_bubble"></i><span class="right"><?=date("l d/m/y")?></span>
+								<i class="icon-icons_mail"></i><span class="right"><?=date("l d/m/y")?></span>
 								<p class="text">Click on the FAQs link to the right to find out more about using this site.</p>
 							</div>
 					</div>

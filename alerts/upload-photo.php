@@ -24,7 +24,7 @@
 			$stmt->execute(array('Photo' => $Photo, 'EmpNum' => $_SESSION['user']->EmpNum));
 			$_SESSION['user']->Photo = $Photo;
 		} else {
-			echo 'You must upload an image...';
+			$error = 'yes';
 		}
 	}
 ?>
@@ -57,6 +57,11 @@
 	</div>
 </div>
 <div id="alertBody" class="alertBody">
+	<div class="row withPadding">
+		<div class="medium-12 columns">
+			Note: Images must be less than 2MB and must be a jpg, gif, or png.
+		</div>
+	</div>
 	<div class="tableRow">
 		<img src="<?=HTTP_PATH.$_SESSION['user']->Photo?>" onerror="this.src='<?=HTTP_PATH?>images/no-photo.png';" alt="<?=$_SESSION['user']->Fname?>" />
 		<form method="post" action="upload-photo.php" enctype="multipart/form-data" name="uploadPhoto" id="uploadPhoto">
@@ -81,6 +86,10 @@
 <script src="<?=HTTP_PATH?>js/cruk.js"></script>
 <script>
 	parent.$('.portfolioPhoto').attr("src", '<?=HTTP_PATH.$_SESSION['user']->Photo?>')
+<?php if($error=='yes'){ ?>
+	$("#alertContent").load("../alerts/alert-popup.php", {'error' : 'Failed load: Images must be less than 2MB and must be a jpg, gif, or png.'});
+	$("#alert").css('display', 'block');
+<?php } ?>			 
 </script>
 </body>
 </html>

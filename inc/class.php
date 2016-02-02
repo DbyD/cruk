@@ -144,6 +144,13 @@ class searchAllUsers{
 		$result = $stmt->fetchAll(PDO::FETCH_OBJ);
 		return $result;
     }
+    public function getAllTeamSearch($search) {
+		global $db;
+		$stmt = $db->prepare("SELECT * FROM tblempall WHERE Team LIKE '%$search%' GROUP BY Team LIMIT 20 ");
+		$stmt->execute();
+		$result = $stmt->fetchAll(PDO::FETCH_OBJ);
+		return $result;
+    }
 }
 
 class searchUsers{
