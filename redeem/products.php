@@ -23,7 +23,7 @@ $menu = new MenuGenerator;
 
 			<div class="row">
 				<a id="viewBasket" class='<?php if($basket_isset) echo 'view-basket';?>' href="<?php echo HTTP_PATH . "redeem/product-basket.php?basket=true&menu_id=" . $menu_id; ?>">
-				<p><i class="fi-shopping-bag medium left"></i>&nbsp;&nbsp;View basket</p>
+				<i class="fi-shopping-bag"></i>View basket
 			</a>
 			</div>
 
@@ -54,7 +54,7 @@ $menu = new MenuGenerator;
 					<?php foreach( $products as $product ):?>
 
 						<div class="small-2 large-4 columns">
-					  		<div class="product">
+					  		<div class="callout panel product">
 
 					  			<p><?php echo $product['aTitle']; ?></p>
 
