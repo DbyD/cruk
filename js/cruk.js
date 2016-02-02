@@ -369,13 +369,14 @@ $(document).ready(function(){
 
 	$("#price").click(function(e){
 		var parentUL = $(this).children()[1];
+		//$(this).find('p').html('Price <i class="icon-icons_thindownarrow right"></i>');
 		$(parentUL).children().toggleClass('hide');
 	});
 
 	$('.price-list').click(function(e){
 		var currentPrice = $(e.target).text();
-		$("#price").find('p').html(currentPrice + '<i class="fi-arrow-down right">');
-		$("#aPrice").val(currentPrice);
+		$("#price").find('p').html('Price ' + currentPrice + '<i class="icon-icons_thinrightarrow right"></i>');
+		$("#aPrice").val(currentPrice.replace('£', ''));
 	});
 
 	$(".basket-item-remove").click(function(){
