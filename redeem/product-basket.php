@@ -75,7 +75,7 @@ $basket = getBasket( $_SESSION["user"]->id );
 
 			
 			<a id="viewBasket" class='<?php if($basket_isset) echo 'view-basket';?>' href="<?php echo HTTP_PATH . "redeem/product-basket.php?basket=true&menu_id=" . $menu_id; ?>">
-				<p><i class="fi-shopping-bag medium left"></i>&nbsp;&nbsp;View basket</p>
+				<i class="fi-shopping-bag"></i>View basket
 			</a>
 
 			<?php if( $basket_isset ) : ;?>
@@ -95,17 +95,18 @@ $basket = getBasket( $_SESSION["user"]->id );
 
 					
 
-			<div class="row product">
+			<div class="row callout panel productView">
 				<?php if($res):?>
 					<div data-alert class="alert-box success radius">
 					  Added in basket!
 					  <a href="#" class="close">&times;</a>
 					</div>
 				<?php endif; ?>
-				<div class="small-4 large-4 columns">
+				<div class="small-4 medium-4 columns">
 					<img src="<?php echo HTTP_PATH . $product["Image_name"]; ?>" class="product-img">
 				</div>
-				<div class="small-8 large-8 columns">
+				<div class="small-8 medium-8 columns">
+				<div class="small-12 large-12 columns productText">
 					<h3><?php echo $product["aTitle"]; ?></h3>
 					<p><?php echo $product["aContent"]; ?></p>
 				</div>
@@ -113,28 +114,29 @@ $basket = getBasket( $_SESSION["user"]->id );
 					<div class="row">
 						
 
-						<div class="small-4 large-4 large-offset-4 columns">
+						<div class="small-6 large-6 columns">
 							<div id="price">
-								<div><p>Price<i class="fi-arrow-down right"></i></p></div>
+								<div><p>Price<i class="icon-icons_thinrightarrow right"></i></p></div>
 								<div>
 									<ul class="price-list hide">
 										<?php foreach($prices as $price):?>
-											<li><?php echo $price; ?></li>
+											<li><?php echo "&pound;".$price; ?></li>
 										<?php endforeach;?>
 									</ul>
 								</div>
 							</div>
 						</div>
 
-						<div class="small-4 large-4 columns">
+						<div class="small-6 large-6 columns">
 							<form action="" method="post">
 								<input type="hidden" name="prID" value="<?php echo $product["prID"]; ?>" id="prID">
 								<input type="hidden" name="aPrice" value="<?php echo $product["aPrice"]; ?>" id="aPrice">
 								<input type="hidden" name="employeID" value="<?php echo $_SESSION['user']->id; ?>" id="employeID">
-								<button id="addBasket"><p>Add to Basket</p></button>
+								<button id="addBasket" class="pinkButton">Add to Basket</button>
 							</form>
 						</div>
 					</div>
+				</div>
 				</div>
 				
 
@@ -145,7 +147,7 @@ $basket = getBasket( $_SESSION["user"]->id );
 				$total_price = 0;
 				 ?>
 				<!-- <pre><?php var_dump($basket); ?></pre> -->
-					<div class="row" id="basket-table">
+					<div class="row callout panel " id="basket-table">
 
 						<div class="small-12 large-12 columns">
 
@@ -167,7 +169,7 @@ $basket = getBasket( $_SESSION["user"]->id );
 
 							  	?>
 							  		<tr>
-							  			<td><span>1<span></td>
+							  			<td><span>1</span></td>
 							  			<td><?php echo $pr_info['aTitle'];?></td>
 							  			<td>$<?php echo $pr_b['aPrice'];?></td>
 							  			<td>
@@ -206,14 +208,14 @@ $basket = getBasket( $_SESSION["user"]->id );
 							</div>
 
 						</div>
-						<div class="small-12 large-offset-2 large-10 columns">
-							<button class="button-basket">
+						<div class="small-12 medium-12 columns textRight">
+							<button class="purpleButton">
 								CONTINUE SHOPING
 							</button>
-							<button class="button-basket">
+							<button class="blueButton">
 								UPDATE QUANTITY
 							</button>
-							<button class="button-basket">
+							<button class="pinkButton">
 								CHECK OUT
 							</button>
 						</div>
