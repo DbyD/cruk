@@ -5,8 +5,8 @@ include "lib.php";
 $menu = new MenuGenerator;
 ?>
 
-<?php 
-	$val = $_SESSION['user']->SuperUser;
+<?php
+    $val = $_SESSION['user']->administrator;
 
 	if( $val == "NO" ){
 
