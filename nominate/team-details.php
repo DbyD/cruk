@@ -16,7 +16,7 @@
 <div id="alertTitle" class="title smallPopupTitle">
 	<div class="row withPadding">
 		<div class="medium-12 columns">
-			Find/Ceate Team
+			Find/Create Team
 			<div class="small">
 				Search for an existing team (e.g. 'Payroll') or for individual colleagues
 			</div>
@@ -150,7 +150,7 @@
 	<div class="medium-12 columns">
 		<div class="TeamInputName">
 			<form action="create-team.php" method="POST" name="confirmTeam" id="confirmTeam">
-				<input type="text" name="teamid" id="teamid" value="<?=$teamid?>" class="" />
+				<input type="hidden" name="teamid" id="teamid" value="<?=$teamid?>" class="" />
 				<input type="text" name="myTeamName" id="myTeamName" value="" class="" />
 			</form>
 		</div>
