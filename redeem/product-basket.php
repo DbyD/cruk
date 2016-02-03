@@ -57,7 +57,7 @@ $basket = getBasket( $_SESSION["user"]->id );
 		$basket_isset = false;
 	}
 
-	$val = $_SESSION['user']->SuperUser;
+	$val = $_SESSION['user']->administrator;
 
 	if( $val == "YES" ){
 

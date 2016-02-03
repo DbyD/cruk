@@ -458,12 +458,15 @@ form .row .row {
 .height120 {
 	height: 120px;
 }
-#team {
+#myTeamName {
 	border-radius: 8px;
 }
-#nominateTeamMember img {
+#addTeamMember img {
 	height: 25px !important;
 	width: 25px !important;
+}
+#teamMembers .withTopPadding{
+	padding: 5px 0;
 }
 @media only screen and (max-width: 1199px) {
 .height515 {

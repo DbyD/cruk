@@ -275,6 +275,17 @@ $(function(){
 					break;
 				}
 				break;
+			case 'addTeam':
+				console.log(id)
+				var input = $("<input>")
+				   .attr("type", "hidden")
+				   .attr("name", "TeamMember").val(id);
+				$("#addTeamMember").append($(input));
+				$("#popupContent1").load(
+					'team-details.php',
+					$('#addTeamMember').serialize()
+				);
+				break;
 			default:
 				alert('Nothing to do!');
 		}
