@@ -3,7 +3,7 @@
 <li class="clickAble <?php getCurrentFolder('my-account'); ?>" data-type="gourl" data-url="<?=HTTP_PATH?>my-account"><i class="icon-icons_account"></i>My Account</li>
 <li class="clickAble <?php getCurrentFolder('winners-wall'); ?>" data-type="gourl" data-url="<?=HTTP_PATH?>winners-wall"><i class="icon-icons_winners"></i>Wall of Fame</li>
 <li class="clickAble <?php getCurrentFolder('redeem'); ?>" data-type="gourl" data-url="<?=HTTP_PATH?>redeem"><i class="icon-icons_redeem"></i>Redeem</li>
-<?php if($_SESSION['user']->approver() == 'YES') { ?>
+<?php if($_SESSION['user']->approver() == 'YES' || $_SESSION['user']->administrator == 'YES') { ?>
 <li class="clickAble <?php getCurrentFolder('approvals'); ?>" data-type="gourl" data-url="<?=HTTP_PATH?>approvals"><i class="icon-icons_trophy"></i>Approvals</li>
 <?php }
 	if($_SESSION['user']->SuperUser == 'YES') { ?>
