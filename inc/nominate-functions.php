@@ -110,6 +110,20 @@ function getEmployeFnameAndSname () {
 	return $arr;
 }
 ////////////////////////////////////////////////////////////////////////////////////
+function fixMenuSpace($i){
+	switch ($i) {
+		case '0':
+			return '<div class="tableReportsHead tableColumn-8 noRightBorder"></div>';
+		case 1:
+			return '<div class="tableReportsHead tableColumn-6 noRightBorder"></div>';
+		case 2:
+			return '<div class="tableReportsHead tableColumn-4 noRightBorder"></div>';
+		case 3:
+			return '<div class="tableReportsHead tableColumn-2 noRightBorder"></div>';
+	}
+}
+////////////////////////////////////////////////////////////////////////////////////
+////////////    TEAM FUNCTIONS    ////////////////////////////////////////////////////
 function getmyTeams($empnum){
 	global $db;
 	$stmt = $db->prepare('SELECT * FROM tblteams WHERE EmpNum = :EmpNum ');
@@ -126,17 +140,35 @@ function getAllTeamsMembers($teamID) {
 	return $result;
 }
 ////////////////////////////////////////////////////////////////////////////////////
-function fixMenuSpace($i){
-	switch ($i) {
-		case '0':
-			return '<div class="tableReportsHead tableColumn-8 noRightBorder"></div>';
-		case 1:
-			return '<div class="tableReportsHead tableColumn-6 noRightBorder"></div>';
-		case 2:
-			return '<div class="tableReportsHead tableColumn-4 noRightBorder"></div>';
-		case 3:
-			return '<div class="tableReportsHead tableColumn-2 noRightBorder"></div>';
+function addTeamMember($empnum) {
+	if(isset($_SESSION['TeamMembers'])){
+	} else {
+		$_SESSION['TeamMembers'] =  array();
 	}
+	$name = getName($empnum);
+	if (in_array_r($empnum, $_SESSION['TeamMembers'])) {
+	} else {
+		$_SESSION['TeamMembers'][] = array('EmpNum' => $empnum, 'full_name' => $name);
+	}
+	return;
+}
+////////////////////////////////////////////////////////////////////////////////////
+function in_array_r($needle, $haystack, $strict = false) {
+    foreach ($haystack as $item) {
+        if (($strict ? $item === $needle : $item == $needle) || (is_array($item) && in_array_r($needle, $item, $strict))) {
+            return true;
+        }
+    }
+    return false;
+}
+////////////////////////////////////////////////////////////////////////////////////
+function removeTeamMember($empnum) {
+     foreach($_SESSION['TeamMembers'] as $subKey => $subArray){
+          if($subArray['EmpNum'] == $empnum){
+               unset($_SESSION['TeamMembers'][$subKey]);
+          }
+     }
+     return $_SESSION['TeamMembers'];
 }
 ////////////////////////////////////////////////////////////////////////////////////
 ?>

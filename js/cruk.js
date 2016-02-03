@@ -3,6 +3,23 @@ $.ajaxPrefilter(function( options, originalOptions, jqXHR ) {
 });
 //----------------------------------------------------------------------------------
 $(function(){
+	$("#confirmTeam").validate({
+		rules: {myTeamName: "required"},
+		messages: {myTeamName: "Please add an appropriate team name. The team name will be visible on the Wall of Fame"},
+		errorPlacement: function(error, element) {
+			$("#alertContent").load("../alerts/alert-popup.php", {'error' : error.html() });
+			$("#alert").css('display', 'block');
+		}/*,
+		submitHandler: function(form) { 
+			$.post('create-team.php', $("#confirmTeam").serialize(), function(data) {
+				if (data == 'created') {
+					$("#popup1").css('display', 'none');
+					$("#popupContent1").empty();
+					location.reload();
+				}
+			});
+		}*/
+	});
 	$("#searchColleague").validate({
 		rules: {searchAuto: "required"},
 		messages: {searchAuto: "Search Field cannot be empty. Please type in Colleague's First or Last name."},
@@ -286,6 +303,11 @@ $(function(){
 					$('#addTeamMember').serialize()
 				);
 				break;
+			case 'removeTeamMember':
+				url = url+"?removeMember="+id
+				console.log(url)
+				$("#popupContent1").load(url);
+				break;
 			default:
 				alert('Nothing to do!');
 		}
@@ -322,7 +344,7 @@ $(function() {
 	});
 });
 //----------------------------------------------------------------------------------
-	$(document).foundation();
+$(document).foundation();
 //----------------------------------------------------------------------------------
 (function($){
 	$(window).load(function(){

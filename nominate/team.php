@@ -17,7 +17,7 @@
 				<div class="tableReports">
 					<form action="team.php" method="post" name="myTeam" id="myTeam" >
 						<div class="tableReportsHeadButton tableColumn-4">
-							<div class="inlineDiv clickAble purpleButton " data-type="popup" data-url="<?=HTTP_PATH?>nominate/team-details.php" data-id="3">
+							<div class="inlineDiv clickAble purpleButton " data-type="popup" data-url="team-details.php" data-id="newteam">
 								Find/Create Team
 							</div>
 						</div>
@@ -28,7 +28,7 @@
 								$i ++;
 							?>
 						<div class="tableReportsHead tableColumn-2 clickAble <?php if ($myteam==$list->id) echo "white" ?>" data-type="gourl" data-url="<?=HTTP_PATH?>nominate/team.php?team=<?=$list->id;?>">
-							<?=$list->TeamName;?>
+							<?=$list->myTeamName;?>
 						</div>
 						<?php  }
 						// fix header. 
@@ -39,7 +39,7 @@
 				<?php
 					if ($myteam){ ?>
 				<form action="nominate-team.php" method="post" name="nominateTeam" id="nominateTeam">
-					<input type="hidden" name="formName" value="nominateTeam">
+					<input type="hidden" name="myTeamName" id="myTeamName" value="<?=$myteam?>">
 					<div class="row mCustomScrollbar height515" data-mcs-theme="dark-2">
 					<?php	$searchList = getAllTeamsMembers($myteam);
 						if ($searchList){
@@ -63,10 +63,10 @@
 					<div id="buttonRow" class="row buttonRow">
 						<div class="row searchResult noBorder valign-middle">
 							<div class="medium-3 columns">
-								<a href="#" class="blueButton clickAble" data-type="submit" data-url="nominateTeam">Delete Team</a>
+								<a href="#" class="blueButton clickAble" data-type="deleteTeam" data-url="nominateTeam">Delete Team</a>
 							</div>
 							<div class="medium-3 columns">
-								<a href="#" class="blueButton clickAble" data-type="popup" data-url="nominateTeam">Edit Team</a>
+								<a href="#" class="blueButton clickAble" data-type="popup" data-url="team-details.php" data-id="<?=$myteam?>">Edit Team</a>
 							</div>
 							<div class="medium-6 columns textRight ">
 								<a href="#" class="pinkButton clickAble" data-type="submit" data-url="nominateTeam">Nominate Team</a>

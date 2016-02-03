@@ -1,5 +1,16 @@
 <?php
 	include '../inc/config.php';
+	if ($_GET['id']){
+		if ($_GET['id'] == 'newteam'){
+			unset($_SESSION['TeamMembers']);
+		} else {
+			$teamid =$_GET['id'];
+		}
+	}
+	if ($_GET['removeMember']){
+		//echo $_GET['removeMember'];
+		removeTeamMember($_GET['removeMember']);
+	}
 ?>
 
 <div id="alertTitle" class="title smallPopupTitle">
@@ -35,10 +46,8 @@
 						$search = $_GET['searchTeamAuto'];
 						$searchUsers = new searchUsers($db);
 						$searchList = $searchUsers->getAllSearch($search);
-						$x = 0 ;
 						if ($searchList){
 							foreach ($searchList as $list){
-								$x = $x + 1 ;
 				?>
 					<div class="row searchResult valign-middle">
 						<div class="medium-1 columns noPadding">
@@ -51,7 +60,7 @@
 							<?php echo $list->Team; ?>
 						</div>
 						<div class="medium-1 columns textRight">
-							<div id="teamTick" class="circleTick inline smallTick clickAble" data-type="addTeam" data-id="<?php echo $list->id; ?>" data-url="team-details.php">
+							<div id="teamTick" class="circleTick inline smallTick clickAble" data-type="addTeam" data-id="<?php echo $list->EmpNum; ?>" data-url="team-details.php">
 								<label for="teamTick"></label>
 							</div>
 						</div>
@@ -86,28 +95,48 @@
 				</div>
 			</div>
 			<div class="medium-12 columns noPadding">
+			<?php
+			// add in current team members
+			if ($_GET['TeamMember']){
+				addTeamMember($_GET['TeamMember']);
+			}
+				//print_r($_SESSION['TeamMembers']);
+			$x = 0 ;
+			// add in current team members
+			if ($_SESSION['TeamMembers']){
+				foreach ($_SESSION['TeamMembers'] as $list){
+					$x ++ ;
+					if($x == 1){
+			?>
 				<div class="row valign-middle withTopPadding">
 					<div class="medium-5 columns noPadding">
-						EmployeeA A
+						<?php echo $list['full_name'] ?>
 					</div>
 					<div class="medium-1 columns">
-						<i class="icon-icons_close clickAble" data-type="clear" data-id="v"></i>
+						<i class="icon-icons_close clickAble" data-type="removeTeamMember" data-id="<?php echo $list['EmpNum'] ?>" data-url="team-details.php"></i>
 					</div>
+			<?php	} else {?>
 					<div class="medium-5 columns noPadding">
-						EmployeeB B
+						<?php echo $list['full_name'] ?>
 					</div>
 					<div class="medium-1 columns">
-						<i class="icon-icons_close clickAble" data-type="clear" data-id="v"></i>
+						<i class="icon-icons_close clickAble" data-type="removeTeamMember" data-id="<?php echo $list['EmpNum'] ?>" data-url="team-details.php"></i>
 					</div>
 				</div>
-				<?php
-					// add in current team members
-					if ($_GET['TeamMember']){
-						 $teamMember = $_GET['TeamMember'];
-						 echo $teamMember;
-						 $addTeamMember = addTeamMember($_GET['TeamMember']);
+			<?php	
+						$x = 0 ; 
 					}
-				?>
+				}
+			}
+			if($x == 1){
+			?>
+			
+					<div class="medium-5 columns noPadding"></div>
+					<div class="medium-1 columns"></div>
+				</div>
+			<?php
+			}
+			?>
 			</div>
 		</div>
 	</div>
@@ -120,8 +149,8 @@
 	</div>
 	<div class="medium-12 columns">
 		<div class="TeamInputName">
-			<form action="team-details.php" method="POST" name="formMYTeamName" id="formMYTeamName">
-				<input type="text" name="id" id="id" value="" class="" />
+			<form action="create-team.php" method="POST" name="confirmTeam" id="confirmTeam">
+				<input type="text" name="teamid" id="teamid" value="<?=$teamid?>" class="" />
 				<input type="text" name="myTeamName" id="myTeamName" value="" class="" />
 			</form>
 		</div>
