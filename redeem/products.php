@@ -8,7 +8,7 @@ $menu = new MenuGenerator;
 <?php 
 	$val = $_SESSION['user']->SuperUser;
 
-	if( $val == "YES" ){
+	if( $val == "NO" ){
 
 		include('../admin/products.php');
 	} else {
