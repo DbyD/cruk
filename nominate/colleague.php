@@ -23,7 +23,7 @@
 			</div>
 			<form action="nominate-colleague.php" method="post" name="nominateColleague" id="nominateColleague">
 				<input type="hidden" name="formName" value="nominateColleague">
-				<div class="row mCustomScrollbar height515" data-mcs-theme="dark-2">
+				<div class="row mCustomScrollbar height505" data-mcs-theme="dark-2">
 				<?php
 					if ($_GET['searchAuto']){
 						$search = $_GET['searchAuto'];

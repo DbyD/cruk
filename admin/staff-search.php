@@ -26,7 +26,7 @@
 			</div>
 			<form action="staff-edit.php" method="post" name="editStaff" id="editStaff">
 				<input type="hidden" name="formName" value="editStaff">
-				<div class="row mCustomScrollbar height515" data-mcs-theme="dark-2">
+				<div class="row mCustomScrollbar height505" data-mcs-theme="dark-2">
 				<?php
 					if ($_GET['searchAdmin']){
 						$search = $_GET['searchAdmin'];

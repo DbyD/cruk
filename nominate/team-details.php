@@ -5,6 +5,7 @@
 			unset($_SESSION['TeamMembers']);
 		} else {
 			$teamid =$_GET['id'];
+			$_SESSION['TeamMembers'] =  getThisTeamMembers($teamid);
 		}
 	}
 	if ($_GET['removeMember']){
@@ -40,7 +41,7 @@
 <div id="alertBody" class="alertBody">
 	<div class="row mCustomScrollbar height175 scrollBar" data-mcs-theme="dark-2">
 		<form action="team-details.php" method="post" name="addTeamMember" id="addTeamMember">
-			<input type="hidden" name="ssTeamMember" id="ssTeamMember" value="test">
+			<input type="hidden" name="TeamMember" id="TeamMember" value="<?=$teamid?>">
 				<?php
 					if ($_GET['searchTeamAuto']){
 						$search = $_GET['searchTeamAuto'];
@@ -79,7 +80,7 @@
 					} else { ?>
 					<div class="row searchResult valign-middle">
 						<div class="medium-12 columns">
-							<p>Please enter the name of the colleague you would like to nominate in the Search box above.</p>
+							<p>Use the search box above to find an existing team or add individuals to create a new team.</p>
 						</div>
 					</div>
 				<?php } ?>
@@ -88,10 +89,10 @@
 </div>
 <div id="teamMembers" class="greyBox">
 	<div class="row mCustomScrollbar height120 scrollBar" data-mcs-theme="dark-2">
-		<div class="row withPadding">
+		<div class="row withSidePadding">
 			<div class="medium-12 columns noPadding">
 				<div class="small">
-					This team currently includes
+					This team currently includes the following individuals. You can remove individuals using the <i class="icon-icons_close"></i>.
 				</div>
 			</div>
 			<div class="medium-12 columns noPadding">
@@ -110,14 +111,14 @@
 			?>
 				<div class="row valign-middle withTopPadding">
 					<div class="medium-5 columns noPadding">
-						<?php echo $list['full_name'] ?>
+						<?php echo getName($list['EmpNum']); ?>
 					</div>
 					<div class="medium-1 columns">
 						<i class="icon-icons_close clickAble" data-type="removeTeamMember" data-id="<?php echo $list['EmpNum'] ?>" data-url="team-details.php"></i>
 					</div>
 			<?php	} else {?>
 					<div class="medium-5 columns noPadding">
-						<?php echo $list['full_name'] ?>
+						<?php echo getName($list['EmpNum']); ?>
 					</div>
 					<div class="medium-1 columns">
 						<i class="icon-icons_close clickAble" data-type="removeTeamMember" data-id="<?php echo $list['EmpNum'] ?>" data-url="team-details.php"></i>
@@ -144,14 +145,14 @@
 <div id="alertTitle" class="row title smallPopupTitle">
 	<div class="medium-12 columns">
 		<div class="small">
-			Choose an appropriate team name, then add colleagues. The team name will be visible on the Wall of Fame
+			Enter an appropriate name for this team below. The team name will be visible on the Wall of Fame.
 		</div>
 	</div>
 	<div class="medium-12 columns">
 		<div class="TeamInputName">
 			<form action="create-team.php" method="POST" name="confirmTeam" id="confirmTeam">
 				<input type="hidden" name="teamid" id="teamid" value="<?=$teamid?>" class="" />
-				<input type="text" name="myTeamName" id="myTeamName" value="" class="" />
+				<input type="text" name="myTeamName" id="myTeamName" value="<?php echo getmyTeamName($teamid) ?>" class="" />
 			</form>
 		</div>
 	</div>

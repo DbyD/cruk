@@ -7,6 +7,8 @@
 .small {
 	font-size: 10px;
 	padding-top: 5px;
+	font-weight: normal;
+	font-style: normal;
 }
 .smaller {
 	font-size: smaller;
@@ -327,14 +329,17 @@
 
 }
 .buttonRow {
-	padding-top: 5px;
-	border-top: 1px solid #ccc;
-}
-.height515 {
-	height: 515px;
+	padding-top: 10px;
+/*	border-top: 1px solid #ccc; */
 }
 .height555 {
 	height: 555px;
+}
+.height505 {
+	height: 505px;
+}
+.height490 {
+	height: 490px;
 }
 .titlePhoto {
 	position: absolute;
@@ -468,12 +473,18 @@ form .row .row {
 #teamMembers .withTopPadding{
 	padding: 5px 0;
 }
+.paddingLeft{
+	padding-left: 2% !important;
+}
 @media only screen and (max-width: 1199px) {
-.height515 {
-	height: 465px;
+.height505 {
+	height: 455px;
 }
 .height555 {
 	height: 505px;
+}
+.height490 {
+	height: 440px;
 }
 .withPadding {
 	padding: 7px 10px;
@@ -484,7 +495,7 @@ form .row .row {
 	padding: 40px 0;
 	height: auto;
 }
-.height515 {
+.height555, .height505, .height490 {
 	height: auto;
 }
 .searchInput input[type=text] {
@@ -557,7 +568,7 @@ form .row .row {
 	display: inline-table;
 }
 .tableColumn-2 {
-	width: 16%;
+	width: 16.5%;
 	display: inline-table;
 }
 .tableColumn-3 {
@@ -565,7 +576,7 @@ form .row .row {
 	display: inline-table;
 }
 .tableColumn-4 {
-	width: 32%;
+	width: 32.4%;
 	display: inline-table;
 }
 .tableColumn-5 {
@@ -1003,8 +1014,8 @@ p.alertText {
 	padding: 0 !important;
 	overflow: auto;
 }
-.height163 {
-	height: 163px;
+.height158 {
+	height: 158px;
 }
 #awardList .row {
 	border-bottom: 1px solid #4001c4;
@@ -1095,7 +1106,7 @@ button:hover, button:focus, .button:hover, .button:focus {
 .height306 {
 	height: 284px;
 }
-.height163 {
+.height158 {
 	height: 148px;
 }
 }

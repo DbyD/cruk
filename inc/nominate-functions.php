@@ -118,8 +118,6 @@ function fixMenuSpace($i){
 			return '<div class="tableReportsHead tableColumn-6 noRightBorder"></div>';
 		case 2:
 			return '<div class="tableReportsHead tableColumn-4 noRightBorder"></div>';
-		case 3:
-			return '<div class="tableReportsHead tableColumn-2 noRightBorder"></div>';
 	}
 }
 ////////////////////////////////////////////////////////////////////////////////////
@@ -132,11 +130,26 @@ function getmyTeams($empnum){
 	return $stmt->fetchAll(PDO::FETCH_OBJ);
 }
 ////////////////////////////////////////////////////////////////////////////////////
+function getmyTeamName($id){
+	global $db;
+	$stmt = $db->prepare('SELECT myTeamName FROM tblteams WHERE id = :id ');
+	$stmt->execute(array('id' => $id));
+	$stmt->execute();
+	$result = $stmt->fetch(PDO::FETCH_OBJ);
+	return $result->myTeamName;
+}
+////////////////////////////////////////////////////////////////////////////////////
 function getAllTeamsMembers($teamID) {
 	global $db;
-	$stmt = $db->prepare("SELECT * FROM tblteamusers tu INNER JOIN tblempall e ON tu.EmpNum=e.EmpNum WHERE tu.teamID = :teamID");
-	$stmt->execute(array('teamID' => $teamID));
-	$result = $stmt->fetchAll(PDO::FETCH_OBJ);
+	if($teamID != 'myteam'){
+		$stmt = $db->prepare("SELECT * FROM tblteamusers tu INNER JOIN tblempall e ON tu.EmpNum=e.EmpNum WHERE tu.teamID = :teamID");
+		$stmt->execute(array('teamID' => $teamID));
+		$result = $stmt->fetchAll(PDO::FETCH_OBJ);
+	} else {
+		$stmt = $db->prepare("SELECT * FROM tblempall WHERE Team = :Team");
+		$stmt->execute(array('Team' => $_SESSION['user']->Team));
+		$result = $stmt->fetchAll(PDO::FETCH_OBJ);
+	}
 	return $result;
 }
 ////////////////////////////////////////////////////////////////////////////////////
@@ -151,6 +164,20 @@ function addTeamMember($empnum) {
 		$_SESSION['TeamMembers'][] = array('EmpNum' => $empnum, 'full_name' => $name);
 	}
 	return;
+}
+////////////////////////////////////////////////////////////////////////////////////
+function getThisTeamMembers($teamID) {
+	global $db;
+	if($teamID != 'myteam'){
+		$stmt = $db->prepare("SELECT * FROM tblteamusers tu INNER JOIN tblempall e ON tu.EmpNum=e.EmpNum WHERE tu.teamID = :teamID");
+		$stmt->execute(array('teamID' => $teamID));
+		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+	} else {
+		$stmt = $db->prepare("SELECT EmpNum,Fname,Sname FROM tblempall WHERE Team = :Team");
+		$stmt->execute(array('Team' => $_SESSION['user']->Team));
+		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+	}
+	return $result;
 }
 ////////////////////////////////////////////////////////////////////////////////////
 function in_array_r($needle, $haystack, $strict = false) {

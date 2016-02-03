@@ -65,7 +65,7 @@
 						<!-- <i class="icon-icons_trophy"></i> -->
 						Most Recent Awards
 					</div>
-					<div id="awardList" class="mCustomScrollbar height163" data-mcs-theme="dark-2">
+					<div id="awardList" class="mCustomScrollbar height158" data-mcs-theme="dark-2">
 					<?php
 						$res = getEmployeFnameAndSname();
 						if( $res != 0 ){

@@ -276,13 +276,21 @@ input[type=submit], .blueButton {
 	width: 8px;
 	opacity: 1;
 	z-index: 5;
+	right: 3px;
+	margin: 5px 0;
 }
 .mCS-dark-2.mCSB_scrollTools .mCSB_draggerRail{
-	background-color: #e5e5e5;
+	background-color: #eceaeb;
 	width: 8px;
+}
+#awards .mCS-dark-2.mCSB_scrollTools .mCSB_draggerRail{
+	background-color: rgba(253,252,255,0.5);
 }
 .mCS-dark-2.mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar{
 	background-color: #b2b2b2;
+}
+#awards .mCS-dark-2.mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar{
+	background-color: #cbcbcb;
 }
 .ui-menu{
 	z-index: 11;
@@ -320,6 +328,9 @@ li.ui-menu-item { font-size:13px !important; }
 .pink{
 	color: #ec008c;
 }
+.italics{
+	font-style: italic;
+}
 .inlineDiv{
 	display: inline-block;
 	vertical-align: middle;
@@ -332,6 +343,7 @@ li.ui-menu-item { font-size:13px !important; }
 }
 .greyBox{
 	background: #ebebeb;
+	padding: 5px 0;
 }
 /* @end */
 
