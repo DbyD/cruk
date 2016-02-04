@@ -9,12 +9,11 @@
 						Messages
 					</div>
 					<?php 
-							$enpnum = $_SESSION['user'];
 							if( function_exists( 'getTotalPendingNominations' ) ) {
-								$count_nomination = getTotalPendingNominations($enpnum->EmpNum);
+								$count_nomination = getTotalPendingNominations($_SESSION['user']->EmpNum);
 							}
 							if( function_exists( 'getTotalNewNominations' ) ) {
-								$count_newAwards = getTotalNewNominations($enpnum->EmpNum);
+								$count_newAwards = getTotalNewNominations($_SESSION['user']->EmpNum);
 							}
 							if($count_nomination > 0 || $count_newAwards > 0){
 					?>

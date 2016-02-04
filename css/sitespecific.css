@@ -1031,6 +1031,9 @@ button:hover, button:focus, .button:hover, .button:focus {
 .static-redeem > div,.products > div {
 	margin-top: 10px;
 }
+.title .submenu{
+	font-size: 13px;
+}
 /*.static-redeem,.products {
 	
 }
@@ -1038,7 +1041,7 @@ button:hover, button:focus, .button:hover, .button:focus {
 	background: #fff;
 	height: 300px;
 }*/
-.productCats .columns:last-child {
+.productCats .columns:last-child, .products .columns:last-child {
   float: left; 
  }
 .products > div > div {
@@ -1246,22 +1249,20 @@ button:hover, button:focus, .button:hover, .button:focus {
 	float: left;
 	margin-right: 20px;
 }
+#redeempanel{
+	background-color: #2e008b;
+	color: #fff;
+}
 .price-panel {
 	text-align: center;
-	font-size: 60px;
-}
-.title {
+	font-size: 30px;
 	font-weight: bold;
+	padding: 25px 0px;
 }
-.unlaimed-panel {
-	background-color: #622fa6;
+.unclaimed-panel {
+	background-color: #3d01b7;
 	height: 40px;
-	padding-left: 15px;
-	position: absolute;
-	width: 100%;
-	font-weight: bold;
-	line-height: 38px;
-	bottom: 0px;
+	padding: 15px;
 }
 #awards {
 	position: relative;
