@@ -6,7 +6,7 @@
 
 require_once dirname(dirname(__FILE__)).'/_toolkit_loader.php';
 
-require_once 'settings.php' ;
+require_once 'settings_example.php' ;
 
 try {
     #$auth = new OneLogin_Saml2_Auth($settingsInfo);
