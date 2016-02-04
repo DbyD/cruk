@@ -112,12 +112,12 @@ function getEmployeFnameAndSname () {
 ////////////////////////////////////////////////////////////////////////////////////
 function fixMenuSpace($i){
 	switch ($i) {
-		case '0':
-			return '<div class="tableReportsHead tableColumn-8 noRightBorder"></div>';
 		case 1:
 			return '<div class="tableReportsHead tableColumn-6 noRightBorder"></div>';
 		case 2:
 			return '<div class="tableReportsHead tableColumn-4 noRightBorder"></div>';
+		case 3:
+			return '<div class="tableReportsHead tableColumn-2 noRightBorder"></div>';
 	}
 }
 ////////////////////////////////////////////////////////////////////////////////////
