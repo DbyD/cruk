@@ -1,8 +1,13 @@
 <?php
 	include '../inc/config.php';
-	if ($_GET['clear'] == "yes"){
-		$_SESSION['nominee']->Volunteer = "";
-		unset($_SESSION['nominee']->Volunteer);
+	if ($_POST['deleteTeamID'] != ""){
+		$teamID = $_POST['deleteTeamID'];
+		$stmt = $db->prepare("DELETE FROM tblteams WHERE id = :teamID");
+		$stmt->bindParam(':teamID', $teamID);
+		$stmt->execute();
+		$stmt = $db->prepare("DELETE FROM tblteamusers WHERE teamID = :teamID");
+		$stmt->bindParam(':teamID', $teamID);
+		$stmt->execute();
 		echo "removed";
 	} else {
 		if ($_POST['myTeamName']){
@@ -11,7 +16,7 @@
 				$teamID = $_POST['teamid'];
 				$stmt = $db->prepare("DELETE FROM tblteamusers WHERE teamID = :teamID");
 				$stmt->bindParam(':teamID', $teamID);
-				$teamID = $stmt->execute();
+				$stmt->execute();
 			} else {
 				$stmt = $db->prepare("INSERT INTO tblteams (EmpNum, myTeamName) VALUES (:EmpNum, :myTeamName)");
 				$stmt->bindParam(':EmpNum', $_SESSION['user']->EmpNum);

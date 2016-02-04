@@ -6,6 +6,7 @@
 		} else {
 			$teamid =$_GET['id'];
 			$_SESSION['TeamMembers'] =  getThisTeamMembers($teamid);
+			$_SESSION['teamid'] = $teamid;
 		}
 	}
 	if ($_GET['removeMember']){
@@ -131,12 +132,12 @@
 			}
 			if($x == 1){
 			?>
-			
 					<div class="medium-5 columns noPadding"></div>
 					<div class="medium-1 columns"></div>
 				</div>
 			<?php
 			}
+			$count = count($_SESSION['TeamMembers']);
 			?>
 			</div>
 		</div>
@@ -150,9 +151,10 @@
 	</div>
 	<div class="medium-12 columns">
 		<div class="TeamInputName">
-			<form action="create-team.php" method="POST" name="confirmTeam" id="confirmTeam">
-				<input type="hidden" name="teamid" id="teamid" value="<?=$teamid?>" class="" />
-				<input type="text" name="myTeamName" id="myTeamName" value="<?php echo getmyTeamName($teamid) ?>" class="" />
+			<form action="edit-team.php" method="POST" name="confirmTeam" id="confirmTeam">
+				<input type="hidden" name="teamNO" id="teamNO" value="<?=$count?>" class="" />
+				<input type="hidden" name="teamid" id="teamid" value="<?=$_SESSION['teamid']?>" class="" />
+				<input type="text" name="myTeamName" id="myTeamName" value="<?php echo getmyTeamName($_SESSION['teamid']) ?>" class="" />
 			</form>
 		</div>
 	</div>

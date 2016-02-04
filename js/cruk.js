@@ -2,23 +2,40 @@ $.ajaxPrefilter(function( options, originalOptions, jqXHR ) {
     options.async = true;
 });
 //----------------------------------------------------------------------------------
+jQuery.validator.addMethod("greaterThanTwo", function(value, element) {
+    return this.optional(element) || (parseFloat(value) > 1);
+}, "A team must consist of a minimum of 2 members.");
 $(function(){
 	$("#confirmTeam").validate({
-		rules: {myTeamName: "required"},
+		rules: {
+			myTeamName: "required",
+        	teamNO : { greaterThanTwo : true }
+		},
 		messages: {myTeamName: "Please add an appropriate team name. The team name will be visible on the Wall of Fame"},
 		errorPlacement: function(error, element) {
 			$("#alertContent").load("../alerts/alert-popup.php", {'error' : error.html() });
 			$("#alert").css('display', 'block');
-		}/*,
+		},
 		submitHandler: function(form) { 
-			$.post('create-team.php', $("#confirmTeam").serialize(), function(data) {
+			$.post('edit-team.php', $("#confirmTeam").serialize(), function(data) {
 				if (data == 'created') {
 					$("#popup1").css('display', 'none');
 					$("#popupContent1").empty();
 					location.reload();
 				}
 			});
-		}*/
+		}
+	});
+	$("#deleteTeam").validate({
+		submitHandler: function(form) { 
+			$.post('edit-team.php', $("#deleteTeam").serialize(), function(data) {
+				if (data == 'removed') {
+					$("#popup1").css('display', 'none');
+					$("#popupContent1").empty();
+					location.reload();
+				}
+			});
+		}
 	});
 	$("#searchColleague").validate({
 		rules: {searchAuto: "required"},
@@ -180,7 +197,8 @@ $(function(){
 	$('.clickAble').click(function(e) {
 		var url = $(this).attr('data-url');
 		var type = $(this).attr('data-type');
-		var id = $(this).attr('data-id');		
+		var id = $(this).attr('data-id');	
+		var count = $(this).attr('data-count');
 		switch (type) { 
 			case 'donothing': 
 				break; 
@@ -298,15 +316,17 @@ $(function(){
 				   .attr("type", "hidden")
 				   .attr("name", "TeamMember").val(id);
 				$("#addTeamMember").append($(input));
-				$("#popupContent1").load(
-					'team-details.php',
-					$('#addTeamMember').serialize()
-				);
+				$("#popupContent1").load('team-details.php',$('#addTeamMember').serialize());
 				break;
 			case 'removeTeamMember':
 				url = url+"?removeMember="+id
 				console.log(url)
 				$("#popupContent1").load(url);
+				break;
+			case 'deleteTeam':
+				url = url+"?deleteTeam="+id
+				console.log(url)
+			//	$("#popupContent1").load(url);
 				break;
 			default:
 				alert('Nothing to do!');

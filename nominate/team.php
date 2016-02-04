@@ -20,7 +20,7 @@
 				<div class="tableReports">
 					<form action="team.php" method="post" name="myTeam" id="myTeam" >
 						<div class="tableReportsHeadButton tableColumn-4">
-							<div class="inlineDiv clickAble purpleButton " data-type="popup" data-url="team-details.php" data-id="newteam">
+							<div id="newTeamButton" class="inlineDiv clickAble purpleButton " data-type="popup" data-url="team-details.php" data-id="newteam" data-count="1">
 								Find/Create Team
 							</div>
 						</div>
@@ -28,7 +28,7 @@
 							My Team
 						</div>
 						<?php // get list of work related
-								$i= 0;
+								$i= 1;
 								$myTeams = getmyTeams($_SESSION['user']->EmpNum);
 								foreach($myTeams as $list){ 
 								$i ++;
@@ -44,7 +44,7 @@
 				</div>
 				<form action="nominate-team.php" method="post" name="nominateTeam" id="nominateTeam">
 					<input type="hidden" name="myTeamName" id="myTeamName" value="<?=$myteam?>">
-					<div class="row mCustomScrollbar height490" data-mcs-theme="dark-2">
+					<div class="row mCustomScrollbar height480" data-mcs-theme="dark-2">
 					<?php	$searchList = getAllTeamsMembers($myteam);
 						if ($searchList){
 							foreach ($searchList as $list){
@@ -69,14 +69,14 @@
 							<?php if ($myteam == 'myteam'){ ?>
 							This Team cannot be deleted.
 							<?php } ?> 
-							If you would like to remove anyone you may do so by selecting Edit Team and removing them.
+							If you would like to add or remove anyone you may do so by selecting Edit Team. Once you modify this team you will have to save it with a new name.
 						</div>
 					</div>
 					<div id="buttonRow" class="row buttonRow">
 						<div class="row searchResult noBorder valign-middle">
 							<div class="medium-3 columns">
 							<?php if ($myteam != 'myteam'){ ?>
-								<a href="#" class="blueButton clickAble" data-type="deleteTeam" data-url="nominateTeam">Delete Team</a>
+								<a href="#" class="blueButton clickAble" data-type="popup" data-url="alert-delete-team.php" data-id="<?=$myteam?>">Delete Team</a>
 							<?php } ?>
 							</div>
 							<div class="medium-3 columns">
@@ -93,3 +93,6 @@
 	</div>
 </div>
 <?php include_once('../inc/footer.php'); ?>
+<script>
+$("#newTeamButton" ).attr( 'data-count', '<?=$i?>' );
+</script>
