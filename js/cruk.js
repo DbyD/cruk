@@ -258,8 +258,13 @@ $(function(){
 				break;
 			case 'popup': 
 				//if(id=='littleExtra') $('#littleExtra').prop('checked', false);
-				$("#popupContent1").load(url+"?id="+id);
-				$("#popup1").css('display', 'block');
+				if(count>3){
+						$("#popupContent1").load(url+"?id="+id);
+						$("#popup1").css('display', 'block');
+				} else {
+					$("#popupContent1").load(url+"?id="+id);
+					$("#popup1").css('display', 'block');
+				}
 				break;
 			case 'subPopup': 
 				var top = $(this).position().top + 30

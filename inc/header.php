@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="<?=HTTP_PATH?>css/smoothness/jquery-ui-1.8.2.custom.css" /> 
 <link rel="stylesheet" href="<?=HTTP_PATH?>css/styles.css">
 <link rel="stylesheet" href="<?=HTTP_PATH?>css/sitespecific.css">
+<link rel="stylesheet" href="<?=HTTP_PATH?>css/mobile.css">
 <link rel="stylesheet" href="<?=HTTP_PATH?>css/foundation-icons.css">
 <script src="<?=HTTP_PATH?>js/vendor/modernizr.js"></script>
 <link rel="shortcut icon" href="<?=HTTP_PATH?>favicon.ico"> 
