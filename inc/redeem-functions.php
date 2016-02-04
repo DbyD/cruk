@@ -118,11 +118,21 @@ function getMenuAllRows(){
 	return $arr;
 }
 
-function getMenuRows(){
+function getMenuRows( $id = null ){
 	global $db;
 
+    if($id != null){
+        $where  = "id = :id";
+    } else {
+        $where = "1=1";
+    }
 
-	$stmt = $db->prepare("SELECT * FROM tblmenuleft WHERE parent='0' ORDER BY qu");
+	$stmt = $db->prepare("SELECT * FROM tblmenuleft WHERE parent='0' AND " . $where . " ORDER BY qu");
+
+
+    if($id != null){
+        $stmt->bindValue(':id',$id, PDO::PARAM_INT);
+    }
 
 	$stmt->execute();
 
@@ -261,7 +271,7 @@ function deleteBasketItem( $baID ){
 	$res = $stmt->execute();
 	return $res;
 }
-////////////////////////////////////////////////////////////////////////////////////
+/////////////////,///////////////////////////////////////////////////////////////////
 function deleteMenu( $id ){
 	global $db;
 	$stmt = $db->prepare("DELETE FROM tblmenuleft WHERE id = :id");
@@ -270,13 +280,29 @@ function deleteMenu( $id ){
 	return $res;
 }
 ////////////////////////////////////////////////////////////////////////////////////
-function getMenuSubs( $id ){
+function getMenuSub( $sub_id ){
+    global $db;
+
+    $sql = 'SELECT * FROM tblmenuleft WHERE id = :id AND parent>0';
+
+    $stmt = $db->prepare( $sql );
+    $stmt->execute( array('id' => $sub_id) );
+
+    $arr = array();
+    while($result = $stmt->fetch(PDO::FETCH_ASSOC)){
+        $arr[] = $result;
+    }
+
+    return $arr;
+}
+////////////////////////////////////////////////////////////////////////////////////
+function getMenuSubs( $parent_id ){
 	global $db;
 
 	$sql = 'SELECT * FROM tblmenuleft WHERE parent = :parent';
 
 	$stmt = $db->prepare( $sql );
-	$stmt->execute( array('parent' => $id) );
+	$stmt->execute( array('parent' => $parent_id) );
 
 	$arr = array();
 	while($result = $stmt->fetch(PDO::FETCH_ASSOC)){

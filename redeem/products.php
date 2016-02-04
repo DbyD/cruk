@@ -1,22 +1,46 @@
-<?php 
+
+<?php
 include_once '../inc/config.php';
 include_once '../inc/header.php';
 include "lib.php";
 $menu = new MenuGenerator;
+
+$val = $_SESSION['user']->administrator;
+
+if( $val == "YES" ){
+
+    include('../admin/products.php');
+} else {
+    $res = 0;
+    if( isset( $_GET["menu_id"] ) ) {
+        $menu_id = $_GET["menu_id"];
+        $menu = getMenuRows( $menu_id );
+
+        if( isset( $_GET["sub_id"] ) ){
+            $sub_id = $_GET["sub_id"];
+            $sub = getMenuSub( $sub_id );
+        } else {
+            $sub_id = null;
+        }
+
+        $res = getMenuProducts( $menu_id, $sub_id);
+    } else {
+        $res = getTotalProducts();
+    }
+
+    if( $res != 0){
+        $products = $res;
+    }
 ?>
 
-<?php 
-	$val = $_SESSION['user']->administrator;
 
-	if( $val == "YES" ){
-
-		include('../admin/products.php');
-	} else {
-?>
 
 <div id="content" class="large-8 large-push-2 columns">
 	<div class="title withStar">
-		Redeem
+		<a href="<?php echo HTTP_PATH . 'redeem/'; ?>">Redeem</a>
+        <?php echo (isset($menu[0]["label"])) ? "<a href=" . HTTP_PATH . 'redeem/products.php?menu_id=' . $menu_id . ">" . '/' . $menu[0]["label"]:'';?></a>
+        <?php echo (isset($sub[0]["label"])) ? "<a href=" . HTTP_PATH . 'redeem/products.php?menu_id=' . $menu_id . "&sub_id=" . $sub_id . ">" . '/' . $sub[0]["label"]:'';?></a>
+
 	</div>
 	<div class="row contentFill">
 		<div class="medium-12 columns leftnp rightnp fillHeight">
@@ -28,27 +52,7 @@ $menu = new MenuGenerator;
 			</div>
 
 			<div class="row products">
-				<?php 
-					$res = 0;
-					if( isset( $_GET["menu_id"] ) ) {
-						$menu_id = $_GET["menu_id"];
 
-						if( isset( $_GET["sub_id"] ) ){
-							$sub_id = $_GET["sub_id"];
-						} else {
-							$sub_id = null;
-						}
-
-						$res = getMenuProducts( $menu_id, $sub_id);
-					} else {
-						$res = getTotalProducts();
-					}
-
-					if( $res != 0){
-						$products = $res;
-					}
-					
-				?>
 				
 				<?php if( isset( $products ) ):?>
 					<?php foreach( $products as $product ):?>
