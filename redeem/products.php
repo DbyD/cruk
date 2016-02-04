@@ -16,16 +16,16 @@ if( $val == "YES" ){
         $menu_id = $_GET["menu_id"];
         $menu = getMenuRows( $menu_id );
 
+
         if( isset( $_GET["sub_id"] ) ){
             $sub_id = $_GET["sub_id"];
             $sub = getMenuSub( $sub_id );
+            $res = getMenuProducts( $menu_id, $sub_id);
         } else {
             $sub_id = null;
         }
 
-        $res = getMenuProducts( $menu_id, $sub_id);
-    } else {
-        $res = getTotalProducts();
+        $subs = getMenuSubs( $menu_id );
     }
 
     if( $res != 0){
@@ -47,31 +47,62 @@ if( $val == "YES" ){
 
 			<div class="row">
 				<a id="viewBasket" class='<?php if($basket_isset) echo 'view-basket';?>' href="<?php echo HTTP_PATH . "redeem/product-basket.php?basket=true&menu_id=" . $menu_id; ?>">
-				<i class="fi-shopping-bag"></i>View basket
-			</a>
+				    <i class="fi-shopping-bag"></i>View basket
+			    </a>
 			</div>
 
-			<div class="row products">
+
 
 				
 				<?php if( isset( $products ) ):?>
-					<?php foreach( $products as $product ):?>
+                    <div class="row products">
+                        <?php foreach( $products as $product ):?>
 
-						<div class="small-2 large-4 columns">
-					  		<div class="callout panel product">
+                                <div class="small-2 large-4 columns">
+                                    <div class="callout panel product">
 
-					  			<p><?php echo $product['aTitle']; ?></p>
+                                        <p><?php echo $product['aTitle']; ?></p>
 
-					  			<a href="<?php echo HTTP_PATH . "redeem/product-basket.php?prID=" . $product["prID"] . "&menu_id=" . $menu_id; ?>">
-					  				<img src="<?php echo HTTP_PATH . $product["Image_name"]; ?>" class="product-img">
-					  			</a>
-					  		</div>
-					    </div>
-					<?php endforeach;?>
-				<?php endif;?>
+                                        <a href="<?php echo HTTP_PATH . "redeem/product-basket.php?prID=" . $product["prID"] . "&menu_id=" . $menu_id; ?>">
+                                            <img src="<?php echo HTTP_PATH . $product["Image_name"]; ?>" class="product-img">
+                                        </a>
+                                    </div>
+                                </div>
+
+                        <?php endforeach;?>
+                    </div>
+				<?php else:?>
+                    <?php if( (isset($subs) && count($subs) > 0) && (!isset($sub_id))): ?>
+
+                        <div class="row subs">
+
+                            <?php foreach($subs as $sub): ?>
+
+                                <?php if( is_array( $sub ) ):?>
+
+                                    <div class="small-2 large-4 columns">
+                                        <div class="callout panel product">
+                                            <p>
+                                                <?php echo $sub['label']; ?>
+                                            </p>
+                                            <?php if($sub["sub_image"] == ""):?>
+                                                <span>Not Image.</span>
+                                            <?php else:?>
+                                                <a href="<?php echo HTTP_PATH . "redeem/products.php?menu_id=" . $menu_id . "&sub_id=" . $sub["id"];?>"><img src="<?php echo HTTP_PATH . $sub["sub_image"]; ?>"></a>
+                                            <?php endif;?>
+                                        </div>
+                                    </div>
+
+
+                                <?php endif; ?>
+
+                            <?php endforeach;?>
+                        </div>
+                    <?php endif; ?>
+                <?php endif;?>
 			  
 
-			</div>
+
 		</div>	
 	</div>
 </div>
