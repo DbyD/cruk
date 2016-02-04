@@ -37,11 +37,6 @@
 .LoginPadding {
 	margin-top: 28px;
 }
-@media only screen and (max-width: 1023px) {
-#content .colleaguelogin, #content .firsttime {
-	height: auto;
-}
-}
 /* @end */
 /* @group Home */
 #home1, #home2, #home3 {
@@ -118,26 +113,6 @@
 	font-size: 16px;
 	padding-left: 10px;
 }
-@media only screen and (max-width: 1199px) {
-#home1, #home2, #home3 {
-	margin-bottom: px;
-}
-#home1 .image {
-	height: 265px;
-}
-#home2 .image, #home3 .image {
-	height: 170px;
-}
-#home5 {
-	margin-bottom: 0px;
-}
-#home4 .image {
-	height: 109px;
-}
-#home5 .image {
-	height: 157px;
-}
-}
 /* @end */
 /* @group Content */
 #content .row .row {
@@ -210,19 +185,6 @@
 	color: #2e008b;
 	text-align: center;
 	display: inline-block;
-}
-@media only screen and (min-width: 1200px) {
-.contentFill {
-	height: 605px;
-}
-}
-@media only screen and (max-width: 1023px) {
-.contentFill {
-	height: auto;
-}
-.fillHeight {
-	min-height: 300px;
-}
 }
 /* @end */
 /* @group Portfolio */
@@ -482,45 +444,6 @@ form .row .row {
 }
 .paddingLeft{
 	padding-left: 2% !important;
-}
-@media only screen and (max-width: 1199px) {
-.height505 {
-	height: 455px;
-}
-.height555 {
-	height: 505px;
-}
-.height480 {
-	height: 430px;
-}
-.withPadding {
-	padding: 7px 10px;
-}
-}
-@media only screen and (max-width: 1023px) {
-.nominateButton {
-	padding: 40px 0;
-	height: auto;
-}
-.height555, .height505, .height490 {
-	height: auto;
-}
-.searchInput input[type=text] {
-	width: 100%;
-}
-.searchInput .medium-10 {
-	width: 77%;
-}
-.searchInput .medium-2 {
-	width: 22%;
-}
-.valign-middle .columns {
-	display: block;
-}
-.searchResult .medium-2 {
-	float: left;
-	width: 20%;
-}
 }
 /* @end */
 /* @group My Account */
@@ -990,7 +913,7 @@ p.alertText {
 }
 #messageList .row {
 	border-bottom: 1px solid #cfcfcf;
-	padding: 10px;
+	padding: 10px 20px 10px 10px;
 }
 .height233 {
 	height: 233px;
@@ -1099,23 +1022,6 @@ p.alertText {
 }
 button:hover, button:focus, .button:hover, .button:focus {
 	background: #2e008b;
-}
-@media only screen and (max-width: 1199px) {
-.height590 {
-	height: 540px;
-}
-.height233 {
-	height: 206px;
-}
-.height252 {
-	height: 225px;
-}
-.height306 {
-	height: 284px;
-}
-.height158 {
-	height: 148px;
-}
 }
 /* @end */
 /* @group Redeem */

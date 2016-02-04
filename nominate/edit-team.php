@@ -11,7 +11,6 @@
 		echo "removed";
 	} else {
 		if ($_POST['myTeamName']){
-			echo 'id='.$_POST['teamid'].'=<br>';
 			if($_POST['teamid'] != ""){
 				$teamID = $_POST['teamid'];
 				$stmt = $db->prepare("DELETE FROM tblteamusers WHERE teamID = :teamID");

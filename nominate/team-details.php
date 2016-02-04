@@ -26,10 +26,10 @@
 		<div class="medium-12 columns">
 			<div class="searchTeamInput">
 				<form action="team-details.php" method="POST" name="searchTeam" id="searchTeam">
-					<div class="medium-9 columns noPadding">
+					<div class="small-9 medium-9 columns noPadding">
 						<input type="text" name="searchTeamAuto" id="searchTeamAuto" value="" class="search" />
 					</div>
-					<div class="medium-3 columns noPadding">
+					<div class="small-3 medium-3 columns noPadding">
 						<div class="purpleButton clickAble" data-type="submit" data-id="letsub" data-url="searchTeam">
 							Search
 						</div>
@@ -52,16 +52,16 @@
 							foreach ($searchList as $list){
 				?>
 					<div class="row searchResult valign-middle">
-						<div class="medium-1 columns noPadding">
+						<div class="small-1 medium-1 columns noPadding">
 							<img src="<?=HTTP_PATH.$list->Photo?>" alt="" onerror="this.src='<?=HTTP_PATH?>images/no-photo.png'"/>
 						</div>
-						<div class="medium-4 columns">
+						<div class="small-4 medium-4 columns">
 							<?php echo $list->Fname.' '.$list->Sname; ?>
 						</div>
-						<div class="medium-5 columns">
+						<div class="small-5 medium-5 columns">
 							<?php echo $list->Team; ?>
 						</div>
-						<div class="medium-1 columns textRight">
+						<div class="small-1 medium-1 columns textRight">
 							<div id="teamTick" class="circleTick inline smallTick clickAble" data-type="addTeam" data-id="<?php echo $list->EmpNum; ?>" data-url="team-details.php">
 								<label for="teamTick"></label>
 							</div>
