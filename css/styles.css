@@ -237,6 +237,16 @@ input[type=submit], .blueButton {
 	text-transform: uppercase;
 	border-radius: 16px;
 }
+.lightBlueButton {
+	background-color: #00b6ed;
+	font-size: 11px;
+	padding: 7px 16px;
+	border: 1px solid #048db7;
+	color: #fff !important;
+	cursor: pointer;
+	text-transform: uppercase;
+	border-radius: 16px;
+}
 #content .panel.callout a:not(.button){
 	color: #00b6ed;
 }

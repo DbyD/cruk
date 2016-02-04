@@ -72,10 +72,10 @@
 							foreach ($res as $key => $value){
 						?>
 						<div class="row">
-							<div class="medium-2 columns">
+							<div class="small-2 medium-2 columns">
 								<i class="icon-icons_person"></i>
 							</div>
-							<div class="medium-10 columns">
+							<div class="small-2 medium-10 columns">
 								Individual
 								<p><?php echo $value['name'].' '.$value['sname']; ?></p>
 							</div>

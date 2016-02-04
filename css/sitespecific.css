@@ -1,6 +1,6 @@
 /* @group Login */
 #content .colleaguelogin, #content .firsttime {
-	padding: 10px;
+	padding: 20px;
 	background: #fff;
 	height: 220px;
 }
@@ -14,11 +14,18 @@
 	font-size: smaller;
 }
 #content .firsttime {
-	background: #cfcecf;
+	background: #2e008b;
+	color: #fff;
+}
+.firsttime h1, .firsttime p{
+	color: #fff !important;
 }
 .panel.callout p.alert {
 	color: #ff2600;
 	margin-bottom: 0.5rem;
+}
+#login{
+	background: url(../images/login-background.jpg) no-repeat;
 }
 #login .panel.callout a:not(.button) {
 	color: #008CBA;

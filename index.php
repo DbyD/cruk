@@ -49,7 +49,7 @@
 								<p>Login below to send a 'Thank you' card or a gift to a colleague.</p>
 								<?php if(isset( $_GET['alert'] ) ) echo '<p class="alert">You have entered an incorrect Username or Password</p>'; ?>
 								<div class="medium-6 columns">
-									Username: (Employee number)
+									Username: (Staff number)
 									<input type="text" name="sUsername" autocomplete="off" />
 								</div>
 								<div class="medium-6 columns">
@@ -71,13 +71,13 @@
 					<div class="callout panel firsttime">
 						<div class="row">
 							<form>
-								<h1>First time users</h1>
+								<h1>First Time Users</h1>
 								<p>If you are new to the Recognition portal, register here.</p>
 								<div class="medium-6 columns LoginPadding">
-									<a href="forgotten_password.php" class="blueButton">Forgot password?</a>
+									<a href="forgotten_password.php" class="lightBlueButton">Forgot password?</a>
 								</div>
 								<div class="medium-6 columns LoginPadding">
-									<p><a href="register.php" class="pinkButton LoginPadding">Register now</a></p>
+									<p><a href="register.php" class="lightBlueButton LoginPadding">Register now</a></p>
 								</div>
 							</form>
 						</div>
