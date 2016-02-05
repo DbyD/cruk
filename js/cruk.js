@@ -7,6 +7,7 @@ jQuery.validator.addMethod("greaterThanTwo", function(value, element) {
 }, "A team must consist of a minimum of 2 members.");
 $(function(){
 	$("#confirmTeam").validate({
+		ignore: [],
 		rules: {
 			myTeamName: "required",
         	teamNO : { greaterThanTwo : true }
@@ -18,7 +19,6 @@ $(function(){
 		},
 		submitHandler: function(form) { 
 			$.post('edit-team.php', $("#confirmTeam").serialize(), function(data) {
-				console.log(data)
 				if (data == 'created') {
 					$("#popup1").css('display', 'none');
 					$("#popupContent1").empty();
@@ -258,6 +258,7 @@ $(function(){
 				}
 				break;
 			case 'popup': 
+				console.log(id)
 				//if(id=='littleExtra') $('#littleExtra').prop('checked', false);
 				if(count>3){
 						$("#popupContent1").load(url+"?id="+id);
@@ -299,6 +300,7 @@ $(function(){
 				location.reload();
 				break;
 			case 'submit':
+				console.log(url)
 				if ($("#"+url).valid()) {
 					$("#"+url).submit();
 				}
@@ -325,14 +327,24 @@ $(function(){
 				$("#popupContent1").load('team-details.php',$('#addTeamMember').serialize());
 				break;
 			case 'removeTeamMember':
+				console.log(id)
 				url = url+"?removeMember="+id
 				console.log(url)
 				$("#popupContent1").load(url);
 				break;
 			case 'deleteTeam':
+				console.log(id)
 				url = url+"?deleteTeam="+id
 				console.log(url)
 			//	$("#popupContent1").load(url);
+				break;
+			case 'addFullTeam':
+				console.log(id)
+				var input = $("<input>")
+				   .attr("type", "hidden")
+				   .attr("name", "id").val(id);
+				$("#addTeamMember").append($(input));
+				$("#popupContent1").load('team-details.php',$('#addTeamMember').serialize());
 				break;
 			default:
 				alert('Nothing to do!');

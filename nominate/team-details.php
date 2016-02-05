@@ -3,12 +3,14 @@
 	if ($_GET['id']){
 		if ($_GET['id'] == 'newteam'){
 			unset($_SESSION['TeamMembers']);
+			unset($_SESSION['teamid']);
 		} else {
-			$teamid =$_GET['id'];
+			$teamid = $_GET['id'];
 			$_SESSION['TeamMembers'] =  getThisTeamMembers($teamid);
 			$_SESSION['teamid'] = $teamid;
 		}
 	}
+	//print_r($_SESSION['TeamMembers']);
 	if ($_GET['removeMember']){
 		//echo $_GET['removeMember'];
 		removeTeamMember($_GET['removeMember']);
@@ -47,9 +49,12 @@
 					if ($_GET['searchTeamAuto']){
 						$search = $_GET['searchTeamAuto'];
 						$searchUsers = new searchUsers($db);
-						$searchList = $searchUsers->getAllSearch($search);
-						if ($searchList){
-							foreach ($searchList as $list){
+						$searchList = $searchUsers->getAllTeamSearch($search);
+						if (!$searchList){
+							// if no team then do individual
+							$searchList = $searchUsers->getAllSearch($search);
+							if ($searchList){
+								foreach ($searchList as $list){
 				?>
 					<div class="row searchResult valign-middle">
 						<div class="small-1 medium-1 columns noPadding">
@@ -68,8 +73,8 @@
 						</div>
 					</div>
 				<?php
-							}
-						} else {
+								}
+							} else {
 						?>
 					<div class="row searchResult valign-middle">
 						<div class="medium-12 columns">
@@ -77,6 +82,25 @@
 						</div>
 					</div>
 						<?php
+							}
+						} else {
+							// do team
+							if ($searchList){
+								foreach ($searchList as $list){
+				?>
+					<div class="row searchResult valign-middle">
+						<div class="small-10 medium-10 columns">
+							<?php echo $list->Team; ?>
+						</div>
+						<div class="small-2 medium-2 columns textRight">
+							<div id="teamTick" class="circleTick inline smallTick clickAble" data-type="addFullTeam" data-id="<?php echo $list->Team; ?>" data-url="team-details.php">
+								<label for="teamTick"></label>
+							</div>
+						</div>
+					</div>
+				<?php
+								}
+							}
 						}
 					} else { ?>
 					<div class="row searchResult valign-middle">
@@ -152,7 +176,7 @@
 	<div class="medium-12 columns">
 		<div class="TeamInputName">
 			<form action="edit-team.php" method="POST" name="confirmTeam" id="confirmTeam">
-				<input type="hidden" name="teamNO" id="teamNO" value="<?=$count?>" class="" />
+				<input type="hidden" name="teamNO" id="teamNO" value="<?=$count?>" />
 				<input type="hidden" name="teamid" id="teamid" value="<?=$_SESSION['teamid']?>" class="" />
 				<input type="text" name="myTeamName" id="myTeamName" value="<?php echo getmyTeamName($_SESSION['teamid']) ?>" class="" />
 			</form>

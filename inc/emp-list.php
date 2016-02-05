@@ -3,8 +3,8 @@ include 'config.php';
 if ( !isset($_REQUEST['term']) )
 	exit;
 	$data = array();
-	$searchAllUsers = new searchAllUsers($db);
-	$searchList = $searchAllUsers->getAllUserSearch($_REQUEST['term']);
+	$searchUsers = new searchUsers($db);
+	$searchList = $searchUsers->getAllUserSearch($_REQUEST['term']);
 	foreach ($searchList as $list){
 		$data[] = array(
 			'label' => $list->Fname .' '. $list->Sname  ,
