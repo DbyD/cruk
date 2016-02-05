@@ -8,10 +8,16 @@ if(isset($_POST["baIDdel"])){
 	deleteBasketItem( $_POST["baIDdel"] );
 }
 
+
+if( isset( $_POST[ "prID" ] ) && isset( $_POST[ "aPrice" ] ) && isset( $_POST[ "employeID" ] ) ){
+	$res = addBasket($_POST);
+}
+
 if(isset( $_POST["submit"] ) ){
 	if( empty( $_POST["title"] ) || empty( $_POST["point"] ) || empty( $_POST["Delivery"] ) || empty( $_POST["content"] ) || empty( $_FILES ) ){
 		$error_message = "<div class='error'>Please fill in all fields</div>";
 	} else {
+
 		
 		$file_path = insertFile( $_FILES , $_POST["menu_id"], $_POST["sub_id"]);
 
@@ -48,7 +54,6 @@ $basket = getBasket( $_SESSION["user"]->id );
 	$val = $_SESSION['user']->administrator;
 
 	if( $val == "YES" ){
-
 		include('../admin/products.php');
 	} else {
 ?>
@@ -62,23 +67,16 @@ $basket = getBasket( $_SESSION["user"]->id );
 						<div class="row">
 							<a id="viewBasket" class='<?php if($basket_isset) echo 'view-basket';?>' href="<?php echo HTTP_PATH . "redeem/product-basket.php?basket=true&menu_id=" . $menu_id; ?>"> <i class="fi-shopping-bag"></i>View basket </a>
 							<?php if( $basket_isset ) : ;?>
-							<span id="item-count"><?php echo count( $basket ); ?> Items</span>
+
+							<span id="item-count"><?php echo ($basket != 0)?count( $basket ):0; ?> Items</span>
 							<?php endif;?>
 						</div>
 						<?php 
 								if( isset( $_GET['prID'] ) ) {
 									$product = getProductByID( $_GET['prID'] ); 
 									$prices = explode(',',$product["aPrice"]);
-									if( isset( $_POST[ "prID" ] ) && isset( $_POST[ "aPrice" ] ) && isset( $_POST[ "employeID" ] ) ){
-										$res = addBasket($_POST);
-									}
 							?>
 						<div class="row callout panel productView">
-							<?php if($res):?>
-							<div data-alert class="alert-box success radius">
-								Added in basket! <a href="#" class="close">&times;</a>
-							</div>
-							<?php endif; ?>
 							<div class="small-4 medium-4 columns">
 								<img src="<?php echo HTTP_PATH . $product["Image_name"]; ?>" class="product-img">
 							</div>
@@ -104,7 +102,7 @@ $basket = getBasket( $_SESSION["user"]->id );
 											</div>
 										</div>
 										<div class="small-6 large-6 columns">
-											<form action="" method="post">
+											<form action="<?php echo HTTP_PATH . "redeem/product-basket.php?basket=true&menu_id=" . $menu_id; ?>" method="post">
 												<input type="hidden" name="prID" value="<?php echo $product["prID"]; ?>" id="prID">
 												<input type="hidden" name="aPrice" value="<?php echo $product["aPrice"]; ?>" id="aPrice">
 												<input type="hidden" name="employeID" value="<?php echo $_SESSION['user']->id; ?>" id="employeID">
@@ -119,7 +117,6 @@ $basket = getBasket( $_SESSION["user"]->id );
 							if( isset( $_GET['basket'] ) ) {
 							$total_price = 0;
 							 ?>
-						<!-- <pre><?php var_dump($basket); ?></pre> -->
 						<div class="row callout panel " id="basket-table">
 							<div class="small-12 large-12 columns">
 								<div id="box-basket">
