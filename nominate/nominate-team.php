@@ -1,7 +1,8 @@
 <?php
 	include_once('../inc/config.php');
 	include_once('../inc/header.php');
-	$_SESSION['alreadydone']='no';
+	unset($_SESSION['alreadydone']);
+	unset($_SESSION['nominee']);
 	$teamid =$_POST['myTeamName'];
 	$_SESSION['TeamMembers'] =  getThisTeamMembers($teamid);
 	$_SESSION['teamnominee']->teamID = $teamid;
@@ -20,7 +21,7 @@
 		</div>
 		<div id="beliefs" class="row">
 			<div class="medium-4 columns leftnp">
-				<div class="callout panel white textCenter clickAble <?php if($_SESSION['nominee']->BeliefID=='Be Brave') echo "selectedecard"; ?>" id="Be Brave" data-type="select" data-id="beliefs">
+				<div class="callout panel white textCenter clickAble <?php if($_SESSION['teamnominee']->BeliefID=='Be Brave') echo "selectedecard"; ?>" id="Be Brave" data-type="select" data-id="beliefs">
 					<div class="tickedbox">
 						<i class="icon-icons_tickinbox"></i>
 					</div>
@@ -31,7 +32,7 @@
 				</div>
 			</div>
 			<div class="medium-4 columns">
-				<div class="callout panel white textCenter clickAble <?php if($_SESSION['nominee']->BeliefID=='Be Sharp') echo "selectedecard"; ?>" id="Be Sharp" data-type="select" data-id="beliefs">
+				<div class="callout panel white textCenter clickAble <?php if($_SESSION['teamnominee']->BeliefID=='Be Sharp') echo "selectedecard"; ?>" id="Be Sharp" data-type="select" data-id="beliefs">
 					<div class="tickedbox">
 						<i class="icon-icons_tickinbox"></i>
 					</div>
@@ -42,7 +43,7 @@
 				</div>
 			</div>
 			<div class="medium-4 columns rightnp">
-				<div class="callout panel white textCenter clickAble <?php if($_SESSION['nominee']->BeliefID=='Be United') echo "selectedecard"; ?>" id="Be United" data-type="select" data-id="beliefs">
+				<div class="callout panel white textCenter clickAble <?php if($_SESSION['teamnominee']->BeliefID=='Be United') echo "selectedecard"; ?>" id="Be United" data-type="select" data-id="beliefs">
 					<div class="tickedbox">
 						<i class="icon-icons_tickinbox"></i>
 					</div>
@@ -54,9 +55,9 @@
 			</div>
 			<select name="BeliefID" id="BeliefID">
 				<option value=""></option>
-				<option <?php if($_SESSION['nominee']->BeliefID=='Be Brave') echo "selected"; ?> value="Be Brave">Be Brave</option>
-				<option <?php if($_SESSION['nominee']->BeliefID=='Be Sharp') echo "selected"; ?> value="Be Sharp">Be Sharp</option>
-				<option <?php if($_SESSION['nominee']->BeliefID=='Be United') echo "selected"; ?> value="Be United">Be United</option>
+				<option <?php if($_SESSION['teamnominee']->BeliefID=='Be Brave') echo "selected"; ?> value="Be Brave">Be Brave</option>
+				<option <?php if($_SESSION['teamnominee']->BeliefID=='Be Sharp') echo "selected"; ?> value="Be Sharp">Be Sharp</option>
+				<option <?php if($_SESSION['teamnominee']->BeliefID=='Be United') echo "selected"; ?> value="Be United">Be United</option>
 			</select>
 		</div>
 		<?php
@@ -71,7 +72,7 @@
 			</div>
 			<div class="row withPadding noMargin">
 				<div class="medium-12 columns">
-					<textarea name="personalMessage" id="personalMessage" placeholder="Example: Your dedication and passion is infectious, I am proud of you. Keep up the good work."><?=$_SESSION['nominee']->personalMessage?></textarea>
+					<textarea name="personalMessage" id="personalMessage" placeholder="Example: Your dedication and passion is infectious, I am proud of you. Keep up the good work."><?=$_SESSION['teamnominee']->personalMessage?></textarea>
 					<div class="charctersRemaining">
 						Characters remaining: <span id="chars">250</span>
 					</div>
@@ -79,15 +80,15 @@
 			</div>
 			<div class="row withPadding noMargin">
 				<div class="medium-12 columns">
-					<i class="icon-icons_i clickAble" data-type="alert" data-url="alert-little-extra.php"></i>
+					<i class="icon-icons_i clickAble" data-type="alert" data-url="alert-team-little-extra.php"></i>
 					Add 'A Little Extra'
-					<div id="littleExtraTick" class="circleTick inline smallTick clickAble <?php if($_SESSION['nominee']->littleExtra=='Yes') echo 'circleTickChecked'; ?>" data-type="popup" data-url="little-extra.php">
+					<div id="littleExtraTick" class="circleTick inline smallTick clickAble <?php if($_SESSION['teamnominee']->littleExtra=='Yes') echo 'circleTickChecked'; ?>" data-type="popup" data-url="team-little-extra.php">
 						<label for="Volunteer"></label>
 					</div>
 					<div id="littleExtraMessage">
-						<input type="hidden" value="<?php if($_SESSION['nominee']->littleExtra=='Yes') echo 'Yes'; ?>" name="littleExtra" id="littleExtra"> 
-						<div <?php if($_SESSION['nominee']->littleExtra!='Yes') echo 'class="hidden"'; ?> >
-							<span><?=$_SESSION['nominee']->Reason;?></span> 
+						<input type="hidden" value="<?php if($_SESSION['teamnominee']->littleExtra=='Yes') echo 'Yes'; ?>" name="littleExtra" id="littleExtra"> 
+						<div <?php if($_SESSION['teamnominee']->littleExtra!='Yes') echo 'class="hidden"'; ?> >
+							<span><?=$_SESSION['teamnominee']->Reason;?></span> 
 							<i class="icon-icons_close clickAble" data-type="clear" data-id="lexm"></i>
 						</div>
 					</div>
@@ -97,12 +98,12 @@
 				<div class="medium-12 columns textRight">
 					<i class="icon-icons_i clickAble" data-type="alert" data-url="alert-volunteer.php"></i>
 					Nominating for a Volunteer
-					<div id="volunteerTick" class="circleTick inline smallTick clickAble <?php if($_SESSION['nominee']->Volunteer) echo 'circleTickChecked'; ?>" data-type="popup" data-url="volunteer.php">
+					<div id="volunteerTick" class="circleTick inline smallTick clickAble <?php if($_SESSION['teamnominee']->Volunteer) echo 'circleTickChecked'; ?>" data-type="popup" data-url="volunteer.php">
 						<label for="Volunteer"></label>
 					</div>
 					<div id="volunteerName">
-						<div <?php if(!$_SESSION['nominee']->Volunteer) echo 'class="hidden"'; ?> >
-							<span><?=$_SESSION['nominee']->Volunteer;?></span> 
+						<div <?php if(!$_SESSION['teamnominee']->Volunteer) echo 'class="hidden"'; ?> >
+							<span><?=$_SESSION['teamnominee']->Volunteer;?></span> 
 							<i class="icon-icons_close clickAble" data-type="clear" data-id="v"></i>
 						</div>
 					</div>
@@ -113,7 +114,7 @@
 					<i class="icon-icons_i clickAble" data-type="alert" data-url="alert-private.php"></i>
 					Keep this award private 
 					<div class="hiddenTick inline smallTick">
-						<input type="checkbox" value="Yes" name="awardPrivate" id="awardPrivate" <?php if($_SESSION['nominee']->awardPrivate) echo "checked"; ?>>
+						<input type="checkbox" value="Yes" name="awardPrivate" id="awardPrivate" <?php if($_SESSION['teamnominee']->awardPrivate) echo "checked"; ?>>
 						<label for="awardPrivate"></label>
 					</div>
 				</div>
@@ -132,3 +133,4 @@
 </div>
 <?php include_once('../inc/footer.php'); ?>
 			<? print_r($_SESSION['teamnominee']);?>
+			<? print_r($_SESSION['nominee']);?>
