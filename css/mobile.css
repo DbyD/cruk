@@ -53,6 +53,9 @@
 }
 }
 @media only screen and (max-width: 1023px) {
+.off-canvas-wrap {
+    padding: 0;
+}
 #payoff, #portfolio {
 	display: none;
 }
@@ -191,9 +194,6 @@ ul.off-canvas-list .photo {
 	padding: 40px 0;
 	height: auto;
 }
-.height555, .height505, .height490 {
-	height: auto;
-}
 .searchInput input[type=text] {
 	width: 100%;
 }
@@ -229,5 +229,18 @@ ul.off-canvas-list .photo {
 .height158 {
 	height: 148px;
 }
+@media only screen and (max-width: 1023px) {
+#winnerswall .tableColumn-3 {
+    width: 48%;
+}
+}
+}
+/* @end */
+
+/* @group Override */
+
+@media only screen and (max-width: 1199px) {
+.height590,.height555, .height505, .height490 {
+	height: auto;
 }
 /* @end */
