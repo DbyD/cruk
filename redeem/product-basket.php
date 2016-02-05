@@ -12,7 +12,7 @@ if(isset( $_POST["submit"] ) ){
 	if( empty( $_POST["title"] ) || empty( $_POST["point"] ) || empty( $_POST["Delivery"] ) || empty( $_POST["content"] ) || empty( $_FILES ) ){
 		$error_message = "<div class='error'>Please fill in all fields</div>";
 	} else {
-		
+
 		$file_path = insertFile( $_FILES , $_POST["menu_id"], $_POST["sub_id"]);
 
 
@@ -45,7 +45,7 @@ $basket = getBasket( $_SESSION["user"]->id );
 
 ?>
 
-<?php 
+<?php
 
 	if( isset( $_GET["menu_id"] ) ) {
 		$menu_id = $_GET["menu_id"];
@@ -84,16 +84,16 @@ $basket = getBasket( $_SESSION["user"]->id );
 
 			</div>
 			
-				<?php 
+				<?php
 					if( isset( $_GET['prID'] ) ) {
-						$product = getProductByID( $_GET['prID'] ); 
+						$product = getProductByID( $_GET['prID'] );
 						$prices = explode(',',$product["aPrice"]);
 						if( isset( $_POST[ "prID" ] ) && isset( $_POST[ "aPrice" ] ) && isset( $_POST[ "employeID" ] ) ){
 							$res = addBasket($_POST);
 						}
 				?>
 
-					
+
 
 			<div class="row callout panel productView">
 				<?php if($res):?>
@@ -112,7 +112,7 @@ $basket = getBasket( $_SESSION["user"]->id );
 				</div>
 				<div class="small-12 large-12 columns">
 					<div class="row">
-						
+
 
 						<div class="small-6 large-6 columns">
 							<div id="price">
@@ -138,11 +138,11 @@ $basket = getBasket( $_SESSION["user"]->id );
 					</div>
 				</div>
 				</div>
-				
+
 
 			</div>
 
-			<?php } else { 
+			<?php } else {
 				if( isset( $_GET['basket'] ) ) {
 				$total_price = 0;
 				 ?>
