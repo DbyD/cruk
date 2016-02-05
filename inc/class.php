@@ -129,7 +129,7 @@ class MyNominationsList{
     }
 }
 
-class searchAllUsers{
+class searchUsers{
     public function getAllUserSearch($search) {
 		global $db;
 		$stmt = $db->prepare("SELECT * FROM tblempall WHERE (Fname LIKE '%$search%' OR Sname LIKE '%$search%') AND EmpNum <> :empnum LIMIT 20");
@@ -151,9 +151,6 @@ class searchAllUsers{
 		$result = $stmt->fetchAll(PDO::FETCH_OBJ);
 		return $result;
     }
-}
-
-class searchUsers{
     public function getAllSearch($search) {
 		global $db;
 		$stmt = $db->prepare("SELECT * FROM tblempall WHERE (Fname LIKE '%$search%' OR Sname LIKE '%$search%'

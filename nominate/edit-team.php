@@ -1,5 +1,8 @@
 <?php
 	include '../inc/config.php';
+	//echo $_POST['deleteTeamID']."<br>";
+	//echo $_POST['teamid']."<br>";
+	//echo $_POST['myTeamName']."<br>";
 	if ($_POST['deleteTeamID'] != ""){
 		$teamID = $_POST['deleteTeamID'];
 		$stmt = $db->prepare("DELETE FROM tblteams WHERE id = :teamID");
@@ -11,7 +14,7 @@
 		echo "removed";
 	} else {
 		if ($_POST['myTeamName']){
-			if($_POST['teamid'] != ""){
+			if (is_numeric($_POST['teamid'])) {
 				$teamID = $_POST['teamid'];
 				$stmt = $db->prepare("DELETE FROM tblteamusers WHERE teamID = :teamID");
 				$stmt->bindParam(':teamID', $teamID);

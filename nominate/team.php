@@ -34,7 +34,7 @@
 								$i ++;
 							?>
 						<div class="tableReportsHead tableColumn-2 clickAble <?php if ($myteam==$list->id) echo "white" ?>" data-type="gourl" data-url="<?=HTTP_PATH?>nominate/team.php?team=<?=$list->id;?>">
-							<?=$list->myTeamName;?>
+							<?php echo shortenName($list->myTeamName);?>
 						</div>
 						<?php  }
 						// fix header. 
