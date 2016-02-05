@@ -264,6 +264,26 @@ function getBasket( $empID ){
 	return $arr;
 }
 
+function getBasketByID( $b_id ){
+	global $db;
+
+
+	$stmt = $db->prepare("SELECT * FROM tblbasket WHERE baID=:baID");
+	$stmt->bindValue(':baID',$b_id, PDO::PARAM_INT);
+	$stmt->execute();
+
+	$arr = array();
+	while($result = $stmt->fetch(PDO::FETCH_ASSOC)){
+		$arr[] = $result;
+	}
+
+	if( count($arr) == 0){
+		return 0;
+	}
+
+	return $arr;
+}
+
 function deleteBasketItem( $baID ){
 	global $db;
 	$stmt = $db->prepare("DELETE FROM tblbasket WHERE baID = :baID");

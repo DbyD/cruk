@@ -4,8 +4,56 @@ include_once '../inc/header.php';
 include "lib.php";
 $menu = new MenuGenerator;
 
-if(isset($_POST["baIDdel"])){
-	deleteBasketItem( $_POST["baIDdel"] );
+if(isset($_POST['submitUpdate'])){
+	//echo "<pre>";
+	//var_dump($_POST);
+	$arr = array();
+	
+	foreach($_POST as $key => $post){
+		$item = explode('_',$key);
+		$arr[ $item[1] ][ $item[0] ] = $post; 
+	}
+
+	foreach($arr as $val){
+		if(!$val['submitUpdate']){
+			$current_count = count( explode(',',$val['busketIDS']) );
+			$quantity = $val["quantity"];
+
+			if( $current_count != $quantity ) {
+				if( $current_count < $quantity ){
+					$addCount = $quantity - $current_count;
+					$basket = getBasketByID( explode(',', $val['busketIDS'])[0] )[0];
+					
+					for( $i = 0; $i < $addCount; $i++ ){
+						addBasket( $basket );
+					}
+				} else {
+					//echo "<br /><br />Qchacnel " . ( $current_count - $quantity ) . "<br /><br />";
+					//var_dump($val);
+					$minusCount = $current_count - $quantity;
+					$b_ids = explode( ',', $val['busketIDS'] );
+					rsort( $b_ids );
+
+					for( $i = 0; $i < $minusCount; $i++ ){
+						deleteBasketItem( $b_ids[ $i ] );
+					}
+				}
+				
+			}
+		}
+	}
+
+	
+}
+
+if(isset($_POST["baIDdel"]) && isset( $_POST['count'] ) ){
+	
+	$explode = explode(',', $_POST["baIDdel"]);
+	$count = $_POST['count'];
+	
+	for($i = 0;$i < $count; $i++){
+		deleteBasketItem( $explode[ $i ] );
+	}
 }
 
 
@@ -120,7 +168,7 @@ $basket = getBasket( $_SESSION["user"]->id );
 						<div class="row callout panel " id="basket-table">
 							<div class="small-12 large-12 columns">
 								<div id="box-basket">
-									<table>
+									<table id="table_basket">
 										<thead>
 											<tr>
 												<th width="200">QTY</th>
@@ -130,21 +178,65 @@ $basket = getBasket( $_SESSION["user"]->id );
 											</tr>
 										</thead>
 										<tbody>
-											<?php foreach ($basket as $pr_b):
+											
+											<?php 
+											
+											$arr = array();
+											$i = 0;
+											foreach ($basket as $pr_b){						
 												$pr_info = getProductByID( $pr_b["prID"] );
-												$total_price += $pr_b['aPrice']
-			
+												$total_price += $pr_b['aPrice'];
+												
+
+												if( $i == 0 ){
+													$arr[ $i ]['baID'] = $pr_b['baID'];
+													$arr[ $i ]['aPrice'] = $pr_b['aPrice'];
+													$arr[ $i ]['aTitle'] = $pr_info['aTitle'];
+													$arr[ $i ]['prID'] = $pr_b["prID"];
+													$arr[ $i ]['QTY'] = 1;
+													$i++;
+												} else {
+													$isProduct = false;
+													for( $j = 0; $j < count($arr); $j++ ){
+														if( $pr_b["prID"] == $arr[ $j ]['prID'] && $pr_b["aPrice"] == $arr[ $j ]['aPrice']){
+															$arr[ $j ]['QTY']++;
+															$arr[ $j ]['baID'] .= ',' . $pr_b['baID'] ;
+															$isProduct = true;
+														} 
+													}
+
+													if( !$isProduct ){
+														$arr[ $i ]['baID'] = $pr_b['baID'];
+														$arr[ $i ]['aPrice'] = $pr_b['aPrice'];
+														$arr[ $i ]['aTitle'] = $pr_info['aTitle'];
+														$arr[ $i ]['prID'] = $pr_b["prID"];
+														$arr[ $i ]['QTY'] = 1;
+														$i++;
+													}
+												}
+
+												
+											}
+												
 											?>
-											<tr>
-												<td><span>1</span>
-												</td>
-												<td><?php echo $pr_info['aTitle'];?></td>
-												<td>$<?php echo $pr_b['aPrice'];?></td>
-												<td> <i class="fi-trash basket-item-remove"></i>
-													<input type="hidden" value="<?php echo $pr_b["baID"]; ?>">
-												</td>
-											</tr>
+
+											<?php 
+											$i = 1;
+											foreach( $arr as $b ):?>
+												<tr>
+													<td>
+														<input type="number" class="quantityPr" value="<?php echo $b['QTY']; ?>">
+													</td>
+													<td><?php echo $b['aTitle'];?></td>
+													<td>$<?php echo $b['aPrice'];?></td>
+													<td> <i class="fi-trash basket-item-remove"></i>
+														<input type="hidden" value="<?php echo $b["baID"]; ?>">
+													</td>
+												</tr>
+												<?php $i++; ?>
 											<?php endforeach;?>
+
+										
 											<tr>
 												<td></td>
 												<td></td>
@@ -153,12 +245,17 @@ $basket = getBasket( $_SESSION["user"]->id );
 											</tr>
 										</tbody>
 									</table>
+
+									<form action="" method="post" id="formUpdate">
+										<input type="submit" class="hidden" name="submitUpdate" value="submit">
+									</form>
 								</div>
 								<a href="#" data-reveal-id="myModalbasket" id="modalButton" class="hide">Click Me For A Modal</a>
 								<div id="myModalbasket" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
 									<h2 id="modalTitle">Yow want delete this item?</h2>
 									<form action="" method="post">
-										<input type="hidden" name="baIDdel" id="baIDdel">
+										<input type="text" name="baIDdel" id="baIDdel">
+										<input type="text" name="count" id="countPr">
 										<button> YES </button>
 									</form>
 									<button id="close-basket-del"> NO </button>
@@ -167,7 +264,7 @@ $basket = getBasket( $_SESSION["user"]->id );
 							</div>
 							<div class="small-12 medium-12 columns textRight">
 								<button class="purpleButton"> CONTINUE SHOPING </button>
-								<button class="blueButton"> UPDATE QUANTITY </button>
+								<button class="blueButton" id="updateButton"> UPDATE QUANTITY </button>
 								<button class="pinkButton"> CHECK OUT </button>
 							</div>
 						</div>

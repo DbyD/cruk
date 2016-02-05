@@ -440,7 +440,11 @@ $(document).ready(function(){
 
 	$(".basket-item-remove").click(function(){
 		var baID = $(this).siblings().val();
+		var count = $(this).parent().siblings().find('.quantityPr').val();
+		
 		$("#baIDdel").val(baID);
+		$("#countPr").val(count);
+
 		$("#modalButton").click();
 	});
 
@@ -464,6 +468,33 @@ $(document).ready(function(){
 		$(this).closest( ".menu-item-holder" ).hide();
 	});
 
+	$(".quantityPr").bind("change paste keyup", function(){
+		var table = $("#table_basket");
+		var lists = table.find('tr');
+		var quantityArr = [];
+		var htmlInputs = '';
+
+
+		for(var i = 1; i < ( lists.length - 1); i++){
+			quantityArr[i-1] = {
+								'quantity' : $(lists[i]).find('.quantityPr').val(),
+								'busketIDS' : $(lists[i]).find('input[type=hidden]').val()
+							};
+
+			htmlInputs = htmlInputs + '<input type="hidden" name="busketIDS_' + i + '" value="' + $(lists[i]).find('input[type=hidden]').val() + '">' + '<input type="hidden" name="quantity_' + i + '" value="' + $(lists[i]).find('.quantityPr').val() + '">'; 				
+		}
+
+		
+
+		$("#formUpdate").html(htmlInputs + '<input type="submit" class="hidden" name="submitUpdate" value="submit">');
+
+	});
+
+
+	$("#updateButton").click(function(){
+		var button  = $("#formUpdate").find('input[type=submit]');
+		button.click();
+	});
 
 });
 
