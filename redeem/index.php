@@ -42,18 +42,15 @@ include_once('../inc/header.php');
 					<span class="helper"></span>
 					<img src="<?=HTTP_PATH?>images/our-heroes.svg" alt="Cancer Research UK" />
 				</div>
-				<div id="awards" class="callout panel">
+				<div id="redeempanel" class="callout panel">
 					<div class="title">
-						<!-- <i class="icon-icons_trophy"></i> --> 
 						Avable to spend
 					</div>
 					<div class="price-panel">
-						<!-- <i class="icon-icons_trophy"></i> --> 
-						$300
+						<?php echo '&pound;'.getAvailable($_SESSION['user']->EmpNum); ?> 
 					</div>
-					<div class="unlaimed-panel">
-						<!-- <i class="icon-icons_trophy"></i> --> 
-						+2 Unclaimed
+					<div class="unclaimed-panel">
+						<div class="clickAble" data-type="gourl" data-url="<?=HTTP_PATH?>my-account/my-awards.php">+<?php echo getTotalNewNominations($_SESSION['user']->EmpNum); ?> Unclaimed</div>
 					</div>
 				</div>
 				<div  class="callout panel" id="menu_container">

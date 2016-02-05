@@ -18,6 +18,7 @@ $(function(){
 		},
 		submitHandler: function(form) { 
 			$.post('edit-team.php', $("#confirmTeam").serialize(), function(data) {
+				console.log(data)
 				if (data == 'created') {
 					$("#popup1").css('display', 'none');
 					$("#popupContent1").empty();

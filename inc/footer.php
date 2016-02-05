@@ -9,12 +9,11 @@
 						Messages
 					</div>
 					<?php 
-							$enpnum = $_SESSION['user'];
 							if( function_exists( 'getTotalPendingNominations' ) ) {
-								$count_nomination = getTotalPendingNominations($enpnum->EmpNum);
+								$count_nomination = getTotalPendingNominations($_SESSION['user']->EmpNum);
 							}
 							if( function_exists( 'getTotalNewNominations' ) ) {
-								$count_newAwards = getTotalNewNominations($enpnum->EmpNum);
+								$count_newAwards = getTotalNewNominations($_SESSION['user']->EmpNum);
 							}
 							if($count_nomination > 0 || $count_newAwards > 0){
 					?>
@@ -75,7 +74,7 @@
 							<div class="small-2 medium-2 columns">
 								<i class="icon-icons_person"></i>
 							</div>
-							<div class="small-2 medium-10 columns">
+							<div class="small-10 medium-10 columns">
 								Individual
 								<p><?php echo $value['name'].' '.$value['sname']; ?></p>
 							</div>
