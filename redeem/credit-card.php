@@ -113,7 +113,7 @@ $basket = getBasket( $_SESSION["user"]->id );
 						    <div class="small-8 columns">
 						      <div class="row">
 						        <div class="small-3 columns">
-						          <label for="right-label" class="right inline">Telephone Number:</label>
+						          <label for="right-label" class="right inline">Telephone <br />Number:</label>
 						        </div>
 						        <div class="small-9 columns">
 						          <input type="text" id="right-label" placeholder="Inline Text Input">

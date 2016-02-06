@@ -276,7 +276,7 @@ $basket = getBasket( $_SESSION["user"]->id );
 
 							</div>
 							<div class="small-12 medium-12 columns textRight">
-								<button class="purpleButton"> CONTINUE SHOPING </button>
+								<a href="<?php echo HTTP_PATH . "redeem"?>"><button class="purpleButton">CONTINUE SHOPING </button></a>
 								<button class="blueButton" id="updateButton"> UPDATE QUANTITY </button>
 								<button class="pinkButton" id="checkOutButton"> CHECK OUT </button>
 
