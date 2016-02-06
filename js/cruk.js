@@ -195,7 +195,7 @@ $(function(){
 	});
 });
 //----------------------------------------------------------------------------------
-	$('.clickAble').click(function(e) {
+	$('.clickAble').unbind().click(function(e) {
 		var url = $(this).attr('data-url');
 		var type = $(this).attr('data-type');
 		var id = $(this).attr('data-id');	
