@@ -139,6 +139,8 @@ if( $val == "YES" ){
 <script src="<?=HTTP_PATH?>js/jquery.validate.min.js"></script> 
 <script src="<?=HTTP_PATH?>js/foundation.min.js"></script> 
 <script src="<?=HTTP_PATH?>js/cruk.js"></script>
+<script src="<?=HTTP_PATH?>js/redeem.js"></script>
+
 </body>
 </html>
 <?php } ?>

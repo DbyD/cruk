@@ -5,8 +5,7 @@ include "lib.php";
 $menu = new MenuGenerator;
 
 if(isset($_POST['submitUpdate'])){
-	//echo "<pre>";
-	//var_dump($_POST);
+	
 	$arr = array();
 	
 	foreach($_POST as $key => $post){
@@ -28,8 +27,7 @@ if(isset($_POST['submitUpdate'])){
 						addBasket( $basket );
 					}
 				} else {
-					//echo "<br /><br />Qchacnel " . ( $current_count - $quantity ) . "<br /><br />";
-					//var_dump($val);
+					
 					$minusCount = $current_count - $quantity;
 					$b_ids = explode( ',', $val['busketIDS'] );
 					rsort( $b_ids );
@@ -105,6 +103,7 @@ $basket = getBasket( $_SESSION["user"]->id );
 		include('../admin/products.php');
 	} else {
 ?>
+			
 
 			<div id="content" class="large-8 large-push-2 columns">
 				<div class="title withStar">
@@ -250,23 +249,43 @@ $basket = getBasket( $_SESSION["user"]->id );
 										<input type="submit" class="hidden" name="submitUpdate" value="submit">
 									</form>
 								</div>
+
 								<a href="#" data-reveal-id="myModalbasket" id="modalButton" class="hide">Click Me For A Modal</a>
+
 								<div id="myModalbasket" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
 									<h2 id="modalTitle">Yow want delete this item?</h2>
 									<form action="" method="post">
-										<input type="text" name="baIDdel" id="baIDdel">
-										<input type="text" name="count" id="countPr">
+										<input type="hidden" name="baIDdel" id="baIDdel">
+										<input type="hidden" name="count" id="countPr">
 										<button> YES </button>
 									</form>
 									<button id="close-basket-del"> NO </button>
 									<a class="close-reveal-modal" aria-label="Close">&#215;</a>
 								</div>
+
+								<a href="#" data-reveal-id="myModalcheck" id="modalCheckButton" class="hidden">Click Me For A Modal</a>
+
+								<div id="myModalcheck" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+								  <h2 id="modalTitle">Your award balance does not cover the total value of your order.</h2>
+								  <p class="lead">Would you like to pay the excess by credit or debit card?</p>
+								  <a href="<?php echo HTTP_PATH . "redeem/credit-card.php?menu_id=" . $menu_id; ?>">Yes</a>
+								  <a href="#" id="closeCheckOut">No</a>
+								  <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+								</div>
+
+
 							</div>
 							<div class="small-12 medium-12 columns textRight">
 								<button class="purpleButton"> CONTINUE SHOPING </button>
 								<button class="blueButton" id="updateButton"> UPDATE QUANTITY </button>
-								<button class="pinkButton"> CHECK OUT </button>
+								<button class="pinkButton" id="checkOutButton"> CHECK OUT </button>
+
 							</div>
+
+
+							
+
+
 						</div>
 						<? } else { echo "error 404"; } } ?>
 					</div>
@@ -326,6 +345,8 @@ $basket = getBasket( $_SESSION["user"]->id );
 		<a class="exit-off-canvas"></a>
 	</div>
 </div>
+
+
 <script src="<?=HTTP_PATH?>js/vendor/jquery.js"></script> 
 <script src="//code.jquery.com/jquery-1.11.3.min.js"></script> 
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script> 
@@ -333,4 +354,6 @@ $basket = getBasket( $_SESSION["user"]->id );
 <script src="<?=HTTP_PATH?>js/jquery.validate.min.js"></script> 
 <script src="<?=HTTP_PATH?>js/foundation.min.js"></script> 
 <script src="<?=HTTP_PATH?>js/cruk.js"></script>
+<script src="<?=HTTP_PATH?>js/redeem.js"></script>
+
 </body></html><?php } ?>
