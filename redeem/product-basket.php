@@ -89,6 +89,11 @@ $basket = getBasket( $_SESSION["user"]->id );
 
 	if( isset( $_GET["menu_id"] ) ) {
 		$menu_id = $_GET["menu_id"];
+        $menu = getMenuRows( $menu_id );
+	}
+	if( isset( $_GET['prID'] ) ) {
+		$product = getProductByID( $_GET['prID'] );
+		$sub = getMenuSub($product["subID"]);
 	}
 
 	if( isset($_GET['basket'])){
@@ -108,6 +113,14 @@ $basket = getBasket( $_SESSION["user"]->id );
 			<div id="content" class="large-8 large-push-2 columns">
 				<div class="title withStar">
 					<div class="inlineDiv clickAble" data-type="gourl" data-url="<?php echo HTTP_PATH . 'redeem/'; ?>">Redeem</div> <i class="icon-icons_thickrightarrow smalli"></i>
+					<?php	if (isset($_GET['prID'])) {
+							echo '<div class="inlineDiv clickAble submenu" data-type="gourl" data-url="' . HTTP_PATH . 'redeem/products.php?menu_id=' . $menu_id . '">'. $menu[0]["label"] . '</div> ';
+							echo '<i class="icon-icons_thickrightarrow smalli"></i> <div class="inlineDiv clickAble submenu" data-type="gourl" data-url="' . HTTP_PATH . 'redeem/products.php?menu_id=' . $menu_id . '&sub_id=' . $sub[0]["id"] . '">'. $sub[0]["label"] . '</div> ';
+							echo '<i class="icon-icons_thickrightarrow smalli"></i> <span class="subSubTitle">' . $product["aTitle"] . '</span>';
+						} else {
+							echo '<span class="subSubTitle">Basket</span>';
+						}
+				?>
 				</div>
 				<div class="row contentFill">
 					<div class="medium-12 columns leftnp rightnp fillHeight">
