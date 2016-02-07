@@ -207,6 +207,9 @@ textarea{
 :placeholder-shown {
 	color: #a7a8aa;
 }
+input[type=submit], input[type=button], button{	
+	min-width: 100px;
+}
 input[type=submit], .blueButton {
 	background-color: #2e008b;
 	font-size: 11px;
@@ -216,6 +219,9 @@ input[type=submit], .blueButton {
 	cursor: pointer;
 	text-transform: uppercase;
 	border-radius: 16px;
+}
+.blueButton:hover, .blueButton:focus {
+	background-color: #2e008b;
 }
 .pinkButton {
 	background-color: #ec008c;
@@ -227,6 +233,9 @@ input[type=submit], .blueButton {
 	text-transform: uppercase;
 	border-radius: 16px;
 }
+.pinkButton:hover, .pinkButton:focus {
+	background-color: #ec008c;
+}
 .purpleButton {
 	background-color: #8c66bd;
 	font-size: 11px;
@@ -237,6 +246,9 @@ input[type=submit], .blueButton {
 	text-transform: uppercase;
 	border-radius: 16px;
 }
+.purpleButton:hover, .purpleButton:focus {
+	background-color: #8c66bd;
+}
 .lightBlueButton {
 	background-color: #00b6ed;
 	font-size: 11px;
@@ -246,6 +258,9 @@ input[type=submit], .blueButton {
 	cursor: pointer;
 	text-transform: uppercase;
 	border-radius: 16px;
+}
+.lightBlueButton:hover, .lightBlueButton:focus {
+	background-color: #00b6ed;
 }
 #content .panel.callout a:not(.button){
 	color: #00b6ed;
@@ -260,13 +275,13 @@ input[type=submit], .blueButton {
 	cursor: pointer;
 }
 .textLeft{
-	text-align: left;
+	text-align: left !important;
 }
 .textRight{
-	text-align: right;
+	text-align: right !important;
 }
 .textCenter{
-	text-align: center;
+	text-align: center !important;
 }
 .valign-middle {
     display: table;

@@ -170,10 +170,10 @@ $basket = getBasket( $_SESSION["user"]->id );
 									<table id="table_basket">
 										<thead>
 											<tr>
-												<th width="200">QTY</th>
-												<th>PRODUCT NAME</th>
-												<th width="150">PRICE</th>
-												<th width="150">REMOVE</th>
+												<th width="100">QTY</th>
+												<th class="textLeft">PRODUCT NAME</th>
+												<th width="125">PRICE</th>
+												<th width="125">REMOVE</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -224,10 +224,10 @@ $basket = getBasket( $_SESSION["user"]->id );
 											foreach( $arr as $b ):?>
 												<tr>
 													<td>
-														<input type="number" class="quantityPr" value="<?php echo $b['QTY']; ?>">
+														<input type="number" class="quantityPr" value="<?php echo $b['QTY']; ?>" min="1">
 													</td>
-													<td><?php echo $b['aTitle'];?></td>
-													<td>$<?php echo $b['aPrice'];?></td>
+													<td class="textLeft"><?php echo $b['aTitle'];?></td>
+													<td>&pound;<?php echo $b['aPrice'];?></td>
 													<td> <i class="fi-trash basket-item-remove"></i>
 														<input type="hidden" value="<?php echo $b["baID"]; ?>">
 													</td>
@@ -238,8 +238,8 @@ $basket = getBasket( $_SESSION["user"]->id );
 										
 											<tr>
 												<td></td>
-												<td></td>
-												<td>Total $<?php echo $total_price;?></td>
+												<td class="textRight">Total</td>
+												<td>&pound;<?php echo $total_price;?></td>
 												<td></td>
 											</tr>
 										</tbody>
@@ -253,33 +253,56 @@ $basket = getBasket( $_SESSION["user"]->id );
 								<a href="#" data-reveal-id="myModalbasket" id="modalButton" class="hide">Click Me For A Modal</a>
 
 								<div id="myModalbasket" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
-									<h2 id="modalTitle">Yow want delete this item?</h2>
-									<form action="" method="post">
-										<input type="hidden" name="baIDdel" id="baIDdel">
-										<input type="hidden" name="count" id="countPr">
-										<button> YES </button>
-									</form>
-									<button id="close-basket-del"> NO </button>
-									<a class="close-reveal-modal" aria-label="Close">&#215;</a>
+									<h2 id="modalTitle">Delete Item</h2>
+									<div class="row">
+										<div class="large-12 columns">
+											<p>Are you sure you would like to delete this item?</p><p>This action is irreversible!</p>
+										</div>
+									</div>
+									<div class="row">
+										<div class="large-4 columns">
+										</div>
+										<div class="large-8 columns">
+											<form action="" method="post">
+												<input type="hidden" name="baIDdel" id="baIDdel">
+												<input type="hidden" name="count" id="countPr">
+												<button class="blueButton"> YES </button>
+											</form>
+											<button id="close-basket-del" class="blueButton"> NO </button>
+										</div>
+									</div>
+									<a class="close-reveal-modal" aria-label="Close"><i class="icon-icons_close"></i></a>
 								</div>
 
 								<a href="#" data-reveal-id="myModalcheck" id="modalCheckButton" class="hidden">Click Me For A Modal</a>
 
 								<div id="myModalcheck" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
-								  <h2 id="modalTitle">Your award balance does not cover the total value of your order.</h2>
-								  <p class="lead">Would you like to pay the excess by credit or debit card?</p>
-								  <a href="<?php echo HTTP_PATH . "redeem/credit-card.php?menu_id=" . $menu_id; ?>">Yes</a>
-								  <a href="#" id="closeCheckOut">No</a>
-								  <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+									<h2 id="modalTitle">credit or debit card</h2>
+									<div class="row">
+										<div class="large-12 columns">
+											<p>Your award balance does not cover the total value of your order.</p>
+											<p>Would you like to pay the excess by credit or debit card?</p>
+										</div>
+									</div>
+									<div class="row">
+										<div class="large-4 columns">
+										</div>
+										<div class="large-8 columns">
+											<button class="purpleButton" onClick="location.href='<?php echo HTTP_PATH . "redeem/credit-card.php?menu_id=" . $menu_id; ?>'">Yes</button>
+											<button id="closeCheckOut" class="blueButton">NO</button>
+										</div>
+									</div>
+									<a class="close-reveal-modal" aria-label="Close"><i class="icon-icons_close"></i></a>
 								</div>
 
 
 							</div>
-							<div class="small-12 medium-12 columns textRight">
-								<a href="<?php echo HTTP_PATH . "redeem"?>"><button class="purpleButton">CONTINUE SHOPING </button></a>
-								<button class="blueButton" id="updateButton"> UPDATE QUANTITY </button>
-								<button class="pinkButton" id="checkOutButton"> CHECK OUT </button>
-
+							<div class="row">
+								<div class="small-12 medium-12 columns textRight">
+								<a href="<?php echo HTTP_PATH . "redeem"?>"><button class="purpleButton">CONTINUE SHOPPING</button></a>
+								<button class="blueButton" id="updateButton">UPDATE QUANTITY</button>
+								<button class="pinkButton" id="checkOutButton">CHECK OUT</button>
+								</div>
 							</div>
 
 

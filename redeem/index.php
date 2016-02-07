@@ -13,23 +13,27 @@ include_once('../inc/header.php');
 							<a id="viewBasket" class='<?php if($basket_isset) echo 'view-basket';?>' href="<?php echo HTTP_PATH . "redeem/product-basket.php?basket=true&menu_id=" . $menu_id; ?>"> <i class="fi-shopping-bag"></i>View basket </a>
 						</div>
 						<div class="row static-redeem" id="redeemHome">
-							<div class="small-2 large-6 columns leftnp">
+							<div class="small-6 large-6 columns leftnp">
 								<div class="callout panel clickAble" data-type="gourl" data-url="<?=HTTP_PATH?>redeem/products.php?menu_id=1">
+									<div class="prodTitle">Shop</div>
 									<img src="img/shop.jpg" alt="Shop">
 								</div>
 							</div>
-							<div class="small-4 large-6 columns rightnp">
+							<div class="small-6 large-6 columns rightnp">
 								<div class="callout panel clickAble" data-type="gourl" data-url="<?=HTTP_PATH?>redeem/products.php?menu_id=2">
+									<div class="prodTitle">Travel</div>
 									<img src="img/travel.jpg" alt="Travel">
 								</div>
 							</div>
 							<div class="small-6 large-6 columns leftnp">
 								<div class="callout panel clickAble" data-type="gourl" data-url="<?=HTTP_PATH?>redeem/products.php?menu_id=4">
+									<div class="prodTitle">Experience</div>
 									<img src="img/experience.jpg" alt="Experience">
 								</div>
 							</div>
 							<div class="small-6 large-6 columns rightnp">
 								<div class="callout panel clickAble" data-type="gourl" data-url="<?=HTTP_PATH?>redeem/products.php?menu_id=29">
+									<div class="prodTitle">Donate</div>
 									<img src="img/donate.jpg" alt="Donate">
 								</div>
 							</div>

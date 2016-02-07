@@ -50,7 +50,7 @@ if( $val == "YES" ){
 						<?php if( isset( $products ) ):?>
 						<div class="row products">
 							<?php foreach( $products as $product ):?>
-							<div class="small-2 large-4 columns">
+							<div class="small-6 large-4 columns">
 								<div class="callout panel product">
 									<p><?php echo $product['aTitle']; ?></p>
 									<a href="<?php echo HTTP_PATH . "redeem/product-basket.php?prID=" . $product["prID"] . "&menu_id=" . $menu_id; ?>"> <img src="<?php echo HTTP_PATH . $product["Image_name"]; ?>" class="product-img"> </a>
@@ -63,7 +63,7 @@ if( $val == "YES" ){
 						<div class="row products">
 							<?php foreach($subs as $sub): ?>
 							<?php if( is_array( $sub ) ):?>
-							<div class="small-2 large-4 columns">
+							<div class="small-6 large-4 columns">
 								<div class="callout panel product">
 									<p> <?php echo $sub['label']; ?> </p>
 									<?php if($sub["sub_image"] == ""):?>

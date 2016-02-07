@@ -999,24 +999,24 @@ p.alertText {
 .height120 {
 	height: 120px;
 }
-#myModal {
+#myModal, #myModalbasket, #myModalcheck {
 	top: 90px;
 	width: 450px;
 	padding: 0px;
 	height: 300px;
 }
-#myModal h2 {
+#myModal h2, #myModalbasket h2, #myModalcheck h2 {
 	background: #2e008b;
 	padding: 15px;
 	color: #fff;
 }
-#myModal a {
+#myModal a, #myModalbasket a, #myModalcheck a {
 	position: absolute;
 	top: -12px;
 	right: -12px;
 	line-height: 0;
 }
-#myModal i {
+#myModal i, #myModalbasket i, #myModalcheck i {
 	font-size: 22px;
 	color: #fff;
 }
@@ -1048,12 +1048,15 @@ button:hover, button:focus, .button:hover, .button:focus {
 	background: #fff;
 	height: 200px;
 }
-.product > p:first-child {
+.prodTitle, .product > p:first-child {
 	text-align: left;
 	background-color: #8c66bd;
 	color: #fff;
 	padding: 10px;
 	border-radius: 3px;
+}
+.prodTitle{
+	border-radius:0px;
 }
 .product > img {
 	cursor: pointer;
@@ -1221,19 +1224,29 @@ button:hover, button:focus, .button:hover, .button:focus {
 	width: 100%;
 }
 #box-basket thead {
-	background-color: #caabf1;
-	border-color: #caabf1;
+	background-color: #8c66bd;
+	border-color: #8c66bd;
 	padding: 0px;
 	margin: 0px;
 }
 #box-basket thead > tr > th {
 	color: #fff;
 	text-align: center;
+	font-weight: normal;
+	font-style: normal;
+	font-size: 13px;
 }
 #box-basket tbody > tr > td {
 	border-bottom: 1px solid #ccc;
 	text-align: center;
 	color: #622fa6;
+	font-size: 13px;
+}
+#box-basket input[type=number]{
+	width: 70%;
+	margin: 0px auto;
+	height: auto;
+    padding: 0.2rem 0.5rem;
 }
 .button-basket {
 	border-radius: 25px;

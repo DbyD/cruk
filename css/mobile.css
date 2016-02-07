@@ -229,12 +229,25 @@ ul.off-canvas-list .photo {
 .height158 {
 	height: 148px;
 }
+}
 @media only screen and (max-width: 1023px) {
 #winnerswall .tableColumn-3 {
     width: 48%;
 }
 }
+/* @end */
+
+
+/* @group Redeem */
+@media only screen and (max-width: 1023px) {
+	
+#redeemHome .columns, #content .products .columns {
+    padding: 0 1%;
 }
+#redeemHome, .products{
+	margin-bottom: 5px !important;
+}
+	}
 /* @end */
 
 /* @group Override */
