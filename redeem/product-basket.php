@@ -107,7 +107,7 @@ $basket = getBasket( $_SESSION["user"]->id );
 
 			<div id="content" class="large-8 large-push-2 columns">
 				<div class="title withStar">
-					Redeem
+					<div class="inlineDiv clickAble" data-type="gourl" data-url="<?php echo HTTP_PATH . 'redeem/'; ?>">Redeem</div> <i class="icon-icons_thickrightarrow smalli"></i>
 				</div>
 				<div class="row contentFill">
 					<div class="medium-12 columns leftnp rightnp fillHeight">
@@ -277,7 +277,7 @@ $basket = getBasket( $_SESSION["user"]->id );
 								<a href="#" data-reveal-id="myModalcheck" id="modalCheckButton" class="hidden">Click Me For A Modal</a>
 
 								<div id="myModalcheck" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
-									<h2 id="modalTitle">credit or debit card</h2>
+									<h2 id="modalTitle">Credit or Debit Card</h2>
 									<div class="row">
 										<div class="large-12 columns">
 											<p>Your award balance does not cover the total value of your order.</p>
@@ -288,7 +288,7 @@ $basket = getBasket( $_SESSION["user"]->id );
 										<div class="large-4 columns">
 										</div>
 										<div class="large-8 columns">
-											<button class="purpleButton" onClick="location.href='<?php echo HTTP_PATH . "redeem/credit-card.php?menu_id=" . $menu_id; ?>'">Yes</button>
+											<button class="blueButton" onClick="location.href='<?php echo HTTP_PATH . "redeem/credit-card.php?menu_id=" . $menu_id; ?>'">Yes</button>
 											<button id="closeCheckOut" class="blueButton">NO</button>
 										</div>
 									</div>

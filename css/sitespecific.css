@@ -1141,7 +1141,7 @@ button:hover, button:focus, .button:hover, .button:focus {
 	/*padding: 10px;
 	margin-top: 20px !important;*/
 }
-.panel.callout.productView{
+.panel.callout.productView, .panel.callout.creditCardView{
 	background: #fff;
 	margin-top: 10px !important;
 }
@@ -1309,5 +1309,20 @@ button:hover, button:focus, .button:hover, .button:focus {
 	padding: 20px;
 	text-align: right;
 	font-size: 24px;
+}
+.creditCardView label{
+	color: #2e008b;
+	margin: 1.2rem 0 0;
+    padding: 0;
+}
+.creditCardView input[type=text], .creditCardView input[type=email]{
+	width: 80%;
+	border-radius: 8px;
+	margin: 1rem 0 0.2rem;
+}
+.creditCardView small{
+	display: block;
+	margin-right: 18px;
+	color: #2e008b;
 }
 /* @end*/
