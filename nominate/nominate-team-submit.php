@@ -183,5 +183,5 @@
 		echo $email;
 	$_SESSION['teamnominee']->teamEmailList = $teamEmailList;
 	//}
-	//header("Location: nominate-team-done.php");
+	header("Location: nominate-team-done.php");
 ?>
