@@ -23,8 +23,7 @@ $(document).ready(function(){
 		$(".close-reveal-modal").click();
 	});
 
-	$(".pinkButton").click(function(e){
-		
+	$(".proceedButton").click(function(e){
 		if(!$("input[name=read]").prop('checked')){
 			e.preventDefault();
 			alert("Please indicate if you have read the Terms & Conditions.");

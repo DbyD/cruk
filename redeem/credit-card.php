@@ -405,7 +405,7 @@ $basket = getBasket( $_SESSION["user"]->id );
 								<div class="row">
 									<div class="medium-9 columns textRight buttonRow">
 										<button class="purpleButton">CONTINUE SHOPPING</button>
-										<button class="pinkButton">PROCEED TO NEXT STEP</button>
+										<button class="pinkButton proceedButton">PROCEED TO NEXT STEP</button>
 									</div>
 								</div>
 							</form>

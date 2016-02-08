@@ -303,7 +303,23 @@ $basket = getBasket( $_SESSION["user"]->id );
 											<button class="blueButton" onClick="location.href='<?php echo HTTP_PATH . "redeem/credit-card.php?menu_id=" . $menu_id; ?>'&checkout=false">Yes</button>
 											<button id="closeCheckOut" class="blueButton">NO</button>
 										</div>
+										
 									</div>
+									<div class="row">
+										<div class="large-4 columns">
+											<a href="<?php echo HTTP_PATH . "redeem/product-basket.php?basket=true&menu_id=" . $menu_id; ?>">
+												<button class="blueButton" >View basket</button>
+											</a>
+											
+										</div>
+										<div class="large-6 columns">
+											<a href="<?php echo HTTP_PATH . "redeem"?>">
+												<button class="purpleButton">Continue shopping</button>
+											</a>
+										</div>
+										<div class="large-2 columns"></div>
+									</div>
+									
 									<a class="close-reveal-modal" aria-label="Close"><i class="icon-icons_close"></i></a>
 								</div>
 

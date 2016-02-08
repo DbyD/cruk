@@ -1010,7 +1010,7 @@ p.alertText {
 	padding: 15px;
 	color: #fff;
 }
-#myModal a, #myModalbasket a, #myModalcheck a {
+#myModal a, #myModalbasket a, #myModalcheck .icon-icons_close > a {
 	position: absolute;
 	top: -12px;
 	right: -12px;
