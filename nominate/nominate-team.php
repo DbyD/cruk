@@ -9,7 +9,7 @@
 ?>
 
 <div id="content" class="large-8 large-push-2 columns">
-	<form action="nominate-submit.php" method="post" name="nominateColleague2" id="nominateColleague2">
+	<form action="nominate-team-submit.php" method="post" name="nominateColleague2" id="nominateColleague2">
 		<input type="hidden" name="formName" value="nominateColleague2">
 		<div class="title">
 			Nominate <i class="icon-icons_thickrightarrow smalli"></i> <span class="subTitle">Team</span>
@@ -88,8 +88,8 @@
 					<div id="littleExtraMessage">
 						<input type="hidden" value="<?php if($_SESSION['teamnominee']->littleExtra=='Yes') echo 'Yes'; ?>" name="littleExtra" id="littleExtra"> 
 						<div <?php if($_SESSION['teamnominee']->littleExtra!='Yes') echo 'class="hidden"'; ?> >
-							<span><?=$_SESSION['teamnominee']->Reason;?></span> 
-							<i class="icon-icons_close clickAble" data-type="clear" data-id="lexm"></i>
+							<span><?= cleanWorkAward($_SESSION['teamnominee']->workAward);?></span> 
+							<i class="icon-icons_close clickAble" data-type="clear" data-id="tlexm"></i>
 						</div>
 					</div>
 				</div>
@@ -114,7 +114,7 @@
 					<i class="icon-icons_i clickAble" data-type="alert" data-url="alert-private.php"></i>
 					Keep this award private 
 					<div class="hiddenTick inline smallTick">
-						<input type="checkbox" value="Yes" name="awardPrivate" id="awardPrivate" <?php if($_SESSION['teamnominee']->awardPrivate) echo "checked"; ?>>
+						<input type="checkbox" value="Yes" name="awardPrivate" id="awardPrivate" <?php if($_SESSION['teamnominee']->awardPrivate=='Yes') echo "checked"; ?>>
 						<label for="awardPrivate"></label>
 					</div>
 				</div>

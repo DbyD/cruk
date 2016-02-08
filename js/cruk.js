@@ -159,6 +159,26 @@ $(function(){
 			});
 		}
 	});
+	$("#teamLittleExtraForm").validate({
+		rules: {Reason: "required"},
+		messages: {Reason: "Please add in a reason for the little exra."},
+		errorPlacement: function(error, element) {
+			$("#alertContent").load("../alerts/alert-popup.php", {'error' : error.html() });
+			$("#alert").css('display', 'block');
+		},
+		submitHandler: function(form) { 
+			$.post('team-little-extra-update.php', $("#teamLittleExtraForm").serialize(), function(data) {
+				if (data != 'removed') {
+					$('#littleExtraTick').addClass('circleTickChecked');
+					$("#popup1").css('display', 'none');
+					$("#popupContent1").empty();
+					$("#littleExtra").val('Yes');
+					$("#littleExtraMessage span").html(data);
+					$("#littleExtraMessage div").removeClass('hidden');
+				}
+			});
+		}
+	});
 	$("#approveAward").validate({
 		rules: {dReason: "required"},
 		messages: {dReason: "Please add in a reason for the decline."},
@@ -246,6 +266,18 @@ $(function(){
 				}
 				if(id=='lexm'){
 					$.post('little-extra-update.php?clear=yes', $("#LittleExtraForm").serialize(), function(data) {
+						if (data == 'removed') {
+							$('#littleExtraTick').removeClass('circleTickChecked');
+							$("#littleExtraMessage span").html('');
+							$("#littleExtra").val('No');
+							$("#popup1").css('display', 'none');
+							$("#popupContent1").empty();
+							$("#littleExtraMessage div").addClass('hidden');
+						}
+					});
+				}
+				if(id=='tlexm'){
+					$.post('team-little-extra-update.php?clear=yes', $("#teamLittleExtraForm").serialize(), function(data) {
 						if (data == 'removed') {
 							$('#littleExtraTick').removeClass('circleTickChecked');
 							$("#littleExtraMessage span").html('');

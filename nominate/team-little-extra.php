@@ -7,7 +7,7 @@
 	</div>
 </div>
 <div id="alertBody" class="alertBody">
-	<form action="#" method="post" name="LittleExtraForm" id="LittleExtraForm">
+	<form action="#" method="post" name="teamLittleExtraForm" id="teamLittleExtraForm">
 	<?php //if(($_SESSION['nominee']->AppEmpNum == $_SESSION['user']->EmpNum)){ ?>
 		<div class="tableRow">
 			<div class="greyText textLeft">
@@ -21,7 +21,7 @@
 			</div>
 			<div class="tableColumn-2 textRight">
 				<div class="hiddenTick inline smallTick ">
-					<input type="radio" value="TeamEvent" name="teamAward" id="TeamEvent" checked>
+					<input type="radio" value="TeamEvent" name="workAward" id="TeamEvent" checked>
 					<label for="TeamEvent"></label>
 				</div>
 			</div>
@@ -32,19 +32,30 @@
 			</div>
 			<div class="tableColumn-2 textRight">
 				<div class="hiddenTick inline smallTick ">
-					<input type="radio" value="20pound" name="teamAward" id="20pound" >
+					<input type="radio" value="20pound" name="workAward" id="20pound" >
 					<label for="20pound"></label>
 				</div>
 			</div>
 		</div>
 		<div class="row withPadding">
+			<div class="greyText medium-12 columns">
+				Please add a reason for giving 'A Little Extra' 
+			</div>
+		</div>
+		<div class="row withSidePadding valign-middle">
+			<div class="medium-12 columns">
+				Reason:
+				<textarea name="Reason" id="Reason"><?=$_SESSION['nominee']->Reason?></textarea>
+			</div>
+		</div>
+		<div class="row withPadding">
 			<div class="medium-8 columns textRight">
-				<?php if ($_SESSION['nominee']->littleExtra =='Yes') { ?>
-				<a id="test" href="#" class="blueButton clickAble" data-type="clear" data-id="lexm">Delete 'A Little Extra'</a>
+				<?php if ($_SESSION['teamnominee']->littleExtra =='Yes') { ?>
+				<a id="test" href="#" class="blueButton clickAble" data-type="clear" data-id="tlexm">Delete 'A Little Extra'</a>
 				<?php } ?>
 			</div>
 			<div class="medium-4 columns textRight ">
-				<p><a href="#" class="pinkButton clickAble" data-type="submit" data-url="LittleExtraForm">Confirm</a></p>
+				<p><a href="#" class="pinkButton clickAble" data-type="submit" data-url="teamLittleExtraForm">Confirm</a></p>
 			</div>
 		</div>
 	</form>

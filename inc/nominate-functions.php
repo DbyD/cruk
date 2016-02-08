@@ -215,4 +215,21 @@ function removeTeamMember($empnum) {
 function shortenName($name){
 	return (strlen($name) > 15) ? substr($name,0,10).'...' : $name;
 }
+////////////////////////////////////////////////////////////////////////////////////
+function getTeamsApprover($EmpNum) {
+	global $db;
+	$stmt = $db->prepare("SELECT AppEmpNum, AppFname, AppSname, AppEaddress FROM tblempall WHERE EmpNum = :EmpNum");
+	$stmt->execute(array('EmpNum' => $EmpNum));
+	$result = $stmt->fetch(PDO::FETCH_OBJ);
+	return $result;
+}
+////////////////////////////////////////////////////////////////////////////////////
+function cleanWorkAward($workAward){
+	if( $workAward=='TeamEvent'){
+		return 'Team event';
+	} else {
+		return '£20 Voucher per person';
+	}
+}
+////////////////////////////////////////////////////////////////////////////////////
 ?>

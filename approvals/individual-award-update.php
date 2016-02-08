@@ -89,6 +89,7 @@
 			// send email to nominee
 			$award->Fname = $award->nominee()->Fname;
 			$award->NomFull_name = $award->nominator()->full_name;
+			$award->NomFname = $award->nominator()->Fname;
 			$award->content = indEcardExtraText($award);
 			echo $award->content;
 			// check if offline

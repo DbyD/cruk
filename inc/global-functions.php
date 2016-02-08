@@ -132,31 +132,65 @@ function getTotalNominationsList($empnum){
 function indEcardText($ecard){
 	$ecardImage = str_replace(' ','-',strtolower($ecard->BeliefID));
 	$ecardText = '<img src="'.HTTP_PATH.'images/emails/'.$ecardImage.'.png" alt="'.$ecard->BeliefID.'">';
-	$ecardText .= "<p>Hello ".$ecard->Fname."</p>
-				<p>Congratulations!</p>
-				<p>".$ecard->NomFull_name." would like to thank you for the amazing work you have performed here at Cancer Research.</p>
+	$ecardText .= "<p>Congratulations ".$ecard->Fname."</p>
+				<p>".$ecard->NomFull_name." says you’ve done something really special and deserve an Our Heroes Extraordinary People, 
+				Extraordinary Effort award for the".$ecard->BeliefID." category.</p>
 				<p>".$ecard->personalMessage."</p>
-				<p>The CRUK Belief most closely associated with your achievement is: ".$ecard->BeliefID.".</p>
-				<p>Congratulations again and many thanks for your contribution to Cancer Research UK.</p>";
+				<p>Through your dedication and commitment we can beat cancer sooner. The success of Cancer Research UK depends on people like you and we want you to know how much we appreciate your efforts.</p>
+				<p>Thank you and well done!.</p>";
 	return $ecardText;
 }
 ////////////////////////////////////////////////////////////////////////////////////
 function indEcardExtraText($ecard){
 	$ecardImage = str_replace(' ','-',strtolower($ecard->BeliefID));
 	$ecardText = '<img src="'.HTTP_PATH.'images/emails/'.$ecardImage.'.png" alt="'.$ecard->BeliefID.'">';
-	$ecardText .= "<p>Hello ".$ecard->Fname."</p>
-				<p>Congratulations!</p>
-				<p>".$ecard->NomFull_name." would like to thank you for the amazing work you have performed here at Cancer Research.</p>
+	$ecardText .= "<p>Congratulations ".$ecard->Fname."</p>
+				<p>".$ecard->NomFull_name." says you’ve done something really special and deserve an Our Heroes Extraordinary People, 
+				Extraordinary Effort award for the".$ecard->BeliefID." category.</p>
 				<p>".$ecard->personalMessage."</p>
-				<p>The CRUK Belief most closely associated with your achievement is: ".$ecard->BeliefID.".</p>
-				<p>As part of your award, you've also been given a 'Little Extra'. Please log onto the <a href='".HTTP_PATH."'>Our Heroes Portal</a> to view and claim your Little Extra something.</p>
-				<p>Congratulations again and many thanks for your contribution to Cancer Research UK.</p>";
+				<p>".$ecard->NomFname." says you deserve  'A Little Extra' as part of your award! Please log onto the <a href='".HTTP_PATH."'>Our Heroes Portal</a> to view and claim your Little Extra award.</p>
+				<p>Through your dedication and commitment we can beat cancer sooner. The success of Cancer Research UK depends on people like you and we want you to know how much we appreciate your efforts.</p> 
+				<p>Thank you and well done!</p>";
 	return $ecardText;
 }
 ////////////////////////////////////////////////////////////////////////////////////
 function getCurrentFolder($name){
 	$folder = basename(getcwd());
 	if ($folder == $name) echo 'selected';
+}
+////////////////////////////////////////////////////////////////////////////////////
+function indEcardTeamText($ecard){
+	$ecardImage = str_replace(' ','-',strtolower($ecard->BeliefID));
+	$ecardText = '<img src="'.HTTP_PATH.'images/emails/'.$ecardImage.'.png" alt="'.$ecard->BeliefID.'">';
+	$ecardText .= "<p>Congratulations ".$ecard->Fname."</p>
+				<p>".$ecard->NomFull_name." says you’ve done something really special and deserve an Our Heroes Extraordinary People, 
+				Extraordinary Effort award for the".$ecard->BeliefID." category.</p>
+				<p>".$ecard->personalMessage."</p>
+				<p>The award has been given to you as part of a team award that also includes ".$ecard->teamEmailList.".</p>
+				<p>Through your dedication and commitment we can beat cancer sooner. The success of Cancer Research UK depends on people like you and we want you to know how much we appreciate your efforts.</p>
+				<p>Thank you and well done!.</p>";
+	return $ecardText;
+}
+////////////////////////////////////////////////////////////////////////////////////
+function indEcardTeamExtraText($ecard){
+	$ecardImage = str_replace(' ','-',strtolower($ecard->BeliefID));
+	$ecardText = '<img src="'.HTTP_PATH.'images/emails/'.$ecardImage.'.png" alt="'.$ecard->BeliefID.'">';
+	$ecardText .= "<p>Congratulations ".$ecard->Fname."</p>
+				<p>".$ecard->NomFull_name." says you’ve done something really special and deserve an Our Heroes Extraordinary People, 
+				Extraordinary Effort award for the".$ecard->BeliefID." category.</p>
+				<p>".$ecard->personalMessage."</p>
+				<p>The award has been given to you as part of a team award that also includes ".$ecard->teamEmailList.".</p>";
+	if($ecard->workAward=='TeamEvent'){
+		$ecardText .= "Each member of the team has been awarded a &pound;20 voucher. You can use your voucher to choose from a great selection of awards on the <a href='".HTTP_PATH."'>Our Heroes Portal</a>.";
+	} else {
+		$ecardText .= 'You and your team are invited to celebrate the award together at an event of your choice. Entertainment to the value of &pound;20 per team member can be expensed to the
+		 				"Our Heroes" project code (HRP2000). Whether it’s a few drinks, a meal out or a team experience, it\'s up to your team to decide and make arrangements to suit you all.  
+		 				'.$ecard->NomFname.' has nominated '.$ecard->FirstNominee.' as the team\'s contact in the first instance.</p>';
+	}
+	$ecardText .= "<p>".$ecard->NomFname." says you deserve  'A Little Extra' as part of your award! Please log onto the <a href='".HTTP_PATH."'>Our Heroes Portal</a> to view and claim your Little Extra award.</p>
+				<p>Through your dedication and commitment we can beat cancer sooner. The success of Cancer Research UK depends on people like you and we want you to know how much we appreciate your efforts.</p> 
+				<p>Thank you and well done!</p>";
+	return $ecardText;
 }
 ////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////

@@ -114,7 +114,7 @@
 					<i class="icon-icons_i clickAble" data-type="alert" data-url="alert-private.php"></i>
 					Keep this award private 
 					<div class="hiddenTick inline smallTick">
-						<input type="checkbox" value="Yes" name="awardPrivate" id="awardPrivate" <?php if($_SESSION['nominee']->awardPrivate) echo "checked"; ?>>
+						<input type="checkbox" value="Yes" name="awardPrivate" id="awardPrivate" <?php if($_SESSION['teamnominee']->awardPrivate=='Yes') echo "checked"; ?>>
 						<label for="awardPrivate"></label>
 					</div>
 				</div>
