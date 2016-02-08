@@ -76,7 +76,23 @@
 
 <div id="content" class="large-8 large-push-2 columns">
 	<div class="title withStar">
-		Redeem Admin 
+		<div class="title">
+			<div class="inlineDiv clickAble" data-type="gourl" data-url="<?php echo HTTP_PATH . 'redeem/'; ?>">Redeem</div>
+			<i class="icon-icons_thickrightarrow smalli"></i>
+			
+			
+			<?php
+				$menuInfo = getMenuRows( $menu_id );
+				if ( isset( $sub_id ) ) {
+					$subInfo = getMenuSub($sub_id[0]["labels"]);
+					
+					echo '<div class="inlineDiv clickAble submenu" data-type="gourl" data-url="' . HTTP_PATH . 'redeem/products.php?menu_id=' . $menu_id . '">'. $menuInfo[0]["label"] . '</div> ';
+					echo '<i class="icon-icons_thickrightarrow smalli"></i> <span class="subSubTitle">' . $subInfo[0]["label"] . '</span>';
+				} else {
+					echo '<span class="subSubTitle">' . $menuInfo[0]["label"] . '</span>';
+				} 
+			?>
+		</div>
 	</div>
 	<div class="row contentFill mCustomScrollbar height590 " data-mcs-theme="dark-2">
 		<div class="medium-12 columns leftnp rightnp fillHeight productCats">
