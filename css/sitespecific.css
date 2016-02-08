@@ -1332,4 +1332,9 @@ button:hover, button:focus, .button:hover, .button:focus {
     margin-top: 20px;
     padding: 10px;
 }
+
+.viewForm {
+	padding: 5px 0px;
+}
+
 /* @end*/

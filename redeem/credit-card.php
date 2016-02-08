@@ -19,6 +19,40 @@ $basket = getBasket( $_SESSION["user"]->id );
 	if( $val == "YES" ){
 		include('../admin/products.php');
 	} else {
+
+
+	// Post request from credit card form
+
+	if( isset( $_POST ) ){
+
+		if( isset( $_POST['post'] ) ){
+			$form = unserialize( $_POST[ 'post' ] );
+		}
+	
+		if( isset( $_POST[ "address1" ] ) && isset($_POST[ "town" ] ) && isset( $_POST[ "postcode" ] ) && isset( $_POST[ "read" ] ) ){
+			
+			$error = false;
+			$post = $_POST;
+
+			if( empty( $_POST["address1"] ) ){
+				$error = true;
+			}
+
+			if( empty( $_POST["town"] ) ){
+				$error = true;
+			}
+
+			if( empty( $_POST["postcode"] ) ){
+				$error = true;
+			}
+
+			if( $_POST["read"] != "on" ){
+				$error = true;
+			}
+
+		}
+	}
+						
 ?>
 
 <div id="content" class="large-8 large-push-2 columns">
@@ -231,6 +265,62 @@ $basket = getBasket( $_SESSION["user"]->id );
 							</div>
 						</div>
 
+						<?php if( isset( $post ) && !$error ):?>
+
+							<div id="formDiv">
+								<p>If your order includes an e-voucher code, this will be delivered by email using the email address you provide below. Please note, for security reasons, all gift cards are delivered unloaded. They will typically be loaded within 3 working days from receipt of your card.</p>
+								<div class="row viewForm">
+								<?php foreach ($post as $key => $value):?>
+									
+									
+
+										<div class="medium-3 columns">
+											<?php
+												if( $key == 'telephone' ){
+													echo "Telephone:";
+												} else if( $key == 'address1' ){
+													echo "Adress1:";
+												} else if( $key == 'address2' ){
+													echo "Adress2:";
+												} else if( $key == 'town' ){
+													echo "Town:";
+												} else if( $key == 'postcode' ){
+													echo "Postcode:";
+												}
+											?>
+										</div>
+
+										<div class="medium-9 columns">
+											<?php 
+												if( $key != 'read' ){ 
+													echo ( $value == '' )?'<i>(Empty)</i>':$value;
+												}
+											?>
+										</div>
+
+									
+
+									
+								<?php endforeach; ?>
+									<div class="medium-12 columns">
+
+										<form action="" method="post">
+											<input type="hidden" name="post" value="<?php echo htmlentities(serialize($post));  ?>">
+											<button>EDIT DETAILS</button>
+											<button id="">PROCEED TO NEXT STEP</button>
+										</form>
+
+										
+									</div>
+									<div class="medium-12 columns">
+										<p>If you require any assistance completing this transaction please contact the Xexec Helpdesk by email at info@xexec.com or by telephone on 0845 230 9393</p>
+									</div>
+								</div>
+								
+							</div>
+
+						<?php else:?>
+
 						<div id="formDiv">
 							<p>If your order includes an e-voucher code,this will be delivered by email using your work email adress,if you have also made a charity donation, this will automatically be made on your behalf. </p>
 
@@ -242,7 +332,7 @@ $basket = getBasket( $_SESSION["user"]->id );
 											<label for="right-label" class="right inline">Telephone Number: <span class="required">&nbsp;</span></label>
 										</div>
 										<div class="medium-9 columns">
-											<input type="text" id="right-label" name="telephone">
+											<input type="text" id="right-label" name="telephone" value="<?php echo (isset($form["telephone"]))?$form["telephone"]:"";?>">
 										</div>
 									</div>
 								</div>
@@ -253,8 +343,9 @@ $basket = getBasket( $_SESSION["user"]->id );
 												<br /><small>(or company name)</small></label>
 										</div>
 										<div class="medium-9 columns">
-											<input type="text" id="right-label" name="address1" required>
+											<input type="text" id="right-label" name="address1" value="<?php echo (isset($form["address1"]))?$form["address1"]:"";?>" required>
 											<small>House name/number and street, P.O. box,company name, c/o</small>
+											
 										</div>
 									</div>
 								</div>
@@ -265,8 +356,9 @@ $basket = getBasket( $_SESSION["user"]->id );
 												<br /><small>(optional)</small></label>
 										</div>
 										<div class="medium-9 columns">
-											<input type="text" id="right-label" name="address2">
+											<input type="text" id="right-label" name="address2" value="<?php echo (isset($form["address2"]))?$form["address2"]:"";?>">
 											<small>Apartment, suite, unit, building,floor,etc</small>
+											
 										</div>
 									</div>
 								</div>
@@ -276,7 +368,8 @@ $basket = getBasket( $_SESSION["user"]->id );
 											<label for="right-label" class="right inline">Town/City: <span class="required">*</span></label>
 										</div>
 										<div class="medium-9 columns">
-											<input type="text" id="right-label" name="town" required>
+											<input type="text" id="right-label" name="town" value="<?php echo (isset($form["town"]))?$form["town"]:"";?>" required>
+											
 										</div>
 									</div>
 								</div>
@@ -286,10 +379,13 @@ $basket = getBasket( $_SESSION["user"]->id );
 											<label for="right-label" class="right inline">Postcode: <span class="required">*</span></label>
 										</div>
 										<div class="medium-9 columns">
-											<input type="text" id="right-label" name="postcode" required>
+											<input type="text" id="right-label" name="postcode" value="<?php echo (isset($form["postcode"]))?$form["postcode"]:"";?>" required>
+											
 										</div>
 									</div>
-								</div>
+								</div>                  
+
+
 
 								<div class="row">
 									<div class="row">
@@ -299,7 +395,8 @@ $basket = getBasket( $_SESSION["user"]->id );
 										<div class="medium-9 columns">
 											
 											<p>Please supply a fully inclusive delivery address as this will be the adress we will be delivering your products to.</p>
-											<p>I have read the Terms & Conditions <span class="required">*</span></p>
+											<p>I have read the Terms & Conditions <span class="required">*</span> 
+												<input type="checkbox" name="read" <?php echo ( isset( $form ) )?'checked':"";?> ></p>
 												
 										</div>
 									</div>
@@ -315,6 +412,11 @@ $basket = getBasket( $_SESSION["user"]->id );
 							<hr />
 							<p>If you require any assistance completing this transaction please contact the Xexec Helpdesk by email at info@xexec.com or by telephone on 0845 230 9393</p>
 						</div>
+						<?php endif;?>
+
+						
+
+
 
 			<?php endif;?>
 		</div>
