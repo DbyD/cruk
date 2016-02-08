@@ -158,6 +158,5 @@
 		}
 		echo $email;
 	}
-	//unset($_SESSION['nominee']);
 	header("Location: nominate-done.php");
 ?>

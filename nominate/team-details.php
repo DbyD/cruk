@@ -134,7 +134,7 @@
 					$x ++ ;
 					if($x == 1){
 			?>
-				<div class="row valign-middle withTopPadding">
+				<div class="row withTopPadding">
 					<div class="medium-5 columns noPadding">
 						<?php echo getName($list['EmpNum']); ?>
 					</div>

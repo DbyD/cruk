@@ -30,13 +30,16 @@
 				<div class="row mCustomScrollbar height555" data-mcs-theme="dark-2">
 					<?php 
 					// Get List for My Awards
-					$nomUsers = new MyApprovalsList($db);
-					$nomList = $nomUsers->getAllMyApprovalsList($_SESSION['user']->EmpNum);
+					$nomList = getAllMyApprovalsList($_SESSION['user']->EmpNum);
 					foreach ($nomList as $list){
 					?>
 					<div class="tableRow">
 						<div class="tableColumn-3">
-							<?=getName($list->NominatedEmpNum)?>
+					<?php if($list->Team == ''){ 
+							echo getName($list->NominatedEmpNum);
+						} else {
+							echo $list->Team;
+						}?>
 						</div>
 						<div class="tableColumn-3">
 						<?php
@@ -51,10 +54,10 @@
 							<?=getConvertedDate($list->NomDate)?>
 						</div>
 						<div class="tableColumn-3">
-						<?php if($list->teamID == ''){ ?>
+						<?php if($list->Team == ''){ ?>
 								<div class="clickAble" data-type="popup" data-id="<?=$list->ID?>" data-url="<?=HTTP_PATH?>approvals/individual-award.php">Individual Award</div>
 						<?php } else { ?>
-								<div class="clickAble" data-type="popup" data-id="<?=$list->ID?>" data-url="<?=HTTP_PATH?>approvals/team-award.php">Team Award</div>
+								<div class="clickAble" data-type="popup" data-id="<?=$list->teamID?>" data-url="<?=HTTP_PATH?>approvals/team-award.php">Team Award</div>
 						<?php } ?>
 						</div>
 					</div>

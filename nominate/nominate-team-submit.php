@@ -30,14 +30,14 @@
 		$stmt->bindParam(':Volunteer', $_SESSION['teamnominee']->Volunteer);
 		
 		// need to work out who correct approver is. get approver for first person
-		
-		 
 		$searchList = array_to_object(getThisTeamMembers($_SESSION['teamnominee']->teamID));
 		//print_r($searchList);
 		if ($searchList){
 			foreach ($searchList as $list){
 				//echo $list->AppEmpNum;
 				$AppEmpNum = getTeamsApprover($list->EmpNum);
+				$_SESSION['teamnominee']->AppEmpNum = $AppEmpNum->AppEmpNum;
+				$_SESSION['teamnominee']->full_App_name = $AppEmpNum->Fname.' '.$AppEmpNum->Sname;
 				//print_r($AppEmpNum);
 		//echo "<br><br>";
 				if($AppEmpNum->AppEmpNum !='') break;
@@ -107,7 +107,7 @@
 											<p>Team Name: ".getmyTeamName($_SESSION['teamnominee']->teamID)."<br>
 											".$teamEmailList.".</p>
 											<p>".$_SESSION['user']->Fname." has given the following reason for the nomination:</p>
-											<p>".$_SESSION['nominee']->Reason."</p>
+											<p>".$_SESSION['teamnominee']->Reason."</p>
 											<p>As the senior manager of the first-named colleague in this team, you are asked to review the nomination and either approve or decline the award for all nominated colleagues. 
 											You may wish to discuss the award with the senior managers of the other colleagues nominated before you make your decision.</p>
 											<p>To view the details of the proposed nomination and to approve or decline the award, please login to the  <a href='".HTTP_PATH."'>Our Heroes Portal</a>.</p>
@@ -181,9 +181,7 @@
 			}
 		}
 		echo $email;
-	//unset($_SESSION['teamnominee']);
-	//unset($_SESSION['TeamMembers']);
-	//unset($_SESSION['teamid']);
+	$_SESSION['teamnominee']->teamEmailList = $teamEmailList;
 	//}
-	header("Location: nominate-team-done.php");
+	//header("Location: nominate-team-done.php");
 ?>

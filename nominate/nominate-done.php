@@ -26,9 +26,9 @@
 					<p>As you've added 'A Little Extra', your award has gone to <?=$_SESSION['nominee']->full_App_name();?> for approval.</p>
 					<p>You will be notified of the result.</p>
 					<?php	} elseif($_SESSION['nominee']->littleExtra=='Yes' && ($_SESSION['nominee']->AppEmpNum == $_SESSION['user']->EmpNum)){?>
-					<p>As you are also the assigned Approver for this nomination, this award has automatically be approved and your Thank you Certificate has been sent to <?=$_SESSION['nominee']->full_name();?>.</p>
+					<p>As you are also the assigned Approver for this nomination, this award has automatically be approved and your Thank You Certificate has been sent to <?=$_SESSION['nominee']->full_name();?>.</p>
 					<?php } else { ?>
-					<p>Your Thank you Certificate has been sent to <?=$_SESSION['nominee']->full_name();?>.</p>
+					<p>Your Thank You Certificate has been sent to <?=$_SESSION['nominee']->full_name();?>.</p>
 					<?php } ?>
 					<? //print_r($_SESSION['nominee']);?>
 				</div>
@@ -36,4 +36,7 @@
 		</div>
 	</div>
 </div>
-<?php include_once('../inc/footer.php'); ?>
+<?php
+	unset($_SESSION['nominee']);
+	include_once('../inc/footer.php');
+?>

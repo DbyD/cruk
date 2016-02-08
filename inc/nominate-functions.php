@@ -67,13 +67,18 @@ function getTotalNewNominations($empnum){
 ////////////////////////////////////////////////////////////////////////////////////
 function getTotalPendingNominations($empnum){
 	global $db;
+	$count =0;
 	$stmt = $db->prepare('SELECT * FROM tblnominations WHERE ApproverEmpNum = :EmpNum AND AprStatus=0');
 	$stmt->execute(array('EmpNum' => $empnum));
 	if ($result = $stmt->fetch()){
-		return $stmt->rowCount();
-	} else{
-		return 0;
+		$count += $stmt->rowCount();
 	}
+	$stmt = $db->prepare('SELECT * FROM tblnominations_team WHERE ApproverEmpNum = :EmpNum AND AprStatus=0');
+	$stmt->execute(array('EmpNum' => $empnum));
+	if ($result = $stmt->fetch()){
+		$count += $stmt->rowCount();
+	}
+	return $count;
 }
 ////////////////////////////////////////////////////////////////////////////////////
 function getTotalApprovedNominations($empnum){

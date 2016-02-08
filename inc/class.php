@@ -68,22 +68,49 @@ class Award {
 		return $result;
 	}
 }
+class teamAward {
+	public $NominatorEmpNum;
+	public $ID;
+	public $ApproverEmpNum;
+	public function nominator(){
+		global $db;
+		$stmt = $db->prepare('SELECT Fname, Sname, Eaddress FROM tblempall WHERE EmpNum = :NominatorEmpNum');
+		$stmt->execute(array('NominatorEmpNum' => $this->NominatorEmpNum));
+		$result = $stmt->fetch(PDO::FETCH_OBJ);
+		$result->full_name = $result->Fname. ' ' . $result->Sname;
+		return $result;
+	}
+	public function teamNominees(){
+		global $db;
+		$stmt = $db->prepare('SELECT e.EmpNum, e.Fname, e.Sname, e.Eaddress, e.Shop, e.JobTitle, e.LMEmpNum, e.LMFname, e.LMSname, e.LMEaddress 
+								FROM tblempall e INNER JOIN tblnominations_teamusers nt
+								ON nt.EmpNum = e.EmpNum
+								WHERE nt.nominationsID = :ID');
+		$stmt->execute(array('ID' => $this->ID));
+		$result = $stmt->fetchAll(PDO::FETCH_OBJ);
+		/*$result->full_name = $result->Fname. ' ' . $result->Sname;
+		$result->LMfull_name = $result->LMFname. ' ' . $result->LMSname;
+		if ($result->Shop != '' && $result->JobTitle != 'Shop Mgr'){
+			$result->offline = 'YES';
+		}*/
+		return $result;
+	}
+	public function approver(){
+		global $db;
+		$stmt = $db->prepare('SELECT Fname, Sname, Eaddress FROM tblempall WHERE EmpNum = :ApproverEmpNum');
+		$stmt->execute(array('ApproverEmpNum' => $this->ApproverEmpNum));
+		$result = $stmt->fetch(PDO::FETCH_OBJ);
+		$result->full_name = $result->Fname. ' ' . $result->Sname;
+		return $result;
+	}
+}
+
 
 class allApprovalsList{
     public function getAllApprovalsList() {
 		global $db;
 		$stmt = $db->prepare("SELECT * FROM tblnominations WHERE AprStatus=0 AND littleExtra='Yes' ORDER BY NomDate DESC");
 		$stmt->execute();
-		$result = $stmt->fetchAll(PDO::FETCH_OBJ);
-		return $result;
-    }
-}
-
-class MyApprovalsList{
-    public function getAllMyApprovalsList($empnum) {
-		global $db;
-		$stmt = $db->prepare("SELECT * FROM tblnominations WHERE ApproverEmpNum = :empnum AND AprStatus=0 AND littleExtra='Yes' ORDER BY NomDate DESC");
-		$stmt->execute(array('empnum' => $empnum));
 		$result = $stmt->fetchAll(PDO::FETCH_OBJ);
 		return $result;
     }
