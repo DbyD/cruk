@@ -84,8 +84,8 @@
 			<?php
 				$menuInfo = getMenuRows( $menu_id );
 				if ( isset( $sub_id ) ) {
-					$subInfo = getMenuSub($sub_id[0]["labels"]);
-					
+					$subInfo = getMenuSub( $sub_id );
+					 
 					echo '<div class="inlineDiv clickAble submenu" data-type="gourl" data-url="' . HTTP_PATH . 'redeem/products.php?menu_id=' . $menu_id . '">'. $menuInfo[0]["label"] . '</div> ';
 					echo '<i class="icon-icons_thickrightarrow smalli"></i> <span class="subSubTitle">' . $subInfo[0]["label"] . '</span>';
 				} else {
