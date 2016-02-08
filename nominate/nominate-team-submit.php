@@ -18,8 +18,8 @@
 		}
 		
 		
-		print_r($_SESSION['teamnominee']);
-		echo "<br><br>";
+		//print_r($_SESSION['teamnominee']);
+		//echo "<br><br>";
 		$stmt = $db->prepare("INSERT INTO tblnominations_team(
 								awardType, NominatorEmpNum, Volunteer, ApproverEmpNum, Team, 
 								littleExtra, amount, personalMessage, Reason, BeliefID, dReason, NomDate, AprDate, AprStatus, awardPrivate) 
@@ -32,18 +32,18 @@
 		// need to work out who correct approver is. get approver for first person
 		
 		 
-		$searchList = getThisTeamMembers($_SESSION['teamnominee']->teamID);
-				print_r($searchList);
-		echo "<br><br>";
+		$searchList = array_to_object(getThisTeamMembers($_SESSION['teamnominee']->teamID));
+		//print_r($searchList);
 		if ($searchList){
 			foreach ($searchList as $list){
-				echo $list['AppEmpNum'];
-				$AppEmpNum = getTeamsApprover($list['EmpNum']);
-				print_r($AppEmpNum);
-		echo "<br><br>";
+				//echo $list->AppEmpNum;
+				$AppEmpNum = getTeamsApprover($list->EmpNum);
+				//print_r($AppEmpNum);
+		//echo "<br><br>";
 				if($AppEmpNum->AppEmpNum !='') break;
 			}
 		}
+		
 		$stmt->bindParam(':ApproverEmpNum', $AppEmpNum->AppEmpNum);
 		$stmt->bindParam(':Team', getmyTeamName($_SESSION['teamnominee']->teamID));
 		$stmt->bindParam(':littleExtra', $_SESSION['teamnominee']->littleExtra);
@@ -76,9 +76,9 @@
 			foreach ($searchList as $list){
 				$stmt = $db->prepare("INSERT INTO tblnominations_teamusers(nominationsID, EmpNum) VALUES (:nominationsID, :EmpNum)");
 				$stmt->bindParam(':nominationsID', $id);
-				$stmt->bindParam(':EmpNum', $list['EmpNum']);
+				$stmt->bindParam(':EmpNum', $list->EmpNum);
 				$stmt->execute();
-				$teamEmailList .= getName($list['EmpNum']).", ";
+				$teamEmailList .= getName($list->EmpNum).", ";
 			}
 			$teamEmailList = chop($teamEmailList,", ");
 			$_SESSION['teamnominee']->teamEmailList = $teamEmailList;
@@ -97,7 +97,7 @@
 										<p>".$_SESSION['user']->Fname." has nominated a team to receive 'A Little Extra' as part of an Our Heroes Award.</p>
 										<p>Hoever there is no approver listed. </p>";
 				$email = sendEmail($sendEmail,'T'.$id);
-				echo $sendEmail->Content;
+				//echo $sendEmail->Content;
 			} else {
 				// send email to approver
 				if(filter_var($AppEmpNum->AppEaddress, FILTER_VALIDATE_EMAIL)){
@@ -114,7 +114,7 @@
 											<p>If no decision is made within the next 30 days, the nomination will automatically be approved.</p>
 											<p>If you need a hand to access the Our Heroes Portal or approve the award, our recognition partners, Xexec, are happy to help 0845 230 9393</p>";
 					$email = sendEmail($sendEmail,'T'.$id);
-					echo $sendEmail->Content;
+					//echo $sendEmail->Content;
 				} else {
 					$email = "fail";
 				}
@@ -148,17 +148,21 @@
 			
 			if ($searchList){
 				foreach ($searchList as $list){
+					$_SESSION['teamnominee']->teamEmailList = $teamEmailList;
+					$_SESSION['teamnominee']->Eaddress = $list->Eaddress;
 					$_SESSION['teamnominee']->Fname = getFirstName($list->EmpNum);
+					$_SESSION['teamnominee']->full_name = getName($list->EmpNum);
 					$_SESSION['teamnominee']->content = indEcardTeamText($_SESSION['teamnominee']);
+					//echo $_SESSION['teamnominee']->content;
 					// test if offline
-					if ($_SESSION['teamnominee']->offline == 'YES'){
+					if ($list->offline == 'YES'){
 						// they in a shop so considered offline. need to fix email with all requirements. will need to get wording from Jamie
 						$sendEmail = new StdClass();
 						$sendEmail->emailTo = $xexecEmail;
 						$sendEmail->subject = 'E-Card Award Notification';
 						$sendEmail->Bcc = '';
 						$sendEmail->Content = "<p>Hi</p>
-												<p>".$_SESSION['user']->Fname." has nominated ".$_SESSION['teamnominee']->full_name()." to receive a Thank you card as part of an Our Heroes Award.</p>
+												<p>".$_SESSION['user']->Fname." has nominated ".$_SESSION['teamnominee']->full_name." to receive a Thank you card as part of an Our Heroes Award.</p>
 												<p>Below is the content of the card:</p>
 												<p>".$_SESSION['teamnominee']->content."</p>";
 						$email = sendEmail($sendEmail,'T'.$id);
@@ -166,10 +170,11 @@
 					} else {
 						if(filter_var($_SESSION['teamnominee']->Eaddress, FILTER_VALIDATE_EMAIL)){
 							$email = sendEcardEmail($_SESSION['teamnominee']);
+							echo $email;
+							echo "email sent to teamnominee";
 						} else {
 							$email = "fail xexec";
 						}
-						echo "email sent to teamnominee";
 					}
 					$_SESSION['alreadydone'] = 'yes';
 				}
@@ -180,5 +185,5 @@
 	//unset($_SESSION['TeamMembers']);
 	//unset($_SESSION['teamid']);
 	//}
-	//header("Location: nominate-done.php");
+	header("Location: nominate-team-done.php");
 ?>

@@ -1,6 +1,6 @@
 <?php
 	include '../inc/config.php';
-	$_SESSION['alreadydone'] = 'no';
+	unset($_SESSION['alreadydone']);
 ?>
 
 <div id="alertTitle" class="title">
