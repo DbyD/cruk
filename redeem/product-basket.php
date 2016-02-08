@@ -27,7 +27,6 @@ if(isset($_POST['submitUpdate'])){
 						addBasket( $basket );
 					}
 				} else {
-					
 					$minusCount = $current_count - $quantity;
 					$b_ids = explode( ',', $val['busketIDS'] );
 					rsort( $b_ids );
@@ -301,7 +300,7 @@ $basket = getBasket( $_SESSION["user"]->id );
 										<div class="large-4 columns">
 										</div>
 										<div class="large-8 columns">
-											<button class="blueButton" onClick="location.href='<?php echo HTTP_PATH . "redeem/credit-card.php?menu_id=" . $menu_id; ?>'">Yes</button>
+											<button class="blueButton" onClick="location.href='<?php echo HTTP_PATH . "redeem/credit-card.php?menu_id=" . $menu_id; ?>'&checkout=false">Yes</button>
 											<button id="closeCheckOut" class="blueButton">NO</button>
 										</div>
 									</div>
@@ -314,7 +313,7 @@ $basket = getBasket( $_SESSION["user"]->id );
 								<div class="small-12 medium-12 columns textRight">
 								<a href="<?php echo HTTP_PATH . "redeem"?>"><button class="purpleButton">CONTINUE SHOPPING</button></a>
 								<button class="blueButton" id="updateButton">UPDATE QUANTITY</button>
-								<button class="pinkButton" id="checkOutButton">CHECK OUT</button>
+								<button class="pinkButton" id="checkOutButton" linkGo="<?php echo HTTP_PATH . "redeem/credit-card.php?menu_id=" . $menu_id; ?>'&checkout=true">CHECK OUT</button>
 								</div>
 							</div>
 
@@ -337,6 +336,7 @@ $basket = getBasket( $_SESSION["user"]->id );
 						Avable to spend
 					</div>
 					<div class="price-panel">
+
 						<?php echo '&pound;'.getAvailable($_SESSION['user']->EmpNum); ?>
 					</div>
 					<div class="unclaimed-panel">

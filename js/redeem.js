@@ -7,8 +7,14 @@ $(document).ready(function(){
 		var total = $.trim( $("#table_basket tr").last().children().eq(2).text() );
 		totalNumber = total.slice( 1,total.length );
 
-		if(totalNumber > priceNumber){
+        console.log("totalNumber = ", totalNumber);
+        console.log("priceNumber = ", priceNumber);
+        console.log(parseInt(totalNumber) > parseInt(priceNumber));
+
+		if(parseInt(totalNumber) > parseInt(priceNumber)){
 			$('#modalCheckButton').click();
+		} else {
+			window.location.replace($(this).attr('linkGo'));
 		}
 		
 	});

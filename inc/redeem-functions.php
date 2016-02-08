@@ -351,7 +351,8 @@ WHERE id = :id";
 ///////////////////////////////////////////////////////////////////////////////////
 function getAvailable($empnum){
 	global $db;
-	$stmt = $db->prepare("SELECT SUM(amount) FROM tblnominations WHERE NominatedEmpNum = :EmpNum AND amount='20' AND AwardClaimed='Yes'");
+	$stmt = $db->prepare("SELECT SUM(amount) FROM tblnominations WHERE NominatedEmpNum = :EmpNum AND amount='2000' AND AwardClaimed='Yes'");
+
 	$stmt->execute(array('EmpNum' => $empnum));
 	if ($result = $stmt->fetchColumn()){
 		return $result;
@@ -360,6 +361,7 @@ function getAvailable($empnum){
 	}
 
 } 
+
 ///////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////

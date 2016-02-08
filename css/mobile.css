@@ -6,6 +6,11 @@
 #content, #left-column, #right-column {
 	height: 610px;
 }
+
+#content {
+	overflow: scroll;
+}
+
 .large-2 {
 	width: 20%;
 	padding-right: 0;
