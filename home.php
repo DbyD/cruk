@@ -1,5 +1,6 @@
 <?php 
 	include_once('inc/config.php');
+
 	include_once('inc/header.php');
 ?>
 			<div id="content" class="large-8 large-push-2 columns">
@@ -42,7 +43,7 @@
 					</div>
 				</div>
 			</div>
-			<?php //print_r($_SESSION['user']); ?>
+			<?php // print_r($_SESSION['user']); ?>
 <?php
 	include_once('inc/footer.php');
 ?>

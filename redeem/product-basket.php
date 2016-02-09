@@ -21,7 +21,9 @@ if(isset($_POST['submitUpdate'])){
 			if( $current_count != $quantity ) {
 				if( $current_count < $quantity ){
 					$addCount = $quantity - $current_count;
-					$basket = getBasketByID( explode(',', $val['busketIDS'])[0] )[0];
+					
+					$basket_id = explode(',', $val['busketIDS'])[0];
+					$basket = getBasketByID( $basket_id )[0];
 					
 					for( $i = 0; $i < $addCount; $i++ ){
 						addBasket( $basket );
@@ -300,25 +302,12 @@ $basket = getBasket( $_SESSION["user"]->id );
 										<div class="large-4 columns">
 										</div>
 										<div class="large-8 columns">
-											<button class="blueButton" onClick="location.href='<?php echo HTTP_PATH . "redeem/credit-card.php?menu_id=" . $menu_id; ?>'&checkout=false">Yes</button>
+											<button class="blueButton" onClick="location.href='<?php echo HTTP_PATH . "redeem/checkout.php?menu_id=" . $menu_id . '&checkout=false'; ?>'">Yes</button>
 											<button id="closeCheckOut" class="blueButton">NO</button>
 										</div>
 										
 									</div>
-									<div class="row">
-										<div class="large-4 columns">
-											<a href="<?php echo HTTP_PATH . "redeem/product-basket.php?basket=true&menu_id=" . $menu_id; ?>">
-												<button class="blueButton" >View basket</button>
-											</a>
-											
-										</div>
-										<div class="large-6 columns">
-											<a href="<?php echo HTTP_PATH . "redeem"?>">
-												<button class="purpleButton">Continue shopping</button>
-											</a>
-										</div>
-										<div class="large-2 columns"></div>
-									</div>
+									
 									
 									<a class="close-reveal-modal" aria-label="Close"><i class="icon-icons_close"></i></a>
 								</div>
@@ -329,7 +318,7 @@ $basket = getBasket( $_SESSION["user"]->id );
 								<div class="small-12 medium-12 columns textRight">
 								<a href="<?php echo HTTP_PATH . "redeem"?>"><button class="purpleButton">CONTINUE SHOPPING</button></a>
 								<button class="blueButton" id="updateButton">UPDATE QUANTITY</button>
-								<button class="pinkButton" id="checkOutButton" linkGo="<?php echo HTTP_PATH . "redeem/credit-card.php?menu_id=" . $menu_id; ?>'&checkout=true">CHECK OUT</button>
+								<button class="pinkButton" id="checkOutButton" linkGo="<?php echo HTTP_PATH . "redeem/checkout.php?menu_id=" . $menu_id; ?>'&checkout=true">CHECK OUT</button>
 								</div>
 							</div>
 

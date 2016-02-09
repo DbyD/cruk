@@ -13,6 +13,7 @@ if( $val == "YES" ){
     $res = 0;
     if( isset( $_GET["menu_id"] ) ) {
         $menu_id = $_GET["menu_id"];
+
         $menu = getMenuRows( $menu_id );
 
         if( isset( $_GET["sub_id"] ) ){
@@ -53,6 +54,7 @@ if( $val == "YES" ){
 							<div class="small-6 large-4 columns">
 								<div class="callout panel product">
 									<p><?php echo $product['aTitle']; ?></p>
+
 									<a href="<?php echo HTTP_PATH . "redeem/product-basket.php?prID=" . $product["prID"] . "&menu_id=" . $menu_id; ?>"> <img src="<?php echo HTTP_PATH . $product["Image_name"]; ?>" class="product-img"> </a>
 								</div>
 							</div>

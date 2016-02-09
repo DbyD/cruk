@@ -98,9 +98,30 @@ WHERE prID = :prID";
 	$stmt->execute();
 } 
 
-function getMenuAllRows(){
+function addBasketOrders( $data ){
 	global $db;
 
+
+	$stmt = $db->prepare("
+INSERT INTO tblbasketorders (	phone, adress1, adress2, town, postcode, date, empID, totalPrice) 
+VALUES (	:phone, :adress1, :adress2, :town, :postcode, :date, :empID, :totalPrice)");
+
+	$stmt->bindValue(':phone',$data["telephone"], PDO::PARAM_STR);
+	$stmt->bindValue(':adress1', $data["address1"], PDO::PARAM_STR);
+	$stmt->bindValue(':adress2',$data["address2"] , PDO::PARAM_STR);
+	$stmt->bindValue(':town',$data["town"] , PDO::PARAM_STR);
+	$stmt->bindValue(':postcode',$data["postcode"] , PDO::PARAM_INT);
+	$stmt->bindValue(':date',$data["date"] , PDO::PARAM_INT);
+	$stmt->bindValue(':empID',$data["empID"] , PDO::PARAM_INT);
+	$stmt->bindValue(':totalPrice',$data["totalPrice"] , PDO::PARAM_INT);
+
+	$stmt->execute();
+	$lastId = $db->lastInsertId();
+	return $lastId;
+}
+
+function getMenuAllRows(){
+	global $db;
 
 	$stmt = $db->prepare("SELECT * FROM tblmenuleft ORDER BY qu");
 
@@ -233,7 +254,7 @@ function addBasket( $data ){
 	global $db;
 
 	
-	$stmt = $db->prepare("INSERT INTO tblbasket (prID, aPrice, employeID) VALUES (:prID, :aPrice, :employeID)");
+	$stmt = $db->prepare("INSERT INTO tblbasket (prID, aPrice, employeID, status) VALUES (:prID, :aPrice, :employeID, 'in the basket')");
 	
 
 	$stmt->bindValue(':prID',$data["prID"], PDO::PARAM_INT);
@@ -248,7 +269,7 @@ function getBasket( $empID ){
 	global $db;
 
 
-	$stmt = $db->prepare("SELECT * FROM tblbasket WHERE employeID=:employeID");
+	$stmt = $db->prepare("SELECT * FROM tblbasket WHERE employeID=:employeID AND status='in the basket'");
 	$stmt->bindValue(':employeID',$empID, PDO::PARAM_INT);
 	$stmt->execute();
 
@@ -262,6 +283,20 @@ function getBasket( $empID ){
 	}
 
 	return $arr;
+}
+
+function updateBasketStatus( $empID, $orderID ){
+	global $db;
+
+	$sql = "
+UPDATE tblbasket 
+SET status = 'order', orderID = :orderID
+WHERE employeID = :employeID AND status='in the basket'";	
+	$stmt = $db->prepare($sql);
+
+	$stmt->bindValue(':employeID',$empID, PDO::PARAM_INT);
+	$stmt->bindValue(':orderID',$orderID, PDO::PARAM_INT);
+	$stmt->execute(); 
 }
 
 function getBasketByID( $b_id ){
@@ -351,7 +386,7 @@ WHERE id = :id";
 ///////////////////////////////////////////////////////////////////////////////////
 function getAvailable($empnum){
 	global $db;
-	$stmt = $db->prepare("SELECT SUM(amount) FROM tblnominations WHERE NominatedEmpNum = :EmpNum AND amount='20' AND AwardClaimed='Yes'");
+	$stmt = $db->prepare("SELECT SUM(amount) FROM tblnominations WHERE NominatedEmpNum = :EmpNum AND amount='2000' AND AwardClaimed='Yes'");
 
 	$stmt->execute(array('EmpNum' => $empnum));
 	if ($result = $stmt->fetchColumn()){

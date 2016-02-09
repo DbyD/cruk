@@ -26,7 +26,12 @@ $basket = getBasket( $_SESSION["user"]->id );
 	if( isset( $_POST ) ){
 
 		if( isset( $_POST['post'] ) ){
-			$form = unserialize( $_POST[ 'post' ] );
+			if($_POST["save"] == 'false'){
+				$form = unserialize( $_POST[ 'post' ] );
+			} else {
+				$postForUpload = unserialize( $_POST[ 'post' ]);
+			}
+			
 		}
 	
 		if( isset( $_POST[ "address1" ] ) && isset($_POST[ "town" ] ) && isset( $_POST[ "postcode" ] ) && isset( $_POST[ "read" ] ) ){
@@ -60,7 +65,7 @@ $basket = getBasket( $_SESSION["user"]->id );
 		<div class="inlineDiv clickAble" data-type="gourl" data-url="<?php echo HTTP_PATH . 'redeem/'; ?>">
 			Redeem
 		</div>
-		<i class="icon-icons_thickrightarrow smalli"></i> <span class="subSubTitle">Credit Card</span>
+		<i class="icon-icons_thickrightarrow smalli"></i> <span class="subSubTitle">Checkout</span>
 	</div>
 	<div class="row contentFill">
 		<div class="medium-12 columns leftnp rightnp fillHeight">
@@ -77,7 +82,7 @@ $basket = getBasket( $_SESSION["user"]->id );
 							Please enter your Billing details below.
 						</div>
 					</div>
-					<form action="<?php echo HTTP_PATH . 'redeem/credit-card.php?menu_id=' . $menu_id ?>" method="post">
+					<form action="<?php echo HTTP_PATH . 'redeem/checkout.php?menu_id=' . $menu_id ?>" method="post">
 						<div class="row">
 							<div class="medium-3 columns textRight">
 								<label for="right-label" class="right inline">First Name(s): <span class="required">*</span></label>
@@ -172,6 +177,7 @@ $basket = getBasket( $_SESSION["user"]->id );
 					</form>
 				</div>
 			<?php else:?>
+
 				
 				<div class="row callout panel " id="basket-table">
 							<div class="small-12 large-12 columns">
@@ -271,8 +277,6 @@ $basket = getBasket( $_SESSION["user"]->id );
 								<p>If your order includes an e-voucher code, this will be delivered by email using the email address you provide below. Please note, for security reasons, all gift cards are delivered unloaded. They will typically be loaded within 3 working days from receipt of your card.</p>
 								<div class="row viewForm">
 								<?php foreach ($post as $key => $value):?>
-									
-									
 
 										<div class="medium-3 columns">
 											<?php
@@ -302,15 +306,24 @@ $basket = getBasket( $_SESSION["user"]->id );
 
 									
 								<?php endforeach; ?>
-									<div class="medium-12 columns">
+									<div class="medium-6  columns">
 
 										<form action="" method="post">
 											<input type="hidden" name="post" value="<?php echo htmlentities(serialize($post));  ?>">
+											<input type="hidden" name="save" value="false">
 											<button>EDIT DETAILS</button>
-											<button id="">PROCEED TO NEXT STEP</button>
+											
 										</form>
-
 										
+									</div>
+									<div class="medium-6 columns">
+
+										<form action="" method="post">
+											<input type="hidden" name="post" value="<?php echo htmlentities(serialize($post));  ?>">
+											<input type="hidden" name="save" value="true">
+											<button>PROCEED TO NEXT STEP</button>
+										</form>
+	
 									</div>
 									<div class="medium-12 columns">
 										<p>If you require any assistance completing this transaction please contact the Xexec Helpdesk by email at info@xexec.com or by telephone on 0845 230 9393</p>
@@ -319,12 +332,43 @@ $basket = getBasket( $_SESSION["user"]->id );
 								
 							</div>
 
+						<?php elseif( isset( $postForUpload ) ):?>
+							
+								<?php 
+									
+									$last_id = 0;
+
+									if( $total_price != null ){
+										$postForUpload["date"] = date("Y-m-d h:i:s");
+										$postForUpload["empID"] = $_SESSION['user']->id;
+										$postForUpload["totalPrice"] = $total_price;
+										$last_id = addBasketOrders( $postForUpload ); 
+									}
+									
+									if( $last_id > 0 ):
+										updateBasketStatus( $_SESSION['user']->id, $last_id );
+								?>
+								<h2>Thank you</h2>
+								<p> 
+									Thank you for your purchase. Your voucher will be delivered 
+									within the next 5-7 working days (Additional delay may be
+									experienced over the official holidays). Your reference 
+									number for this order is your unique prize code.
+								</p>
+
+								<p> Confirmation of this order has been sent to your email address.</p>
+								<?php else: ?>
+									Products for order not!.
+								<?php endif; ?>
+							
+
+							
 						<?php else:?>
 
 						<div id="formDiv">
 							<p>If your order includes an e-voucher code,this will be delivered by email using your work email adress,if you have also made a charity donation, this will automatically be made on your behalf. </p>
 
-							<form action="<?php echo HTTP_PATH . 'redeem/credit-card.php?menu_id=' . $menu_id ?>" method="post">
+							<form action="<?php echo HTTP_PATH . 'redeem/checkout.php?menu_id=' . $menu_id ?>" method="post">
 								
 								<div class="row">
 									<div class="row">
