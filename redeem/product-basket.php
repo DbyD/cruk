@@ -21,7 +21,8 @@ if(isset($_POST['submitUpdate'])){
 			if( $current_count != $quantity ) {
 				if( $current_count < $quantity ){
 					$addCount = $quantity - $current_count;
-					$basket = getBasketByID( explode(',', $val['busketIDS'])[0] )[0];
+					$basket_id = explode(',', $val['busketIDS'])[0];
+    				$basket = getBasketByID( $basket_id )[0];
 					
 					for( $i = 0; $i < $addCount; $i++ ){
 						addBasket( $basket );
