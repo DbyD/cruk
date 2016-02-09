@@ -1,4 +1,5 @@
 <?PHP 
+include_once '../inc/config.php';
 // Signature key entered on MMS. The demo accounts is fixed to this value, 
 $key = 'Cheer11Inside19Credit';
  
@@ -14,7 +15,7 @@ echo '</pre>';
 if (!isset($_POST['responseCode'])) {
 //  Send request to gateway
 //  Request 
-	$req = array( 'merchantID' => '102290', 'action' => 'SALE', 'type' => 1, 'amount' => 2000, 'countryCode' => 826, 'currencyCode' => 826, 'transactionUnique' => '12345', 'redirectURL' => 'http://alec_win7/visavouchers/credit-card-response.asp', );
+	$req = array( 'merchantID' => '102290', 'action' => 'SALE', 'type' => 1, 'amount' => 2000, 'countryCode' => 826, 'currencyCode' => 826, 'transactionUnique' => '12345', 'redirectURL' => HTTP_PATH . 'redeem/credit-card.php', );
 	print_r($req);
 	
 //  Create the signature using the function called below. 
@@ -30,7 +31,7 @@ if (!isset($_POST['responseCode'])) {
 } else {
 	//  Handle the response posted back 
 	$res = $_POST;
- 
+ 	echo '<pre>';var_dump($res);echo '</pre>';
 	//  Extract the return signature as this isn't hashed 
 	$signature = null;
 	if (isset($res['signature'])) { 
@@ -55,6 +56,7 @@ function createSignature(array $data, $key) {
 	echo $key;
 	//  Sort by field name 
 	ksort($data);
+
 	//  Create the URL encoded signature string 
 	$ret = http_build_query($data, '', '&');
 	//  Normalise all line endings (CRNL|NLCR|NL|CR) to just NL (%0A) 
