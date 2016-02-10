@@ -9,7 +9,8 @@ $checkout = $_GET["checkout"];
 
 
 
-$basket = getBasket( $_SESSION["user"]->id );
+$basket = getBasket( $_SESSION["user"]->EmpNum );
+
 	if( isset( $_GET["menu_id"] ) ) {
 		$menu_id = $_GET["menu_id"];
 	}
@@ -21,6 +22,13 @@ $basket = getBasket( $_SESSION["user"]->id );
 	} else {
 
 
+	$sum_all = getAvailable( $_SESSION['user']->EmpNum ); 
+	$sum_credit_card = getCreditCard( $_SESSION['user']->EmpNum );
+	$sum_orders = getEmpBasketOrdersSum( $_SESSION['user']->EmpNum );
+
+	$remaining_amount = $sum_all + $sum_credit_card - $sum_orders;
+
+	
 	// Post request from credit card form
 
 	if( isset( $_POST ) ){
@@ -69,117 +77,6 @@ $basket = getBasket( $_SESSION["user"]->id );
 	</div>
 	<div class="row contentFill">
 		<div class="medium-12 columns leftnp rightnp fillHeight">
-			<?php if( $checkout == "false"):?>
-				<div class="row">
-					<a id="viewBasket" class='<?php if($basket_isset) echo 'view-basket';?>' href="<?php echo HTTP_PATH . "redeem/product-basket.php?basket=true&menu_id=" . $menu_id; ?>"> <i class="fi-shopping-bag"></i>View basket </a>
-					<?php if( $basket_isset ) : ;?>
-					<span id="item-count"><?php echo ($basket != 0)?count( $basket ):0; ?> Items</span>
-					<?php endif;?>
-				</div>
-				<div class="row callout panel creditCardView height555">
-					<div class="row">
-						<div class="medium-12 withPadding columns">
-							Please enter your Billing details below.
-						</div>
-					</div>
-					
-					<form action="<?php echo HTTP_PATH . 'redeem/credit-card.php'?>" method="post">
-						<div class="row">
-							<div class="medium-3 columns textRight">
-								<label for="right-label" class="right inline">First Name(s): <span class="required">*</span></label>
-							</div>
-							<div class="medium-9 columns">
-								<input type="text" id="right-label" name="firstname" required>
-							</div>
-						</div>
-						<div class="row">
-							<div class="row">
-								<div class="medium-3 columns textRight">
-									<label for="right-label" class="right inline">Surname: <span class="required">*</span></label>
-								</div>
-								<div class="medium-9 columns">
-									<input type="text" id="right-label" name="surname" required>
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="row">
-								<div class="medium-3 columns textRight">
-									<label for="right-label" class="right inline">Address Line 1: <span class="required">*</span>
-										<small>(or company name)</small></label>
-								</div>
-								<div class="medium-9 columns">
-									<input type="text" id="right-label" name="address1" required>
-									<small>House name/number and street, P.O. box,company name, c/o</small>
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="row">
-								<div class="medium-3 columns textRight">
-									<label for="right-label" class="right inline">Address Line 2: <span class="required">&nbsp;</span>
-										<small>(optional)</small></label>
-								</div>
-								<div class="medium-9 columns">
-									<input type="text" id="right-label" name="address2">
-									<small>Apartment, suite, unit, building,floor,etc</small>
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="row">
-								<div class="medium-3 columns textRight">
-									<label for="right-label" class="right inline">Town/City: <span class="required">*</span></label>
-								</div>
-								<div class="medium-9 columns">
-									<input type="text" id="right-label" name="town" required>
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="row">
-								<div class="medium-3 columns textRight">
-									<label for="right-label" class="right inline">Postcode: <span class="required">*</span></label>
-								</div>
-								<div class="medium-9 columns">
-									<input type="text" id="right-label" name="postcode" required>
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="row">
-								<div class="medium-3 columns textRight">
-									<label for="right-label" class="right inline">Telephone Number: <span class="required">&nbsp;</span></label>
-								</div>
-								<div class="medium-9 columns">
-									<input type="text" id="right-label" name="telephone">
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="row">
-								<div class="medium-3 columns textRight">
-									<label for="right-label" class="right inline">E-Mail Address: <span class="required">&nbsp;</span></label>
-								</div>
-								<div class="medium-9 columns">
-									<input type="email" id="right-label" name="email">
-								</div>
-							</div>
-						</div>
-						<div class="row buttonRow">
-								<div class="medium-3 columns buttonRow textRight">
-									<div class="required small">* Required Fields</div>
-								</div>
-							<div class="medium-9 columns textRight buttonRow">
-								<button class="purpleButton">CONTINUE SHOPPING</button>
-								<button class="pinkButton">PROCEED TO NEXT STEP</button>
-							</div>
-						</div>
-					</form>
-				</div>
-			<?php else:?>
-
-				
 				<div class="row callout panel " id="basket-table">
 							<div class="small-12 large-12 columns">
 								<div id="box-basket">
@@ -198,7 +95,10 @@ $basket = getBasket( $_SESSION["user"]->id );
 											
 											$arr = array();
 											$i = 0;
-											foreach ($basket as $pr_b){						
+											
+
+											foreach ($basket as $pr_b){	
+
 												$pr_info = getProductByID( $pr_b["prID"] );
 												$total_price += $pr_b['aPrice'];
 												
@@ -338,16 +238,23 @@ $basket = getBasket( $_SESSION["user"]->id );
 								<?php 
 									
 									$last_id = 0;
+							
 
-									if( $total_price != null ){
+									if( $total_price <= $remaining_amount){
 										$postForUpload["date"] = date("Y-m-d h:i:s");
-										$postForUpload["empID"] = $_SESSION['user']->id;
+										$postForUpload["EmpNum"] = $_SESSION['user']->EmpNum;
 										$postForUpload["totalPrice"] = $total_price;
 										$last_id = addBasketOrders( $postForUpload ); 
+
+										$sum_all = getAvailable( $_SESSION['user']->EmpNum ); 
+										$sum_credit_card = getCreditCard( $_SESSION['user']->EmpNum );
+										$sum_orders = getEmpBasketOrdersSum( $_SESSION['user']->EmpNum );
+										$remaining_amount = $sum_all + $sum_credit_card - $sum_orders;
+
 									}
 									
 									if( $last_id > 0 ):
-										updateBasketStatus( $_SESSION['user']->id, $last_id );
+										updateBasketStatus( $_SESSION['user']->EmpNum, $last_id );
 								?>
 								<h2>Thank you</h2>
 								<p> 
@@ -457,13 +364,7 @@ $basket = getBasket( $_SESSION["user"]->id );
 							<hr />
 							<p>If you require any assistance completing this transaction please contact the Xexec Helpdesk by email at info@xexec.com or by telephone on 0845 230 9393</p>
 						</div>
-						<?php endif;?>
-
-						
-
-
-
-			<?php endif;?>
+				<?php endif;?>
 		</div>
 	</div>
 </div>
@@ -477,7 +378,7 @@ $basket = getBasket( $_SESSION["user"]->id );
 			Avable to spend
 		</div>
 		<div class="price-panel">
-			<?php echo '&pound;'.getAvailable($_SESSION['user']->EmpNum); ?>
+			<?php echo '&pound;' . $remaining_amount;?> 
 		</div>
 		<div class="unclaimed-panel">
 			<div class="clickAble" data-type="gourl" data-url="<?=HTTP_PATH?>my-account/my-awards.php">

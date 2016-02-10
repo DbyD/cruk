@@ -8,7 +8,13 @@ $url = 'https://gateway.fidelipay.co.uk/paymentform/';
 
 
 echo '<pre>';
-// var_dump($_POST);
+
+
+if(isset($_POST["firstname"]) && isset($_POST["surname"]) && isset($_POST["address1"]) && isset($_POST["address2"]) && isset($_POST["town"]) && isset($_POST["postcode"]) && isset($_POST["telephone"]) && isset($_POST["email"])){
+	$last_id = insertCreditCard( $_POST );
+	var_dump($last_id);
+}
+
 echo '</pre>';
 
  
@@ -31,7 +37,8 @@ if (!isset($_POST['responseCode'])) {
 } else {
 	//  Handle the response posted back 
 	$res = $_POST;
- 	echo '<pre>';var_dump($res);echo '</pre>';
+ 	echo '<pre>';var_dump($res['amount']);echo '</pre>';
+ 	updateCreditCardAmount( $res['amount'] );
 	//  Extract the return signature as this isn't hashed 
 	$signature = null;
 	if (isset($res['signature'])) { 

@@ -93,7 +93,16 @@ if( $val == "YES" ){
 						Avable to spend
 					</div>
 					<div class="price-panel">
-						<?php echo '&pound;'.getAvailable($_SESSION['user']->EmpNum); ?> 
+						<?php echo '&pound;'; ?> 
+						<?php 
+						$sum_all = getAvailable( $_SESSION['user']->EmpNum ); 
+						$sum_credit_card = getCreditCard( $_SESSION['user']->EmpNum );
+						$sum_orders = getEmpBasketOrdersSum( $_SESSION['user']->EmpNum );
+
+
+						$remaining_amount = $sum_all + $sum_credit_card - $sum_orders;
+						echo $remaining_amount;
+						?> 
 					</div>
 					<div class="unclaimed-panel">
 						<div class="clickAble" data-type="gourl" data-url="<?=HTTP_PATH?>my-account/my-awards.php">+<?php echo getTotalNewNominations($_SESSION['user']->EmpNum); ?> Unclaimed</div>

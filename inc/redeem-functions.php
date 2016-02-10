@@ -101,10 +101,9 @@ WHERE prID = :prID";
 function addBasketOrders( $data ){
 	global $db;
 
-
 	$stmt = $db->prepare("
-INSERT INTO tblbasketorders (	phone, adress1, adress2, town, postcode, date, empID, totalPrice) 
-VALUES (	:phone, :adress1, :adress2, :town, :postcode, :date, :empID, :totalPrice)");
+INSERT INTO tblbasketorders (	phone, adress1, adress2, town, postcode, date, EmpNum, totalPrice) 
+VALUES (	:phone, :adress1, :adress2, :town, :postcode, :date, :EmpNum, :totalPrice)");
 
 	$stmt->bindValue(':phone',$data["telephone"], PDO::PARAM_STR);
 	$stmt->bindValue(':adress1', $data["address1"], PDO::PARAM_STR);
@@ -112,7 +111,7 @@ VALUES (	:phone, :adress1, :adress2, :town, :postcode, :date, :empID, :totalPric
 	$stmt->bindValue(':town',$data["town"] , PDO::PARAM_STR);
 	$stmt->bindValue(':postcode',$data["postcode"] , PDO::PARAM_INT);
 	$stmt->bindValue(':date',$data["date"] , PDO::PARAM_INT);
-	$stmt->bindValue(':empID',$data["empID"] , PDO::PARAM_INT);
+	$stmt->bindValue(':EmpNum',$data["EmpNum"] , PDO::PARAM_STR);
 	$stmt->bindValue(':totalPrice',$data["totalPrice"] , PDO::PARAM_INT);
 
 	$stmt->execute();
@@ -254,12 +253,12 @@ function addBasket( $data ){
 	global $db;
 
 	
-	$stmt = $db->prepare("INSERT INTO tblbasket (prID, aPrice, employeID, status) VALUES (:prID, :aPrice, :employeID, 'in the basket')");
+	$stmt = $db->prepare("INSERT INTO tblbasket (prID, aPrice, EmpNum, status) VALUES (:prID, :aPrice, :EmpNum, 'in the basket')");
 	
 
 	$stmt->bindValue(':prID',$data["prID"], PDO::PARAM_INT);
 	$stmt->bindValue(':aPrice', $data["aPrice"], PDO::PARAM_INT);
-	$stmt->bindValue(':employeID', $data["employeID"], PDO::PARAM_INT);
+	$stmt->bindValue(':EmpNum', $data["EmpNum"], PDO::PARAM_STR);
 	
 
 	return $stmt->execute(); 
@@ -269,8 +268,8 @@ function getBasket( $empID ){
 	global $db;
 
 
-	$stmt = $db->prepare("SELECT * FROM tblbasket WHERE employeID=:employeID AND status='in the basket'");
-	$stmt->bindValue(':employeID',$empID, PDO::PARAM_INT);
+	$stmt = $db->prepare("SELECT * FROM tblbasket WHERE EmpNum=:EmpNum AND status='in the basket'");
+	$stmt->bindValue(':EmpNum',$empID, PDO::PARAM_INT);
 	$stmt->execute();
 
 	$arr = array();
@@ -291,10 +290,10 @@ function updateBasketStatus( $empID, $orderID ){
 	$sql = "
 UPDATE tblbasket 
 SET status = 'order', orderID = :orderID
-WHERE employeID = :employeID AND status='in the basket'";	
+WHERE EmpNum = :EmpNum AND status='in the basket'";	
 	$stmt = $db->prepare($sql);
 
-	$stmt->bindValue(':employeID',$empID, PDO::PARAM_INT);
+	$stmt->bindValue(':EmpNum',$empID, PDO::PARAM_STR);
 	$stmt->bindValue(':orderID',$orderID, PDO::PARAM_INT);
 	$stmt->execute(); 
 }
@@ -398,9 +397,73 @@ function getAvailable($empnum){
 } 
 
 ///////////////////////////////////////////////////////////////////////////////////
+function getEmpBasketOrdersSum( $empnum ){
+	global $db;
+	$stmt = $db->prepare("SELECT SUM(totalPrice) FROM tblbasketorders WHERE EmpNum = :EmpNum ORDER BY id DESC");
+
+	$stmt->execute(array('EmpNum' => $empnum));
+	if ($result = $stmt->fetchColumn()){
+		return $result;
+	} else{
+		return 0;
+	}
+}
 ///////////////////////////////////////////////////////////////////////////////////
+function insertCreditCard( $data ) {
+	global $db;
+	$data["amount"] = 0;
+	$data["EmpNum"] = $_SESSION["user"]->EmpNum;
+
+
+	$stmt = $db->prepare("
+INSERT INTO tblcreditcard 
+	(firstname, surname, address1, 	address2, town, postcode, telephone, email, amount, EmpNum) 
+VALUES 
+	(:firstname, :surname, :address1, :address2, :town, :postcode, :telephone, :email, :amount, :EmpNum)");
+	
+
+	$stmt->bindValue(':firstname',$data["firstname"], PDO::PARAM_STR);
+	$stmt->bindValue(':surname', $data["surname"], PDO::PARAM_STR);
+	$stmt->bindValue(':address1',$data["address1"] , PDO::PARAM_STR);
+	$stmt->bindValue(':address2',$data["address2"] , PDO::PARAM_STR);
+	$stmt->bindValue(':town',$data["town"] , PDO::PARAM_STR);
+	$stmt->bindValue(':postcode',$data["postcode"] , PDO::PARAM_INT);
+	$stmt->bindValue(':telephone',$data["telephone"] , PDO::PARAM_STR);
+	$stmt->bindValue(':email',$data["email"] , PDO::PARAM_STR);
+	$stmt->bindValue(':amount',$data["amount"] , PDO::PARAM_INT);
+	$stmt->bindValue(':EmpNum',$data["EmpNum"] , PDO::PARAM_INT);
+
+	$stmt->execute();
+	$lastId = $db->lastInsertId();
+	return $lastId;
+}
 ///////////////////////////////////////////////////////////////////////////////////
+function updateCreditCardAmount( $amount ) {
+	global $db;
+
+	$sql = "
+UPDATE tblcreditcard 
+SET amount = :amount
+WHERE EmpNum = :EmpNum";
+
+	$stmt = $db->prepare( $sql );
+
+	$stmt->bindValue(':amount', $amount, PDO::PARAM_INT);
+	$stmt->bindValue(':EmpNum', $_SESSION["user"]->EmpNum, PDO::PARAM_STR);
+	$stmt->execute();
+}
 ///////////////////////////////////////////////////////////////////////////////////
+function getCreditCard( $empnum ) {
+	global $db;
+	$stmt = $db->prepare("SELECT SUM( amount ) FROM tblcreditcard WHERE EmpNum = :EmpNum");
+
+	$stmt->execute(array('EmpNum' => $empnum));
+	if ($result = $stmt->fetchColumn()){
+		return $result;
+	} else{
+		return 0;
+	}
+}
 ///////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////

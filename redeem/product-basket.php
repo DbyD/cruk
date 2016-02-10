@@ -41,9 +41,9 @@ if(isset($_POST['submitUpdate'])){
 			}
 		}
 	}
-
-	
 }
+
+
 
 if(isset($_POST["baIDdel"]) && isset( $_POST['count'] ) ){
 	
@@ -56,7 +56,7 @@ if(isset($_POST["baIDdel"]) && isset( $_POST['count'] ) ){
 }
 
 
-if( isset( $_POST[ "prID" ] ) && isset( $_POST[ "aPrice" ] ) && isset( $_POST[ "employeID" ] ) ){
+if( isset( $_POST[ "prID" ] ) && isset( $_POST[ "aPrice" ] ) && isset( $_POST[ "EmpNum" ] ) ){
 	$res = addBasket($_POST);
 }
 
@@ -85,29 +85,34 @@ if(isset( $_POST["submit"] ) ){
 
 	}
 }
- 
-$basket = getBasket( $_SESSION["user"]->id );
 
-	if( isset( $_GET["menu_id"] ) ) {
-		$menu_id = $_GET["menu_id"];
-        $menu = getMenuRows( $menu_id );
-	}
-	if( isset( $_GET['prID'] ) ) {
-		$product = getProductByID( $_GET['prID'] );
-		$sub = getMenuSub($product["subID"]);
-	}
 
-	if( isset($_GET['basket'])){
-		$basket_isset = true;
-	} else {
-		$basket_isset = false;
-	}
 
-	$val = $_SESSION['user']->administrator;
+$basket = getBasket( $_SESSION["user"]->EmpNum );
 
-	if( $val == "YES" ){
-		include('../admin/products.php');
-	} else {
+if( isset( $_GET["menu_id"] ) ) {
+	$menu_id = $_GET["menu_id"];
+
+    $menu = getMenuRows( $menu_id );
+}
+
+if( isset( $_GET['prID'] ) ) {
+	$product = getProductByID( $_GET['prID'] );
+	$sub = getMenuSub($product["subID"]);
+}
+
+if( isset($_GET['basket'])){
+	$basket_isset = true;
+} else {
+	$basket_isset = false;
+}
+
+$val = $_SESSION['user']->administrator;
+
+if( $val == "YES" ){
+	include('../admin/products.php');
+} else {
+
 ?>
 			
 
@@ -166,7 +171,7 @@ $basket = getBasket( $_SESSION["user"]->id );
 											<form action="<?php echo HTTP_PATH . "redeem/product-basket.php?basket=true&menu_id=" . $menu_id; ?>" method="post">
 												<input type="hidden" name="prID" value="<?php echo $product["prID"]; ?>" id="prID">
 												<input type="hidden" name="aPrice" value="<?php echo $product["aPrice"]; ?>" id="aPrice">
-												<input type="hidden" name="employeID" value="<?php echo $_SESSION['user']->id; ?>" id="employeID">
+												<input type="hidden" name="EmpNum" value="<?php echo $_SESSION['user']->EmpNum; ?>" id="EmpNum">
 												<button id="addBasket" class="pinkButton">Add to Basket</button>
 											</form>
 										</div>
@@ -302,7 +307,7 @@ $basket = getBasket( $_SESSION["user"]->id );
 										<div class="large-4 columns">
 										</div>
 										<div class="large-8 columns">
-											<button class="blueButton" onClick="location.href='<?php echo HTTP_PATH . "redeem/checkout.php?menu_id=" . $menu_id . '&checkout=false'; ?>'">Yes</button>
+											<button class="blueButton" onClick="location.href='<?php echo HTTP_PATH . "redeem/credit-card-page.php?menu_id=" . $menu_id; ?>'">Yes</button>
 											<button id="closeCheckOut" class="blueButton">NO</button>
 										</div>
 										
@@ -342,7 +347,18 @@ $basket = getBasket( $_SESSION["user"]->id );
 					</div>
 					<div class="price-panel">
 
-						<?php echo '&pound;'.getAvailable($_SESSION['user']->EmpNum); ?>
+						<?php echo '&pound;'; ?> 
+						<?php 
+						$sum_all = getAvailable( $_SESSION['user']->EmpNum ); 
+						$sum_credit_card = getCreditCard( $_SESSION['user']->EmpNum );
+						$sum_orders = getEmpBasketOrdersSum( $_SESSION['user']->EmpNum );
+						$remaining_amount = $sum_all + $sum_credit_card - $sum_orders;
+						
+						echo $remaining_amount;
+
+
+						?> 
+
 					</div>
 					<div class="unclaimed-panel">
 						<div class="clickAble" data-type="gourl" data-url="<?=HTTP_PATH?>my-account/my-awards.php">
