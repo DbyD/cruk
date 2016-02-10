@@ -1337,4 +1337,14 @@ button:hover, button:focus, .button:hover, .button:focus {
 	padding: 5px 0px;
 }
 
+.card-form {
+	background-color: #fff;
+	margin-top: 20px !important;
+}
+
+.card-form input[type=submit] {
+	float: right;
+	margin-right:20px;
+}
+
 /* @end*/

@@ -8,7 +8,6 @@ $menu_id = $_GET["menu_id"];
 $checkout = $_GET["checkout"];
 
 
-
 $basket = getBasket( $_SESSION["user"]->EmpNum );
 
 	if( isset( $_GET["menu_id"] ) ) {
@@ -44,7 +43,7 @@ $basket = getBasket( $_SESSION["user"]->EmpNum );
 						</div>
 					</div>
 					
-					<form action="<?php echo HTTP_PATH . 'redeem/credit-card.php'?>" method="post">
+					<form action="<?php echo HTTP_PATH . 'redeem/credit-card.php?menu_id='?>" method="post">
 						<div class="row">
 							<div class="medium-3 columns textRight">
 								<label for="right-label" class="right inline">First Name(s): <span class="required">*</span></label>
