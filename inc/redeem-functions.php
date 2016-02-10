@@ -442,9 +442,19 @@ function updateCreditCardAmount( $amount ) {
 	global $db;
 
 	$sql = "
-UPDATE tblcreditcard 
-SET amount = :amount
-WHERE EmpNum = :EmpNum";
+UPDATE  
+	tblcreditcard AS a
+        INNER JOIN
+	        (
+	            SELECT  id
+	            FROM    tblcreditcard 
+	            GROUP   BY id 
+	        ) 
+	AS b 
+	ON  a.id = b.id
+SET     a.amount = :amount
+WHERE    a.EmpNum = :EmpNum";
+
 
 	$stmt = $db->prepare( $sql );
 
@@ -458,6 +468,7 @@ function getCreditCard( $empnum ) {
 	$stmt = $db->prepare("SELECT SUM( amount ) FROM tblcreditcard WHERE EmpNum = :EmpNum");
 
 	$stmt->execute(array('EmpNum' => $empnum));
+
 	if ($result = $stmt->fetchColumn()){
 		return $result;
 	} else{

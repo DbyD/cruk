@@ -21,7 +21,7 @@ echo '</pre>';
 if (!isset($_POST['responseCode'])) {
 //  Send request to gateway
 //  Request 
-	$req = array( 'merchantID' => '102290', 'action' => 'SALE', 'type' => 1, 'amount' => 2000, 'countryCode' => 826, 'currencyCode' => 826, 'transactionUnique' => '12345', 'redirectURL' => HTTP_PATH . 'redeem/credit-card.php', );
+	$req = array( 'merchantID' => '102290', 'action' => 'SALE', 'type' => 1, 'amount' => 2000, 'countryCode' => 826, 'currencyCode' => 826, 'transactionUnique' => '12345', 'redirectURL' => HTTP_PATH . 'redeem/product-basket.php?basket=true&menu_id=', );
 	print_r($req);
 	
 //  Create the signature using the function called below. 

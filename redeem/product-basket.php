@@ -4,6 +4,57 @@ include_once '../inc/header.php';
 include "lib.php";
 $menu = new MenuGenerator;
 
+
+									
+ 
+$key = 'Cheer11Inside19Credit';
+
+
+function createSignature(array $data, $key) {
+	// echo $key;
+	//  Sort by field name 
+	ksort($data);
+
+	//  Create the URL encoded signature string 
+	$ret = http_build_query($data, '', '&');
+	//  Normalise all line endings (CRNL|NLCR|NL|CR) to just NL (%0A) 
+	$ret = str_replace(array('%0D%0A', '%0A%0D', '%0D'), '%0A', $ret);
+	//  Hash the signature string and the key together 
+	return hash('SHA512', $ret . $key);
+ }
+
+
+if(isset($_POST['redirectURL'])){
+	$res = $_POST;
+ 	// echo '<pre>';var_dump($res['amount']);echo '</pre>';
+ 	updateCreditCardAmount( $res['amount'] );
+	//  Extract the return signature as this isn't hashed 
+	$signature = null;
+	if (isset($res['signature'])) { 
+		$signature = $res['signature'];
+		unset($res['signature']);
+	}
+ 
+	if (!$signature || $signature !== createSignature($res, $key)) {
+		
+		die('Sorry, the signature check failed');
+	}
+	
+	if ($res['responseCode'] === "0") { 
+		// echo "<p>Thank you for your payment.</p>";
+	} else { 
+		// echo "<p>Failed to take payment: " . htmlentities($res['responseMessage']) . "</p>";
+	}
+}
+
+
+
+
+									
+
+
+
+
 if(isset($_POST['submitUpdate'])){
 	
 	$arr = array();
@@ -186,6 +237,7 @@ if( $val == "YES" ){
 						<div class="row callout panel " id="basket-table">
 							<div class="small-12 large-12 columns">
 								<div id="box-basket">
+									
 									<table id="table_basket">
 										<thead>
 											<tr>
@@ -347,16 +399,14 @@ if( $val == "YES" ){
 					</div>
 					<div class="price-panel">
 
-						<?php echo '&pound;'; ?> 
 						<?php 
-						$sum_all = getAvailable( $_SESSION['user']->EmpNum ); 
-						$sum_credit_card = getCreditCard( $_SESSION['user']->EmpNum );
-						$sum_orders = getEmpBasketOrdersSum( $_SESSION['user']->EmpNum );
-						$remaining_amount = $sum_all + $sum_credit_card - $sum_orders;
-						
-						echo $remaining_amount;
 
+							$sum_all = getAvailable( $_SESSION['user']->EmpNum ); 
+							$sum_credit_card = getCreditCard( $_SESSION['user']->EmpNum );
+							$sum_orders = getEmpBasketOrdersSum( $_SESSION['user']->EmpNum );
 
+							$remaining_amount = $sum_all + $sum_credit_card - $sum_orders;
+							echo '&pound;' . $remaining_amount;
 						?> 
 
 					</div>
