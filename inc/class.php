@@ -88,11 +88,6 @@ class teamAward {
 								WHERE nt.nomination_teamID = :ID');
 		$stmt->execute(array('ID' => $this->ID));
 		$result = $stmt->fetchAll(PDO::FETCH_OBJ);
-		$result->full_name = $result->Fname. ' ' . $result->Sname;
-		$result->LMfull_name = $result->LMFname. ' ' . $result->LMSname;
-		if ($result->Shop != '' && $result->JobTitle != 'Shop Mgr'){
-			$result->offline = 'YES';
-		}
 		return $result;
 	}
 	public function approver(){

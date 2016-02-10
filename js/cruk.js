@@ -197,6 +197,23 @@ $(function(){
 			});
 		}
 	});
+	$("#approveTeamAward").validate({
+		rules: {dReason: "required"},
+		messages: {dReason: "Please add in a reason for the decline."},
+		errorPlacement: function(error, element) {
+			$("#alertContent").load("../alerts/alert-popup.php", {'error' : error.html() });
+			$("#alert").css('display', 'block');
+		},
+		submitHandler: function(form) { 
+			$.post('../approvals/team-award-update.php', $("#approveTeamAward").serialize(), function(data) {
+				if (data = 'declined') {
+					$("#popup1").css('display', 'none');
+					$("#popupContent1").empty();
+					location.reload();
+				}
+			});
+		}
+	});
 	$("#claimAward").validate({
 		rules: {award: "required"},
 		messages: {award: "Please select one award or click the close x to cancel."},
@@ -338,7 +355,7 @@ $(function(){
 				$("#dReason").val('');
 				$("#"+url).validate().cancelSubmit = true
 				$("#"+url).submit();
-				location.reload();
+			//	location.reload();
 				break;
 			case 'submit':
 				console.log(url)

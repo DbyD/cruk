@@ -72,7 +72,7 @@
 		</div>
 	</div>
 </div>
-<form action="../approvals/team-award-update.php" method="post" name="approveAward" id="approveAward" novalidate>
+<form action="../approvals/team-award-update.php" method="post" name="approveTeamAward" id="approveTeamAward" novalidate>
 	<input type="hidden" name="ID" value="<?=$_GET['id']?>">
 	<div class="tableRow noBorder">
 		<div class="tableColumn-12 textLeft greyText">
@@ -81,10 +81,10 @@
 	</div>
 	<div class="tableRow noBorder popupLastRow">
 		<div class="tableColumn-8 textRight">
-			<a href="#" class="blueButton clickAble" data-type="submit" data-url="approveAward">Decline</a>
+			<a href="#" class="blueButton clickAble" data-type="submit" data-url="approveTeamAward">Decline</a>
 		</div>
 		<div class="tableColumn-3 textRight">
-			<a href="#" class="pinkButton clickAble cancel" data-type="submitNoValidate" data-url="approveAward" formnovalidate >Approve</a>
+			<a href="#" class="pinkButton clickAble cancel" data-type="submitNoValidate" data-url="approveTeamAward" formnovalidate >Approve</a>
 		</div>
 	</div>
 </form>

@@ -6,7 +6,7 @@
 <?php if($_SESSION['user']->approver() == 'YES' || $_SESSION['user']->administrator == 'YES') { ?>
 <li class="clickAble <?php getCurrentFolder('approvals'); ?>" data-type="gourl" data-url="<?=HTTP_PATH?>approvals"><i class="icon-icons_tickinbox"></i>Approvals</li>
 <?php }
-	if($_SESSION['user']->SuperUser == 'Y') { ?>
+	if($_SESSION['user']->SuperUser == 'YES' || $_SESSION['user']->SuperUser == 'Y') { ?>
 <li class="clickAble <?php getCurrentFolder('reports'); ?>" data-type="gourl" data-url="<?=HTTP_PATH?>reports"><i class="icon-icons_report"></i>Reports</li>
 <li class="clickAble <?php getCurrentFolder('admin'); ?>" data-type="gourl" data-url="<?=HTTP_PATH?>admin"><i class="icon-icons_admin"></i>Admin</li>
 <?php } ?>

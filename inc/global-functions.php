@@ -187,11 +187,12 @@ function indEcardTeamText($ecard){
 }
 ////////////////////////////////////////////////////////////////////////////////////
 function indEcardTeamExtraText($ecard){
-	
 	$ecard->teamEmailList = str_replace($ecard->full_name.", ","",$ecard->teamEmailList);
 	$ecard->teamEmailList = str_replace("and ".$ecard->full_name,"",$ecard->teamEmailList);
-	$ecard->teamEmailList = strrev(implode(strrev(' and'), explode(',', strrev($ecard->teamEmailList), 2)));
-			
+	if (strpos($ecard->teamEmailList, 'and') !== false) {
+	} else {
+		$ecard->teamEmailList = strrev(implode(strrev(' and'), explode(',', strrev($ecard->teamEmailList), 2)));
+	}
 	$ecardImage = str_replace(' ','-',strtolower($ecard->BeliefID));
 	
 	$ecardText = '<img src="'.HTTP_PATH.'images/emails/'.$ecardImage.'.png" alt="'.$ecard->BeliefID.'">';
@@ -200,12 +201,12 @@ function indEcardTeamExtraText($ecard){
 				Extraordinary Effort award for the".$ecard->BeliefID." category.</p>
 				<p>".$ecard->personalMessage."</p>
 				<p>The award has been given to you as part of a team award that also includes ".$ecard->teamEmailList.".</p>";
-	if($ecard->workAward=='TeamEvent'){
+	if($ecard->workAward=='20pound'){
 		$ecardText .= "Each member of the team has been awarded a &pound;20 voucher. You can use your voucher to choose from a great selection of awards on the <a href='".HTTP_PATH."'>Our Heroes Portal</a>.";
 	} else {
 		$ecardText .= "You and your team are invited to celebrate the award together at an event of your choice. Entertainment to the value of &pound;20 per team member can be expensed to the
 		 				\"Our Heroes\" project code (HRP2000). Whether it's a few drinks, a meal out or a team experience, it's up to your team to decide and make arrangements to suit you all.  
-		 				".$ecard->NomFname." has nominated ".$ecard->FirstNominee." as the team's contact in the first instance.</p>";
+		 				".$ecard->NomFname." has nominated ".$ecard->firstPerson." as the team's contact in the first instance.</p>";
 	}
 	$ecardText .= "<p>".$ecard->NomFname." says you deserve  'A Little Extra' as part of your award! Please log onto the <a href='".HTTP_PATH."'>Our Heroes Portal</a> to view and claim your Little Extra award.</p>
 				<p>Through your dedication and commitment we can beat cancer sooner. The success of Cancer Research UK depends on people like you and we want you to know how much we appreciate your efforts.</p> 

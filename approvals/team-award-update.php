@@ -113,7 +113,13 @@
 			//print_r($award);
 			// send email to nominee
 			foreach ($TeamMembers as $list){
+				$award->teamEmailList = $teamEmailList;
 				$award->Fname = $list->Fname;
+				$award->full_name = $list->Fname.' '.$list->Sname;
+				
+				//need to get offline...
+				//$award->teamNominees()->offline = ;
+				
 				$award->content = indEcardTeamExtraText($award);
 				echo $award->content;
 			// check if offline
