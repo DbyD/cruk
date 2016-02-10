@@ -440,27 +440,29 @@ VALUES
 ///////////////////////////////////////////////////////////////////////////////////
 function updateCreditCardAmount( $amount ) {
 	global $db;
-
+	
 	$sql = "
 UPDATE  
 	tblcreditcard AS a
         INNER JOIN
 	        (
-	            SELECT  id
-	            FROM    tblcreditcard 
-	            GROUP   BY id 
+	            SELECT MAX(id) as id 
+	            FROM tblcreditcard 
+	            GROUP BY EmpNum
 	        ) 
 	AS b 
 	ON  a.id = b.id
 SET     a.amount = :amount
-WHERE    a.EmpNum = :EmpNum";
+WHERE   a.EmpNum = :EmpNum";
 
 
 	$stmt = $db->prepare( $sql );
+	
 
 	$stmt->bindValue(':amount', $amount, PDO::PARAM_INT);
 	$stmt->bindValue(':EmpNum', $_SESSION["user"]->EmpNum, PDO::PARAM_STR);
 	$stmt->execute();
+	
 }
 ///////////////////////////////////////////////////////////////////////////////////
 function getCreditCard( $empnum ) {

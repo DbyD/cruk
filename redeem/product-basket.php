@@ -27,7 +27,8 @@ function createSignature(array $data, $key) {
 if(isset($_POST['redirectURL'])){
 	$res = $_POST;
  	// echo '<pre>';var_dump($res['amount']);echo '</pre>';
- 	updateCreditCardAmount( $res['amount'] );
+ 	$re = updateCreditCardAmount( $res['amount'] );
+
 	//  Extract the return signature as this isn't hashed 
 	$signature = null;
 	if (isset($res['signature'])) { 
@@ -406,7 +407,7 @@ if( $val == "YES" ){
 							$sum_orders = getEmpBasketOrdersSum( $_SESSION['user']->EmpNum );
 
 							$remaining_amount = $sum_all + $sum_credit_card - $sum_orders;
-							echo '&pound;' . $remaining_amount;
+							echo '&pound;' . ' ' .  $remaining_amount;
 						?> 
 
 					</div>
