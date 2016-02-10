@@ -23,7 +23,7 @@
 						<div id='messageEmployee'>
 							<i class="icon-icons_tickinbox"></i> <span class="right"><?=date("l d/m/y")?></span>
 							<?php if($count_nomination > 0){?>
-								<div class="clickAble" data-type="gourl" data-url="<?=HTTP_PATH?>approvals/pending.php">You have a <? echo $count_nomination; ?> award<?php if($count_nomination>1) echo "s"; ?> to aprove</div>
+								<div class="clickAble" data-type="gourl" data-url="<?=HTTP_PATH?>approvals/pending.php">You have a <? echo $count_nomination; ?> award<?php if($count_nomination>1) echo "s"; ?> to approve</div>
 							<?php } ?>
 							<?php if($count_newAwards > 0){?>
 								<div class="clickAble" data-type="gourl" data-url="<?=HTTP_PATH?>my-account/my-awards.php">You have <? echo $count_newAwards; ?> new award<?php if($count_newAwards>1) echo "s"; ?></div>

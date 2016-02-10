@@ -160,7 +160,6 @@ ul.off-canvas-list .photo {
 @media only screen and (min-width: 1200px) {
 .contentFill {
 	height: 605px;
-	overflow: scroll;
 }
 }
 @media only screen and (max-width: 1023px) {

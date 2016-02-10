@@ -30,7 +30,7 @@
 			<div class="row withSidePadding">
 				<div class="small-12 columns">
 					<div class="small">
-						This team currently includes the following colleagues.
+						This team includes the following colleagues.
 					</div>
 				</div>
 				<div class="small-12 columns">
@@ -72,7 +72,7 @@
 		</div>
 	</div>
 </div>
-<form action="../approvals/individual-award-update.php" method="post" name="approveAward" id="approveAward" novalidate>
+<form action="../approvals/team-award-update.php" method="post" name="approveAward" id="approveAward" novalidate>
 	<input type="hidden" name="ID" value="<?=$_GET['id']?>">
 	<div class="tableRow noBorder">
 		<div class="tableColumn-12 textLeft greyText">
@@ -95,6 +95,8 @@
 		<div class="textRight"><i class="icon-icons_i"></i></div>
 		<h3>Team event</h3>
 		<p>The team can choose how to celebrate together. The chosen event can be expensed to the sum of £20 per head.</p>
+		<h3>£20 Voucher per person</h3>
+		<p>Each team member can be given a £20 voucher to redeem on an item of their choice.</p>
 		<div id="closealert" data-type="close" data-id="4" class="clickAble closealert"><i class="icon-icons_close"></i></div>
 	</div>
 </div>

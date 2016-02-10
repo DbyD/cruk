@@ -134,7 +134,9 @@ function getTotalNominationsList($empnum){
 }
 ////////////////////////////////////////////////////////////////////////////////////
 function indEcardText($ecard){
+	
 	$ecardImage = str_replace(' ','-',strtolower($ecard->BeliefID));
+	
 	$ecardText = '<img src="'.HTTP_PATH.'images/emails/'.$ecardImage.'.png" alt="'.$ecard->BeliefID.'">';
 	$ecardText .= "<p>Congratulations ".$ecard->Fname."</p>
 				<p>".$ecard->NomFull_name." says you've done something really special and deserve an Our Heroes Extraordinary People, 
@@ -146,7 +148,9 @@ function indEcardText($ecard){
 }
 ////////////////////////////////////////////////////////////////////////////////////
 function indEcardExtraText($ecard){
+	
 	$ecardImage = str_replace(' ','-',strtolower($ecard->BeliefID));
+	
 	$ecardText = '<img src="'.HTTP_PATH.'images/emails/'.$ecardImage.'.png" alt="'.$ecard->BeliefID.'">';
 	$ecardText .= "<p>Congratulations ".$ecard->Fname."</p>
 				<p>".$ecard->NomFull_name." says you've done something really special and deserve an Our Heroes Extraordinary People, 
@@ -164,9 +168,13 @@ function getCurrentFolder($name){
 }
 ////////////////////////////////////////////////////////////////////////////////////
 function indEcardTeamText($ecard){
+	
 	$ecard->teamEmailList = str_replace($ecard->full_name.", ","",$ecard->teamEmailList);
 	$ecard->teamEmailList = str_replace(", ".$ecard->full_name,"",$ecard->teamEmailList);
+	$ecard->teamEmailList = strrev(implode(strrev(' and'), explode(',', strrev($ecard->teamEmailList), 2)));
+	
 	$ecardImage = str_replace(' ','-',strtolower($ecard->BeliefID));
+	
 	$ecardText = '<img src="'.HTTP_PATH.'images/emails/'.$ecardImage.'.png" alt="'.$ecard->BeliefID.'">';
 	$ecardText .= "<p>Congratulations ".$ecard->Fname."</p>
 				<p>".$ecard->NomFull_name." says you've done something really special and deserve an Our Heroes Extraordinary People, 
@@ -179,9 +187,13 @@ function indEcardTeamText($ecard){
 }
 ////////////////////////////////////////////////////////////////////////////////////
 function indEcardTeamExtraText($ecard){
+	
 	$ecard->teamEmailList = str_replace($ecard->full_name.", ","",$ecard->teamEmailList);
-	$ecard->teamEmailList = str_replace(", ".$ecard->full_name,"",$ecard->teamEmailList);
+	$ecard->teamEmailList = str_replace("and ".$ecard->full_name,"",$ecard->teamEmailList);
+	$ecard->teamEmailList = strrev(implode(strrev(' and'), explode(',', strrev($ecard->teamEmailList), 2)));
+			
 	$ecardImage = str_replace(' ','-',strtolower($ecard->BeliefID));
+	
 	$ecardText = '<img src="'.HTTP_PATH.'images/emails/'.$ecardImage.'.png" alt="'.$ecard->BeliefID.'">';
 	$ecardText .= "<p>Congratulations ".$ecard->Fname."</p>
 				<p>".$ecard->NomFull_name." says you've done something really special and deserve an Our Heroes Extraordinary People, 

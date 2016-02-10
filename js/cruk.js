@@ -169,6 +169,7 @@ $(function(){
 		submitHandler: function(form) { 
 			$.post('team-little-extra-update.php', $("#teamLittleExtraForm").serialize(), function(data) {
 				if (data != 'removed') {
+					console.log(data);
 					$('#littleExtraTick').addClass('circleTickChecked');
 					$("#popup1").css('display', 'none');
 					$("#popupContent1").empty();
@@ -287,6 +288,14 @@ $(function(){
 							$("#littleExtraMessage div").addClass('hidden');
 						}
 					});
+				}
+				if(id=='20'){
+					$("#includeMe").prop('checked', false);
+					$("#optout").addClass('hide');
+				}
+				if(id=='te'){
+					$("#includeMe").prop('checked', true);
+					$("#optout").removeClass('hide');
 				}
 				break;
 			case 'popup': 

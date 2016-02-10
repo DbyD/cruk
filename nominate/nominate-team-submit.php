@@ -21,10 +21,10 @@
 		//print_r($_SESSION['teamnominee']);
 		//echo "<br><br>";
 		$stmt = $db->prepare("INSERT INTO tblnominations_team(
-								awardType, NominatorEmpNum, Volunteer, ApproverEmpNum, Team, 
-								littleExtra, amount, personalMessage, Reason, BeliefID, dReason, NomDate, AprDate, AprStatus, awardPrivate) 
-								VALUES (:awardType, :NominatorEmpNum, :Volunteer, :ApproverEmpNum, :Team, 
-								:littleExtra, :amount, :personalMessage, :Reason, :BeliefID, :dReason, NOW(), :AprDate, :AprStatus, :awardPrivate)");
+								awardType, NominatorEmpNum, Volunteer, ApproverEmpNum, Team, littleExtra, amount, 
+								includeMe, personalMessage, Reason, BeliefID, dReason, NomDate, AprDate, AprStatus, awardPrivate) 
+								VALUES (:awardType, :NominatorEmpNum, :Volunteer, :ApproverEmpNum, :Team, :littleExtra, :amount, 
+								:includeMe, :personalMessage, :Reason, :BeliefID, :dReason, NOW(), :AprDate, :AprStatus, :awardPrivate)");
 		$stmt->bindParam(':awardType', $a = 2);
 		$stmt->bindParam(':NominatorEmpNum', $_SESSION['user']->EmpNum);
 		$stmt->bindParam(':Volunteer', $_SESSION['teamnominee']->Volunteer);
@@ -47,6 +47,7 @@
 		$stmt->bindParam(':ApproverEmpNum', $AppEmpNum->AppEmpNum);
 		$stmt->bindParam(':Team', getmyTeamName($_SESSION['teamnominee']->teamID));
 		$stmt->bindParam(':littleExtra', $_SESSION['teamnominee']->littleExtra);
+		$stmt->bindParam(':includeMe', $_SESSION['teamnominee']->includeMe);
 		$stmt->bindParam(':personalMessage', $_SESSION['teamnominee']->personalMessage);
 		$stmt->bindParam(':Reason', $_SESSION['teamnominee']->Reason);
 		$stmt->bindParam(':BeliefID', $_SESSION['teamnominee']->BeliefID);
@@ -66,7 +67,7 @@
 			$stmt->bindParam(':AprDate', $today, PDO::PARAM_STR);
 			$stmt->bindParam(':amount', $a = 0);
 		}
-		$stmt->bindParam(':awardPrivate', $_SESSION['awardPrivate']->AprDate);
+		$stmt->bindParam(':awardPrivate', $_SESSION['teamnominee']->awardPrivate);
 	
 		$stmt->execute();
 		$id = $db->lastInsertId();
@@ -74,13 +75,14 @@
 		//add team members 
 		if ($searchList){
 			foreach ($searchList as $list){
-				$stmt = $db->prepare("INSERT INTO tblnominations_teamusers(nominationsID, EmpNum) VALUES (:nominationsID, :EmpNum)");
-				$stmt->bindParam(':nominationsID', $id);
+				$stmt = $db->prepare("INSERT INTO tblnominations_teamusers(nomination_teamID, EmpNum) VALUES (:nomination_teamID, :EmpNum)");
+				$stmt->bindParam(':nomination_teamID', $id);
 				$stmt->bindParam(':EmpNum', $list->EmpNum);
 				$stmt->execute();
 				$teamEmailList .= getName($list->EmpNum).", ";
 			}
 			$teamEmailList = chop($teamEmailList,", ");
+			$teamEmailList = strrev(implode(strrev(' and'), explode(',', strrev($teamEmailList), 2)));
 			$_SESSION['teamnominee']->teamEmailList = $teamEmailList;
 		}
 		

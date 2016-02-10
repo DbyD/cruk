@@ -16,7 +16,7 @@ function workAwardType($id){
 ////////////////////////////////////////////////////////////////////////////////////
 function getMyWorkAwards($nominationID){
 	global $db;
-	$stmt = $db->prepare('SELECT * FROM tblworknominations wn INNER JOIN tblworkawards wa WHERE nominationID = :nominationID');
+	$stmt = $db->prepare('SELECT * FROM tblworknominations wn INNER JOIN tblworkawards wa ON wn.workawardsID = wa.id WHERE nominationID = :nominationID');
 	$stmt->execute(array('nominationID' => $nominationID));
 	return $stmt->fetchAll(PDO::FETCH_OBJ);
 }

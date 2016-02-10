@@ -54,7 +54,7 @@
 			$stmt->bindParam(':AprDate', $today, PDO::PARAM_STR);
 			$stmt->bindParam(':amount', $a = 0);
 		}
-		$stmt->bindParam(':awardPrivate', $_SESSION['awardPrivate']->AprDate);
+		$stmt->bindParam(':awardPrivate', $_SESSION['nominee']->awardPrivate);
 	
 		$stmt->execute();
 		$id = $db->lastInsertId();

@@ -24,7 +24,10 @@
 					<div class="tableColumn-3">
 						Certificate
 					</div>
-					<div class="tableColumn-3">
+					<div class="tableColumn-0">
+						<i class="icon-icons_person"></i>/<i class="icon-icons_group"></i>
+					</div>
+					<div class="tableColumn-2">
 						A Little Extra
 					</div>
 				</div>
@@ -51,7 +54,10 @@
 						<div class="tableColumn-3">
 							<div class="viewButton inlineDiv clickAble" data-type="ecard" data-url="<?=HTTP_PATH?>alerts/view-ecard.php" data-id="<?=$list->ID?>">View</div>
 						</div>
-						<div class="tableColumn-3">
+						<div class="tableColumn-0">
+							<i class="icon-icons_person"></i>
+						</div>
+						<div class="tableColumn-2">
 							<?php
 							if($list->littleExtra == 'Yes'){
 								if($list->AwardClaimed == 'No'){

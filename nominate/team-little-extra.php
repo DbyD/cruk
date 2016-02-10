@@ -22,7 +22,14 @@
 			<div class="tableColumn-2 textRight">
 				<div class="hiddenTick inline smallTick ">
 					<input type="radio" value="TeamEvent" name="workAward" id="TeamEvent" checked>
-					<label for="TeamEvent"></label>
+					<label for="TeamEvent" class="clickAble" data-type="clear" data-id="te"></label>
+				</div>
+			</div>
+			<div class="tableColumn-12 textLeft" id="optout">
+				Untick if you would like to exclude yourself.
+				<div class="hiddenTick inline verysmallTick ">
+					<input type="checkbox" value="includeMe" name="includeMe" id="includeMe" <?php if ($_SESSION['teamnominee']->includeMe == 'excludeMe'){ } else { echo "checked"; }?>>
+					<label for="includeMe"></label>
 				</div>
 			</div>
 		</div>
@@ -32,8 +39,8 @@
 			</div>
 			<div class="tableColumn-2 textRight">
 				<div class="hiddenTick inline smallTick ">
-					<input type="radio" value="20pound" name="workAward" id="20pound" >
-					<label for="20pound"></label>
+					<input type="radio" value="20pound" name="workAward" id="20pound" <?php if ($_SESSION['teamnominee']->workAward=='20pound') echo "checked"; ?>>
+					<label for="20pound" class="clickAble" data-type="clear" data-id="20"></label>
 				</div>
 			</div>
 		</div>
@@ -45,7 +52,7 @@
 		<div class="row withSidePadding valign-middle">
 			<div class="medium-12 columns">
 				Reason:
-				<textarea name="Reason" id="Reason"><?=$_SESSION['nominee']->Reason?></textarea>
+				<textarea name="Reason" id="Reason"><?=$_SESSION['teamnominee']->Reason?></textarea>
 			</div>
 		</div>
 		<div class="row withPadding">
@@ -69,4 +76,10 @@
 		<div id="closealert" data-type="close" data-id="4" class="clickAble closealert"><i class="icon-icons_close"></i></div>
 	</div>
 </div>
+<?php if ($_SESSION['teamnominee']->workAward=='20pound'){ ?>
+<script>
+	$("#includeMe").attr('checked', false);
+	$("#optout").addClass('hide');
+</script>
+<?php } ?>
 <script src="../js/cruk.js"></script>
