@@ -16,16 +16,16 @@
 			if( empty( $_POST["title"] ) || empty( $_POST["point"] ) || empty( $_POST["Delivery"] ) || empty( $_POST["content"] ) || empty( $_FILES["fileImage"] ) ){
 				$error_message = "<div class='error'>Please fill in all fields</div>";
 			} else {
-
-				if(isset($_POST["sub_id"])){
-					$file_path = insertFile( $_FILES , $_POST["menu_id"], $_POST["sub_id"]);
+				if( isset($_POST["sub_id"] ) ){
+					$sub_id_insert = $_POST["sub_id"];
 				} else {
-					
+					$sub_id_insert = NULL;
 				}
 				
+				$file_path = insertFile(  $_POST["menu_id"], $sub_id_insert );
 
 
-				if($file_path != 'error'){
+				if( $file_path != 'error' ){
 
 					$data = array(
 						'aTitle' => $_POST["title"],
@@ -33,7 +33,7 @@
 						'delivery' => $_POST["Delivery"],
 						'aContent' => $_POST["content"],
 						'menuID' => $_POST["menu_id"],
-						'subID' => $_POST["sub_id"],
+						'subID' => $sub_id_insert,
 						'Image_name' => $file_path
 					);
 
@@ -42,7 +42,6 @@
 					if( isset( $_POST["prID"] ) ) {
 						$data['prID'] = $_POST["prID"];
 						updateProduct( $data );
-
 					} else {
 						insertProduct( $data );
 					}
@@ -56,15 +55,13 @@
 
 		if( isset( $_GET["sub_id"] ) ){
 			$sub_id = $_GET["sub_id"];
-			$res = getMenuProducts( $menu_id, $sub_id);
 		} else {
 			$sub_id = null;
 			$subs = getMenuSubs( $menu_id );
-			$res = 0;
 		}
-
-
-
+		
+		$res = getMenuProducts( $menu_id, $sub_id);
+		
 		if( isset( $_GET["prID"] ) ){
 			$pr = getProductByID( $_GET["prID"] );
 		}
@@ -90,7 +87,6 @@
 				$menuInfo = getMenuRows( $menu_id );
 				if ( isset( $sub_id ) ) {
 					$subInfo = getMenuSub( $sub_id );
-					 
 					echo '<div class="inlineDiv clickAble submenu" data-type="gourl" data-url="' . HTTP_PATH . 'redeem/products.php?menu_id=' . $menu_id . '">'. $menuInfo[0]["label"] . '</div> ';
 					echo '<i class="icon-icons_thickrightarrow smalli"></i> <span class="subSubTitle">' . $subInfo[0]["label"] . '</span>';
 				} else {
@@ -177,7 +173,11 @@
 						  				<?php echo $product['aTitle']; ?>
 									</p>
 
-						  			<a href="<?php echo HTTP_PATH . 'redeem/products.php?menu_id=' . $menu_id . '&sub_id=' . $sub_id . '&prID=' . $product['prID']; ?>"><img src="<?php echo HTTP_PATH . $product["Image_name"]; ?>" class="product-img"></a>
+									<?php if(isset($sub_id)):?>
+						  				<a href="<?php echo HTTP_PATH . 'redeem/products.php?menu_id=' . $menu_id . '&sub_id=' . $sub_id . '&prID=' . $product['prID']; ?>"><img src="<?php echo HTTP_PATH . $product["Image_name"]; ?>" class="product-img"></a>
+						  			<?php else:?>
+						  				<a href="<?php echo HTTP_PATH . 'redeem/products.php?menu_id=' . $menu_id . '&prID=' . $product['prID']; ?>"><img src="<?php echo HTTP_PATH . $product["Image_name"]; ?>" class="product-img"></a>
+						  			<?php endif;?>
 						  		</div>
 						    </div>
 						

@@ -4,9 +4,6 @@ function insertFile( $menu_id, $sub_id ){
 	$uploadOk = 1;
 	$imageFileType = pathinfo(basename($_FILES["fileImage"]["name"]),PATHINFO_EXTENSION);
 
-
-	
-
 	// Check if image file is a actual image or fake image
 	if(isset($_POST["submit"])) {
 	    $check = getimagesize($_FILES["fileImage"]["tmp_name"]);
@@ -37,8 +34,12 @@ function insertFile( $menu_id, $sub_id ){
 	    echo "Sorry, your file was not uploaded.";
 	// if everything is ok, try to upload file
 	} else {
-		$target_dir = "../images/menu_".$menu_id."/sub_".$sub_id . "/products/";
-		
+
+		if(!$sub_id == 0){
+			$target_dir = "../images/menu_".$menu_id."/sub_".$sub_id . "/products/";
+		} else {
+			$target_dir = "../images/menu_".$menu_id."/not_sub" . "/products/";
+		}
 		
 		$time = time();
 		$hash = md5($time);
@@ -58,6 +59,12 @@ function insertFile( $menu_id, $sub_id ){
 		}
 
 	    if (move_uploaded_file($_FILES["fileImage"]["tmp_name"], $target_file)) {
+	    	include('classSimpleImage.php');
+	    	$image = new SimpleImage();
+		    $image->load($target_file);
+		    $image->resize(190, 120);
+		    $image->save($target_file);
+		    
 	        $arr = explode("../", $target_file);
 	        return end($arr);
 	    }

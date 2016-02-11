@@ -16,22 +16,23 @@ function getTotalProducts(){
 	return $arr;
 }
 
-function getMenuProducts($menu_id , $sub_id ){
+function getMenuProducts( $menu_id , $sub_id ){
 	global $db;
-
-	$where  = 'menuID = :menuID';
-	if($sub_id != null){
-		$where .= ' AND subID = :subID';
+	
+	$where  = 'menuID = :menuID AND subID = :subID';
+	if( $sub_id === null ){
+		$where  = 'menuID = :menuID AND subID IS NULL';
 	}
 
 	$stmt = $db->prepare('SELECT * FROM tblproducts WHERE ' . $where);
-
+	
 	$stmt->bindValue(':menuID',$menu_id, PDO::PARAM_INT);
-
-	if($sub_id != null){
+	
+	if( $sub_id !== null ){
 		$stmt->bindValue(':subID', $sub_id, PDO::PARAM_INT);
 	}
-
+	
+	
 	$stmt->execute();
 
 	$arr = array();
