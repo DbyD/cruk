@@ -26,117 +26,110 @@ $basket = getBasket( $_SESSION["user"]->EmpNum );
 		<div class="inlineDiv clickAble" data-type="gourl" data-url="<?php echo HTTP_PATH . 'redeem/'; ?>">
 			Redeem
 		</div>
-		<i class="icon-icons_thickrightarrow smalli"></i> <span class="subSubTitle">Credit card</span>
+		<i class="icon-icons_thickrightarrow smalli"></i> <span class="subSubTitle">Credit Card</span>
 	</div>
 	<div class="row contentFill">
 		<div class="medium-12 columns leftnp rightnp fillHeight">
+			<div class="row">
+				<a id="viewBasket" class='<?php if($basket_isset) echo 'view-basket';?>' href="<?php echo HTTP_PATH . "redeem/product-basket.php?basket=true&menu_id=" . $menu_id; ?>"> <i class="fi-shopping-bag"></i>View basket </a>
+				<?php if( $basket_isset ) : ;?>
+				<span id="item-count"><?php echo ($basket != 0)?count( $basket ):0; ?> Items</span>
+				<?php endif;?>
+			</div>
+			<div class="row callout panel creditCardView height555">
 				<div class="row">
-					<a id="viewBasket" class='<?php if($basket_isset) echo 'view-basket';?>' href="<?php echo HTTP_PATH . "redeem/product-basket.php?basket=true&menu_id=" . $menu_id; ?>"> <i class="fi-shopping-bag"></i>View basket </a>
-					<?php if( $basket_isset ) : ;?>
-					<span id="item-count"><?php echo ($basket != 0)?count( $basket ):0; ?> Items</span>
-					<?php endif;?>
-				</div>
-				<div class="row callout panel creditCardView height555">
-					<div class="row">
-						<div class="medium-12 withPadding columns">
-							Please enter your Billing details below.
-						</div>
+					<div class="medium-12 withPadding columns">
+						Please enter your Billing details below.
 					</div>
-					
-					<form action="<?php echo HTTP_PATH . 'redeem/credit-card.php?menu_id='?>" method="post">
+				</div>
+				<form action="<?php echo HTTP_PATH . 'redeem/credit-card.php?menu_id='?>" method="post">
+					<input type="hidden" name="firstname" value="<?php echo $_SESSION['user']->Fname; ?>" required>
+					<input type="hidden" name="surname" value="<?php echo $_SESSION['user']->Sname; ?>" required>
+					<?php if($_SESSION['user']->Eaddress !=''){?>
+					<input type="hidden" name="email" value="<?php echo $_SESSION['user']->Eaddress; ?>" required>
+					<?php } else { ?>
+					<div class="row">
 						<div class="row">
 							<div class="medium-3 columns textRight">
-								<label for="right-label" class="right inline">First Name(s): <span class="required">*</span></label>
+								<label for="right-label" class="right inline">E-Mail Address: <span class="required">&nbsp;</span>
+								</label>
 							</div>
 							<div class="medium-9 columns">
-								<input type="text" id="right-label" name="firstname" required>
+								<input type="email" id="right-label" name="email">
 							</div>
 						</div>
+					</div>
+					<?php } ?>
+					<div class="row">
 						<div class="row">
-							<div class="row">
-								<div class="medium-3 columns textRight">
-									<label for="right-label" class="right inline">Surname: <span class="required">*</span></label>
-								</div>
-								<div class="medium-9 columns">
-									<input type="text" id="right-label" name="surname" required>
-								</div>
+							<div class="medium-3 columns textRight">
+								<label for="right-label" class="right inline">Address Line 1: <span class="required">*</span>
+									<small>(or company name)</small></label>
+							</div>
+							<div class="medium-9 columns">
+								<input type="text" id="right-label" name="address1" required>
+								<small>House name/number and street, P.O. box,company name, c/o</small>
 							</div>
 						</div>
+					</div>
+					<div class="row">
 						<div class="row">
-							<div class="row">
-								<div class="medium-3 columns textRight">
-									<label for="right-label" class="right inline">Address Line 1: <span class="required">*</span>
-										<small>(or company name)</small></label>
-								</div>
-								<div class="medium-9 columns">
-									<input type="text" id="right-label" name="address1" required>
-									<small>House name/number and street, P.O. box,company name, c/o</small>
-								</div>
+							<div class="medium-3 columns textRight">
+								<label for="right-label" class="right inline">Address Line 2: <span class="required">&nbsp;</span>
+									<small>(optional)</small></label>
+							</div>
+							<div class="medium-9 columns">
+								<input type="text" id="right-label" name="address2">
+								<small>Apartment, suite, unit, building,floor,etc</small>
 							</div>
 						</div>
+					</div>
+					<div class="row">
 						<div class="row">
-							<div class="row">
-								<div class="medium-3 columns textRight">
-									<label for="right-label" class="right inline">Address Line 2: <span class="required">&nbsp;</span>
-										<small>(optional)</small></label>
-								</div>
-								<div class="medium-9 columns">
-									<input type="text" id="right-label" name="address2">
-									<small>Apartment, suite, unit, building,floor,etc</small>
-								</div>
+							<div class="medium-3 columns textRight">
+								<label for="right-label" class="right inline">Town/City: <span class="required">*</span>
+								</label>
+							</div>
+							<div class="medium-9 columns">
+								<input type="text" id="right-label" name="town" required>
 							</div>
 						</div>
+					</div>
+					<div class="row">
 						<div class="row">
-							<div class="row">
-								<div class="medium-3 columns textRight">
-									<label for="right-label" class="right inline">Town/City: <span class="required">*</span></label>
-								</div>
-								<div class="medium-9 columns">
-									<input type="text" id="right-label" name="town" required>
-								</div>
+							<div class="medium-3 columns textRight">
+								<label for="right-label" class="right inline">Postcode: <span class="required">*</span>
+								</label>
+							</div>
+							<div class="medium-9 columns">
+								<input type="text" id="right-label" name="postcode" required>
 							</div>
 						</div>
+					</div>
+					<div class="row">
 						<div class="row">
-							<div class="row">
-								<div class="medium-3 columns textRight">
-									<label for="right-label" class="right inline">Postcode: <span class="required">*</span></label>
-								</div>
-								<div class="medium-9 columns">
-									<input type="text" id="right-label" name="postcode" required>
-								</div>
+							<div class="medium-3 columns textRight">
+								<label for="right-label" class="right inline">Telephone Number: <span class="required">&nbsp;</span>
+								</label>
+							</div>
+							<div class="medium-9 columns">
+								<input type="text" id="right-label" name="telephone">
 							</div>
 						</div>
-						<div class="row">
-							<div class="row">
-								<div class="medium-3 columns textRight">
-									<label for="right-label" class="right inline">Telephone Number: <span class="required">&nbsp;</span></label>
-								</div>
-								<div class="medium-9 columns">
-									<input type="text" id="right-label" name="telephone">
-								</div>
+					</div>
+					<div class="row buttonRow">
+						<div class="medium-3 columns buttonRow textRight">
+							<div class="required small">
+								* Required Fields
 							</div>
 						</div>
-						<div class="row">
-							<div class="row">
-								<div class="medium-3 columns textRight">
-									<label for="right-label" class="right inline">E-Mail Address: <span class="required">&nbsp;</span></label>
-								</div>
-								<div class="medium-9 columns">
-									<input type="email" id="right-label" name="email">
-								</div>
-							</div>
+						<div class="medium-9 columns textRight buttonRow">
+							<button class="purpleButton">CONTINUE SHOPPING</button>
+							<button class="pinkButton">PROCEED TO NEXT STEP</button>
 						</div>
-						<div class="row buttonRow">
-								<div class="medium-3 columns buttonRow textRight">
-									<div class="required small">* Required Fields</div>
-								</div>
-							<div class="medium-9 columns textRight buttonRow">
-								<button class="purpleButton">CONTINUE SHOPPING</button>
-								<button class="pinkButton">PROCEED TO NEXT STEP</button>
-							</div>
-						</div>
-					</form>
-				</div>
+					</div>
+				</form>
+			</div>
 		</div>
 	</div>
 </div>
