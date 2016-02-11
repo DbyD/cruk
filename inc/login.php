@@ -31,7 +31,7 @@
 		if ($admin = $stmt->fetch()){
 			$_SESSION['adminID'] = $admin['adminID'];
 
-			header( 'Location: ../admin/dashboard.php');
+			header( 'Location: ../home.php');
 		} else {
 			header( 'Location: ../index.php?alert=incorrect');
 		}

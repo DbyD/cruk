@@ -31,7 +31,7 @@
 			</div>
 		</div>
 		<form action="nominate-colleague.php" method="post" name="nominateColleague" id="nominateColleague">
-			<div class="rowe">
+			<div class="row callout panel fillHeight white">
 				<div class="medium-6 columns">
 					<div class="row ">
 						<div class="medium-10 columns">
@@ -180,15 +180,15 @@
 						</div>
 					</div>
 				</div>
-			</div>
-			<div id="buttonRow" class="row buttonRow hidden">
-				<div class="row  noBorder valign-middle">
-					<div class="medium-12 columns textRight ">
-						Check All &nbsp;
-						<input name="all checked" id="allchecked" type="checkbox" value="yes" <?php if ($_COOKIE['pruNom']['all checked']=="yes") echo  "checked"; ?>  onChange="CheckAll()" />
+				<div id="buttonRow" class="row buttonRow">
+					<div class="row  noBorder valign-middle">
+						<div class="medium-12 columns textRight ">
+							Check All &nbsp;
+							<input name="all checked" id="allchecked" type="checkbox" value="yes" <?php if ($_COOKIE['pruNom']['all checked']=="yes") echo  "checked"; ?>  onChange="CheckAll()" />
+						</div>
 					</div>
+					<input type="submit" class="submit">
 				</div>
-				<input type="submit" class="submit">
 			</div>
 		</form>
 	</div>

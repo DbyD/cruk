@@ -6,7 +6,7 @@
 
 <div id="content" class="large-8 large-push-2 columns MyAccount">
 	<div class="title withStar">
-		<div class="inlineDiv clickAble" data-type="gourl" data-url="index.php">Approvals</div> <i class="icon-icons_thickrightarrow smalli"></i> <span class="subSubTitle">My Approvals</span>
+		<div class="inlineDiv clickAble" data-type="gourl" data-url="index.php">Approvals</div> <i class="icon-icons_thickrightarrow smalli"></i> <span class="subSubTitle">Pending</span>
 		 <span class="smaller">Please approve or decline the following pending awards.</span>
 	</div>
 	<div class="row contentFill">
