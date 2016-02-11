@@ -837,6 +837,12 @@ p.alertText {
 .size-72 {
 	font-size: 72px;
 }
+#winnerswall #mCSB_1{
+	padding-right: 10px;
+}
+#winnerswall .mCS-dark-2.mCSB_scrollTools .mCSB_draggerRail {
+    background-color: rgba(207,206,211,0.5);
+}
 #winnerswall .panel.callout {
 	margin: 1%;
 }
