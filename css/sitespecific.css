@@ -1030,7 +1030,7 @@ p.alertText {
 	padding: 15px;
 	color: #fff;
 }
-#myModal a, #myModalbasket a, #myModalcheck .icon-icons_close > a {
+#myModal a, #myModalbasket a, #myModalcheck .icon-icons_close > a, #myModalcheck .close-reveal-modal {
 	position: absolute;
 	top: -12px;
 	right: -12px;
@@ -1345,12 +1345,13 @@ button:hover, button:focus, .button:hover, .button:focus {
 	margin-right: 18px;
 	color: #2e008b;
 }
+.height410 {
+	height: 410px;
+}
 /* @end*/
 /* @group Redeem */
 #formDiv {
-	background-color: #fff;
-    margin-top: 20px;
-    padding: 10px;
+    padding: 0 2%;
 }
 
 .viewForm {
