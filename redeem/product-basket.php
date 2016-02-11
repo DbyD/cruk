@@ -26,8 +26,13 @@ function createSignature(array $data, $key) {
 
 if(isset($_POST['redirectURL'])){
 	$res = $_POST;
- 	// echo '<pre>';var_dump($res['amount']);echo '</pre>';
- 	$re = updateCreditCardAmount( $res['amount'] );
+
+	$resultCardRequest = json_encode($res);
+ 	// echo '<pre>';var_dump($resultCardRequest);echo '</pre>';
+ 	
+ 	updateCreditCardAmount( $res['amount'] ,  $resultCardRequest);
+
+ 	
 
 	//  Extract the return signature as this isn't hashed 
 	$signature = null;

@@ -438,7 +438,7 @@ VALUES
 	return $lastId;
 }
 ///////////////////////////////////////////////////////////////////////////////////
-function updateCreditCardAmount( $amount ) {
+function updateCreditCardAmount( $amount , $resultCardRequest ) {
 	global $db;
 	
 	$sql = "
@@ -452,7 +452,7 @@ UPDATE
 	        ) 
 	AS b 
 	ON  a.id = b.id
-SET     a.amount = :amount
+SET     a.amount = :amount,a.resultCardRequest = :resultCardRequest
 WHERE   a.EmpNum = :EmpNum";
 
 
@@ -461,6 +461,7 @@ WHERE   a.EmpNum = :EmpNum";
 
 	$stmt->bindValue(':amount', $amount, PDO::PARAM_INT);
 	$stmt->bindValue(':EmpNum', $_SESSION["user"]->EmpNum, PDO::PARAM_STR);
+	$stmt->bindValue(':resultCardRequest', $resultCardRequest, PDO::PARAM_STR);
 	$stmt->execute();
 	
 }
