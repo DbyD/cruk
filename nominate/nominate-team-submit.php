@@ -21,9 +21,9 @@
 		//print_r($_SESSION['teamnominee']);
 		//echo "<br><br>";
 		$stmt = $db->prepare("INSERT INTO tblnominations_team(
-								awardType, NominatorEmpNum, Volunteer, ApproverEmpNum, Team, littleExtra, amount, 
+								awardType, NominatorEmpNum, Volunteer, ApproverEmpNum, Team, TeamID, littleExtra, amount, 
 								includeMe, personalMessage, Reason, BeliefID, dReason, NomDate, AprDate, AprStatus, awardPrivate) 
-								VALUES (:awardType, :NominatorEmpNum, :Volunteer, :ApproverEmpNum, :Team, :littleExtra, :amount, 
+								VALUES (:awardType, :NominatorEmpNum, :Volunteer, :ApproverEmpNum, :Team, :TeamID, :littleExtra, :amount, 
 								:includeMe, :personalMessage, :Reason, :BeliefID, :dReason, NOW(), :AprDate, :AprStatus, :awardPrivate)");
 		$stmt->bindParam(':awardType', $a = 2);
 		$stmt->bindParam(':NominatorEmpNum', $_SESSION['user']->EmpNum);
@@ -46,6 +46,7 @@
 		
 		$stmt->bindParam(':ApproverEmpNum', $AppEmpNum->AppEmpNum);
 		$stmt->bindParam(':Team', getmyTeamName($_SESSION['teamnominee']->teamID));
+		$stmt->bindParam(':TeamID', $_SESSION['teamnominee']->teamID);
 		$stmt->bindParam(':littleExtra', $_SESSION['teamnominee']->littleExtra);
 		$stmt->bindParam(':includeMe', $_SESSION['teamnominee']->includeMe);
 		$stmt->bindParam(':personalMessage', $_SESSION['teamnominee']->personalMessage);

@@ -69,10 +69,28 @@
 					</div>
 					<div id="awardList" class="mCustomScrollbar height158" data-mcs-theme="dark-2">
 					<?php
-						$res = getEmployeFnameAndSname();
+						$res = getMostRecentAwards();
 						if( $res != 0 ){
 							foreach ($res as $key => $value){
+								if($value['Type'] == 'Team'){
 						?>
+						<div class="row">
+							<div class="small-2 medium-2 columns">
+								<i class="icon-icons_group"></i>
+							</div>
+							<div class="small-10 medium-10 columns">
+								Team
+								<p>
+									<?php  
+									$TeamMembers = getThisTeamMembers($value['TeamID']);
+									//print_r($TeamMembers);
+									foreach ($TeamMembers as $list){
+										echo getName($list['EmpNum']).'<br>';
+									}
+								?></p>
+							</div>
+						</div>
+						<?php 	} else { ?>
 						<div class="row">
 							<div class="small-2 medium-2 columns">
 								<i class="icon-icons_person"></i>
@@ -82,7 +100,8 @@
 								<p><?php echo $value['name'].' '.$value['sname']; ?></p>
 							</div>
 						</div>
-					<?php	}
+					<?php		}	
+							}
 						}
 					?>
 					</div>

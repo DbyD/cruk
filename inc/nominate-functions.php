@@ -97,17 +97,29 @@ function getTotalApprovedNominations($empnum){
 	}
 }
 ////////////////////////////////////////////////////////////////////////////////////
-function getEmployeFnameAndSname () {
+function getMostRecentAwards () {
 	global $db;
-	$sql = 'SELECT e.Fname AS name,
-				e.Sname AS sname,
-				n.id AS id
-			FROM 
-				tblnominations AS n
-			INNER JOIN
-				tblempall AS e
+	$sql = 'SELECT X.* FROM (
+				(SELECT  "individual"	AS Type,
+						n.ID			AS ID,
+						e.Fname			AS name,
+						e.Sname			AS sname,
+						""				AS TeamID,
+						n.AprDate		AS AprDate
+			FROM tblnominations AS n
+			INNER JOIN tblempall AS e
 			ON n.NominatedEmpNum = e.EmpNum
-			WHERE n.awardType=1 AND n.AprStatus=1 ORDER BY n.AprDate DESC LIMIT 20';
+			WHERE n.awardType=1 AND n.AprStatus=1)
+				UNION
+				(SELECT  "Team"				AS Type,
+						ID					AS ID,
+						Team				AS name,
+						""					AS sname,
+						TeamID				AS TeamID,
+						AprDate				AS AprDate
+				FROM tblnominations_team
+				WHERE awardType=2 AND AprStatus=1)) X
+			ORDER BY AprDate DESC LIMIT 20';
 	$stmt = $db->prepare( $sql );
 	$stmt->execute();
 	$arr = array();

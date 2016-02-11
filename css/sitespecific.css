@@ -858,11 +858,11 @@ p.alertText {
 #winnerswall span {
 	background: rgba(0,182,237,0.8);
 	color: #fff;
-	height: 170px;
+	height: 250px;
 	text-align: left;
 	padding: 10px;
 	position: absolute;
-	top: 0;
+	bottom: 0;
 	left: 0;
 	z-index: 1;
 	width: 100%;
@@ -871,21 +871,24 @@ p.alertText {
 	height: 590px;
 }
 .nominateEmployeeImage {
-	padding: 15px 5px;
+	padding: 10px 5px;
 	background-color: #fff;
 	text-align: center;
 	height: 170px;
+	font-size: 15px;
 }
 .nominateEmployeeImage img {
 	border-radius: 50%;
 	width: 100px;
+	margin-bottom: 10px;
 }
 .nominateEmployeeImage p {
-	font-size: 16px;
-	padding: 15px 0 0;
+	font-size: 15px;
+	padding: 5px 0 0;
 }
 .content-nominate {
-	padding: 10px;
+	padding: 5px 10px;
+	height: 110px;
 }
 .content-nominate > p {
 	color: #fff !important;
@@ -903,35 +906,56 @@ p.alertText {
 #modalForSendMail {
 	display: none;
 }
-.BeBrave .nominateEmployeeImage p {
+.BeBrave .nominateEmployeeImage,.BeBrave .largePhotoIcon {
 	color: #00b6ed !important;
 }
-.BeBrave .content-nominate {
+.BeBrave .content-nominate{
 	background-color: #ec008c;
 }
 .BeBrave  span.showbehaviour, #beliefs span[id='Be BraveText'] {
-	background: rgba(236,0,140,0.8) !important;
+	background: rgba(236,0,140,0.9) !important;
 }
-.BeUnited .nominateEmployeeImage p {
+img.BeBrave {
+	background-color: #ec008c;
+	border-radius: initial;
+}
+.BeUnited .nominateEmployeeImage,.BeUnited .largePhotoIcon {
 	color: #5833a2 !important;
 }
 .BeUnited .content-nominate {
 	background-color: #5833a2;
 }
 .BeUnited  span.showbehaviour, #beliefs span[id='Be UnitedText'] {
-	background: rgba(88,51,162,0.8) !important;
+	background: rgba(88,51,162,0.9) !important;
 }
-.BeSharp .nominateEmployeeImage p {
+img.BeUnited {
+	background-color: #5833a2;
+	border-radius: initial;
+}
+.BeSharp .nominateEmployeeImage,.BeSharp .largePhotoIcon {
 	color: #00b6ed !important;
 }
 .BeSharp .content-nominate {
 	background-color: #00b6ed;
 }
 .BeSharp  span.showbehaviour, #beliefs span[id='Be SharpText'] {
-	background: rgba(0,182,237,0.8) !important;
+	background: rgba(0,182,237,0.9) !important;
+}
+img.BeSharp{
+	background-color: #00b6ed;
+	border-radius: initial;
+}
+.largePhotoIcon{
+	font-size: 100px;
+	vertical-align: middle;
+	margin-bottom: 15px;
 }
 .sendMail {
 	cursor: pointer;
+	position: absolute;
+	top: 10px;
+	right: 15px;
+	font-size: 16px;
 }
 #messageList {
 	padding: 0 !important;

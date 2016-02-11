@@ -1,24 +1,41 @@
 <?php
 function getAllEmployees(){
 	global $db;
-	$sql = "
-SELECT  n.ID AS ID,
-		e.Fname AS name,
-		e.Sname AS Sname,
-		e.EmpNum AS EmpNum,
-		e.Photo AS Photo,
-		e.Department AS Department,
-		n.Volunteer AS Volunteer,
-		n.personalMessage AS personalMessage,
-		n.BeliefID AS BeliefID,
-		n.NominatorEmpNum AS NominatorEmpNum
-FROM 
-	tblnominations AS n
-		INNER JOIN
-	tblempall AS e
-			ON n.NominatedEmpNum = e.EmpNum
-			WHERE n.awardType=1 AND n.AprStatus=1 
-			ORDER BY n.AprDate DESC LIMIT 20";
+	$sql = 'SELECT X.* FROM ((
+				SELECT  "individual"		AS Type,
+						n.ID				AS ID,
+						""					AS TeamID,
+						e.Fname				AS name,
+						e.Sname				AS Sname,
+						e.EmpNum			AS EmpNum,
+						e.Photo				AS Photo,
+						e.Department		AS Department,
+						n.Volunteer			AS Volunteer,
+						n.personalMessage	AS personalMessage,
+						n.BeliefID			AS BeliefID,
+						n.NominatorEmpNum	AS NominatorEmpNum,
+						n.AprDate			AS AprDate
+				FROM tblnominations AS n
+				INNER JOIN tblempall AS e
+				ON n.NominatedEmpNum = e.EmpNum
+				WHERE n.awardType=1 AND n.AprStatus=1)
+				UNION
+				(SELECT  "Team"				AS Type,
+						ID					AS ID,
+						TeamID				AS TeamID,
+						Team				AS name,
+						""					AS Sname,
+						""					AS EmpNum,
+						""					AS Photo,
+						""					AS Department,
+						Volunteer			AS Volunteer,
+						personalMessage		AS personalMessage,
+						BeliefID			AS BeliefID,
+						NominatorEmpNum		AS NominatorEmpNum,
+						AprDate				AS AprDate
+				FROM tblnominations_team
+				WHERE awardType=2 AND AprStatus=1)) X
+			ORDER BY AprDate DESC LIMIT 20';
 ///			ON n.NominatorEmpNum = e.EmpNum GROUP BY n.NominatorEmpNum";
 
 	$stmt = $db->prepare( $sql );

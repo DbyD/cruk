@@ -13,12 +13,45 @@
 					if( $employees != 0 ){
 						foreach ($employees as  $employee){
 							$class = str_replace(' ','',$employee["BeliefID"]);
+							if($employee["Type"]=='Team'){ 
 				?>
+					<div class="callout panel tableColumn-3 <?=$class?>">
+						<div class="clickAble" id="wallT<?php echo $employee["ID"]; ?>" data-type="donothing">
+							<div class="nominateEmployeeImage">
+								<i class="icon-icons_mail right sendMail"></i>
+								<img src="<?=HTTP_PATH?>images/winners-wall-team.png" class="<?=$class?>">
+								<p><?php echo $employee["name"] ?></p>
+							</div>
+							<div class="content-nominate">
+								<p>Belief
+									<input type="hidden" id="sender" value="<?php echo $_SESSION['user']->EmpNum; ?>">
+									<input type="hidden" id="recipient" value="<?php echo $employee["ID"]; ?>">
+									<input type="hidden" id="senderName" value="<?php echo getName($_SESSION['user']->EmpNum); ?>">
+									<input type="hidden" id="recipientName" value="<?php echo $employee["ID"]; ?>"> 
+								</p>
+								<p><?php echo $employee["BeliefID"]; ?></p>
+								<p>Nominated By:</p>
+								<p><?php echo getname($employee["NominatorEmpNum"]); ?></p>
+							</div>
+							<span id="wallT<?php echo $employee["ID"]; ?>Text" class="showbehaviour hidden">
+								<?php
+									echo $employee["personalMessage"];
+									echo "<br><br><b>Team Members:</b><br>";
+									$TeamMembers = getThisTeamMembers($employee['TeamID']);
+									foreach ($TeamMembers as $list){
+										echo getName($list['EmpNum']).'<br>';
+									}
+								?>
+							</span>
+						</div>
+					</div>
+					<?php } else { ?>
 					<div class="callout panel tableColumn-3 <?=$class?>">
 						<div class="clickAble" id="wall<?php echo $employee["ID"]; ?>" data-type="donothing">
 							<div class="nominateEmployeeImage">
+								<i class="icon-icons_mail right sendMail"></i>
 								<img src="<?php echo HTTP_PATH.$employee["Photo"];?>" onerror="this.src='<?=HTTP_PATH?>images/no-photo.png'">
-								<p><?php echo $employee["name"].' '.$employee["Sname"]; ?></p>
+								<?php echo $employee["name"].' '.$employee["Sname"]; ?><div class="small"><?php echo $employee["Department"]; ?></div>
 							</div>
 							<div class="content-nominate">
 								<p>Belief
@@ -27,7 +60,7 @@
 									<input type="hidden" id="senderName" value="<?php echo getName($_SESSION['user']->EmpNum); ?>">
 									<input type="hidden" id="recipientName" value="<?php echo $employee["name"]; ?>"> 
 									<input type="hidden" id="Department" value="<?php echo $employee["Department"]; ?>"> 
-									<i class="icon-icons_mail right sendMail"></i></p>
+								</p>
 								<p><?php echo $employee["BeliefID"]; ?></p>
 								<p>Nominated By:</p>
 								<p><?php echo getname($employee["NominatorEmpNum"]); ?></p>
@@ -35,7 +68,8 @@
 							<span id="wall<?php echo $employee["ID"]; ?>Text" class="showbehaviour hidden"><?php echo $employee["personalMessage"]; ?></span>
 						</div>
 					</div>
-				<?php	}
+				<?php		}	
+						}
 					}
 				}
 				// need to fix modal not what we want.
