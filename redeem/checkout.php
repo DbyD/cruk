@@ -83,7 +83,9 @@ $basket = getBasket( $_SESSION["user"]->EmpNum );
 				<span id="item-count"><?php echo ($basket != 0)?count( $basket ):0; ?> Items</span>
 				<?php endif;?>
 			</div>
-			<div class="row callout panel " id="basket-table">
+			
+			<div class="row callout panel <?php if(isset($postForUpload)) echo 'hidden'; ?>" id="basket-table">
+				
 				<div class="small-12 large-12 columns">
 					<div id="box-basket">
 						<table id="table_basket">
@@ -169,7 +171,11 @@ $basket = getBasket( $_SESSION["user"]->EmpNum );
 								</div>
 							</div> -->
 			</div>
+		
+			
+
 			<?php if( isset( $post ) && !$error ):?>
+
 			<div class="row callout panel creditCardView mCustomScrollbar height410" data-mcs-theme="dark-2">
 				<div  id="formDiv" >
 					<div class="row">
@@ -232,26 +238,27 @@ $basket = getBasket( $_SESSION["user"]->EmpNum );
 			</div>
 			<?php elseif( isset( $postForUpload ) ):?>
 			<?php 
+
 									
-									$last_id = 0;
-							
+				$last_id = 0;
 
-									if( $total_price <= $remaining_amount){
-										$postForUpload["date"] = date("Y-m-d h:i:s");
-										$postForUpload["EmpNum"] = $_SESSION['user']->EmpNum;
-										$postForUpload["totalPrice"] = $total_price;
-										$last_id = addBasketOrders( $postForUpload ); 
+				if( $total_price <= $remaining_amount){
+					$postForUpload["date"] = date("Y-m-d h:i:s");
+					$postForUpload["EmpNum"] = $_SESSION['user']->EmpNum;
+					$postForUpload["totalPrice"] = $total_price;
+					$last_id = addBasketOrders( $postForUpload ); 
 
-										$sum_all = getAvailable( $_SESSION['user']->EmpNum ); 
-										$sum_credit_card = getCreditCard( $_SESSION['user']->EmpNum );
-										$sum_orders = getEmpBasketOrdersSum( $_SESSION['user']->EmpNum );
-										$remaining_amount = $sum_all + $sum_credit_card - $sum_orders;
+					$sum_all = getAvailable( $_SESSION['user']->EmpNum ); 
+					$sum_credit_card = getCreditCard( $_SESSION['user']->EmpNum );
+					$sum_orders = getEmpBasketOrdersSum( $_SESSION['user']->EmpNum );
+					$remaining_amount = $sum_all + $sum_credit_card - $sum_orders;
 
-									}
-									
-									if( $last_id > 0 ):
-										updateBasketStatus( $_SESSION['user']->EmpNum, $last_id );
-								?>
+				}
+				
+				if( $last_id > 0 ):
+					updateBasketStatus( $_SESSION['user']->EmpNum, $last_id );
+			?>
+
 			<div class="row callout panel creditCardView mCustomScrollbar height410" data-mcs-theme="dark-2">
 				<div  id="formDiv" >
 					<div class="row">
@@ -264,6 +271,7 @@ $basket = getBasket( $_SESSION["user"]->EmpNum );
 					</div>
 				</div>
 			</div>
+
 			<?php else: ?>
 			Products for order not!.
 			<?php endif; ?>

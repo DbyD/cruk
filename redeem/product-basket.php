@@ -266,9 +266,10 @@ if( $val == "YES" ){
 							</div>
 						</div>
 						<?php } else { 
-							if( isset( $_GET['basket'] ) ) {
+							if( isset( $_GET['basket'] ) && $basket != 0) {
 							$total_price = 0;
-							 ?>
+						?>
+
 						<div class="row callout panel " id="basket-table">
 							<div class="small-12 large-12 columns">
 								<div id="box-basket">
@@ -288,7 +289,8 @@ if( $val == "YES" ){
 											
 											$arr = array();
 											$i = 0;
-											foreach ($basket as $pr_b){						
+												
+											foreach ($basket as $pr_b){		
 												$pr_info = getProductByID( $pr_b["prID"] );
 												$total_price += $pr_b['aPrice'];
 												
@@ -419,7 +421,7 @@ if( $val == "YES" ){
 
 
 						</div>
-						<? } else { echo "error 404"; } } ?>
+						<? } else { echo "Basket empty"; } } ?>
 					</div>
 				</div>
 			</div>
