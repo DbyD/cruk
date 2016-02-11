@@ -503,6 +503,12 @@ form .row .row {
 	background: #2e008b;
 	color: #fff;
 }
+.tableTitle div{
+	vertical-align: middle;
+}
+.doubleHeader{
+	padding: 7px 0;
+}
 .tableRow {
 	font-size: 13px;
 	padding: 14px 0;

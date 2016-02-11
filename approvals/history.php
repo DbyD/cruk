@@ -11,7 +11,7 @@
 	<div class="row contentFill">
 		<div class="medium-12 columns leftnp rightnp fillHeight">
 			<div class="callout panel fillHeight white">
-				<div class="tableTitle">
+				<div class="tableTitle doubleHeader">
 					<div class="tableColumn-3">
 						Nominee
 					</div>
@@ -21,7 +21,7 @@
 					<div class="tableColumn-2">
 						Date
 					</div>
-					<div class="tableColumn-1 ">
+					<div class="tableColumn-1 twoLines">
 						Reason/ Message
 					</div>
 					<div class="tableColumn-2">

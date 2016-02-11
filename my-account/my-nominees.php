@@ -42,7 +42,7 @@
 							<?=getConvertedDate($list->NomDate)?>
 						</div>
 						<div class="tableColumn-2">
-							<div class="viewButton inlineDiv clickAble" data-type="ecard" data-url="<?=HTTP_PATH?>alerts/view-ecard.php" data-id="<?=$list->ID?>">View</div>
+							<div class="viewButton inlineDiv clickAble lightBlue" data-type="ecard" data-url="<?=HTTP_PATH?>alerts/view-ecard.php" data-id="<?=$list->ID?>">View</div>
 						</div>
 						<div class="tableColumn-4">
 							<?php
