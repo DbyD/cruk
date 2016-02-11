@@ -27,7 +27,7 @@ function getMenuProducts( $menu_id , $sub_id ){
 	$stmt = $db->prepare('SELECT * FROM tblproducts WHERE ' . $where);
 	
 	$stmt->bindValue(':menuID',$menu_id, PDO::PARAM_INT);
-	
+
 	if( $sub_id !== null ){
 		$stmt->bindValue(':subID', $sub_id, PDO::PARAM_INT);
 	}
@@ -72,6 +72,12 @@ VALUES
 function updateProduct( $data ){
 	global $db;
 
+	if( isset( $data[ "Image_name" ] ) ){
+		$image_update = ',Image_name = :Image_name';
+	} else {
+		$image_update = '';
+	}
+
 	$sql = "
 UPDATE tblproducts 
 SET aTitle = :aTitle,
@@ -79,8 +85,7 @@ SET aTitle = :aTitle,
 	delivery = :delivery,
 	aContent = :aContent,
 	menuID = :menuID,
-	subID = :subID,
-	Image_name = :Image_name
+	subID = :subID " . $image_update . "
 WHERE prID = :prID";
 
 	$stmt = $db->prepare( $sql );
@@ -92,7 +97,9 @@ WHERE prID = :prID";
 	$stmt->bindValue(':aContent',$data["aContent"] , PDO::PARAM_STR);
 	$stmt->bindValue(':menuID',$data["menuID"] , PDO::PARAM_INT);
 	$stmt->bindValue(':subID',$data["subID"] , PDO::PARAM_INT);
-	$stmt->bindValue(':Image_name',$data["Image_name"] , PDO::PARAM_STR);
+	if( isset( $data[ "Image_name" ] ) ){
+		$stmt->bindValue(':Image_name',$data["Image_name"] , PDO::PARAM_STR);
+	}
 	$stmt->bindValue(':prID',$data["prID"] , PDO::PARAM_INT);
 	
 
@@ -367,7 +374,8 @@ function getMenuSubs( $parent_id ){
 	return $arr;
 }
 ///////////////////////////////////////////////////////////////////////////////////
-function updateSubImage( $link,$id ){
+function updateSubImage( $link, $id ){
+	var_dump($link, ',',$id );
 
 	global $db;
 

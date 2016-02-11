@@ -6,14 +6,16 @@
 		if( isset( $_POST['submit'] ) && isset( $_POST["sub_id"] ) ) {
 			if( $_FILES['imageSub'] != null ){
 				$res = insertImageSub( $_FILES['imageSub'], $_POST["sub_id"], $menu_id );
+				
 				if( $res ){
 					updateSubImage( $res, $_POST["sub_id"] );
 				}
+
 			}
 		}
 
-		if(isset( $_POST["submit"] ) ){
-			if( empty( $_POST["title"] ) || empty( $_POST["point"] ) || empty( $_POST["Delivery"] ) || empty( $_POST["content"] ) || empty( $_FILES["fileImage"] ) ){
+		if( isset( $_POST["submit"] ) ){
+			if( empty( $_POST["title"] ) || empty( $_POST["point"] ) || empty( $_POST["Delivery"] ) || empty( $_POST["content"] ) ){
 				$error_message = "<div class='error'>Please fill in all fields</div>";
 			} else {
 				if( isset($_POST["sub_id"] ) ){
@@ -21,32 +23,29 @@
 				} else {
 					$sub_id_insert = NULL;
 				}
-				
-				$file_path = insertFile(  $_POST["menu_id"], $sub_id_insert );
 
+				$data = array(
+					'aTitle' => $_POST["title"],
+					'aPrice' => $_POST["point"],
+					'delivery' => $_POST["Delivery"],
+					'aContent' => $_POST["content"],
+					'menuID' => $_POST["menu_id"],
+					'subID' => $sub_id_insert
+				);
 
-				if( $file_path != 'error' ){
-
-					$data = array(
-						'aTitle' => $_POST["title"],
-						'aPrice' => $_POST["point"],
-						'delivery' => $_POST["Delivery"],
-						'aContent' => $_POST["content"],
-						'menuID' => $_POST["menu_id"],
-						'subID' => $sub_id_insert,
-						'Image_name' => $file_path
-					);
-
-
-
-					if( isset( $_POST["prID"] ) ) {
-						$data['prID'] = $_POST["prID"];
-						updateProduct( $data );
-					} else {
-						insertProduct( $data );
-					}
-					
+				if( !empty( $_FILES["fileImage"] ) ){
+					$file_path = insertFile(  $_POST["menu_id"], $sub_id_insert );
+					$data['Image_name'] = $file_path;
 				}
+
+				if( isset( $_POST["prID"] ) ) {
+					$data['prID'] = $_POST["prID"];
+					updateProduct( $data );
+				} else {
+					insertProduct( $data );
+				}
+					
+				
 
 				
 			}
@@ -151,15 +150,6 @@
 						<?php endforeach;?>
 					</div>	
 				<?php endif; ?>
-
-
-
-
-
-
-
-
-
 
 				
 				<?php if( isset( $products ) ):?>

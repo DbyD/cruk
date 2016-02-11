@@ -64,7 +64,7 @@ function insertFile( $menu_id, $sub_id ){
 		    $image->load($target_file);
 		    $image->resize(190, 120);
 		    $image->save($target_file);
-		    
+
 	        $arr = explode("../", $target_file);
 	        return end($arr);
 	    }
@@ -101,6 +101,12 @@ function insertImageSub( $file, $sub_id, $menu_id){
 		}
 
 	    if (move_uploaded_file($file["tmp_name"], $target_file)) {
+	    	include('classSimpleImage.php');
+	    	$image = new SimpleImage();
+		    $image->load($target_file);
+		    $image->resize(190, 120);
+		    $image->save($target_file);
+		    
 	        $arr = explode("../", $target_file);
 	        return end( $arr );
 	    }
