@@ -50,6 +50,7 @@ function getMenuProducts( $menu_id , $sub_id ){
 function insertProduct( $data ){
 	global $db;
 
+	
 
 	$stmt = $db->prepare("
 INSERT INTO tblproducts 
@@ -96,10 +97,12 @@ WHERE prID = :prID";
 	$stmt->bindValue(':delivery',$data["delivery"] , PDO::PARAM_STR);
 	$stmt->bindValue(':aContent',$data["aContent"] , PDO::PARAM_STR);
 	$stmt->bindValue(':menuID',$data["menuID"] , PDO::PARAM_INT);
-	$stmt->bindValue(':subID',$data["subID"] , PDO::PARAM_INT);
+	$stmt->bindValue(':subID', $data["subID"] , PDO::PARAM_INT);
+
 	if( isset( $data[ "Image_name" ] ) ){
 		$stmt->bindValue(':Image_name',$data["Image_name"] , PDO::PARAM_STR);
 	}
+	
 	$stmt->bindValue(':prID',$data["prID"] , PDO::PARAM_INT);
 	
 

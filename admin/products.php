@@ -18,12 +18,13 @@
 			if( empty( $_POST["title"] ) || empty( $_POST["point"] ) || empty( $_POST["Delivery"] ) || empty( $_POST["content"] ) ){
 				$error_message = "<div class='error'>Please fill in all fields</div>";
 			} else {
+				
 				if( isset($_POST["sub_id"] ) ){
 					$sub_id_insert = $_POST["sub_id"];
 				} else {
 					$sub_id_insert = NULL;
 				}
-
+				
 				$data = array(
 					'aTitle' => $_POST["title"],
 					'aPrice' => $_POST["point"],
@@ -40,6 +41,11 @@
 
 				if( isset( $_POST["prID"] ) ) {
 					$data['prID'] = $_POST["prID"];
+
+					if( $sub_id_insert == 'other'){
+						$data['subID'] = NULL;
+					}
+
 					updateProduct( $data );
 				} else {
 					insertProduct( $data );
@@ -154,6 +160,9 @@
 				
 				<?php if( isset( $products ) ):?>
 				<div class="row products">
+					<div class="small-12 large-12 columns" id="subsTitle">
+						Products
+					</div>
 					<?php foreach( $products as $product ):?>
 						
 							<div class="small-2 large-4 columns">
@@ -174,19 +183,6 @@
 					<?php endforeach;?>
 					</div>
 				<?php endif;?>
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 			</div>
 		
@@ -215,7 +211,31 @@
 			        <div class="large-9 columns">
 			        	<input type="text" placeholder="" name="point" value="<?php echo isset( $pr['aPrice'] ) ? $pr['aPrice'] : ''; ?>" />
 			    </div>
-			  </div>	
+			  </div>
+			  <?php if(!is_null($subs)):?>
+				  <div class="row">
+				    <div class="large-3 columns">
+				      <label>CHoose Sub menu</label></div>
+				      <div class="large-9 columns">
+				        <select name="sub_id">
+				        	<option value="other">--Select--</option>
+				        	<?php foreach($subs as $sub): ?>
+								<?php if( is_array( $sub ) ):?>
+									<option value="<?php echo $sub["id"]; ?>"><?php echo $sub['label']; ?></option>
+								<?php endif; ?>
+							<?php endforeach;?>
+				        </select>
+				    </div>
+				  </div>
+
+				  <div class="row">
+				    <div class="large-3 columns">
+				      <label>CHoose Sub menu: </label></div>
+				        <div class="large-9 columns">
+				        	<input type="text" placeholder="" name="point" value="<?php echo isset( $pr['aPrice'] ) ? $pr['aPrice'] : ''; ?>" />
+				    </div>
+				  </div>
+			  <?php endif;?>
 			  
 			  <div class="row">
 			    <div class="large-3 columns">
