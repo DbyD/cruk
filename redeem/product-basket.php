@@ -24,6 +24,38 @@ function createSignature(array $data, $key) {
  }
 
 
+function SendMail($args = array()){
+
+	// noreply@xexec.com
+
+	$args = array('to'=>'maksdev0@gmail.com',
+					'from'=> 'noreply@xexec.com',
+					'subject'=> 'Reading',
+					'message'=> '<i>message</i>',
+					'to_bcc' => $_SESSION["user"]->Eaddress
+				);
+
+	
+	$to      = $args['to']; //'maksdev0@gmail.com
+	$subject = $args['subject'];// Reading
+	$message = $args['message'];// message
+
+	$headers = "MIME-Version: 1.0" . "\r\n";
+	$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+
+	$headers .= 'From:  '. $args['from'] . "\r\n" .
+		'Reply-To:  '.$args['to'] . "\r\n" .
+		'Bcc:  '.$args['to_bcc'] . "\r\n" .
+		'X-Mailer: PHP/' . phpversion();
+		
+
+	$mail = mail($to, $subject, $message, $headers);
+}
+
+
+// echo '<pre>';var_dump( $_SESSION["user"]->Eaddress );echo '</pre>';
+
+
 if(isset($_POST['redirectURL'])){
 	$res = $_POST;
 
@@ -31,8 +63,6 @@ if(isset($_POST['redirectURL'])){
  	// echo '<pre>';var_dump($resultCardRequest);echo '</pre>';
  	
  	updateCreditCardAmount( $res['amount'] ,  $resultCardRequest);
-
- 	
 
 	//  Extract the return signature as this isn't hashed 
 	$signature = null;
@@ -48,6 +78,7 @@ if(isset($_POST['redirectURL'])){
 	
 	if ($res['responseCode'] === "0") { 
 		// echo "<p>Thank you for your payment.</p>";
+		SendMail();
 	} else { 
 		// echo "<p>Failed to take payment: " . htmlentities($res['responseMessage']) . "</p>";
 	}

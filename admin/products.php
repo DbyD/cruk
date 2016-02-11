@@ -17,7 +17,12 @@
 				$error_message = "<div class='error'>Please fill in all fields</div>";
 			} else {
 
-				$file_path = insertFile( $_FILES , $_POST["menu_id"], $_POST["sub_id"]);
+				if(isset($_POST["sub_id"])){
+					$file_path = insertFile( $_FILES , $_POST["menu_id"], $_POST["sub_id"]);
+				} else {
+					
+				}
+				
 
 
 				if($file_path != 'error'){
@@ -195,9 +200,10 @@
 
 			</div>
 		
-	<?php if(isset($sub_id)):?>
+	
 	<div class="row">
 		<div class="small-12 large-12 columns form-prduct">
+
 			<form method="post" action="" enctype="multipart/form-data">
 				<?php if(isset($error_message)) echo $error_message;?>
 		      <h2>Add / Edit Products</h2>
@@ -251,9 +257,10 @@
 			  	<?php endif;?>
 			  
 			  	<input type="hidden" value="<?php echo $menu_id; ?>" name="menu_id"/>
-			  		
-			  	<input type="hidden" value="<?php echo $sub_id; ?>" name="sub_id"/>
-			  		
+
+			  	<?php if(isset($sub_id)):?>	
+			  		<input type="hidden" value="<?php echo $sub_id; ?>" name="sub_id"/>
+			  	<?php endif;?>	
 			  
 			  <div class="row">
 			 	 	<div class="large-12 columns">
@@ -262,13 +269,14 @@
 			  </div>
 
 			</form>
+
 			<hr />
 
 
 
 		</div>
 	</div>
-	<?php endif;?>
+	
 
 </div>
 
