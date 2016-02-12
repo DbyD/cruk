@@ -50,23 +50,28 @@ function getMenuProducts( $menu_id , $sub_id ){
 function insertProduct( $data ){
 	global $db;
 
-	
+	if($data["subID"] != 'other'){
+		$sub_key = 'subID,';
+		$sub_key = ':subID,';
+	}
 
 	$stmt = $db->prepare("
 INSERT INTO tblproducts 
-	(aTitle, aPrice, delivery, aContent, menuID, subID, Image_name) 
+	(aTitle, aPrice, delivery, aContent, menuID, " . $sub_message . " Image_name) 
 VALUES 
-	(:aTitle, :aPrice, :delivery, :aContent, :menuID, :subID, :Image_name )");
-	
+	(:aTitle, :aPrice, :delivery, :aContent, :menuID, " . $sub_message . " :Image_name )");
 
 	$stmt->bindValue(':aTitle',$data["aTitle"], PDO::PARAM_STR);
 	$stmt->bindValue(':aPrice', $data["aPrice"], PDO::PARAM_STR);
 	$stmt->bindValue(':delivery',$data["delivery"] , PDO::PARAM_STR);
 	$stmt->bindValue(':aContent',$data["aContent"] , PDO::PARAM_STR);
 	$stmt->bindValue(':menuID',$data["menuID"] , PDO::PARAM_INT);
-	$stmt->bindValue(':subID',$data["subID"] , PDO::PARAM_INT);
+	if($data["subID"] != 'other'){
+		$stmt->bindValue(':subID',$data["subID"] , PDO::PARAM_INT);
+	}
 	$stmt->bindValue(':Image_name',$data["Image_name"] , PDO::PARAM_STR);
 
+	
 	$stmt->execute();
 } 
 
@@ -379,18 +384,27 @@ function getMenuSubs( $parent_id ){
 	return $arr;
 }
 ///////////////////////////////////////////////////////////////////////////////////
-function updateSubImage( $link, $id ){
+function updateSubImageAndName( $res ){
 
 	global $db;
+	$string = '';
+
+	if($res['sub_image'] != false){
+		$string = ',sub_image = :sub_image';
+	}
 
 	$sql = "
 UPDATE tblmenuleft 
-SET sub_image = :sub_image
-WHERE id = :id";	
+SET label = :label " . $string . " 
+WHERE id = :id";
+
 	$stmt = $db->prepare($sql);
 
-	$stmt->bindValue(':sub_image', $link, PDO::PARAM_STR);
-	$stmt->bindValue(':id', $id, PDO::PARAM_INT);
+	if($res['sub_image'] != false){
+		$stmt->bindValue(':sub_image', $res['sub_image'], PDO::PARAM_STR);
+	}
+	$stmt->bindValue(':label', $res['label'], PDO::PARAM_STR);
+	$stmt->bindValue(':id', $res['id'], PDO::PARAM_INT);
 
 	$stmt->execute(); 
 

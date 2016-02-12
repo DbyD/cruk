@@ -1,24 +1,32 @@
 <?php 
+	
+
 	$res = 0;
 	if( isset( $_GET["menu_id"] ) ) {
 		$menu_id = $_GET["menu_id"];
 
 		if( isset( $_POST['submit'] ) && isset( $_POST["sub_id"] ) ) {
+			$res = array();
+			
 			if( $_FILES['imageSub'] != null ){
-				$res = insertImageSub( $_FILES['imageSub'], $_POST["sub_id"], $menu_id );
-				
-				if( $res ){
-					updateSubImage( $res, $_POST["sub_id"] );
-				}
-
+				$path = insertImageSub( $_FILES['imageSub'], $_POST["sub_id"], $menu_id );
+				$res["sub_image"] = $path;
 			}
+
+			$res["id"] = $_POST["sub_id"];
+			$res["label"] = $_POST["nameSub"];
+
+			updateSubImageAndName( $res );
+				
 		}
+
 
 		if( isset( $_POST["submit"] ) ){
 			if( empty( $_POST["title"] ) || empty( $_POST["point"] ) || empty( $_POST["Delivery"] ) || empty( $_POST["content"] ) ){
 				$error_message = "<div class='error'>Please fill in all fields</div>";
 			} else {
 				
+
 				if( isset($_POST["sub_id"] ) ){
 					$sub_id_insert = $_POST["sub_id"];
 				} else {
@@ -64,6 +72,7 @@
 			$sub_id = null;
 			$subs = getMenuSubs( $menu_id );
 		}
+		
 		
 		$res = getMenuProducts( $menu_id, $sub_id);
 		
@@ -126,6 +135,14 @@
 											<?php endif;?>
 
 											<form action="" method="post" enctype="multipart/form-data">
+
+											  <div class="row">
+											    <div class="large-12 columns">
+											      <label>Sub name.
+											        <input type="text" name="nameSub" value="<?php echo $sub['label']; ?>"/>
+											      </label>
+											    </div>
+											  </div>
 												
 
 											  <div class="row">
@@ -135,6 +152,8 @@
 											      </label>
 											    </div>
 											  </div>
+
+											  
 
 											  <input type="hidden" name="sub_id" value="<?php echo $sub["id"]; ?>"/>
 
