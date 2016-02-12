@@ -24,7 +24,7 @@ $basket = getBasket( $_SESSION["user"]->EmpNum );
 <div id="content" class="large-8 large-push-2 columns">
 	<div class="title withStar">
 		<div class="inlineDiv clickAble" data-type="gourl" data-url="<?php echo HTTP_PATH . 'redeem/'; ?>">
-			Redeem
+			Shop
 		</div>
 		<i class="icon-icons_thickrightarrow smalli"></i> <span class="subSubTitle">Credit Card</span>
 	</div>

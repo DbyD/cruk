@@ -16,6 +16,8 @@ if(isset($_POST)){
 	
 }
 
+
+
  
 $key = 'Cheer11Inside19Credit';
 
@@ -178,9 +180,18 @@ $basket = getBasket( $_SESSION["user"]->EmpNum );
 <div id="content" class="large-8 large-push-2 columns">
 	<div class="title withStar">
 		<div class="inlineDiv clickAble" data-type="gourl" data-url="<?php echo HTTP_PATH . 'redeem/'; ?>">
-			Redeem
+			Shop
 		</div>
-		<i class="icon-icons_thickrightarrow smalli"></i> <span class="subSubTitle">Checkout</span>
+		<i class="icon-icons_thickrightarrow smalli"></i> <span class="subSubTitle"> Checkout </span>
+		<?php if(isset($post) && !$error):?>
+			<i class="icon-icons_thickrightarrow smalli"></i> <span class="subSubTitle"> Order Confirmed </span>
+		<?php else: ?>
+			<i class="icon-icons_thickrightarrow smalli"></i> <span class="subSubTitle"> Order Confirmation </span>
+		<?php endif; ?>
+		
+		
+
+		
 	</div>
 	<div class="row contentFill">
 		<div class="medium-12 columns leftnp rightnp fillHeight">

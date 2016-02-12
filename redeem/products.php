@@ -34,7 +34,7 @@ if( $val == "YES" ){
 
 			<div id="content" class="large-8 large-push-2 columns">
 				<div class="title">
-					<div class="inlineDiv clickAble" data-type="gourl" data-url="<?php echo HTTP_PATH . 'redeem/'; ?>">Redeem</div> <i class="icon-icons_thickrightarrow smalli"></i>
+					<div class="inlineDiv clickAble" data-type="gourl" data-url="<?php echo HTTP_PATH . 'redeem/'; ?>">Shop</div> <i class="icon-icons_thickrightarrow smalli"></i>
 				<?php	if (isset($sub[0]["label"])) {
 							echo '<div class="inlineDiv clickAble submenu" data-type="gourl" data-url="' . HTTP_PATH . 'redeem/products.php?menu_id=' . $menu_id . '">'. $menu[0]["label"] . '</div> ';
 							echo '<i class="icon-icons_thickrightarrow smalli"></i> <span class="subSubTitle">' . $sub[0]["label"] . '</span>';
@@ -93,7 +93,7 @@ if( $val == "YES" ){
 						Avable to spend
 					</div>
 					<div class="price-panel">
-						<?php echo '&pound;'; ?> 
+						
 						<?php 
 						$sum_all = getAvailable( $_SESSION['user']->EmpNum ); 
 						$sum_credit_card = getCreditCard( $_SESSION['user']->EmpNum );
@@ -101,9 +101,11 @@ if( $val == "YES" ){
 
 
 						$remaining_amount = $sum_all + $sum_credit_card - $sum_orders;
-						echo $remaining_amount;
+						echo '&pound;' . ' ' . $remaining_amount;
 						?> 
+						
 					</div>
+					
 					<div class="unclaimed-panel">
 						<div class="clickAble" data-type="gourl" data-url="<?=HTTP_PATH?>my-account/my-awards.php">+<?php echo getTotalNewNominations($_SESSION['user']->EmpNum); ?> Unclaimed</div>
 					</div>
