@@ -132,7 +132,6 @@ $basket = getBasket( $_SESSION["user"]->EmpNum );
 	$sum_all = getAvailable( $_SESSION['user']->EmpNum ); 
 	$sum_credit_card = getCreditCard( $_SESSION['user']->EmpNum );
 	$sum_orders = getEmpBasketOrdersSum( $_SESSION['user']->EmpNum );
-
 	$remaining_amount = $sum_all + $sum_credit_card - $sum_orders;
 
 	
@@ -188,11 +187,8 @@ $basket = getBasket( $_SESSION["user"]->EmpNum );
 		<?php else: ?>
 			<i class="icon-icons_thickrightarrow smalli"></i> <span class="subSubTitle"> Order Confirmation </span>
 		<?php endif; ?>
-		
-		
-
-		
 	</div>
+
 	<div class="row contentFill">
 		<div class="medium-12 columns leftnp rightnp fillHeight">
 			<div class="row">
@@ -281,13 +277,13 @@ $basket = getBasket( $_SESSION["user"]->EmpNum );
 					</div>
 				</div>
 				<!--
-							<div class="row">
-								<div class="large-12 columns">
-									<label> NOTE: if your Basket includes several gift cards from the same retailer...
-										<textarea placeholder=""></textarea>
-									</label>
-								</div>
-							</div> -->
+				<div class="row">
+					<div class="large-12 columns">
+						<label> NOTE: if your Basket includes several gift cards from the same retailer...
+							<textarea placeholder=""></textarea>
+						</label>
+					</div>
+				</div> -->
 			</div>
 
 			<?php if( isset( $post ) && !$error ):?>

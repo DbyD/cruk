@@ -1,6 +1,9 @@
 <?php 
 include_once '../inc/config.php';
 include_once('../inc/header.php'); 
+
+$basket = getBasket( $_SESSION["user"]->EmpNum );
+
 ?>
 
 			<div id="content" class="large-8 large-push-2 columns">
@@ -9,9 +12,13 @@ include_once('../inc/header.php');
 				</div>
 				<div class="row contentFill">
 					<div class="medium-12 columns leftnp rightnp fillHeight">
+						
+						<?php if($basket != 0):?>
 						<div class="row">
 							<a id="viewBasket" class='<?php if($basket_isset) echo 'view-basket';?>' href="<?php echo HTTP_PATH . "redeem/product-basket.php?basket=true&menu_id=" . $menu_id; ?>"> <i class="fi-shopping-bag"></i>View basket </a>
 						</div>
+						<?php endif; ?>
+
 						<div class="row static-redeem" id="redeemHome">
 							<div class="small-6 large-6 columns leftnp">
 								<div class="callout panel clickAble" data-type="gourl" data-url="<?=HTTP_PATH?>redeem/products.php?menu_id=1">
