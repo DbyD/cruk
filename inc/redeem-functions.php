@@ -113,19 +113,21 @@ function addBasketOrders( $data ){
 	global $db;
 
 	$stmt = $db->prepare("
-INSERT INTO tblbasketorders (	phone, adress1, adress2, town, postcode, date, EmpNum, totalPrice) 
-VALUES (	:phone, :adress1, :adress2, :town, :postcode, :date, :EmpNum, :totalPrice)");
-
+INSERT INTO tblbasketorders ( phone, address1, address2, town, postcode, date, EmpNum, totalPrice) 
+VALUES ( :phone, :address1, :address2, :town, :postcode, :date, :EmpNum, :totalPrice)");
+	
+	
 	$stmt->bindValue(':phone',$data["telephone"], PDO::PARAM_STR);
-	$stmt->bindValue(':adress1', $data["address1"], PDO::PARAM_STR);
-	$stmt->bindValue(':adress2',$data["address2"] , PDO::PARAM_STR);
+	$stmt->bindValue(':address1', $data["address1"], PDO::PARAM_STR);
+	$stmt->bindValue(':address2',$data["address2"] , PDO::PARAM_STR);
 	$stmt->bindValue(':town',$data["town"] , PDO::PARAM_STR);
 	$stmt->bindValue(':postcode',$data["postcode"] , PDO::PARAM_INT);
-	$stmt->bindValue(':date',$data["date"] , PDO::PARAM_INT);
+	$stmt->bindValue(':date',$data["date"] , PDO::PARAM_STR);
 	$stmt->bindValue(':EmpNum',$data["EmpNum"] , PDO::PARAM_STR);
 	$stmt->bindValue(':totalPrice',$data["totalPrice"] , PDO::PARAM_INT);
 
 	$stmt->execute();
+	// print_r( $stmt->errorInfo() );
 	$lastId = $db->lastInsertId();
 	return $lastId;
 }

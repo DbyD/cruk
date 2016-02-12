@@ -317,6 +317,7 @@
 					
 	
 				<?php
+				
 				$menu->db = $db;
 				echo  $menu->Menu();
 				?>
