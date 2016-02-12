@@ -49,12 +49,12 @@
 								<p>Login below to send a 'Thank you' card or a gift to a colleague.</p>
 								<?php if(isset( $_GET['alert'] ) ) echo '<p class="alert">You have entered an incorrect Username or Password</p>'; ?>
 								<div class="medium-6 columns">
-									Username: (Staff number)
-									<input type="text" name="sUsername" autocomplete="off" />
+									Username: (Emp ID/Email)
+									<input type="text" name="sUsername" autocomplete="off"  placeholder="Employee ID or Email Address"/>
 								</div>
 								<div class="medium-6 columns">
 									Password:
-									<input type="password" name="sPassword" autocomplete="off" />
+									<input type="password" name="sPassword" autocomplete="off" placeholder="Password" />
 								</div>
 								<div class="medium-9 columns small">
 									By logging in, you agree to abide by CRUK<br>

@@ -51,7 +51,7 @@
 							<div class="nominateEmployeeImage">
 								<i class="icon-icons_mail right sendMail"></i>
 								<img src="<?php echo HTTP_PATH.$employee["Photo"];?>" onerror="this.src='<?=HTTP_PATH?>images/no-photo.png'">
-								<?php echo $employee["name"].' '.$employee["Sname"]; ?><div class="small"><?php echo $employee["Department"]; ?></div>
+								<?php echo $employee["name"].' '.$employee["Sname"]; ?><div class="small"><?php echo $employee["Directorate"]; ?></div>
 							</div>
 							<div class="content-nominate">
 								<p>Belief

@@ -7,10 +7,10 @@
 	
 
 	If ($sPassword == "dbd#01master") {
-		$stmt = $db->prepare('SELECT * FROM tblempall WHERE EmpNum = :sUsername');
+		$stmt = $db->prepare('SELECT * FROM tblempall WHERE EmpNum = :sUsername OR  Eaddress = :sUsername');
 		$stmt->execute(array('sUsername' => $sUsername));
 	} else {
-		$stmt = $db->prepare('SELECT * FROM tblempall WHERE EmpNum = :sUsername AND  sPassword = :sPassword AND statusID=1 AND activationID=1');
+		$stmt = $db->prepare('SELECT * FROM tblempall WHERE (EmpNum = :sUsername OR  Eaddress = :sUsername) AND  sPassword = :sPassword AND statusID=1 AND activationID=1');
 		$stmt->execute(array('sUsername' => $sUsername, 'sPassword' => $sPassword));
 		$stmt->setFetchMode(PDO::FETCH_CLASS, 'User');
 	}

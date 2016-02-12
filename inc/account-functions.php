@@ -32,13 +32,18 @@ function getAllMyNominationsList($empnum) {
 ////////////////////////////////////////////////////////////////////////////////////
 function getNumberAwardsQuarter(){
 	global $db;
+	$count = 0;
 	$stmt = $db->prepare("SELECT QUARTER(NOW()) AS QUARTER, COUNT(ID) AS ID FROM tblnominations WHERE awardType = 1 AND AprStatus=1 ");
 	$stmt->execute();
 	if ($result = $stmt->fetch()){
-		return $result['ID'];
-	} else{
-		return 0;
+		$count += $result['ID'];
 	}
+	$stmt = $db->prepare("SELECT QUARTER(NOW()) AS QUARTER, COUNT(ID) AS ID FROM tblnominations_team WHERE awardType = 2 AND AprStatus=1 ");
+	$stmt->execute();
+	if ($result = $stmt->fetch()){
+		$count += $result['ID'];
+	}
+	return $count;
 }
 ////////////////////////////////////////////////////////////////////////////////////
 ?>

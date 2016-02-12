@@ -7,6 +7,7 @@
 				<div class="callout panel" id="home1">
 					<div class="image">
 						<p>Our Beliefs</p>
+						<div class="ourbelief hide clickAble" data-type="gourl" data-url="#">Click here to read all out the Cancer Research Beliefs.</div>
 					</div>
 				</div>
 				<div class="medium-6 columns leftnp">

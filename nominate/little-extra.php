@@ -2,7 +2,7 @@
 <div id="alertTitle" class="title smallPopupTitle">
 	<div class="row withPadding">
 		<div class="medium-12 columns">
-			A Little Extra
+			A Little Extra <i class="icon-icons_i small clickAble" data-type="alert" data-url="alert-little-extra.php"></i>
 		</div>
 	</div>
 </div>

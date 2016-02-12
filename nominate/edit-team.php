@@ -8,9 +8,9 @@
 		$stmt = $db->prepare("DELETE FROM tblteams WHERE id = :teamID");
 		$stmt->bindParam(':teamID', $teamID);
 		$stmt->execute();
-		$stmt = $db->prepare("DELETE FROM tblteamusers WHERE teamID = :teamID");
+	/*	$stmt = $db->prepare("DELETE FROM tblteamusers WHERE teamID = :teamID");
 		$stmt->bindParam(':teamID', $teamID);
-		$stmt->execute();
+		$stmt->execute(); */
 		echo "removed";
 	} else {
 		if ($_POST['myTeamName']){

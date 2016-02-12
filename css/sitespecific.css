@@ -45,6 +45,18 @@
 #home1 .image {
 	height: 286px;
 	background-image: url(../images/home-our-beliefs.jpg);
+	position: relative;
+}
+#home1 .image .ourbelief{
+	position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: #00b6ed;
+    text-align: center;
+	line-height: 250px;
+	font-size: 18px;
+	color: #fff;
 }
 #home1 p {
 	color: #2e008b;
@@ -717,6 +729,9 @@ form .row .row {
 .smallPopupTitle i {
 	font-size: 28px;
 }
+.smallPopupTitle i.small {
+	font-size: 13px;
+}
 p.alertText {
 	padding: 30px;
 	font-size: 16px;
@@ -1161,7 +1176,13 @@ button:hover, button:focus, .button:hover, .button:focus {
 	top: 0;
 	background: #ddd;
 	border: 1px solid #888;
-	width: 200px;
+	width: 250px;
+}
+.activated .sub-menu-area input{
+	width: 80%;
+    display: inline;
+    margin: 2px 0;
+    border-radius: 6px;
 }
 .left-bar-nav {
 	list-style: none;
