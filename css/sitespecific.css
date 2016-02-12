@@ -1176,7 +1176,13 @@ button:hover, button:focus, .button:hover, .button:focus {
 	top: 0;
 	background: #ddd;
 	border: 1px solid #888;
-	width: 200px;
+	width: 250px;
+}
+.activated .sub-menu-area input{
+	width: 80%;
+    display: inline;
+    margin: 2px 0;
+    border-radius: 6px;
 }
 .left-bar-nav {
 	list-style: none;
