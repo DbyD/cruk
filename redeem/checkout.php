@@ -8,6 +8,117 @@ $menu_id = $_GET["menu_id"];
 $checkout = $_GET["checkout"];
 
 
+if(isset($_POST)){
+	echo "<pre>";
+	//var_dump($_POST);
+	
+	$insert_data = $_SESSION['cardForm'];
+	$insert_data['amount'] = $_POST['amount'];
+	
+}
+
+ 
+$key = 'Cheer11Inside19Credit';
+
+
+function createSignature(array $data, $key) {
+	// echo $key;
+	//  Sort by field name 
+	ksort($data);
+
+	//  Create the URL encoded signature string 
+	$ret = http_build_query($data, '', '&');
+	//  Normalise all line endings (CRNL|NLCR|NL|CR) to just NL (%0A) 
+	$ret = str_replace(array('%0D%0A', '%0A%0D', '%0D'), '%0A', $ret);
+	//  Hash the signature string and the key together 
+	return hash('SHA512', $ret . $key);
+ }
+
+
+function SendMail($args = array()){
+
+	// noreply@xexec.com
+
+	$args = array(	
+					'to'=>'maksdev0@gmail.com',
+					'from'=> 'noreply@xexec.com',
+					'subject'=> 'Reading',
+					'message'=> '<i>message</i>',
+					'to_bcc' => $_SESSION["user"]->Eaddress
+				);
+
+	
+	$to      = $args['to']; //'maksdev0@gmail.com
+	$subject = $args['subject'];// Reading
+	$message = $args['message'];// message
+
+	$headers = "MIME-Version: 1.0" . "\r\n";
+	$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+
+	$headers .= 'From:  '. $args['from'] . "\r\n" .
+		'Reply-To:  '.$args['to'] . "\r\n" .
+		'Bcc:  '.$args['to_bcc'] . "\r\n" .
+		'X-Mailer: PHP/' . phpversion();
+		
+
+	$mail = mail($to, $subject, $message, $headers);
+}
+
+
+// echo '<pre>';var_dump( $_SESSION["user"]->Eaddress );echo '</pre>';
+
+
+if(isset($_POST['redirectURL'])){
+	$res = $_POST;
+ 	
+ 	// updateCreditCardAmount( $res['amount'] ,  $resultCardRequest);
+	$insert_data['resultCardRequest'] = json_encode($res);
+	$insert_data['EmpNum'] = $_SESSION["user"]->EmpNum;
+
+	$signature = null;
+	if (isset($res['signature'])) { 
+		$signature = $res['signature'];
+		unset($res['signature']);
+	}
+ 
+	if (!$signature || $signature !== createSignature($res, $key)) {
+		
+		die('Sorry, the signature check failed');
+	}
+	
+	if ($res['responseCode'] === "0") { 
+		$card_message = "<p>Thank you for your payment.</p>";
+		var_dump($insert_data);
+		// $last_id = insertCreditCard( $insert_data );
+		echo "insert id = " . 51;
+		// SendMail();
+	} else { 
+		$card_message = "<p>Failed to take payment: " . htmlentities($res['responseMessage']) . "</p>";
+	}
+}
+
+
+
+
+echo "</pre>";
+die;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 $basket = getBasket( $_SESSION["user"]->EmpNum );
 

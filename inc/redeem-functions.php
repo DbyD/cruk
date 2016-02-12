@@ -378,7 +378,6 @@ function getMenuSubs( $parent_id ){
 }
 ///////////////////////////////////////////////////////////////////////////////////
 function updateSubImage( $link, $id ){
-	var_dump($link, ',',$id );
 
 	global $db;
 
@@ -423,16 +422,12 @@ function getEmpBasketOrdersSum( $empnum ){
 ///////////////////////////////////////////////////////////////////////////////////
 function insertCreditCard( $data ) {
 	global $db;
-	$data["amount"] = 0;
-	$data["EmpNum"] = $_SESSION["user"]->EmpNum;
-
 
 	$stmt = $db->prepare("
 INSERT INTO tblcreditcard 
-	(firstname, surname, address1, 	address2, town, postcode, telephone, email, amount, EmpNum) 
+	(firstname, surname, address1, 	address2, town, postcode, telephone, email, amount, EmpNum, resultCardRequest) 
 VALUES 
-	(:firstname, :surname, :address1, :address2, :town, :postcode, :telephone, :email, :amount, :EmpNum)");
-	
+	(:firstname, :surname, :address1, :address2, :town, :postcode, :telephone, :email, :amount, :EmpNum, :resultCardRequest)");
 
 	$stmt->bindValue(':firstname',$data["firstname"], PDO::PARAM_STR);
 	$stmt->bindValue(':surname', $data["surname"], PDO::PARAM_STR);
@@ -443,7 +438,10 @@ VALUES
 	$stmt->bindValue(':telephone',$data["telephone"] , PDO::PARAM_STR);
 	$stmt->bindValue(':email',$data["email"] , PDO::PARAM_STR);
 	$stmt->bindValue(':amount',$data["amount"] , PDO::PARAM_INT);
-	$stmt->bindValue(':EmpNum',$data["EmpNum"] , PDO::PARAM_INT);
+	$stmt->bindValue(':EmpNum',$data["EmpNum"] , PDO::PARAM_STR);
+	$stmt->bindValue(':resultCardRequest',$data["resultCardRequest"] , PDO::PARAM_STR);
+
+	
 
 	$stmt->execute();
 	$lastId = $db->lastInsertId();
