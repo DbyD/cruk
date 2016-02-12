@@ -70,10 +70,33 @@
 											}
 											echo $msg;
 										} else {
+											If ($_POST["emailaddress"]){
+												$EmpNum = $_POST["EmpNum"];
+												$stmt = $db->prepare('UPDATE tblempall SET Eaddress = :sEaddress WHERE EmpNum = :EmpNum');
+												$stmt->execute(array(':EmpNum' => $EmpNum,':sEaddress' => $_POST["sEaddress"]));
+											}
 											$stmt = $db->prepare("SELECT EmpNum,Eaddress,Fname,Sname,sPassword,statusID FROM tblempall WHERE EmpNum = :EmpNum and activationID=1");
 											$stmt->execute(array('EmpNum' => $_POST["EmpNum"]));
 											if ($user = $stmt->fetch()){ 
-												if ($user['sPassword'] != "" && $user['statusID'] == 1){
+											// check if has email address
+												if ($user['Eaddress'] == ""){
+							?>
+								<input type="hidden" value="yes" name="emailaddress">
+								<input type="text" value="<?=$user['EmpNum']?>" name="EmpNum">
+								<input type="text" value="<?=$user['Fname']?>" name="Fname">
+								<p>We do not have an email address on record for you. Please enter one now. Confirmation details will be sent to this email address to validate your account.</p>
+								<div class="medium-6 columns">
+									Email:
+									<input type="email" name="sEaddress" id="sEaddress" required/>
+								</div>
+								<div class="medium-6 columns"></div><div class="medium-7 columns"></div>
+								<div class="medium-5 columns">
+									<input type="submit" value="Submit" name="submit">
+								</div>
+											
+											
+							<?php				} else {
+													if ($user['sPassword'] != "" && $user['statusID'] == 1){
 							?>
 								<p>Your account has already been registered.</p>
 								<p>Please <a href="<?=HTTP_PATH?>forgotten_password.php">click here</a> if you have forgotten your password.</p>
@@ -85,19 +108,20 @@
 								<p>Please enter a password to be used with your account. Confirmation details will be sent to your mail box to validate your account.</p>
 								<div class="medium-6 columns">
 									Password:
-									<input type="text" name="sPassword" id="sPassword" />
+									<input type="password" name="sPassword" id="sPassword" required/>
 								</div>
 								<div class="medium-6 columns"></div><div class="medium-7 columns"></div>
 								<div class="medium-5 columns">
 									<input type="submit" value="Submit" name="submit">
 								</div>
-							<?php				} 
+							<?php					} 
+												}
 											} else { ?>
 								<p class="alert">No record found.<br>Please try again or contact your line manager for further assistance.</p>
 								<p>Please enter your employee Number to register.</p>
 								<div class="medium-6 columns">
 									Employee Number:
-									<input type="text" name="EmpNum" id="EmpNum" />
+									<input type="text" name="EmpNum" id="EmpNum" required/>
 								</div>
 								<div class="medium-6 columns"></div><div class="medium-7 columns"></div>
 								<div class="medium-5 columns">
@@ -106,10 +130,10 @@
 							<?php			}
 										}
 									} else { ?>
-								<p>Please enter your employee Number to register.</p>
+								<p>Please enter your Employee Number to register.</p>
 								<div class="medium-6 columns">
 									Employee Number:
-									<input type="text" name="EmpNum" id="EmpNum" />
+									<input type="text" name="EmpNum" id="EmpNum" required/>
 								</div>
 								<div class="medium-6 columns"></div><div class="medium-7 columns"></div>
 								<div class="medium-5 columns">

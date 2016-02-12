@@ -648,5 +648,10 @@ $(function() {
 		var divID = this.id + "Text";
 		$("[id='"+divID+"']").addClass('hidden');
 	});
+	$('#home1 div.image').hover(function(){
+		$(".ourbelief").removeClass('hide');
+	},function(){
+		$(".ourbelief").addClass('hide');
+	});
 });
 //----------------------------------------------------------------------------------

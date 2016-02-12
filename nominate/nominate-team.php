@@ -97,7 +97,7 @@
 			<div class="row withPadding noMargin">
 				<div class="medium-12 columns textRight">
 					<i class="icon-icons_i clickAble" data-type="alert" data-url="alert-volunteer.php"></i>
-					Nominating for a Volunteer
+					Nominating on behalf of a Volunteer?
 					<div id="volunteerTick" class="circleTick inline smallTick clickAble <?php if($_SESSION['teamnominee']->Volunteer) echo 'circleTickChecked'; ?>" data-type="popup" data-url="volunteer.php">
 						<label for="Volunteer"></label>
 					</div>
