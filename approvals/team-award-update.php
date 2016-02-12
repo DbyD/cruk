@@ -79,7 +79,7 @@
 											<p>Good news!</p>
 											<p>Your nomination of ".$award->teamEmailList." for an Our Heroes Extraordinary People, Extraordinary Effort Award has been approved by ".$approver_name.".</p>
 											<p>The Thank You certificate you prepared when nominating this award has been sent by email to ".$award->teamEmailList." with details of the award.</p>
-											<p>A record of all the nominations you have made and their current status can be viewed on the <a href='".HTTP_PATH."'>My Account</a> section of the Our Heroes portal.</p>
+											<p>A record of all the nominations you have made and their current status can be viewed on the <a href='".HTTP_PATH."'>My Awards</a> section of the Our Heroes portal.</p>
 											<p>Thank you for your nomination.</p>";
 					$email = sendEmail($sendEmail,'T'.$ID);
 					$_SESSION['alreadydone'] = 'yes';

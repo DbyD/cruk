@@ -23,8 +23,8 @@
 						Date
 					</div>
 					<div class="tableColumn-3 doubleLine">
-						Category
-						<div class="smaller">Click to approve/decline</div>
+						View Nomination
+						<div class="smaller">and approve/decline</div>
 					</div>
 				</div>
 				<div class="row mCustomScrollbar height555" data-mcs-theme="dark-2">
@@ -55,9 +55,9 @@
 						</div>
 						<div class="tableColumn-3">
 						<?php if($list->Team == ''){ ?>
-								<div class="clickAble" data-type="popup" data-id="<?=$list->ID?>" data-url="<?=HTTP_PATH?>approvals/individual-award.php">Individual Award</div>
+								<div class="clickAble lightBlue" data-type="popup" data-id="<?=$list->ID?>" data-url="<?=HTTP_PATH?>approvals/individual-award.php">Individual Award</div>
 						<?php } else { ?>
-								<div class="clickAble" data-type="popup" data-id="<?=$list->teamID?>" data-url="<?=HTTP_PATH?>approvals/team-award.php">Team Award</div>
+								<div class="clickAble lightBlue" data-type="popup" data-id="<?=$list->teamID?>" data-url="<?=HTTP_PATH?>approvals/team-award.php">Team Award</div>
 						<?php } ?>
 						</div>
 					</div>

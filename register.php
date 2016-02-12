@@ -117,14 +117,14 @@
 							<?php					} 
 												}
 											} else { ?>
-								<p class="alert">No record found.<br>Please try again or contact your line manager for further assistance.</p>
+								<p class="alert">No record found. Please try again or contact <a href="hrservicecentre@cancer">hrservicecentre@cancer</a> or the Xexec helpdesk on 020 8201 6483 for further assistance.</p>
 								<p>Please enter your employee Number to register.</p>
 								<div class="medium-6 columns">
 									Employee Number:
 									<input type="text" name="EmpNum" id="EmpNum" required/>
 								</div>
-								<div class="medium-6 columns"></div><div class="medium-7 columns"></div>
-								<div class="medium-5 columns">
+								<div class="medium-6 columns"></div>
+								<div class="medium-10 columns textRight">
 									<input type="submit" value="Submit" name="submit">
 								</div>
 							<?php			}
@@ -135,8 +135,8 @@
 									Employee Number:
 									<input type="text" name="EmpNum" id="EmpNum" required/>
 								</div>
-								<div class="medium-6 columns"></div><div class="medium-7 columns"></div>
-								<div class="medium-5 columns">
+								<div class="medium-6 columns"></div>
+								<div class="medium-10 columns textRight">
 									<input type="submit" value="Submit" name="submit">
 								</div>
 							<?php	} 

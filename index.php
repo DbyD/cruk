@@ -58,7 +58,7 @@
 								</div>
 								<div class="medium-9 columns small">
 									By logging in, you agree to abide by CRUK<br>
-									Terms and Conditions. See link below
+									Terms and Conditions.
 								</div>
 								<div class="medium-3 columns">
 									<p><input type="submit" value="Submit"></p>

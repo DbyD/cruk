@@ -5,7 +5,7 @@
 
 <div id="content" class="large-8 large-push-2 columns MyAccount">
 	<div class="title withStar">
-		<div class="inlineDiv clickAble" data-type="gourl" data-url="index.php">My Account</div> <i class="icon-icons_thickrightarrow smalli"></i> <span class="subSubTitle">My Nominees</span>
+		<div class="inlineDiv clickAble" data-type="gourl" data-url="index.php">My Awards</div> <i class="icon-icons_thickrightarrow smalli"></i> <span class="subSubTitle">Awards I've Nominated</span>
 		<div class="awardStar">
 			<i class="icon-icons_star"></i><span><?php echo getTotalNominations($_SESSION['user']->EmpNum) ?></span>
 		</div>
@@ -47,7 +47,7 @@
 						<div class="tableColumn-4">
 							<?php
 							if($list->AprStatus == 0){
-								echo '<div class="lightBlue">Pending <span class="smaller">('.getName($list->ApproverEmpNum).'</span>)</div>';
+								echo '<div class="blackText">Pending <span class="smaller">('.getName($list->ApproverEmpNum).'</span>)</div>';
 							} else {
 								if($list->amount != 0){
 									echo "Approved (".getName($list->ApproverEmpNum).")";

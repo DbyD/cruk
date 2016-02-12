@@ -6,7 +6,7 @@
 <div id="content" class="large-8 large-push-2 columns MyAccount">
 	<div class="title withStar">
 		<div class="inlineDiv clickAble purpleButton right" data-type="popup" data-url="<?=HTTP_PATH?>my-account/my-award-details.php" data-id="3">View Details</div>
-		<div class="inlineDiv clickAble" data-type="gourl" data-url="index.php">My Account</div> <i class="icon-icons_thickrightarrow smalli"></i> <span class="subSubTitle">My Awards</span>
+		<div class="inlineDiv clickAble" data-type="gourl" data-url="index.php">My Awards</div> <i class="icon-icons_thickrightarrow smalli"></i> <span class="subSubTitle">Awards I've Received</span>
 		<div class="awardStar">
 			<i class="icon-icons_star"></i><span><?php echo getTotalAwards($_SESSION['user']->EmpNum) ?></span>
 		</div>

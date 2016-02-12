@@ -4,7 +4,7 @@
 ?>
 			<div id="content" class="large-8 large-push-2 columns">
 				<div class="title">
-					Our Heroes Wall of Fame
+					Wall of Fame <span class="smaller">See all nominees, most recent first.</span>
 				</div>
 				<div id="winnerswall" class="row mCustomScrollbar height605" data-mcs-theme="dark-2">
 				<?php 

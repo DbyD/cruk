@@ -7,13 +7,13 @@
 				<div class="callout panel" id="home1">
 					<div class="image">
 						<p>Our Beliefs</p>
-						<div class="ourbelief hide clickAble" data-type="gourl" data-url="#">Click here to read all out the Cancer Research Beliefs.</div>
+						<div class="ourbelief hide clickAble" data-type="gourl" data-url="our-beliefs.php">Click here to read all out the Cancer Research Beliefs.</div>
 					</div>
 				</div>
 				<div class="medium-6 columns leftnp">
 					<div class="callout panel clickAble" id="home2" data-type="gourl" data-url="nominate">
 						<div class="image">
-							<p>Our<br>Heroes<br><span>Nominate</span></p>
+							<p>Nominate</p>
 						</div>
 					</div>
 				</div>

@@ -5,7 +5,7 @@
 	height: 220px;
 }
 .small {
-	font-size: 10px;
+	font-size: 11px;
 	padding-top: 5px;
 	font-weight: normal;
 	font-style: normal;
@@ -70,7 +70,7 @@
 }
 #home2 p {
 	color: #fff;
-	padding: 100px 20px 0;
+	padding: 120px 20px 0;
 	font-size: 16px;
 	letter-spacing: 0.2em;
 }
@@ -139,7 +139,7 @@
 	padding: 4px 15px;
 }
 .smalli {
-	font-size: 10px;
+	font-size: 11px;
 	margin: 0 5px;
 }
 .contentFill {
@@ -474,7 +474,7 @@ form .row .row {
 	padding-left: 2% !important;
 }
 /* @end */
-/* @group My Account */
+/* @group My Awards */
 .accountHome .image {
 	background: url(../images/nominate-home.jpg);
 }
@@ -943,6 +943,10 @@ img.BeBrave {
 	background-color: #ec008c;
 	border-radius: initial;
 }
+div[id='Be Brave'].selectedecard{
+	background: #fde5f3 !important;
+	border: 1px solid #ec008c;
+}
 .BeUnited .nominateEmployeeImage,.BeUnited .largePhotoIcon {
 	color: #5833a2 !important;
 }
@@ -956,6 +960,10 @@ img.BeUnited {
 	background-color: #5833a2;
 	border-radius: initial;
 }
+div[id='Be United'].selectedecard{
+	background: #eeeaf6 !important;
+	border: 1px solid #5833a2;
+}
 .BeSharp .nominateEmployeeImage,.BeSharp .largePhotoIcon {
 	color: #00b6ed !important;
 }
@@ -964,6 +972,10 @@ img.BeUnited {
 }
 .BeSharp  span.showbehaviour, #beliefs span[id='Be SharpText'] {
 	background: rgba(0,182,237,0.9) !important;
+}
+div[id='Be Sharp'].selectedecard{
+	background: #e5f8fd !important;
+	border: 1px solid #00b6ed;
 }
 img.BeSharp{
 	background-color: #00b6ed;
