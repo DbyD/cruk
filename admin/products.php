@@ -100,7 +100,7 @@
 			?>
 		</div>
 	</div>
-	<div class="row contentFill mCustomScrollbar height590 " data-mcs-theme="dark-2">
+	<div class="row contentFill mCustomScrollbar height605 " data-mcs-theme="dark-2">
 		<div class="medium-12 columns leftnp rightnp fillHeight productCats">
 
 				<?php if( isset($subs) && count($subs) > 0 ): ?>

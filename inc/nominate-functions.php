@@ -109,7 +109,7 @@ function getMostRecentAwards () {
 			FROM tblnominations AS n
 			INNER JOIN tblempall AS e
 			ON n.NominatedEmpNum = e.EmpNum
-			WHERE n.awardType=1 AND n.AprStatus=1)
+			WHERE n.awardType=1 AND n.AprStatus=1 AND e.Directorate="'.$_SESSION['user']->Directorate.'")
 				UNION
 				(SELECT  "Team"				AS Type,
 						ID					AS ID,
@@ -120,6 +120,7 @@ function getMostRecentAwards () {
 				FROM tblnominations_team
 				WHERE awardType=2 AND AprStatus=1)) X
 			ORDER BY AprDate DESC LIMIT 20';
+			//echo $sql;
 	$stmt = $db->prepare( $sql );
 	$stmt->execute();
 	$arr = array();

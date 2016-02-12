@@ -188,13 +188,15 @@ $(function(){
 			$("#alert").css('display', 'block');
 		},
 		submitHandler: function(form) { 
-			$.post('../approvals/individual-award-update.php', $("#approveAward").serialize(), function(data) {
-				if (data = 'declined') {
-					$("#popup1").css('display', 'none');
-					$("#popupContent1").empty();
-					location.reload();
-				}
-			});
+			if (confirm("Are you sure. This is irreversible.")) {
+				$.post('../approvals/individual-award-update.php', $("#approveAward").serialize(), function(data) {
+					if (data = 'declined') {
+						$("#popup1").css('display', 'none');
+						$("#popupContent1").empty();
+						location.reload();
+					}
+				});
+			}
 		}
 	});
 	$("#approveTeamAward").validate({
@@ -205,13 +207,15 @@ $(function(){
 			$("#alert").css('display', 'block');
 		},
 		submitHandler: function(form) { 
-			$.post('../approvals/team-award-update.php', $("#approveTeamAward").serialize(), function(data) {
-				if (data = 'declined') {
-					$("#popup1").css('display', 'none');
-					$("#popupContent1").empty();
-					location.reload();
-				}
-			});
+			if (confirm("Are you sure. This is irreversible.")) {
+				$.post('../approvals/team-award-update.php', $("#approveTeamAward").serialize(), function(data) {
+					if (data = 'declined') {
+						$("#popup1").css('display', 'none');
+						$("#popupContent1").empty();
+						location.reload();
+					}
+				});
+			}
 		}
 	});
 	$("#claimAward").validate({
@@ -311,7 +315,6 @@ $(function(){
 					$("#optout").addClass('hide');
 				}
 				if(id=='te'){
-					$("#includeMe").prop('checked', true);
 					$("#optout").removeClass('hide');
 				}
 				break;
@@ -638,7 +641,7 @@ $(document).ready(function(){
 
 //----------------------------------------------------------------------------------
 $(function() {
-	$('#winnerswall div.clickAble').hover(function(){
+	$('#winnerswall div.mouseOver').hover(function(){
 		var divID = this.id + "Text";
 		$("[id='"+divID+"']").removeClass('hidden');
 	},function(){

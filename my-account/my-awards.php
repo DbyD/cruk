@@ -24,18 +24,17 @@
 					<div class="tableColumn-3">
 						Certificate
 					</div>
-					<div class="tableColumn-0">
-						<i class="icon-icons_person"></i>/<i class="icon-icons_group"></i>
-					</div>
 					<div class="tableColumn-2">
 						A Little Extra
+					</div>
+					<div class="tableColumn-0">
+						<!--<i class="icon-icons_person"></i>/--><i class="icon-icons_group"></i>
 					</div>
 				</div>
 				<div class="row mCustomScrollbar height555" data-mcs-theme="dark-2">
 					<?php 
 					// Get List for My Awards
-					$nomUsers = new MyNominationsList($db);
-					$nomList = $nomUsers->getAllMyNominationsList($_SESSION['user']->EmpNum);
+					$nomList = getAllMyNominationsList($_SESSION['user']->EmpNum);
 					foreach ($nomList as $list){
 					?>
 					<div class="tableRow">
@@ -52,10 +51,11 @@
 							<?=getConvertedDate($list->AprDate)?>
 						</div>
 						<div class="tableColumn-3">
+						<?php if($list->nomination_teamID != ''){ ?>
+							<div class="viewButton inlineDiv clickAble lightBlue" data-type="ecard" data-url="<?=HTTP_PATH?>alerts/view-team-ecard.php" data-id="<?=$list->nomination_teamID?>">View</div>
+						<?php } else { ?>
 							<div class="viewButton inlineDiv clickAble lightBlue" data-type="ecard" data-url="<?=HTTP_PATH?>alerts/view-ecard.php" data-id="<?=$list->ID?>">View</div>
-						</div>
-						<div class="tableColumn-0">
-							<i class="icon-icons_person"></i>
+						<?php } ?>
 						</div>
 						<div class="tableColumn-2">
 							<?php
@@ -75,6 +75,13 @@
 								echo "-";
 							}
 						?>
+						</div>
+						<div class="tableColumn-0">
+						<?php if($list->nomination_teamID != ''){ ?>
+							<i class="icon-icons_group"></i>
+						<?php } else { ?>
+							<!--<i class="icon-icons_person"></i>-->
+						<?php } ?>
 						</div>
 					</div>
 					<?php	} ?>

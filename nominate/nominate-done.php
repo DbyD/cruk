@@ -31,6 +31,7 @@
 					<p>Your Thank You Certificate has been sent to <?=$_SESSION['nominee']->full_name();?>.</p>
 					<?php } ?>
 					<? //print_r($_SESSION['nominee']);?>
+					<p>A history of all your nominations can be viewed in the My Awards > <a href="<?=HTTP_PATH?>my-account/my-nominees.php">My Nominees</a> section</p>
 				</div>
 			</div>
 		</div>

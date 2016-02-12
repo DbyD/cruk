@@ -28,6 +28,7 @@
 					<p>Your Thank You Certificates have been sent to <?=$_SESSION['teamnominee']->teamEmailList;?>.</p>
 					<?php } ?>
 					<? //print_r($_SESSION['teamnominee']);?>
+					<p>A history of all your nominations can be viewed in the My Awards > <a href="<?=HTTP_PATH?>my-account/my-nominees.php">My Nominees</a> section</p>
 				</div>
 			</div>
 		</div>

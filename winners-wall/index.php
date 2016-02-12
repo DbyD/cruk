@@ -3,10 +3,10 @@
 	include_once('../inc/header.php');
 ?>
 			<div id="content" class="large-8 large-push-2 columns">
-				<div class="row winners-header">
-					<h2>Our Heroes Wall of Fame</h2>
+				<div class="title">
+					Our Heroes Wall of Fame
 				</div>
-				<div id="winnerswall" class="row mCustomScrollbar height590" data-mcs-theme="dark-2">
+				<div id="winnerswall" class="row mCustomScrollbar height605" data-mcs-theme="dark-2">
 				<?php 
 				if(function_exists('getAllEmployees')){
 					$employees = getAllEmployees();
@@ -16,7 +16,7 @@
 							if($employee["Type"]=='Team'){ 
 				?>
 					<div class="callout panel tableColumn-3 <?=$class?>">
-						<div class="clickAble" id="wallT<?php echo $employee["ID"]; ?>" data-type="donothing">
+						<div class="mouseOver" id="wallT<?php echo $employee["ID"]; ?>">
 							<div class="nominateEmployeeImage">
 								<i class="icon-icons_mail right sendMail"></i>
 								<img src="<?=HTTP_PATH?>images/winners-wall-team.png" class="<?=$class?>">
@@ -33,7 +33,7 @@
 								<p>Nominated By:</p>
 								<p><?php echo getname($employee["NominatorEmpNum"]); ?></p>
 							</div>
-							<span id="wallT<?php echo $employee["ID"]; ?>Text" class="showbehaviour hidden">
+							<span id="wallT<?php echo $employee["ID"]; ?>Text" class="showbehaviour hidden mCustomScrollbar height250" data-mcs-theme="dark-2">
 								<?php
 									echo $employee["personalMessage"];
 									echo "<br><br><b>Team Members:</b><br>";
@@ -47,7 +47,7 @@
 					</div>
 					<?php } else { ?>
 					<div class="callout panel tableColumn-3 <?=$class?>">
-						<div class="clickAble" id="wall<?php echo $employee["ID"]; ?>" data-type="donothing">
+						<div class="mouseOver" id="wall<?php echo $employee["ID"]; ?>">
 							<div class="nominateEmployeeImage">
 								<i class="icon-icons_mail right sendMail"></i>
 								<img src="<?php echo HTTP_PATH.$employee["Photo"];?>" onerror="this.src='<?=HTTP_PATH?>images/no-photo.png'">
@@ -65,7 +65,9 @@
 								<p>Nominated By:</p>
 								<p><?php echo getname($employee["NominatorEmpNum"]); ?></p>
 							</div>
-							<span id="wall<?php echo $employee["ID"]; ?>Text" class="showbehaviour hidden"><?php echo $employee["personalMessage"]; ?></span>
+							<span id="wall<?php echo $employee["ID"]; ?>Text" class="showbehaviour hidden mCustomScrollbar height250" data-mcs-theme="dark-2">
+								<?php echo $employee["personalMessage"]; ?>
+							</span>
 						</div>
 					</div>
 				<?php		}	

@@ -13,6 +13,7 @@
 			<div class="greyText textLeft">
 				<p>A team event allows your nominated team to celebrate their success together. Where this isn't practical, each team member can be given a £20 voucher to redeem on an item of their choice.
 				<i class="icon-icons_i clickAble blueText" data-type="subPopup"></i></p>
+				Please note that the first-named person in your team list will be responsible for organising the team event.
 			</div>
 		</div>
 		<div class="tableRow largerText">
@@ -26,9 +27,9 @@
 				</div>
 			</div>
 			<div class="tableColumn-12 textLeft" id="optout">
-				Untick if you would like to exclude yourself.
+				Check if you would like to include yourself.
 				<div class="hiddenTick inline verysmallTick ">
-					<input type="checkbox" value="includeMe" name="includeMe" id="includeMe" <?php if ($_SESSION['teamnominee']->includeMe == 'excludeMe'){ } else { echo "checked"; }?>>
+					<input type="checkbox" value="includeMe" name="includeMe" id="includeMe" <?php if ($_SESSION['teamnominee']->includeMe == 'includeMe'){ echo "checked"; }?>>
 					<label for="includeMe"></label>
 				</div>
 			</div>

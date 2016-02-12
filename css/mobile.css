@@ -215,7 +215,7 @@ ul.off-canvas-list .photo {
 /* @end */
 /* @group Messages */
 @media only screen and (max-width: 1199px) {
-.height590 {
+.height605 {
 	height: 540px;
 }
 .height233 {
@@ -254,7 +254,7 @@ ul.off-canvas-list .photo {
 /* @group Override */
 
 @media only screen and (max-width: 1199px) {
-.height590,.height555, .height505, .height490 {
+.height605,.height555, .height505, .height490 {
 	height: auto;
 }
 /* @end */

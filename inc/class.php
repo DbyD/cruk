@@ -141,16 +141,6 @@ class NominationsList{
     }
 }
 
-class MyNominationsList{
-    public function getAllMyNominationsList($empnum) {
-		global $db;
-		$stmt = $db->prepare('SELECT * FROM tblnominations WHERE NominatedEmpNum = :empnum AND AprStatus=1 ORDER BY AprDate DESC');
-		$stmt->execute(array('empnum' => $empnum));
-		$result = $stmt->fetchAll(PDO::FETCH_OBJ);
-		return $result;
-    }
-}
-
 class searchUsers{
     public function getAllUserSearch($search) {
 		global $db;

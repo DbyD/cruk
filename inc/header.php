@@ -44,6 +44,7 @@
 	</ul>
 	<section class="top-bar-section">
 		<!-- Right Nav Section -->
+		<div class="totalAwardsQuarter"><?php echo getNumberAwardsQuarter() ?> awards have been given out across the company this quarter, in addition to many offline Thank you cards.</div>
 		<ul class="right">
 			<li><a href="<?=HTTP_PATH?>inc/logout.php">Logout</a></li>
 			<!--<li class="has-dropdown"> <a href="#">&nbsp;</a>
