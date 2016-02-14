@@ -37,7 +37,7 @@ function createSignature(array $data, $key) {
 
 
 function SendMail($args = array()){
-
+/*
 	// noreply@xexec.com
 
 	$args = array(	
@@ -63,6 +63,29 @@ function SendMail($args = array()){
 		
 
 	$mail = mail($to, $subject, $message, $headers);
+	*/
+	// this is what has already been setup with some styling to it. All you need to do is the shopping basket and order details. The rest is done.
+	$sendEmail = new StdClass();
+	$sendEmail->emailTo = $_SESSION['user']->Eaddress;
+	$sendEmail->subject = 'CRUK Order';
+	$sendEmail->Bcc = 'alec@iceimages.co.za';
+	
+	// you need to add content here.
+	$content =	'Dear '.$_SESSION['user']->Fname.
+				'<p>Thank you for your recent purchase.</p>
+				<p><b>Items Purchased</b></p>';
+				
+	//add shopping basket here in a table
+	$content .= '';
+	
+	//add order details here in a table
+	$content .= '';
+	
+	$content .='<p>If you have any questions regarding your order, please email <ahref="mailto:concierge@xexec.com">concierge@xexec.com</a> or call +44 20 8201 6483 quoting your unique order code.</p>';
+	
+	$sendEmail->Content = $content;
+	
+	$email = sendEmail($sendEmail,'');
 }
 
 
