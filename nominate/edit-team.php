@@ -19,6 +19,10 @@
 				$stmt = $db->prepare("DELETE FROM tblteamusers WHERE teamID = :teamID");
 				$stmt->bindParam(':teamID', $teamID);
 				$stmt->execute();
+				$stmt = $db->prepare("UPDATE tblteams SET myTeamName = :myTeamName WHERE id = :teamID");
+				$stmt->bindParam(':myTeamName', $_POST['myTeamName']);
+				$stmt->bindParam(':teamID', $teamID);
+				$stmt->execute();
 			} else {
 				$stmt = $db->prepare("INSERT INTO tblteams (EmpNum, myTeamName) VALUES (:EmpNum, :myTeamName)");
 				$stmt->bindParam(':EmpNum', $_SESSION['user']->EmpNum);

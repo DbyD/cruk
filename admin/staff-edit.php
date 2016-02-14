@@ -214,7 +214,7 @@
 									status
 								</div>
 								<div class="medium-4 columns">
-									<input type="text" value="<?=$staff->statusID?>" name="statusID" id="statusID" required>
+									<input type="text" value="<?=$staff->activated?>" name="activated" id="activated" required>
 								</div>
 							</div>
 							<div id="buttonRow" class="row buttonRow">

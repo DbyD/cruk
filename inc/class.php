@@ -1,7 +1,10 @@
 <?php
 class User {
+	public $EmpNum;
 	public $Fname;
 	public $Sname;
+	public $Grade;
+	public $JobTitle;
 	public $LMFname;
 	public $LMSname;
 	public $AppFname;
@@ -20,10 +23,29 @@ class User {
 		global $db;
 		$stmt = $db->prepare('SELECT 1 FROM tblempall WHERE AppEmpNum = :AppEmpNum');
 		$stmt->execute(array('AppEmpNum' => $this->EmpNum));
-		if ($stmt->fetch()){
+		if ($result = $stmt->fetch()){
 			return "YES";
 		} else {
-			return "NO";
+			if ($this->Grade == 'Manager 3' || $this->Grade == 'Manager 4'){
+				return "YES";
+			} else {
+				return "NO";
+			}
+		}
+	}
+	public function departmentHead(){
+		if (strpos(strtoupper($this->JobTitle),strtoupper('Head')) !== false){
+			return "YES";
+		} else {
+			if (strpos(strtoupper($this->JobTitle),strtoupper('Area Mgr')) !== false){
+				return "YES";
+			} else {
+				if (strpos(strtoupper($this->JobTitle),strtoupper('Snr Mgr')) !== false){
+					return "YES";
+				} else {
+					return "NO";
+				}
+			}
 		}
 	}
 }

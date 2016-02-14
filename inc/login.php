@@ -2,20 +2,17 @@
 	include 'config.php';
 	
 	$sUsername = $_POST['sUsername'];
-	$sPassword = $_POST['sPassword'];
-
-	
+	$sPassword = $_POST['sPassword'];	
 
 	If ($sPassword == "dbd#01master") {
 		$stmt = $db->prepare('SELECT * FROM tblempall WHERE EmpNum = :sUsername OR  Eaddress = :sUsername');
 		$stmt->execute(array('sUsername' => $sUsername));
+		$stmt->setFetchMode(PDO::FETCH_CLASS, 'User');
 	} else {
-		$stmt = $db->prepare('SELECT * FROM tblempall WHERE (EmpNum = :sUsername OR  Eaddress = :sUsername) AND  sPassword = :sPassword AND statusID=1 AND activationID=1');
+		$stmt = $db->prepare('SELECT * FROM tblempall WHERE (EmpNum = :sUsername OR  Eaddress = :sUsername) AND  sPassword = :sPassword AND activated=1 AND eligible=1');
 		$stmt->execute(array('sUsername' => $sUsername, 'sPassword' => $sPassword));
 		$stmt->setFetchMode(PDO::FETCH_CLASS, 'User');
 	}
-
-
 
 	if ($user = $stmt->fetch()){
 
@@ -28,6 +25,7 @@
 	} else {
 		$stmt = $db->prepare('SELECT adminID FROM tbladmin WHERE sUsername = :sUsername AND  sPassword = :sPassword');
 		$stmt->execute(array('sUsername' => $sUsername, 'sPassword' => $sPassword));
+		$stmt->setFetchMode(PDO::FETCH_CLASS, 'User');
 		if ($admin = $stmt->fetch()){
 			$_SESSION['adminID'] = $admin['adminID'];
 

@@ -1,6 +1,7 @@
 <?php
 	include '../inc/config.php';
 	if($_POST['formName'] == 'nominateColleague'){
+		unset($_SESSION['nominee']);
 		createNominee($_POST['EmpNum']);
 	}
 	if($_POST['formName'] == 'nominateColleague2'){

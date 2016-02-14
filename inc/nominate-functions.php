@@ -1,7 +1,7 @@
 <?php
 ////////////////////////////////////////////////////////////////////////////////////
 function createNominee($empnum){
-	global $result, $db;
+	global $db;
 	$stmt = $db->prepare('SELECT * FROM tblempall WHERE EmpNum = :EmpNum');
 	$stmt->execute(array('EmpNum' => $empnum));
 	$stmt->setFetchMode(PDO::FETCH_CLASS, 'User');
@@ -18,29 +18,240 @@ function createNominee($empnum){
 				$result->shopMEaddress = $mgr->Eaddress;
 			}
 		}
+		print_r($result);
 		if ($result->AppEmpNum == ''){
-			// Get fullname and email address
-			// Trading region = Trading Area Manager
-			if (strpos(strtoupper($result->Team),strtoupper('Trading Region')) !== false){
-				// find Area Mgr
-				$stmt = $db->prepare('SELECT * FROM tblempall WHERE RetailArea = :RetailArea AND JobTitle= :JobTitle');
-				$stmt->execute(array('RetailArea' => $result->RetailArea, 'JobTitle' => 'Area Mgr' ));
-				if ($mgr = $stmt->fetch(PDO::FETCH_OBJ)){
-					$result->AppEmpNum = $mgr->EmpNum;
-					$result->AppFname = $mgr->Fname;
-					$result->AppSname = $mgr->Sname;
-					$result->AppEaddress = $mgr->Eaddress;
-				}
-			} else {
-				// volunteer fundraising = senior Manager
-				if (strpos(strtoupper($result->Team),strtoupper('Volunteer Fundraising')) == True){
-				} else {
-					//everyone else department head
-				}
-			}
+			$result = getApprover($result);
 		}
 		$_SESSION['nominee'] = $result;
 	}
+}
+////////////////////////////////////////////////////////////////////////////////////
+function getApprover($approver){
+	global $db;
+	// Get fullname and email address
+	// Trading region = Trading Area Manager
+	if (strpos(strtoupper($approver->Team),strtoupper('Trading Region')) !== false){
+		// find Area Mgr
+		$stmt = $db->prepare('SELECT * FROM tblempall WHERE RetailArea = :RetailArea AND Grade= :Grade');
+		$stmt->execute(array('RetailArea' => $approver->RetailArea, 'Grade' => 'Manager 1' ));
+		if ($mgr = $stmt->fetch(PDO::FETCH_OBJ)){
+			$approver->AppEmpNum = $mgr->EmpNum;
+			$approver->AppFname = $mgr->Fname;
+			$approver->AppSname = $mgr->Sname;
+			$approver->AppEaddress = $mgr->Eaddress;
+echo "<br>1 ran here<br>";
+		} else {
+			$stmt = $db->prepare('SELECT * FROM tblempall WHERE Team = :Team AND Grade= :Grade');
+			$stmt->execute(array('Team' => $approver->Team, 'Grade' => 'Manager 2' ));
+			if ($mgr = $stmt->fetch(PDO::FETCH_OBJ)){
+				$approver->AppEmpNum = $mgr->EmpNum;
+				$approver->AppFname = $mgr->Fname;
+				$approver->AppSname = $mgr->Sname;
+				$approver->AppEaddress = $mgr->Eaddress;
+echo "<br>2 ran here<br>";
+			}
+		}
+	} else {
+		// volunteer fundraising = senior Manager
+		if (strpos(strtoupper($approver->Section),strtoupper('Volunteer Fundraising')) !== false){
+			// if manager 3 nominated then use manager 4. No manager 4 So who is approver
+			if($approver->Grade == 'Manager 3'){
+				$stmt = $db->prepare('SELECT * FROM tblempall WHERE Department = :Department AND Grade= :Grade');
+				$stmt->execute(array('Department' => $approver->Department, 'Grade' => 'Manager 4' ));
+				if ($mgr = $stmt->fetch(PDO::FETCH_OBJ)){
+					$approver->AppEmpNum = $mgr->EmpNum;
+					$approver->AppFname = $mgr->Fname;
+					$approver->AppSname = $mgr->Sname;
+					$approver->AppEaddress = $mgr->Eaddress;
+echo "<br>3 ran here<br>";
+				} else {
+					$stmt = $db->prepare("SELECT * FROM tblempall WHERE SuperUser = 'Y'");
+					$stmt->execute();
+					if ($mgr = $stmt->fetch(PDO::FETCH_OBJ)){
+						$approver->AppEmpNum = $mgr->EmpNum;
+						$approver->AppFname = $mgr->Fname;
+						$approver->AppSname = $mgr->Sname;
+						$approver->AppEaddress = $mgr->Eaddress;
+	echo "<br>SU ran here<br>";
+					}
+				}
+			} else {
+				// if manager 2 nominated then use manager 3.
+				if($approver->Grade == 'Manager 2'){
+					$stmt = $db->prepare('SELECT * FROM tblempall WHERE Section = :Section AND Grade= :Grade');
+					$stmt->execute(array('Section' => $approver->Section, 'Grade' => 'Manager 3' ));
+					if ($mgr = $stmt->fetch(PDO::FETCH_OBJ)){
+						$approver->AppEmpNum = $mgr->EmpNum;
+						$approver->AppFname = $mgr->Fname;
+						$approver->AppSname = $mgr->Sname;
+						$approver->AppEaddress = $mgr->Eaddress;
+echo "<br>4 ran here<br>";
+					} else {
+						$stmt = $db->prepare("SELECT * FROM tblempall WHERE SuperUser = 'Y'");
+						$stmt->execute();
+						if ($mgr = $stmt->fetch(PDO::FETCH_OBJ)){
+							$approver->AppEmpNum = $mgr->EmpNum;
+							$approver->AppFname = $mgr->Fname;
+							$approver->AppSname = $mgr->Sname;
+							$approver->AppEaddress = $mgr->Eaddress;
+		echo "<br>SU ran here<br>";
+						}
+					}
+				} else {
+					$stmt = $db->prepare('SELECT * FROM tblempall WHERE Section = :Section AND Team = :Team AND Grade= :Grade');
+					$stmt->execute(array('Section' => $approver->Section,'Team' => $approver->Team,  'Grade' => 'Manager 2' ));
+					if ($mgr = $stmt->fetch(PDO::FETCH_OBJ)){
+						$approver->AppEmpNum = $mgr->EmpNum;
+						$approver->AppFname = $mgr->Fname;
+						$approver->AppSname = $mgr->Sname;
+						$approver->AppEaddress = $mgr->Eaddress;
+echo "<br>5 ran here<br>";
+					} else {
+						echo '<br>'.$approver->Section.'<br>';
+						$stmt = $db->prepare('SELECT * FROM tblempall WHERE Section = :Section AND Grade= :Grade');
+						$stmt->execute(array('Section' => $approver->Section, 'Grade' => 'Manager 2' ));
+						if ($mgr = $stmt->fetch(PDO::FETCH_OBJ)){
+							echo $mgr->EmpNum;
+							$approver->AppEmpNum = $mgr->EmpNum;
+							$approver->AppFname = $mgr->Fname;
+							$approver->AppSname = $mgr->Sname;
+							$approver->AppEaddress = $mgr->Eaddress;
+echo "<br>6 ran here<br>";
+						} else {
+							$stmt = $db->prepare('SELECT * FROM tblempall WHERE Section = :Section AND Grade= :Grade');
+							$stmt->execute(array('Section' => $approver->Section, 'Grade' => 'Manager 3' ));
+							if ($mgr = $stmt->fetch(PDO::FETCH_OBJ)){
+								$approver->AppEmpNum = $mgr->EmpNum;
+								$approver->AppFname = $mgr->Fname;
+								$approver->AppSname = $mgr->Sname;
+								$approver->AppEaddress = $mgr->Eaddress;
+echo "<br>7 ran here<br>";
+							} else {
+								$stmt = $db->prepare('SELECT * FROM tblempall WHERE Department = :Department AND Grade= :Grade');
+								$stmt->execute(array('Department' => $approver->Department, 'Grade' => 'Manager 4' ));
+								if ($mgr = $stmt->fetch(PDO::FETCH_OBJ)){
+									$approver->AppEmpNum = $mgr->EmpNum;
+									$approver->AppFname = $mgr->Fname;
+									$approver->AppSname = $mgr->Sname;
+									$approver->AppEaddress = $mgr->Eaddress;
+echo "<br>9 ran here<br>";
+								} else {
+									$stmt = $db->prepare("SELECT * FROM tblempall WHERE SuperUser = 'Y'");
+									$stmt->execute();
+									if ($mgr = $stmt->fetch(PDO::FETCH_OBJ)){
+										$approver->AppEmpNum = $mgr->EmpNum;
+										$approver->AppFname = $mgr->Fname;
+										$approver->AppSname = $mgr->Sname;
+										$approver->AppEaddress = $mgr->Eaddress;
+					echo "<br>SU ran here<br>";
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		} else {
+			echo "<br>run general<br>";
+			//everyone else department head
+			if($approver->Grade == 'Manager 4'){
+				// fix for above manager 4 need to grade above manager 4
+				$stmt = $db->prepare('SELECT * FROM tblempall WHERE Directorate = :Directorate AND Grade= :Grade');
+				$stmt->execute(array('Department' => $approver->Department, 'Grade' => 'Manager 4' ));
+				if ($mgr = $stmt->fetch(PDO::FETCH_OBJ)){
+					$approver->AppEmpNum = $mgr->EmpNum;
+					$approver->AppFname = $mgr->Fname;
+					$approver->AppSname = $mgr->Sname;
+					$approver->AppEaddress = $mgr->Eaddress;
+echo "<br>10 ran here<br>";
+				} else {
+					$stmt = $db->prepare("SELECT * FROM tblempall WHERE SuperUser = 'Y'");
+					$stmt->execute();
+					if ($mgr = $stmt->fetch(PDO::FETCH_OBJ)){
+						$approver->AppEmpNum = $mgr->EmpNum;
+						$approver->AppFname = $mgr->Fname;
+						$approver->AppSname = $mgr->Sname;
+						$approver->AppEaddress = $mgr->Eaddress;
+	echo "<br>SU ran here<br>";
+					}
+				}
+			} else {
+				if($approver->Grade == 'Manager 3'){
+					// fix
+					$stmt = $db->prepare('SELECT * FROM tblempall WHERE Department = :Department AND Grade= :Grade');
+					$stmt->execute(array('Department' => $approver->Department, 'Grade' => 'Manager 4' ));
+					if ($mgr = $stmt->fetch(PDO::FETCH_OBJ)){
+						$approver->AppEmpNum = $mgr->EmpNum;
+						$approver->AppFname = $mgr->Fname;
+						$approver->AppSname = $mgr->Sname;
+						$approver->AppEaddress = $mgr->Eaddress;
+echo "<br>11 ran here<br>";
+					} else {
+						$stmt = $db->prepare("SELECT * FROM tblempall WHERE SuperUser = 'Y'");
+						$stmt->execute();
+						if ($mgr = $stmt->fetch(PDO::FETCH_OBJ)){
+							$approver->AppEmpNum = $mgr->EmpNum;
+							$approver->AppFname = $mgr->Fname;
+							$approver->AppSname = $mgr->Sname;
+							$approver->AppEaddress = $mgr->Eaddress;
+		echo "<br>SU ran here<br>";
+						}
+					}
+				} else {
+					$stmt = $db->prepare('SELECT * FROM tblempall WHERE Section = :Section AND Grade= :Grade');
+					$stmt->execute(array('Section' => $approver->Section, 'Grade' => 'Manager 3' ));
+					if ($mgr = $stmt->fetch(PDO::FETCH_OBJ)){
+						$approver->AppEmpNum = $mgr->EmpNum;
+						$approver->AppFname = $mgr->Fname;
+						$approver->AppSname = $mgr->Sname;
+						$approver->AppEaddress = $mgr->Eaddress;
+echo "<br>12 ran here<br>";
+					} else {
+						$stmt = $db->prepare('SELECT * FROM tblempall WHERE Department = :Department AND Grade= :Grade');
+						$stmt->execute(array('Department' => $approver->Department, 'Grade' => 'Manager 3' ));
+						if ($mgr = $stmt->fetch(PDO::FETCH_OBJ)){
+							$approver->AppEmpNum = $mgr->EmpNum;
+							$approver->AppFname = $mgr->Fname;
+							$approver->AppSname = $mgr->Sname;
+							$approver->AppEaddress = $mgr->Eaddress;
+echo "<br>13 ran here<br>";
+						} else {
+							$stmt = $db->prepare('SELECT * FROM tblempall WHERE Department = :Department AND Grade= :Grade');
+							$stmt->execute(array('Department' => $approver->Department, 'Grade' => 'Manager 4' ));
+							if ($mgr = $stmt->fetch(PDO::FETCH_OBJ)){
+								$approver->AppEmpNum = $mgr->EmpNum;
+								$approver->AppFname = $mgr->Fname;
+								$approver->AppSname = $mgr->Sname;
+								$approver->AppEaddress = $mgr->Eaddress;
+echo "<br>14 ran here<br>";
+							} else {
+								$stmt = $db->prepare('SELECT * FROM tblempall WHERE Directorate = :Directorate AND Grade= :Grade');
+								$stmt->execute(array('Directorate' => $approver->Directorate, 'Grade' => 'Manager 3' ));
+								if ($mgr = $stmt->fetch(PDO::FETCH_OBJ)){
+									$approver->AppEmpNum = $mgr->EmpNum;
+									$approver->AppFname = $mgr->Fname;
+									$approver->AppSname = $mgr->Sname;
+									$approver->AppEaddress = $mgr->Eaddress;
+echo "<br>15 ran here<br>";
+								} else {
+									$stmt = $db->prepare("SELECT * FROM tblempall WHERE SuperUser = 'Y'");
+									$stmt->execute();
+									if ($mgr = $stmt->fetch(PDO::FETCH_OBJ)){
+										$approver->AppEmpNum = $mgr->EmpNum;
+										$approver->AppFname = $mgr->Fname;
+										$approver->AppSname = $mgr->Sname;
+										$approver->AppEaddress = $mgr->Eaddress;
+					echo "<br>SU ran here<br>";
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	return $approver;
 }
 ////////////////////////////////////////////////////////////////////////////////////
 function getTotalNominations($empnum){
@@ -235,7 +446,7 @@ function removeTeamMember($empnum) {
 }
 ////////////////////////////////////////////////////////////////////////////////////
 function shortenName($name){
-	return (strlen($name) > 15) ? substr($name,0,10).'...' : $name;
+	return (strlen($name) > 13) ? substr($name,0,10).'...' : $name;
 }
 ////////////////////////////////////////////////////////////////////////////////////
 function getTeamsApprover($EmpNum) {

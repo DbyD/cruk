@@ -75,7 +75,7 @@
 												$stmt = $db->prepare('UPDATE tblempall SET Eaddress = :sEaddress WHERE EmpNum = :EmpNum');
 												$stmt->execute(array(':EmpNum' => $EmpNum,':sEaddress' => $_POST["sEaddress"]));
 											}
-											$stmt = $db->prepare("SELECT EmpNum,Eaddress,Fname,Sname,sPassword,statusID FROM tblempall WHERE EmpNum = :EmpNum and activationID=1");
+											$stmt = $db->prepare("SELECT EmpNum,Eaddress,Fname,Sname,sPassword,activated FROM tblempall WHERE EmpNum = :EmpNum and eligible=1");
 											$stmt->execute(array('EmpNum' => $_POST["EmpNum"]));
 											if ($user = $stmt->fetch()){ 
 											// check if has email address
@@ -96,7 +96,7 @@
 											
 											
 							<?php				} else {
-													if ($user['sPassword'] != "" && $user['statusID'] == 1){
+													if ($user['sPassword'] != "" && $user['activated'] == 1){
 							?>
 								<p>Your account has already been registered.</p>
 								<p>Please <a href="<?=HTTP_PATH?>forgotten_password.php">click here</a> if you have forgotten your password.</p>

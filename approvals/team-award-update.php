@@ -25,9 +25,9 @@
 			foreach ($TeamMembers as $list){
 				$stmt = $db->prepare("INSERT INTO tblnominations(
 								awardType, NominatorEmpNum, NominatedEmpNum, nomination_teamID, Volunteer, ApproverEmpNum,
-								littleExtra, amount, NomDate, AprDate, AprStatus) 
+								littleExtra, amount, NomDate, AprDate, AprStatus, AwardClaimed, DateClaimed) 
 								VALUES (:awardType, :NominatorEmpNum, :NominatedEmpNum, :nomination_teamID, :Volunteer, :ApproverEmpNum, 
-								:littleExtra, :amount, :NomDate, :AprDate, :AprStatus)");
+								:littleExtra, :amount, :NomDate, NOW(), :AprStatus, :AwardClaimed, NOW())");
 				$stmt->bindParam(':awardType', $a = 2);
 				$stmt->bindParam(':NominatorEmpNum', $award->NominatorEmpNum);
 				$stmt->bindParam(':NominatedEmpNum', $list->EmpNum);
@@ -42,8 +42,8 @@
 				}
 				$stmt->bindParam(':amount', $amount);
 				$stmt->bindValue(':NomDate', $award->NomDate, PDO::PARAM_NULL);
-				$stmt->bindValue(':AprDate', $award->AprDate, PDO::PARAM_NULL);
-				$stmt->bindParam(':AprStatus', $award->AprStatus);
+				$stmt->bindParam(':AprStatus', $a = 1);
+				$stmt->bindParam(':AwardClaimed', $a = 'Yes');
 				$stmt->execute();
 				
 				$teamEmailList .= getName($list->EmpNum).", ";

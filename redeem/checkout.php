@@ -41,7 +41,7 @@ function SendMail($args = array()){
 	// noreply@xexec.com
 
 	$args = array(	
-					'to'=>'maksdev0@gmail.com',
+					'to'=>'alec@dbyd.co.za',
 					'from'=> 'noreply@xexec.com',
 					'subject'=> 'Reading',
 					'message'=> '<i>message</i>',
@@ -181,11 +181,12 @@ $basket = getBasket( $_SESSION["user"]->EmpNum );
 		<div class="inlineDiv clickAble" data-type="gourl" data-url="<?php echo HTTP_PATH . 'redeem/'; ?>">
 			Shop
 		</div>
-		<i class="icon-icons_thickrightarrow smalli"></i> <span class="subSubTitle"> Checkout </span>
 		<?php if(isset($post) && !$error):?>
-			<i class="icon-icons_thickrightarrow smalli"></i> <span class="subSubTitle"> Order Confirmed </span>
-		<?php else: ?>
+			<i class="icon-icons_thickrightarrow smalli"></i> <span class="subTitle"> Checkout </span>
 			<i class="icon-icons_thickrightarrow smalli"></i> <span class="subSubTitle"> Order Confirmation </span>
+		<?php else: ?>
+		<i class="icon-icons_thickrightarrow smalli"></i> <span class="subSubTitle"> Checkout </span>
+			<!--<i class="icon-icons_thickrightarrow smalli"></i> <span class="subSubTitle"> Order Confirmed </span>-->
 		<?php endif; ?>
 	</div>
 

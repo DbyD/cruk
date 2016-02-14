@@ -31,19 +31,26 @@
 		
 		// need to work out who correct approver is. get approver for first person
 		$searchList = array_to_object(getThisTeamMembers($_SESSION['teamnominee']->teamID));
-		//print_r($searchList);
+		print_r($searchList);
 		if ($searchList){
 			foreach ($searchList as $list){
 				//echo $list->AppEmpNum;
 				$AppEmpNum = getTeamsApprover($list->EmpNum);
 				$_SESSION['teamnominee']->AppEmpNum = $AppEmpNum->AppEmpNum;
 				$_SESSION['teamnominee']->full_App_name = $AppEmpNum->Fname.' '.$AppEmpNum->Sname;
+				if(!isset($firstPersonEmpNum)){
+					$firstPersonEmpNum = $list;
+				}
 				//print_r($AppEmpNum);
 		//echo "<br><br>";
 				if($AppEmpNum->AppEmpNum !='') break;
 			}
 		}
-		
+		if($AppEmpNum->AppEmpNum ==''){
+			print_r( $firstPersonEmpNum);
+			$approver = getApprover($firstPersonEmpNum);
+			$AppEmpNum->AppEmpNum = $approver->AppEmpNum;
+		}
 		$stmt->bindParam(':ApproverEmpNum', $AppEmpNum->AppEmpNum);
 		$stmt->bindParam(':Team', getmyTeamName($_SESSION['teamnominee']->teamID));
 		$stmt->bindParam(':TeamID', $_SESSION['teamnominee']->teamID);
