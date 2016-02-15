@@ -1,42 +1,50 @@
 <?php 
+	
 
 	$res = 0;
 	if( isset( $_GET["menu_id"] ) ) {
-		$menu_id = $_GET["menu_id"];
 
-		if( isset( $_POST['submit'] ) && isset( $_POST["sub_id"] ) ) {
+		$menu_id = $_GET["menu_id"];
+		
+		
+		if( isset( $_POST['submit_sub_change'] )  && isset( $_POST["sub_id"] ) ) {
 			$res = array();
+
+
 			
-			if( $_FILES['imageSub'] != null ){
+			
+			if( !empty($_FILES['imageSub']['name']) ){
 				$path = insertImageSub( $_FILES['imageSub'], $_POST["sub_id"], $menu_id );
 				$res["sub_image"] = $path;
 			}
 
+		
+
+			
+
 			$res["id"] = $_POST["sub_id"];
 			$res["label"] = $_POST["nameSub"];
 
-			/*echo "<pre>";
-			var_dump($res);
-			echo "</pre>";
-*/
+
 			updateSubImageAndName( $res );
 				
 		}
 
 
-		if( isset( $_POST["submit"] ) ){
-			
 
-			if( empty( $_POST["title"] ) || empty( $_POST["point"] ) || empty( $_POST["Delivery"] ) || empty( $_POST["content"] ) ){
+		if( isset( $_POST["submit"] ) ){
+
+			if( empty( $_POST["title"] ) || empty( $_POST["point"] ) || empty( $_POST["Delivery"] ) || empty( trim($_POST["content"]) ) ){
 				$error_message = "<div class='error'>Please fill in all fields</div>";
 			} else {
-				
 
 				if( isset($_POST["sub_id"] ) ){
 					$sub_id_insert = $_POST["sub_id"];
 				} else {
 					$sub_id_insert = NULL;
 				}
+				
+				
 				
 				$data = array(
 					'aTitle' => $_POST["title"],
@@ -47,10 +55,12 @@
 					'subID' => $sub_id_insert
 				);
 
-				if( !empty( $_FILES["fileImage"] ) ){
+				
+				if( !empty( $_FILES["fileImage"]['name'] ) ){
 					$file_path = insertFile(  $_POST["menu_id"], $sub_id_insert );
 					$data['Image_name'] = $file_path;
 				}
+
 
 				if( isset( $_POST["prID"] ) ) {
 					$data['prID'] = $_POST["prID"];
@@ -113,6 +123,8 @@
 				} else {
 					echo '<span class="subSubTitle">' . $menuInfo[0]["label"] . '</span>';
 				} 
+
+				$time = time();
 			?>
 		</div>
 	</div>
@@ -138,7 +150,7 @@
 											<?php if($sub["sub_image"] == ""):?>
 												<span>Not Image.</span>
 											<?php else:?>
-												<img src="<?php echo HTTP_PATH . $sub["sub_image"]; ?>">
+												<img src="<?php echo HTTP_PATH . $sub["sub_image"]; ?>?<?=$time?>">
 											<?php endif;?>
 
 											<form action="" method="post" enctype="multipart/form-data">
@@ -167,7 +179,7 @@
 											  <div class="row">
 											    <div class="large-12 columns">
 											      <label>
-											        <input type="submit" name="submit" value="update" class="right"/>
+											        <input type="submit" name="submit_sub_change" value="update" class="right"/>
 											      </label>
 											    </div>
 											  </div>
@@ -252,14 +264,6 @@
 								<?php endif; ?>
 							<?php endforeach;?>
 				        </select>
-				    </div>
-				  </div>
-
-				  <div class="row">
-				    <div class="large-3 columns">
-				      <label>CHoose Sub menu: </label></div>
-				        <div class="large-9 columns">
-				        	<input type="text" placeholder="" name="point" value="<?php echo isset( $pr['aPrice'] ) ? $pr['aPrice'] : ''; ?>" />
 				    </div>
 				  </div>
 			  <?php endif;?>

@@ -17,8 +17,7 @@ function insertFile( $menu_id, $sub_id ){
 	}
 	
 	// Check file size
-	if ($_FILES["fileImage"]["size"] > 500000) {
-	    
+	if ($_FILES["fileImage"]["size"] > 5000000) {
 	    $uploadOk = 0;
 	}
 	// Allow certain file formats
@@ -57,7 +56,7 @@ function insertFile( $menu_id, $sub_id ){
 		    echo "Sorry, file already exists.";
 		    $uploadOk = 0;
 		}
-
+		
 	    if (move_uploaded_file($_FILES["fileImage"]["tmp_name"], $target_file)) {
 	    	include('classSimpleImage.php');
 	    	$image = new SimpleImage();
@@ -79,7 +78,7 @@ function insertImageSub( $file, $sub_id, $menu_id){
 
 	$imageFileType = end( $arr );
 
-	if ( $file["size"] > 500000 ) {
+	if ( $file["size"] > 5000000 ) {
 	    $error = true;
 	}
 

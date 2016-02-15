@@ -45,33 +45,85 @@ function createSignature(array $data, $key) {
 
 
 function SendMail($args = array()){
-/*
-	// noreply@xexec.com
-
-	$args = array(	
-					'to'=>'alec@dbyd.co.za',
-					'from'=> 'noreply@xexec.com',
-					'subject'=> 'Reading',
-					'message'=> '<i>message</i>',
-					'to_bcc' => $_SESSION["user"]->Eaddress
-				);
-
+					
+	$sendEmail->Content = $content;
 	
-	$to      = $args['to']; //'maksdev0@gmail.com
-	$subject = $args['subject'];// Reading
-	$message = $args['message'];// message
+	$email = sendEmail($sendEmail,'');
+}
 
-	$headers = "MIME-Version: 1.0" . "\r\n";
-	$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
 
-	$headers .= 'From:  '. $args['from'] . "\r\n" .
-		'Reply-To:  '.$args['to'] . "\r\n" .
-		'Bcc:  '.$args['to_bcc'] . "\r\n" .
-		'X-Mailer: PHP/' . phpversion();
+
+
+
+
+
+
+
+
+
+
+
+$arr = array();
+		$i = $total_price = 0;
+		$basket = getBasket( $_SESSION["user"]->EmpNum );
 		
 
-	$mail = mail($to, $subject, $message, $headers);
-	*/
+		foreach ($basket as $pr_b){	
+
+			$pr_info = getProductByID( $pr_b["prID"] );
+			$total_price += $pr_b['aPrice'];
+			
+
+			if( $i == 0 ){
+				$arr[ $i ]['baID'] = $pr_b['baID'];
+				$arr[ $i ]['aPrice'] = $pr_b['aPrice'];
+				$arr[ $i ]['aTitle'] = $pr_info['aTitle'];
+				$arr[ $i ]['prID'] = $pr_b["prID"];
+				$arr[ $i ]['QTY'] = 1;
+				$i++;
+			} else {
+				$isProduct = false;
+				for( $j = 0; $j < count($arr); $j++ ){
+					if( $pr_b["prID"] == $arr[ $j ]['prID'] && $pr_b["aPrice"] == $arr[ $j ]['aPrice']){
+						$arr[ $j ]['QTY']++;
+						$arr[ $j ]['baID'] .= ',' . $pr_b['baID'] ;
+						$isProduct = true;
+					} 
+				}
+
+				if( !$isProduct ){
+					$arr[ $i ]['baID'] = $pr_b['baID'];
+					$arr[ $i ]['aPrice'] = $pr_b['aPrice'];
+					$arr[ $i ]['aTitle'] = $pr_info['aTitle'];
+					$arr[ $i ]['prID'] = $pr_b["prID"];
+					$arr[ $i ]['QTY'] = 1;
+					$i++;
+				}
+			}
+
+			
+		}
+
+
+		$i = 1;
+		$table_body = '';
+		foreach( $arr as $b ){
+			$table_body .= '<tr>
+								<td>' . $b['QTY'] .'</td>
+								<td class="textLeft">' . $b['aTitle'] . '</td>
+								<td></td>
+								<td>&pound;' . $b['aPrice'] . '</td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+								<td class="textRight">Total</td>
+								<td>&pound;' . $total_price . '</td>
+							</tr>';
+
+			$i++;
+		}
+	
 	// this is what has already been setup with some styling to it. All you need to do is the shopping basket and order details. The rest is done.
 	$sendEmail = new StdClass();
 	$sendEmail->emailTo = $_SESSION['user']->Eaddress;
@@ -82,6 +134,20 @@ function SendMail($args = array()){
 	$content =	'Dear '.$_SESSION['user']->Fname.
 				'<p>Thank you for your recent purchase.</p>
 				<p><b>Items Purchased</b></p>';
+
+	$content .= '<table id="table_basket">
+					<thead>
+						<tr>
+							<th width="100">QTY</th>
+							<th class="textLeft">PRODUCT NAME</th>
+							<th></th>
+							<th width="125">PRICE</th>
+						</tr>
+					</thead>
+					<tbody>
+						' . $table_body . '
+					</tbody>
+				</table>';
 				
 	//add shopping basket here in a table
 	$content .= '';
@@ -91,10 +157,24 @@ function SendMail($args = array()){
 	
 	$content .='<p>If you have any questions regarding your order, please email <ahref="mailto:concierge@xexec.com">concierge@xexec.com</a> or call +44 20 8201 6483 quoting your unique order code.</p>';
 	
-	$sendEmail->Content = $content;
-	
-	$email = sendEmail($sendEmail,'');
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 // echo '<pre>';var_dump( $_SESSION["user"]->Eaddress );echo '</pre>';
@@ -258,6 +338,54 @@ if(count($basket) > 0 && is_array($basket)){
 }
 						
 ?>
+
+
+
+
+
+<?php 
+
+echo $content;
+
+
+?>
+<table>
+  <thead>
+    <tr>
+      <th width="200">Table Header</th>
+      <th>Table Header</th>
+      <th width="150">Table Header</th>
+      <th width="150">Table Header</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Content Goes Here</td>
+      <td>This is longer content Donec id elit non mi porta gravida at eget metus.</td>
+      <td>Content Goes Here</td>
+      <td>Content Goes Here</td>
+    </tr>
+    <tr>
+      <td>Content Goes Here</td>
+      <td>This is longer Content Goes Here Donec id elit non mi porta gravida at eget metus.</td>
+      <td>Content Goes Here</td>
+      <td>Content Goes Here</td>
+    </tr>
+    <tr>
+      <td>Content Goes Here</td>
+      <td>This is longer Content Goes Here Donec id elit non mi porta gravida at eget metus.</td>
+      <td>Content Goes Here</td>
+      <td>Content Goes Here</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+
+
 
 <div id="content" class="large-8 large-push-2 columns">
 	<div class="title withStar">

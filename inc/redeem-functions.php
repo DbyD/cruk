@@ -49,16 +49,18 @@ function getMenuProducts( $menu_id , $sub_id ){
 function insertProduct( $data ){
 	global $db;
 
+	$sub_key = $sub_value = '';
+
 	if($data["subID"] != 'other'){
 		$sub_key = 'subID,';
-		$sub_key = ':subID,';
+		$sub_value = ':subID,';
 	}
 
 	$stmt = $db->prepare("
 INSERT INTO tblproducts 
-	(aTitle, aPrice, delivery, aContent, menuID, " . $sub_message . " Image_name) 
+	(aTitle, aPrice, delivery, aContent, menuID, " . $sub_key . " Image_name) 
 VALUES 
-	(:aTitle, :aPrice, :delivery, :aContent, :menuID, " . $sub_message . " :Image_name )");
+	(:aTitle, :aPrice, :delivery, :aContent, :menuID, " . $sub_value . " :Image_name )");
 
 	$stmt->bindValue(':aTitle',$data["aTitle"], PDO::PARAM_STR);
 	$stmt->bindValue(':aPrice', $data["aPrice"], PDO::PARAM_STR);
@@ -388,6 +390,7 @@ function updateSubImageAndName( $res ){
 	global $db;
 	$string = '';
 
+
 	if($res['sub_image'] != false){
 		$string = ',sub_image = :sub_image';
 	}
@@ -396,6 +399,7 @@ function updateSubImageAndName( $res ){
 UPDATE tblmenuleft 
 SET label = :label " . $string . " 
 WHERE id = :id";
+
 
 	$stmt = $db->prepare($sql);
 
