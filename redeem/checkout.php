@@ -45,139 +45,24 @@ function createSignature(array $data, $key) {
 
 
 function SendMail($args = array()){
+	$post_email = unserialize($_POST['post']);
+	$tel_number = $post_email['telephone'];
+	$delivery_address = $post_email['address1'];
+	$email_order_code = $args["email_order_code"];
+	$content = get_content_email($email_order_code, $tel_number, $delivery_address);
+	
+
 					
 	$sendEmail->Content = $content;
-	
-	$email = sendEmail($sendEmail,'');
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-$arr = array();
-		$i = $total_price = 0;
-		$basket = getBasket( $_SESSION["user"]->EmpNum );
-		
-
-		foreach ($basket as $pr_b){	
-
-			$pr_info = getProductByID( $pr_b["prID"] );
-			$total_price += $pr_b['aPrice'];
-			
-
-			if( $i == 0 ){
-				$arr[ $i ]['baID'] = $pr_b['baID'];
-				$arr[ $i ]['aPrice'] = $pr_b['aPrice'];
-				$arr[ $i ]['aTitle'] = $pr_info['aTitle'];
-				$arr[ $i ]['prID'] = $pr_b["prID"];
-				$arr[ $i ]['QTY'] = 1;
-				$i++;
-			} else {
-				$isProduct = false;
-				for( $j = 0; $j < count($arr); $j++ ){
-					if( $pr_b["prID"] == $arr[ $j ]['prID'] && $pr_b["aPrice"] == $arr[ $j ]['aPrice']){
-						$arr[ $j ]['QTY']++;
-						$arr[ $j ]['baID'] .= ',' . $pr_b['baID'] ;
-						$isProduct = true;
-					} 
-				}
-
-				if( !$isProduct ){
-					$arr[ $i ]['baID'] = $pr_b['baID'];
-					$arr[ $i ]['aPrice'] = $pr_b['aPrice'];
-					$arr[ $i ]['aTitle'] = $pr_info['aTitle'];
-					$arr[ $i ]['prID'] = $pr_b["prID"];
-					$arr[ $i ]['QTY'] = 1;
-					$i++;
-				}
-			}
-
-			
-		}
-
-
-		$i = 1;
-		$table_body = '';
-		foreach( $arr as $b ){
-			$table_body .= '<tr>
-								<td>' . $b['QTY'] .'</td>
-								<td class="textLeft">' . $b['aTitle'] . '</td>
-								<td></td>
-								<td>&pound;' . $b['aPrice'] . '</td>
-							</tr>
-							<tr>
-								<td></td>
-								<td></td>
-								<td class="textRight">Total</td>
-								<td>&pound;' . $total_price . '</td>
-							</tr>';
-
-			$i++;
-		}
-	
-	// this is what has already been setup with some styling to it. All you need to do is the shopping basket and order details. The rest is done.
 	$sendEmail = new StdClass();
 	$sendEmail->emailTo = $_SESSION['user']->Eaddress;
 	$sendEmail->subject = 'CRUK Order';
 	$sendEmail->Bcc = 'alec@iceimages.co.za';
 	
-	// you need to add content here.
-	$content =	'Dear '.$_SESSION['user']->Fname.
-				'<p>Thank you for your recent purchase.</p>
-				<p><b>Items Purchased</b></p>';
-
-	$content .= '<table id="table_basket">
-					<thead>
-						<tr>
-							<th width="100">QTY</th>
-							<th class="textLeft">PRODUCT NAME</th>
-							<th></th>
-							<th width="125">PRICE</th>
-						</tr>
-					</thead>
-					<tbody>
-						' . $table_body . '
-					</tbody>
-				</table>';
-				
-	//add shopping basket here in a table
-	$content .= '';
-	
-	//add order details here in a table
-	$content .= '';
-	
-	$content .='<p>If you have any questions regarding your order, please email <ahref="mailto:concierge@xexec.com">concierge@xexec.com</a> or call +44 20 8201 6483 quoting your unique order code.</p>';
-	
+	$email = sendEmail($sendEmail,'');
+}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// echo '<pre>';var_dump( $_SESSION["user"]->Eaddress );echo '</pre>';
 
 
 if(isset($_POST['redirectURL'])){
@@ -218,12 +103,12 @@ if(isset($_POST['redirectURL'])){
 				$insert_data["postcode"] = intval( $_SESSION['cardForm']["postcode"] );
 				
 				$order_insert_id = addBasketOrders( $insert_data );
+				$email_order_code = $order_insert_id;
 
 				updateBasketStatus( $_SESSION['user']->EmpNum, $order_insert_id );
 				
 				if( $order_insert_id > 0){
 					$credit_save = true;
-					SendMail();
 					$_SESSION["thank_you"] = false;
 				}
 			}
@@ -307,6 +192,7 @@ if(isset($postForUpload)){
 				$postForUpload["EmpNum"] = $_SESSION['user']->EmpNum;
 				$postForUpload["totalPrice"] = $total_price;
 				$last_id = addBasketOrders( $postForUpload ); 
+				$email_order_code = $last_id;
 
 				$sum_all = getAvailable( $_SESSION['user']->EmpNum ); 
 				$sum_credit_card = getCreditCard( $_SESSION['user']->EmpNum );
@@ -336,49 +222,158 @@ if(count($basket) > 0 && is_array($basket)){
 	$basket = array();
 	$basket_isset = false;
 }
-						
-?>
 
 
 
 
 
-<?php 
-
-echo $content;
 
 
-?>
-<table>
+
+
+function get_content_email( $email_order_code, $tel_number, $delivery_address) {
+	$arr = array();
+		$i = $total_price = 0;
+		$basket = getBasketByOrder( $email_order_code );
+		
+
+		foreach ($basket as $pr_b){	
+
+
+			$pr_info = getProductByID( $pr_b["prID"] );
+			$total_price += $pr_b['aPrice'];
+			
+
+			if( $i == 0 ){
+				$arr[ $i ]['baID'] = $pr_b['baID'];
+				$arr[ $i ]['aPrice'] = $pr_b['aPrice'];
+				$arr[ $i ]['aTitle'] = $pr_info['aTitle'];
+				$arr[ $i ]['prID'] = $pr_b["prID"];
+				$arr[ $i ]['QTY'] = 1;
+				$i++;
+			} else {
+				$isProduct = false;
+				for( $j = 0; $j < count($arr); $j++ ){
+					if( $pr_b["prID"] == $arr[ $j ]['prID'] && $pr_b["aPrice"] == $arr[ $j ]['aPrice']){
+						$arr[ $j ]['QTY']++;
+						$arr[ $j ]['baID'] .= ',' . $pr_b['baID'] ;
+						$isProduct = true;
+					} 
+				}
+
+				if( !$isProduct ){
+					$arr[ $i ]['baID'] = $pr_b['baID'];
+					$arr[ $i ]['aPrice'] = $pr_b['aPrice'];
+					$arr[ $i ]['aTitle'] = $pr_info['aTitle'];
+					$arr[ $i ]['prID'] = $pr_b["prID"];
+					$arr[ $i ]['QTY'] = 1;
+					$i++;
+				}
+			}
+
+			
+		}
+
+
+		$i = 1;
+		$table_body = '';
+		foreach( $arr as $b ){
+			$table_body .= '<tr>
+								<td>' . $b['QTY'] .'</td>
+								<td class="textLeft">' . $b['aTitle'] . '</td>
+								<td></td>
+								<td>&pound;' . $b['aPrice'] . '</td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+								<td class="textRight">Total</td>
+								<td>&pound;' . $total_price . '</td>
+							</tr>';
+
+			$i++;
+		}
+	
+	// this is what has already been setup with some styling to it. All you need to do is the shopping basket and order details. The rest is done.
+
+	
+	// you need to add content here.
+	$content =	'Dear '.$_SESSION['user']->Fname.
+				'<p>Thank you for your recent purchase.</p>
+				<p><b>Items Purchased</b></p>';
+
+	$content .= '<table id="table_basket">
+					<thead>
+						<tr>
+							<th width="100">QTY</th>
+							<th class="textLeft">PRODUCT NAME</th>
+							<th></th>
+							<th width="125">PRICE</th>
+						</tr>
+					</thead>
+					<tbody>
+						' . $table_body . '
+					</tbody>
+				</table>';
+				
+	//add shopping basket here in a table
+	$content .= '<table>
   <thead>
     <tr>
-      <th width="200">Table Header</th>
-      <th>Table Header</th>
-      <th width="150">Table Header</th>
-      <th width="150">Table Header</th>
+      <th width="200"></th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>Content Goes Here</td>
-      <td>This is longer content Donec id elit non mi porta gravida at eget metus.</td>
-      <td>Content Goes Here</td>
-      <td>Content Goes Here</td>
+      <td><b>Your order code:</b></td>
+     <td> ' . $email_order_code .  ' </td>
     </tr>
     <tr>
-      <td>Content Goes Here</td>
-      <td>This is longer Content Goes Here Donec id elit non mi porta gravida at eget metus.</td>
-      <td>Content Goes Here</td>
-      <td>Content Goes Here</td>
+      <td><b>Name:</b></td>
+      <td>' . $_SESSION['user']->Fname . '</td>
+     
     </tr>
     <tr>
-      <td>Content Goes Here</td>
-      <td>This is longer Content Goes Here Donec id elit non mi porta gravida at eget metus.</td>
-      <td>Content Goes Here</td>
-      <td>Content Goes Here</td>
+      <td><b>Email:</b></td>
+      <td>' . $_SESSION['user']->Eaddress . '</td>
+     
+    </tr>
+    <tr>
+      <td><b>Telephone Number:</b></td>
+      <td>' . $tel_number . '</td>
+      
+    </tr>
+    <tr>
+      <td><b>Delivery address:</b></td>
+      <td>' . $delivery_address . '</td>
+      
     </tr>
   </tbody>
-</table>
+</table>';
+	
+	//add order details here in a table
+	$content .= '';
+	
+	$content .='<p>If you have any questions regarding your order, please email <ahref="mailto:concierge@xexec.com">concierge@xexec.com</a> or call +44 20 8201 6483 quoting your unique order code.</p>';
+	return $content;
+}
+
+
+
+if( isset( $email_order_code ) && $_SESSION["thank_you"] == false){
+	if(isset($_POST['post'])){
+		$args = array();
+		$args["email_order_code"] = $email_order_code;
+		SendMail( $args );
+	}
+}
+
+
+
+?>
+
+
 
 
 

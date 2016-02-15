@@ -15,7 +15,7 @@ $basket = getBasket( $_SESSION["user"]->EmpNum );
 						
 						<?php if($basket != 0):?>
 						<div class="row">
-							<a id="viewBasket" class='<?php if($basket_isset) echo 'view-basket';?>' href="<?php echo HTTP_PATH . "redeem/product-basket.php?basket=true&menu_id=" . $menu_id; ?>"> <i class="fi-shopping-bag"></i>View basket </a>
+							<a id="viewBasket" class='<?php if($basket_isset) echo 'view-basket';?>' href="<?php echo HTTP_PATH . "redeem/product-basket.php?basket=true&menu_id="; ?>"> <i class="fi-shopping-bag"></i>View basket </a>
 						</div>
 						<?php endif; ?>
 

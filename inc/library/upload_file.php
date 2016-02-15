@@ -61,7 +61,7 @@ function insertFile( $menu_id, $sub_id ){
 	    	include('classSimpleImage.php');
 	    	$image = new SimpleImage();
 		    $image->load($target_file);
-		    $image->resize(218, 138);
+		    $image->resize(190, 120);
 		    $image->save($target_file);
 
 	        $arr = explode("../", $target_file);
@@ -103,7 +103,7 @@ function insertImageSub( $file, $sub_id, $menu_id){
 	    	include('classSimpleImage.php');
 	    	$image = new SimpleImage();
 		    $image->load($target_file);
-		    $image->resize(218, 138);
+		    $image->resize(190, 120);
 		    $image->save($target_file);
 		    
 	        $arr = explode("../", $target_file);
