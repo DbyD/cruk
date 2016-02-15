@@ -29,4 +29,15 @@ $(document).ready(function(){
 			alert("Please indicate if you have read the Terms & Conditions.");
 		}
 	});
+
+	$("#addBasket").click(function(e){
+		var price = $("#aPrice").val();
+		var splitPrice = price.split(',');
+		if(splitPrice.length > 1){
+			e.preventDefault();
+			$("#emptyPriceButton").click();
+		}
+	});
+
+
 });

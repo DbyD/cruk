@@ -192,6 +192,16 @@ if( $val == "YES" ){
 												<button id="addBasket" class="pinkButton">Add to Basket</button>
 											</form>
 										</div>
+
+										<a href="#" data-reveal-id="myModalPrice" class="hidden" id="emptyPriceButton">Click Me For A Modal</a>
+
+										<div id="myModalPrice" class="reveal-modal hidden" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+										  <h2 id="modalTitle">Please select an amount by clicking on Price.</h2>
+										  <p class="lead"></p>
+										  <p></p>
+										  <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+										</div>
+
 									</div>
 								</div>
 							</div>
