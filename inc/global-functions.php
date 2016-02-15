@@ -28,11 +28,17 @@ function endEmail($noid){
 ////////////////////////////////////////////////////////////////////////////////////
 // send email
 function sendEmail($email,$noid){
-	global $strFrom;
+	global $headers;
 	$message = startEmail();
 	$message .= $email->Content;
 	$message .= endEmail($noid);
-	if (mail($email->emailTo, $email->subject, $message, $strFrom)){
+	if(isset($email->Cc)){
+		$headers .= 'Cc: '. $email->Cc . "\r\n";
+	}
+	if(isset($email->Bcc)){
+		$headers .= 'Bcc: '. $email->Bcc . "\r\n";
+	}
+	if (mail($email->emailTo, $email->subject, $message, $headers)){
 		$reply = "success";
 	} else {
 		$reply = "fail";
@@ -53,7 +59,7 @@ function array_to_object($array) {
 ////////////////////////////////////////////////////////////////////////////////////
 function sendEcardEmail($ecard){
 	// need to fix this so we can email anytime
-	global $strFrom;
+	global $headers;
 	$subject = "Our Heroes E-Card";
 	if ($emailTo = $ecard->offline == 'YES'){
 		$emailTo = $ecard->shopMEaddress;
@@ -68,7 +74,13 @@ function sendEcardEmail($ecard){
 	$message = startEmail();
 	$message .= $ecard->content;
 	$message .= endEmail();
-	if (mail($emailTo, $subject, $message, $strFrom)){
+	if(isset($ecard->Cc)){
+		$headers .= 'Cc: '. $ecard->Cc . "\r\n";
+	}
+	if(isset($ecard->Bcc)){
+		$headers .= 'Bcc: '. $ecard->Bcc . "\r\n";
+	}
+	if (mail($emailTo, $subject, $message, $headers)){
 		$reply = "ecard sent";
 	} else {
 		$reply = "fail";

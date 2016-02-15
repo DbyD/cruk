@@ -5,11 +5,17 @@ $.ajaxPrefilter(function( options, originalOptions, jqXHR ) {
 jQuery.validator.addMethod("greaterThanTwo", function(value, element) {
     return this.optional(element) || (parseFloat(value) > 1);
 }, "A team must consist of a minimum of 2 members.");
+$.validator.addMethod("customrule", function(value, element, param) { 
+	return this.optional(element) || value === param; 
+}, "You cannot Have a second team called My Team. Please give your team a new name. {0}");
 $(function(){
 	$("#confirmTeam").validate({
 		ignore: [],
 		rules: {
-			myTeamName: "required",
+			myTeamName:	{
+                required: true,
+                customrule: 'My Team1'
+            },
         	teamNO : { greaterThanTwo : true }
 		},
 		messages: {myTeamName: "Please add an appropriate team name. The team name will be visible on the Wall of Fame"},

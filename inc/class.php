@@ -5,6 +5,7 @@ class User {
 	public $Sname;
 	public $Grade;
 	public $JobTitle;
+	public $Section;
 	public $LMFname;
 	public $LMSname;
 	public $AppFname;
@@ -34,19 +35,26 @@ class User {
 		}
 	}
 	public function departmentHead(){
-		if (strpos(strtoupper($this->JobTitle),strtoupper('Head')) !== false){
+		if ($this->Grade == 'Manager 3' || $this->Grade == 'Manager 4' || $this->Grade == 'EX1' || $this->Grade == 'EX2'){
 			return "YES";
 		} else {
-			if (strpos(strtoupper($this->JobTitle),strtoupper('Area Mgr')) !== false){
-				return "YES";
-			} else {
-				if (strpos(strtoupper($this->JobTitle),strtoupper('Snr Mgr')) !== false){
+			if (strpos(strtoupper($this->Section),strtoupper('Volunteer Fundraising')) !== false){
+				if ($this->Grade == 'Manager 2'){
 					return "YES";
 				} else {
 					return "NO";
 				}
+			} else {
+				if (strpos(strtoupper($this->Section),strtoupper('Trading Region')) !== false){
+					if ($this->Grade == 'Manager 1' || $this->Grade == 'Manager 2'){
+						return "YES";
+					} else {
+						return "NO";
+					}
+				}
 			}
 		}
+		return "NO";
 	}
 }
 

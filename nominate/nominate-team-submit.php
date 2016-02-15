@@ -102,7 +102,8 @@
 			$sendEmail->Bcc = '';
 			if($AppEmpNum->AppEmpNum ==''){
 				// send email to super user. but using xexec for now.
-				$sendEmail->emailTo = $xexecEmail;
+				$sendEmail->emailTo = getSUemail();
+				$sendEmail->Cc = 'ourheroes@cancer.org.uk';
 				$sendEmail->Content = "<p>Hello </p>
 										<p>".$_SESSION['user']->Fname." has nominated a team to receive 'A Little Extra' as part of an Our Heroes Award.</p>
 										<p>Hoever there is no approver listed. </p>";

@@ -465,4 +465,12 @@ function cleanWorkAward($workAward){
 	}
 }
 ////////////////////////////////////////////////////////////////////////////////////
+function getSUemail(){
+	global $db;
+	$stmt = $db->prepare("SELECT Eaddress FROM tblempall WHERE SuperUser = 'Y'");
+	$stmt->execute();
+	$result = $stmt->fetch(PDO::FETCH_OBJ);
+	return $result->Eaddress;
+}
+////////////////////////////////////////////////////////////////////////////////////
 ?>

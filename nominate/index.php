@@ -20,7 +20,7 @@
 			<div class="medium-6 columns rightnp">
 				<div class="callout panel white">
 					<div class="nominateButton clickAble" data-type="gourl" data-url="team.php">
-						Submit a Team Nomination
+						Nominate a Team
 					</div>
 				</div>
 			</div>
