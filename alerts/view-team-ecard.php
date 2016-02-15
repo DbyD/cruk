@@ -3,7 +3,7 @@
 	$ecard = getTeamNomination($_GET['id']);
 	$ecardImage = str_replace(' ','-',strtolower($ecard->BeliefID));
 	
-	$searchList = array_to_object(getThisTeamMembers($ecard->TeamID));
+	$searchList = array_to_object(getThisTeamMembers($ecard->ID));
 	foreach ($searchList as $list){
 		$teamEmailList .= getName($list->EmpNum).", ";
 	}

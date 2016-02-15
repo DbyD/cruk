@@ -6,7 +6,7 @@
 			unset($_SESSION['teamid']);
 		} else {
 			$teamid = $_GET['id'];
-			$_SESSION['TeamMembers'] =  getThisTeamMembers($teamid);
+			$_SESSION['TeamMembers'] =  getAllTeamsMembers($teamid);
 			$_SESSION['teamid'] = $teamid;
 		}
 	}
@@ -136,17 +136,17 @@
 			?>
 				<div class="row withTopPadding">
 					<div class="medium-5 columns noPadding">
-						<?php echo getName($list['EmpNum']); ?>
+						<?php echo getName($list->EmpNum); ?>
 					</div>
 					<div class="medium-1 columns">
-						<i class="icon-icons_close clickAble" data-type="removeTeamMember" data-id="<?php echo $list['EmpNum'] ?>" data-url="team-details.php"></i>
+						<i class="icon-icons_close clickAble" data-type="removeTeamMember" data-id="<?php echo $list->EmpNum ?>" data-url="team-details.php"></i>
 					</div>
 			<?php	} else {?>
 					<div class="medium-5 columns noPadding">
-						<?php echo getName($list['EmpNum']); ?>
+						<?php echo getName($list->EmpNum); ?>
 					</div>
 					<div class="medium-1 columns">
-						<i class="icon-icons_close clickAble" data-type="removeTeamMember" data-id="<?php echo $list['EmpNum'] ?>" data-url="team-details.php"></i>
+						<i class="icon-icons_close clickAble" data-type="removeTeamMember" data-id="<?php echo $list->EmpNum ?>" data-url="team-details.php"></i>
 					</div>
 				</div>
 			<?php	

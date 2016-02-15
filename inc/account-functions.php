@@ -46,4 +46,32 @@ function getNumberAwardsQuarter(){
 	return $count;
 }
 ////////////////////////////////////////////////////////////////////////////////////
+ function getAllNominationsList($empnum) {
+	// this needs to be fixed to include team
+		global $db;
+		$sql = 'SELECT X.* FROM ((
+				SELECT 	ID				AS ID,
+					NominatedEmpNum		AS NominatedEmpNum,
+					""					AS Team,
+					amount				AS amount,
+					NomDate				AS NomDate,
+					AprStatus			AS AprStatus,
+					ApproverEmpNum		AS ApproverEmpNum 
+				FROM tblnominations WHERE awardType=1 AND NominatorEmpNum = :empnum)
+				UNION
+				(SELECT  ID				AS ID,
+					""					AS NominatedEmpNum,
+					Team				AS Team,
+					amount				AS amount,
+					NomDate				AS NomDate,
+					AprStatus			AS AprStatus,
+					ApproverEmpNum		AS ApproverEmpNum
+				FROM tblnominations_team WHERE awardType=2 AND NominatorEmpNum = :empnum)) X
+						 ORDER BY NomDate DESC';
+		$stmt = $db->prepare( $sql );
+		$stmt->execute(array('empnum' => $empnum));
+		$result = $stmt->fetchAll(PDO::FETCH_OBJ);
+		return $result;
+    }
+////////////////////////////////////////////////////////////////////////////////////
 ?>

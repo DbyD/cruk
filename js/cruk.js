@@ -12,10 +12,7 @@ $(function(){
 	$("#confirmTeam").validate({
 		ignore: [],
 		rules: {
-			myTeamName:	{
-                required: true,
-                customrule: 'My Team1'
-            },
+			myTeamName: "required",
         	teamNO : { greaterThanTwo : true }
 		},
 		messages: {myTeamName: "Please add an appropriate team name. The team name will be visible on the Wall of Fame"},

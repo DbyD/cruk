@@ -11,7 +11,7 @@
 			<i class="icon-icons_star"></i><span><?php echo getTotalAwards($_SESSION['user']->EmpNum) ?></span>
 		</div>
 	</div>
-	<div class="row contentFill">
+	<div class="row contentFill myawards">
 		<div class="medium-12 columns leftnp rightnp fillHeight">
 			<div class="callout panel fillHeight white">
 				<div class="tableTitle">

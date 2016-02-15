@@ -79,15 +79,14 @@
 								<i class="icon-icons_group"></i>
 							</div>
 							<div class="small-10 medium-10 columns">
-								Team
-								<p>
 									<?php  
-									$TeamMembers = getThisTeamMembers($value['TeamID']);
+									$TeamMembers = getThisTeamMembers($value['ID']);
 									//print_r($TeamMembers);
 									foreach ($TeamMembers as $list){
 										echo getName($list['EmpNum']).'<br>';
 									}
-								?></p>
+								?>
+								<p><?php echo $value['BeliefID']; ?></p>
 							</div>
 						</div>
 						<?php 	} else { ?>
@@ -96,8 +95,8 @@
 								<i class="icon-icons_person"></i>
 							</div>
 							<div class="small-10 medium-10 columns">
-								Individual
-								<p><?php echo $value['name'].' '.$value['sname']; ?></p>
+								<?php echo $value['name'].' '.$value['sname']; ?>
+								<p><?php echo $value['BeliefID']; ?></p>
 							</div>
 						</div>
 					<?php		}	

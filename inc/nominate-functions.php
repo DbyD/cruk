@@ -316,6 +316,7 @@ function getMostRecentAwards () {
 						n.ID			AS ID,
 						e.Fname			AS name,
 						e.Sname			AS sname,
+						n.BeliefID		AS BeliefID,
 						""				AS TeamID,
 						n.AprDate		AS AprDate
 			FROM tblnominations AS n
@@ -327,6 +328,7 @@ function getMostRecentAwards () {
 						ID					AS ID,
 						Team				AS name,
 						""					AS sname,
+						BeliefID			AS BeliefID,
 						TeamID				AS TeamID,
 						AprDate				AS AprDate
 				FROM tblnominations_team
@@ -384,33 +386,33 @@ function getmyTeamName($id){
 function getAllTeamsMembers($teamID) {
 	global $db;
 	if($teamID != 'myteam'){
-		$stmt = $db->prepare("SELECT * FROM tblteamusers tu INNER JOIN tblempall e ON tu.EmpNum=e.EmpNum WHERE tu.teamID = :teamID");
+		$stmt = $db->prepare("SELECT * FROM tblteamusers tu INNER JOIN tblempall e ON tu.EmpNum=e.EmpNum WHERE tu.teamID = :teamID ORDER BY e.Sname");
 		$stmt->execute(array('teamID' => $teamID));
 		$result = $stmt->fetchAll(PDO::FETCH_OBJ);
 		return $result;
 	} else {
-		$stmt = $db->prepare("SELECT * FROM tblempall WHERE Shop<>'' AND Shop = :Shop");
-		$stmt->execute(array('Shop' => $_SESSION['user']->Shop));
+		$stmt = $db->prepare("SELECT * FROM tblempall WHERE Shop<>'' AND Shop = :Shop AND EmpNum <> :EmpNum ORDER BY Sname");
+		$stmt->execute(array('Shop' => $_SESSION['user']->Shop, 'EmpNum' => $_SESSION['user']->EmpNum));
 		if ($result = $stmt->fetchAll(PDO::FETCH_OBJ)){
 			return $result;
 		} else {
-			$stmt = $db->prepare("SELECT * FROM tblempall WHERE RetailArea = :RetailArea");
-			$stmt->execute(array('RetailArea' => $_SESSION['user']->RetailArea));
+			$stmt = $db->prepare("SELECT * FROM tblempall WHERE RetailArea = :RetailArea AND EmpNum <> :EmpNum ORDER BY Sname");
+			$stmt->execute(array('RetailArea' => $_SESSION['user']->RetailArea, 'EmpNum' => $_SESSION['user']->EmpNum));
 			if ($result = $stmt->fetchAll(PDO::FETCH_OBJ)){
 				return $result;
 			} else {
-				$stmt = $db->prepare("SELECT * FROM tblempall WHERE Team = :Team");
-				$stmt->execute(array('Team' => $_SESSION['user']->Team));
+				$stmt = $db->prepare("SELECT * FROM tblempall WHERE Team = :Team AND EmpNum <> :EmpNum ORDER BY Sname");
+				$stmt->execute(array('Team' => $_SESSION['user']->Team, 'EmpNum' => $_SESSION['user']->EmpNum));
 				if ($result = $stmt->fetchAll(PDO::FETCH_OBJ)){
 					return $result;
 				} else {
-					$stmt = $db->prepare("SELECT * FROM tblempall WHERE Section = :Section");
-					$stmt->execute(array('Section' => $_SESSION['user']->Section));
+					$stmt = $db->prepare("SELECT * FROM tblempall WHERE Section = :Section AND EmpNum <> :EmpNum ORDER BY Sname");
+					$stmt->execute(array('Section' => $_SESSION['user']->Section, 'EmpNum' => $_SESSION['user']->EmpNum));
 					if ($result = $stmt->fetchAll(PDO::FETCH_OBJ)){
 						return $result;
 					} else {
-						$stmt = $db->prepare("SELECT * FROM tblempall WHERE Department = :Department");
-						$stmt->execute(array('Department' => $_SESSION['user']->Department));
+						$stmt = $db->prepare("SELECT * FROM tblempall WHERE Department = :Department AND EmpNum <> :EmpNum ORDER BY Sname");
+						$stmt->execute(array('Department' => $_SESSION['user']->Department, 'EmpNum' => $_SESSION['user']->EmpNum));
 						if ($result = $stmt->fetchAll(PDO::FETCH_OBJ)){
 							return $result;
 						} 
@@ -436,47 +438,9 @@ function addTeamMember($empnum) {
 ////////////////////////////////////////////////////////////////////////////////////
 function getThisTeamMembers($teamID) {
 	global $db;
-	if($teamID == 'myteam'){
-		$stmt = $db->prepare("SELECT * FROM tblempall WHERE Shop<>'' AND Shop = :Shop");
-		$stmt->execute(array('Shop' => $_SESSION['user']->Shop));
-		if ($result = $stmt->fetchAll(PDO::FETCH_ASSOC)){
-			return $result;
-		} else {
-			$stmt = $db->prepare("SELECT * FROM tblempall WHERE RetailArea = :RetailArea");
-			$stmt->execute(array('RetailArea' => $_SESSION['user']->RetailArea));
-			if ($result = $stmt->fetchAll(PDO::FETCH_ASSOC)){
-				return $result;
-			} else {
-				$stmt = $db->prepare("SELECT * FROM tblempall WHERE Team = :Team");
-				$stmt->execute(array('Team' => $_SESSION['user']->Team));
-				if ($result = $stmt->fetchAll(PDO::FETCH_ASSOC)){
-					return $result;
-				} else {
-					$stmt = $db->prepare("SELECT * FROM tblempall WHERE Section = :Section");
-					$stmt->execute(array('Section' => $_SESSION['user']->Section));
-					if ($result = $stmt->fetchAll(PDO::FETCH_ASSOC)){
-						return $result;
-					} else {
-						$stmt = $db->prepare("SELECT * FROM tblempall WHERE Department = :Department");
-						$stmt->execute(array('Department' => $_SESSION['user']->Department));
-						if ($result = $stmt->fetchAll(PDO::FETCH_ASSOC)){
-							return $result;
-						} 
-					}
-				}
-			}
-		}
-	} else {
-		if (is_numeric($teamID)) {
-			$stmt = $db->prepare("SELECT * FROM tblteamusers tu INNER JOIN tblempall e ON tu.EmpNum=e.EmpNum WHERE tu.teamID = :teamID");
-			$stmt->execute(array('teamID' => $teamID));
-			$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-		} else {
-			$stmt = $db->prepare("SELECT EmpNum,Fname,Sname FROM tblempall WHERE Team = :Team");
-			$stmt->execute(array('Team' => $teamID));
-			$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-		}
-	}
+	$stmt = $db->prepare("SELECT * FROM tblnominations_teamusers tu INNER JOIN tblempall e ON tu.EmpNum=e.EmpNum WHERE tu.nomination_teamID = :teamID ORDER BY e.Sname");
+	$stmt->execute(array('teamID' => $teamID));
+	$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 	return $result;
 }
 ////////////////////////////////////////////////////////////////////////////////////
@@ -491,7 +455,7 @@ function in_array_r($needle, $haystack, $strict = false) {
 ////////////////////////////////////////////////////////////////////////////////////
 function removeTeamMember($empnum) {
      foreach($_SESSION['TeamMembers'] as $subKey => $subArray){
-          if($subArray['EmpNum'] == $empnum){
+          if($subArray->EmpNum == $empnum){
                unset($_SESSION['TeamMembers'][$subKey]);
           }
      }

@@ -29,7 +29,7 @@
 		$stmt->bindParam(':Volunteer', $_SESSION['teamnominee']->Volunteer);
 		
 		// need to work out who correct approver is. get approver for first person
-		$searchList = getThisTeamMembers($_SESSION['teamnominee']->teamID);
+		$searchList = getAllTeamsMembers($_SESSION['teamnominee']->teamID);
 		$totalTeamMembers = count($searchList);
 		$searchList = array_to_object($searchList);
 		//print_r($searchList);

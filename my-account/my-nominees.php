@@ -30,19 +30,28 @@
 				<div class="row mCustomScrollbar height555" data-mcs-theme="dark-2">
 				<?php 
 					// Get List for My nominations
-					$nomUsers = new NominationsList($db);
-					$nomList = $nomUsers->getAllNominationsList($_SESSION['user']->EmpNum);
+					$nomList = getAllNominationsList($_SESSION['user']->EmpNum);
 					foreach ($nomList as $list){
 					?>
 					<div class="tableRow">
 						<div class="tableColumn-3">
-							<?=getName($list->NominatedEmpNum)?>
+						<?php 
+						if($list->Team != ''){
+							echo $list->Team;
+						} else {
+							echo getName($list->NominatedEmpNum);
+						}
+						?>
 						</div>
 						<div class="tableColumn-3">
 							<?=getConvertedDate($list->NomDate)?>
 						</div>
 						<div class="tableColumn-2">
+						<?php if($list->Team != ''){ ?>
+							<div class="viewButton inlineDiv clickAble lightBlue" data-type="ecard" data-url="<?=HTTP_PATH?>alerts/view-team-ecard.php" data-id="<?=$list->ID?>">View</div>
+						<?php } else { ?>
 							<div class="viewButton inlineDiv clickAble lightBlue" data-type="ecard" data-url="<?=HTTP_PATH?>alerts/view-ecard.php" data-id="<?=$list->ID?>">View</div>
+						<?php } ?>
 						</div>
 						<div class="tableColumn-4">
 							<?php

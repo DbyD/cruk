@@ -4,7 +4,7 @@
 	unset($_SESSION['alreadydone']);
 	unset($_SESSION['nominee']);
 	$teamid =$_POST['myTeamName'];
-	$_SESSION['TeamMembers'] =  getThisTeamMembers($teamid);
+	$_SESSION['TeamMembers'] =  getAllTeamsMembers($teamid);
 	$_SESSION['teamnominee']->teamID = $teamid;
 ?>
 
@@ -133,4 +133,4 @@
 </div>
 <?php include_once('../inc/footer.php'); ?>
 			<? //print_r($_SESSION['teamnominee']);?>
-			<? //print_r($_SESSION['nominee']);?>
+			<? //print_r($_SESSION['TeamMembers']);?>

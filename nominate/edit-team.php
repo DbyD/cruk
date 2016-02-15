@@ -33,7 +33,7 @@
 			foreach ($_SESSION['TeamMembers'] as $list){
 				$stmt = $db->prepare("INSERT INTO tblteamusers (teamID, EmpNum) VALUES (:teamID, :EmpNum)");
 				$stmt->bindParam(':teamID', $teamID);
-				$stmt->bindParam(':EmpNum', $list['EmpNum']);
+				$stmt->bindParam(':EmpNum', $list->EmpNum);
 				$stmt->execute();
 			}
 			echo "created";

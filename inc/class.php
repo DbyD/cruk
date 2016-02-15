@@ -161,17 +161,6 @@ class claimedAwardsList{
     }
 }
 
-class NominationsList{
-	// this needs to be fixed to include team
-    public function getAllNominationsList($empnum) {
-		global $db;
-		$stmt = $db->prepare("SELECT * FROM tblnominations WHERE awardType='1' AND NominatorEmpNum = :empnum ORDER BY NomDate DESC");
-		$stmt->execute(array('empnum' => $empnum));
-		$result = $stmt->fetchAll(PDO::FETCH_OBJ);
-		return $result;
-    }
-}
-
 class searchUsers{
     public function getAllUserSearch($search) {
 		global $db;
