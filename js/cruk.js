@@ -564,7 +564,8 @@ $(document).ready(function(){
 	});
 
 
-	$("#updateButton").click(function(){
+	$("#updateButton").click(function(e){
+		e.preventDefault();
 		var button  = $("#formUpdate").find('input[type=submit]');
 		button.click();
 	});

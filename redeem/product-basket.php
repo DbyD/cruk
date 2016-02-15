@@ -4,25 +4,35 @@ include_once '../inc/header.php';
 include "lib.php";
 $menu = new MenuGenerator;
 
+
+
 if(isset($_POST['submitUpdate'])){
 	
 	$arr = array();
+
 	
 	foreach($_POST as $key => $post){
-		$item = explode('_',$key);
-		$arr[ $item[1] ][ $item[0] ] = $post; 
+		if( $key != "submitUpdate" ){
+			$item = explode('_',$key);
+			$arr[ $item[1] ][ $item[0] ] = $post; 
+		}
 	}
 
+
 	foreach($arr as $val){
-		if(!$val['submitUpdate']){
+			
 			$current_count = count( explode(',',$val['busketIDS']) );
 			$quantity = $val["quantity"];
 
 			if( $current_count != $quantity ) {
 				if( $current_count < $quantity ){
 					$addCount = $quantity - $current_count;
-					$basket_id = explode(',', $val['busketIDS']);
-    				$basket = getBasketByID( $basket_id[0] );
+					
+
+					$ex_basket_id = explode(',', $val['busketIDS']);
+    				$basket_id = isset($ex_basket_id[0]) ? $ex_basket_id[0] : '';
+
+    				$basket = getBasketByID( $basket_id );
 					for( $i = 0; $i < $addCount; $i++ ){
 						addBasket( $basket[0] );
 					}
@@ -37,8 +47,9 @@ if(isset($_POST['submitUpdate'])){
 				}
 				
 			}
-		}
+		
 	}
+
 }
 
 
@@ -206,39 +217,40 @@ if( $val == "YES" ){
 											$arr = array();
 											$i = 0;
 												
-											foreach ($basket as $pr_b){		
-												$pr_info = getProductByID( $pr_b["prID"] );
-												$total_price += $pr_b['aPrice'];
-												
+											if(!empty($basket)){
+												foreach ($basket as $pr_b){		
+													$pr_info = getProductByID( $pr_b["prID"] );
+													$total_price += $pr_b['aPrice'];
+													
 
-												if( $i == 0 ){
-													$arr[ $i ]['baID'] = $pr_b['baID'];
-													$arr[ $i ]['aPrice'] = $pr_b['aPrice'];
-													$arr[ $i ]['aTitle'] = $pr_info['aTitle'];
-													$arr[ $i ]['prID'] = $pr_b["prID"];
-													$arr[ $i ]['QTY'] = 1;
-													$i++;
-												} else {
-													$isProduct = false;
-													for( $j = 0; $j < count($arr); $j++ ){
-														if( $pr_b["prID"] == $arr[ $j ]['prID'] && $pr_b["aPrice"] == $arr[ $j ]['aPrice']){
-															$arr[ $j ]['QTY']++;
-															$arr[ $j ]['baID'] .= ',' . $pr_b['baID'] ;
-															$isProduct = true;
-														} 
-													}
-
-													if( !$isProduct ){
+													if( $i == 0 ){
 														$arr[ $i ]['baID'] = $pr_b['baID'];
 														$arr[ $i ]['aPrice'] = $pr_b['aPrice'];
 														$arr[ $i ]['aTitle'] = $pr_info['aTitle'];
 														$arr[ $i ]['prID'] = $pr_b["prID"];
 														$arr[ $i ]['QTY'] = 1;
 														$i++;
-													}
-												}
+													} else {
+														$isProduct = false;
+														for( $j = 0; $j < count($arr); $j++ ){
+															if( $pr_b["prID"] == $arr[ $j ]['prID'] && $pr_b["aPrice"] == $arr[ $j ]['aPrice']){
+																$arr[ $j ]['QTY']++;
+																$arr[ $j ]['baID'] .= ',' . $pr_b['baID'] ;
+																$isProduct = true;
+															} 
+														}
 
-												
+														if( !$isProduct ){
+															$arr[ $i ]['baID'] = $pr_b['baID'];
+															$arr[ $i ]['aPrice'] = $pr_b['aPrice'];
+															$arr[ $i ]['aTitle'] = $pr_info['aTitle'];
+															$arr[ $i ]['prID'] = $pr_b["prID"];
+															$arr[ $i ]['QTY'] = 1;
+															$i++;
+														}
+													}
+
+												}
 											}
 												
 											?>
@@ -312,7 +324,7 @@ if( $val == "YES" ){
 										<div class="large-4 columns">
 										</div>
 										<div class="large-8 columns">
-											<button class="blueButton" onClick="location.href='<?php echo HTTP_PATH . "redeem/credit-card-page.php?menu_id=" . $menu_id; ?>'">Yes</button>
+											<button class="blueButton" onClick="location.href='<?php echo HTTP_PATH . "redeem/credit-card-page.php?menu_id=" . $menu_id . "&checkout=false"; ?>'">Yes</button>
 											<button id="closeCheckOut" class="blueButton">NO</button>
 										</div>
 										
@@ -328,7 +340,7 @@ if( $val == "YES" ){
 								<div class="small-12 medium-12 columns textRight">
 								<a href="<?php echo HTTP_PATH . "redeem"?>"><button class="purpleButton">CONTINUE SHOPPING</button></a>
 								<button class="blueButton" id="updateButton">UPDATE QUANTITY</button>
-								<button class="pinkButton" id="checkOutButton" linkGo="<?php echo HTTP_PATH . "redeem/checkout.php?menu_id=" . $menu_id; ?>'&checkout=true">CHECK OUT</button>
+								<button class="pinkButton" id="checkOutButton" linkGo="<?php echo HTTP_PATH . "redeem/checkout.php?menu_id=" . $menu_id . "&checkout=true"; ?>'">CHECK OUT</button>
 								</div>
 							</div>
 

@@ -29,5 +29,4 @@ $(document).ready(function(){
 			alert("Please indicate if you have read the Terms & Conditions.");
 		}
 	});
-
 });

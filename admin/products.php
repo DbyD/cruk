@@ -1,5 +1,4 @@
 <?php 
-	
 
 	$res = 0;
 	if( isset( $_GET["menu_id"] ) ) {
@@ -16,12 +15,22 @@
 			$res["id"] = $_POST["sub_id"];
 			$res["label"] = $_POST["nameSub"];
 
+			/*echo "<pre>";
+			var_dump($res);
+			echo "</pre>";
+*/
 			updateSubImageAndName( $res );
 				
 		}
-
+		if(isset($_POST["add_basket"])){
+			// echo '<pre>';
+			// var_dump($_POST);
+			// die;
+		}
 
 		if( isset( $_POST["submit"] ) ){
+			
+
 			if( empty( $_POST["title"] ) || empty( $_POST["point"] ) || empty( $_POST["Delivery"] ) || empty( $_POST["content"] ) ){
 				$error_message = "<div class='error'>Please fill in all fields</div>";
 			} else {
@@ -93,7 +102,7 @@
 <div id="content" class="large-8 large-push-2 columns">
 	<div class="title withStar">
 		<div class="title">
-			<div class="inlineDiv clickAble" data-type="gourl" data-url="<?php echo HTTP_PATH . 'redeem/'; ?>">Redeem</div>
+			<div class="inlineDiv clickAble" data-type="gourl" data-url="<?php echo HTTP_PATH . 'redeem/'; ?>">Shop</div>
 			<i class="icon-icons_thickrightarrow smalli"></i>
 			
 			
@@ -294,6 +303,7 @@
 			  <div class="row">
 			 	 	<div class="large-12 columns">
 			 	 	 	<input type="submit" value="Save" name="submit"/>
+			 	 	 	<input type="submit" value="Add basket" name="add_basket"/>
 			  		</div>
 			  </div>
 

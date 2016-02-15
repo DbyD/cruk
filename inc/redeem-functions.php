@@ -32,7 +32,6 @@ function getMenuProducts( $menu_id , $sub_id ){
 		$stmt->bindValue(':subID', $sub_id, PDO::PARAM_INT);
 	}
 	
-	
 	$stmt->execute();
 
 	$arr = array();

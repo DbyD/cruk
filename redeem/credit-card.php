@@ -6,6 +6,7 @@ include "lib.php";
 $key = 'Cheer11Inside19Credit';
 $url = 'https://gateway.fidelipay.co.uk/paymentform/';
 
+
 if(isset($_POST)){	
 	if(isset($_POST["firstname"]) && isset($_POST["surname"]) && isset($_POST["address1"]) && isset($_POST["address2"]) && isset($_POST["town"]) && isset($_POST["postcode"]) && isset($_POST["telephone"]) && isset($_POST["email"])){
 		$_SESSION['cardForm'] = array(
@@ -50,12 +51,6 @@ function createSignature(array $data, $key) {
 	$ret = str_replace(array('%0D%0A', '%0A%0D', '%0D'), '%0A', $ret);
 	return hash('SHA512', $ret . $key);
  }
-
-
-
-$menu = new MenuGenerator;
-$menu_id = $_GET["menu_id"];
-$checkout = $_GET["checkout"];
 
 
 

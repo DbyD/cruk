@@ -31,8 +31,8 @@ $basket = getBasket( $_SESSION["user"]->EmpNum );
 	<div class="row contentFill">
 		<div class="medium-12 columns leftnp rightnp fillHeight">
 			<div class="row">
-				<a id="viewBasket" class='<?php if($basket_isset) echo 'view-basket';?>' href="<?php echo HTTP_PATH . "redeem/product-basket.php?basket=true&menu_id=" . $menu_id; ?>"> <i class="fi-shopping-bag"></i>View basket </a>
-				<?php if( $basket_isset ) : ;?>
+				<a id="viewBasket" class='<?php if(isset($basket_isset)) echo 'view-basket';?>' href="<?php echo HTTP_PATH . "redeem/product-basket.php?basket=true&menu_id=" . $menu_id; ?>"> <i class="fi-shopping-bag"></i>View basket </a>
+				<?php if( isset($basket_isset) ) : ;?>
 				<span id="item-count"><?php echo ($basket != 0)?count( $basket ):0; ?> Items</span>
 				<?php endif;?>
 			</div>
@@ -42,6 +42,7 @@ $basket = getBasket( $_SESSION["user"]->EmpNum );
 						Please enter your Billing details below.
 					</div>
 				</div>
+				<?php $_SESSION["thank_you"] = true; ?>
 				<form action="<?php echo HTTP_PATH . 'redeem/credit-card.php?menu_id='?>" method="post">
 					<input type="hidden" name="firstname" value="<?php echo $_SESSION['user']->Fname; ?>" required>
 					<input type="hidden" name="surname" value="<?php echo $_SESSION['user']->Sname; ?>" required>
@@ -159,7 +160,6 @@ $basket = getBasket( $_SESSION["user"]->EmpNum );
 	</div>
 	<div  class="callout panel" id="menu_container">
 		<?php $menus = getMenuAllRows(); ?>
-		<!-- <pre><?php var_dump($menus); ?></pre> -->
 		
 		<section class="block-list">
 			<ul class="left-bar-nav">

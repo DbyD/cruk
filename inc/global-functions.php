@@ -16,6 +16,7 @@ function startEmail(){
 }
 ////////////////////////////////////////////////////////////////////////////////////
 function endEmail($noid){
+	$endemail = '';
 	$endemail .= '<img class="emailCruklogo" src="'.HTTP_PATH.'images/emails/Cancer-Research-UK.png" alt="Cancer Research UK">';
 	$endemail .= '<p>Regards</p><p><b>Cancer Research</b></p>';
 	if($noid != ''){

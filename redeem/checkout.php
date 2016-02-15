@@ -8,11 +8,15 @@ $menu_id = $_GET["menu_id"];
 $checkout = $_GET["checkout"];
 
 
-if(isset($_POST)){
-	// var_dump($_POST);
+if(isset($_POST) && !empty($_POST)){
+	// var_dump($_POST);die;
 	
 	$insert_data = $_SESSION['cardForm'];
-	$insert_data['amount'] = intval(substr( $_POST['amount'] ,-strlen($_POST['amount']),strlen($_POST['amount'])-2 ));
+	
+	if(!empty($insert_data) && isset($insert_data['amount'])){
+		$insert_data['amount'] = intval(substr( $_POST['amount'] ,-strlen($_POST['amount']),strlen($_POST['amount'])-2 ));
+	}
+	
 	
 }
 
@@ -98,6 +102,7 @@ if(isset($_POST['redirectURL'])){
  	// updateCreditCardAmount( $res['amount'] ,  $resultCardRequest);
 	$insert_data['resultCardRequest'] = json_encode($res);
 	$insert_data['EmpNum'] = $_SESSION["user"]->EmpNum;
+	$insert_data['amount'] = intval(substr( $res["amount"] ,-strlen($res["amount"]),strlen($res["amount"])-2 ));
 	
 
 	$signature = null;
@@ -109,33 +114,39 @@ if(isset($_POST['redirectURL'])){
 	if (!$signature || $signature !== createSignature($res, $key)) {
 		die('Sorry, the signature check failed');
 	}
-	
-	if ($res['responseCode'] === "0") { 
-		$card_message = "<p>Thank you for your payment.</p>";
-		
-		$last_id = insertCreditCard( $insert_data );
 
-		$basket = getBasket( $_SESSION["user"]->EmpNum );
-		
-		foreach ($basket as $pr_b){	
-			$total_price += $pr_b['aPrice'];
+	if($_SESSION["thank_you"] === true){
+		if ($res['responseCode'] === "0") { 
+			$card_message = "<p>Thank you for your payment.</p>";
+			$total_price = 0;
+			
+			$last_id = insertCreditCard( $insert_data );
+
+			$basket = getBasket( $_SESSION["user"]->EmpNum );
+
+			
+			foreach ($basket as $pr_b){	
+				$total_price += $pr_b['aPrice'];
+			}
+
+			$insert_data["date"] = date("Y-m-d h:i:s");
+			$insert_data["totalPrice"] = $total_price;
+			$insert_data["postcode"] = intval( $_SESSION['cardForm']["postcode"] );
+			
+			$order_insert_id = addBasketOrders( $insert_data );
+
+			updateBasketStatus( $_SESSION['user']->EmpNum, $order_insert_id );
+			
+			if( $order_insert_id > 0){
+				$credit_save = true;
+				SendMail();
+			}
+		} else { 
+			$card_message = "<p>Failed to take payment: " . htmlentities($res['responseMessage']) . "</p>";
 		}
-
-		$insert_data["date"] = date("Y-m-d h:i:s");
-		$insert_data["totalPrice"] = $total_price;
-		$insert_data["postcode"] = intval( $_SESSION['cardForm']["postcode"] );
-		
-		$order_insert_id = addBasketOrders( $insert_data );
-
-		updateBasketStatus( $_SESSION['user']->EmpNum, $order_insert_id );
-		
-		if( $order_insert_id > 0){
-			$credit_save = true;
-			SendMail();
-		}
-	} else { 
-		$card_message = "<p>Failed to take payment: " . htmlentities($res['responseMessage']) . "</p>";
 	}
+} else {
+	$credit_save = true;
 }
 
 
@@ -193,7 +204,7 @@ $basket = getBasket( $_SESSION["user"]->EmpNum );
 			}
 
 		}
-	} else if( isset($_POST['redirectURL']) && $credit_save == true ){
+	} else if( isset($_POST['redirectURL'])  ){
 		$postForUpload = array();
 	}
 						
@@ -217,7 +228,7 @@ $basket = getBasket( $_SESSION["user"]->EmpNum );
 		<div class="medium-12 columns leftnp rightnp fillHeight">
 			<div class="row">
 				<a id="viewBasket" class='<?php if($basket_isset) echo 'view-basket';?>' href="<?php echo HTTP_PATH . "redeem/product-basket.php?basket=true&menu_id=" . $menu_id; ?>"> <i class="fi-shopping-bag"></i>View basket </a>
-				<?php if( $basket_isset ) : ;?>
+				<?php if( isset($basket_isset) ) : ;?>
 				<span id="item-count"><?php echo ($basket != 0)?count( $basket ):0; ?> Items</span>
 				<?php endif;?>
 			</div>
@@ -239,7 +250,7 @@ $basket = getBasket( $_SESSION["user"]->EmpNum );
 								<?php 
 												
 												$arr = array();
-												$i = 0;
+												$i = $total_price = 0;
 												
 	
 												foreach ($basket as $pr_b){	
@@ -373,12 +384,10 @@ $basket = getBasket( $_SESSION["user"]->EmpNum );
 				</div>
 			</div>
 			<?php elseif( isset( $postForUpload ) ):?>
-			<?php 
+			<?php 					
+				$last_id = 1;
 
-									
-				$last_id = 0;
-
-				if( count($postForUpload) > 0 ){
+				if( count($postForUpload) > 0 && $_SESSION["thank_you"] === true ){
 					if( $total_price <= $remaining_amount){
 						$postForUpload["date"] = date("Y-m-d h:i:s");
 						$postForUpload["EmpNum"] = $_SESSION['user']->EmpNum;
@@ -391,13 +400,18 @@ $basket = getBasket( $_SESSION["user"]->EmpNum );
 						$remaining_amount = $sum_all + $sum_credit_card - $sum_orders;
 
 					}
-				} else {
+				} else if( $_SESSION["thank_you"] === true ){
 					$last_id = $order_insert_id;
 				}
 				
 				
-				if( $last_id > 0 ):
-					updateBasketStatus( $_SESSION['user']->EmpNum, $last_id );
+
+				if( $last_id > 0 || $_SESSION["thank_you"] === false):
+					if( $_SESSION["thank_you"] === true ){
+						updateBasketStatus( $_SESSION['user']->EmpNum, $last_id );
+					}
+					
+					$_SESSION["thank_you"] = false;
 				?>
 
 				<div class="row callout panel creditCardView mCustomScrollbar height410" data-mcs-theme="dark-2">
@@ -417,9 +431,10 @@ $basket = getBasket( $_SESSION["user"]->EmpNum );
 					Products for order not!.
 				<?php endif; ?>
 			<?php else:?>
+			<?php $_SESSION["thank_you"] = true; ?>
 			<div class="row callout panel creditCardView mCustomScrollbar height410" data-mcs-theme="dark-2">
 				<div  id="formDiv" >
-					<form action="<?php echo HTTP_PATH . 'redeem/checkout.php?menu_id=' . $menu_id ?>" method="post">
+					<form action="<?php echo HTTP_PATH . 'redeem/checkout.php?menu_id=' . $menu_id . "&checkout=true;" ?>" method="post">
 						<div class="row">
 							<div class="medium-12 withPadding columns">
 								If your order includes an e-voucher code,this will be delivered by email using your work email adress,if you have also made a charity donation, this will automatically be made on your behalf.
