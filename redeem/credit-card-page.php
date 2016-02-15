@@ -10,6 +10,15 @@ $checkout = $_GET["checkout"];
 
 $basket = getBasket( $_SESSION["user"]->EmpNum );
 
+if(count($basket) > 0 && is_array($basket)){
+	$basket_isset = true;
+} else {
+	$basket = array();
+	$basket_isset = false;
+}
+
+
+
 	if( isset( $_GET["menu_id"] ) ) {
 		$menu_id = $_GET["menu_id"];
 	}
@@ -30,12 +39,17 @@ $basket = getBasket( $_SESSION["user"]->EmpNum );
 	</div>
 	<div class="row contentFill">
 		<div class="medium-12 columns leftnp rightnp fillHeight">
+			
+			<?php if(is_array($basket)):?>
+
 			<div class="row">
-				<a id="viewBasket" class='<?php if(isset($basket_isset)) echo 'view-basket';?>' href="<?php echo HTTP_PATH . "redeem/product-basket.php?basket=true&menu_id=" . $menu_id; ?>"> <i class="fi-shopping-bag"></i>View basket </a>
-				<?php if( isset($basket_isset) ) : ;?>
+				<a id="viewBasket" class='<?php if($basket_isset) echo 'view-basket';?>' href="<?php echo HTTP_PATH . "redeem/product-basket.php?basket=true&menu_id=" . $menu_id; ?>"> <i class="fi-shopping-bag"></i>View basket </a>
+				<?php if( $basket_isset ) : ;?>
+
 				<span id="item-count"><?php echo ($basket != 0)?count( $basket ):0; ?> Items</span>
 				<?php endif;?>
 			</div>
+			<?php endif; ?>
 			<div class="row callout panel creditCardView height555">
 				<div class="row">
 					<div class="medium-12 withPadding columns">

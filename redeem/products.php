@@ -5,6 +5,13 @@ include "lib.php";
 $menu = new MenuGenerator;
 
 $val = $_SESSION['user']->administrator;
+$basket = getBasket( $_SESSION["user"]->EmpNum );
+if(count($basket) > 0 && is_array($basket)){
+	$basket_isset = true;
+} else {
+	$basket = array();
+	$basket_isset = false;
+}
 
 if( $val == "YES" ){
 
@@ -30,6 +37,7 @@ if( $val == "YES" ){
     if( $res != 0){
         $products = $res;
     }
+
 ?>
 
 			<div id="content" class="large-8 large-push-2 columns">
@@ -46,11 +54,18 @@ if( $val == "YES" ){
 				<div class="row contentFill">
 					<div class="medium-12 columns leftnp rightnp fillHeight">
 						
-						<?php if(isset( $basket ) && $basket != 0):?>
+						
+						<?php if(is_array($basket)):?>
+
 						<div class="row">
 							<a id="viewBasket" class='<?php if($basket_isset) echo 'view-basket';?>' href="<?php echo HTTP_PATH . "redeem/product-basket.php?basket=true&menu_id=" . $menu_id; ?>"> <i class="fi-shopping-bag"></i>View basket </a>
+							<?php if( $basket_isset ) : ;?>
+
+							<span id="item-count"><?php echo ($basket != 0)?count( $basket ):0; ?> Items</span>
+							<?php endif;?>
 						</div>
 						<?php endif; ?>
+						
 
 						<?php if( isset( $products ) ):?>
 						<div class="row products">

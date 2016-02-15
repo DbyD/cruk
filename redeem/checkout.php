@@ -250,11 +250,14 @@ if(isset($postForUpload)){
 			$_SESSION["thank_you"] = false;
 		}
  	}
-			
-	
-
-	
  }
+ 
+if(count($basket) > 0 && is_array($basket)){
+	$basket_isset = true;
+} else {
+	$basket = array();
+	$basket_isset = false;
+}
 						
 ?>
 
@@ -284,12 +287,15 @@ var_dump($_SESSION["thank_you"]);
 
 	<div class="row contentFill">
 		<div class="medium-12 columns leftnp rightnp fillHeight">
+			<?php if(is_array($basket)):?>
 			<div class="row">
 				<a id="viewBasket" class='<?php if($basket_isset) echo 'view-basket';?>' href="<?php echo HTTP_PATH . "redeem/product-basket.php?basket=true&menu_id=" . $menu_id; ?>"> <i class="fi-shopping-bag"></i>View basket </a>
-				<?php if( isset($basket_isset) ) : ;?>
+				<?php if( $basket_isset ) : ;?>
+
 				<span id="item-count"><?php echo ($basket != 0)?count( $basket ):0; ?> Items</span>
 				<?php endif;?>
 			</div>
+			<?php endif; ?>
 			
 			<div class="row callout panel <?php if(isset($postForUpload)) echo 'hidden'; ?>" id="basket-table">
 				
