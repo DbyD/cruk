@@ -37,7 +37,7 @@ function getAllEmployees(){
 						AprDate				AS AprDate
 				FROM tblnominations_team
 				WHERE awardType=2 AND AprStatus=1)) X
-			ORDER BY AprDate DESC LIMIT 20';
+			ORDER BY AprDate DESC';
 ///			ON n.NominatorEmpNum = e.EmpNum GROUP BY n.NominatorEmpNum";
 
 	$stmt = $db->prepare( $sql );
