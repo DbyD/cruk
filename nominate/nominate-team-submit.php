@@ -17,7 +17,6 @@
 			$_SESSION['teamnominee']->awardPrivate = 'No';
 		}
 		
-		
 		//print_r($_SESSION['teamnominee']);
 		//echo "<br><br>";
 		$stmt = $db->prepare("INSERT INTO tblnominations_team(
@@ -30,8 +29,10 @@
 		$stmt->bindParam(':Volunteer', $_SESSION['teamnominee']->Volunteer);
 		
 		// need to work out who correct approver is. get approver for first person
-		$searchList = array_to_object(getThisTeamMembers($_SESSION['teamnominee']->teamID));
-		print_r($searchList);
+		$searchList = getThisTeamMembers($_SESSION['teamnominee']->teamID);
+		$totalTeamMembers = count($searchList);
+		$searchList = array_to_object($searchList);
+		//print_r($searchList);
 		if ($searchList){
 			foreach ($searchList as $list){
 				//echo $list->AppEmpNum;
@@ -47,10 +48,16 @@
 			}
 		}
 		if($AppEmpNum->AppEmpNum ==''){
-			print_r( $firstPersonEmpNum);
+			print_r($firstPersonEmpNum);
 			$approver = getApprover($firstPersonEmpNum);
 			$AppEmpNum->AppEmpNum = $approver->AppEmpNum;
 		}
+		if($totalTeamMembers>21){
+			$AppEmpNum = getSUApprover();
+			$_SESSION['teamnominee']->AppEmpNum = $AppEmpNum->AppEmpNum;
+			$_SESSION['teamnominee']->full_App_name = $AppEmpNum->AppFname;
+		}
+		
 		$stmt->bindParam(':ApproverEmpNum', $AppEmpNum->AppEmpNum);
 		$stmt->bindParam(':Team', getmyTeamName($_SESSION['teamnominee']->teamID));
 		$stmt->bindParam(':TeamID', $_SESSION['teamnominee']->teamID);
@@ -94,6 +101,7 @@
 			$_SESSION['teamnominee']->teamEmailList = $teamEmailList;
 		}
 		
+		
 		$_SESSION['alreadydone'] = 'yes';
 			
 		if($_SESSION['teamnominee']->littleExtra=='Yes' && ($AppEmpNum->AppEmpNum != $_SESSION['user']->EmpNum)){
@@ -112,7 +120,11 @@
 			} else {
 				// send email to approver
 				if(filter_var($AppEmpNum->AppEaddress, FILTER_VALIDATE_EMAIL)){
-					$sendEmail->emailTo = $AppEmpNum->AppEaddress;
+					if($totalTeamMembers>21){
+						$sendEmail->emailTo = $approver->SUEaddress;
+					} else {
+						$sendEmail->emailTo = $AppEmpNum->AppEaddress;
+					}
 					$sendEmail->Content = "<p>Dear ".$AppEmpNum->AppFname."</p>
 											<p>".$_SESSION['user']->Fname." has nominated the following colleagues to receive 'A Little Extra' as part of an Our Heroes Extraordinary People, Extraordinary Effort Team Award.</p>
 											<p>Team Name: ".getmyTeamName($_SESSION['teamnominee']->teamID)."<br>
@@ -126,6 +138,8 @@
 											<p>If you need a hand to access the Our Heroes Portal or approve the award, our recognition partners, Xexec, are happy to help 0845 230 9393</p>";
 					$email = sendEmail($sendEmail,'T'.$id);
 					//echo $sendEmail->Content;
+				
+		
 				} else {
 					$email = "fail";
 				}
@@ -156,7 +170,6 @@
 				$_SESSION['teamnominee']->NomFull_name = $_SESSION['user']->full_name();
 			}
 			// get team ecard
-			
 			if ($searchList){
 				foreach ($searchList as $list){
 					$_SESSION['teamnominee']->teamEmailList = $teamEmailList;
@@ -164,6 +177,24 @@
 					$_SESSION['teamnominee']->Fname = getFirstName($list->EmpNum);
 					$_SESSION['teamnominee']->full_name = getName($list->EmpNum);
 					$_SESSION['teamnominee']->content = indEcardTeamText($_SESSION['teamnominee']);
+					// need to add to tblnominations
+					$stmt = $db->prepare("INSERT INTO tblnominations(
+								awardType, NominatorEmpNum, NominatedEmpNum, nomination_teamID, Volunteer, ApproverEmpNum,
+								littleExtra, amount, NomDate, AprDate, AprStatus, awardPrivate) 
+								VALUES (:awardType, :NominatorEmpNum, :NominatedEmpNum, :nomination_teamID, :Volunteer, :ApproverEmpNum, 
+								:littleExtra, :amount, NOW(), NOW(), :AprStatus, :awardPrivate)");
+					$stmt->bindParam(':awardType', $a = 2);
+					$stmt->bindParam(':NominatorEmpNum', $_SESSION['user']->EmpNum);
+					$stmt->bindParam(':NominatedEmpNum', $list->EmpNum);
+					$stmt->bindParam(':nomination_teamID', $id);
+					$stmt->bindParam(':Volunteer', $_SESSION['teamnominee']->Volunteer);
+					$stmt->bindParam(':ApproverEmpNum', $AppEmpNum->AppEmpNum);
+					$stmt->bindParam(':littleExtra', $a = 'No', PDO::PARAM_STR);
+					$stmt->bindParam(':amount', $a = 0);
+					$stmt->bindParam(':AprStatus', $a = 1);
+					$stmt->bindParam(':awardPrivate', $_SESSION['teamnominee']->awardPrivate);
+					$stmt->execute();
+					
 					//echo $_SESSION['teamnominee']->content;
 					// test if offline
 					if ($list->offline == 'YES'){
@@ -192,7 +223,7 @@
 			}
 		}
 		echo $email;
-	$_SESSION['teamnominee']->teamEmailList = $teamEmailList;
+		$_SESSION['teamnominee']->teamEmailList = $teamEmailList;
 	//}
 	header("Location: nominate-team-done.php");
 ?>
