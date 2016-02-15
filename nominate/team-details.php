@@ -178,7 +178,12 @@
 			<form action="edit-team.php" method="POST" name="confirmTeam" id="confirmTeam">
 				<input type="hidden" name="teamNO" id="teamNO" value="<?=$count?>" />
 				<input type="hidden" name="teamid" id="teamid" value="<?=$_SESSION['teamid']?>" class="" />
-				<input type="text" name="myTeamName" id="myTeamName" value="<?php echo getmyTeamName($_SESSION['teamid']) ?>" class="" />
+				<?php 
+					if($_SESSION['teamid'] != 'myteam'){
+						$myTeamName = getmyTeamName($_SESSION['teamid']);
+					} 
+				?>
+				<input type="text" name="myTeamName" id="myTeamName" value="<?php echo $myTeamName; ?>" class="" />
 			</form>
 		</div>
 	</div>

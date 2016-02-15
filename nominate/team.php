@@ -5,6 +5,8 @@
 	if($myteam == ''){
 		$myteam = 'myteam';
 	}
+	unset($_SESSION['teamnominee']);
+	unset($_SESSION['TeamMembers']);
 ?>
 
 <div id="content" class="large-8 large-push-2 columns">
@@ -45,7 +47,9 @@
 				<form action="nominate-team.php" method="post" name="nominateTeam" id="nominateTeam">
 					<input type="hidden" name="myTeamName" id="myTeamName" value="<?=$myteam?>">
 					<div class="row mCustomScrollbar height480" data-mcs-theme="dark-2">
-					<?php	$searchList = getAllTeamsMembers($myteam);
+					<?php
+						$searchList = getAllTeamsMembers($myteam);
+						echo count($searchList);
 						if ($searchList){
 							foreach ($searchList as $list){
 				?>
@@ -56,8 +60,28 @@
 						<div class="medium-4 columns">
 							<?php echo $list->Fname.' '.$list->Sname; ?>
 						</div>
-						<div class="medium-6 columns lightBlue italics">
-							<?php echo $list->Team; ?>
+						<div class="medium-6 columns italics">
+						<?php 
+							if($list->Shop != ''){
+								echo $list->Shop; 
+							} else {
+								if($list->RetailArea != ''){
+									echo $list->RetailArea; 
+								} else {
+									if($list->Team != ''){
+										echo $list->Team; 
+									} else {
+										if($list->Section != ''){
+											echo $list->Section; 
+										} else {
+											if($list->Department != ''){
+												echo $list->Department; 
+											}
+										}
+									}
+								}
+							}
+						?>
 						</div>
 					</div>
 				<?php

@@ -17,7 +17,6 @@
 			$_SESSION['teamnominee']->awardPrivate = 'No';
 		}
 		
-		
 		//print_r($_SESSION['teamnominee']);
 		//echo "<br><br>";
 		$stmt = $db->prepare("INSERT INTO tblnominations_team(
@@ -30,8 +29,10 @@
 		$stmt->bindParam(':Volunteer', $_SESSION['teamnominee']->Volunteer);
 		
 		// need to work out who correct approver is. get approver for first person
-		$searchList = array_to_object(getThisTeamMembers($_SESSION['teamnominee']->teamID));
-		print_r($searchList);
+		$searchList = getThisTeamMembers($_SESSION['teamnominee']->teamID);
+		$totalTeamMembers = count($searchList);
+		$searchList = array_to_object($searchList);
+		//print_r($searchList);
 		if ($searchList){
 			foreach ($searchList as $list){
 				//echo $list->AppEmpNum;
@@ -47,8 +48,12 @@
 			}
 		}
 		if($AppEmpNum->AppEmpNum ==''){
-			print_r( $firstPersonEmpNum);
+			print_r($firstPersonEmpNum);
 			$approver = getApprover($firstPersonEmpNum);
+			$AppEmpNum->AppEmpNum = $approver->AppEmpNum;
+		}
+		if($totalTeamMembers>21){
+			$approver = getSUApprover();
 			$AppEmpNum->AppEmpNum = $approver->AppEmpNum;
 		}
 		$stmt->bindParam(':ApproverEmpNum', $AppEmpNum->AppEmpNum);
@@ -94,6 +99,9 @@
 			$_SESSION['teamnominee']->teamEmailList = $teamEmailList;
 		}
 		
+		print_r($approver);
+		exit;
+		
 		$_SESSION['alreadydone'] = 'yes';
 			
 		if($_SESSION['teamnominee']->littleExtra=='Yes' && ($AppEmpNum->AppEmpNum != $_SESSION['user']->EmpNum)){
@@ -107,7 +115,7 @@
 				$sendEmail->Content = "<p>Hello </p>
 										<p>".$_SESSION['user']->Fname." has nominated a team to receive 'A Little Extra' as part of an Our Heroes Award.</p>
 										<p>Hoever there is no approver listed. </p>";
-				$email = sendEmail($sendEmail,'T'.$id);
+				//$email = sendEmail($sendEmail,'T'.$id);
 				//echo $sendEmail->Content;
 			} else {
 				// send email to approver
@@ -124,7 +132,7 @@
 											<p>To view the details of the proposed nomination and to approve or decline the award, please login to the  <a href='".HTTP_PATH."'>Our Heroes Portal</a>.</p>
 											<p>If no decision is made within the next 30 days, the nomination will automatically be approved.</p>
 											<p>If you need a hand to access the Our Heroes Portal or approve the award, our recognition partners, Xexec, are happy to help 0845 230 9393</p>";
-					$email = sendEmail($sendEmail,'T'.$id);
+					//$email = sendEmail($sendEmail,'T'.$id);
 					//echo $sendEmail->Content;
 				} else {
 					$email = "fail";
@@ -145,7 +153,7 @@
 											Team Award: ".cleanWorkAward($_SESSION['teamnominee']->workAward)."<br>Award category: ".$_SESSION['teamnominee']->BeliefID."</p>
 											<p>Any other nominations awaiting your approval can be found in the <a href='".HTTP_PATH."'>My Approvals</a> section of the Our Heroes Portal. 
 											You can also find a history of nominations in the <a href='".HTTP_PATH."'>Reports</a> section.</p>";
-					$email = sendEmail($sendEmail,'T'.$id);
+					//$email = sendEmail($sendEmail,'T'.$id);
 					$_SESSION['alreadydone'] = 'yes';
 				}
 			}
@@ -176,7 +184,7 @@
 												<p>".$_SESSION['user']->Fname." has nominated ".$_SESSION['teamnominee']->full_name." to receive a Thank you card as part of an Our Heroes Award.</p>
 												<p>Below is the content of the card:</p>
 												<p>".$_SESSION['teamnominee']->content."</p>";
-						$email = sendEmail($sendEmail,'T'.$id);
+						//$email = sendEmail($sendEmail,'T'.$id);
 						echo "offline email sent to xxexec";
 					} else {
 						if(filter_var($_SESSION['teamnominee']->Eaddress, FILTER_VALIDATE_EMAIL)){
@@ -192,7 +200,7 @@
 			}
 		}
 		echo $email;
-	$_SESSION['teamnominee']->teamEmailList = $teamEmailList;
+		$_SESSION['teamnominee']->teamEmailList = $teamEmailList;
 	//}
 	header("Location: nominate-team-done.php");
 ?>

@@ -386,12 +386,38 @@ function getAllTeamsMembers($teamID) {
 		$stmt = $db->prepare("SELECT * FROM tblteamusers tu INNER JOIN tblempall e ON tu.EmpNum=e.EmpNum WHERE tu.teamID = :teamID");
 		$stmt->execute(array('teamID' => $teamID));
 		$result = $stmt->fetchAll(PDO::FETCH_OBJ);
+		return $result;
 	} else {
-		$stmt = $db->prepare("SELECT * FROM tblempall WHERE Team = :Team");
-		$stmt->execute(array('Team' => $_SESSION['user']->Team));
-		$result = $stmt->fetchAll(PDO::FETCH_OBJ);
+		$stmt = $db->prepare("SELECT * FROM tblempall WHERE Shop<>'' AND Shop = :Shop");
+		$stmt->execute(array('Shop' => $_SESSION['user']->Shop));
+		if ($result = $stmt->fetchAll(PDO::FETCH_OBJ)){
+			return $result;
+		} else {
+			$stmt = $db->prepare("SELECT * FROM tblempall WHERE RetailArea = :RetailArea");
+			$stmt->execute(array('RetailArea' => $_SESSION['user']->RetailArea));
+			if ($result = $stmt->fetchAll(PDO::FETCH_OBJ)){
+				return $result;
+			} else {
+				$stmt = $db->prepare("SELECT * FROM tblempall WHERE Team = :Team");
+				$stmt->execute(array('Team' => $_SESSION['user']->Team));
+				if ($result = $stmt->fetchAll(PDO::FETCH_OBJ)){
+					return $result;
+				} else {
+					$stmt = $db->prepare("SELECT * FROM tblempall WHERE Section = :Section");
+					$stmt->execute(array('Section' => $_SESSION['user']->Section));
+					if ($result = $stmt->fetchAll(PDO::FETCH_OBJ)){
+						return $result;
+					} else {
+						$stmt = $db->prepare("SELECT * FROM tblempall WHERE Department = :Department");
+						$stmt->execute(array('Department' => $_SESSION['user']->Department));
+						if ($result = $stmt->fetchAll(PDO::FETCH_OBJ)){
+							return $result;
+						} 
+					}
+				}
+			}
+		}
 	}
-	return $result;
 }
 ////////////////////////////////////////////////////////////////////////////////////
 function addTeamMember($empnum) {
@@ -410,9 +436,35 @@ function addTeamMember($empnum) {
 function getThisTeamMembers($teamID) {
 	global $db;
 	if($teamID == 'myteam'){
-		$stmt = $db->prepare("SELECT EmpNum,Fname,Sname FROM tblempall WHERE Team = :Team");
-		$stmt->execute(array('Team' => $_SESSION['user']->Team));
-		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		$stmt = $db->prepare("SELECT * FROM tblempall WHERE Shop<>'' AND Shop = :Shop");
+		$stmt->execute(array('Shop' => $_SESSION['user']->Shop));
+		if ($result = $stmt->fetchAll(PDO::FETCH_ASSOC)){
+			return $result;
+		} else {
+			$stmt = $db->prepare("SELECT * FROM tblempall WHERE RetailArea = :RetailArea");
+			$stmt->execute(array('RetailArea' => $_SESSION['user']->RetailArea));
+			if ($result = $stmt->fetchAll(PDO::FETCH_ASSOC)){
+				return $result;
+			} else {
+				$stmt = $db->prepare("SELECT * FROM tblempall WHERE Team = :Team");
+				$stmt->execute(array('Team' => $_SESSION['user']->Team));
+				if ($result = $stmt->fetchAll(PDO::FETCH_ASSOC)){
+					return $result;
+				} else {
+					$stmt = $db->prepare("SELECT * FROM tblempall WHERE Section = :Section");
+					$stmt->execute(array('Section' => $_SESSION['user']->Section));
+					if ($result = $stmt->fetchAll(PDO::FETCH_ASSOC)){
+						return $result;
+					} else {
+						$stmt = $db->prepare("SELECT * FROM tblempall WHERE Department = :Department");
+						$stmt->execute(array('Department' => $_SESSION['user']->Department));
+						if ($result = $stmt->fetchAll(PDO::FETCH_ASSOC)){
+							return $result;
+						} 
+					}
+				}
+			}
+		}
 	} else {
 		if (is_numeric($teamID)) {
 			$stmt = $db->prepare("SELECT * FROM tblteamusers tu INNER JOIN tblempall e ON tu.EmpNum=e.EmpNum WHERE tu.teamID = :teamID");
@@ -471,6 +523,28 @@ function getSUemail(){
 	$stmt->execute();
 	$result = $stmt->fetch(PDO::FETCH_OBJ);
 	return $result->Eaddress;
+}
+////////////////////////////////////////////////////////////////////////////////////
+function getSUApprover(){
+	global $db;
+	$stmt = $db->prepare("SELECT * FROM tblempall WHERE EmpNum = 'hradmin'");
+	$stmt->execute();
+	if ($mgr = $stmt->fetch(PDO::FETCH_OBJ)){
+		$suapprover->AppEmpNum = $mgr->EmpNum;
+		$suapprover->AppFname = $mgr->Fname;
+		$suapprover->AppSname = $mgr->Sname;
+		$suapprover->AppEaddress = $mgr->Eaddress;
+		$stmt = $db->prepare("SELECT Eaddress FROM tblempall WHERE SuperUser = 'Y'");
+		$stmt->execute();
+		if ($searchList = $stmt->fetchAll(PDO::FETCH_OBJ)){
+			foreach ($searchList as $list){
+				$teamEmailList .= $list->Eaddress.", ";
+			}
+		}
+		$teamEmailList = chop($teamEmailList,", ");
+		$suapprover->SUEaddress = $teamEmailList;
+	}
+	return $suapprover;
 }
 ////////////////////////////////////////////////////////////////////////////////////
 ?>
