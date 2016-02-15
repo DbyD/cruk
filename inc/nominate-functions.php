@@ -256,7 +256,8 @@ echo "<br>15 ran here<br>";
 ////////////////////////////////////////////////////////////////////////////////////
 function getTotalNominations($empnum){
 	global $db;
-	$stmt = $db->prepare('SELECT * FROM tblnominations WHERE NominatorEmpNum = :EmpNum');
+	// need to fix to add team
+	$stmt = $db->prepare("SELECT * FROM tblnominations WHERE awardType='1' And NominatorEmpNum = :EmpNum");
 	$stmt->execute(array('EmpNum' => $empnum));
 	if ($result = $stmt->fetch()){
 		return $stmt->rowCount();

@@ -53,9 +53,11 @@
 			$AppEmpNum->AppEmpNum = $approver->AppEmpNum;
 		}
 		if($totalTeamMembers>21){
-			$approver = getSUApprover();
-			$AppEmpNum->AppEmpNum = $approver->AppEmpNum;
+			$AppEmpNum = getSUApprover();
+			$_SESSION['teamnominee']->AppEmpNum = $AppEmpNum->AppEmpNum;
+			$_SESSION['teamnominee']->full_App_name = $AppEmpNum->AppFname;
 		}
+		
 		$stmt->bindParam(':ApproverEmpNum', $AppEmpNum->AppEmpNum);
 		$stmt->bindParam(':Team', getmyTeamName($_SESSION['teamnominee']->teamID));
 		$stmt->bindParam(':TeamID', $_SESSION['teamnominee']->teamID);
@@ -99,8 +101,6 @@
 			$_SESSION['teamnominee']->teamEmailList = $teamEmailList;
 		}
 		
-		print_r($approver);
-		exit;
 		
 		$_SESSION['alreadydone'] = 'yes';
 			
@@ -115,12 +115,16 @@
 				$sendEmail->Content = "<p>Hello </p>
 										<p>".$_SESSION['user']->Fname." has nominated a team to receive 'A Little Extra' as part of an Our Heroes Award.</p>
 										<p>Hoever there is no approver listed. </p>";
-				//$email = sendEmail($sendEmail,'T'.$id);
+				$email = sendEmail($sendEmail,'T'.$id);
 				//echo $sendEmail->Content;
 			} else {
 				// send email to approver
 				if(filter_var($AppEmpNum->AppEaddress, FILTER_VALIDATE_EMAIL)){
-					$sendEmail->emailTo = $AppEmpNum->AppEaddress;
+					if($totalTeamMembers>21){
+						$sendEmail->emailTo = $approver->SUEaddress;
+					} else {
+						$sendEmail->emailTo = $AppEmpNum->AppEaddress;
+					}
 					$sendEmail->Content = "<p>Dear ".$AppEmpNum->AppFname."</p>
 											<p>".$_SESSION['user']->Fname." has nominated the following colleagues to receive 'A Little Extra' as part of an Our Heroes Extraordinary People, Extraordinary Effort Team Award.</p>
 											<p>Team Name: ".getmyTeamName($_SESSION['teamnominee']->teamID)."<br>
@@ -132,8 +136,10 @@
 											<p>To view the details of the proposed nomination and to approve or decline the award, please login to the  <a href='".HTTP_PATH."'>Our Heroes Portal</a>.</p>
 											<p>If no decision is made within the next 30 days, the nomination will automatically be approved.</p>
 											<p>If you need a hand to access the Our Heroes Portal or approve the award, our recognition partners, Xexec, are happy to help 0845 230 9393</p>";
-					//$email = sendEmail($sendEmail,'T'.$id);
+					$email = sendEmail($sendEmail,'T'.$id);
 					//echo $sendEmail->Content;
+				
+		
 				} else {
 					$email = "fail";
 				}
@@ -153,7 +159,7 @@
 											Team Award: ".cleanWorkAward($_SESSION['teamnominee']->workAward)."<br>Award category: ".$_SESSION['teamnominee']->BeliefID."</p>
 											<p>Any other nominations awaiting your approval can be found in the <a href='".HTTP_PATH."'>My Approvals</a> section of the Our Heroes Portal. 
 											You can also find a history of nominations in the <a href='".HTTP_PATH."'>Reports</a> section.</p>";
-					//$email = sendEmail($sendEmail,'T'.$id);
+					$email = sendEmail($sendEmail,'T'.$id);
 					$_SESSION['alreadydone'] = 'yes';
 				}
 			}
@@ -164,7 +170,6 @@
 				$_SESSION['teamnominee']->NomFull_name = $_SESSION['user']->full_name();
 			}
 			// get team ecard
-			
 			if ($searchList){
 				foreach ($searchList as $list){
 					$_SESSION['teamnominee']->teamEmailList = $teamEmailList;
@@ -172,6 +177,24 @@
 					$_SESSION['teamnominee']->Fname = getFirstName($list->EmpNum);
 					$_SESSION['teamnominee']->full_name = getName($list->EmpNum);
 					$_SESSION['teamnominee']->content = indEcardTeamText($_SESSION['teamnominee']);
+					// need to add to tblnominations
+					$stmt = $db->prepare("INSERT INTO tblnominations(
+								awardType, NominatorEmpNum, NominatedEmpNum, nomination_teamID, Volunteer, ApproverEmpNum,
+								littleExtra, amount, NomDate, AprDate, AprStatus, awardPrivate) 
+								VALUES (:awardType, :NominatorEmpNum, :NominatedEmpNum, :nomination_teamID, :Volunteer, :ApproverEmpNum, 
+								:littleExtra, :amount, NOW(), NOW(), :AprStatus, :awardPrivate)");
+					$stmt->bindParam(':awardType', $a = 2);
+					$stmt->bindParam(':NominatorEmpNum', $_SESSION['user']->EmpNum);
+					$stmt->bindParam(':NominatedEmpNum', $list->EmpNum);
+					$stmt->bindParam(':nomination_teamID', $id);
+					$stmt->bindParam(':Volunteer', $_SESSION['teamnominee']->Volunteer);
+					$stmt->bindParam(':ApproverEmpNum', $AppEmpNum->AppEmpNum);
+					$stmt->bindParam(':littleExtra', $a = 'No', PDO::PARAM_STR);
+					$stmt->bindParam(':amount', $a = 0);
+					$stmt->bindParam(':AprStatus', $a = 1);
+					$stmt->bindParam(':awardPrivate', $_SESSION['teamnominee']->awardPrivate);
+					$stmt->execute();
+					
 					//echo $_SESSION['teamnominee']->content;
 					// test if offline
 					if ($list->offline == 'YES'){
@@ -184,7 +207,7 @@
 												<p>".$_SESSION['user']->Fname." has nominated ".$_SESSION['teamnominee']->full_name." to receive a Thank you card as part of an Our Heroes Award.</p>
 												<p>Below is the content of the card:</p>
 												<p>".$_SESSION['teamnominee']->content."</p>";
-						//$email = sendEmail($sendEmail,'T'.$id);
+						$email = sendEmail($sendEmail,'T'.$id);
 						echo "offline email sent to xxexec";
 					} else {
 						if(filter_var($_SESSION['teamnominee']->Eaddress, FILTER_VALIDATE_EMAIL)){
