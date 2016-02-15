@@ -11,7 +11,9 @@ $checkout = $_GET["checkout"];
 if(isset($_POST) && !empty($_POST)){
 	// var_dump($_POST);die;
 	
-	$insert_data = $_SESSION['cardForm'];
+	if(isset($_SESSION['cardForm'])){
+		$insert_data = $_SESSION['cardForm'];
+	}
 	
 	if(!empty($insert_data) && isset($insert_data['amount'])){
 		$insert_data['amount'] = intval(substr( $_POST['amount'] ,-strlen($_POST['amount']),strlen($_POST['amount'])-2 ));
@@ -163,10 +165,6 @@ $basket = getBasket( $_SESSION["user"]->EmpNum );
 
 	$val = $_SESSION['user']->administrator;
 
-	if( $val == "YES" ){
-		include('../admin/products.php');
-	} else {
-
 
 	$sum_all = getAvailable( $_SESSION['user']->EmpNum ); 
 	$sum_credit_card = getCreditCard( $_SESSION['user']->EmpNum );
@@ -251,7 +249,7 @@ if(isset($postForUpload)){
 		}
  	}
  }
- 
+
 if(count($basket) > 0 && is_array($basket)){
 	$basket_isset = true;
 } else {
@@ -259,10 +257,6 @@ if(count($basket) > 0 && is_array($basket)){
 	$basket_isset = false;
 }
 						
-?>
-
-<?php
-var_dump($_SESSION["thank_you"]);
 ?>
 
 <div id="content" class="large-8 large-push-2 columns">
@@ -470,7 +464,7 @@ var_dump($_SESSION["thank_you"]);
 			<?php $_SESSION["thank_you"] = true; ?>
 			<div class="row callout panel creditCardView mCustomScrollbar height410" data-mcs-theme="dark-2">
 				<div  id="formDiv" >
-					<form action="<?php echo HTTP_PATH . 'redeem/checkout.php?menu_id=' . $menu_id . "&checkout=true;" ?>" method="post">
+					<form action="<?php echo HTTP_PATH . 'redeem/checkout.php?menu_id=' . $menu_id . "&checkout=true" ?>" method="post">
 						<div class="row">
 							<div class="medium-12 withPadding columns">
 								If your order includes an e-voucher code,this will be delivered by email using your work email adress,if you have also made a charity donation, this will automatically be made on your behalf.
@@ -616,4 +610,4 @@ var_dump($_SESSION["thank_you"]);
 <script src="<?=HTTP_PATH?>js/foundation.min.js"></script> 
 <script src="<?=HTTP_PATH?>js/cruk.js"></script> 
 <script src="<?=HTTP_PATH?>js/redeem.js"></script>
-</body></html><?php } ?>
+</body></html>

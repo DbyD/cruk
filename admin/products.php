@@ -22,11 +22,7 @@
 			updateSubImageAndName( $res );
 				
 		}
-		if(isset($_POST["add_basket"])){
-			// echo '<pre>';
-			// var_dump($_POST);
-			// die;
-		}
+
 
 		if( isset( $_POST["submit"] ) ){
 			
@@ -97,6 +93,8 @@
 	if( $res != 0){
 		$products = $res;
 	}
+
+
 ?>
 
 <div id="content" class="large-8 large-push-2 columns">
@@ -205,6 +203,7 @@
 						  			<?php else:?>
 						  				<a href="<?php echo HTTP_PATH . 'redeem/products.php?menu_id=' . $menu_id . '&prID=' . $product['prID']; ?>"><img src="<?php echo HTTP_PATH . $product["Image_name"]; ?>" class="product-img"></a>
 						  			<?php endif;?>
+						  			<a href="http://cruk.loc/redeem/product-basket.php?prID=<?php echo $product['prID'];?>&menu_id=<?php echo $menu_id;?>">Add basket</a>
 						  		</div>
 						    </div>
 						
@@ -240,7 +239,7 @@
 			        	<input type="text" placeholder="" name="point" value="<?php echo isset( $pr['aPrice'] ) ? $pr['aPrice'] : ''; ?>" />
 			    </div>
 			  </div>
-			  <?php if(!is_null($subs)):?>
+			  <?php if(isset($subs) && !is_null($subs)):?>
 				  <div class="row">
 				    <div class="large-3 columns">
 				      <label>CHoose Sub menu</label></div>
@@ -303,7 +302,6 @@
 			  <div class="row">
 			 	 	<div class="large-12 columns">
 			 	 	 	<input type="submit" value="Save" name="submit"/>
-			 	 	 	<input type="submit" value="Add basket" name="add_basket"/>
 			  		</div>
 			  </div>
 
@@ -334,7 +332,15 @@
 					</div>
 					<div class="price-panel">
 						<!-- <i class="icon-icons_trophy"></i> -->
-						$300
+						<?php 
+						$sum_all = getAvailable( $_SESSION['user']->EmpNum ); 
+						$sum_credit_card = getCreditCard( $_SESSION['user']->EmpNum );
+						$sum_orders = getEmpBasketOrdersSum( $_SESSION['user']->EmpNum );
+
+
+						$remaining_amount = $sum_all + $sum_credit_card - $sum_orders;
+						echo '&pound;' . ' ' . $remaining_amount;
+						?> 
 					</div>
 					<div class="unlaimed-panel">
 						<!-- <i class="icon-icons_trophy"></i> -->

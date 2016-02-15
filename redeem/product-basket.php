@@ -119,12 +119,6 @@ if( isset( $_GET['prID'] ) ) {
 
 $val = $_SESSION['user']->administrator;
 
-if( $val == "YES" ){
-	include('../admin/products.php');
-} else {
-
-
-
 ?>
 			
 
@@ -441,4 +435,4 @@ if( $val == "YES" ){
 <script src="<?=HTTP_PATH?>js/cruk.js"></script>
 <script src="<?=HTTP_PATH?>js/redeem.js"></script>
 
-</body></html><?php } ?>
+</body></html>

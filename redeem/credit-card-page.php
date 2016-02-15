@@ -25,9 +25,7 @@ if(count($basket) > 0 && is_array($basket)){
 
 	$val = $_SESSION['user']->administrator;
 
-	if( $val == "YES" ){
-		include('../admin/products.php');
-	} else {					
+					
 ?>
 
 <div id="content" class="large-8 large-push-2 columns">
@@ -215,4 +213,4 @@ if(count($basket) > 0 && is_array($basket)){
 <script src="<?=HTTP_PATH?>js/foundation.min.js"></script> 
 <script src="<?=HTTP_PATH?>js/cruk.js"></script> 
 <script src="<?=HTTP_PATH?>js/redeem.js"></script>
-</body></html><?php } ?>
+</body></html>

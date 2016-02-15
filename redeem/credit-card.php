@@ -60,11 +60,6 @@ if( isset( $_GET["menu_id"] ) ) {
 }
 
 $val = $_SESSION['user']->administrator;
-
-if( $val == "YES" ){
-	include('../admin/products.php');
-} else {	
-		
 ?>
 
 
@@ -77,7 +72,6 @@ if( $val == "YES" ){
 <?php echo PHP_EOL; ?>
 </form>
 <?php echo PHP_EOL; ?>
-<?php } ?>
 
 <script type="text/javascript">
 	document.ccresponse.submit();
