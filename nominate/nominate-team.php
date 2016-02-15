@@ -132,5 +132,5 @@
 	</form>
 </div>
 <?php include_once('../inc/footer.php'); ?>
-			<? print_r($_SESSION['teamnominee']);?>
+			<? //print_r($_SESSION['teamnominee']);?>
 			<? //print_r($_SESSION['nominee']);?>

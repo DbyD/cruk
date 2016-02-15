@@ -49,7 +49,7 @@
 					<div class="row mCustomScrollbar height480" data-mcs-theme="dark-2">
 					<?php
 						$searchList = getAllTeamsMembers($myteam);
-						echo count($searchList);
+						//echo count($searchList);
 						if ($searchList){
 							foreach ($searchList as $list){
 				?>
