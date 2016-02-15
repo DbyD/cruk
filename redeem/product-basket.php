@@ -57,7 +57,8 @@ if(isset($_POST['submitUpdate'])){
 if(isset($_POST["baIDdel"]) && isset( $_POST['count'] ) ){
 	
 	$explode = explode(',', $_POST["baIDdel"]);
-	$count = $_POST['count'];
+	$count = intval($_POST['count']);
+	
 	
 	for($i = 0;$i < $count; $i++){
 		deleteBasketItem( $explode[ $i ] );
