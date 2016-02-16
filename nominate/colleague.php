@@ -85,5 +85,8 @@
 	include_once('../inc/footer.php');
 	if ($_GET['searchAuto']){
 ?>
-<script>$('#buttonRow').removeClass('hidden'); </script>
+<script>
+	<?php if($x==1){ ?>$("#EmpNum1").prop('checked', true); <?php } ?>
+	$('#buttonRow').removeClass('hidden');
+</script>
 <?php } ?>

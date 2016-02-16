@@ -45,7 +45,7 @@
 		} ?>
 		<div class="row withPadding">
 			<div class="greyText medium-12 columns">
-				Please add a reason for giving 'A Little Extra' 
+				Please add a reason for giving 'A Little Extra'. 
 			</div>
 		</div>
 		<div class="row withSidePadding valign-middle">

@@ -144,7 +144,7 @@ $(function(){
 	});
 	$("#LittleExtraForm").validate({
 		rules: {Reason: "required"},
-		messages: {Reason: "Please add in a reason for the little exra."},
+		messages: {Reason: "Please add in a reason for the Little Extra."},
 		errorPlacement: function(error, element) {
 			$("#alertContent").load("../alerts/alert-popup.php", {'error' : error.html() });
 			$("#alert").css('display', 'block');
@@ -350,12 +350,12 @@ $(function(){
 			case 'expandArrow': 
 				$("#"+id+" .expandArrow i" ).attr( "data-type", "colapseArrow" );
 				$("#"+id+" .expandArrow i" ).removeClass('icon-icons_pointright').addClass('icon-icons_pointdown');
-				$("#"+id+" .claimedAwardsExpanded").css('display', 'block');
+				$("#"+id+" .claimedAwardsExpanded").removeClass('hide');
 				break;
 			case 'colapseArrow': 
 				$("#"+id+" .expandArrow i" ).attr( "data-type", "expandArrow" );
 				$("#"+id+" .expandArrow i" ).removeClass('icon-icons_pointdown').addClass('icon-icons_pointright');
-				$("#"+id+" .claimedAwardsExpanded").css('display', 'none');
+				$("#"+id+" .claimedAwardsExpanded").addClass('hide');
 				break;
 			case 'submitNoValidate':
 				$("#dReason").val('');
