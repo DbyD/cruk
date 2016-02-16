@@ -33,8 +33,9 @@
 
 
 		if( isset( $_POST["submit"] ) ){
+			$content = trim($_POST["content"]);
 
-			if( empty( $_POST["title"] ) || empty( $_POST["point"] ) || empty( $_POST["Delivery"] ) || empty( trim($_POST["content"]) ) ){
+			if( empty( $_POST["title"] ) || empty( $_POST["point"] ) || empty( $_POST["Delivery"] ) || empty( $content ) ){
 				$error_message = "<div class='error'>Please fill in all fields</div>";
 			} else {
 
