@@ -444,9 +444,9 @@ function insertCreditCard( $data ) {
 
 	$stmt = $db->prepare("
 INSERT INTO tblcreditcard 
-	(firstname, surname, address1, 	address2, town, postcode, telephone, email, amount, EmpNum, resultCardRequest) 
+	(firstname, surname, address1, 	address2, town, postcode, telephone, email, amount, EmpNum, orderID, resultCardRequest) 
 VALUES 
-	(:firstname, :surname, :address1, :address2, :town, :postcode, :telephone, :email, :amount, :EmpNum, :resultCardRequest)");
+	(:firstname, :surname, :address1, :address2, :town, :postcode, :telephone, :email, :amount, :EmpNum, :orderID, :resultCardRequest)");
 
 	$stmt->bindValue(':firstname',$data["firstname"], PDO::PARAM_STR);
 	$stmt->bindValue(':surname', $data["surname"], PDO::PARAM_STR);
@@ -458,6 +458,7 @@ VALUES
 	$stmt->bindValue(':email',$data["email"] , PDO::PARAM_STR);
 	$stmt->bindValue(':amount',$data["amount"] , PDO::PARAM_INT);
 	$stmt->bindValue(':EmpNum',$data["EmpNum"] , PDO::PARAM_STR);
+	$stmt->bindValue(':orderID',$data["orderID"] , PDO::PARAM_INT);
 	$stmt->bindValue(':resultCardRequest',$data["resultCardRequest"] , PDO::PARAM_STR);
 
 	

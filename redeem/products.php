@@ -14,7 +14,6 @@ if(count($basket) > 0 && is_array($basket)){
 }
 
 if( $val == "YES" ){
-
     include('../admin/products.php');
 } else {
     $res = 0;

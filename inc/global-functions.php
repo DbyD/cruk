@@ -4,25 +4,40 @@ function startEmail(){
 	$startemail = '<!DOCTYPE HTML><html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     			<title>CRUK Our Heroes</title>
 				<style type=text/css>
-					body,div {margin:0px;padding:0px}
-					.emailText {font-size:9pt;font-family:Arial;line-height:12pt;color:#2e008b;background:#fff;width:600px;padding:0 20px;text-align:left}
-					img{display:block}
+					body, div {margin: 0px;padding: 0px}
+					.emailText {font-size: 10pt;font-family: Calibri;line-height: 13pt;color: #2e008b;background: #fff;width: 600px;padding: 0 20px;text-align: left}
+					.colorblock {padding: 20px;color: #fff;margin-bottom:20px;}
+					img {display: block}
 					.emailOurheroes {text-align: left;}
 					.emailCruklogo {float: right;}
-					.small{font-size:8pt;}
-				</style></head><body><div align="center"><div class="emailText">
-				<div class="ourheroes"><img src="'.HTTP_PATH.'images/emails/our-heroes.png" alt="Cancer Research UK"></div>';
+					.small {font-size: 8pt;}
+					.largetext {font-size: 17pt;}
+					a {color:#fff}
+				</style></head><body><div align="center"><div class="emailText">';
 	return  $startemail;
 }
 ////////////////////////////////////////////////////////////////////////////////////
 function endEmail($noid){
 	$endemail = '';
-	$endemail .= '<img class="emailCruklogo" src="'.HTTP_PATH.'images/emails/Cancer-Research-UK.png" alt="Cancer Research UK">';
-	$endemail .= '<p>Regards</p><p><b>Cancer Research</b></p>';
+	$endemail .= '<p>Kind regards</p><p><b>Our Heroes Team</b></p>';
 	if($noid != ''){
-			$endemail .= '<p class="small">For future reference, if you need to contact our recognition partner, Xexec, about this nomination, please quote nomination code '.$noid.'</p>';
+			$endemail .= '<p class="small">Xexec ref: '.$noid.'</p>';
 	}
-	$endemail .= '</div></div></body></html>';
+	$endemail .= '<div class="ourheroes"><img src="'.HTTP_PATH.'images/emails/our-heroes.png" alt="Cancer Research UK">
+					<img class="emailCruklogo" src="'.HTTP_PATH.'images/emails/Cancer-Research-UK.png" alt="Cancer Research UK"></div>';
+		$endemail .= '</div></div></body></html>';
+	return $endemail;
+}
+////////////////////////////////////////////////////////////////////////////////////
+function endEcardEmail($noid){
+	$endemail = '';
+	$endemail .= '<p>Thank you and well done!</p><p><b>Our Heroes Team</b></p>';
+	if($noid != ''){
+			$endemail .= '<p class="small">Xexec ref: '.$noid.'</p>';
+	}
+	$endemail .= '</div><div class="ourheroes"><img src="'.HTTP_PATH.'images/emails/our-heroes.png" alt="Cancer Research UK">
+					<img class="emailCruklogo" src="'.HTTP_PATH.'images/emails/Cancer-Research-UK.png" alt="Cancer Research UK"></div>';
+		$endemail .= '</div></div></body></html>';
 	return $endemail;
 }
 ////////////////////////////////////////////////////////////////////////////////////
@@ -60,7 +75,7 @@ function array_to_object($array) {
 function sendEcardEmail($ecard){
 	// need to fix this so we can email anytime
 	global $headers;
-	$subject = "Our Heroes E-Card";
+	$subject = $ecard->emailsubject;
 	if ($emailTo = $ecard->offline == 'YES'){
 		$emailTo = $ecard->shopMEaddress;
 	} else {
@@ -73,7 +88,7 @@ function sendEcardEmail($ecard){
 	// need to fully design e-card
 	$message = startEmail();
 	$message .= $ecard->content;
-	$message .= endEmail();
+	$message .= endEcardEmail();
 	if(isset($ecard->Cc)){
 		$headers .= 'Cc: '. $ecard->Cc . "\r\n";
 	}
@@ -147,31 +162,25 @@ function getTotalNominationsList($empnum){
 }
 ////////////////////////////////////////////////////////////////////////////////////
 function indEcardText($ecard){
-	
-	$ecardImage = str_replace(' ','-',strtolower($ecard->BeliefID));
-	
-	$ecardText = '<img src="'.HTTP_PATH.'images/emails/'.$ecardImage.'.png" alt="'.$ecard->BeliefID.'">';
-	$ecardText .= "<p>Congratulations ".$ecard->Fname."</p>
+	$ecardText = ecardTopBar($ecard);
+	$ecardText .= "<p>Dear ".$ecard->Fname."</p>
+				<p>Congratulations!</p>
 				<p>".$ecard->NomFull_name." says you've done something really special and deserve an Our Heroes Extraordinary People, 
-				Extraordinary Effort award for the".$ecard->BeliefID." category.</p>
+				Extraordinary Effort award in the ".$ecard->BeliefID." category. Here's what they said:</p>
 				<p>".$ecard->personalMessage."</p>
-				<p>Through your dedication and commitment we can beat cancer sooner. The success of Cancer Research UK depends on people like you and we want you to know how much we appreciate your efforts.</p>
-				<p>Thank you and well done!.</p>";
+				<p>Through your dedication and commitment we can beat cancer sooner. The success of Cancer Research UK depends on people like you and we want you to know how much we appreciate your efforts.</p>";
 	return $ecardText;
 }
 ////////////////////////////////////////////////////////////////////////////////////
 function indEcardExtraText($ecard){
-	
-	$ecardImage = str_replace(' ','-',strtolower($ecard->BeliefID));
-	
-	$ecardText = '<img src="'.HTTP_PATH.'images/emails/'.$ecardImage.'.png" alt="'.$ecard->BeliefID.'">';
-	$ecardText .= "<p>Congratulations ".$ecard->Fname."</p>
+	$ecardText = ecardTopBar($ecard);
+	$ecardText .= "<p>Dear ".$ecard->Fname."</p>
+				<p>Congratulations!</p>
 				<p>".$ecard->NomFull_name." says you've done something really special and deserve an Our Heroes Extraordinary People, 
-				Extraordinary Effort award for the ".$ecard->BeliefID." category.</p>
+				Extraordinary Effort award in the ".$ecard->BeliefID." category. </p>
 				<p>".$ecard->personalMessage."</p>
-				<p>".$ecard->NomFname." says you deserve  'A Little Extra' as part of your award! Please log onto the <a href='".HTTP_PATH."'>Our Heroes Portal</a> to view and claim your Little Extra award.</p>
-				<p>Through your dedication and commitment we can beat cancer sooner. The success of Cancer Research UK depends on people like you and we want you to know how much we appreciate your efforts.</p> 
-				<p>Thank you and well done!</p>";
+				<p>".$ecard->NomFname." says you deserve  'A Little Extra' as part of your award! <span class='hide'>Please log on (or register if you haven’t already) to the <a href='".HTTP_PATH."'>Our Heroes Portal</a> to view and claim your Little Extra award.</span></p>
+				<p>Through your dedication and commitment we can beat cancer sooner. The success of Cancer Research UK depends on people like you and we want you to know how much we appreciate your efforts.</p>";
 	return $ecardText;
 }
 ////////////////////////////////////////////////////////////////////////////////////
@@ -181,39 +190,50 @@ function getCurrentFolder($name){
 }
 ////////////////////////////////////////////////////////////////////////////////////
 function indEcardTeamText($ecard){
-	
 	$ecard->teamEmailList = str_replace($ecard->full_name.", ","",$ecard->teamEmailList);
 	$ecard->teamEmailList = str_replace(", ".$ecard->full_name,"",$ecard->teamEmailList);
 	$ecard->teamEmailList = strrev(implode(strrev(' and'), explode(',', strrev($ecard->teamEmailList), 2)));
-	
-	$ecardImage = str_replace(' ','-',strtolower($ecard->BeliefID));
-	
-	$ecardText = '<img src="'.HTTP_PATH.'images/emails/'.$ecardImage.'.png" alt="'.$ecard->BeliefID.'">';
-	$ecardText .= "<p>Congratulations ".$ecard->Fname."</p>
+	$ecardText = ecardTopBar($ecard);
+	$ecardText .= "<p>Dear ".$ecard->Fname."</p>
+				<p>Congratulations!</p>
 				<p>".$ecard->NomFull_name." says you've done something really special and deserve an Our Heroes Extraordinary People, 
-				Extraordinary Effort award for the ".$ecard->BeliefID." category.</p>
-				<p>".$ecard->personalMessage."</p>
-				<p>The award has been given to you as part of a team award that also includes ".$ecard->teamEmailList.".</p>
-				<p>Through your dedication and commitment we can beat cancer sooner. The success of Cancer Research UK depends on people like you and we want you to know how much we appreciate your efforts.</p>
+				Extraordinary Effort award in the ".$ecard->BeliefID." category.</p>
+				<p>".$ecard->personalMessage."</p>";
+				
+	if(substr_count($ecard->teamEmailList, ",") > 3){
+		$ecardText .="<p>The award has been given to ".getmyTeamName($ecard->teamID)." as a team award.</p>";
+	} else {
+		$ecardText .="<p>The award has been given to you as part of a team award that also includes ".$ecard->teamEmailList.".</p>";
+	}
+	
+	$ecardText .= "<p>Through your dedication and commitment we can beat cancer sooner. The success of Cancer Research UK depends on people like you and we want you to know how much we appreciate your efforts.</p>
 				<p>Thank you and well done!</p>";
 	return $ecardText;
 }
 ////////////////////////////////////////////////////////////////////////////////////
 function indEcardTeamExtraText($ecard){
+	
 	$ecard->teamEmailList = str_replace($ecard->full_name.", ","",$ecard->teamEmailList);
 	$ecard->teamEmailList = str_replace("and ".$ecard->full_name,"",$ecard->teamEmailList);
 	if (strpos($ecard->teamEmailList, 'and') !== false) {
 	} else {
 		$ecard->teamEmailList = strrev(implode(strrev(' and'), explode(',', strrev($ecard->teamEmailList), 2)));
 	}
-	$ecardImage = str_replace(' ','-',strtolower($ecard->BeliefID));
 	
-	$ecardText = '<img src="'.HTTP_PATH.'images/emails/'.$ecardImage.'.png" alt="'.$ecard->BeliefID.'">';
-	$ecardText .= "<p>Congratulations ".$ecard->Fname."</p>
-				<p>".$ecard->NomFull_name." says you've done something really special and deserve an Our Heroes Extraordinary People, 
-				Extraordinary Effort award for the".$ecard->BeliefID." category.</p>
-				<p>".$ecard->personalMessage."</p>
-				<p>The award has been given to you as part of a team award that also includes ".$ecard->teamEmailList.".</p>";
+	$ecardText = ecardTopBar($ecard);
+	
+	$ecardText .= "<p>dear ".$ecard->Fname."</p>
+				<p>Congratulations!</p>
+				<p>".$ecard->NomFull_name." says you’ve done something really special and deserve an Our Heroes Extraordinary People, 
+				Extraordinary Effort award in the ".$ecard->BeliefID." category.</p>
+				<p>".$ecard->personalMessage."</p>";
+				
+	if(substr_count($ecard->teamEmailList, ",") > 3){
+		$ecardText .="<p>The award has been given to ".getmyTeamName($ecard->teamID)." as a team award.</p>";
+	} else {
+		$ecardText .="<p>The award has been given to you as part of a team award that also includes ".$ecard->teamEmailList.".</p>";
+	}
+				
 	if($ecard->workAward=='20pound'){
 		$ecardText .= "Each member of the team has been awarded a &pound;20 voucher. You can use your voucher to choose from a great selection of awards on the <a href='".HTTP_PATH."'>Our Heroes Portal</a>.";
 	} else {
@@ -221,12 +241,33 @@ function indEcardTeamExtraText($ecard){
 		 				\"Our Heroes\" project code (HRP2000). Whether it's a few drinks, a meal out or a team experience, it's up to your team to decide and make arrangements to suit you all.  
 		 				".$ecard->NomFname." has nominated ".$ecard->firstPerson." as the team's contact in the first instance.</p>";
 	}
-	$ecardText .= "<p>".$ecard->NomFname." says you deserve  'A Little Extra' as part of your award! Please log onto the <a href='".HTTP_PATH."'>Our Heroes Portal</a> to view and claim your Little Extra award.</p>
-				<p>Through your dedication and commitment we can beat cancer sooner. The success of Cancer Research UK depends on people like you and we want you to know how much we appreciate your efforts.</p> 
+	$ecardText .= "<p>Through your dedication and commitment we can beat cancer sooner. The success of Cancer Research UK depends on people like you and we want you to know how much we appreciate your efforts.</p> 
 				<p>Thank you and well done!</p>";
+				
 	return $ecardText;
 }
 ////////////////////////////////////////////////////////////////////////////////////
+function ecardTopBar($ecard){
+	$ecardImage = str_replace(' ','-',strtolower($ecard->BeliefID));
+	
+	switch ($ecard->BeliefID) {
+		case 'Be Brave'  :
+			$backgroundColor= "#ec008c";
+			break;
+		case 'Be Sharp'  :
+			$backgroundColor= "#00b6ed";
+			break;
+		case 'Be United'  :
+			$backgroundColor= "#5833a2";
+			break;
+		default             :
+			$backgroundColor= "#ec008c";
+	}
+	
+	$ecardText = '<img src="'.HTTP_PATH.'images/emails/'.$ecardImage.'.png" alt="'.$ecard->BeliefID.'">';
+	$ecardText .= '<div class="colorblock" style="background:'.$backgroundColor.'">';
+	return $ecardText;
+}
 ////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////

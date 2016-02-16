@@ -21,9 +21,6 @@ if(isset($_POST) && !empty($_POST)){
 	
 	
 }
-
-
-
  
 $key = 'Cheer11Inside19Credit';
 
@@ -88,8 +85,6 @@ if(isset($_POST['redirectURL'])){
 		if ($res['responseCode'] === "0") { 
 			$card_message = "<p>Thank you for your payment.</p>";
 			$total_price = 0;
-			
-			$last_id = insertCreditCard( $insert_data );
 
 			$basket = getBasket( $_SESSION["user"]->EmpNum );
 			
@@ -103,6 +98,8 @@ if(isset($_POST['redirectURL'])){
 				$insert_data["postcode"] = intval( $_SESSION['cardForm']["postcode"] );
 				
 				$order_insert_id = addBasketOrders( $insert_data );
+				$insert_data["orderID"] = $order_insert_id;
+				$last_id = insertCreditCard( $insert_data );
 				$email_order_code = $order_insert_id;
 
 				updateBasketStatus( $_SESSION['user']->EmpNum, $order_insert_id );

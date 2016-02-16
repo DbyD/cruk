@@ -1,4 +1,3 @@
-
 /* @group General */
 @media only screen and (min-width: 1024px) {
 .row {
@@ -7,6 +6,7 @@
 #content, #left-column, #right-column {
 	height: 610px;
 }
+
 .large-2 {
 	width: 20%;
 	padding-right: 0;
@@ -51,7 +51,6 @@
 #subHome .image {
 	height: 415px;
 	background-size: auto 425px;
-	
 }
 }
 @media only screen and (max-width: 1023px) {
@@ -131,15 +130,14 @@ ul.off-canvas-list .photo {
 /* @group Login */
 @media only screen and (max-width: 1023px) {
 #content .colleaguelogin, #content .firsttime {
-	height: 330px;
-	padding: 20px;
+	height: auto;
 }
 }
 /* @end */
 /* @group Home */
 @media only screen and (max-width: 1199px) {
 #home1, #home2, #home3 {
-	margin-bottom: 0px;
+	margin-bottom: px;
 }
 #home1 .image {
 	height: 265px;
@@ -191,64 +189,13 @@ ul.off-canvas-list .photo {
 @media only screen and (max-width: 1023px) {
 #subHome .image {
 	background-size: 100% auto;
-	background-repeat:no-repeat;
-	height: 190px;
-}
-.tableTitle{
-	font-size: 13px;
-	padding: 14px 0px;
-	text-align: center;
-	background: #2E008B none repeat scroll 0% 0%;
-	color: #FFF;
-}
-.tableColumn-3{
-	display: inline-table;
-	width: 30%;
-}
-.closealert{
-	position: absolute;
-	top: -5px;
-	right: -2px;
-	cursor: pointer;
-}
-.title{
-	padding: 30px 15px;
-}
-.title .awardStar{
-	margin-left: -3px;	
-}
-.withStar.title .right{
-	margin: 0px 20px 0px 0px;
+	height: 200px;
 }
 .nominateButton {
 	padding: 40px 0;
 	height: auto;
 }
-
-.tableColumn-4{
-	width: 60%;
-	margin-right: 20px;
-	display: inline-table;
-	padding: 20px 4px;	
-}
-
-.tableReports{
-	font-size: 13px;
-	height: 60px;
-	padding: 0px;
-	text-align: center;
-	background: #2E008B none repeat scroll 0% 0%;
-	color: #FFF;}
-
-.tableReportsHead.white{
-	background: #FFF none repeat scroll 0% 0%;
-	color: #2E008B;
-	display: inline-table;
-	padding: 8px 30px;
-	border-right: 1px solid #5833A2;}
-
 .searchInput input[type=text] {
-	margin-top:10px;
 	width: 100%;
 }
 .searchInput .medium-10 {
@@ -260,7 +207,6 @@ ul.off-canvas-list .photo {
 .valign-middle .columns {
 	display: block;
 }
-
 .searchResult .medium-2 {
 	float: left;
 	width: 20%;
@@ -269,7 +215,7 @@ ul.off-canvas-list .photo {
 /* @end */
 /* @group Messages */
 @media only screen and (max-width: 1199px) {
-.height590 {
+.height605 {
 	height: 540px;
 }
 .height233 {
@@ -308,26 +254,7 @@ ul.off-canvas-list .photo {
 /* @group Override */
 
 @media only screen and (max-width: 1199px) {
-.height590,.height555, .height505, .height490 {
+.height605,.height555, .height505, .height490 {
 	height: auto;
 }
-/* @end */
-/* @group My Awards */
-@media only screen and (max-width: 479px) {
-.tableColumn-3{
-	display: inline-table;
-	width: 18%;
-	padding: 0 0 0 3px;
-	font: 8px;
-}
-	}
-	
-@media only screen and (min-width: 480px) {
-.tableColumn-3{
-	display: inline-table;
-	width: 24%;
-	font: 8px;
-}
-	}
-
 /* @end */

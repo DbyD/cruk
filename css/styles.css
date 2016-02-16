@@ -364,6 +364,10 @@ li.ui-menu-item { font-size:13px !important; }
 .italics{
 	font-style: italic;
 }
+.nonItalics{
+	font-style: normal;
+	font-weight: normal;
+}
 .inlineDiv{
 	display: inline-block;
 	vertical-align: middle;

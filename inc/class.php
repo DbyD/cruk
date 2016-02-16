@@ -152,9 +152,17 @@ class MyApprovalsHistory{
 }
 
 class claimedAwardsList{
+	public $empnum;
     public function getAllclaimedAwardsList($empnum) {
 		global $db;
 		$stmt = $db->prepare("SELECT * FROM tblnominations WHERE NominatedEmpNum = :empnum AND AprStatus=1 AND AwardClaimed='Yes' ORDER BY amount ASC, NomDate DESC");
+		$stmt->execute(array('empnum' => $empnum));
+		$result = $stmt->fetchAll(PDO::FETCH_OBJ);
+		return $result;
+    }
+    public function getAllredeemedList($empnum) {
+		global $db;
+		$stmt = $db->prepare("SELECT * FROM tblbasketorders WHERE EmpNum = :empnum ORDER BY date DESC");
 		$stmt->execute(array('empnum' => $empnum));
 		$result = $stmt->fetchAll(PDO::FETCH_OBJ);
 		return $result;

@@ -33,8 +33,9 @@
 
 
 		if( isset( $_POST["submit"] ) ){
+			$content = trim($_POST["content"]);
 
-			if( empty( $_POST["title"] ) || empty( $_POST["point"] ) || empty( $_POST["Delivery"] ) || empty( $_POST["content"] ) ){
+			if( empty( $_POST["title"] ) || empty( $_POST["point"] ) || empty( $_POST["Delivery"] ) || empty( $content ) ){
 				$error_message = "<div class='error'>Please fill in all fields</div>";
 			} else {
 
@@ -212,10 +213,11 @@
 
 									<?php if(isset($sub_id)):?>
 						  				<a href="<?php echo HTTP_PATH . 'redeem/products.php?menu_id=' . $menu_id . '&sub_id=' . $sub_id . '&prID=' . $product['prID']; ?>"><img src="<?php echo HTTP_PATH . $product["Image_name"]; ?>" class="product-img"></a>
+						  				<a href="http://cruk.loc/redeem/product-basket.php?prID=<?php echo $product['prID'];?>&menu_id=<?php echo $menu_id;?>">Add basket</a>
 						  			<?php else:?>
 						  				<a href="<?php echo HTTP_PATH . 'redeem/products.php?menu_id=' . $menu_id . '&prID=' . $product['prID']; ?>"><img src="<?php echo HTTP_PATH . $product["Image_name"]; ?>" class="product-img"></a>
 						  			<?php endif;?>
-						  			<a href="http://cruk.loc/redeem/product-basket.php?prID=<?php echo $product['prID'];?>&menu_id=<?php echo $menu_id;?>">Add basket</a>
+						  			
 						  		</div>
 						    </div>
 						

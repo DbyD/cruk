@@ -139,6 +139,7 @@
 				} else {
 					$award->Eaddress = $list->Eaddress;
 					if(filter_var($award->Eaddress, FILTER_VALIDATE_EMAIL)){
+						$award->emailsubject = "Congratulations, your team has been sent an Our Heroes award with 'A Little Extra'";
 						$email = sendEcardEmail($award);
 						$_SESSION['alreadydone'] = 'yes';
 					} else {

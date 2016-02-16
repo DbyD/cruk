@@ -38,7 +38,7 @@ $currect_amount = $total_price - $remaining_amount;
 
 // set the correct amount. You only use the amount short. so if basket = £25 and you have £20 then amount is £5
 if (!isset($_POST['responseCode'])) {
-	$req = array( 'merchantID' => '102290', 'action' => 'SALE', 'type' => 1, 'amount' => intval($currect_amount . '00'), 'countryCode' => 826, 'currencyCode' => 826, 'transactionUnique' => '12345', 'redirectURL' => HTTP_PATH . 'redeem/checkout.php?menu_id=&checkout=true');
+	$req = array( 'merchantID' => '102290', 'action' => 'SALE', 'type' => 1, 'amount' => intval($currect_amount . '00'), 'countryCode' => 826, 'currencyCode' => 826, 'transactionUnique' => md5(uniqid(rand(), true)), 'redirectURL' => HTTP_PATH . 'redeem/checkout.php?menu_id=&checkout=true');
 	// print_r($req);
 	 
 	$req['signature'] = createSignature($req, $key);
