@@ -116,7 +116,20 @@
 		</div>
 		<?php if ($totalRedemtions > 0) { ?>
 		<div class="tableRow claimedAwardsExpanded hide">
+			<?php // get credit card topups
+				$sum_credit_card = getCreditCard( $_SESSION['user']->EmpNum );
+				if($sum_credit_card>0){
+			?>
+			<div class="row">
+				<div class="tableColumn-10 nonItalics textRight">
+					<p>Including payment card top-ups of:</p>
+				</div>
+				<div class="tableColumn-2 textRight">
+					<?php echo '£'.$sum_credit_card;?>
+				</div>
+			</div>
 				<?php
+				}
 					foreach($redeemList as $list){
 				?>
 			<div class="row">
@@ -149,13 +162,13 @@
 		<div class="tableColumn-6 textRight">
 			<?php
 				// need to get correct balance. for now im just going to calculate positive. Need to calculate negative once redeem is done.
-				$positiveBalance = $amountEarned - $totalRedemtions;
+				$positiveBalance = $amountEarned + $sum_credit_card - $totalRedemtions;
 				//getTotalUnclaimedAwards($_SESSION['user']->EmpNum) * 20;
 				echo '£'.$positiveBalance;
 			?>
 		</div>
 	</div>
-	<div class="tableRow">
+	<div class="tableRow clickAble" data-type="gourl" data-url="<?=HTTP_PATH?>my-account/my-awards.php">
 		<div class="tableColumn-6 textLeft">
 			Unclaimed awards:
 		</div>
