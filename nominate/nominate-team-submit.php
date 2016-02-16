@@ -211,6 +211,7 @@
 						echo "offline email sent to xxexec";
 					} else {
 						if(filter_var($_SESSION['teamnominee']->Eaddress, FILTER_VALIDATE_EMAIL)){
+							$_SESSION['teamnominee']->emailsubject = "Congratulations, your team has been sent an Our Heroes award";
 							$email = sendEcardEmail($_SESSION['teamnominee']);
 							echo $email;
 							echo "email sent to teamnominee";

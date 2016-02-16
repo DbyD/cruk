@@ -111,6 +111,7 @@
 				$_SESSION['alreadydone'] = 'yes';
 			} else {
 				if(filter_var($award->nominee()->Eaddress, FILTER_VALIDATE_EMAIL)){
+					$award->emailsubject = "Congratulations, you've sent an Our Heroes award with 'A Little Extra'";
 					$email = sendEcardEmail($award);
 					$_SESSION['alreadydone'] = 'yes';
 				} else {
