@@ -73,14 +73,15 @@
 				if(filter_var($award->nominator()->Eaddress, FILTER_VALIDATE_EMAIL)){
 					$sendEmail = new StdClass();
 					$sendEmail->emailTo = $award->nominator()->Eaddress;
-					$sendEmail->subject = 'Award Notification';
+					$sendEmail->subject = 'Congratulations, your nomination has been approved';
 					$sendEmail->Bcc = '';
 					$sendEmail->Content = "<p>Dear ".$award->nominator()->Fname."</p>
 											<p>Good news!</p>
 											<p>Your nomination of ".$award->teamEmailList." for an Our Heroes Extraordinary People, Extraordinary Effort Award has been approved by ".$approver_name.".</p>
 											<p>The Thank You certificate you prepared when nominating this award has been sent by email to ".$award->teamEmailList." with details of the award.</p>
 											<p>A record of all the nominations you have made and their current status can be viewed on the <a href='".HTTP_PATH."'>My Awards</a> section of the Our Heroes portal.</p>
-											<p>Thank you for your nomination.</p>";
+											<p>Thank you for your nomination.</p>
+											<p>Kind regards</p>";
 					$email = sendEmail($sendEmail,'T'.$ID);
 					$_SESSION['alreadydone'] = 'yes';
 					echo $sendEmail->Content;
@@ -94,15 +95,15 @@
 			if(filter_var($approver_email, FILTER_VALIDATE_EMAIL)){
 				$sendEmail = new StdClass();
 				$sendEmail->emailTo = $approver_email;
-				$sendEmail->subject = 'Award Notification';
+				$sendEmail->subject = "Confirmation of your approval for a 'Little Extra' award";
 				$sendEmail->Bcc = '';
 				$sendEmail->Content = "<p>Dear ".$approver_fname."</p>
 										<p>Thank you for approving 'A Little Extra' award for ".$award->teamEmailList.". The details of this award are as follows:<p>
 										<p>Nominator: ".$award->nominator()->full_name."<br>
-										Team Award: ".cleanWorkAward($award->workAward)."<br>Award category: ".$award->BeliefID."</p>
-										<p>Any other nominations awaiting your approval can be found in the <a href='".HTTP_PATH."'>My Approvals</a> section of the Our Heroes Portal. 
-										You can also find a history of nominations in the <a href='".HTTP_PATH."'>Reports</a> section.</p>";
-			//	$email = sendEmail($sendEmail,'T'.$ID);
+										Team Award: ".cleanWorkAward($award->amount)."<br>Award category: ".$award->BeliefID."</p>
+										<p>Any other nominations awaiting your approval can be found in the <a href='".HTTP_PATH."'>My Approvals</a> section of the Our Heroes Portal.</p>
+										<p>Thank you</p>";
+				$email = sendEmail($sendEmail,'T'.$ID);
 				$_SESSION['alreadydone'] = 'yes';
 			}
 			
@@ -119,6 +120,8 @@
 				
 				//need to get offline...
 				//$award->teamNominees()->offline = ;
+				
+				//also need to send to LM
 				
 				$award->content = indEcardTeamExtraText($award);
 				echo $award->content;
@@ -139,8 +142,8 @@
 				} else {
 					$award->Eaddress = $list->Eaddress;
 					if(filter_var($award->Eaddress, FILTER_VALIDATE_EMAIL)){
-						$award->emailsubject = "Congratulations, your team has been sent an Our Heroes award with 'A Little Extra'";
-						$email = sendEcardEmail($award);
+						$award->subject = "Congratulations, your team has been sent an Our Heroes award with 'A Little Extra'";
+						$email = sendEcardEmail($award,'T'.$ID);
 						$_SESSION['alreadydone'] = 'yes';
 					} else {
 						$email = "fail";
@@ -179,7 +182,7 @@
 			if(filter_var($award->nominator()->Eaddress, FILTER_VALIDATE_EMAIL)){
 				$sendEmail = new StdClass();
 				$sendEmail->emailTo = $award->nominator()->Eaddress;
-				$sendEmail->subject = 'Award Notification';
+				$sendEmail->subject = "Unfortunately your 'Little Extra' nomination has been declined";
 				$sendEmail->Bcc = '';
 				$sendEmail->Content = "<p>Dear ".$award->nominator()->Fname."</p>
 										<p>You recently nominated your team ".$award->Team." for an Our Heroes Extraordinary People, Extraordinary effort award.</p>
@@ -187,7 +190,8 @@
 										<p>The following reason was given:<br>".$_POST['dReason']."
 										<p>None of your team nominees have been notified of the declined nomination.</p>
 										<p>Thank you for participating in the Our Heroes recognition programme. We strongly encourage you to submit other 
-										nominations in the future via the <a href='".HTTP_PATH."'>Our Heroes</a> portal.</p>";
+										nominations in the future via the <a href='".HTTP_PATH."'>Our Heroes</a> portal.</p>
+										<p>Kind Regards</p>";
 				$email = sendEmail($sendEmail,'T'.$ID);
 				//echo $sendEmail->Content;
 				$_SESSION['alreadydone'] = 'yes';
@@ -198,13 +202,13 @@
 			if(filter_var($approver_email, FILTER_VALIDATE_EMAIL)){
 				$sendEmail = new StdClass();
 				$sendEmail->emailTo = $approver_email;
-				$sendEmail->subject = 'Award Notification';
+				$sendEmail->subject = "Confirmation that you declined a 'Little Extra' award";
 				$sendEmail->Bcc = '';
 				$sendEmail->Content = "<p>Dear ".$approver_fname."</p>
-										<p>This is confirmation that you declined a nomination made by ".$award->nominator()->full_name." for ".$award->Team."
+										<p>This is confirmation that you declined a nomination made by ".$award->nominator()->full_name." for ".$award->teamEmailList."
 										on the Our Heroes Portal. The reason for this decline was given as:<br>".$_POST['dReason']."<p>
-										<p>Any other nominations awaiting your approval can be found in the <a href='".HTTP_PATH."'>My Approvals</a> section of the Our Heroes Portal. 
-										You can also find a history of nominations in the <a href='".HTTP_PATH."'>Reports</a> section.</p>";
+										<p>Any other nominations awaiting your approval can be found in the <a href='".HTTP_PATH."'>My Approvals</a> section of the Our Heroes Portal.</p>
+										<p>Kind Regards</p>";
 				$email = sendEmail($sendEmail,'T'.$ID);
 				$_SESSION['alreadydone'] = 'yes';
 			}

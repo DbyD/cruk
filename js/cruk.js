@@ -189,7 +189,7 @@ $(function(){
 		errorPlacement: function(error, element) {
 			$("#alertContent").load("../alerts/alert-popup.php", {'error' : error.html() });
 			$("#alert").css('display', 'block');
-		},
+		}/*,
 		submitHandler: function(form) { 
 			if (confirm("Are you sure. This is irreversible.")) {
 				$.post('../approvals/individual-award-update.php', $("#approveAward").serialize(), function(data) {
@@ -200,7 +200,7 @@ $(function(){
 					}
 				});
 			}
-		}
+		}*/
 	});
 	$("#approveTeamAward").validate({
 		rules: {dReason: "required"},

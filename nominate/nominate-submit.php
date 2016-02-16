@@ -87,13 +87,16 @@
 			} else {
 				// send email to approver
 				if(filter_var($_SESSION['nominee']->Eaddress, FILTER_VALIDATE_EMAIL)){
+					$sendEmail->subject = "Please approve an Our Heroes nomination for a 'Little Extra' award";
 					$sendEmail->emailTo = $_SESSION['nominee']->AppEaddress;
-					$sendEmail->Content = "<p>Hello ".$_SESSION['nominee']->AppFname."</p>
-											<p>".$_SESSION['user']->Fname." has nominated ".$_SESSION['nominee']->full_name()." to receive 'A Little Extra' as part of an Our Heroes Award.</p>
+					$sendEmail->Content = "<p>Dear ".$_SESSION['nominee']->AppFname."</p>
+											<p>".$_SESSION['user']->Fname." has nominated ".$_SESSION['nominee']->full_name()." to receive 'A Little Extra' as part of an Our Heroes Extraordinary People, Extraordinary Effort Award.</p>
 											<p>".$_SESSION['user']->Fname." has given the following reason for the nomination:</p>
 											<p>".$_SESSION['nominee']->Reason."</p>
 											<p>Please login to the <a href='".HTTP_PATH."'>Our Heroes Portal</a> to view the details of the proposed nomination and to approve or decline the award.</p>
-											<p>If no decision is made within the next 30 days, the nomination will automatically be approved.</p>";
+											<p>If no decision is made within the next 30 days, the nomination will automatically be approved.</p>
+											<p>If you need a hand to access the Our Heroes Portal or to approve the award, our recognition partners, Xexec, are happy to assist on 020 8201 6483.</p> 
+											<p>Thank you</p>";
 					$email = sendEmail($sendEmail,$id);
 					echo $sendEmail->Content;
 				} else {
@@ -102,16 +105,24 @@
 			}
 			$_SESSION['alreadydone'] = 'yes';
 		} else {
+			
+			// send email to nominee
+			if ($_SESSION['nominee']->Volunteer !='') {
+				$_SESSION['nominee']->NomFull_name = $_SESSION['nominee']->Volunteer;
+			} else {
+				$_SESSION['nominee']->NomFull_name = $_SESSION['user']->full_name();
+			}
+			
 			if(($_SESSION['nominee']->AppEmpNum == $_SESSION['user']->EmpNum)){
 				// email to approver
 				if(filter_var($_SESSION['user']->Eaddress, FILTER_VALIDATE_EMAIL)){
 					$sendEmail = new StdClass();
 					$sendEmail->emailTo = $_SESSION['user']->Eaddress;
-					$sendEmail->subject = 'Award Notification';
+					$sendEmail->subject = "Confirmation of your approval for a 'Little Extra' award";
 					$sendEmail->Bcc = '';
 					$sendEmail->Content = "<p>Dear ".$_SESSION['user']->Fname."</p>
 											<p>Thank you for approving 'A Little Extra' award for ".$_SESSION['nominee']->full_name().". The details of this award are as follows:<p>
-											<p>Nominator: ".$_SESSION['user']->full_name."<br>
+											<p>Nominator: ".$_SESSION['nominee']->NomFull_name."<br>
 											Award Options: &pound;20 voucher";
 					foreach ($_SESSION['nominee']->workAward as $key => $value){
 					   if (strstr($key, 'workAward')){
@@ -121,19 +132,22 @@
 					   }
 					}
 					$sendEmail->Content .= "<br>Award category: ".$_SESSION['nominee']->BeliefID."</p>
-											<p>Any other nominations awaiting your approval can be found in the <a href='".HTTP_PATH."'>My Approvals</a> section of the Our Heroes Portal. 
-											You can also find a history of nominations in the <a href='".HTTP_PATH."'>Reports</a> section.</p>";
+											<p>Any other nominations awaiting your approval can be found in the <a href='".HTTP_PATH."'>My Approvals</a> section of the Our Heroes Portal.</p>
+											<p>Thank you</p>";
 					$email = sendEmail($sendEmail,$id);
 					$_SESSION['alreadydone'] = 'yes';
 				}
 			}
-			// send email to nominee
-			if ($_SESSION['nominee']->Volunteer !='') {
-				$_SESSION['nominee']->NomFull_name = $_SESSION['nominee']->Volunteer;
+			
+			if(($_SESSION['nominee']->AppEmpNum == $_SESSION['user']->EmpNum)){
+				$_SESSION['nominee']->NomFname = $_SESSION['user']->Fname;
+				$_SESSION['nominee']->subject = "Congratulations, you've been sent an Our Heroes award with 'A Little Extra'";
+				$_SESSION['nominee']->content = indEcardExtraText($_SESSION['nominee']);
 			} else {
-				$_SESSION['nominee']->NomFull_name = $_SESSION['user']->full_name();
+				$_SESSION['nominee']->subject = "Congratulations, you've been sent an Our Heroes award";
+				$_SESSION['nominee']->content = indEcardText($_SESSION['nominee']);
 			}
-			$_SESSION['nominee']->content = indEcardText($_SESSION['nominee']);
+					
 			// test if offline
 			if ($_SESSION['nominee']->offline == 'YES'){
 				// they in a shop so considered offline. need to fix email with all requirements. will need to get wording from Jamie
@@ -149,8 +163,7 @@
 				echo "offline email sent to xxexec";
 			} else {
 				if(filter_var($_SESSION['nominee']->Eaddress, FILTER_VALIDATE_EMAIL)){
-					$_SESSION['nominee']->emailsubject ="Congratulations, you've been sent an Our Heroes award";
-					$email = sendEcardEmail($_SESSION['nominee']);
+					$email = sendEcardEmail($_SESSION['nominee'],$id);
 				} else {
 					$email = "fail xexec";
 				}

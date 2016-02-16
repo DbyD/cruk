@@ -475,10 +475,10 @@ function getTeamsApprover($EmpNum) {
 }
 ////////////////////////////////////////////////////////////////////////////////////
 function cleanWorkAward($workAward){
-	if( $workAward=='TeamEvent'){
+	if( $workAward == 'TeamEvent'){
 		return 'Team event';
 	} else {
-		return '£20 Voucher per person';
+		return '&pound;20 Voucher per person';
 	}
 }
 ////////////////////////////////////////////////////////////////////////////////////

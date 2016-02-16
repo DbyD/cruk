@@ -91,13 +91,14 @@ class Award {
 	}
 	public function lineManager(){
 		global $db;
-		$stmt = $db->prepare('SELECT Fname, Sname, Eaddress FROM tblempall WHERE EmpNum = :LMEmpNum');
+		$stmt = $db->prepare('SELECT EmpNum, Fname, Sname, Eaddress FROM tblempall WHERE EmpNum = :LMEmpNum');
 		$stmt->execute(array('LMEmpNum' => $this->nominee()->LMEmpNum));
 		$result = $stmt->fetch(PDO::FETCH_OBJ);
 		$result->full_name = $result->Fname. ' ' . $result->Sname;
 		return $result;
 	}
 }
+
 class teamAward {
 	public $NominatorEmpNum;
 	public $ID;

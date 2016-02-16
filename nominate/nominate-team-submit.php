@@ -106,7 +106,7 @@
 			
 		if($_SESSION['teamnominee']->littleExtra=='Yes' && ($AppEmpNum->AppEmpNum != $_SESSION['user']->EmpNum)){
 			$sendEmail = new StdClass();
-			$sendEmail->subject = 'Award Notification';
+			$sendEmail->subject = "Please approve an Our Heroes nomination for a 'Little Extra' award";
 			$sendEmail->Bcc = '';
 			if($AppEmpNum->AppEmpNum ==''){
 				// send email to super user. but using xexec for now.
@@ -131,14 +131,14 @@
 											".$teamEmailList.".</p>
 											<p>".$_SESSION['user']->Fname." has given the following reason for the nomination:</p>
 											<p>".$_SESSION['teamnominee']->Reason."</p>
-											<p>As the senior manager of the first-named colleague in this team, you are asked to review the nomination and either approve or decline the award for all nominated colleagues. 
+											<p>As the approver for the first-named colleague in this team, you are asked to review the nomination and either approve or decline the award for all nominated colleagues. 
 											You may wish to discuss the award with the senior managers of the other colleagues nominated before you make your decision.</p>
 											<p>To view the details of the proposed nomination and to approve or decline the award, please login to the  <a href='".HTTP_PATH."'>Our Heroes Portal</a>.</p>
 											<p>If no decision is made within the next 30 days, the nomination will automatically be approved.</p>
-											<p>If you need a hand to access the Our Heroes Portal or approve the award, our recognition partners, Xexec, are happy to help 0845 230 9393</p>";
+											<p>If you need a hand to access the Our Heroes Portal or approve the award, our recognition partners, Xexec, are happy to help 0845 230 9393</p>
+											<p>Thank you</p>";
 					$email = sendEmail($sendEmail,'T'.$id);
 					//echo $sendEmail->Content;
-				
 		
 				} else {
 					$email = "fail";
@@ -211,8 +211,8 @@
 						echo "offline email sent to xxexec";
 					} else {
 						if(filter_var($_SESSION['teamnominee']->Eaddress, FILTER_VALIDATE_EMAIL)){
-							$_SESSION['teamnominee']->emailsubject = "Congratulations, your team has been sent an Our Heroes award";
-							$email = sendEcardEmail($_SESSION['teamnominee']);
+							$_SESSION['teamnominee']->subject = "Congratulations, your team has been sent an Our Heroes award";
+							$email = sendEcardEmail($_SESSION['teamnominee'],'T'.$id);
 							echo $email;
 							echo "email sent to teamnominee";
 						} else {

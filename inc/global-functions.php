@@ -5,26 +5,27 @@ function startEmail(){
     			<title>CRUK Our Heroes</title>
 				<style type=text/css>
 					body, div {margin: 0px;padding: 0px}
-					.emailText {font-size: 10pt;font-family: Calibri;line-height: 13pt;color: #2e008b;background: #fff;width: 600px;padding: 0 20px;text-align: left}
+					.emailText {font-size: 11pt;font-family: Calibri;line-height: 14pt;color: #2e008b;background: #fff;width: 600px;padding: 0 20px;text-align: left}
 					.colorblock {padding: 20px;color: #fff;margin-bottom:20px;}
 					img {display: block}
-					.emailOurheroes {text-align: left;}
+					.ourheroes {padding: 0 20px}
 					.emailCruklogo {float: right;}
 					.small {font-size: 8pt;}
 					.largetext {font-size: 17pt;}
-					a {color:#fff}
+					a {color:#2e008b}
+					.colorblock a {color:#fff}
 				</style></head><body><div align="center"><div class="emailText">';
 	return  $startemail;
 }
 ////////////////////////////////////////////////////////////////////////////////////
 function endEmail($noid){
 	$endemail = '';
-	$endemail .= '<p>Kind regards</p><p><b>Our Heroes Team</b></p>';
+	$endemail .= '<p><b>Our Heroes Team</b></p>';
 	if($noid != ''){
 			$endemail .= '<p class="small">Xexec ref: '.$noid.'</p>';
 	}
-	$endemail .= '<div class="ourheroes"><img src="'.HTTP_PATH.'images/emails/our-heroes.png" alt="Cancer Research UK">
-					<img class="emailCruklogo" src="'.HTTP_PATH.'images/emails/Cancer-Research-UK.png" alt="Cancer Research UK"></div>';
+	$endemail .= '<div class="ourheroes"><img class="emailCruklogo" src="'.HTTP_PATH.'images/emails/Cancer-Research-UK.png" alt="Cancer Research UK">
+					<img src="'.HTTP_PATH.'images/emails/our-heroes.png" alt="Cancer Research UK"></div>';
 		$endemail .= '</div></div></body></html>';
 	return $endemail;
 }
@@ -33,10 +34,10 @@ function endEcardEmail($noid){
 	$endemail = '';
 	$endemail .= '<p>Thank you and well done!</p><p><b>Our Heroes Team</b></p>';
 	if($noid != ''){
-			$endemail .= '<p class="small">Xexec ref: '.$noid.'</p>';
+			$endemail .= '<p class="small">Xexec ref: '.$noid.'</p></div>';
 	}
-	$endemail .= '</div><div class="ourheroes"><img src="'.HTTP_PATH.'images/emails/our-heroes.png" alt="Cancer Research UK">
-					<img class="emailCruklogo" src="'.HTTP_PATH.'images/emails/Cancer-Research-UK.png" alt="Cancer Research UK"></div>';
+	$endemail .= '<div class="ourheroes"><img class="emailCruklogo" src="'.HTTP_PATH.'images/emails/Cancer-Research-UK.png" alt="Cancer Research UK">
+					<img src="'.HTTP_PATH.'images/emails/our-heroes.png" alt="Cancer Research UK"></div>';
 		$endemail .= '</div></div></body></html>';
 	return $endemail;
 }
@@ -72,10 +73,9 @@ function array_to_object($array) {
     return is_array($array) ? (object) array_map(__FUNCTION__,$array) : $array;
 }
 ////////////////////////////////////////////////////////////////////////////////////
-function sendEcardEmail($ecard){
+function sendEcardEmail($ecard,$ID){
 	// need to fix this so we can email anytime
 	global $headers;
-	$subject = $ecard->emailsubject;
 	if ($emailTo = $ecard->offline == 'YES'){
 		$emailTo = $ecard->shopMEaddress;
 	} else {
@@ -88,14 +88,14 @@ function sendEcardEmail($ecard){
 	// need to fully design e-card
 	$message = startEmail();
 	$message .= $ecard->content;
-	$message .= endEcardEmail();
+	$message .= endEcardEmail($ID);
 	if(isset($ecard->Cc)){
 		$headers .= 'Cc: '. $ecard->Cc . "\r\n";
 	}
 	if(isset($ecard->Bcc)){
 		$headers .= 'Bcc: '. $ecard->Bcc . "\r\n";
 	}
-	if (mail($emailTo, $subject, $message, $headers)){
+	if (mail($emailTo, $ecard->subject, $message, $headers)){
 		$reply = "ecard sent";
 	} else {
 		$reply = "fail";
@@ -179,7 +179,7 @@ function indEcardExtraText($ecard){
 				<p>".$ecard->NomFull_name." says you've done something really special and deserve an Our Heroes Extraordinary People, 
 				Extraordinary Effort award in the ".$ecard->BeliefID." category. </p>
 				<p>".$ecard->personalMessage."</p>
-				<p>".$ecard->NomFname." says you deserve  'A Little Extra' as part of your award! <span class='hide'>Please log on (or register if you haven’t already) to the <a href='".HTTP_PATH."'>Our Heroes Portal</a> to view and claim your Little Extra award.</span></p>
+				<p>".$ecard->NomFname." says you deserve  'A Little Extra' as part of your award! <span class='hide'>Please log on (or register if you haven't already) to the <a href='".HTTP_PATH."'>Our Heroes Portal</a> to view and claim your Little Extra award.</span></p>
 				<p>Through your dedication and commitment we can beat cancer sooner. The success of Cancer Research UK depends on people like you and we want you to know how much we appreciate your efforts.</p>";
 	return $ecardText;
 }
@@ -206,8 +206,7 @@ function indEcardTeamText($ecard){
 		$ecardText .="<p>The award has been given to you as part of a team award that also includes ".$ecard->teamEmailList.".</p>";
 	}
 	
-	$ecardText .= "<p>Through your dedication and commitment we can beat cancer sooner. The success of Cancer Research UK depends on people like you and we want you to know how much we appreciate your efforts.</p>
-				<p>Thank you and well done!</p>";
+	$ecardText .= "<p>Through your dedication and commitment we can beat cancer sooner. The success of Cancer Research UK depends on people like you and we want you to know how much we appreciate your efforts.</p>";
 	return $ecardText;
 }
 ////////////////////////////////////////////////////////////////////////////////////
@@ -241,8 +240,7 @@ function indEcardTeamExtraText($ecard){
 		 				\"Our Heroes\" project code (HRP2000). Whether it's a few drinks, a meal out or a team experience, it's up to your team to decide and make arrangements to suit you all.  
 		 				".$ecard->NomFname." has nominated ".$ecard->firstPerson." as the team's contact in the first instance.</p>";
 	}
-	$ecardText .= "<p>Through your dedication and commitment we can beat cancer sooner. The success of Cancer Research UK depends on people like you and we want you to know how much we appreciate your efforts.</p> 
-				<p>Thank you and well done!</p>";
+	$ecardText .= "<p>Through your dedication and commitment we can beat cancer sooner. The success of Cancer Research UK depends on people like you and we want you to know how much we appreciate your efforts.</p>";
 				
 	return $ecardText;
 }
