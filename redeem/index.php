@@ -2,46 +2,63 @@
 include_once '../inc/config.php';
 include_once('../inc/header.php'); 
 
+$val = $_SESSION['user']->administrator;
 $basket = getBasket( $_SESSION["user"]->EmpNum );
-
+if(count($basket) > 0 && is_array($basket)){
+	$basket_isset = true;
+} else {
+	$basket = array();
+	$basket_isset = false;
+}
 ?>
-
+	
 			<div id="content" class="large-8 large-push-2 columns">
 				<div class="title withStar">
 					Shop
 				</div>
 				<div class="row contentFill">
 					<div class="medium-12 columns leftnp rightnp fillHeight">
-						
-						<?php if($basket != 0):?>
+						<?php if(is_array($basket)):?>
 						<div class="row">
-							<a id="viewBasket" class='<?php if($basket_isset) echo 'view-basket';?>' href="<?php echo HTTP_PATH . "redeem/product-basket.php?basket=true&menu_id="; ?>"> <i class="fi-shopping-bag"></i>View basket </a>
+							<a id="viewBasket" class='<?php if($basket_isset) echo 'view-basket';?>' href="<?php echo HTTP_PATH . "redeem/product-basket.php?basket=true&menu_id=" . $menu_id; ?>"> <i class="fi-shopping-bag"></i>View basket </a>
+							<?php if( $basket_isset ) : ;?>
+							<span id="item-count"><?php echo ($basket != 0)?count( $basket ):0; ?> Items</span>
+							<?php endif;?>
 						</div>
 						<?php endif; ?>
-
-						<div class="row static-redeem" id="redeemHome">
-							<div class="small-6 large-6 columns leftnp">
-								<div class="callout panel clickAble" data-type="gourl" data-url="<?=HTTP_PATH?>redeem/products.php?menu_id=1">
-									<div class="prodTitle">Shop</div>
-									<img src="img/shop.jpg" alt="Shop">
+						<div class="row mCustomScrollbar height563" data-mcs-theme="dark-2">
+							<div class="row static-redeem" id="redeemHome">
+								<div class="small-6 large-6 columns leftnp">
+									<div class="callout panel clickAble" data-type="gourl" data-url="<?=HTTP_PATH?>redeem/products.php?menu_id=1">
+										<div class="prodTitle">
+											Shop
+										</div>
+										<img src="img/shop.jpg" alt="Shop">
+									</div>
 								</div>
-							</div>
-							<div class="small-6 large-6 columns rightnp">
-								<div class="callout panel clickAble" data-type="gourl" data-url="<?=HTTP_PATH?>redeem/products.php?menu_id=2">
-									<div class="prodTitle">Travel</div>
-									<img src="img/travel.jpg" alt="Travel">
+								<div class="small-6 large-6 columns rightnp">
+									<div class="callout panel clickAble" data-type="gourl" data-url="<?=HTTP_PATH?>redeem/products.php?menu_id=2">
+										<div class="prodTitle">
+											Travel
+										</div>
+										<img src="img/travel.jpg" alt="Travel">
+									</div>
 								</div>
-							</div>
-							<div class="small-6 large-6 columns leftnp">
-								<div class="callout panel clickAble" data-type="gourl" data-url="<?=HTTP_PATH?>redeem/products.php?menu_id=4">
-									<div class="prodTitle">Experience</div>
-									<img src="img/experience.jpg" alt="Experience">
+								<div class="small-6 large-6 columns leftnp">
+									<div class="callout panel clickAble" data-type="gourl" data-url="<?=HTTP_PATH?>redeem/products.php?menu_id=4">
+										<div class="prodTitle">
+											Experience
+										</div>
+										<img src="img/experience.jpg" alt="Experience">
+									</div>
 								</div>
-							</div>
-							<div class="small-6 large-6 columns rightnp">
-								<div class="callout panel clickAble" data-type="gourl" data-url="<?=HTTP_PATH?>redeem/products.php?menu_id=29">
-									<div class="prodTitle">Donate</div>
-									<img src="img/donate.jpg" alt="Donate">
+								<div class="small-6 large-6 columns rightnp">
+									<div class="callout panel clickAble" data-type="gourl" data-url="<?=HTTP_PATH?>redeem/products.php?menu_id=29">
+										<div class="prodTitle">
+											Donate
+										</div>
+										<img src="img/donate.jpg" alt="Donate">
+									</div>
 								</div>
 							</div>
 						</div>
@@ -58,18 +75,20 @@ $basket = getBasket( $_SESSION["user"]->EmpNum );
 						Avable to spend
 					</div>
 					<div class="price-panel">
-						<?php echo '&pound;'; ?> 
+						<?php echo '&pound;'; ?>
 						<?php 
-						$sum_all = getAvailable( $_SESSION['user']->EmpNum ); 
-						$sum_credit_card = getCreditCard( $_SESSION['user']->EmpNum );
-						$sum_orders = getEmpBasketOrdersSum( $_SESSION['user']->EmpNum );
-
-						$remaining_amount = $sum_all + $sum_credit_card - $sum_orders;
-						echo $remaining_amount;
-						?> 
+									$sum_all = getAvailable( $_SESSION['user']->EmpNum ); 
+									$sum_credit_card = getCreditCard( $_SESSION['user']->EmpNum );
+									$sum_orders = getEmpBasketOrdersSum( $_SESSION['user']->EmpNum );
+			
+									$remaining_amount = $sum_all + $sum_credit_card - $sum_orders;
+									echo $remaining_amount;
+									?>
 					</div>
 					<div class="unclaimed-panel">
-						<div class="clickAble" data-type="gourl" data-url="<?=HTTP_PATH?>my-account/my-awards.php">+<?php echo getTotalNewNominations($_SESSION['user']->EmpNum); ?> Unclaimed</div>
+						<div class="clickAble" data-type="gourl" data-url="<?=HTTP_PATH?>my-account/my-awards.php">
+							+<?php echo getTotalNewNominations($_SESSION['user']->EmpNum); ?> Unclaimed
+						</div>
 					</div>
 				</div>
 				<div  class="callout panel" id="menu_container">

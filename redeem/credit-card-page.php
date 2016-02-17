@@ -16,9 +16,6 @@ if(count($basket) > 0 && is_array($basket)){
 	$basket = array();
 	$basket_isset = false;
 }
-
-
-
 	if( isset( $_GET["menu_id"] ) ) {
 		$menu_id = $_GET["menu_id"];
 	}
@@ -49,99 +46,106 @@ if(count($basket) > 0 && is_array($basket)){
 			</div>
 			<?php endif; ?>
 			<div class="row callout panel creditCardView height555">
-				<div class="row">
-					<div class="medium-12 withPadding columns">
-						Please enter your Billing details below.
+				<div id="formDiv" >
+					<div class="row">
+						<div class="medium-12 withPadding columns">
+							Please enter your Billing details below.
+						</div>
 					</div>
+					<?php $_SESSION["thank_you"] = true; ?>
+					<form action="<?php echo HTTP_PATH . 'redeem/credit-card.php?menu_id='?>" method="post">
+						<input type="hidden" name="firstname" value="<?php echo $_SESSION['user']->Fname; ?>" required>
+						<input type="hidden" name="surname" value="<?php echo $_SESSION['user']->Sname; ?>" required>
+						<?php if($_SESSION['user']->Eaddress !=''){?>
+						<input type="hidden" name="email" value="<?php echo $_SESSION['user']->Eaddress; ?>" required>
+						<?php } else { ?>
+						<div class="row">
+							<div class="row">
+								<div class="medium-3 columns textRight">
+									<label for="right-label" class="right inline">E-Mail Address: <span class="required">&nbsp;</span>
+									</label>
+								</div>
+								<div class="medium-9 columns">
+									<input type="email" id="right-label" name="email">
+								</div>
+							</div>
+						</div>
+						<?php } ?>
+						<div class="row">
+							<div class="row">
+								<div class="medium-3 columns textRight">
+									<label for="right-label" class="right inline">Address Line 1: <span class="required">*</span>
+										<small>(or company name)</small></label>
+								</div>
+								<div class="medium-9 columns">
+									<input type="text" id="right-label" name="address1" required>
+									<small>House name/number and street, P.O. box,company name, c/o</small>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="row">
+								<div class="medium-3 columns textRight">
+									<label for="right-label" class="right inline">Address Line 2: <span class="required">&nbsp;</span>
+										<small>(optional)</small></label>
+								</div>
+								<div class="medium-9 columns">
+									<input type="text" id="right-label" name="address2">
+									<small>Apartment, suite, unit, building,floor,etc</small>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="row">
+								<div class="medium-3 columns textRight">
+									<label for="right-label" class="right inline">Town/City: <span class="required">*</span>
+									</label>
+								</div>
+								<div class="medium-9 columns">
+									<input type="text" id="right-label" name="town" required>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="row">
+								<div class="medium-3 columns textRight">
+									<label for="right-label" class="right inline">Postcode: <span class="required">*</span>
+									</label>
+								</div>
+								<div class="medium-9 columns">
+									<input type="text" id="right-label" name="postcode" required>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="row">
+								<div class="medium-3 columns textRight">
+									<label for="right-label" class="right inline">Telephone Number: <span class="required">&nbsp;</span>
+									</label>
+								</div>
+								<div class="medium-9 columns">
+									<input type="text" id="right-label" name="telephone">
+								</div>
+							</div>
+						</div>
+						<div class="row withPadding">
+							<div class="medium-3 columns textRight">
+								<span class="right inline required small">* Required Fields</span>
+							</div>
+							<div class="medium-9 columns">
+								<p>Please supply a fully inclusive delivery address as this will be the address we will be delivering your products to.</p>
+								I have read the Terms & Conditions <span class="required">*</span>
+								<input type="checkbox" name="read" <?php echo ( isset( $form ) )?'checked':"";?> >
+							</div>
+						</div>
+						<div class="row">
+							<div class="medium-12 columns textRight">
+								<button class="purpleButton">CONTINUE SHOPPING</button> &nbsp;
+								<button class="pinkButton proceedButton">PROCEED TO NEXT STEP</button>
+							</div>
+						</div>
+					</form>
 				</div>
-				<?php $_SESSION["thank_you"] = true; ?>
-				<form action="<?php echo HTTP_PATH . 'redeem/credit-card.php?menu_id='?>" method="post">
-					<input type="hidden" name="firstname" value="<?php echo $_SESSION['user']->Fname; ?>" required>
-					<input type="hidden" name="surname" value="<?php echo $_SESSION['user']->Sname; ?>" required>
-					<?php if($_SESSION['user']->Eaddress !=''){?>
-					<input type="hidden" name="email" value="<?php echo $_SESSION['user']->Eaddress; ?>" required>
-					<?php } else { ?>
-					<div class="row">
-						<div class="row">
-							<div class="medium-3 columns textRight">
-								<label for="right-label" class="right inline">E-Mail Address: <span class="required">&nbsp;</span>
-								</label>
-							</div>
-							<div class="medium-9 columns">
-								<input type="email" id="right-label" name="email">
-							</div>
-						</div>
-					</div>
-					<?php } ?>
-					<div class="row">
-						<div class="row">
-							<div class="medium-3 columns textRight">
-								<label for="right-label" class="right inline">Address Line 1: <span class="required">*</span>
-									<small>(or company name)</small></label>
-							</div>
-							<div class="medium-9 columns">
-								<input type="text" id="right-label" name="address1" required>
-								<small>House name/number and street, P.O. box,company name, c/o</small>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="row">
-							<div class="medium-3 columns textRight">
-								<label for="right-label" class="right inline">Address Line 2: <span class="required">&nbsp;</span>
-									<small>(optional)</small></label>
-							</div>
-							<div class="medium-9 columns">
-								<input type="text" id="right-label" name="address2">
-								<small>Apartment, suite, unit, building,floor,etc</small>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="row">
-							<div class="medium-3 columns textRight">
-								<label for="right-label" class="right inline">Town/City: <span class="required">*</span>
-								</label>
-							</div>
-							<div class="medium-9 columns">
-								<input type="text" id="right-label" name="town" required>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="row">
-							<div class="medium-3 columns textRight">
-								<label for="right-label" class="right inline">Postcode: <span class="required">*</span>
-								</label>
-							</div>
-							<div class="medium-9 columns">
-								<input type="text" id="right-label" name="postcode" required>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="row">
-							<div class="medium-3 columns textRight">
-								<label for="right-label" class="right inline">Telephone Number: <span class="required">&nbsp;</span>
-								</label>
-							</div>
-							<div class="medium-9 columns">
-								<input type="text" id="right-label" name="telephone">
-							</div>
-						</div>
-					</div>
-					<div class="row buttonRow">
-						<div class="medium-3 columns buttonRow textRight">
-							<div class="required small">
-								* Required Fields
-							</div>
-						</div>
-						<div class="medium-9 columns textRight buttonRow">
-							<button class="purpleButton">CONTINUE SHOPPING</button>
-							<button class="pinkButton">PROCEED TO NEXT STEP</button>
-						</div>
-					</div>
-				</form>
 			</div>
 		</div>
 	</div>

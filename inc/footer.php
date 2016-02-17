@@ -128,5 +128,25 @@
 <script src="<?=HTTP_PATH?>js/foundation.min.js"></script>
 <script src="<?=HTTP_PATH?>js/cruk.js"></script>
 <script src="<?=HTTP_PATH?>js/redeem.js"></script>
+
+
+<script>
+  $(function() {
+    $( "#datepickerfrom" ).datepicker({
+      showOn: "button",
+      buttonImage: "../images/calendar.gif",
+      buttonImageOnly: true,
+      buttonText: "Select date"
+    });
+    $( "#datepickerto" ).datepicker({
+      showOn: "button",
+      buttonImage: "../images/calendar.gif",
+      buttonImageOnly: true,
+      buttonText: "Select date"
+    });
+  });
+</script>
+
+
 </body>
 </html>

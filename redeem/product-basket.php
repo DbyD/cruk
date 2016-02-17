@@ -4,21 +4,16 @@ include_once '../inc/header.php';
 include "lib.php";
 $menu = new MenuGenerator;
 
-
-
 if(isset($_POST['submitUpdate'])){
 	
 	$arr = array();
 
-	
 	foreach($_POST as $key => $post){
 		if( $key != "submitUpdate" ){
 			$item = explode('_',$key);
 			$arr[ $item[1] ][ $item[0] ] = $post; 
 		}
 	}
-
-
 	foreach($arr as $val){
 			
 			$current_count = count( explode(',',$val['busketIDS']) );
@@ -47,12 +42,8 @@ if(isset($_POST['submitUpdate'])){
 				}
 				
 			}
-		
 	}
-
 }
-
-
 
 if(isset($_POST["baIDdel"]) && isset( $_POST['count'] ) ){
 	
@@ -64,7 +55,6 @@ if(isset($_POST["baIDdel"]) && isset( $_POST['count'] ) ){
 		deleteBasketItem( $explode[ $i ] );
 	}
 }
-
 
 if( isset( $_POST[ "prID" ] ) && isset( $_POST[ "aPrice" ] ) && isset( $_POST[ "EmpNum" ] ) ){
 	$res = addBasket($_POST);
@@ -96,8 +86,6 @@ if(isset( $_POST["submit"] ) ){
 	}
 }
 
-
-
 $basket = getBasket( $_SESSION["user"]->EmpNum );
 
 if(count($basket) > 0 && is_array($basket)){
@@ -120,7 +108,6 @@ if( isset( $_GET['prID'] ) ) {
 $val = $_SESSION['user']->administrator;
 
 ?>
-			
 
 			<div id="content" class="large-8 large-push-2 columns">
 				<div class="title withStar">
@@ -148,6 +135,7 @@ $val = $_SESSION['user']->administrator;
 						</div>
 						<?php endif; ?>
 
+						<div class="row mCustomScrollbar height563" data-mcs-theme="dark-2">
 						<?php 
 								if( isset( $_GET['prID'] ) ) {
 									$product = getProductByID( $_GET['prID'] ); 
@@ -186,22 +174,24 @@ $val = $_SESSION['user']->administrator;
 												<button id="addBasket" class="pinkButton">Add to Basket</button>
 											</form>
 										</div>
-
 										<a href="#" data-reveal-id="myModalPrice" class="hidden" id="emptyPriceButton">Click Me For A Modal</a>
-
 										<div id="myModalPrice" class="reveal-modal hidden" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
-										  <h2 id="modalTitle">Please select an amount by clicking on Price.</h2>
-										  <p class="lead"></p>
-										  <p></p>
-										  <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+										  <h2 id="modalTitle">Price</h2>
+										  <div class="withPadding">
+												<div class="row">
+													<div class="large-12 columns">
+														<p>Please select an amount by clicking on Price.</p>
+														<p>&nbsp;</p>
+													</div>
+												</div>
+											</div>
+										 	<a class="close-reveal-modal" aria-label="Close"><i class="icon-icons_close"></i></a>
 										</div>
-
 									</div>
 								</div>
 							</div>
 						</div>
-						<?php } else { 
-							if( isset( $_GET['basket'] ) && $basket != 0) {
+						<?php } else {
 							$total_price = 0;
 						?>
 
@@ -332,7 +322,7 @@ $val = $_SESSION['user']->administrator;
 										<div class="large-4 columns">
 										</div>
 										<div class="large-8 columns">
-											<button class="blueButton" onClick="location.href='<?php echo HTTP_PATH . "redeem/credit-card-page.php?menu_id=" . $menu_id . "&checkout=false"; ?>'">Yes</button>
+											<button class="blueButton" onClick="location.href='<?php echo HTTP_PATH . "redeem/credit-card-page.php?menu_id=" . $menu_id . "&checkout=false"; ?>'">Yes</button> &nbsp; 
 											<button id="closeCheckOut" class="blueButton">NO</button>
 										</div>
 										
@@ -357,8 +347,9 @@ $val = $_SESSION['user']->administrator;
 
 
 						</div>
-						<? } else { echo "Basket empty"; } } ?>
+						<?php } ?>
 					</div>
+				</div>
 				</div>
 			</div>
 			<div id="left-column" class="large-2 large-pull-8 columns">

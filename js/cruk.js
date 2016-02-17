@@ -189,7 +189,7 @@ $(function(){
 		errorPlacement: function(error, element) {
 			$("#alertContent").load("../alerts/alert-popup.php", {'error' : error.html() });
 			$("#alert").css('display', 'block');
-		}/*,
+		},
 		submitHandler: function(form) { 
 			if (confirm("Are you sure. This is irreversible.")) {
 				$.post('../approvals/individual-award-update.php', $("#approveAward").serialize(), function(data) {
@@ -200,7 +200,7 @@ $(function(){
 					}
 				});
 			}
-		}*/
+		}
 	});
 	$("#approveTeamAward").validate({
 		rules: {dReason: "required"},
@@ -468,11 +468,6 @@ $(document).ready(function(){
 		$("#DepartmentModal").val(Department);
 		$("#mailToEmployee").val('Hi '+recipientName+'. I saw your "Our Heroes" award on the Wall of Fame. Congratulations! '+ senderName);
 		$("#messageModal").html('Hi '+recipientName+'. I saw your "Our Heroes" award on the Wall of Fame. Congratulations! '+ senderName);
-		console.log(sender);
-		console.log(recipient);
-		console.log(senderName);
-		console.log(recipientName);
-		console.log(Department);
 	});
 	$("#sendButton").click(function(){
 		var recipient = $("#recipientModal").val();

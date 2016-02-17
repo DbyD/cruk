@@ -113,7 +113,7 @@
 				$_SESSION['nominee']->NomFull_name = $_SESSION['user']->full_name();
 			}
 			
-			if(($_SESSION['nominee']->AppEmpNum == $_SESSION['user']->EmpNum)){
+			if(($_SESSION['nominee']->AppEmpNum == $_SESSION['user']->EmpNum) && $_SESSION['user']->LittleExtra == 'Yes'){
 				// email to approver
 				if(filter_var($_SESSION['user']->Eaddress, FILTER_VALIDATE_EMAIL)){
 					$sendEmail = new StdClass();

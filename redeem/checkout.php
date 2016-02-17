@@ -7,10 +7,8 @@ $menu = new MenuGenerator;
 $menu_id = $_GET["menu_id"];
 $checkout = $_GET["checkout"];
 
-
 if(isset($_POST) && !empty($_POST)){
 	// var_dump($_POST);die;
-	
 	if(isset($_SESSION['cardForm'])){
 		$insert_data = $_SESSION['cardForm'];
 	}
@@ -18,49 +16,9 @@ if(isset($_POST) && !empty($_POST)){
 	if(!empty($insert_data) && isset($insert_data['amount'])){
 		$insert_data['amount'] = intval(substr( $_POST['amount'] ,-strlen($_POST['amount']),strlen($_POST['amount'])-2 ));
 	}
-	
-	
 }
  
 $key = 'Cheer11Inside19Credit';
-
-
-function createSignature(array $data, $key) {
-	// echo $key;
-	// Sort by field name 
-	ksort($data);
-
-	//  Create the URL encoded signature string 
-	$ret = http_build_query($data, '', '&');
-	//  Normalise all line endings (CRNL|NLCR|NL|CR) to just NL (%0A) 
-	$ret = str_replace(array('%0D%0A', '%0A%0D', '%0D'), '%0A', $ret);
-	//  Hash the signature string and the key together 
-	return hash('SHA512', $ret . $key);
- }
-
-
-
-
-function SendMail($args = array()){
-	$post_email = unserialize($_POST['post']);
-	$tel_number = $post_email['telephone'];
-	$delivery_address = $post_email['address1'];
-	$email_order_code = $args["email_order_code"];
-	$content = get_content_email($email_order_code, $tel_number, $delivery_address);
-	
-
-					
-	$sendEmail->Content = $content;
-	$sendEmail = new StdClass();
-	$sendEmail->emailTo = $_SESSION['user']->Eaddress;
-	$sendEmail->subject = 'CRUK Order';
-	$sendEmail->Bcc = 'alec@iceimages.co.za';
-	
-	$email = sendEmail($sendEmail,'');
-}
-
-
-
 
 if(isset($_POST['redirectURL'])){
 	$res = $_POST;
@@ -70,7 +28,6 @@ if(isset($_POST['redirectURL'])){
 	$insert_data['EmpNum'] = $_SESSION["user"]->EmpNum;
 	$insert_data['amount'] = intval(substr( $res["amount"] ,-strlen($res["amount"]),strlen($res["amount"])-2 ));
 	
-
 	$signature = null;
 	if (isset($res['signature'])) { 
 		$signature = $res['signature'];
@@ -127,13 +84,11 @@ $basket = getBasket( $_SESSION["user"]->EmpNum );
 
 	$val = $_SESSION['user']->administrator;
 
-
 	$sum_all = getAvailable( $_SESSION['user']->EmpNum ); 
 	$sum_credit_card = getCreditCard( $_SESSION['user']->EmpNum );
 	$sum_orders = getEmpBasketOrdersSum( $_SESSION['user']->EmpNum );
 	$remaining_amount = $sum_all + $sum_credit_card - $sum_orders;
 
-	
 	// Post request from credit card form
 
 	if( isset( $_POST ) && !isset($_POST['redirectURL']) ){
@@ -144,11 +99,9 @@ $basket = getBasket( $_SESSION["user"]->EmpNum );
 			} else {
 				$postForUpload = unserialize( $_POST[ 'post' ]);
 			}
-			
 		}
 	
-		if( isset( $_POST[ "address1" ] ) && isset($_POST[ "town" ] ) && isset( $_POST[ "postcode" ] ) && isset( $_POST[ "read" ] ) ){
-			
+		if( isset( $_POST[ "address1" ] ) && isset($_POST[ "town" ] ) && isset( $_POST[ "postcode" ] ) && isset( $_POST[ "read" ] ) ){			
 			$error = false;
 			$post = $_POST;
 
@@ -200,9 +153,6 @@ if(isset($postForUpload)){
 		} else if( $_SESSION["thank_you"] === true ){
 			$last_id = $order_insert_id;
 		}
-		
-		
-
 		if( $last_id > 0 || $_SESSION["thank_you"] === false){
 			if( $_SESSION["thank_you"] === true ){
 				updateBasketStatus( $_SESSION['user']->EmpNum, $last_id );
@@ -220,144 +170,6 @@ if(count($basket) > 0 && is_array($basket)){
 	$basket_isset = false;
 }
 
-
-
-
-
-
-
-
-
-function get_content_email( $email_order_code, $tel_number, $delivery_address) {
-	$arr = array();
-		$i = $total_price = 0;
-		$basket = getBasketByOrder( $email_order_code );
-		
-
-		foreach ($basket as $pr_b){	
-
-
-			$pr_info = getProductByID( $pr_b["prID"] );
-			$total_price += $pr_b['aPrice'];
-			
-
-			if( $i == 0 ){
-				$arr[ $i ]['baID'] = $pr_b['baID'];
-				$arr[ $i ]['aPrice'] = $pr_b['aPrice'];
-				$arr[ $i ]['aTitle'] = $pr_info['aTitle'];
-				$arr[ $i ]['prID'] = $pr_b["prID"];
-				$arr[ $i ]['QTY'] = 1;
-				$i++;
-			} else {
-				$isProduct = false;
-				for( $j = 0; $j < count($arr); $j++ ){
-					if( $pr_b["prID"] == $arr[ $j ]['prID'] && $pr_b["aPrice"] == $arr[ $j ]['aPrice']){
-						$arr[ $j ]['QTY']++;
-						$arr[ $j ]['baID'] .= ',' . $pr_b['baID'] ;
-						$isProduct = true;
-					} 
-				}
-
-				if( !$isProduct ){
-					$arr[ $i ]['baID'] = $pr_b['baID'];
-					$arr[ $i ]['aPrice'] = $pr_b['aPrice'];
-					$arr[ $i ]['aTitle'] = $pr_info['aTitle'];
-					$arr[ $i ]['prID'] = $pr_b["prID"];
-					$arr[ $i ]['QTY'] = 1;
-					$i++;
-				}
-			}
-
-			
-		}
-
-
-		$i = 1;
-		$table_body = '';
-		foreach( $arr as $b ){
-			$table_body .= '<tr>
-								<td>' . $b['QTY'] .'</td>
-								<td class="textLeft">' . $b['aTitle'] . '</td>
-								<td></td>
-								<td>&pound;' . $b['aPrice'] . '</td>
-							</tr>
-							<tr>
-								<td></td>
-								<td></td>
-								<td class="textRight">Total</td>
-								<td>&pound;' . $total_price . '</td>
-							</tr>';
-
-			$i++;
-		}
-	
-	// this is what has already been setup with some styling to it. All you need to do is the shopping basket and order details. The rest is done.
-
-	
-	// you need to add content here.
-	$content =	'Dear '.$_SESSION['user']->Fname.
-				'<p>Thank you for your recent purchase.</p>
-				<p><b>Items Purchased</b></p>';
-
-	$content .= '<table id="table_basket">
-					<thead>
-						<tr>
-							<th width="100">QTY</th>
-							<th class="textLeft">PRODUCT NAME</th>
-							<th></th>
-							<th width="125">PRICE</th>
-						</tr>
-					</thead>
-					<tbody>
-						' . $table_body . '
-					</tbody>
-				</table>';
-				
-	//add shopping basket here in a table
-	$content .= '<table>
-  <thead>
-    <tr>
-      <th width="200"></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><b>Your order code:</b></td>
-     <td> ' . $email_order_code .  ' </td>
-    </tr>
-    <tr>
-      <td><b>Name:</b></td>
-      <td>' . $_SESSION['user']->Fname . '</td>
-     
-    </tr>
-    <tr>
-      <td><b>Email:</b></td>
-      <td>' . $_SESSION['user']->Eaddress . '</td>
-     
-    </tr>
-    <tr>
-      <td><b>Telephone Number:</b></td>
-      <td>' . $tel_number . '</td>
-      
-    </tr>
-    <tr>
-      <td><b>Delivery address:</b></td>
-      <td>' . $delivery_address . '</td>
-      
-    </tr>
-  </tbody>
-</table>';
-	
-	//add order details here in a table
-	$content .= '';
-	
-	$content .='<p>If you have any questions regarding your order, please email <ahref="mailto:concierge@xexec.com">concierge@xexec.com</a> or call +44 20 8201 6483 quoting your unique order code.</p>';
-	return $content;
-}
-
-
-
 if( isset( $email_order_code ) && $_SESSION["thank_you"] == false){
 	if(isset($_POST['post'])){
 		$args = array();
@@ -366,18 +178,7 @@ if( isset( $email_order_code ) && $_SESSION["thank_you"] == false){
 	}
 }
 
-
-
 ?>
-
-
-
-
-
-
-
-
-
 
 <div id="content" class="large-8 large-push-2 columns">
 	<div class="title withStar">
@@ -411,6 +212,7 @@ if( isset( $email_order_code ) && $_SESSION["thank_you"] == false){
 			</div>
 			<?php endif; ?>
 			
+			<div class="row mCustomScrollbar height563" data-mcs-theme="dark-2">
 			<div class="row callout panel <?php if(isset($postForUpload)) echo 'hidden'; ?>" id="basket-table">
 				
 				<div class="small-12 large-12 columns">
@@ -501,8 +303,8 @@ if( isset( $email_order_code ) && $_SESSION["thank_you"] == false){
 
 			<?php if( isset( $post ) && !$error ):?>
 
-			<div class="row callout panel creditCardView mCustomScrollbar height410" data-mcs-theme="dark-2">
-				<div  id="formDiv" >
+			<div class="row callout panel creditCardView">
+				<div id="formDiv" >
 					<div class="row">
 						<div class="medium-12 withPadding columns">
 							If your order includes an e-voucher code,this will be delivered by email using your work email adress,if you have also made a charity donation, this will automatically be made on your behalf.
@@ -539,15 +341,13 @@ if( isset( $email_order_code ) && $_SESSION["thank_you"] == false){
 					</div>
 					<?php endforeach; ?>
 					<div class="row">
-						<div class="medium-8 columns textRight">
-							<form action="" method="post">
+						<div class="medium-12 columns textRight">
+							<form action="" method="post" class="checkoutform">
 								<input type="hidden" name="post" value="<?php echo htmlentities(serialize($post));  ?>">
 								<input type="hidden" name="save" value="false">
 								<button class="purpleButton">EDIT DETAILS</button>
 							</form>
-						</div>
-						<div class="medium-4 columns textRight">
-							<form action="" method="post">
+							<form action="" method="post" class="checkoutform">
 								<input type="hidden" name="post" value="<?php echo htmlentities(serialize($post));  ?>">
 								<input type="hidden" name="save" value="true">
 								<button class="pinkButton">Complete Checkout</button>
@@ -564,15 +364,13 @@ if( isset( $email_order_code ) && $_SESSION["thank_you"] == false){
 			<?php elseif( isset( $postForUpload ) ):?>
 			<?php if( $last_id > 0 || $_SESSION["thank_you"] === false):?>
 
-				<div class="row callout panel creditCardView mCustomScrollbar height410" data-mcs-theme="dark-2">
-					<div  id="formDiv" >
-						<div class="row">
-							<div class="medium-12 withPadding columns">
-								<h2>Thank you</h2>
-								<p>Thank you for your purchase. Your voucher will be delivered within the next 5-7 working days 
-									(Additional delay may be experienced over the official holidays). Your Reference for this order is: <?php echo $last_id?></p>
-								<p> Confirmation of this order has been sent to your email address.</p>
-							</div>
+				<div id="formDiv" class="callout panel white">
+					<div class="row">
+						<div class="medium-12 withPadding columns">
+							<h2>Thank you</h2>
+							<p>Thank you for your purchase. Your voucher will be delivered within the next 5-7 working days 
+								(Additional delay may be experienced over the official holidays). Your Reference for this order is: <?php echo $last_id?></p>
+							<p> Confirmation of this order has been sent to your email address.</p>
 						</div>
 					</div>
 				</div>
@@ -582,8 +380,7 @@ if( isset( $email_order_code ) && $_SESSION["thank_you"] == false){
 				<?php endif; ?>
 			<?php else:?>
 			<?php $_SESSION["thank_you"] = true; ?>
-			<div class="row callout panel creditCardView mCustomScrollbar height410" data-mcs-theme="dark-2">
-				<div  id="formDiv" >
+				<div id="formDiv" class="callout panel creditCardView">
 					<form action="<?php echo HTTP_PATH . 'redeem/checkout.php?menu_id=' . $menu_id . "&checkout=true" ?>" method="post">
 						<div class="row">
 							<div class="medium-12 withPadding columns">
@@ -652,7 +449,7 @@ if( isset( $email_order_code ) && $_SESSION["thank_you"] == false){
 						</div>
 						<div class="row">
 							<div class="medium-12 columns textRight">
-								<button class="purpleButton">CONTINUE SHOPPING</button>
+								<a href="index.php" class="purpleButton">CONTINUE SHOPPING</a> &nbsp;
 								<button class="pinkButton proceedButton">PROCEED TO NEXT STEP</button>
 							</div>
 						</div>
@@ -663,8 +460,8 @@ if( isset( $email_order_code ) && $_SESSION["thank_you"] == false){
 						</div>
 					</form>
 				</div>
-			</div>
 			<?php endif;?>
+			</div>
 		</div>
 	</div>
 </div>

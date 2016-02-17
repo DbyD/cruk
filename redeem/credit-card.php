@@ -6,7 +6,6 @@ include "lib.php";
 $key = 'Cheer11Inside19Credit';
 $url = 'https://gateway.fidelipay.co.uk/paymentform/';
 
-
 if(isset($_POST)){	
 	if(isset($_POST["firstname"]) && isset($_POST["surname"]) && isset($_POST["address1"]) && isset($_POST["address2"]) && isset($_POST["town"]) && isset($_POST["postcode"]) && isset($_POST["telephone"]) && isset($_POST["email"])){
 		$_SESSION['cardForm'] = array(
@@ -22,8 +21,6 @@ if(isset($_POST)){
 	}
 }
 
-
-
 $basket = getBasket( $_SESSION["user"]->EmpNum );
 $total_price = 0;
 foreach ($basket as $pr_b) {
@@ -33,7 +30,6 @@ $sum_all = getAvailable( $_SESSION['user']->EmpNum );
 $sum_credit_card = getCreditCard( $_SESSION['user']->EmpNum );
 $sum_orders = getEmpBasketOrdersSum( $_SESSION['user']->EmpNum );
 $remaining_amount = $sum_all + $sum_credit_card - $sum_orders;
-
 $currect_amount = $total_price - $remaining_amount;
 
 // set the correct amount. You only use the amount short. so if basket = £25 and you have £20 then amount is £5
@@ -44,25 +40,12 @@ if (!isset($_POST['responseCode'])) {
 	$req['signature'] = createSignature($req, $key);
 }
 
-function createSignature(array $data, $key) {
-	// echo $key;
-	ksort($data);
-	$ret = http_build_query($data, '', '&');
-	$ret = str_replace(array('%0D%0A', '%0A%0D', '%0D'), '%0A', $ret);
-	return hash('SHA512', $ret . $key);
- }
-
-
-
-
 if( isset( $_GET["menu_id"] ) ) {
 	$menu_id = $_GET["menu_id"];
 }
 
 $val = $_SESSION['user']->administrator;
 ?>
-
-
 
 <?php echo '<form action="' . htmlentities($url) . '" method="post" name="ccresponse">' . PHP_EOL; ?>
 <?php foreach ($req as $field => $value) :?>

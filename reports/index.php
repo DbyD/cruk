@@ -4,7 +4,6 @@
 	$startdate=new DateTime('first day of this month'); 
 	$enddate=new DateTime('last day of this month'); 
 ?>
-
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
 <div id="content" class="large-8 large-push-2 columns">
@@ -35,7 +34,9 @@
 		<div id="subHome" class="callout panel dashboard white reportHome">
 			<div class="tableColumn-6">
 				<div class="dashboardGraphs">
-					<p>Awards this month: <?=getTotalReport($startdate->format('Y-m-d 00:00:00'),$enddate->format('Y-m-d 23:59:59'))?></p>
+					<p>Awards this month:
+						<?=getTotalReport($startdate->format('Y-m-d 00:00:00'),$enddate->format('Y-m-d 23:59:59'))?>
+					</p>
 					<script type="text/javascript">
 						google.load("visualization", "1", {packages:["corechart"]});
 						google.setOnLoadCallback(drawChart);
@@ -58,15 +59,27 @@
 							chart.draw(data, options);
 						}
 					</script>
-					<div id="donutchart1" style="width: 300px; height:220px;"></div>
-					<div class="pieLegend piePending"><i>-</i>Pending - <?=getTotalPendingReport($startdate->format('Y-m-d 00:00:00'),$enddate->format('Y-m-d 23:59:59'))?></div>
-					<div class="pieLegend pieApproved"><i>-</i>Approved - <?=getTotalApprovedReport($startdate->format('Y-m-d 00:00:00'),$enddate->format('Y-m-d 23:59:59'))?></div>
-					<div class="pieLegend pieDeclined"><i>-</i>Declined - <?=getTotalDeclinedReport($startdate->format('Y-m-d 00:00:00'),$enddate->format('Y-m-d 23:59:59'))?></div>
+					<div id="donutchart1" style="width: 300px; height:220px;">
+					</div>
+					<div class="pieLegend piePending">
+						<i>-</i>Pending -
+						<?=getTotalPendingReport($startdate->format('Y-m-d 00:00:00'),$enddate->format('Y-m-d 23:59:59'))?>
+					</div>
+					<div class="pieLegend pieApproved">
+						<i>-</i>Approved -
+						<?=getTotalApprovedReport($startdate->format('Y-m-d 00:00:00'),$enddate->format('Y-m-d 23:59:59'))?>
+					</div>
+					<div class="pieLegend pieDeclined">
+						<i>-</i>Declined -
+						<?=getTotalDeclinedReport($startdate->format('Y-m-d 00:00:00'),$enddate->format('Y-m-d 23:59:59'))?>
+					</div>
 				</div>
 			</div>
 			<div class="tableColumn-6">
 				<div class="dashboardGraphs">
-					<p>Total Awards: <?=getTotalReport()?></p>
+					<p>Total Awards:
+						<?=getTotalReport()?>
+					</p>
 					<script type="text/javascript">
 						google.load("visualization", "1", {packages:["corechart"]});
 						google.setOnLoadCallback(drawChart);
@@ -89,39 +102,49 @@
 							chart.draw(data, options);
 						}
 					</script>
-					<div id="donutchart2" style="width: 300px; height:220px;"></div>
-					<div class="pieLegend piePending"><i>-</i>Pending - <?=getTotalPendingReport()?></div>
-					<div class="pieLegend pieApproved"><i>-</i>Approved - <?=getTotalApprovedReport()?></div>
-					<div class="pieLegend pieDeclined"><i>-</i>Declined - <?=getTotalDeclinedReport()?></div>
+					<div id="donutchart2" style="width: 300px; height:220px;">
+					</div>
+					<div class="pieLegend piePending">
+						<i>-</i>Pending -
+						<?=getTotalPendingReport()?>
+					</div>
+					<div class="pieLegend pieApproved">
+						<i>-</i>Approved -
+						<?=getTotalApprovedReport()?>
+					</div>
+					<div class="pieLegend pieDeclined">
+						<i>-</i>Declined -
+						<?=getTotalDeclinedReport()?>
+					</div>
 				</div>
 			</div>
 			<p>&nbsp;</p>
 		</div>
-	</div>
-	<div class="row">
-		<div class="medium-4 columns leftnp">
-			<div class="callout panel reportLikes">
-				<div class="likeHead">Likes</div>
-				<i class="icon-icons_mail"></i>
-				<?php echo getTotalLikes() ?>
-			</div>
-		</div>
-		<div class="medium-8 columns leftnp rightnp" id="reportTop10">
-			<div class="callout panel">
-				<div class="tableTitle">
-					Top 10 nominees
+		<div class="row">
+			<div class="medium-4 columns leftnp">
+				<div class="callout panel reportLikes">
+					<div class="likeHead">
+						Likes
+					</div>
+					<i class="icon-icons_mail"></i> <?php echo getTotalLikes() ?>
 				</div>
-				<div class="medium-6 columns leftnp rightnp borderRight">
-				<?php
+			</div>
+			<div class="medium-8 columns leftnp rightnp" id="reportTop10">
+				<div class="callout panel">
+					<div class="tableTitle">
+						Top 10 nominees
+					</div>
+					<div class="medium-6 columns leftnp rightnp borderRight">
+						<?php
 				// get top 5 nominees
 				$nominees = getTopTen(0);
 				$x = 0;
 				foreach ($nominees as $list){
 					$x ++;
 				?>
-					<div class="tableRow">
-						<div class="tableColumn-2">
-						<?php
+						<div class="tableRow">
+							<div class="tableColumn-2">
+								<?php
 						switch ($x) {
 							case 1:
 								echo $x.'<sup>st</sup>';
@@ -137,29 +160,30 @@
 								break;
 							}
 						?>
+							</div>
+							<div class="tableColumn-9">
+								<?php echo getName($list->NominatedEmpNum); ?>
+							</div>
 						</div>
-						<div class="tableColumn-9">
-							<?php echo getName($list->NominatedEmpNum); ?>
-						</div>
+						<?php } ?>
 					</div>
-				<?php } ?>
-				</div>
-				<div class="medium-6 columns leftnp rightnp">
-				<?php
+					<div class="medium-6 columns leftnp rightnp">
+						<?php
 				// get top 5-10 nominees
 				$nominees = getTopTen(5);
 				foreach ($nominees as $list){
 					$x ++;
 				?>
-					<div class="tableRow">
-						<div class="tableColumn-2">
-							<?php echo $x.'<sup>th</sup>'; ?>
+						<div class="tableRow">
+							<div class="tableColumn-2">
+								<?php echo $x.'<sup>th</sup>'; ?>
+							</div>
+							<div class="tableColumn-9">
+								<?php echo getName($list->NominatedEmpNum); ?>
+							</div>
 						</div>
-						<div class="tableColumn-9">
-							<?php echo getName($list->NominatedEmpNum); ?>
-						</div>
+						<?php } ?>
 					</div>
-				<?php } ?>
 				</div>
 			</div>
 		</div>

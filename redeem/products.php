@@ -66,6 +66,7 @@ if( $val == "YES" ){
 						<?php endif; ?>
 						
 
+			<div class="row mCustomScrollbar height563" data-mcs-theme="dark-2">
 						<?php if( isset( $products ) ):?>
 						<div class="row products">
 							<?php foreach( $products as $product ):?>
@@ -99,6 +100,7 @@ if( $val == "YES" ){
 						<?php endif; ?>
 						<?php endif;?>
 					</div>
+				</div>
 				</div>
 			</div>
 			<div id="left-column" class="large-2 large-pull-8 columns">

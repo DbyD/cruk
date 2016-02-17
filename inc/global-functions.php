@@ -13,7 +13,13 @@ function startEmail(){
 					.small {font-size: 8pt;}
 					.largetext {font-size: 17pt;}
 					a {color:#2e008b}
-					.colorblock a {color:#fff}
+					.colorblock a {color:#fff}					
+					.invoice, .details {margin-top: 10px;border-top: 1px solid #666666;border-left: 1px solid #666666;width: 100%;text-align:center;}
+					.details{text-align: left;}
+					td, th {border-right: 1px solid #666666;border-bottom: 1px solid #666666;}
+					.details td {padding-left:10px;}
+					.textLeft{text-align:left;padding-left:10px;}
+					.textRight{text-align:right;padding-right:10px;}
 				</style></head><body><div align="center"><div class="emailText">';
 	return  $startemail;
 }

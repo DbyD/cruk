@@ -1,3 +1,4 @@
+<?php if(isset($_SESSION['user']) === false){ header("Location: ".HTTP_PATH."index.php"); } ?>
 <!doctype html>
 <html class="no-js" lang="en">
 <head>
@@ -46,6 +47,7 @@
 		<!-- Right Nav Section -->
 		<div class="totalAwardsQuarter"><?php echo getNumberAwardsQuarter() ?> awards have been given out across the company this quarter, in addition to many offline Thank you cards.</div>
 		<ul class="right">
+			<li class="yourrewards"><a href="http://yourrewards.cruk.org"><img src="<?=HTTP_PATH?>images/Your-Rewards.png" alt="Your Rewards" /></a></li>
 			<li><a href="<?=HTTP_PATH?>inc/logout.php">Logout</a></li>
 			<!--<li class="has-dropdown"> <a href="#">&nbsp;</a>
 				<ul class="dropdown">
@@ -69,6 +71,7 @@
 			<ul class="off-canvas-list">
 				<li><?php include 'portfolio.php'; ?></li>
 				<?php include 'menu.php'; ?>
+				<li class="clickAble" data-type="gourl" data-url="<?=HTTP_PATH?>inc/logout.php">Logout</li>
 			</ul>
 		</aside>
 		<section class="main-section">
