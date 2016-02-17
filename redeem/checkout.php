@@ -56,10 +56,25 @@ if(isset($_POST['redirectURL'])){
 				
 				$order_insert_id = addBasketOrders( $insert_data );
 				$insert_data["orderID"] = $order_insert_id;
-				$last_id = insertCreditCard( $insert_data );
+				insertCreditCard( $insert_data );
+				$last_order_id = $order_insert_id;
 				$email_order_code = $order_insert_id;
-
 				updateBasketStatus( $_SESSION['user']->EmpNum, $order_insert_id );
+				
+				$args = array();
+				
+				$post_email = $insert_data;
+				$args["tel_number"] = $post_email['telephone'];
+				$delivery_address = $post_email['address1'].', ';
+				if ($post_email['address2'] !=''){ 
+					$delivery_address .= $post_email['address2'].', ';
+				}
+				$delivery_address .= $post_email['town'].', '.$post_email['postcode'];
+				$args["delivery_address"] = $delivery_address;
+		
+				$args["email_order_code"] = $email_order_code;
+				SendMail( $args );
+
 				
 				if( $order_insert_id > 0){
 					$credit_save = true;
@@ -174,6 +189,18 @@ if( isset( $email_order_code ) && $_SESSION["thank_you"] == false){
 	if(isset($_POST['post'])){
 		$args = array();
 		$args["email_order_code"] = $email_order_code;
+		
+		$post_email = unserialize($_POST['post']);
+		$args["tel_number"] = $post_email['telephone'];
+		$delivery_address = $post_email['address1'].', ';
+		if ($post_email['address2'] !=''){ 
+			$delivery_address .= $post_email['address2'].', ';
+		}
+		$delivery_address .= $post_email['town'].', '.$post_email['postcode'];
+		$args["delivery_address"] = $delivery_address;
+		
+		$email_order_code = $args["email_order_code"];
+		$last_order_id = $email_order_code;
 		SendMail( $args );
 	}
 }
@@ -369,8 +396,9 @@ if( isset( $email_order_code ) && $_SESSION["thank_you"] == false){
 						<div class="medium-12 withPadding columns">
 							<h2>Thank you</h2>
 							<p>Thank you for your purchase. Your voucher will be delivered within the next 5-7 working days 
-								(Additional delay may be experienced over the official holidays). Your Reference for this order is: <?php echo $last_id?></p>
-							<p> Confirmation of this order has been sent to your email address.</p>
+								(Additional delay may be experienced over the official holidays).</p>
+							<p>Your Reference for this order is: <?php echo $last_order_id?></p>
+							<p>Confirmation of this order has been sent to your email address.</p>
 						</div>
 					</div>
 				</div>

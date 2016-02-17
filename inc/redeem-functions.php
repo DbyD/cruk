@@ -336,10 +336,10 @@ function getEmpBasketOrdersSum( $empnum ){
 function insertCreditCard( $data ) {
 	global $db;
 	$stmt = $db->prepare("
-INSERT INTO tblcreditcard 
-	(firstname, surname, address1, 	address2, town, postcode, telephone, email, amount, EmpNum, orderID, resultCardRequest) 
-VALUES 
-	(:firstname, :surname, :address1, :address2, :town, :postcode, :telephone, :email, :amount, :EmpNum, :orderID, :resultCardRequest)");
+	INSERT INTO tblcreditcard 
+		(firstname, surname, address1, 	address2, town, postcode, telephone, email, amount, EmpNum, orderID, resultCardRequest) 
+	VALUES 
+		(:firstname, :surname, :address1, :address2, :town, :postcode, :telephone, :email, :amount, :EmpNum, :orderID, :resultCardRequest)");
 	$stmt->bindValue(':firstname',$data["firstname"], PDO::PARAM_STR);
 	$stmt->bindValue(':surname', $data["surname"], PDO::PARAM_STR);
 	$stmt->bindValue(':address1',$data["address1"] , PDO::PARAM_STR);
@@ -353,8 +353,7 @@ VALUES
 	$stmt->bindValue(':orderID',$data["orderID"] , PDO::PARAM_INT);
 	$stmt->bindValue(':resultCardRequest',$data["resultCardRequest"] , PDO::PARAM_STR);
 	$stmt->execute();
-	$lastId = $db->lastInsertId();
-	return $lastId;
+	return $data["orderID"];
 }
 ///////////////////////////////////////////////////////////////////////////////////
 function updateCreditCardAmount( $amount , $resultCardRequest ) {
@@ -415,13 +414,8 @@ function createSignature(array $data, $key) {
 }
 ///////////////////////////////////////////////////////////////////////////////////
 function SendMail($args = array()){
-	$post_email = unserialize($_POST['post']);
-	$tel_number = $post_email['telephone'];
-	$delivery_address = $post_email['address1'].', ';
-	if ($post_email['address2'] !=''){ 
-		$delivery_address .= $post_email['address2'].', ';
-	}
-	$delivery_address .= $post_email['town'].', '.$post_email['postcode'];
+	$tel_number = $args['tel_number'];
+	$delivery_address = $args["delivery_address"];
 	$email_order_code = $args["email_order_code"];
 	$content = get_content_email($email_order_code, $tel_number, $delivery_address);					
 	$sendEmail = new StdClass();
@@ -471,14 +465,12 @@ function get_content_email( $email_order_code, $tel_number, $delivery_address) {
 			$table_body .= '<tr>
 								<td>' . $b['QTY'] .'</td>
 								<td class="textLeft">' . $b['aTitle'] . '</td>
-								<td></td>
 								<td>&pound;' . $b['aPrice'] . '</td>
 							</tr>
 							<tr>
 								<td></td>
-								<td></td>
-								<td class="textRight">Total</td>
-								<td>&pound;' . $total_price . '</td>
+								<td class="textRight"><b>Total</b></td>
+								<td><b>&pound;' . $total_price . '</b></td>
 							</tr>';
 			$i++;
 		}
@@ -490,7 +482,6 @@ function get_content_email( $email_order_code, $tel_number, $delivery_address) {
 						<tr>
 							<th width="100">QTY</th>
 							<th class="textLeft">PRODUCT NAME</th>
-							<th></th>
 							<th width="125">PRICE</th>
 						</tr>
 						' . $table_body . '

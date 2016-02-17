@@ -2,7 +2,18 @@
 include_once '../inc/config.php';
 include_once '../inc/header.php';
 include "lib.php";
-
+?>
+<div id="content" class="large-8 large-push-2 columns">
+	<div id="formDiv" class="callout panel white">
+		<div class="row">
+			<div class="medium-12 withPadding columns">
+				<p>Please wait while your order is being processed.</p>
+				<p>You will be redirected to the credit card payment gateway.</p>
+			</div>
+		</div>
+	</div>
+</div>
+<?php
 $key = 'Cheer11Inside19Credit';
 $url = 'https://gateway.fidelipay.co.uk/paymentform/';
 

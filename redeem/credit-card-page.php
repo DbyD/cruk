@@ -74,6 +74,17 @@ if(count($basket) > 0 && is_array($basket)){
 						<div class="row">
 							<div class="row">
 								<div class="medium-3 columns textRight">
+									<label for="right-label" class="right inline">Telephone Number: <span class="required">&nbsp;</span>
+									</label>
+								</div>
+								<div class="medium-9 columns">
+									<input type="text" id="right-label" name="telephone">
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="row">
+								<div class="medium-3 columns textRight">
 									<label for="right-label" class="right inline">Address Line 1: <span class="required">*</span>
 										<small>(or company name)</small></label>
 								</div>
@@ -114,17 +125,6 @@ if(count($basket) > 0 && is_array($basket)){
 								</div>
 								<div class="medium-9 columns">
 									<input type="text" id="right-label" name="postcode" required>
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="row">
-								<div class="medium-3 columns textRight">
-									<label for="right-label" class="right inline">Telephone Number: <span class="required">&nbsp;</span>
-									</label>
-								</div>
-								<div class="medium-9 columns">
-									<input type="text" id="right-label" name="telephone">
 								</div>
 							</div>
 						</div>
