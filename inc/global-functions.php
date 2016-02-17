@@ -55,10 +55,10 @@ function sendEmail($email,$noid){
 	$message .= $email->Content;
 	$message .= endEmail($noid);
 	if(isset($email->Cc)){
-		$headers .= 'Cc: '. $email->Cc . "\r\n";
+		$headers .= "Cc: ". $email->Cc . "\r\n";
 	}
 	if(isset($email->Bcc)){
-		$headers .= 'Bcc: '. $email->Bcc . "\r\n";
+		$headers .= "Bcc: ". $email->Bcc . "\r\n";
 	}
 	if (mail($email->emailTo, $email->subject, $message, $headers)){
 		$reply = "success";
@@ -96,10 +96,10 @@ function sendEcardEmail($ecard,$ID){
 	$message .= $ecard->content;
 	$message .= endEcardEmail($ID);
 	if(isset($ecard->Cc)){
-		$headers .= 'Cc: '. $ecard->Cc . "\r\n";
+		$headers .= "Cc: ". $ecard->Cc . "\r\n";
 	}
 	if(isset($ecard->Bcc)){
-		$headers .= 'Bcc: '. $ecard->Bcc . "\r\n";
+		$headers .= "Bcc: ". $ecard->Bcc . "\r\n";
 	}
 	if (mail($emailTo, $ecard->subject, $message, $headers)){
 		$reply = "ecard sent";

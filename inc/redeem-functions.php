@@ -421,8 +421,9 @@ function SendMail($args = array()){
 	$sendEmail = new StdClass();
 	$sendEmail->Content = $content;
 	$sendEmail->emailTo = $_SESSION['user']->Eaddress;
-	$sendEmail->subject = 'CRUK Order';
-	$sendEmail->Bcc = 'alec@dbyd.co.za';
+	$sendEmail->subject = 'CRUK Shop Order';
+	$sendEmail->Bcc = 'alec@iceimages.co.za';
+	$sendEmail->Cc = 'iceman@discoverymail.co.za';
 	$email = sendEmail($sendEmail,'');
 }
 ///////////////////////////////////////////////////////////////////////////////////
