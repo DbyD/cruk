@@ -43,7 +43,7 @@ function insertFile( $menu_id, $sub_id ){
 		$time = time();
 		$hash = md5($time);
 
-		$target_file = $target_dir . $hash . ".".$imageFileType;//
+		$target_file = $target_dir . $_FILES["fileImage"]["name"];//
 		
 		if (!file_exists($target_dir)) {
 			mkdir($target_dir, 0777, true);
@@ -61,7 +61,7 @@ function insertFile( $menu_id, $sub_id ){
 	    	include('classSimpleImage.php');
 	    	$image = new SimpleImage();
 		    $image->load($target_file);
-		    $image->resize(218, 138);
+		    $image->resize(218, 175);
 		    $image->save($target_file);
 
 	        $arr = explode("../", $target_file);
@@ -89,7 +89,7 @@ function insertImageSub( $file, $sub_id, $menu_id){
 	if ( !$error ){
 		$target_dir = "../images/menu_" . $menu_id. "/sub_".$sub_id . "/";
 
-		$target_file = $target_dir  . "logo.".$imageFileType;//
+		$target_file = $target_dir  . $file["name"];//
 		
 		if (!file_exists($target_dir)) {
 			mkdir($target_dir, 0777, true);
@@ -103,7 +103,7 @@ function insertImageSub( $file, $sub_id, $menu_id){
 	    	include('classSimpleImage.php');
 	    	$image = new SimpleImage();
 		    $image->load($target_file);
-		    $image->resize(218, 138);
+		    $image->resize(218, 175);
 		    $image->save($target_file);
 		    
 	        $arr = explode("../", $target_file);

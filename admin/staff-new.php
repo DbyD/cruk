@@ -10,20 +10,13 @@
 		</div>
 		<i class="icon-icons_thickrightarrow smalli"></i> <span class="subTitle clickAble" data-type="gourl" data-url="staff.php">Staff</span>
 		<i class="icon-icons_thickrightarrow smalli"></i> <span class="subTitle clickAble" data-type="gourl" data-url="staff-search.php">Staff Search</span>
-		<i class="icon-icons_thickrightarrow smalli"></i> <span class="subSubTitle">Staff Details</span>
+		<i class="icon-icons_thickrightarrow smalli"></i> <span class="subSubTitle">New Staff Details</span>
 	</div>
 	<div class="row contentFill">
 		<div id="staffedit" class="callout panel dashboard white fillHeight white">
-			<form action="staff-update.php" method="post" name="updateStaffForm" id="updateStaffForm">
+			<form action="staff-insert.php" method="post" name="insertStaffForm" id="insertStaffForm">
 				<input type="hidden" name="formName" value="updateStaff">
-				<input type="hidden" value="<?=$staff->id?>" name="id" id="id" required>
-				<?php
-				if ($_POST['EmpNum']){
-					//echo $_POST['EmpNum'];
-					$staff = getUser($_POST['EmpNum']);
-					//print_r($staff);
-				}
-				?>
+				<input type="hidden" value="" name="id" id="id">
 				<div class="row">
 					<div class="medium-6 columns">
 						<div class="row">
@@ -36,7 +29,7 @@
 								Emp Number
 							</div>
 							<div class="medium-8 columns">
-								<input type="text" value="<?=$staff->EmpNum?>" name="EmpNum" id="EmpNum" required>
+								<input type="text" value="" name="EmpNum" id="EmpNum" required>
 							</div>
 						</div>
 						<div class="row">
@@ -44,7 +37,7 @@
 								Password
 							</div>
 							<div class="medium-8 columns">
-								<input type="password" value="<?=$staff->sPassword?>" name="sPassword" id="sPassword" >
+								<input type="password" value="" name="sPassword" id="sPassword" >
 							</div>
 						</div>
 						<div class="row">
@@ -52,7 +45,7 @@
 								Repeat Password
 							</div>
 							<div class="medium-8 columns">
-								<input type="password" value="<?=$staff->sPassword?>" name="repeatPassword" id="repeatPassword" >
+								<input type="password" value="" name="repeatPassword" id="repeatPassword" >
 							</div>
 						</div>
 						<div class="row">
@@ -60,7 +53,7 @@
 								First name
 							</div>
 							<div class="medium-8 columns">
-								<input type="text" value="<?=$staff->Fname?>" name="Fname" id="Fname" required>
+								<input type="text" value="" name="Fname" id="Fname" required>
 							</div>
 						</div>
 						<div class="row">
@@ -68,7 +61,7 @@
 								Surname
 							</div>
 							<div class="medium-8 columns">
-								<input type="text" value="<?=$staff->Sname?>" name="Sname" id="Sname" required>
+								<input type="text" value="" name="Sname" id="Sname" required>
 							</div>
 						</div>
 						<div class="row">
@@ -76,7 +69,7 @@
 								Preferred Name
 							</div>
 							<div class="medium-8 columns">
-								<input type="text" value="<?=$staff->PreferredFname?>" name="PreferredFname" id="PreferredFname">
+								<input type="text" value="" name="PreferredFname" id="PreferredFname">
 							</div>
 						</div>
 						<div class="row">
@@ -84,7 +77,7 @@
 								Email address
 							</div>
 							<div class="medium-8 columns">
-								<input type="text" value="<?=$staff->Eaddress?>" name="Eaddress" id="Eaddress">
+								<input type="text" value="" name="Eaddress" id="Eaddress">
 							</div>
 						</div>
 						<div class="row">
@@ -92,7 +85,7 @@
 								Job Title
 							</div>
 							<div class="medium-8 columns">
-								<input type="text" value="<?=$staff->JobTitle?>" name="JobTitle" id="JobTitle" required>
+								<input type="text" value="" name="JobTitle" id="JobTitle" required>
 							</div>
 						</div>
 						<div class="row">
@@ -100,7 +93,7 @@
 								Grade
 							</div>
 							<div class="medium-8 columns">
-								<input type="text" value="<?=$staff->Grade?>" name="Grade" id="Grade" >
+								<input type="text" value="" name="Grade" id="Grade" >
 							</div>
 						</div>
 						<div class="row">
@@ -108,7 +101,7 @@
 								Shop
 							</div>
 							<div class="medium-8 columns">
-								<input type="text" value="<?=$staff->Shop?>" name="Shop" id="Shop" >
+								<input type="text" value="" name="Shop" id="Shop" >
 							</div>
 						</div>
 						<div class="row">
@@ -116,7 +109,7 @@
 								Retail Area
 							</div>
 							<div class="medium-8 columns">
-								<input type="text" value="<?=$staff->RetailArea?>" name="RetailArea" id="RetailArea" >
+								<input type="text" value="" name="RetailArea" id="RetailArea" >
 							</div>
 						</div>
 						<div class="row">
@@ -124,7 +117,7 @@
 								Team
 							</div>
 							<div class="medium-8 columns">
-								<input type="text" value="<?=$staff->Team?>" name="Team" id="Team" >
+								<input type="text" value="" name="Team" id="Team" >
 							</div>
 						</div>
 						<div class="row">
@@ -132,7 +125,7 @@
 								Section
 							</div>
 							<div class="medium-8 columns">
-								<input type="text" value="<?=$staff->Section?>" name="Section" id="Section" >
+								<input type="text" value="" name="Section" id="Section" >
 							</div>
 						</div>
 						<div class="row">
@@ -140,7 +133,7 @@
 								Department
 							</div>
 							<div class="medium-8 columns">
-								<input type="text" value="<?=$staff->Department?>" name="Department" id="Department" required>
+								<input type="text" value="" name="Department" id="Department" required>
 							</div>
 						</div>
 						<div class="row">
@@ -148,7 +141,7 @@
 								Directorate
 							</div>
 							<div class="medium-8 columns">
-								<input type="text" value="<?=$staff->Directorate?>" name="Directorate" id="Directorate" required>
+								<input type="text" value="" name="Directorate" id="Directorate" required>
 							</div>
 						</div>
 						<div class="row">
@@ -156,7 +149,7 @@
 								Location Name
 							</div>
 							<div class="medium-8 columns">
-								<input type="text" value="<?=$staff->LocationName?>" name="LocationName" id="LocationName" >
+								<input type="text" value="" name="LocationName" id="LocationName" >
 							</div>
 						</div>
 						<div class="row">
@@ -164,7 +157,7 @@
 								Location Address
 							</div>
 							<div class="medium-8 columns">
-								<input type="text" value="<?=$staff->LocationAddress?>" name="LocationAddress" id="LocationAddress" >
+								<input type="text" value="" name="LocationAddress" id="LocationAddress" >
 							</div>
 						</div>
 					</div>
@@ -179,7 +172,7 @@
 								Emp Number
 							</div>
 							<div class="medium-8 columns">
-								<input type="text" value="<?=$staff->LMEmpNum?>" name="LMEmpNum" id="LMEmpNum" required>
+								<input type="text" value="" name="LMEmpNum" id="LMEmpNum" required>
 							</div>
 						</div>
 						<div class="row">
@@ -187,7 +180,7 @@
 								First name
 							</div>
 							<div class="medium-8 columns">
-								<input type="text" value="<?=$staff->LMFname?>" name="LMFname" id="LMFname" required>
+								<input type="text" value="" name="LMFname" id="LMFname" required>
 							</div>
 						</div>
 						<div class="row">
@@ -195,7 +188,7 @@
 								Surname
 							</div>
 							<div class="medium-8 columns">
-								<input type="text" value="<?=$staff->LMSname?>" name="LMSname" id="LMSname" required>
+								<input type="text" value="" name="LMSname" id="LMSname" required>
 							</div>
 						</div>
 						<div class="row">
@@ -203,7 +196,7 @@
 								Email address
 							</div>
 							<div class="medium-8 columns">
-								<input type="text" value="<?=$staff->LMEaddress?>" name="LMEaddress" id="LMEaddress" required>
+								<input type="text" value="" name="LMEaddress" id="LMEaddress" required>
 							</div>
 						</div>
 						<div class="row">
@@ -211,7 +204,7 @@
 								Grade
 							</div>
 							<div class="medium-8 columns">
-								<input type="text" value="<?=$staff->LMGrade?>" name="LMGrade" id="LMGrade" >
+								<input type="text" value="" name="LMGrade" id="LMGrade" >
 							</div>
 						</div>
 						<div class="row">
@@ -224,7 +217,7 @@
 								Emp Number
 							</div>
 							<div class="medium-8 columns">
-								<input type="text" value="<?=$staff->AppEmpNum?>" name="AppEmpNum" id="AppEmpNum" >
+								<input type="text" value="" name="AppEmpNum" id="AppEmpNum" >
 							</div>
 						</div>
 						<div class="row">
@@ -232,7 +225,7 @@
 								First name
 							</div>
 							<div class="medium-8 columns">
-								<input type="text" value="<?=$staff->AppFname?>" name="AppFname" id="AppFname" >
+								<input type="text" value="" name="AppFname" id="AppFname" >
 							</div>
 						</div>
 						<div class="row">
@@ -240,7 +233,7 @@
 								Surname
 							</div>
 							<div class="medium-8 columns">
-								<input type="text" value="<?=$staff->AppSname?>" name="AppSname" id="AppSname" >
+								<input type="text" value="" name="AppSname" id="AppSname" >
 							</div>
 						</div>
 						<div class="row">
@@ -248,7 +241,7 @@
 								Email address
 							</div>
 							<div class="medium-8 columns">
-								<input type="text" value="<?=$staff->AppEaddress?>" name="AppEaddress" id="AppEaddress" >
+								<input type="text" value="" name="AppEaddress" id="AppEaddress" >
 							</div>
 						</div>
 						<div class="row">
@@ -257,14 +250,14 @@
 							</div>
 						</div>
 						<div class="row">
-							<div class="small-6 medium-6 columns">
+							<div class="medium-6 columns">
 								Eligible
 							</div>
 							<div class="small-3 medium-3 columns">
-								YES &nbsp; <input type="radio" value="1" name="eligible" id="eligible1" <?php if($staff->eligible == 1) echo 'checked'; ?>>
+								YES &nbsp; <input type="radio" value="1" name="eligible" id="eligible1" checked>
 							</div>
 							<div class="small-3 medium-3 columns">
-								NO &nbsp; <input type="radio" value="0" name="eligible" id="eligible2" <?php if($staff->eligible == 0) echo 'checked'; ?> >
+								NO &nbsp; <input type="radio" value="0" name="eligible" id="eligible2" >
 							</div>
 						</div>
 						<div class="row">
@@ -272,10 +265,10 @@
 								Activated
 							</div>
 							<div class="small-3 medium-3 columns">
-								YES &nbsp; <input type="radio" value="1" name="activated" id="activated1" <?php if($staff->activated == 1) echo 'checked'; ?>>
+								YES &nbsp; <input type="radio" value="1" name="activated" id="activated1" >
 							</div>
 							<div class="small-3 medium-3 columns">
-								NO &nbsp; <input type="radio" value="0" name="activated" id="activated2" <?php if($staff->activated == 0) echo 'checked'; ?> >
+								NO &nbsp; <input type="radio" value="0" name="activated" id="activated2" checked>
 							</div>
 						</div>
 						<div class="row">
@@ -283,10 +276,10 @@
 								Super User
 							</div>
 							<div class="small-3 medium-3 columns">
-								YES &nbsp; <input type="radio" value="Y" name="SuperUser" id="SuperUser1" <?php if($staff->SuperUser == 'Y') echo 'checked'; ?>>
+								YES &nbsp; <input type="radio" value="Y" name="SuperUser" id="SuperUser1" >
 							</div>
 							<div class="small-3 medium-3 columns">
-								NO &nbsp; <input type="radio" value="N" name="SuperUser" id="SuperUser2" <?php if($staff->SuperUser != 'Y') echo 'checked'; ?> >
+								NO &nbsp; <input type="radio" value="N" name="SuperUser" id="SuperUser2" checked>
 							</div>
 						</div>
 						<div class="row">

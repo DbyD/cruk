@@ -1,4 +1,3 @@
-		
 			<div id="left-column" class="large-2 large-pull-8 columns">
 				<div id="payoff" class="callout panel clickAble" data-type="gourl" data-url="<?=HTTP_PATH?>home.php">
 					<span class="helper"></span>
@@ -128,8 +127,6 @@
 <script src="<?=HTTP_PATH?>js/foundation.min.js"></script>
 <script src="<?=HTTP_PATH?>js/cruk.js"></script>
 <script src="<?=HTTP_PATH?>js/redeem.js"></script>
-
-
 <script>
   $(function() {
     $( "#datepickerfrom" ).datepicker({
@@ -146,7 +143,5 @@
     });
   });
 </script>
-
-
 </body>
 </html>
