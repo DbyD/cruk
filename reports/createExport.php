@@ -4,18 +4,18 @@
 	include_once("../inc/report-functions.php");
 	switch(intval($_POST["eType"])){
 		case 1:
-			$filename = "Nominations_" . date("Ymd") . ".csv";
+			$filename = "Nominations_" . date("Ymd") . ".xls";
 			$dataLine = createNominationExport($_POST);
 			break;
 		case 2:
-			$filename = "Redemption_" . date("Ymd") . ".csv";
+			$filename = "Redemption_" . date("Ymd") . ".xls";
 			$dataLine = createRedemptionExport($_POST);
 			break;
 	}
 	
 	header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
 	header("Content-Description: File Transfer");
-	header("Content-type: text/csv");
+	header("Content-type: application/vnd.ms-excel");
 	header("Content-Disposition: attachment; filename={$filename}");
 	header("Expires: 0");
 	header("Content-Transfer-Encoding: binary");

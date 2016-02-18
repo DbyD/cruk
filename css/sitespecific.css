@@ -614,16 +614,29 @@ form .row .row {
 	width: auto;
 	margin: 10px 10px 30px 0px;
 }
-#updateStaff input[type=text],#updateStaff input[type=password], #updateStaff input[type=email], #updateStaff  textarea {
-	border-radius: 14px;
+#updateStaff input[type=text],#updateStaff input[type=password], #updateStaff input[type=email], #updateStaff  textarea, .reportHome input[type=text], #staffedit input[type=text], #staffedit input[type=password] {
+	border-radius: 8px;
 	font-size: 12px;
 	padding: 4px 5px;
 	margin: 7px 3px;
 }
+#staffedit{
+	color: #383838 !important;
+	font-size: 12px !important;
+	line-height: 33px;
+}
+#staffedit input[type=text], #staffedit input[type=password], #staffedit input[type="radio"] {
+	margin: 6px 0 0;
+    padding: 2px 5px;
+}
+#staffedit p{
+	line-height: 40px;
+}
 /* @end */
 /* @group Reports */
-#subHome.reportHome {
+#subHome.reportHome, #staffedit.reportHome {
 	margin-bottom: 8px;
+	padding: 0 2%;
 }
 .tableReports {
 	font-size: 13px;
@@ -702,13 +715,25 @@ form .row .row {
 }
 #reportTop10 .tableRow {
 	font-size: 13px;
-	padding: 7px 15px;
+	padding: 6px 15px 7px;
 	text-align: left;
 	border-bottom: 1px solid #cfcecf;
 }
 .borderRight {
 	border-right: 1px solid #cfcecf;
 }
+.reportHome input[type=text] {
+	width: 80%;
+	display: inline;
+	margin-right: 10px;
+}
+.dateInput{
+	margin-bottom: 20px !important;
+}
+.dateInput div:first-child{
+	padding-top: 10px !important;
+}
+#ui-datepicker-div { display: none; }
 }
 /* @end */
 /* @group Alert Popup */
@@ -1150,7 +1175,9 @@ button:hover, button:focus, .button:hover, .button:focus {
 	background-color: #8c66bd;
 	color: #fff;
 	padding: 10px;
-	border-radius: 3px;
+	border-top-left-radius: 3px;
+	border-top-right-radius: 3px;
+	margin: 0;
 }
 .prodTitle{
 	border-radius:0px;
@@ -1189,6 +1216,9 @@ button:hover, button:focus, .button:hover, .button:focus {
 .menu-item-holder  img {
 	width: 14px;
 }
+ .sub-menu-area input[type=text]{
+	padding: 2px 5px;
+}
 .activated .sub-menu-area {
 	display: inline-block !important;
 	position: absolute;
@@ -1223,7 +1253,7 @@ button:hover, button:focus, .button:hover, .button:focus {
 .sub-menu > li > a {
 	color: #622fa6 !important;
 	background: #caabf1;
-	padding: 10px 40px;
+	padding: 4px 40px;
 	font-size: 13px;
 	display: block
 }

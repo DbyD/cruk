@@ -173,21 +173,21 @@ class claimedAwardsList{
 class searchUsers{
     public function getAllUserSearch($search) {
 		global $db;
-		$stmt = $db->prepare("SELECT * FROM tblempall WHERE (Fname LIKE '%$search%' OR Sname LIKE '%$search%') AND EmpNum <> :empnum LIMIT 20");
+		$stmt = $db->prepare("SELECT * FROM tblempall WHERE (Fname LIKE '%$search%' OR Sname LIKE '%$search%') AND EmpNum <> :empnum ORDER BY Sname LIMIT 20");
 		$stmt->execute(array('empnum' => $_SESSION['user']->EmpNum));
 		$result = $stmt->fetchAll(PDO::FETCH_OBJ);
 		return $result;
     }
     public function getAllAdminSearch($search) {
 		global $db;
-		$stmt = $db->prepare("SELECT * FROM tblempall WHERE (Fname LIKE '%$search%' OR Sname LIKE '%$search%') LIMIT 20");
+		$stmt = $db->prepare("SELECT * FROM tblempall WHERE (Fname LIKE '%$search%' OR Sname LIKE '%$search%') ORDER BY Sname LIMIT 20");
 		$stmt->execute();
 		$result = $stmt->fetchAll(PDO::FETCH_OBJ);
 		return $result;
     }
     public function getAllTeamSearch($search) {
 		global $db;
-		$stmt = $db->prepare("SELECT * FROM tblempall WHERE Team LIKE '%$search%' GROUP BY Team LIMIT 20 ");
+		$stmt = $db->prepare("SELECT * FROM tblempall WHERE Team LIKE '%$search%' ORDER BY Sname GROUP BY Team LIMIT 20 ");
 		$stmt->execute();
 		$result = $stmt->fetchAll(PDO::FETCH_OBJ);
 		return $result;
@@ -196,7 +196,7 @@ class searchUsers{
 		global $db;
 		$stmt = $db->prepare("SELECT * FROM tblempall WHERE (Fname LIKE '%$search%' OR Sname LIKE '%$search%'
 									OR CONCAT(Fname,' ',Sname) like '%".str_replace(" ","%",$search)."%')
-									AND EmpNum <> :empnum");
+									AND EmpNum <> :empnum ORDER BY Sname");
 		$stmt->execute(array('empnum' => $_SESSION['user']->EmpNum));
 		$result = $stmt->fetchAll(PDO::FETCH_OBJ);
 		return $result;
@@ -204,7 +204,7 @@ class searchUsers{
     public function getAdminAllSearch($search) {
 		global $db;
 		$stmt = $db->prepare("SELECT * FROM tblempall WHERE (Fname LIKE '%$search%' OR Sname LIKE '%$search%'
-									OR CONCAT(Fname,' ',Sname) like '%".str_replace(" ","%",$search)."%')");
+									OR CONCAT(Fname,' ',Sname) like '%".str_replace(" ","%",$search)."%')  ORDER BY Sname");
 		$stmt->execute();
 		$result = $stmt->fetchAll(PDO::FETCH_OBJ);
 		return $result;

@@ -31,7 +31,7 @@
 				</div>
 			</div>
 		</div>
-		<div id="subHome" class="callout panel dashboard white reportHome">
+		<div id="subHome" class="callout panel dashboard white">
 			<div class="tableColumn-6">
 				<div class="dashboardGraphs">
 					<p>Awards this month:

@@ -5,10 +5,9 @@
 
 <div id="content" class="large-8 large-push-2 columns">
 	<div class="title">
-		<div class="inlineDiv clickAble" data-type="gourl" data-url="index.php">
-			Admin
-		</div>
-		<i class="icon-icons_thickrightarrow smalli"></i> <span class="subSubTitle">Staff Data</span>
+		<div class="inlineDiv clickAble" data-type="gourl" data-url="index.php">Admin</div>
+		<i class="icon-icons_thickrightarrow smalli"></i> <span class="subTitle clickAble" data-type="gourl" data-url="staff.php">Staff</span>
+		<i class="icon-icons_thickrightarrow smalli"></i> <span class="subSubTitle">Staff Search</span>
 	</div>
 	<div class="row contentFill">
 		<div class="callout panel white contentFill">
@@ -83,5 +82,8 @@
 	include_once('../inc/footer.php');
 	if ($_GET['searchAdmin']){
 ?>
-<script>$('#buttonRow').removeClass('hidden'); </script>
+<script>
+	<?php if($x==1){ ?>$("#EmpNum1").prop('checked', true); <?php } ?>
+	$('#buttonRow').removeClass('hidden');
+</script>
 <?php } ?>
