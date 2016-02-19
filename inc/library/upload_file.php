@@ -114,5 +114,4 @@ function insertImageSub( $file, $sub_id, $menu_id){
 		return false;
 	}
 }
-
 ?>
