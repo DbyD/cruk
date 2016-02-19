@@ -32,9 +32,9 @@
 .top-bar .title-area {
 	margin-left: 2%;
 }
-.top-bar-section ul {
+/*.top-bar-section ul {
 	margin-right: 2%;
-}
+}*/
 .row {
 	max-width: 1200px;
 }
@@ -247,10 +247,8 @@ ol {
 	width: 30%;
 }
 .closealert {
-	position: absolute;
-	top: -5px;
-	right: -2px;
-	cursor: pointer;
+	top: -10px;
+	right: -5px;
 }
 /*.title {
 	padding: 30px 15px;
@@ -286,7 +284,7 @@ ol {
 	padding: 8px 30px;
 	border-right: 1px solid #5833A2;
 }
-.searchInput{
+.searchInput {
 	min-height: 50px !important;
 }
 .searchInput input[type=text] {
@@ -332,6 +330,11 @@ ol {
 }
 /* @end */
 /* @group Redeem */
+@media only screen and (max-width: 1199px) {
+.sub-menu > li > a {
+	padding: 2px 40px;
+}
+}
 @media only screen and (max-width: 1023px) {
 #redeemHome .columns, #content .products .columns {
 	padding: 0 1%;
@@ -374,40 +377,64 @@ ol {
 /* @end */
 /* @group Admin */
 @media only screen and (max-width: 1199px) {
-#staffedit{
+#staffedit {
 	line-height: 30px;
 }
-#staffedit .doubleLine{
+#staffedit .doubleLine {
 	line-height: 15px;
 }
 #staffedit input[type=text], #staffedit input[type=password], #staffedit input[type="radio"] {
 	margin: 4px 0 0;
-    padding: 2px 5px;
+	padding: 2px 5px;
 }
 }
 @media only screen and (max-width: 1023px) {
 #staffedit {
-    line-height: initial;
-    padding: 0 2% 2%;
-}	
-#staffedit .columns {
-    padding: 4px 0 0;
+	line-height: initial;
+	padding: 0 2% 2%;
 }
-#staffedit p{
+#staffedit .columns {
+	padding: 4px 0 0;
+}
+#staffedit p {
 	text-align: right;
 	margin: initial;
 }
 }
 /* @end */
-
-
-
-
-
-
-
-
-
-
-
-
+/* @group ecard */
+@media only screen and (max-width: 1199px) {
+#ecardbox {
+	top: 40px;
+	width: 500px;
+	margin-left: -250px;
+}
+.colorblock {
+	margin-bottom: 0px;
+}
+.ourheroes img {
+	height: 45px;
+}
+}
+@media only screen and (max-width: 1023px) {
+#ecardbox {
+	top: 2%;
+	width: 94%;
+	margin-left: auto;
+}
+.ecardPadding {
+	font-size: 12px;
+}
+.colorblock {
+	padding: 10px;
+	margin-bottom: 0px;
+}
+.colorblock p {
+	margin-top: 0.4rem;
+	margin-bottom: 0.4rem;
+}
+.ourheroes img {
+	height: 30px;
+}
+}
+/* @end */

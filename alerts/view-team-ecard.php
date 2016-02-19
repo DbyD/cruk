@@ -13,9 +13,6 @@
 ?>
 
 <div class="ecardPadding">
-	<div class="ourheroes">
-		<img src="<?=HTTP_PATH?>images/emails/our-heroes.png" alt="Cancer Research UK">
-	</div>
 	<?php
 		$ecard->full_name = $_SESSION['user']->full_name();
 		$ecard->Fname = $_SESSION['user']->Fname;
@@ -27,8 +24,13 @@
 			echo indEcardTeamText($ecard);
 		}
 	?>
-	<img class="emailCruklogo" src="<?=HTTP_PATH?>images/emails/Cancer-Research-UK.png" alt="Cancer Research UK">
-	<p>Regards</p>
-	<p><b>Cancer Research</b></p>
+	<p>Thank you and well done!</p>
+	<p><b>Our Heroes Team</b></p>
+	<p class="small">Xexec ref: <?=$ecard->ID?></p>
+	</div>
+	<div class="ourheroes">
+		<img class="emailCruklogo" src="<?=HTTP_PATH?>images/emails/Cancer-Research-UK.png" alt="Cancer Research UK">
+		<img src="<?=HTTP_PATH?>images/emails/our-heroes.png" alt="Cancer Research UK">
+	</div>
 </div>
 <script src="../js/cruk.js"></script>

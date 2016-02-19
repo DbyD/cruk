@@ -25,10 +25,25 @@ body{
 	margin-left: 2%;
 	display: inline;
 }
+.top-bar-section{
+	max-width: 1200px;
+	margin: 0 auto;
+}
 .top-bar-section ul li, 
 .top-bar-section li:not(.has-form) a:not(.button),
 .top-bar-section li:not(.has-form) a:not(.button):hover {
 	background: none;
+}
+.top-bar-section .has-dropdown > a:after{
+	display: none;
+}
+.has-dropdown i{
+	font-size: 22px;
+}
+.top-bar-section .has-dropdown > a{
+	margin-top: 10px;
+    line-height: 2.5rem !important;
+    padding: 0rem 0.9375rem 0 !important;
 }
 .off-canvas-wrap{
 	padding: 30px 0 0;
@@ -313,7 +328,7 @@ input[type=submit], .blueButton {
 	background-color: #eceaeb;
 	width: 8px;
 }
-#awards .mCS-dark-2.mCSB_scrollTools .mCSB_draggerRail{
+#awards .mCS-dark-2.mCSB_scrollTools .mCSB_draggerRail, #awardList .mCS-dark-2.mCSB_scrollTools .mCSB_draggerRail{
 	background-color: rgba(253,252,255,0.5);
 }
 .mCS-dark-2.mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar{
@@ -433,12 +448,6 @@ li.ui-menu-item { font-size:13px !important; }
 	-webkit-box-shadow:  0px 0px 3px #000;
 	box-shadow:  0px 0px 3px #000;
 }
-#ecardbox{
-    top: 50px;
-	width: 610px;
-	margin-left: -305px;
-	max-height: none;
-}
 #alertbox{
 	min-height: 200px;
 }
@@ -453,9 +462,6 @@ li.ui-menu-item { font-size:13px !important; }
 #alertContent, #popupContent1{	
 	padding: 0px;
 	position: relative;
-}
-#popupEcard{	
-	padding: 5px;
 }
 #alertTitle{	
 	padding: 20px;

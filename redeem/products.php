@@ -131,24 +131,25 @@ if( $val == "YES" ){
 					</div>
 				</div>
 				<div  class="callout panel" id="menu_container">
-					<?php $menus = getMenuAllRows(); ?>
-					<!-- <pre><?php var_dump($menus); ?></pre> -->
-					<section class="block-list">
-						<ul class="left-bar-nav">
-							<?php foreach ($menus as $v): ?>
-							<?php if ($v["parent"] == 0): ?>
-							<li><a href="<?php echo "?menu_id=" . $v['id'] ; ?>"><?php echo $v["label"]; ?></a></li>
-							<ul class="sub-menu <?php if( ( isset($menu_id) && $menu_id != $v["id"]) || (!isset($menu_id)) ) echo 'hide';?>">
-								<?php foreach ($menus as $val): ?>
-								<?php if ($v["id"] == $val["parent"]): ?>
-								<li><a href="<?php echo "?menu_id=" . $v['id'] . "&sub_id=" . $val['id'] ; ?>"><?php echo $val["label"]; ?></a></li>
-								<?php endif; ?>
-								<?php endforeach; ?>
-							</ul>
-							<?php endif; ?>
-							<?php endforeach; ?>
-						</ul>
-					</section>
+					<div id="awardList" class="mCustomScrollbar height385" data-mcs-theme="dark-2">
+						<?php $menus = getMenuAllRows(); ?>
+						<section class="block-list">
+								<ul class="left-bar-nav">
+									<?php foreach ($menus as $v): ?>
+									<?php if ($v["parent"] == 0): ?>
+									<li><a href="<?php echo "?menu_id=" . $v['id'] ; ?>"><?php echo $v["label"]; ?></a></li>
+									<ul class="sub-menu <?php if( ( isset($menu_id) && $menu_id != $v["id"]) || (!isset($menu_id)) ) echo 'hide';?>">
+										<?php foreach ($menus as $val): ?>
+										<?php if ($v["id"] == $val["parent"]): ?>
+										<li><a href="<?php echo "?menu_id=" . $v['id'] . "&sub_id=" . $val['id'] ; ?>"><?php echo $val["label"]; ?></a></li>
+										<?php endif; ?>
+										<?php endforeach; ?>
+									</ul>
+									<?php endif; ?>
+									<?php endforeach; ?>
+								</ul>
+						</section>
+					</div>
 				</div>
 			</div>
 			<div id="right-column"  class="large-2 columns">

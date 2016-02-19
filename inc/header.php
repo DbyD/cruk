@@ -38,24 +38,24 @@
 
 
 <nav class="top-bar hide-for-small" data-topbar role="navigation">
-	<ul class="title-area">
-		<li class="name">
-			<h1><a href="<?=HTTP_PATH?>home.php"><img src="<?=HTTP_PATH?>images/Cancer-Research-UK-Logo.svg" alt="Cancer Research UK" /></a></h1>
-		</li>
-	</ul>
-	<section class="top-bar-section">
-		<!-- Right Nav Section -->
-		<div class="totalAwardsQuarter"><?php echo getNumberAwardsQuarter() ?> awards have been given out across the company this quarter, in addition to many offline Thank you cards.</div>
-		<ul class="right">
-			<li class="yourrewards"><a href="http://yourrewards.cruk.org"><img src="<?=HTTP_PATH?>images/Your-Rewards.png" alt="Your Rewards" /></a></li>
-			<li><a href="<?=HTTP_PATH?>inc/logout.php">Logout</a></li>
-			<!--<li class="has-dropdown"> <a href="#">&nbsp;</a>
-				<ul class="dropdown">
-					<li><a href="#">some stuff will go here</a></li>
-				</ul>
-			</li>-->
+		<section class="top-bar-section">
+		<ul class="title-area">
+			<li class="name">
+				<h1><a href="<?=HTTP_PATH?>home.php"><img src="<?=HTTP_PATH?>images/Cancer-Research-UK-Logo.svg" alt="Cancer Research UK" /></a></h1>
+			</li>
 		</ul>
-	</section>
+			<!-- Right Nav Section -->
+			<div class="totalAwardsQuarter">Number of people who have used the Our Heroes scheme this quarter to say thank you to their colleagues: <?php echo getNumberAwardsQuarter() ?></div>
+			<ul class="right">
+				<li class="has-dropdown"><a href="#"><i class="icon-icons_settings"></i></a>
+					<ul class="dropdown">
+						<li class="yourrewards"><a href="http://yourrewards.cruk.org"><img src="<?=HTTP_PATH?>images/Your-Rewards.png" alt="Your Rewards" /></a></li>
+						<li><a href="<?=HTTP_PATH?>terms.php">Terms & Conditions</a></li>
+						<li><a href="<?=HTTP_PATH?>inc/logout.php">Logout</a></li>
+					</ul>
+				</li>
+			</ul>
+		</section>
 </nav>
 <div class="off-canvas-wrap" data-offcanvas>
 	<div class="inner-wrap">
@@ -71,6 +71,8 @@
 			<ul class="off-canvas-list">
 				<li><?php include 'portfolio.php'; ?></li>
 				<?php include 'menu.php'; ?>
+				<li class="yourrewards clickAble" data-type="gourl" data-url="http://yourrewards.cruk.org"><img src="<?=HTTP_PATH?>images/Your-Rewards.png" alt="Your Rewards" /></li>
+				<li class="clickAble" data-type="gourl" data-url="<?=HTTP_PATH?>terms.php">Terms & Conditions</li>
 				<li class="clickAble" data-type="gourl" data-url="<?=HTTP_PATH?>inc/logout.php">Logout</li>
 			</ul>
 		</aside>

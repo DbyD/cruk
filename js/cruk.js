@@ -637,7 +637,6 @@ $(document).ready(function(){
 		
 		
 	}
-
 //----------------------------------------------------------------------------------
 $(function() {
 	$('#winnerswall div.mouseOver').hover(function(){
@@ -647,10 +646,10 @@ $(function() {
 		var divID = this.id + "Text";
 		$("[id='"+divID+"']").addClass('hidden');
 	});
-	$('#home1 div.image').hover(function(){
-		$(".ourbelief").removeClass('hide');
+	$('.homeoverlay div.image').hover(function(e){
+		 $(this).find(".overlay").removeClass('hide');
 	},function(){
-		$(".ourbelief").addClass('hide');
+		 $(this).find(".overlay").addClass('hide');
 	});
 });
 //----------------------------------------------------------------------------------

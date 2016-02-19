@@ -50,22 +50,40 @@
 	background-image: url(../images/home-our-beliefs.jpg);
 	position: relative;
 }
-#home1 .image .ourbelief{
+.homeoverlay .image .overlay{
 	position: absolute;
     top: 0;
     width: 100%;
     height: 100%;
-    background: #00b6ed;
-    text-align: center;
-	line-height: 250px;
+}
+.homeoverlay .image .overlay p{
+	position: absolute;
 	font-size: 18px;
 	color: #fff;
+	bottom: 10px;
+	left: 10px;
 }
+.ourbeliefhome{
+	background: rgba(0,182,237,0.7);
+}
+.nominatehome{
+	background: rgba(0,182,237,0.7);
+}
+.wofhome{
+	background: rgba(0,182,237,0.7);
+}
+.shophome{
+	background: rgba(0,182,237,0.7);
+}
+.passionhome{
+	background: rgba(0,182,237,0.7);
+}
+
 #home1 p {
 	color: #2e008b;
 	font-size: 22px;
-	font-weight: bold;
 	padding: 110px 30px 0;
+	letter-spacing: 0.1em;
 }
 #home2 .image {
 	height: 184px;
@@ -75,7 +93,7 @@
 	color: #fff;
 	padding: 120px 20px 0;
 	font-size: 16px;
-	letter-spacing: 0.2em;
+	letter-spacing: 0.1em;
 }
 #home2 span {
 	color: #2e008b;
@@ -89,7 +107,6 @@
 	color: #2e008b;
 	padding: 10px 20px 0;
 	font-size: 14px;
-	text-transform: uppercase;
 	letter-spacing: 0.1em;
 }
 #home4 .image {
@@ -101,7 +118,7 @@
 	color: #fff;
 	padding: 75px 20px 0;
 	font-size: 16px;
-	letter-spacing: 0.5em;
+	letter-spacing: 0.1em;
 }
 #home5 .image {
 	height: 170px;
@@ -112,7 +129,7 @@
 	text-align: center;
 	font-size: 18px;
 	padding: 50px 0 0 0;
-	letter-spacing: 0.3em;
+	letter-spacing: 0.1em;
 }
 .panel.callout.faq {
 	background: #2e008b;
@@ -123,6 +140,7 @@
 .panel.callout.faq p {
 	color: #fff;
 	font-size: 14px;
+	letter-spacing: 0.1em;
 }
 .faq i {
 	font-size: 16px;
@@ -831,27 +849,34 @@ p.alertText {
 }
 /* @end */
 /* @group Emails */
-.emailText {
-	font-size: 9pt;
-	font-family: Arial;
-	line-height: 12pt;
-	color: #2e008b;
-	background: #fff;
-	width: 560px;
-	padding: 0 20px;
-	text-align: left
-}
-.emailCruklogo {
-	float: right;
-}
-.emailCruklogo {
-	float: right;
+#ecardbox{
+    top: 50px;
+	width: 600px;
+	margin-left: -300px;
+	max-height: none;
 }
 .ecardPadding {
-	padding: 5px;
 	color: #2e008b;
-	font-size: 12px;
+	font-size: 14px;
 	line-height: 16px;
+}
+.emailText {
+	font-size: 11pt;font-family: Calibri;line-height: 14pt;color: #2e008b;background: #fff;width: 600px;padding: 0 20px;text-align: left
+}
+.emailCruklogo {
+	float: right;
+}
+
+.colorblock{
+	padding: 20px;color: #fff;
+}
+.ourheroes{
+	padding: 20px;
+}
+.colorblock a {color:#fff}
+.colorblock p {
+	margin-top: 0.6rem;
+	margin-bottom: 0.6rem;
 }
 /* @end */
 /* @group WinnersWall */
@@ -1253,9 +1278,12 @@ button:hover, button:focus, .button:hover, .button:focus {
 .sub-menu > li > a {
 	color: #622fa6 !important;
 	background: #caabf1;
-	padding: 4px 40px;
+	padding: 8px 40px;
 	font-size: 13px;
 	display: block
+}
+.height385{
+	height: 385px;
 }
 #viewBasket {
 	background-color: #fff;
@@ -1280,7 +1308,9 @@ button:hover, button:focus, .button:hover, .button:focus {
 }
 .panel.callout.productView{
 	background: #fff;
-	margin: 2px 0 350px !important;;
+}
+#mCSB_1_container{
+	min-height: 500px;
 }
 .productText{
 	min-height: 150px;
