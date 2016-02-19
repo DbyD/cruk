@@ -58,8 +58,8 @@
 }
 .homeoverlay .image .overlay p{
 	position: absolute;
-	font-size: 18px;
-	color: #fff;
+	font-size: 16px;
+	color: #fff !important;
 	bottom: 10px;
 	left: 10px;
 }
@@ -73,10 +73,10 @@
 	background: rgba(0,182,237,0.7);
 }
 .shophome{
-	background: rgba(0,182,237,0.7);
+	background: rgba(88,51,162,0.7);
 }
 .passionhome{
-	background: rgba(0,182,237,0.7);
+	background: rgba(236,0,140,0.7);
 }
 
 #home1 p {
@@ -88,6 +88,7 @@
 #home2 .image {
 	height: 184px;
 	background-image: url(../images/home-nominate.jpg);
+	position: relative;
 }
 #home2 p {
 	color: #fff;
@@ -102,6 +103,7 @@
 #home3 .image {
 	height: 184px;
 	background-image: url(../images/home-winners-wall.jpg);
+	position: relative;
 }
 #home3 p {
 	color: #2e008b;
@@ -113,6 +115,7 @@
 	height: 118px;
 	margin-bottom: 0px;
 	background-image: url(../images/home-redeem.jpg);
+	position: relative;
 }
 #home4 p {
 	color: #fff;
@@ -123,6 +126,7 @@
 #home5 .image {
 	height: 170px;
 	background-image: url(../images/home-passion-talks.jpg);
+	position: relative;
 }
 #home5 p {
 	color: #fff;
@@ -1193,7 +1197,7 @@ button:hover, button:focus, .button:hover, .button:focus {
  }
 .products > div > div {
 	background: #fff;
-	height: 200px;
+	height: 174px;
 }
 .prodTitle, .product > p:first-child {
 	text-align: left;
