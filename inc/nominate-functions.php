@@ -311,31 +311,34 @@ function getTotalApprovedNominations($empnum){
 ////////////////////////////////////////////////////////////////////////////////////
 function getMostRecentAwards () {
 	global $db;
+	$Department = $_SESSION['user']->Department;
 	$sql = 'SELECT X.* FROM (
-				(SELECT  "individual"	AS Type,
-						n.ID			AS ID,
-						e.Fname			AS name,
-						e.Sname			AS sname,
-						n.BeliefID		AS BeliefID,
-						""				AS TeamID,
-						n.AprDate		AS AprDate
+				(SELECT  "individual"			AS Type,
+						n.ID					AS ID,
+						e.Fname					AS name,
+						e.Sname					AS sname,
+						e.DirectorateInitials	AS DirectorateInitials,
+						n.BeliefID				AS BeliefID,
+						""						AS TeamID,
+						n.AprDate				AS AprDate
 			FROM tblnominations AS n
 			INNER JOIN tblempall AS e
 			ON n.NominatedEmpNum = e.EmpNum
-			WHERE n.awardType=1 AND n.AprStatus=1)
+			WHERE n.awardType=1 AND n.AprStatus=1 AND e.Department = :Department)
 				UNION
-				(SELECT  "Team"				AS Type,
-						ID					AS ID,
-						Team				AS name,
-						""					AS sname,
-						BeliefID			AS BeliefID,
-						TeamID				AS TeamID,
-						AprDate				AS AprDate
+				(SELECT  "Team"					AS Type,
+						ID						AS ID,
+						Team					AS name,
+						""						AS sname,
+						""						AS DirectorateInitials,
+						BeliefID				AS BeliefID,
+						TeamID					AS TeamID,
+						AprDate					AS AprDate
 				FROM tblnominations_team
 				WHERE awardType=2 AND AprStatus=1)) X
 			ORDER BY AprDate DESC LIMIT 20';
-	$stmt = $db->prepare( $sql );
-	$stmt->execute();
+	$stmt = $db->prepare($sql);
+	$stmt->execute(array('Department' => $Department));
 	$arr = array();
 	while($result = $stmt->fetch( PDO::FETCH_ASSOC )) {
 		$arr[] = $result;

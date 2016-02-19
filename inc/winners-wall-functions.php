@@ -10,7 +10,7 @@ function getAllEmployees(){
 						e.EmpNum			AS EmpNum,
 						e.Photo				AS Photo,
 						e.Department		AS Department,
-						e.Directorate		AS Directorate,
+						e.DirectorateInitials		AS DirectorateInitials,
 						n.Volunteer			AS Volunteer,
 						n.personalMessage	AS personalMessage,
 						n.BeliefID			AS BeliefID,
@@ -29,7 +29,7 @@ function getAllEmployees(){
 						""					AS EmpNum,
 						""					AS Photo,
 						""					AS Department,
-						""					AS Directorate,
+						""					AS DirectorateInitials,
 						Volunteer			AS Volunteer,
 						personalMessage		AS personalMessage,
 						BeliefID			AS BeliefID,
@@ -73,7 +73,8 @@ function getMyMessages($empnum,$department) {
 				Department		AS Department
 			FROM tblnominations
 			WHERE NominatedEmpNum = :recipient) X
-			ORDER BY Department = :Department DESC, date DESC';
+			ORDER BY date DESC';
+	//		ORDER BY Department = :Department DESC, date DESC';
 //	$stmt = $db->prepare('SELECT * FROM tblmessage WHERE recipient = :recipient ORDER BY date DESC');
 	$stmt = $db->prepare($sql);
 	$stmt->execute(array('recipient' => $empnum,'Department' => $department));

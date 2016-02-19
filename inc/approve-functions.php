@@ -68,4 +68,37 @@ function getTeamNomination($ID){
 	return $stmt->fetch();
 }
 ////////////////////////////////////////////////////////////////////////////////////
+function getAllApprovalsList() {
+	global $db;
+	$littleExtra = 'Yes';
+	$sql = 'SELECT X.* FROM (SELECT
+				ID					AS ID,
+				""					AS teamID,
+				NominatorEmpNum		AS NominatorEmpNum,
+				NominatedEmpNum		AS NominatedEmpNum,
+				Volunteer			AS Volunteer,
+				""					AS Team,
+				NomDate				AS NomDate,
+				ApproverEmpNum		AS ApproverEmpNum
+			FROM tblnominations
+			WHERE AprStatus=0 AND littleExtra= :littleExtra
+			UNION
+			SELECT
+				""					AS ID,
+				ID					AS teamID,
+				NominatorEmpNum		AS NominatorEmpNum,
+				""					AS NominatedEmpNum,
+				Volunteer			AS Volunteer,
+				Team				AS Team,
+				NomDate				AS NomDate,
+				ApproverEmpNum		AS ApproverEmpNum
+			FROM tblnominations_team
+			WHERE AprStatus=0 AND littleExtra= :littleExtra) X
+			ORDER BY NomDate DESC';
+	$stmt = $db->prepare($sql);
+	$stmt->execute(array('littleExtra' => $littleExtra));
+	$result = $stmt->fetchAll(PDO::FETCH_OBJ);
+	return $result;
+}
+////////////////////////////////////////////////////////////////////////////////////
 ?>

@@ -58,25 +58,28 @@
 }
 .homeoverlay .image .overlay p{
 	position: absolute;
-	font-size: 16px;
+	font-size: 14px !important;
+	line-height: 16px !important;
 	color: #fff !important;
-	bottom: 10px;
-	left: 10px;
+	bottom: 0px;
+    left: 10px;
+    text-align: left !important;
+    padding: 0 !important;
 }
 .ourbeliefhome{
-	background: rgba(0,182,237,0.7);
+	background: rgba(226,1,134,0.7);
 }
 .nominatehome{
 	background: rgba(0,182,237,0.7);
 }
 .wofhome{
-	background: rgba(0,182,237,0.7);
+	background: rgba(236,0,140,0.7);
 }
 .shophome{
 	background: rgba(88,51,162,0.7);
 }
 .passionhome{
-	background: rgba(236,0,140,0.7);
+	background: rgba(46,0,139,0.7);
 }
 
 #home1 p {
@@ -914,10 +917,10 @@ p.alertText {
 .size-72 {
 	font-size: 72px;
 }
-#winnerswall #mCSB_1{
+#winnerswall #mCSB_1, #productScroll #mCSB_1{
 	padding-right: 10px;
 }
-#winnerswall .mCS-dark-2.mCSB_scrollTools .mCSB_draggerRail {
+#winnerswall .mCS-dark-2.mCSB_scrollTools .mCSB_draggerRail, #productScroll .mCS-dark-2.mCSB_scrollTools .mCSB_draggerRail {
     background-color: rgba(207,206,211,0.5);
 }
 #winnerswall .panel.callout {
@@ -1197,7 +1200,6 @@ button:hover, button:focus, .button:hover, .button:focus {
  }
 .products > div > div {
 	background: #fff;
-	height: 174px;
 }
 .prodTitle, .product > p:first-child {
 	text-align: left;
