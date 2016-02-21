@@ -26,7 +26,7 @@ if(count($basket) > 0 && is_array($basket)){
 							<?php endif;?>
 						</div>
 						<?php endif; ?>
-						<div class="row mCustomScrollbar height563" data-mcs-theme="dark-2">
+						<div class="row height563" data-mcs-theme="dark-2">
 							<div class="row static-redeem" id="redeemHome">
 								<div class="small-6 large-6 columns leftnp">
 									<div class="callout panel clickAble" data-type="gourl" data-url="<?=HTTP_PATH?>redeem/products.php?menu_id=1">
@@ -37,27 +37,11 @@ if(count($basket) > 0 && is_array($basket)){
 									</div>
 								</div>
 								<div class="small-6 large-6 columns rightnp">
-									<div class="callout panel clickAble" data-type="gourl" data-url="<?=HTTP_PATH?>redeem/products.php?menu_id=2">
-										<div class="prodTitle">
-											Travel
-										</div>
-										<img src="img/travel.jpg" alt="Travel">
-									</div>
-								</div>
-								<div class="small-6 large-6 columns leftnp">
 									<div class="callout panel clickAble" data-type="gourl" data-url="<?=HTTP_PATH?>redeem/products.php?menu_id=4">
 										<div class="prodTitle">
 											Experience
 										</div>
 										<img src="img/experience.jpg" alt="Experience">
-									</div>
-								</div>
-								<div class="small-6 large-6 columns rightnp">
-									<div class="callout panel clickAble" data-type="gourl" data-url="<?=HTTP_PATH?>redeem/products.php?menu_id=29">
-										<div class="prodTitle">
-											Donate
-										</div>
-										<img src="img/donate.jpg" alt="Donate">
 									</div>
 								</div>
 							</div>
@@ -66,7 +50,7 @@ if(count($basket) > 0 && is_array($basket)){
 				</div>
 			</div>
 			<div id="left-column" class="large-2 large-pull-8 columns">
-				<div id="payoff" class="callout panel">
+				<div id="payoff" class="callout panel clickAble" data-type="gourl" data-url="<?=HTTP_PATH?>home.php">
 					<span class="helper"></span>
 					<img src="<?=HTTP_PATH?>images/our-heroes.svg" alt="Cancer Research UK" />
 				</div>

@@ -15,7 +15,7 @@
 			} else {
 				$_SESSION['teamnominee']->includeMe = 'excludeMe';
 			}
-			echo cleanWorkAward($_SESSION['teamnominee']->workAward);
+			echo $_SESSION['teamnominee']->Reason;
 		}
 	}
 ?>

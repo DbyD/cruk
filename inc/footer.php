@@ -37,7 +37,7 @@
 							
 					<div id="messageList" class="row mCustomScrollbar height306" data-mcs-theme="dark-2">
 					<?php	}
-							$query = getMyMessages($_SESSION['user']->EmpNum,$_SESSION['user']->Department);
+							$query = getMyMessages($_SESSION['user']->EmpNum);
 							if($query != 0){
 								foreach($query as $mess){?>
 								<div class="row">
@@ -47,7 +47,7 @@
 									<i class="icon-icons_star"></i>
 									<?php } ?>
 									<span class="right"><?=date("l d/m/y", strtotime($mess["date"]))?></span>
-									<p class="text"> <?php echo $mess["text"]; ?></p>
+									<p class="text"> <?php echo fixText($mess["text"]); ?></p>
 								</div>
 						<?php }
 							}?>
@@ -64,7 +64,7 @@
 				<div id="awards" class="callout panel">
 					<div class="title">
 						<!-- <i class="icon-icons_trophy"></i> -->
-						Most Recent Awards
+						Most Recent <?=$_SESSION['user']->DirectorateInitials?> Awards
 					</div>
 					<div id="awardList" class="mCustomScrollbar height158" data-mcs-theme="dark-2">
 					<?php

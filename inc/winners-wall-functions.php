@@ -52,7 +52,7 @@ function getAllEmployees(){
 	return $arr;
 }
 ////////////////////////////////////////////////////////////////////////////////////
-function getMyMessages($empnum,$department) {
+function getMyMessages($empnum) {
 	global $db;
 	$sql = 'SELECT X.* FROM (SELECT
 				sender			AS sender,
@@ -72,12 +72,12 @@ function getMyMessages($empnum,$department) {
 				"a"				AS award,
 				Department		AS Department
 			FROM tblnominations
-			WHERE NominatedEmpNum = :recipient) X
+			WHERE NominatedEmpNum = :recipient AND AprStatus = 1) X
 			ORDER BY date DESC';
 	//		ORDER BY Department = :Department DESC, date DESC';
 //	$stmt = $db->prepare('SELECT * FROM tblmessage WHERE recipient = :recipient ORDER BY date DESC');
 	$stmt = $db->prepare($sql);
-	$stmt->execute(array('recipient' => $empnum,'Department' => $department));
+	$stmt->execute(array('recipient' => $empnum));
 	while($result = $stmt->fetch( PDO::FETCH_ASSOC )) {
 		$arr[] = $result;
 	}
@@ -96,5 +96,9 @@ function getUser( $empnum ) {
 	return $result;
 }
 ////////////////////////////////////////////////////////////////////////////////////
+function fixText($text){
+	$text = str_replace('£','&pound;',$text);
+	return $text;
+}
 ////////////////////////////////////////////////////////////////////////////////////
 ?>

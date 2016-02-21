@@ -36,7 +36,7 @@
 				$stmt->bindParam(':EmpNum', $list->EmpNum);
 				$stmt->execute();
 			}
-			echo "created";
+			echo $teamID;
 		}
 	}
 ?>

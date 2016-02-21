@@ -35,7 +35,7 @@
 					<div class="row searchResult valign-middle">
 						<div class="medium-12 columns">
 							<h3>Find/Amend Colleague profile</h3>
-							<p>Lorem ipsum dolor sit amet, ut vis lorem nostrum maluisset. Per dicta mentitum an, per ad sale laboramus concludaturque. Nisl mundi ne vel, in vis errem ceteros complectitur.</p>
+							<p>&nbsp;</p>
 							<a href="#" class="blueButton clickAble" data-type="gourl" data-url="staff-search.php">Find/Amend <i class="icon-icons_person"></i></a>
 							<p>&nbsp;</p>
 						</div>
@@ -43,12 +43,18 @@
 					<div class="row searchResult valign-middle">
 						<div class="medium-12 columns">
 							<h3>Create New Profile</h3>
-							<p>Lorem ipsum dolor sit amet, ut vis lorem nostrum maluisset. Per dicta mentitum an, per ad sale laboramus concludaturque. Nisl mundi ne vel, in vis errem ceteros complectitur.</p>
+							<p>&nbsp;</p>
 							<a href="#" class="blueButton clickAble" data-type="gourl" data-url="staff-new.php">New Profile <i class="icon-icons_person"></i></a>
 							<p>&nbsp;</p>
 						</div>
 					</div>
-				</div>
+				<!--	<div class="row">
+						<div class="medium-12 columns textRight">
+							<p>&nbsp;</p>
+							<p><a href="#" class="blueButton clickAble" data-type="gourl" data-url="index.php">Back to Admin</a></p>
+						</div>
+					</div>
+				</div> -->
 			</div>
 		</div>
 	</div>

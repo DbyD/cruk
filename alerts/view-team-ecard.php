@@ -6,6 +6,9 @@
 	$searchList = array_to_object(getThisTeamMembers($ecard->ID));
 	foreach ($searchList as $list){
 		$teamEmailList .= getName($list->EmpNum).", ";
+		if(!isset($firstPersonEmpNum)){
+			$firstPersonEmpNum = $list;
+		}
 	}
 	$teamEmailList = chop($teamEmailList,", ");
 	$teamEmailList = strrev(implode(strrev(' and'), explode(',', strrev($teamEmailList), 2)));
@@ -14,8 +17,9 @@
 
 <div class="ecardPadding">
 	<?php
-		$ecard->full_name = $_SESSION['user']->full_name();
-		$ecard->Fname = $_SESSION['user']->Fname;
+		// get first team member
+		$ecard->full_name = $firstPersonEmpNum->Fname.' '.$firstPersonEmpNum->Sname;
+		$ecard->Fname = $ecard->Team;
 		$ecard->NomFull_name = getName($ecard->NominatorEmpNum);
 		$ecard->NomFname = getFirstName($ecard->NominatorEmpNum);
 		if($ecard->littleExtra == 'Yes'){

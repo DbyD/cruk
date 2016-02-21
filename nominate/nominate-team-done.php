@@ -20,7 +20,7 @@
 					<p>Thank You for completing this award.</p>
 					<?php	} ?>
 					<?php	if($_SESSION['teamnominee']->littleExtra=='Yes' && ($_SESSION['teamnominee']->AppEmpNum != $_SESSION['user']->EmpNum)){ ?>
-					<p>As you've added 'A Little Extra', your award has gone to <?=$_SESSION['teamnominee']->full_App_name;?> for approval.</p>
+					<p>As you've added 'A Little Extra', your award has gone to <?=$_SESSION['teamnominee']->AppFname;?> for approval.</p>
 					<p>You will be notified of the result.</p>
 					<?php	} elseif($_SESSION['teamnominee']->littleExtra=='Yes' && ($_SESSION['teamnominee']->AppEmpNum == $_SESSION['user']->EmpNum)){?>
 					<p>As you are also the assigned Approver for this nomination, this award has automatically be approved and your Thank You Certificates have been sent to <?=$_SESSION['teamnominee']->teamEmailList;?>.</p>

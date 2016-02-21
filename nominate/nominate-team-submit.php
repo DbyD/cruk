@@ -20,13 +20,14 @@
 		//print_r($_SESSION['teamnominee']);
 		//echo "<br><br>";
 		$stmt = $db->prepare("INSERT INTO tblnominations_team(
-								awardType, NominatorEmpNum, Volunteer, ApproverEmpNum, Team, TeamID, littleExtra, amount, 
+								awardType, NominatorEmpNum, Volunteer, VolunteerDepartment, ApproverEmpNum, Team, TeamID, littleExtra, amount, 
 								includeMe, personalMessage, Reason, BeliefID, dReason, NomDate, AprDate, AprStatus, awardPrivate) 
-								VALUES (:awardType, :NominatorEmpNum, :Volunteer, :ApproverEmpNum, :Team, :TeamID, :littleExtra, :amount, 
+								VALUES (:awardType, :NominatorEmpNum, :Volunteer, :VolunteerDepartment, :ApproverEmpNum, :Team, :TeamID, :littleExtra, :amount, 
 								:includeMe, :personalMessage, :Reason, :BeliefID, :dReason, NOW(), :AprDate, :AprStatus, :awardPrivate)");
 		$stmt->bindParam(':awardType', $a = 2);
 		$stmt->bindParam(':NominatorEmpNum', $_SESSION['user']->EmpNum);
 		$stmt->bindParam(':Volunteer', $_SESSION['teamnominee']->Volunteer);
+		$stmt->bindParam(':VolunteerDepartment', $_SESSION['teamnominee']->VolunteerDepartment);
 		
 		// need to work out who correct approver is. get approver for first person
 		$searchList = getAllTeamsMembers($_SESSION['teamnominee']->teamID);
@@ -48,7 +49,7 @@
 			}
 		}
 		if($AppEmpNum->AppEmpNum ==''){
-			print_r($firstPersonEmpNum);
+			//print_r($firstPersonEmpNum);
 			$approver = getApprover($firstPersonEmpNum);
 			$AppEmpNum->AppEmpNum = $approver->AppEmpNum;
 		}
@@ -180,9 +181,9 @@
 					// need to add to tblnominations
 					$stmt = $db->prepare("INSERT INTO tblnominations(
 								awardType, NominatorEmpNum, NominatedEmpNum, nomination_teamID, Volunteer, ApproverEmpNum,
-								littleExtra, amount, NomDate, AprDate, AprStatus, awardPrivate) 
+								littleExtra, amount, personalMessage, NomDate, AprDate, AprStatus, awardPrivate) 
 								VALUES (:awardType, :NominatorEmpNum, :NominatedEmpNum, :nomination_teamID, :Volunteer, :ApproverEmpNum, 
-								:littleExtra, :amount, NOW(), NOW(), :AprStatus, :awardPrivate)");
+								:littleExtra, :amount, :personalMessage, NOW(), NOW(), :AprStatus, :awardPrivate)");
 					$stmt->bindParam(':awardType', $a = 2);
 					$stmt->bindParam(':NominatorEmpNum', $_SESSION['user']->EmpNum);
 					$stmt->bindParam(':NominatedEmpNum', $list->EmpNum);
@@ -191,6 +192,7 @@
 					$stmt->bindParam(':ApproverEmpNum', $AppEmpNum->AppEmpNum);
 					$stmt->bindParam(':littleExtra', $a = 'No', PDO::PARAM_STR);
 					$stmt->bindParam(':amount', $a = 0);
+					$stmt->bindParam(':personalMessage', $_SESSION['teamnominee']->personalMessage);
 					$stmt->bindParam(':AprStatus', $a = 1);
 					$stmt->bindParam(':awardPrivate', $_SESSION['teamnominee']->awardPrivate);
 					$stmt->execute();

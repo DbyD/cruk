@@ -13,12 +13,20 @@
 				Please tell us if a volunteer has asked you to complete a nomination on their behalf.
 			</div>
 		</div>
-		<div class="row withPadding valign-middle">
+		<div class="row valign-middle">
 			<div class="medium-4 columns">
-				Add Name:
+				Name:
 			</div>
 			<div class="medium-8 columns">
 				<input type="text" name="Volunteer" id="Volunteer" value="<?=$_SESSION['nominee']->Volunteer?>" />
+			</div>
+		</div>
+		<div class="row valign-middle">
+			<div class="medium-4 columns">
+				Department or Shop:
+			</div>
+			<div class="medium-8 columns">
+				<input type="text" name="VolunteerDepartment" id="VolunteerDepartment" value="<?=$_SESSION['nominee']->VolunteerDepartment?>" />
 			</div>
 		</div>
 		<div class="row withPadding">

@@ -136,6 +136,11 @@ function getConvertedDate($date){
 	return date_format($date, 'd F Y');
 }
 ////////////////////////////////////////////////////////////////////////////////////
+function getConvertedShortDate($date){
+	$date = new DateTime($date);
+	return date_format($date, 'd M Y');
+}
+////////////////////////////////////////////////////////////////////////////////////
 function in_object($val, $obj){
 	if($val == ""){
 		trigger_error("in_object expects parameter 1 must not empty", E_USER_WARNING);
@@ -227,7 +232,7 @@ function indEcardTeamExtraText($ecard){
 	
 	$ecardText = ecardTopBar($ecard);
 	
-	$ecardText .= "<p>dear ".$ecard->Fname."</p>
+	$ecardText .= "<p>Dear ".$ecard->Fname."</p>
 				<p>Congratulations!</p>
 				<p>".$ecard->NomFull_name." says you’ve done something really special and deserve an Our Heroes Extraordinary People, 
 				Extraordinary Effort award in the ".$ecard->BeliefID." category.</p>

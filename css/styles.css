@@ -393,6 +393,9 @@ li.ui-menu-item { font-size:13px !important; }
 .blueText{
 	color: #2e008b !important;
 }
+.redText{
+	color: #f0393e !important;
+}
 .greyBox{
 	background: #ebebeb;
 	padding: 5px 0;

@@ -131,16 +131,6 @@ class teamAward {
 	}
 }
 
-class MyApprovalsHistory{
-    public function getAllMyApprovalsHistory($empnum) {
-		global $db;
-		$stmt = $db->prepare("SELECT * FROM tblnominations WHERE ApproverEmpNum = :empnum AND AprStatus<>0 AND littleExtra='Yes' ORDER BY NomDate DESC");
-		$stmt->execute(array('empnum' => $empnum));
-		$result = $stmt->fetchAll(PDO::FETCH_OBJ);
-		return $result;
-    }
-}
-
 class claimedAwardsList{
 	public $empnum;
     public function getAllclaimedAwardsList($empnum) {
@@ -176,7 +166,7 @@ class searchUsers{
     }
     public function getAllTeamSearch($search) {
 		global $db;
-		$stmt = $db->prepare("SELECT * FROM tblempall WHERE Team LIKE '%$search%' ORDER BY Sname GROUP BY Team LIMIT 20 ");
+		$stmt = $db->prepare("SELECT * FROM tblempall WHERE Team LIKE '%$search%' GROUP BY Team ORDER BY Team LIMIT 20 ");
 		$stmt->execute();
 		$result = $stmt->fetchAll(PDO::FETCH_OBJ);
 		return $result;

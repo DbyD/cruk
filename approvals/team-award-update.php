@@ -24,15 +24,16 @@
 			print_r($TeamMembers);
 			foreach ($TeamMembers as $list){
 				$stmt = $db->prepare("INSERT INTO tblnominations(
-								awardType, NominatorEmpNum, NominatedEmpNum, nomination_teamID, Volunteer, ApproverEmpNum,
+								awardType, NominatorEmpNum, NominatedEmpNum, nomination_teamID, Volunteer, personalMessage, ApproverEmpNum,
 								littleExtra, amount, NomDate, AprDate, AprStatus, AwardClaimed, DateClaimed) 
-								VALUES (:awardType, :NominatorEmpNum, :NominatedEmpNum, :nomination_teamID, :Volunteer, :ApproverEmpNum, 
+								VALUES (:awardType, :NominatorEmpNum, :NominatedEmpNum, :nomination_teamID, :Volunteer, :personalMessage, :ApproverEmpNum, 
 								:littleExtra, :amount, :NomDate, NOW(), :AprStatus, :AwardClaimed, NOW())");
 				$stmt->bindParam(':awardType', $a = 2);
 				$stmt->bindParam(':NominatorEmpNum', $award->NominatorEmpNum);
 				$stmt->bindParam(':NominatedEmpNum', $list->EmpNum);
 				$stmt->bindParam(':nomination_teamID', $award->ID);
 				$stmt->bindParam(':Volunteer', $award->Volunteer);
+				$stmt->bindParam(':personalMessage', $award->personalMessage);
 				$stmt->bindParam(':ApproverEmpNum', $award->ApproverEmpNum);
 				$stmt->bindParam(':littleExtra', $award->littleExtra);
 				if($award->amount=='20pound'){

@@ -11,10 +11,10 @@
 				$sendEmail->emailTo = $sEaddress;
 				$sendEmail->subject = "CRUK Website password reminder";
 				$sendEmail->Content = '<p>Hi '.$user['Fname'].'<p><p>Your Password is: '.$user['sPassword'].'</p>
-									<p>If you would like to change your password please <a href="'.HTTP_PATH.'change_password.php">click here</a>';
+									<p>If you would like to change your password please <a href="'.HTTP_PATH.'change_password.php" class="">click here</a>';
 				$reply = sendEmail($sendEmail,'');
 				if($reply=="success"){
-					$msg = "Your login information has been sent. Please check your mail box.";
+					$msg = 'Your password has been sent by email. <a href="'.HTTP_PATH.'index.php" class="">Click here</a> to return to the login page.';
 				} else {
 					$msg = "There seems to be a problem with our email server. Please try again later.";
 				}
@@ -74,7 +74,7 @@
 						<div class="row">
 							<form action="forgotten_password.php" method="post">
 								<h1>Forgotten Password</h1>
-								<p>Please enter your email address you registered with. Your password will automatically be e-mailed to you.</p>
+								<p>Please enter the email address you used when registering. Your password will automatically be emailed to you.</p>
 								<?php if ($msg) echo '<p class="alert">'.$msg.'</p>'; ?>
 								<div class="medium-6 columns">
 									Your e-mail address:

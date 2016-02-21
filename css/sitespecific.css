@@ -55,6 +55,7 @@
     top: 0;
     width: 100%;
     height: 100%;
+	background: rgba(46,0,139,0.7);
 }
 .homeoverlay .image .overlay p{
 	position: absolute;
@@ -66,7 +67,7 @@
     text-align: left !important;
     padding: 0 !important;
 }
-.ourbeliefhome{
+/*.ourbeliefhome{
 	background: rgba(226,1,134,0.7);
 }
 .nominatehome{
@@ -80,7 +81,7 @@
 }
 .passionhome{
 	background: rgba(46,0,139,0.7);
-}
+}*/
 
 #home1 p {
 	color: #2e008b;
@@ -996,7 +997,7 @@ p.alertText {
 	display: none;
 }
 .BeBrave .nominateEmployeeImage,.BeBrave .largePhotoIcon {
-	color: #00b6ed !important;
+	color: #ec008c !important;
 }
 .BeBrave .content-nominate{
 	background-color: #ec008c;
@@ -1051,12 +1052,13 @@ img.BeSharp{
 	vertical-align: middle;
 	margin-bottom: 15px;
 }
-.sendMail {
+.sendMail, .sendTeamMail {
 	cursor: pointer;
 	position: absolute;
 	top: 10px;
 	right: 15px;
 	font-size: 16px;
+	z-index: 1;
 }
 #messageList {
 	padding: 0 !important;
@@ -1150,24 +1152,24 @@ img.BeSharp{
 .height120 {
 	height: 120px;
 }
-#myModal, #myModalbasket, #myModalcheck, #myModalPrice {
+#myModal, #myModalbasket, #myModalcheck, #myModalPrice, #myTeamModal {
 	top: 90px;
 	width: 450px;
 	padding: 0px;
 	height: 300px;
 }
-#myModal h2, #myModalbasket h2, #myModalcheck h2, #myModalPrice h2 {
+#myModal h2, #myModalbasket h2, #myModalcheck h2, #myModalPrice h2, #myTeamModal h2 {
 	background: #2e008b;
 	padding: 15px;
 	color: #fff;
 }
-#myModal a, #myModalbasket a, #myModalcheck .icon-icons_close > a, #myModalcheck .close-reveal-modal, #myModalPrice .close-reveal-modal {
+#myModal a, #myModalbasket a, #myModalcheck .icon-icons_close > a, #myModalcheck .close-reveal-modal, #myModalPrice .close-reveal-modal, #myTeamModal a {
 	position: absolute;
 	top: -12px;
 	right: -12px;
 	line-height: 0;
 }
-#myModal i, #myModalbasket i, #myModalcheck i, #myModalPrice i {
+#myModal i, #myModalbasket i, #myModalcheck i, #myModalPrice i, #myTeamModal i {
 	font-size: 22px;
 	color: #fff;
 }
@@ -1401,6 +1403,7 @@ button:hover, button:focus, .button:hover, .button:focus {
 	border-color: #8c66bd;
 	padding: 0px;
 	margin: 0px;
+	text-transform: uppercase;
 }
 #box-basket thead > tr > th {
 	color: #fff;

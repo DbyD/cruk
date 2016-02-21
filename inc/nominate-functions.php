@@ -399,17 +399,17 @@ function getAllTeamsMembers($teamID) {
 		if ($result = $stmt->fetchAll(PDO::FETCH_OBJ)){
 			return $result;
 		} else {
-			$stmt = $db->prepare("SELECT * FROM tblempall WHERE RetailArea = :RetailArea AND EmpNum <> :EmpNum ORDER BY Sname");
+			$stmt = $db->prepare("SELECT * FROM tblempall WHERE RetailArea<>'' AND RetailArea = :RetailArea AND EmpNum <> :EmpNum ORDER BY Sname");
 			$stmt->execute(array('RetailArea' => $_SESSION['user']->RetailArea, 'EmpNum' => $_SESSION['user']->EmpNum));
 			if ($result = $stmt->fetchAll(PDO::FETCH_OBJ)){
 				return $result;
 			} else {
-				$stmt = $db->prepare("SELECT * FROM tblempall WHERE Team = :Team AND EmpNum <> :EmpNum ORDER BY Sname");
+				$stmt = $db->prepare("SELECT * FROM tblempall WHERE Team<>'' AND Team = :Team AND EmpNum <> :EmpNum ORDER BY Sname");
 				$stmt->execute(array('Team' => $_SESSION['user']->Team, 'EmpNum' => $_SESSION['user']->EmpNum));
 				if ($result = $stmt->fetchAll(PDO::FETCH_OBJ)){
 					return $result;
 				} else {
-					$stmt = $db->prepare("SELECT * FROM tblempall WHERE Section = :Section AND EmpNum <> :EmpNum ORDER BY Sname");
+					$stmt = $db->prepare("SELECT * FROM tblempall WHERE Section<>'' AND Section = :Section AND EmpNum <> :EmpNum ORDER BY Sname");
 					$stmt->execute(array('Section' => $_SESSION['user']->Section, 'EmpNum' => $_SESSION['user']->EmpNum));
 					if ($result = $stmt->fetchAll(PDO::FETCH_OBJ)){
 						return $result;
@@ -434,9 +434,18 @@ function addTeamMember($empnum) {
 	$name = getName($empnum);
 	if (in_array_r($empnum, $_SESSION['TeamMembers'])) {
 	} else {
-		$_SESSION['TeamMembers'][] = array('EmpNum' => $empnum, 'full_name' => $name);
+		$_SESSION['TeamMembers'][] = (object)array('EmpNum' => $empnum, 'full_name' => $name);
 	}
-	return;
+	return $_SESSION['TeamMembers'];
+}
+////////////////////////////////////////////////////////////////////////////////////
+function addSelectedTeamMembers($Team) {
+	global $db;
+	$stmt = $db->prepare("SELECT * FROM tblempall WHERE Team = :Team AND EmpNum <> :EmpNum ORDER BY Sname");
+	$stmt->execute(array('Team' => $Team, 'EmpNum' => $_SESSION['user']->EmpNum));
+	if ($result = $stmt->fetchAll(PDO::FETCH_OBJ)){
+		return $result;
+	} 
 }
 ////////////////////////////////////////////////////////////////////////////////////
 function getThisTeamMembers($teamID) {

@@ -88,7 +88,7 @@
 					<div id="littleExtraMessage">
 						<input type="hidden" value="<?php if($_SESSION['teamnominee']->littleExtra=='Yes') echo 'Yes'; ?>" name="littleExtra" id="littleExtra"> 
 						<div <?php if($_SESSION['teamnominee']->littleExtra!='Yes') echo 'class="hidden"'; ?> >
-							<span><?= cleanWorkAward($_SESSION['teamnominee']->workAward);?></span> 
+							<span><?= $_SESSION['teamnominee']->Reason;?></span> 
 							<i class="icon-icons_close clickAble" data-type="clear" data-id="tlexm"></i>
 						</div>
 					</div>

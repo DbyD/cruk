@@ -18,14 +18,15 @@
 		}
 		//print_r($_SESSION['nominee']);
 		$stmt = $db->prepare("INSERT INTO tblnominations(
-								awardType, NominatorEmpNum, NominatedEmpNum, Volunteer, ApproverEmpNum, Team, Section, Department, Directorate,
+								awardType, NominatorEmpNum, NominatedEmpNum, Volunteer, VolunteerDepartment, ApproverEmpNum, Team, Section, Department, Directorate,
 								littleExtra, amount, personalMessage, Reason, BeliefID, dReason, NomDate, AprDate, AprStatus, awardPrivate) 
-								VALUES (:awardType, :NominatorEmpNum, :NominatedEmpNum, :Volunteer, :ApproverEmpNum, :Team, :Section, :Department, :Directorate, 
+								VALUES (:awardType, :NominatorEmpNum, :NominatedEmpNum, :Volunteer, :VolunteerDepartment, :ApproverEmpNum, :Team, :Section, :Department, :Directorate, 
 								:littleExtra, :amount, :personalMessage, :Reason, :BeliefID, :dReason, NOW(), :AprDate, :AprStatus, :awardPrivate)");
 		$stmt->bindParam(':awardType', $a = 1);
 		$stmt->bindParam(':NominatorEmpNum', $_SESSION['user']->EmpNum);
 		$stmt->bindParam(':NominatedEmpNum', $_SESSION['nominee']->EmpNum);
 		$stmt->bindParam(':Volunteer', $_SESSION['nominee']->Volunteer);
+		$stmt->bindParam(':VolunteerDepartment', $_SESSION['nominee']->VolunteerDepartment);
 		
 		// need to work out who correct approver is
 		$stmt->bindParam(':ApproverEmpNum', $_SESSION['nominee']->AppEmpNum);

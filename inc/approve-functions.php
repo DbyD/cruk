@@ -29,7 +29,7 @@ function getNomination($ID){
 	return $stmt->fetch();
 }
 ////////////////////////////////////////////////////////////////////////////////////
-function getAllMyApprovalsList($empnum) {
+function getAllMyApprovalsList($EmpNum) {
 	global $db;
 	$littleExtra = 'Yes';
 	$sql = 'SELECT X.* FROM (SELECT
@@ -41,7 +41,7 @@ function getAllMyApprovalsList($empnum) {
 				""					AS Team,
 				NomDate				AS NomDate
 			FROM tblnominations
-			WHERE ApproverEmpNum = :empnum AND AprStatus=0 AND littleExtra= :littleExtra
+			WHERE ApproverEmpNum = :EmpNum AND AprStatus=0 AND littleExtra= :littleExtra
 			UNION
 			SELECT
 				""					AS ID,
@@ -52,10 +52,10 @@ function getAllMyApprovalsList($empnum) {
 				Team				AS Team,
 				NomDate				AS NomDate
 			FROM tblnominations_team
-			WHERE ApproverEmpNum = :empnum AND AprStatus=0 AND littleExtra= :littleExtra) X
+			WHERE ApproverEmpNum = :EmpNum AND AprStatus=0 AND littleExtra= :littleExtra) X
 			ORDER BY NomDate DESC';
 	$stmt = $db->prepare($sql);
-	$stmt->execute(array('empnum' => $empnum,'littleExtra' => $littleExtra));
+	$stmt->execute(array('EmpNum' => $EmpNum,'littleExtra' => $littleExtra));
 	$result = $stmt->fetchAll(PDO::FETCH_OBJ);
 	return $result;
 }
@@ -97,6 +97,39 @@ function getAllApprovalsList() {
 			ORDER BY NomDate DESC';
 	$stmt = $db->prepare($sql);
 	$stmt->execute(array('littleExtra' => $littleExtra));
+	$result = $stmt->fetchAll(PDO::FETCH_OBJ);
+	return $result;
+}
+////////////////////////////////////////////////////////////////////////////////////
+function getAllMyApprovalsHistory($EmpNum) {
+	global $db;
+	$littleExtra = 'Yes';
+	$sql = 'SELECT X.* FROM (SELECT
+				ID					AS ID,
+				NominatorEmpNum		AS NominatorEmpNum,
+				NominatedEmpNum		AS NominatedEmpNum,
+				Volunteer			AS Volunteer,
+				""					AS Team,
+				NomDate				AS NomDate,
+				AprStatus			AS AprStatus,
+				AprDate				AS AprDate
+			FROM tblnominations
+			WHERE AprStatus<>0 AND littleExtra= :littleExtra AND ApproverEmpNum = :EmpNum AND awardType = 1
+			UNION
+			SELECT
+				ID					AS ID,
+				NominatorEmpNum		AS NominatorEmpNum,
+				""					AS NominatedEmpNum,
+				Volunteer			AS Volunteer,
+				Team				AS Team,
+				NomDate				AS NomDate,
+				AprStatus			AS AprStatus,
+				AprDate				AS AprDate
+			FROM tblnominations_team
+			WHERE AprStatus<>0 AND littleExtra= :littleExtra AND ApproverEmpNum = :EmpNum) X
+			ORDER BY NomDate DESC';
+	$stmt = $db->prepare($sql);
+	$stmt->execute(array('littleExtra' => $littleExtra, 'EmpNum' => $EmpNum));
 	$result = $stmt->fetchAll(PDO::FETCH_OBJ);
 	return $result;
 }

@@ -12,14 +12,14 @@
 		<div class="medium-12 columns leftnp rightnp fillHeight">
 			<div class="callout panel fillHeight white">
 				<div class="tableTitle doubleHeader">
-					<div class="tableColumn-3">
+					<div class="tableColumn-2">
 						Nominee
 					</div>
-					<div class="tableColumn-3">
+					<div class="tableColumn-2">
 						Nominated by
 					</div>
 					<div class="tableColumn-2">
-						Date
+						Nomination Date
 					</div>
 					<div class="tableColumn-1 twoLines">
 						Reason/ Message
@@ -27,19 +27,25 @@
 					<div class="tableColumn-2">
 						Status
 					</div>
+					<div class="tableColumn-2 twoLines">
+						Approval/ Decline  Date
+					</div>
 				</div>
 				<div class="row mCustomScrollbar height555" data-mcs-theme="dark-2">
 					<?php 
 					// Get List for My Awards
-					$nomUsers = new MyApprovalsHistory($db);
-					$nomList = $nomUsers->getAllMyApprovalsHistory($_SESSION['user']->EmpNum);
+					$nomList = getAllMyApprovalsHistory($_SESSION['user']->EmpNum);
 					foreach ($nomList as $list){
 					?>
 					<div class="tableRow">
-						<div class="tableColumn-3">
-							<?=getName($list->NominatedEmpNum)?>
+						<div class="tableColumn-2">
+						<?php if($list->Team == ''){ 
+							echo getName($list->NominatedEmpNum);
+						} else {
+							echo $list->Team;
+						}?>
 						</div>
-						<div class="tableColumn-3">
+						<div class="tableColumn-2">
 						<?php
 						if ($list->Volunteer != '') {
 							echo $list->Volunteer;
@@ -49,10 +55,14 @@
 						?>
 						</div>
 						<div class="tableColumn-2">
-							<?=getConvertedDate($list->NomDate)?>
+							<?=getConvertedShortDate($list->NomDate)?>
 						</div>
 						<div class="tableColumn-1">
-							<div class="viewButton inlineDiv clickAble lightBlue" data-type="popup" data-url="<?=HTTP_PATH?>approvals/view-reason-message.php" data-id="<?=$list->ID?>">View</div>
+						<?php if($list->teamID == ''){ ?>
+								<div class="viewButton inlineDiv clickAble lightBlue" data-type="popup" data-url="<?=HTTP_PATH?>approvals/view-reason-message.php" data-id="<?=$list->ID?>">View</div>
+						<?php } else { ?>
+								<div class="viewButton inlineDiv clickAble lightBlue" data-type="popup" data-url="<?=HTTP_PATH?>approvals/view-team-reason-message.php" data-id="<?=$list->ID?>">View</div>
+						<?php } ?>
 						</div>
 						<div class="tableColumn-2">
 						<?php	if($list->AprStatus == 1){
@@ -60,6 +70,9 @@
 								} else {
 									echo "Declined";
 								} ?>
+						</div>
+						<div class="tableColumn-2">
+							<?=getConvertedShortDate($list->AprDate)?>
 						</div>
 					</div>
 					<?php	} ?>

@@ -14,10 +14,12 @@
 		if ($_POST['Volunteer']){
 			if(isset($_SESSION['nominee'])){
 				$_SESSION['nominee']->Volunteer = $_POST['Volunteer'];
+				$_SESSION['nominee']->VolunteerDepartment = $_POST['VolunteerDepartment'];
 				echo $_SESSION['nominee']->Volunteer;
 			}
 			if(isset($_SESSION['teamnominee'])){
 				$_SESSION['teamnominee']->Volunteer = $_POST['Volunteer'];
+				$_SESSION['teamnominee']->VolunteerDepartment = $_POST['VolunteerDepartment'];
 				echo $_SESSION['teamnominee']->Volunteer;
 			}
 		}

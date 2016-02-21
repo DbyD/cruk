@@ -104,7 +104,7 @@ if( $val == "YES" ){
 				</div>
 			</div>
 			<div id="left-column" class="large-2 large-pull-8 columns">
-				<div id="payoff" class="callout panel">
+				<div id="payoff" class="callout panel clickAble" data-type="gourl" data-url="<?=HTTP_PATH?>home.php">
 					<span class="helper"></span>
 					<img src="<?=HTTP_PATH?>images/our-heroes.svg" alt="Cancer Research UK" />
 				</div>

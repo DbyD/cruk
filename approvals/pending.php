@@ -31,37 +31,47 @@
 					<?php 
 					// Get List for My Awards
 					$nomList = getAllMyApprovalsList($_SESSION['user']->EmpNum);
-					foreach ($nomList as $list){
+					if(empty($nomList)){ 
 					?>
 					<div class="tableRow">
-						<div class="tableColumn-3">
-					<?php if($list->Team == ''){ 
-							echo getName($list->NominatedEmpNum);
-						} else {
-							echo $list->Team;
-						}?>
-						</div>
-						<div class="tableColumn-3">
-						<?php
-						if ($list->Volunteer != '') {
-							echo $list->Volunteer;
-						} else {
-							echo getName($list->NominatorEmpNum);
-						}
-						?>
-						</div>
-						<div class="tableColumn-3">
-							<?=getConvertedDate($list->NomDate)?>
-						</div>
-						<div class="tableColumn-3">
-						<?php if($list->Team == ''){ ?>
-								<div class="clickAble lightBlue" data-type="popup" data-id="<?=$list->ID?>" data-url="<?=HTTP_PATH?>approvals/individual-award.php">Individual Award</div>
-						<?php } else { ?>
-								<div class="clickAble lightBlue" data-type="popup" data-id="<?=$list->teamID?>" data-url="<?=HTTP_PATH?>approvals/team-award.php">Team Award</div>
-						<?php } ?>
+						<div class="tableColumn-11 textLeft">
+							There are currently no nominations awaiting you approval.
 						</div>
 					</div>
-					<?php	} ?>
+					<?php 
+					} else { 
+						foreach ($nomList as $list){
+						?>
+						<div class="tableRow">
+							<div class="tableColumn-3">
+						<?php if($list->Team == ''){ 
+								echo getName($list->NominatedEmpNum);
+							} else {
+								echo $list->Team;
+							}?>
+							</div>
+							<div class="tableColumn-3">
+							<?php
+							if ($list->Volunteer != '') {
+								echo $list->Volunteer;
+							} else {
+								echo getName($list->NominatorEmpNum);
+							}
+							?>
+							</div>
+							<div class="tableColumn-3">
+								<?=getConvertedDate($list->NomDate)?>
+							</div>
+							<div class="tableColumn-3">
+							<?php if($list->Team == ''){ ?>
+									<div class="clickAble lightBlue" data-type="popup" data-id="<?=$list->ID?>" data-url="<?=HTTP_PATH?>approvals/individual-award.php">Individual Award</div>
+							<?php } else { ?>
+									<div class="clickAble lightBlue" data-type="popup" data-id="<?=$list->teamID?>" data-url="<?=HTTP_PATH?>approvals/team-award.php">Team Award</div>
+							<?php } ?>
+							</div>
+						</div>
+						<?php }
+					}?>
 				</div>
 			</div>
 		</div>

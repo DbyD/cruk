@@ -1,5 +1,6 @@
 <?php
 	include '../inc/config.php';
+		echo $_POST['id'];
 	if ($_GET['id']){
 		if ($_GET['id'] == 'newteam'){
 			unset($_SESSION['TeamMembers']);
@@ -123,8 +124,14 @@
 			<div class="medium-12 columns noPadding">
 			<?php
 			// add in current team members
-			if ($_GET['TeamMember']){
-				addTeamMember($_GET['TeamMember']);
+			if ($_GET['TeamID']){
+				$teamid = $_GET['TeamID'];
+				$_SESSION['TeamMembers'] =  addSelectedTeamMembers($teamid);
+				$_SESSION['teamid'] = $teamid;
+			} else {
+				if ($_GET['TeamMember']){
+					addTeamMember($_GET['TeamMember']);
+				}
 			}
 				//print_r($_SESSION['TeamMembers']);
 			$x = 0 ;
@@ -191,8 +198,12 @@
 <div id="buttonRow" class="row buttonRow">
 	<div class="row searchResult noBorder valign-middle">
 		<div class="medium-12 columns textRight ">
-			<a href="#" class="pinkButton clickAble" data-type="submit" data-url="confirmTeam">Confirm</a>
+			<a href="#" class="blueButton clickAble" data-type="close" data-id="1" data-url="confirmTeam">Cancel</a>
+			<a href="#" class="pinkButton clickAble" data-type="submit" data-url="confirmTeam">Next</a>
 		</div>
 	</div>
 </div>
 <script src="../js/cruk.js"></script>
+<?php if ($_GET['removeMember']){ ?>
+<script>$("#myTeamName").val('');</script>
+<?php } ?>

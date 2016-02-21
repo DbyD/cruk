@@ -15,17 +15,18 @@ $(function(){
 			myTeamName: "required",
         	teamNO : { greaterThanTwo : true }
 		},
-		messages: {myTeamName: "Please add an appropriate team name. The team name will be visible on the Wall of Fame"},
+		messages: {myTeamName: "Please create a new name for this Team. The team name will be visible on the Wall of Fame"},
 		errorPlacement: function(error, element) {
 			$("#alertContent").load("../alerts/alert-popup.php", {'error' : error.html() });
 			$("#alert").css('display', 'block');
 		},
 		submitHandler: function(form) { 
 			$.post('edit-team.php', $("#confirmTeam").serialize(), function(data) {
-				if (data == 'created') {
+				if (data != 'removed') {
 					$("#popup1").css('display', 'none');
 					$("#popupContent1").empty();
-					location.reload();
+					location.href = 'team.php?team='+data;
+					//location.reload();
 				}
 			});
 		}
@@ -36,7 +37,7 @@ $(function(){
 				if (data == 'removed') {
 					$("#popup1").css('display', 'none');
 					$("#popupContent1").empty();
-					location.reload();
+					location.href = 'team.php';
 				}
 			});
 		}
@@ -191,7 +192,7 @@ $(function(){
 			$("#alert").css('display', 'block');
 		},
 		submitHandler: function(form) { 
-			if (confirm("Are you sure. This is irreversible.")) {
+			if (confirm("Are you sure? This action is irreversible.")) {
 				$.post('../approvals/individual-award-update.php', $("#approveAward").serialize(), function(data) {
 					if (data = 'declined') {
 						$("#popup1").css('display', 'none');
@@ -210,7 +211,7 @@ $(function(){
 			$("#alert").css('display', 'block');
 		},
 		submitHandler: function(form) { 
-			if (confirm("Are you sure. This is irreversible.")) {
+			if (confirm("Are you sure? This action is irreversible.")) {
 				$.post('../approvals/team-award-update.php', $("#approveTeamAward").serialize(), function(data) {
 					if (data = 'declined') {
 						$("#popup1").css('display', 'none');
@@ -406,7 +407,7 @@ $(function(){
 				console.log(id)
 				var input = $("<input>")
 				   .attr("type", "hidden")
-				   .attr("name", "id").val(id);
+				   .attr("name", "TeamID").val(id);
 				$("#addTeamMember").append($(input));
 				$("#popupContent1").load('team-details.php',$('#addTeamMember').serialize());
 				break;
@@ -456,12 +457,12 @@ $(document).foundation();
 $("#scrollBar").mCustomScrollbar();
 //----------------------------------------------------------------------------------
 $(document).ready(function(){
-	$(".sendMail").click(function(){
-		var sender = $($(this).siblings()[0]).val();
-		var recipient = $($(this).siblings()[1]).val();
-		var senderName = $($(this).siblings()[2]).val();
-		var recipientName = $($(this).siblings()[3]).val();
-		var Department = $($(this).siblings()[4]).val();
+	$(".sendMail").unbind().click(function(){
+		var sender = $(this).children('#sender').val();
+		var recipient = $(this).children('#recipient').val();
+		var senderName = $(this).children('#senderName').val();
+		var recipientName = $(this).children('#recipientName').val();
+		var Department = $(this).children('#Department').val();
 		$('#modalForSendMail').click();
 		$("#senderModal").val(sender);
 		$("#recipientModal").val(recipient);
@@ -469,14 +470,12 @@ $(document).ready(function(){
 		$("#mailToEmployee").val('Hi '+recipientName+'. I saw your "Our Heroes" award on the Wall of Fame. Congratulations! '+ senderName);
 		$("#messageModal").html('Hi '+recipientName+'. I saw your "Our Heroes" award on the Wall of Fame. Congratulations! '+ senderName);
 	});
-	$("#sendButton").click(function(){
+	$("#sendButton").unbind().click(function(){
 		var recipient = $("#recipientModal").val();
 		var sender = $("#senderModal").val();
 		var text = $("#mailToEmployee").val();
 		var Department = $("#DepartmentModal").val();
-		var siblings = $("#mailToEmployee").siblings();
 		if( $.trim(text) != '' ){
-			//siblings.addClass("hidden");
 			$(".close-reveal-modal").click();
 			$.ajax({
 			  type:'post',
@@ -492,10 +491,38 @@ $(document).ready(function(){
 			  }
 			});
 		} else {
-			//siblings.removeClass("hidden");
 		}
 	});
-
+	$(".sendTeamMail").unbind().click(function(){
+		var sender = $(this).children('#sender').val();
+		var recipientTeam = $(this).children('#recipientTeam').val();
+		var senderName = $(this).children('#senderName').val();
+		$('#modalForsendTeamMail').click();
+		$("#senderTeamModal").val(sender);
+		$("#recipientTeamModal").val(recipientTeam);
+		$("#mailToTeam").val('Hi. I saw your "Our Heroes" award on the Wall of Fame. Congratulations! '+ senderName);
+		$("#messageTeamModal").html('Hi. I saw your "Our Heroes" award on the Wall of Fame. Congratulations! '+ senderName);
+	});
+	$("#sendTeamButton").unbind().click(function(){
+		var recipientTeam = $("#recipientTeamModal").val();
+		console.log(recipientTeam);
+		var senderTeam = $("#senderTeamModal").val();
+		console.log(senderTeam);
+		if( $.trim(senderTeam) != '' ){
+			$(".close-reveal-modal").click();
+			$.ajax({
+				type:'post',
+				url: "message-team-submit.php?name=message",
+				data:  { 
+					recipientTeam : recipientTeam,
+					senderTeam : senderTeam
+				} ,
+				success: function(data){
+					console.log(data);
+				}
+			});
+		}
+	});
 
 	$("#price").click(function(e){
 		var parentUL = $(this).children()[1];

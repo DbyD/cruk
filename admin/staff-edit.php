@@ -1,6 +1,9 @@
 <?php
 	include_once('../inc/config.php');
 	include_once('../inc/header.php');
+	if ($_POST['EmpNum']){
+		$staff = getUser($_POST['EmpNum']);
+	}
 ?>
 
 <div id="content" class="large-8 large-push-2 columns">
@@ -10,20 +13,14 @@
 		</div>
 		<i class="icon-icons_thickrightarrow smalli"></i> <span class="subTitle clickAble" data-type="gourl" data-url="staff.php">Staff</span>
 		<i class="icon-icons_thickrightarrow smalli"></i> <span class="subTitle clickAble" data-type="gourl" data-url="staff-search.php">Staff Search</span>
-		<i class="icon-icons_thickrightarrow smalli"></i> <span class="subSubTitle">Staff Details</span>
+		<i class="icon-icons_thickrightarrow smalli"></i> <span class="subSubTitle"><?php echo $staff->Fname.' '.$staff->Sname?></span>
 	</div>
 	<div class="row contentFill">
 		<div id="staffedit" class="callout panel dashboard white fillHeight white">
 			<form action="staff-update.php" method="post" name="updateStaffForm" id="updateStaffForm">
 				<input type="hidden" name="formName" value="updateStaff">
 				<input type="hidden" value="<?=$staff->id?>" name="id" id="id" required>
-				<?php
-				if ($_POST['EmpNum']){
-					//echo $_POST['EmpNum'];
-					$staff = getUser($_POST['EmpNum']);
-					//print_r($staff);
-				}
-				?>
+				
 				<div class="row">
 					<div class="medium-6 columns">
 						<div class="row">
