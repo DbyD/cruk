@@ -37,7 +37,6 @@ $(function(){
 				if (data == 'removed') {
 					$("#popup1").css('display', 'none');
 					$("#popupContent1").empty();
-					location.href = 'team.php';
 				}
 			});
 		}
@@ -81,10 +80,12 @@ $(function(){
 		}
 	});
 	$("#insertStaffForm").validate({
-		rules: {EmpNum: "required",
-				repeatPassword: {equalTo: "#sPassword"}
+		rules: {
+			repeatPassword: {equalTo: "#sPassword"}
 		},
 		messages: {
+			Fname: "Please enter a First name.",
+			Sname: "Please enter a Surname.",
 			EmpNum: "Please enter an Employee Number.",
 			repeatPassword: {
 				equalTo: "Please enter the same password as above"
@@ -93,6 +94,14 @@ $(function(){
 		errorPlacement: function(error, element) {
 			$("#alertContent").load("../alerts/alert-popup.php", {'error' : error.html() });
 			$("#alert").css('display', 'block');
+		},
+		submitHandler: function(form) { 
+			$.post('staff-insert.php', $("#insertStaffForm").serialize(), function(data) {
+				if (data) {
+					$("#alertContent").load("../alerts/alert-popup.php", {'error' : data, 'url' : 'staff.php'});
+					$("#alert").css('display', 'block');
+				}
+			});
 		}
 	});
 	$("#updateStaffForm").validate({
@@ -108,6 +117,14 @@ $(function(){
 		errorPlacement: function(error, element) {
 			$("#alertContent").load("../alerts/alert-popup.php", {'error' : error.html() });
 			$("#alert").css('display', 'block');
+		},
+		submitHandler: function(form) { 
+			$.post('staff-update.php', $("#updateStaffForm").serialize(), function(data) {
+				if (data) {
+					$("#alertContent").load("../alerts/alert-popup.php", {'error' : data, 'url' : 'staff-search.php'});
+					$("#alert").css('display', 'block');
+				}
+			});
 		}
 	});
 	$("#nominateColleague").validate({
@@ -300,6 +317,10 @@ $(function(){
 						$("#popupEcard").empty();
 						break;
 					case '3':
+						nexturl = $("#nextUrl").text();
+						if(nexturl!=''){
+							location.href = nexturl;
+						}
 						$("#alert").css('display', 'none');
 						$("#alertContent").empty();
 						break;

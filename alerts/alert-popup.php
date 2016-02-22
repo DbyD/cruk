@@ -12,4 +12,5 @@
 		</div>
 	</div>
 </div>
+<div class="hide" id="nextUrl"><?php echo $_POST['url']; ?></div>
 <script src="../js/cruk.js"></script>

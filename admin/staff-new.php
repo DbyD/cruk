@@ -9,8 +9,7 @@
 			Admin
 		</div>
 		<i class="icon-icons_thickrightarrow smalli"></i> <span class="subTitle clickAble" data-type="gourl" data-url="staff.php">Staff</span>
-		<i class="icon-icons_thickrightarrow smalli"></i> <span class="subTitle clickAble" data-type="gourl" data-url="staff-search.php">Staff Search</span>
-		<i class="icon-icons_thickrightarrow smalli"></i> <span class="subSubTitle">New Staff Details</span>
+		<i class="icon-icons_thickrightarrow smalli"></i> <span class="subSubTitle">New Staff Member</span>
 	</div>
 	<div class="row contentFill">
 		<div id="staffedit" class="callout panel dashboard white fillHeight white">
@@ -26,7 +25,7 @@
 						</div>
 						<div class="row">
 							<div class="medium-4 columns">
-								Emp Number
+								Emp Number <span class="required">*</span>
 							</div>
 							<div class="medium-8 columns">
 								<input type="text" value="" name="EmpNum" id="EmpNum" required>
@@ -50,7 +49,7 @@
 						</div>
 						<div class="row">
 							<div class="medium-4 columns">
-								First name
+								First name <span class="required">*</span>
 							</div>
 							<div class="medium-8 columns">
 								<input type="text" value="" name="Fname" id="Fname" required>
@@ -58,7 +57,7 @@
 						</div>
 						<div class="row">
 							<div class="medium-4 columns">
-								Surname
+								Surname <span class="required">*</span>
 							</div>
 							<div class="medium-8 columns">
 								<input type="text" value="" name="Sname" id="Sname" required>
@@ -142,6 +141,14 @@
 							</div>
 							<div class="medium-8 columns">
 								<input type="text" value="" name="Directorate" id="Directorate" >
+							</div>
+						</div>
+						<div class="row">
+							<div class="medium-4 columns">
+								Directorate Initials
+							</div>
+							<div class="medium-8 columns">
+								<input type="text" value="" name="DirectorateInitials" id="DirectorateInitials">
 							</div>
 						</div>
 						<div class="row">
@@ -283,8 +290,11 @@
 							</div>
 						</div>
 						<div class="row">
-							<div class="medium-12 columns textRight">
-								<p><a href="#" class="pinkButton clickAble" data-type="submit" data-url="updateStaffForm">Save</a></p>
+							<div class="medium-6 columns textLeft required small">
+								* Required Fields
+							</div>
+							<div class="medium-6 columns textRight">
+								<p><a href="#" class="pinkButton clickAble" data-type="submit" data-url="insertStaffForm">Save</a></p>
 							</div>
 						</div>
 					</div>

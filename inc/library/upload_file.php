@@ -51,11 +51,11 @@ function insertFile( $menu_id, $sub_id ){
 		
 
 		// Check if file already exists
-	
+	/*
 		if (file_exists($target_file)) {
 		    echo "Sorry, file already exists.";
 		    $uploadOk = 0;
-		}
+		}*/
 		
 	    if (move_uploaded_file($_FILES["fileImage"]["tmp_name"], $target_file)) {
 	    	include('classSimpleImage.php');

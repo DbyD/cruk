@@ -378,7 +378,7 @@ ol {
 /* @group Admin */
 @media only screen and (max-width: 1199px) {
 #staffedit {
-	line-height: 30px;
+	line-height: 29px;
 }
 #staffedit .doubleLine {
 	line-height: 15px;

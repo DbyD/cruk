@@ -650,7 +650,7 @@ form .row .row {
 #staffedit{
 	color: #383838 !important;
 	font-size: 12px !important;
-	line-height: 33px;
+	line-height: 31px;
 }
 #staffedit input[type=text], #staffedit input[type=password], #staffedit input[type="radio"] {
 	margin: 6px 0 0;

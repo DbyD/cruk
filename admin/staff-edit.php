@@ -30,7 +30,7 @@
 						</div>
 						<div class="row">
 							<div class="medium-4 columns">
-								Emp Number
+								Emp Number <span class="required">*</span>
 							</div>
 							<div class="medium-8 columns">
 								<input type="text" value="<?=$staff->EmpNum?>" name="EmpNum" id="EmpNum" required>
@@ -54,7 +54,7 @@
 						</div>
 						<div class="row">
 							<div class="medium-4 columns">
-								First name
+								First name <span class="required">*</span>
 							</div>
 							<div class="medium-8 columns">
 								<input type="text" value="<?=$staff->Fname?>" name="Fname" id="Fname" required>
@@ -62,7 +62,7 @@
 						</div>
 						<div class="row">
 							<div class="medium-4 columns">
-								Surname
+								Surname <span class="required">*</span>
 							</div>
 							<div class="medium-8 columns">
 								<input type="text" value="<?=$staff->Sname?>" name="Sname" id="Sname" required>
@@ -146,6 +146,14 @@
 							</div>
 							<div class="medium-8 columns">
 								<input type="text" value="<?=$staff->Directorate?>" name="Directorate" id="Directorate">
+							</div>
+						</div>
+						<div class="row">
+							<div class="medium-4 columns">
+								Directorate Initials
+							</div>
+							<div class="medium-8 columns">
+								<input type="text" value="<?=$staff->DirectorateInitials?>" name="DirectorateInitials" id="DirectorateInitials">
 							</div>
 						</div>
 						<div class="row">
@@ -287,7 +295,10 @@
 							</div>
 						</div>
 						<div class="row">
-							<div class="medium-12 columns textRight">
+							<div class="medium-6 columns textLeft required small">
+								* Required Fields
+							</div>
+							<div class="medium-6 columns textRight">
 								<p><a href="#" class="pinkButton clickAble" data-type="submit" data-url="updateStaffForm">Save</a></p>
 							</div>
 						</div>
