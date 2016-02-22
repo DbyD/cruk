@@ -112,7 +112,7 @@
 #home3 p {
 	color: #2e008b;
 	padding: 10px 20px 0;
-	font-size: 14px;
+	font-size: 16px;
 	letter-spacing: 0.1em;
 }
 #home4 .image {
@@ -135,19 +135,20 @@
 #home5 p {
 	color: #fff;
 	text-align: center;
-	font-size: 18px;
+	font-size: 16px;
 	padding: 50px 0 0 0;
 	letter-spacing: 0.1em;
 }
-.panel.callout.faq {
+#faq .image {
 	background: #2e008b;
-	text-align: right;
+	position: relative;
 	height: 42px;
-	padding: 10px 12px;
 }
-.panel.callout.faq p {
+#faq p{
+	text-align: right;
+	padding: 10px 12px;
 	color: #fff;
-	font-size: 14px;
+	font-size: 16px;
 	letter-spacing: 0.1em;
 }
 .faq i {

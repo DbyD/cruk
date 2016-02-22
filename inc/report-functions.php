@@ -89,10 +89,13 @@ function getTotalLikes(){
 	}
 }
 ////////////////////////////////////////////////////////////////////////////////////
-function getSqlDate($date){
+
+////////////////////////////////////////////////////////////////////////////////////
+function getSQLDate($date){
 	$date = new DateTime($date);
 	return date_format($date, 'Y-m-d');
 }
+////////////////////////////////////////////////////////////////////////////////////
 
 /* GLV 2016-02-11 ****************************************************************/
 
@@ -122,20 +125,104 @@ function getWorkAwardsPerID($id){
 	return $stmt->fetchAll(PDO::FETCH_OBJ);
 }
 
+function getExportSQL($params){
+	// We need to alter the SQL Statement to cater for some fairly difficult rules
+	// Rule 1: If Team has Trading Region 1,2,3,4 then take the Retail Area value and filter by that
+	// Rule 2: If Section is Volunteer Fundraising then take the Team and get everybody that matches the team
+	// Rule 3: If not in Rule 1 and 2 then get Get Section. If Section Blank then get Department
+	// Rule 4: If manager level 1,2,3 then get Section. If Section blank pull department. If manager Greater than 4 then get department and then carry on.
+	// Rule 5: If Super User then pull everything
+	
+	// OK So we do this.
+	// Base SQL
+	// Filter SQL
+	// Date SQL
+	
+	// Base SQL
+	$baseSQL = "SELECT * FROM tblnominations";
+	
+	// Test and APPLY Rules
+	$LoggedIn = getUser($params["EmpNum"]);
+	$UserTeam = $LoggedIn->Team;
+	$UserRetailArea = $LoggedIn->RetailArea;
+	$UserSection = $LoggedIn->Section;
+	$UserDepartment = $LoggedIn->Department;
+	$UserGrade = $LoggedIn->Grade;
+	$UserIsSuper = $LoggedIn->SuperUser;
+	//Rule 1
+	if(strtoupper($UserIsSuper) == "Yes"){
+		$filterSQL = "SELECT * FROM (" . $baseSQL . ") AS Temp";
+	} else if((strtoupper($UserTeam) == "TRADING REGION 1") || (strtoupper($UserTeam) == "TRADING REGION 2") ||
+			(strtoupper($UserTeam) == "TRADING REGION 3") || (strtoupper($UserTeam) == "TRADING REGION 4")){
+				$filterSQL = "SELECT * FROM (" . $baseSQL . ") AS Temp WHERE RetailArea = '" . $UserRetailArea . "'";
+	} else if(strtoupper($UserSection) == "VOLUNTEER FUNDRAISING"){
+		$filterSQL = "SELECT * FROM (" . $baseSQL . ") AS Temp WHERE Team = '" . $UserTeam . "'";
+	} else if(Trim($UserSection) != ""){
+		$filterSQL = "SELECT * FROM (" . $baseSQL . ") AS Temp WHERE Section = '" . $UserSection . "'";
+	} else if(Trim($UserDepartment) != ""){
+		$filterSQL = "SELECT * FROM (" . $baseSQL . ") AS Temp WHERE Department = '" . $UserDepartment . "'";
+	} else if((strtoupper($UserGrade) == "MANAGER 1") || (strtoupper($UserGrade) == "MANAGER 2") ||
+			  (strtoupper($UserGrade) == "MANAGER 3")){
+		if(Trim($UserSection) != ""){
+			$filterSQL = "SELECT * FROM (" . $baseSQL . ") AS Temp WHERE Section = '" . $UserSection . "'";
+		} else {
+			$filterSQL = "SELECT * FROM (" . $baseSQL . ") AS Temp WHERE Department = '" . $UserDepartment . "'";
+		}
+	} else {
+		$filterSQL = "SELECT * FROM (" . $baseSQL . ") AS Temp WHERE Department = '" . $UserDepartment . "'";
+	}
+	
+	if(Trim($params["FromDate"]) != ""){
+		$NewFromDate = getSQLDate($params["FromDate"]) . ' 00:00:00';
+		$dateSQL = "SELECT * FROM (" . $filterSQL . ") AS TDates WHERE NomDate >= '" . $NewFromDate . "' ";
+		if(Trim($params["ToDate"]) != ""){
+			$NewEndDate = getSQLDate($params["ToDate"]) . ' 23:59:59';
+			$dateSQL . " AND NomDate <= '" . $NewEndDate . "' ";
+		}
+	} else {
+		$dateSQL = "SELECT * FROM (" . $filterSQL . ") AS TDates ";
+	}
+	return $dateSQL;
+}
+
+function getRedeemDates($params, $prefix){
+	$dateSQL = "";
+	if(Trim($params["FromDate"]) != ""){
+		$NewFromDate = getSQLDate($params["FromDate"]) . ' 00:00:00';
+		$dateSQL .= " AND " . $prefix . "date >= '" . $NewFromDate . "' ";
+		if(Trim($params["ToDate"]) != ""){
+			$NewEndDate = getSQLDate($params["ToDate"]) . ' 23:59:59';
+			$dateSQL .= " AND " . $prefix . "date <= '" . $NewEndDate . "' ";
+		}
+	}
+	return $dateSQL;
+}
+
+function getDepartmentSQL($EmpNum){
+	$LoggedIn = getUser($EmpNum);
+	$UserDepartment = $LoggedIn->Department;
+	if((strtoupper($UserGrade) == "MANAGER 1") || (strtoupper($UserGrade) == "MANAGER 2") ||
+	   (strtoupper($UserGrade) == "MANAGER 3")){
+		if(Trim($UserSection) != ""){
+			$filterSQL = "Section = '" . $UserSection . "'";
+		} else {
+			$filterSQL = "Department = '" . $UserDepartment . "'";
+		}
+	} else {
+		$filterSQL = "Department = '" . $UserDepartment . "'";
+	}
+	return $filterSQL;
+}
+
 function createNominationExport($post){
 	global $db;
+	
+	setMyCookie($post, 'crukNom');
+	
 	$CSVMaster = "<table>";
 	$CSVLine = "";
-	
-	$sql = "SELECT * 
- 			FROM tblnominations 
- 			WHERE NomDate >= :NomDateF 
- 			AND NomDate <= :NomDateT"; 
- 	$stmt = $db->prepare($sql);
- 	$NewFromDate = getSqlDate($post["FromDate"]) . ' 00:00:00';
- 	$NewEndDate = getSqlDate($post["ToDate"]) . ' 00:00:00';
- 	$stmt->bindParam(':NomDateF',$NewFromDate, PDO::PARAM_STR);
- 	$stmt->bindParam(':NomDateT',$NewEndDate, PDO::PARAM_STR);
+	$SQL = getExportSQL($post);
+	$stmt = $db->prepare($SQL);
 	$stmt->execute();
 	
 	$CSVLine .= "<tr><td>Nominee ID</td><td>Nominee</td><td>Team</td><td>Function</td><td>Department</td><td>Grade</td><td>Nominator ID</td><td>Nominator</td><td>Nominator Department</td><td>Nominator Grade</td><td>
@@ -228,21 +315,33 @@ function getCCTransaction($OrderID){
 	return $stmt->fetchAll(PDO::FETCH_OBJ);
 }
 
+function setMyCookie($post, $type){
+	setcookie("$type", "", time() - 3600);
+	$cookie_items = $_COOKIE['crukRed'];
+	foreach($cookie_items as $index => $value){
+		setcookie($type."[".$index."]", '');
+	}
+	setcookie("$post");
+	foreach ($post as $key => $value){
+		setcookie($type."[".$key."]", $value);
+	}
+}
+
 function createRedemptionExport($post){
 	global $db;
-	$CSVMaster = "<table>";
 	
+	setMyCookie($post, 'crukRed');
+	
+	$CSVMaster = "<table>";
+	$sqlWhere = getDepartmentSQL($post["EmpNum"]);
+	$dateSQL = getRedeemDates($post,"bo."); 
 	$sql = "SELECT *
- 			FROM tblbasket b, tblbasketorders bo
- 			WHERE bo.date >= :OrdDateF
- 			AND bo.date <= :OrdDateT 
-			AND b.orderID IS NOT NULL 
-			AND b.orderID = bo.id";
+ 			FROM tblbasket b, tblbasketorders bo, tblempall a
+ 			WHERE b.orderID IS NOT NULL 
+			AND b.orderID = bo.id 
+			AND a.EmpNum = b.EmpNum 
+			AND a." . $sqlWhere . $dateSQL;
 	$stmt = $db->prepare($sql);
-	$NewFromDate = getSqlDate($post["FromDate"]) . ' 00:00:00';
-	$NewEndDate = getSqlDate($post["ToDate"]) . ' 00:00:00';
-	$stmt->bindParam(':OrdDateF',$NewFromDate, PDO::PARAM_STR);
-	$stmt->bindParam(':OrdDateT',$NewEndDate, PDO::PARAM_STR);
 	$stmt->execute();
 	
 	

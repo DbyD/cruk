@@ -173,6 +173,9 @@
 			$_SESSION['alreadydone'] = 'yes';
 		}
 		echo $email;
+		$_SESSION['alreadydone'] = 'yes';
+		header("Location: nominate-done.php");
+	} else {
+		header("Location: index.php");
 	}
-	header("Location: nominate-done.php");
 ?>

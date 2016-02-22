@@ -1,11 +1,11 @@
 <?php
 	include_once('../inc/config.php');
 	include_once('../inc/header.php');
-	if(isset($_COOKIE['pruRed']['FromDate'])){
-		$startdate = date("d/m/Y",$_COOKIE['pruRed']['FromDate']);
+	if(isset($_COOKIE['crukRed']['FromDate'])){
+		$startdate = date("d/m/Y",strtotime($_COOKIE['crukRed']['FromDate']));
 	}
-	if(isset($_COOKIE['pruRed']['ToDate'])){
-		$enddate = date("d/m/Y",$_COOKIE['pruRed']['ToDate']);
+	if(isset($_COOKIE['crukRed']['ToDate'])){
+		$enddate = date("d/m/Y",strtotime($_COOKIE['crukRed']['ToDate']));
 	}
 ?>
 
@@ -65,7 +65,7 @@
 								Nominee Employee ID
 							</div>
 							<div class="medium-2 columns">
-								<input name="NomineeID" type="checkbox" value="yes" <?php if ($_COOKIE['pruRed']['NomineeID']=="yes") echo  "checked"; ?> />
+								<input name="NomineeID" type="checkbox" value="yes" <?php if ($_COOKIE['crukRed']['NomineeID']=="yes") echo  "checked"; ?> />
 							</div>
 						</div>
 						<div class="row ">
@@ -73,7 +73,7 @@
 								Nominee
 							</div>
 							<div class="medium-2 columns">
-								<input name="Nominee" type="checkbox" value="yes" <?php if ($_COOKIE['pruRed']['Nominee']=="yes") echo  "checked"; ?> />
+								<input name="Nominee" type="checkbox" value="yes" <?php if ($_COOKIE['crukRed']['Nominee']=="yes") echo  "checked"; ?> />
 							</div>
 						</div>
 						<div class="row ">
@@ -81,7 +81,7 @@
 								Nominee Department
 							</div>
 							<div class="medium-2 columns">
-								<input name="Department" type="checkbox" value="yes" <?php if ($_COOKIE['pruRed']['Department']=="yes") echo  "checked"; ?> />
+								<input name="Department" type="checkbox" value="yes" <?php if ($_COOKIE['crukRed']['Department']=="yes") echo  "checked"; ?> />
 							</div>
 						</div>
 						<div class="row ">
@@ -89,7 +89,7 @@
 								Nominee Grade
 							</div>
 							<div class="medium-2 columns">
-								<input name="NomGrade" type="checkbox" value="yes" <?php if ($_COOKIE['pruRed']['NomGrade']=="yes") echo  "checked"; ?> />
+								<input name="NomGrade" type="checkbox" value="yes" <?php if ($_COOKIE['crukRed']['NomGrade']=="yes") echo  "checked"; ?> />
 							</div>
 						</div>
 						<div class="row ">
@@ -97,7 +97,7 @@
 								Date Redeemed
 							</div>
 							<div class="medium-2 columns">
-								<input name="RedeemDate" type="checkbox" value="yes" <?php if ($_COOKIE['pruRed']['RedeemDate']=="yes") echo  "checked"; ?> />
+								<input name="RedeemDate" type="checkbox" value="yes" <?php if ($_COOKIE['crukRed']['RedeemDate']=="yes") echo  "checked"; ?> />
 							</div>
 						</div>
 					</div>
@@ -107,7 +107,7 @@
 								Transaction Code
 							</div>
 							<div class="medium-2 columns">
-								<input name="TransCode" type="checkbox" value="yes" <?php if ($_COOKIE['pruRed']['TransCode']=="yes") echo  "checked"; ?> />
+								<input name="TransCode" type="checkbox" value="yes" <?php if ($_COOKIE['crukRed']['TransCode']=="yes") echo  "checked"; ?> />
 							</div>
 						</div>
 						<div class="row ">
@@ -115,7 +115,7 @@
 								Product Category
 							</div>
 							<div class="medium-2 columns">
-								<input name="ProdCat" type="checkbox" value="yes" <?php if ($_COOKIE['pruRed']['ProdCat']=="yes") echo  "checked"; ?> />
+								<input name="ProdCat" type="checkbox" value="yes" <?php if ($_COOKIE['crukRed']['ProdCat']=="yes") echo  "checked"; ?> />
 							</div>
 						</div>
 						<div class="row ">
@@ -123,7 +123,7 @@
 								Product
 							</div>
 							<div class="medium-2 columns">
-								<input name="Product" type="checkbox" value="yes" <?php if ($_COOKIE['pruRed']['Product']=="yes") echo  "checked"; ?> />
+								<input name="Product" type="checkbox" value="yes" <?php if ($_COOKIE['crukRed']['Product']=="yes") echo  "checked"; ?> />
 							</div>
 						</div>
 						<div class="row ">
@@ -131,7 +131,7 @@
 								Amount Spent
 							</div>
 							<div class="medium-2 columns">
-								<input name="AmountSpent" type="checkbox" value="yes" <?php if ($_COOKIE['pruRed']['AmountSpent']=="yes") echo  "checked"; ?> />
+								<input name="AmountSpent" type="checkbox" value="yes" <?php if ($_COOKIE['crukRed']['AmountSpent']=="yes") echo  "checked"; ?> />
 							</div>
 						</div>
 						<div class="row ">
@@ -139,7 +139,7 @@
 								Current Balance
 							</div>
 							<div class="medium-2 columns">
-								<input name="CurrentBalance" type="checkbox" value="yes" <?php if ($_COOKIE['pruRed']['CurrentBalance']=="yes") echo  "checked"; ?> />
+								<input name="CurrentBalance" type="checkbox" value="yes" <?php if ($_COOKIE['crukRed']['CurrentBalance']=="yes") echo  "checked"; ?> />
 							</div>
 						</div>
 					</div>
@@ -148,13 +148,14 @@
 					<div class="medium-12 columns">
 						<div class="medium-6 columns">
 							Check All &nbsp;
-							<input name="select_all" id="select_all" type="checkbox" value="yes" <?php if ($_COOKIE['pruRed']['select_all']=="yes") echo  "checked"; ?> />
+							<input name="select_all" id="select_all" type="checkbox" value="yes" <?php if ($_COOKIE['crukRed']['select_all']=="yes") echo  "checked"; ?> />
 						</div>
 						<div class="medium-6 columns textRight ">
 							<a href="#" class="pinkButton clickAble" data-type="submit" data-url="redemptionReport">Export</a>
 						</div>
 					</div>
 				</div>
+				<input type="hidden" name="EmpNum" value="<?=$_SESSION['user']->EmpNum?>" />
 				<input type="hidden" name="eType" value="2" />
 			</form>
 		</div>

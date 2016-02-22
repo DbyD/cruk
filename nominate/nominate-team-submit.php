@@ -1,6 +1,6 @@
 <?php
 	include '../inc/config.php';
-	//if($_SESSION['alreadydone']!='yes'){
+	if($_SESSION['alreadydone']!='yes'){
 		// upload data and create emails
 		$today = date("Y-m-d H:i:s", strtotime(date ("Y-m-d H:i:s")));
 		
@@ -226,7 +226,10 @@
 			}
 		}
 		echo $email;
+		$_SESSION['alreadydone'] = 'yes';
 		$_SESSION['teamnominee']->teamEmailList = $teamEmailList;
-	//}
-	header("Location: nominate-team-done.php");
+		header("Location: nominate-team-done.php");
+	} else {
+		header("Location: index.php");
+	}
 ?>

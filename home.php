@@ -34,8 +34,11 @@
 								<div class="shophome overlay hide clickAble" data-type="gourl" data-url="redeem"><p>If you've claimed a voucher, here's where you can use it!</p></div>
 							</div>
 						</div>
-						<div class="callout panel faq clickAble" data-type="gourl" data-url="faq.php">
-							<p>FAQs <i class="icon-icons_question"></i></p>
+						<div class="callout panel" id="faq">
+							<div class="image">
+								<p>FAQs <i class="icon-icons_question"></i></p>
+								<div class="faqhome overlay hide clickAble" data-type="gourl" data-url="faq.php"><p>Read all about the scheme here</p></div>
+							</div>
 						</div>
 					</div>
 				</div>

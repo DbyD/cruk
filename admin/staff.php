@@ -53,8 +53,8 @@
 							<p>&nbsp;</p>
 							<p><a href="#" class="blueButton clickAble" data-type="gourl" data-url="index.php">Back to Admin</a></p>
 						</div>
-					</div>
-				</div> -->
+					</div>-->
+				</div> 
 			</div>
 		</div>
 	</div>

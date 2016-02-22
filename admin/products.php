@@ -166,7 +166,14 @@
 			<div class="medium-12 columns form-prduct">
 				<form method="post" action="" enctype="multipart/form-data">
 					<?php if(isset($error_message)) echo $error_message;?>
-					<h2>Add / Edit Products</h2>
+					<div class="row">
+						<div class="large-3 columns">
+							<h2>Add / Edit Products</h2>
+						</div>
+						<div class="large-9 columns textRight">
+							<a href="<?=HTTP_PATH?>redeem/products.php?menu_id=<?php echo $menu_id; if(isset($sub_id)) echo "&sub_id=".$sub_id; ?>" class="blueButton">New</a>
+						</div>
+					</div>
 					<div class="row">
 						<div class="large-3 columns">
 							<label>Title: </label>
@@ -191,23 +198,6 @@
 							<input type="text" placeholder="" name="point" value="<?php echo isset( $pr['aPrice'] ) ? $pr['aPrice'] : ''; ?>" />
 						</div>
 					</div>
-					<?php if(isset($subs) && !is_null($subs)):?>
-					<div class="row">
-						<div class="large-3 columns">
-							<label>CHoose Sub menu</label>
-						</div>
-						<div class="large-9 columns">
-							<select name="sub_id">
-								<option value="other">--Select--</option>
-								<?php foreach($subs as $sub): ?>
-								<?php if( is_array( $sub ) ):?>
-								<option value="<?php echo $sub["id"]; ?>"><?php echo $sub['label']; ?></option>
-								<?php endif; ?>
-								<?php endforeach;?>
-							</select>
-						</div>
-					</div>
-					<?php endif;?>
 					<div class="row">
 						<div class="large-3 columns">
 							<label>Delivery: </label>

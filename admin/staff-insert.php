@@ -38,6 +38,17 @@
 	$stmt->bindParam(':eligible',  $_POST["eligible"] , PDO::PARAM_INT);
 	$stmt->bindParam(':activated',  $_POST["activated"] , PDO::PARAM_INT);
 	$stmt->execute();
+	
+	// Here we do the password stuff.
+	if((Trim($_POST["sPassword"]) != "") && (Trim($_POST["repeatPassword"]) != "")){
+		if(Trim($_POST["sPassword"]) == Trim($_POST["repeatPassword"])){
+			$SQL = "UPDATE tblempall SET sPassword = :Pass WHERE EmpNum = :ENum";
+			$stmt = $db->prepare($SQL);
+			$stmt->bindParam(':ENum', $_POST["EmpNum"]);
+			$stmt->bindParam(':Pass', $_POST["sPassword"]);
+			$stmt->execute();
+		}
+	}
 		
 	header("location:staff.php");
 ?>

@@ -39,6 +39,7 @@ body{
 }
 .has-dropdown i{
 	font-size: 22px;
+	vertical-align: sub;
 }
 .top-bar-section .has-dropdown > a{
 	margin-top: 10px;

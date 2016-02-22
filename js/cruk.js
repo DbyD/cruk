@@ -80,6 +80,36 @@ $(function(){
 			$("#alert").css('display', 'block');
 		}
 	});
+	$("#insertStaffForm").validate({
+		rules: {EmpNum: "required",
+				repeatPassword: {equalTo: "#sPassword"}
+		},
+		messages: {
+			EmpNum: "Please enter an Employee Number.",
+			repeatPassword: {
+				equalTo: "Please enter the same password as above"
+			}
+		},
+		errorPlacement: function(error, element) {
+			$("#alertContent").load("../alerts/alert-popup.php", {'error' : error.html() });
+			$("#alert").css('display', 'block');
+		}
+	});
+	$("#updateStaffForm").validate({
+		rules: {EmpNum: "required",
+				repeatPassword: {equalTo: "#sPassword"}
+		},
+		messages: {
+			EmpNum: "Please enter an Employee Number.",
+			repeatPassword: {
+				equalTo: "Please enter the same password as above"
+			}
+		},
+		errorPlacement: function(error, element) {
+			$("#alertContent").load("../alerts/alert-popup.php", {'error' : error.html() });
+			$("#alert").css('display', 'block');
+		}
+	});
 	$("#nominateColleague").validate({
 		rules: {EmpNum: "required"},
 		messages: {EmpNum: "Please select a Colleague"},

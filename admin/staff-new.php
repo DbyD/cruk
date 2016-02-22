@@ -85,7 +85,7 @@
 								Job Title
 							</div>
 							<div class="medium-8 columns">
-								<input type="text" value="" name="JobTitle" id="JobTitle" required>
+								<input type="text" value="" name="JobTitle" id="JobTitle" >
 							</div>
 						</div>
 						<div class="row">
@@ -133,7 +133,7 @@
 								Department
 							</div>
 							<div class="medium-8 columns">
-								<input type="text" value="" name="Department" id="Department" required>
+								<input type="text" value="" name="Department" id="Department" >
 							</div>
 						</div>
 						<div class="row">
@@ -141,7 +141,7 @@
 								Directorate
 							</div>
 							<div class="medium-8 columns">
-								<input type="text" value="" name="Directorate" id="Directorate" required>
+								<input type="text" value="" name="Directorate" id="Directorate" >
 							</div>
 						</div>
 						<div class="row">
@@ -172,7 +172,7 @@
 								Emp Number
 							</div>
 							<div class="medium-8 columns">
-								<input type="text" value="" name="LMEmpNum" id="LMEmpNum" required>
+								<input type="text" value="" name="LMEmpNum" id="LMEmpNum" >
 							</div>
 						</div>
 						<div class="row">
@@ -180,7 +180,7 @@
 								First name
 							</div>
 							<div class="medium-8 columns">
-								<input type="text" value="" name="LMFname" id="LMFname" required>
+								<input type="text" value="" name="LMFname" id="LMFname" >
 							</div>
 						</div>
 						<div class="row">
@@ -188,7 +188,7 @@
 								Surname
 							</div>
 							<div class="medium-8 columns">
-								<input type="text" value="" name="LMSname" id="LMSname" required>
+								<input type="text" value="" name="LMSname" id="LMSname">
 							</div>
 						</div>
 						<div class="row">
@@ -196,7 +196,7 @@
 								Email address
 							</div>
 							<div class="medium-8 columns">
-								<input type="text" value="" name="LMEaddress" id="LMEaddress" required>
+								<input type="text" value="" name="LMEaddress" id="LMEaddress">
 							</div>
 						</div>
 						<div class="row">

@@ -89,7 +89,7 @@
 								Job Title
 							</div>
 							<div class="medium-8 columns">
-								<input type="text" value="<?=$staff->JobTitle?>" name="JobTitle" id="JobTitle" required>
+								<input type="text" value="<?=$staff->JobTitle?>" name="JobTitle" id="JobTitle">
 							</div>
 						</div>
 						<div class="row">
@@ -137,7 +137,7 @@
 								Department
 							</div>
 							<div class="medium-8 columns">
-								<input type="text" value="<?=$staff->Department?>" name="Department" id="Department" required>
+								<input type="text" value="<?=$staff->Department?>" name="Department" id="Department">
 							</div>
 						</div>
 						<div class="row">
@@ -145,7 +145,7 @@
 								Directorate
 							</div>
 							<div class="medium-8 columns">
-								<input type="text" value="<?=$staff->Directorate?>" name="Directorate" id="Directorate" required>
+								<input type="text" value="<?=$staff->Directorate?>" name="Directorate" id="Directorate">
 							</div>
 						</div>
 						<div class="row">
@@ -176,7 +176,7 @@
 								Emp Number
 							</div>
 							<div class="medium-8 columns">
-								<input type="text" value="<?=$staff->LMEmpNum?>" name="LMEmpNum" id="LMEmpNum" required>
+								<input type="text" value="<?=$staff->LMEmpNum?>" name="LMEmpNum" id="LMEmpNum">
 							</div>
 						</div>
 						<div class="row">
@@ -184,7 +184,7 @@
 								First name
 							</div>
 							<div class="medium-8 columns">
-								<input type="text" value="<?=$staff->LMFname?>" name="LMFname" id="LMFname" required>
+								<input type="text" value="<?=$staff->LMFname?>" name="LMFname" id="LMFname">
 							</div>
 						</div>
 						<div class="row">
@@ -192,7 +192,7 @@
 								Surname
 							</div>
 							<div class="medium-8 columns">
-								<input type="text" value="<?=$staff->LMSname?>" name="LMSname" id="LMSname" required>
+								<input type="text" value="<?=$staff->LMSname?>" name="LMSname" id="LMSname">
 							</div>
 						</div>
 						<div class="row">
@@ -200,7 +200,7 @@
 								Email address
 							</div>
 							<div class="medium-8 columns">
-								<input type="text" value="<?=$staff->LMEaddress?>" name="LMEaddress" id="LMEaddress" required>
+								<input type="text" value="<?=$staff->LMEaddress?>" name="LMEaddress" id="LMEaddress">
 							</div>
 						</div>
 						<div class="row">
