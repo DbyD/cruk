@@ -27,20 +27,18 @@
 								<p><?php echo $employee["name"] ?></p>
 							</div>
 							<div class="content-nominate">
-								<p>Belief
-								</p>
-								<p><?php echo $employee["BeliefID"]; ?></p>
-								<p>Nominated By:</p>
-								<p><?php echo getname($employee["NominatorEmpNum"]); ?></p>
+								<p>Belief: <?php echo $employee["BeliefID"]; ?></p>
+								<p>Nominated By:<br><b><?php echo getname($employee["NominatorEmpNum"]); ?></b></p>
 							</div>
-							<span id="wallT<?php echo $employee["ID"]; ?>Text" class="showbehaviour hidden mCustomScrollbar height250" data-mcs-theme="dark-2">
+							<span id="wallT<?php echo $employee["ID"]; ?>Text" class="showbehaviour hidden mCustomScrollbar height260" data-mcs-theme="dark-2">
 								<?php
-									echo $employee["personalMessage"];
-									echo "<br><br><b>Team Members:</b><br>";
+									echo "<b>Team Members:</b><br>";
 									$TeamMembers = getThisTeamMembers($employee['ID']);
 									foreach ($TeamMembers as $list){
 										echo getName($list['EmpNum']).'<br>';
 									}
+									echo "<hr><b>Award message:</b><br>";
+									echo $employee["personalMessage"];
 								?>
 							</span>
 						</div>
@@ -57,15 +55,13 @@
 									<input type="hidden" id="Department" value="<?php echo $employee["Department"]; ?>"> 
 								</i>
 								<img src="<?php echo HTTP_PATH.$employee["Photo"];?>" onerror="this.src='<?=HTTP_PATH?>images/no-photo.png'">
-								<?php echo $employee["name"].' '.$employee["Sname"]; ?><div class="small"><?php echo $employee["DirectorateInitials"]; ?></div>
+								<div><?php echo $employee["name"].' '.$employee["Sname"]; ?><div class="small"><?php echo $employee["DirectorateInitials"]; ?></div></div>
 							</div>
 							<div class="content-nominate">
-								<p>Belief</p>
-								<p><?php echo $employee["BeliefID"]; ?></p>
-								<p>Nominated By:</p>
-								<p><?php echo getname($employee["NominatorEmpNum"]); ?></p>
+								<p>Belief: <?php echo $employee["BeliefID"]; ?></p>
+								<p>Nominated By:<br><b><?php echo getname($employee["NominatorEmpNum"]); ?></b></p>
 							</div>
-							<span id="wall<?php echo $employee["ID"]; ?>Text" class="showbehaviour hidden mCustomScrollbar height250" data-mcs-theme="dark-2">
+							<span id="wall<?php echo $employee["ID"]; ?>Text" class="showbehaviour hidden mCustomScrollbar height260" data-mcs-theme="dark-2">
 								<?php echo $employee["personalMessage"]; ?>
 							</span>
 						</div>
