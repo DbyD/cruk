@@ -5,8 +5,8 @@
 	height: 220px;
 }
 .small {
-	font-size: 11px;
-	padding-top: 5px;
+	font-size: 12px;
+	padding-top: 4px;
 	font-weight: normal;
 	font-style: normal;
 }
@@ -47,8 +47,8 @@
 }
 #home1 .image {
 	height: 286px;
-	background-image: url(../images/home-our-beliefs.jpg);
 	position: relative;
+	background: #fff url(../images/home-our-beliefs.jpg) no-repeat right top;
 }
 .homeoverlay .image .overlay{
 	position: absolute;
@@ -91,8 +91,8 @@
 }
 #home2 .image {
 	height: 184px;
-	background-image: url(../images/home-nominate.jpg);
 	position: relative;
+	background: #18bded url(../images/home-nominate.jpg) no-repeat center top;
 }
 #home2 p {
 	color: #fff;
@@ -106,8 +106,8 @@
 }
 #home3 .image {
 	height: 184px;
-	background-image: url(../images/home-winners-wall.jpg);
 	position: relative;
+	background: #e8e8e8 url(../images/home-winners-wall.jpg) no-repeat right top;
 }
 #home3 p {
 	color: #2e008b;
@@ -118,8 +118,12 @@
 #home4 .image {
 	height: 118px;
 	margin-bottom: 0px;
-	background-image: url(../images/home-redeem.jpg);
 	position: relative;
+	background: url(../images/home-redeem.jpg) no-repeat center center;
+	-webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 #home4 p {
 	color: #fff;
@@ -129,8 +133,11 @@
 }
 #home5 .image {
 	height: 170px;
-	background-image: url(../images/home-passion-talks.jpg);
 	position: relative;
+	background: url(../images/home-passion-talks.jpg) no-repeat center center;-webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 #home5 p {
 	color: #fff;
@@ -682,7 +689,9 @@ form .row .row {
 }
 .dashboardGraphs {
 	padding: 0 20px;
-	height: 320px;
+}
+.donutcharts{
+	height:220px;
 }
 .pieLegend {
 	font-size: 11px;

@@ -10,7 +10,7 @@ function createNominee($empnum){
 			$result->offline = 'YES';
 			// find Shop Mgr
 			$stmt = $db->prepare('SELECT * FROM tblempall WHERE Shop = :Shop AND JobTitle= :JobTitle');
-			$stmt->execute(array('Shop' => $result->Shop, 'JobTitle' => 'Shop Mgr' ));
+			$stmt->execute(array('Shop' => $result->RetailArea, 'JobTitle' => 'Shop Mgr' ));
 			if ($mgr = $stmt->fetch(PDO::FETCH_OBJ)){
 				$result->shopMEmpNum = $mgr->EmpNum;
 				$result->shopMFname = $mgr->Fname;
@@ -325,17 +325,7 @@ function getMostRecentAwards () {
 			INNER JOIN tblempall AS e
 			ON n.NominatedEmpNum = e.EmpNum
 			WHERE n.awardType=1 AND n.AprStatus=1 AND e.Department = :Department)
-				UNION
-				(SELECT  "Team"					AS Type,
-						ID						AS ID,
-						Team					AS name,
-						""						AS sname,
-						""						AS DirectorateInitials,
-						BeliefID				AS BeliefID,
-						TeamID					AS TeamID,
-						AprDate					AS AprDate
-				FROM tblnominations_team
-				WHERE awardType=2 AND AprStatus=1)) X
+				) X
 			ORDER BY AprDate DESC LIMIT 20';
 	$stmt = $db->prepare($sql);
 	$stmt->execute(array('Department' => $Department));
@@ -348,6 +338,18 @@ function getMostRecentAwards () {
 	}
 	return $arr;
 }
+/* removed from above as we dont know which department
+UNION
+				(SELECT  "Team"					AS Type,
+						ID						AS ID,
+						Team					AS name,
+						""						AS sname,
+						""						AS DirectorateInitials,
+						BeliefID				AS BeliefID,
+						TeamID					AS TeamID,
+						AprDate					AS AprDate
+				FROM tblnominations_team
+				WHERE awardType=2 AND AprStatus=1)*/
 ////////////////////////////////////////////////////////////////////////////////////
 function fixMenuSpace($i){
 	switch ($i) {

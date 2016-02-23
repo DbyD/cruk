@@ -21,12 +21,13 @@
 						Dashboard
 					</div>
 					<div class="tableReportsHead tableColumn-3 clickAble" data-type="gourl" data-url="nomination.php">
-						Nomination
+						Individual Nomination
+					</div>
+					<div class="tableReportsHead tableColumn-3 clickAble" data-type="gourl" data-url="team-nomination.php">
+						Team Nomination
 					</div>
 					<div class="tableReportsHead tableColumn-3 clickAble" data-type="gourl" data-url="redemption.php">
 						Redemption
-					</div>
-					<div class="tableColumn-3">
 					</div>
 				</div>
 			</div>
@@ -59,7 +60,7 @@
 							chart.draw(data, options);
 						}
 					</script>
-					<div id="donutchart1" style="width: 300px; height:220px;">
+					<div id="donutchart1" class="donutcharts">
 					</div>
 					<div class="pieLegend piePending">
 						<i>-</i>Pending -
@@ -102,7 +103,7 @@
 							chart.draw(data, options);
 						}
 					</script>
-					<div id="donutchart2" style="width: 300px; height:220px;">
+					<div id="donutchart2" class="donutcharts">
 					</div>
 					<div class="pieLegend piePending">
 						<i>-</i>Pending -

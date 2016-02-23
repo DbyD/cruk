@@ -112,14 +112,14 @@ function getAllAwards($empnum){
 
 function getWorkAwardsCnt(){
 	global $db;
-	$stmt = $db->prepare('SELECT COUNT(*) AS Cnt FROM tblworkawards');
+	$stmt = $db->prepare('SELECT * FROM tblworkawards');
 	$stmt->execute();
 	return $stmt->fetchAll(PDO::FETCH_OBJ);
 }
 
 function getWorkAwardsPerID($id){
 	global $db;
-	$stmt = $db->prepare('SELECT COUNT(*) AS Cnt FROM tblworknominations WHERE nominationID = :NID');
+	$stmt = $db->prepare('SELECT * FROM tblworknominations WHERE nominationID = :NID');
 	$stmt->bindParam(':NID', $id);
 	$stmt->execute();
 	return $stmt->fetchAll(PDO::FETCH_OBJ);
@@ -150,7 +150,7 @@ function getExportSQL($params){
 	$UserGrade = $LoggedIn->Grade;
 	$UserIsSuper = $LoggedIn->SuperUser;
 	//Rule 1
-	if(strtoupper($UserIsSuper) == "Yes"){
+	if(strtoupper($UserIsSuper) == "Y"){
 		$filterSQL = "SELECT * FROM (" . $baseSQL . ") AS Temp";
 	} else if((strtoupper($UserTeam) == "TRADING REGION 1") || (strtoupper($UserTeam) == "TRADING REGION 2") ||
 			(strtoupper($UserTeam) == "TRADING REGION 3") || (strtoupper($UserTeam) == "TRADING REGION 4")){
@@ -180,7 +180,7 @@ function getExportSQL($params){
 			$dateSQL . " AND NomDate <= '" . $NewEndDate . "' ";
 		}
 	} else {
-		$dateSQL = "SELECT * FROM (" . $filterSQL . ") AS TDates ";
+		$dateSQL = "SELECT * FROM (" . $filterSQL . ") AS TDates WHERE awardType = 1";
 	}
 	return $dateSQL;
 }
@@ -222,12 +222,41 @@ function createNominationExport($post){
 	$CSVMaster = "<table>";
 	$CSVLine = "";
 	$SQL = getExportSQL($post);
+//	$CSVLine .=$SQL;
 	$stmt = $db->prepare($SQL);
 	$stmt->execute();
 	
-	$CSVLine .= "<tr><td>Nominee ID</td><td>Nominee</td><td>Team</td><td>Function</td><td>Department</td><td>Grade</td><td>Nominator ID</td><td>Nominator</td><td>Nominator Department</td><td>Nominator Grade</td><td>
-			     Volunteer Name</td><td>Nomination Date</td><td>Core Belief</td><td>Nominated For</td><td>Nomination Reason</td><td>Personal Message</td><td>Line Manager</td><td>Site Name</td><td>
-			     Approved</td><td>Approved Date</td><td>Approver</td><td>Decline Reason</td><td>Little Extra Removed</td><td>Status</td><td>Total Value</td></tr>";
+	
+	
+	$CSVLine .= "<tr>";
+	$CSVLine .= "<td>Nomination ID</td>";
+	if($post["NomineeID"] == "yes"){$CSVLine .= "<td>Nominee ID</td>";}
+	if($post["Nominee"] == "yes"){$CSVLine .= "<td>Nominee</td>";}
+	if($post["Team"] == "yes"){$CSVLine .= "<td>Nominee Team</td>";}
+	if($post["Function"] == "yes"){$CSVLine .= "<td>Nominee Function</td>";}
+	if($post["Department"] == "yes"){$CSVLine .= "<td>Nominee Department</td>";}
+	if($post["NomGrade"] == "yes"){$CSVLine .= "<td>Nominee Grade</td>";}
+	if($post["LineManager"] == "yes"){$CSVLine .= "<td>Line Manager</td>";}
+	if($post["StoreManager"] == "yes"){$CSVLine .= "<td>Store Manager</td>";}
+	if($post["LocationName"] == "yes"){$CSVLine .= "<td>Site Name</td>";}
+	if($post["NominatorID"] == "yes"){$CSVLine .= "<td>Nominator ID</td>";}
+	if($post["Nominator"] == "yes"){$CSVLine .= "<td>Nominator</td>";}
+	if($post["NominatorDept"] == "yes"){$CSVLine .= "<td>Nominator Department</td>";}
+	if($post["NominatorGrade"] == "yes"){$CSVLine .= "<td>Nominator Grade</td>";}
+	if($post["VolName"] == "yes"){$CSVLine .= "<td>Volunteer Name</td>";}
+	if($post["NomDate"] == "yes"){$CSVLine .= "<td>Nomination Date</td>";}
+	if($post["CoreBelief"] == "yes"){$CSVLine .= "<td>Core Belief</td>";}
+	if($post["NomReason"] == "yes"){$CSVLine .= "<td>Nomination Reason</td>";}
+	if($post["PMessage"] == "yes"){$CSVLine .= "<td>Personal Message</td>";}
+	if($post["Approver"] == "yes"){$CSVLine .= "<td>Approver</td>";}
+	if($post["Approved"] == "yes"){$CSVLine .= "<td>Approved</td>";}
+	if($post["ApprovedDate"] == "yes"){$CSVLine .= "<td>Approved Date</td>";}
+	if($post["Decreason"] == "yes"){$CSVLine .= "<td>Decline Reason</td>";}
+	if($post["Amount"] == "yes"){$CSVLine .= "<td>Amount</td>";}
+	if($post["LittleExtra"] == "yes"){$CSVLine .= "<td>Little Extra Removed</td>";}
+	if($post["Status"] == "yes"){$CSVLine .= "<td>Status</td>";}
+	if($post["TotalVal"] == "yes"){$CSVLine .= "<td>Total Value</td>";}
+	$CSVLine .= "</tr>";
 	$CSVMaster .= $CSVLine;
 	$CSVLine = "";
 	
@@ -239,6 +268,8 @@ function createNominationExport($post){
 		$EmpAwards = getAvailable($dbline["NominatedEmpNum"]);
 		$ApproverDet = getUser($dbline["ApproverEmpNum"]);
 		
+		$CSVLine .= "<td>" . $dbline["ID"] . "</td>";
+		
 		// We check each field and then add it to the CSV
 		if($post["NomineeID"] == "yes"){$CSVLine .= "<td>" . $dbline["NominatedEmpNum"] . "</td>";}
 		if($post["Nominee"] == "yes"){$CSVLine .= "<td>" . Trim($Nominee->Fname) . " " . Trim($Nominee->Sname) . "</td>";}
@@ -246,6 +277,19 @@ function createNominationExport($post){
 		if($post["Function"] == "yes"){$CSVLine .= "<td>" . Trim($Nominee->JobTitle) . "</td>";}
 		if($post["Department"] == "yes"){$CSVLine .= "<td>" . Trim($Nominee->Department) . "</td>";}
 		if($post["NomGrade"] == "yes"){$CSVLine .= "<td>" . Trim($Nominee->Grade) . "</td>";}
+		if($post["LineManager"] == "yes"){$CSVLine .= "<td>" . Trim($Nominee->LMFname) . " " . Trim($Nominee->LMSname) . "</td>";}
+		
+		// need to get store manager
+		$stmt2 = $db->prepare('SELECT * FROM tblempall WHERE Shop = :Shop AND JobTitle= :JobTitle');
+		$stmt2->execute(array('Shop' => $Nominee->RetailArea, 'JobTitle' => 'Shop Mgr' ));
+		if ($mgr = $stmt2->fetch(PDO::FETCH_OBJ)){
+			$shopmgr = $mgr->Fname.' '.$mgr->Sname;
+		} else {
+			$shopmgr = '';
+		}
+		if($post["StoreManager"] == "yes"){$CSVLine .= "<td>" . Trim($shopmgr) . "</td>";}
+		
+		if($post["LocationName"] == "yes"){$CSVLine .= "<td>" . Trim($Nominee->LocationName) . "</td>";}
 		
 		if($post["NominatorID"] == "yes"){$CSVLine .= "<td>" . $dbline["NominatorEmpNum"] . "</td>";}
 		if($post["Nominator"] == "yes"){$CSVLine .= "<td>" . Trim($Nominator->Fname) . " " . Trim($Nominator->Sname) . "</td>";}
@@ -254,48 +298,61 @@ function createNominationExport($post){
 		
 		if($post["VolName"] == "yes"){$CSVLine .= "<td>" . Trim($dbline["Volunteer"]) . "</td>";}
 		
-		if($post["NomDate"] == "yes"){$CSVLine .= "<td>" . $dbline["NomDate"] . ",";}
+		if($post["NomDate"] == "yes"){$CSVLine .= "<td>" . $dbline["NomDate"] . "</td>";}
 		if($post["CoreBelief"] == "yes"){$CSVLine .= "<td>" . Trim($dbline["BeliefID"]) . "</td>";}
-		if($post["NomFor"] == "yes"){
-			$CSVLine .= "<td>" . Trim($dbline["amount"]) . "</td>";
-		}
 		if($post["NomReason"] == "yes"){$CSVLine .= "<td>" . Trim($dbline["Reason"]) . "</td>";}
 		if($post["PMessage"] == "yes"){$CSVLine .= "<td>" . Trim($dbline["personalMessage"]) . "</td>";}
 		
-		if($post["LineManager"] == "yes"){$CSVLine .= "<td>" . Trim($Nominee->LMFname) . " " . Trim($Nominee->LMSname) . "</td>";}
-		if($post["SiteName"] == "yes"){$CSVLine .= "<td>" . Trim($Nominee->LocationName) . "</td>";}
-		
-		//Rules Here
-		if($post["Approved"] == "yes"){
-			if(intval($dbline["AprStatus"]) == 0){
-				$CSVLine .= "<td>Pending</td>";
-			} else if(intval($dbline["AprStatus"]) == 1){
-				$CSVLine .= "<td>Approved</td>";
-			} else {
-				$CSVLine .= "<td>Declined</td>";
+		if(Trim($dbline["amount"])!=0){
+			if($post["Approver"] == "yes"){$CSVLine .= "<td>" . Trim($ApproverDet->Fname) . " " . Trim($ApproverDet->Sname) . "</td>";}
+			//Rules Here
+			if($post["Approved"] == "yes"){
+				if(intval($dbline["AprStatus"]) == 0){
+					$CSVLine .= "<td>Pending</td>";
+				} else if(intval($dbline["AprStatus"]) == 1){
+					$CSVLine .= "<td>Approved</td>";
+				} else {
+					$CSVLine .= "<td>Declined</td>";
+				}
 			}
-		}
-		if($post["ApprovedDate"] == "yes"){$CSVLine .= "<td>" . Trim($dbline["AprDate"]) . "</td>";}
-		if($post["Approver"] == "yes"){$CSVLine .= "<td>" . Trim($ApproverDet->Fname) . " " . Trim($ApproverDet->Sname) . "</td>";}
-		if($post["Decreason"] == "yes"){$CSVLine .= "<td>" . Trim($dbline["dReason"]) . "</td>";}
-		if($post["LittleExtra"] == "yes"){
-			// Get the amount of extras
-			// Check the work nominations table
-			$WA = getWorkAwardsCnt();
-			$WAAlloc = getWorkAwardsPerID($dbline["ID"]);
-			if(intval($WA->Cnt) == intval($WAAlloc->Cnt)){
-				$CSVLine .= "<td>No</td>";
-			} else {
-				$CSVLine .= "<td>Yes</td>";
+			if($post["ApprovedDate"] == "yes"){$CSVLine .= "<td>" . Trim($dbline["AprDate"]) . "</td>";}
+			if($post["Decreason"] == "yes"){$CSVLine .= "<td>" . Trim($dbline["dReason"]) . "</td>";}
+			
+			if($post["Amount"] == "yes"){
+				$CSVLine .= "<td>" . Trim($dbline["amount"]) . "</td>";
 			}
-		}
-		// Rules Here
-		if($post["Status"] == "yes"){
-			if($dbline["AwardClaimed"] == "Yes"){
-				$CSVLine .= "<td>Cliamed</td>";
-			} else {
-				$CSVLine .= "<td>Not Cliamed</td>";
+			if($post["LittleExtra"] == "yes"){
+				// Get the amount of extras
+				// Check the work nominations table
+				$WA = getWorkAwardsCnt();
+				$WAAlloc = getWorkAwardsPerID($dbline["ID"]);
+				$removed = '';
+				foreach($WAAlloc as $list){
+					if (($key = array_search($list->workawardsID, $WA)) !== false) {
+						unset($WA[$key]);
+					}
+				}
+				foreach($WA as $list){
+					$removed .= $list->type.' ,';
+				}
+				$CSVLine .= "<td>".$removed."</td>";
 			}
+			// Rules Here
+			if($post["Status"] == "yes"){
+				if($dbline["AwardClaimed"] == "Yes"){
+					$CSVLine .= "<td>Cliamed</td>";
+				} else {
+					$CSVLine .= "<td>Not Cliamed</td>";
+				}
+			}
+		} else {
+			if($post["Approver"] == "yes"){$CSVLine .= "<td></td>"; }
+			if($post["Approved"] == "yes"){$CSVLine .= "<td></td>"; }
+			if($post["ApprovedDate"] == "yes"){$CSVLine .= "<td></td>"; }
+			if($post["Decreason"] == "yes"){$CSVLine .= "<td></td>"; }
+			if($post["Amount"] == "yes"){$CSVLine .= "<td></td>"; }
+			if($post["LittleExtra"] == "yes"){$CSVLine .= "<td></td>"; }
+			if($post["Status"] == "yes"){$CSVLine .= "<td></td>"; }
 		}
 		if($post["TotalVal"] == "yes"){$CSVLine .= "<td>" . $EmpAwards . "</td>";}
 		
@@ -317,7 +374,7 @@ function getCCTransaction($OrderID){
 
 function setMyCookie($post, $type){
 	setcookie("$type", "", time() - 3600);
-	$cookie_items = $_COOKIE['crukRed'];
+	$cookie_items = $_COOKIE[$type];
 	foreach($cookie_items as $index => $value){
 		setcookie($type."[".$index."]", '');
 	}
@@ -344,8 +401,18 @@ function createRedemptionExport($post){
 	$stmt = $db->prepare($sql);
 	$stmt->execute();
 	
-	
-	$CSVLine .= "<tr><td>Nominee ID</td><td>Nominee</td><td>Department</td><td>Grade</td><td>Redeem Date</td><td>Transaction Code</td><td>Product Category</td><td>Product</td><td>Amount Spent</td><td>Current Balance</td></tr>";
+	$CSVLine .= "<tr>";
+	if($post["NomineeID"] == "yes"){$CSVLine .= "<td>Nominee ID</td>";}
+	if($post["Nominee"] == "yes"){$CSVLine .= "<td>Nominee</td>";}
+	if($post["Department"] == "yes"){$CSVLine .= "<td>Department</td>";}
+	if($post["NomGrade"] == "yes"){$CSVLine .= "<td>Grade</td>";}
+	if($post["RedeemDate"] == "yes"){$CSVLine .= "<td>Redeem Date</td>";}
+	if($post["TransCode"] == "yes"){$CSVLine .= "<td>Transaction Code</td>";}
+	if($post["ProdCat"] == "yes"){$CSVLine .= "<td>Product Category</td>";}
+	if($post["Product"] == "yes"){$CSVLine .= "<td>Product</td>";}
+	if($post["AmountSpent"] == "yes"){$CSVLine .= "<td>Amount Spent</td>";}
+	if($post["CurrentBalance"] == "yes"){$CSVLine .= "<td>Current Balance</td>";}
+	$CSVLine .= "</tr>";
 	$CSVMaster .= $CSVLine;
 	
 	while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {

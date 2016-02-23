@@ -53,6 +53,11 @@
 }
 }
 @media only screen and (max-width: 1023px) {
+.large-2, .large-8{
+	width: 100%;
+	left: auto;
+	right: auto;
+}
 .off-canvas-wrap {
 	padding: 0;
 }
@@ -114,9 +119,9 @@ ul.off-canvas-list .photo {
 	max-width: 100px;
 	max-height: 100px;
 }
-#content .columns {
+/*#content .columns {
 	padding: 6px 0;
-}
+}*/
 #alertbox, #popupbox1, #ecardbox {
 	left: 3%;
 	top: 2%;
@@ -148,16 +153,31 @@ ul.off-canvas-list .photo {
 #home1 .image .ourbelief {
 	font-size: 16px;
 }
+#home4{
+	margin-bottom: 1% !important;
+}
+.medium-6{
+	padding-left: 0 !important;
+	padding-right: 0 !important;
+}
+.title .awardStar{
+	font-size: 14px;
+	display: block;
+}
+.title .awardStar i{
+	margin: 0;
+	float: none;
+}
 /*#messageEmployee {
 	padding: 30px;
-}*/
+}
 p {
 	font-size: 1em;
 	text-align: left;
 	margin-top: 2rem;
 	margin-bottom: 1rem;
 	line-height: 1.3;
-}
+}*/
 .panel.callout.faqs {
 	padding: 5% 8%;
 }
@@ -178,9 +198,9 @@ ol {
 /* @end */
 /* @group Home */
 @media only screen and (max-width: 1199px) {
-#home1, #home2, #home3 {
+/*#home1, #home2, #home3 {
 	margin-bottom: 0px;
-}
+}*/
 #home1 .image {
 	height: 265px;
 }
@@ -435,6 +455,22 @@ ol {
 }
 .ourheroes img {
 	height: 30px;
+}
+}
+/* @end */
+/* @group Reports */
+@media only screen and (max-width: 1199px) {
+.dashboardGraphs {
+	padding: 0 10px;
+}
+.donutcharts{
+	height: 190px;
+}
+#reportTop10 .tableRow{
+	padding: 5px 15px 4px;
+}
+.reportLikes i{
+	padding: 15px;
 }
 }
 /* @end */

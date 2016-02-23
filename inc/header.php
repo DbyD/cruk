@@ -47,7 +47,7 @@
 			<!-- Right Nav Section -->
 			<div class="totalAwardsQuarter">Number of people who have used the Our Heroes scheme this quarter to say thank you to their colleagues: <?php echo getNumberAwardsQuarter() ?></div>
 			<ul class="right">
-				<li class="has-dropdown"><a href="#">Options <i class="icon-icons_exit"></i></a>
+				<li class="has-dropdown"><a href="#"><span>Options</span> <i class="icon-icons_exit"></i></a>
 					<ul class="dropdown">
 						<li class="yourrewards"><a href="http://yourrewards.cruk.org">Your Rewards</a></li>
 						<li><a href="<?=HTTP_PATH?>terms.php">Terms & Conditions</a></li>
@@ -71,7 +71,7 @@
 			<ul class="off-canvas-list">
 				<li><?php include 'portfolio.php'; ?></li>
 				<?php include 'menu.php'; ?>
-				<li class="yourrewards clickAble" data-type="gourl" data-url="http://yourrewards.cruk.org"><img src="<?=HTTP_PATH?>images/Your-Rewards.png" alt="Your Rewards" /></li>
+				<li class="yourrewards clickAble" data-type="gourl" data-url="http://yourrewards.cruk.org">Your Rewards</li>
 				<li class="clickAble" data-type="gourl" data-url="<?=HTTP_PATH?>terms.php">Terms & Conditions</li>
 				<li class="clickAble" data-type="gourl" data-url="<?=HTTP_PATH?>inc/logout.php">Logout</li>
 			</ul>

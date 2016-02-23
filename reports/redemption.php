@@ -2,10 +2,10 @@
 	include_once('../inc/config.php');
 	include_once('../inc/header.php');
 	if(isset($_COOKIE['crukRed']['FromDate'])){
-		$startdate = date("d/m/Y",strtotime($_COOKIE['crukRed']['FromDate']));
+		$startdate = date("d-m-Y",strtotime($_COOKIE['crukRed']['FromDate']));
 	}
 	if(isset($_COOKIE['crukRed']['ToDate'])){
-		$enddate = date("d/m/Y",strtotime($_COOKIE['crukRed']['ToDate']));
+		$enddate = date("d-m-Y",strtotime($_COOKIE['crukRed']['ToDate']));
 	}
 ?>
 
@@ -24,12 +24,13 @@
 						Dashboard
 					</div>
 					<div class="tableReportsHead tableColumn-3 clickAble" data-type="gourl" data-url="nomination.php">
-						Nomination
+						Individual Nomination
+					</div>
+					<div class="tableReportsHead tableColumn-3 clickAble" data-type="gourl" data-url="team-nomination.php">
+						Team Nomination
 					</div>
 					<div class="tableReportsHead tableColumn-3 clickAble white" data-type="gourl" data-url="redemption.php">
 						Redemption
-					</div>
-					<div class="tableColumn-3">
 					</div>
 				</div>
 			</div>
