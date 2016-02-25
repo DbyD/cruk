@@ -216,8 +216,6 @@ ol {
 	padding: 30px 40px;
 }*/
 }
-/* @end */
-/* @group Home */
 @media only screen and (max-width: 1199px) {
 /*#home1, #home2, #home3 {
 	margin-bottom: 0px;
@@ -348,6 +346,12 @@ ol {
 }
 }
 /* @end */
+/* @group Approvals */
+.greyBox .medium-6{
+	width: 50%;
+}
+/* @end */
+
 /* @group Messages */
 @media only screen and (max-width: 1199px) {
 .height590 {
@@ -381,6 +385,8 @@ ol {
 @media only screen and (max-width: 1023px) {
 #redeemHome .columns, #content .products .columns {
 	padding: 0 1%;
+	max-height: 350px;
+	overflow: hidden;
 }
 #redeemHome, .products {
 	margin-bottom: 5px !important;
