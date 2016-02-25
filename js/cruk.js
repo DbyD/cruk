@@ -88,7 +88,7 @@ $(function(){
 			Sname: "Please enter a Surname.",
 			EmpNum: "Please enter an Employee Number.",
 			repeatPassword: {
-				equalTo: "Please enter the same password as above"
+				equalTo: "Your passwords do not match. Please enter the same password in both the Password and Repeat Password fields."
 			}
 		},
 		errorPlacement: function(error, element) {
@@ -111,7 +111,7 @@ $(function(){
 		messages: {
 			EmpNum: "Please enter an Employee Number.",
 			repeatPassword: {
-				equalTo: "Please enter the same password as above"
+				equalTo: "Your passwords do not match. Please enter the same password in both the Password and Repeat Password fields."
 			}
 		},
 		errorPlacement: function(error, element) {
@@ -239,7 +239,7 @@ $(function(){
 			$("#alert").css('display', 'block');
 		},
 		submitHandler: function(form) { 
-			if (confirm("Are you sure? This action is irreversible.")) {
+			if (confirm("Are you sure. This action cannot be undone.")) {
 				$.post('../approvals/individual-award-update.php', $("#approveAward").serialize(), function(data) {
 					if (data = 'declined') {
 						$("#popup1").css('display', 'none');
@@ -258,7 +258,7 @@ $(function(){
 			$("#alert").css('display', 'block');
 		},
 		submitHandler: function(form) { 
-			if (confirm("Are you sure? This action is irreversible.")) {
+			if (confirm("Are you sure. This action cannot be undone.")) {
 				$.post('../approvals/team-award-update.php', $("#approveTeamAward").serialize(), function(data) {
 					if (data = 'declined') {
 						$("#popup1").css('display', 'none');

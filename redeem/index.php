@@ -33,7 +33,7 @@ if(count($basket) > 0 && is_array($basket)){
 										<div class="prodTitle">
 											Shop
 										</div>
-										<img src="img/shop.jpg" alt="Shop">
+										<img src="img/vouchers.jpg" alt="Shop">
 									</div>
 								</div>
 								<div class="small-6 large-6 columns rightnp">

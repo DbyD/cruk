@@ -108,6 +108,7 @@ body{
 }
 #portfolio{
 	height: 39%;
+	position: relative;
 }
 .photo{
 	overflow: hidden;
@@ -123,8 +124,8 @@ body{
 }
 .uploadPhoto{
 	position: absolute;
-	bottom: 8px;
-	right: 12px;
+	bottom: 50px;
+	right: 10px;
 }
 .uploadPhoto i{
 	border: 3px dashed #2e008b;

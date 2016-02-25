@@ -47,7 +47,7 @@
 						<?php if($list->Team == ''){ 
 								echo getName($list->NominatedEmpNum);
 							} else {
-								echo $list->Team;
+								echo str_replace('My Team', 'Team', $list->Team);
 							}?>
 							</div>
 							<div class="tableColumn-3">

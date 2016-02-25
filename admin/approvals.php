@@ -61,9 +61,9 @@
 						</div>
 						<div class="tableColumn-2">
 						<?php if($list->teamID == ''){ ?>
-								<div class="clickAble" data-type="popup" data-id="<?=$list->ID?>" data-url="<?=HTTP_PATH?>approvals/individual-award.php">Individual Award</div>
+								<div class="lightBlue clickAble" data-type="popup" data-id="<?=$list->ID?>" data-url="<?=HTTP_PATH?>approvals/individual-award.php">Individual Award</div>
 						<?php } else { ?>
-								<div class="clickAble" data-type="popup" data-id="<?=$list->teamID?>" data-url="<?=HTTP_PATH?>approvals/team-award.php">Team Award</div>
+								<div class="lightBlue clickAble" data-type="popup" data-id="<?=$list->teamID?>" data-url="<?=HTTP_PATH?>approvals/team-award.php">Team Award</div>
 						<?php } ?>
 						</div>
 					</div>

@@ -53,6 +53,9 @@
 }
 }
 @media only screen and (max-width: 1023px) {
+.tab-bar-section.right{
+	left: auto;
+}
 .large-2, .large-8{
 	width: 100%;
 	left: auto;
@@ -109,7 +112,7 @@ ul.off-canvas-list .title {
 	display: inline-block;
 	width: 145px;
 	vertical-align: top;
-	padding: 10px;
+	padding: 3px 10px;
 }
 ul.off-canvas-list .photo {
 	display: inline-block;
@@ -118,6 +121,15 @@ ul.off-canvas-list .photo {
 .photo img {
 	max-width: 100px;
 	max-height: 100px;
+}
+.uploadPhoto {
+    top: 0px;
+    right: 0px;
+}
+.uploadPhoto i{
+	color: #fff;
+	border: 2px dashed #fff;
+	font-size: 11px !important;
 }
 /*#content .columns {
 	padding: 6px 0;
@@ -150,6 +162,14 @@ ul.off-canvas-list .photo {
 .panel.callout.ourbeliefs {
 	padding: 8%;
 }
+#home1 .image{
+	background-position: center;
+	-webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+
+}
 #home1 .image .ourbelief {
 	font-size: 16px;
 }
@@ -163,6 +183,7 @@ ul.off-canvas-list .photo {
 .title .awardStar{
 	font-size: 14px;
 	display: block;
+	margin-left: -3px;
 }
 .title .awardStar i{
 	margin: 0;
@@ -227,10 +248,10 @@ ol {
 @media only screen and (max-width: 1023px) {
 .contentFill {
 	height: auto;
-	min-height: 100px;
+	min-height: 270px;
 }
 .fillHeight {
-	min-height: 300px;
+	min-height: 270px;
 }
 }
 /* @end */
@@ -273,9 +294,6 @@ ol {
 /*.title {
 	padding: 30px 15px;
 }*/
-.title .awardStar {
-	margin-left: -3px;
-}
 .withStar.title .right {
 	margin: 0px 20px 0px 0px;
 }
@@ -324,6 +342,11 @@ ol {
 	width: 20%;
 }
 }
+@media only screen and (max-width: 374px) {
+#nominateColleague2 .subSubTitle{
+	display: block;
+}
+}
 /* @end */
 /* @group Messages */
 @media only screen and (max-width: 1199px) {
@@ -362,12 +385,62 @@ ol {
 #redeemHome, .products {
 	margin-bottom: 5px !important;
 }
+.left-bar-nav {
+	min-height: 150px;
+}
+#winnerswall #mCSB_1, #productScroll #mCSB_1 {
+    padding-right: 0px;
+}
+.prodTitle, .product > p:first-child{
+	height: 56px;
+}
+.panel.callout.productView{
+	margin-bottom: 10px !important;
+}
+#price > div:last-child{
+	padding-bottom: 10px;
+	height: auto;
+}
+#myModal, #myModalbasket, #myModalcheck, #myModalPrice, #myTeamModal{
+	left: 3%;
+	top: 2% !important;
+	text-align: left;
+	width: 94%;
+	margin-left: auto;
+}
+.reveal-modal{
+	min-height: auto;
+}
+#formDiv .textRight{
+	text-align: left !important;
+}
+.creditCardView label, .creditCardView input[type=text], .creditCardView input[type=email]{
+	margin: 0;
+}
+.creditCardView small{
+	display: inline-block;
+}
+}
+@media only screen and (max-width: 500px) {
+.small-6{
+	width: 100%;
+}
+#redeemHome .columns, #content .products .columns{
+	padding: 0;
+}
+#box-basket input[type=number]{
+	width: 100%;
+	padding: 0.2rem 0;
+}
 }
 /* @end */
 /* @group Override */
-@media only screen and (max-width: 1199px) {
-.height590,.height555, .height505, .height490 {
+@media only screen and (max-width: 1023px) {
+.height590, .height555, .height505, .height480, .height605, .height563, .height385 {
 	height: auto;
+}
+#mCSB_1_container{
+	min-height: auto;
 }
 }
 /* @end */
