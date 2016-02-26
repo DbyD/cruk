@@ -6,7 +6,7 @@
 		$retrunEmpNum = $encrypt->decode($EmpNum);
 		echo $retrunEmpNum;
 		$stmt = $db->prepare('UPDATE tblempall SET activated=1 WHERE EmpNum = :EmpNum');
-		if($stmt->execute(array(':EmpNum' => $EmpNum))){
+		if($stmt->execute(array(':EmpNum' => $retrunEmpNum))){
 			header( 'Location: activated.php?status=done');
 		} else {
 			header( 'Location: activated.php?status=error');
