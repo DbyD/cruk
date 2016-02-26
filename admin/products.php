@@ -249,7 +249,7 @@
 	<div id="awards" class="callout panel">
 		<div class="title">
 			<!-- <i class="icon-icons_trophy"></i> --> 
-			Avable to spend
+			Available to spend
 		</div>
 		<div class="price-panel">
 			<!-- <i class="icon-icons_trophy"></i> -->

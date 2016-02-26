@@ -110,7 +110,7 @@ if( $val == "YES" ){
 				</div>
 				<div id="redeempanel" class="callout panel">
 					<div class="title">
-						Avable to spend
+						Available to spend
 					</div>
 					<div class="price-panel">
 						

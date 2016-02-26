@@ -500,7 +500,7 @@ if( isset( $email_order_code ) && $_SESSION["thank_you"] == false){
 	</div>
 	<div id="redeempanel" class="callout panel">
 		<div class="title">
-			Avable to spend
+			Available to spend
 		</div>
 		<div class="price-panel">
 			<?php echo '&pound;' . $remaining_amount;?>
