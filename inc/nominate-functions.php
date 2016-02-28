@@ -6,11 +6,11 @@ function createNominee($empnum){
 	$stmt->execute(array('EmpNum' => $empnum));
 	$stmt->setFetchMode(PDO::FETCH_CLASS, 'User');
 	if ($result = $stmt->fetch()){
-		if (($result->Shop != '' && $result->Shop != 'N/A') && $result->JobTitle != 'Shop Mgr'){
+		if ($result->Shop != ''  && $result->JobTitle != 'Shop Mgr'){
 			$result->offline = 'YES';
 			// find Shop Mgr
 			$stmt = $db->prepare('SELECT * FROM tblempall WHERE Shop = :Shop AND JobTitle= :JobTitle');
-			$stmt->execute(array('Shop' => $result->RetailArea, 'JobTitle' => 'Shop Mgr' ));
+			$stmt->execute(array('Shop' => $result->Shop, 'JobTitle' => 'Shop Mgr' ));
 			if ($mgr = $stmt->fetch(PDO::FETCH_OBJ)){
 				$result->shopMEmpNum = $mgr->EmpNum;
 				$result->shopMFname = $mgr->Fname;

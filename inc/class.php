@@ -101,8 +101,8 @@ class Award {
 		global $db;
 		// need to get shopmanager for nominee
 		$jobTitle = 'Shop Mgr';
-		$stmt = $db->prepare('SELECT EmpNum, Fname, Sname, Eaddress FROM tblempall WHERE RetailArea = :RetailArea AND JobTitle= :JobTitle');
-		$stmt->execute(array('RetailArea' => $this->nominee()->RetailArea, 'jobTitle' => $jobTitle));
+		$stmt = $db->prepare('SELECT EmpNum, Fname, Sname, Eaddress FROM tblempall WHERE Shop = :Shop AND JobTitle= :JobTitle');
+		$stmt->execute(array('Shop' => $this->nominee()->Shop, 'jobTitle' => $jobTitle));
 		// above works if there is a retail area but might not be one.
 		$result = $stmt->fetch(PDO::FETCH_OBJ);
 		$result->full_name = $result->Fname. ' ' . $result->Sname;

@@ -42,7 +42,7 @@ function startEcardEmail(){
 					.ourheroes {padding: 20px;}
 					.emailCruklogo {padding: 20px;text-align: right;}
 					.emailCruklogo img {display: inline-block;}
-				</style></head><body><div align="center"><table border="0" cellpadding="0" cellspacing="0" class="mytable"><tr><td colspan="2">';
+				</style></head><body><div align="center"><table border="0" cellpadding="0" cellspacing="0" class="mytable"><tr><td colspan="2" width="600px">';
 	return  $startemail;
 }
 ////////////////////////////////////////////////////////////////////////////////////
@@ -299,7 +299,7 @@ function ecardTopBar($ecard){
 			$backgroundColor= "#ec008c";
 	}
 	
-	$ecardText = '<img src="'.HTTP_PATH.'images/emails/'.$ecardImage.'.png" alt="'.$ecard->BeliefID.'">';
+	$ecardText = '<img src="'.HTTP_PATH.'images/emails/'.$ecardImage.'.png" alt="'.$ecard->BeliefID.'" width="600px">';
 	$ecardText .= '<div class="colorblock" style="background:'.$backgroundColor.'">';
 	return $ecardText;
 }
