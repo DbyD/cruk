@@ -108,7 +108,6 @@
 		if($_SESSION['teamnominee']->littleExtra=='Yes' && ($AppEmpNum->AppEmpNum != $_SESSION['user']->EmpNum)){
 			$sendEmail = new StdClass();
 			$sendEmail->subject = "Please approve an Our Heroes nomination for a 'Little Extra' award";
-			$sendEmail->Bcc = '';
 			if($AppEmpNum->AppEmpNum ==''){
 				// send email to super user. but using xexec for now.
 				$sendEmail->emailTo = getSUemail();
@@ -153,7 +152,6 @@
 					$sendEmail = new StdClass();
 					$sendEmail->emailTo = $_SESSION['user']->Eaddress;
 					$sendEmail->subject = 'Award Notification';
-					$sendEmail->Bcc = '';
 					$sendEmail->Content = "<p>Dear ".$_SESSION['user']->Fname."</p>
 											<p>Thank you for approving 'A Little Extra' award for ".getmyTeamName($_SESSION['teamnominee']->teamID).". The details of this award are as follows:<p>
 											<p>Nominator: ".$_SESSION['user']->full_name."<br>
@@ -204,7 +202,6 @@
 						$sendEmail = new StdClass();
 						$sendEmail->emailTo = $xexecEmail;
 						$sendEmail->subject = 'E-Card Award Notification';
-						$sendEmail->Bcc = '';
 						$sendEmail->Content = "<p>Hi</p>
 												<p>".$_SESSION['user']->Fname." has nominated ".$_SESSION['teamnominee']->full_name." to receive a Thank you card as part of an Our Heroes Award.</p>
 												<p>Below is the content of the card:</p>

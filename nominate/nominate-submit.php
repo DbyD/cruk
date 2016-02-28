@@ -75,7 +75,6 @@
 		if($_SESSION['nominee']->littleExtra=='Yes' && ($_SESSION['nominee']->AppEmpNum != $_SESSION['user']->EmpNum)){
 			$sendEmail = new StdClass();
 			$sendEmail->subject = 'Award Notification';
-			$sendEmail->Bcc = '';
 			if($_SESSION['nominee']->AppEmpNum ==''){
 				// send email to super user. but using xexec for now.
 				$sendEmail->emailTo = getSUemail();
@@ -120,7 +119,6 @@
 					$sendEmail = new StdClass();
 					$sendEmail->emailTo = $_SESSION['user']->Eaddress;
 					$sendEmail->subject = "Confirmation of your approval for a 'Little Extra' award";
-					$sendEmail->Bcc = '';
 					$sendEmail->Content = "<p>Dear ".$_SESSION['user']->Fname."</p>
 											<p>Thank you for approving 'A Little Extra' award for ".$_SESSION['nominee']->full_name().". The details of this award are as follows:<p>
 											<p>Nominator: ".$_SESSION['nominee']->NomFull_name."<br>
@@ -155,7 +153,6 @@
 				$sendEmail = new StdClass();
 				$sendEmail->emailTo = $xexecEmail;
 				$sendEmail->subject = 'Congratulations, you’ve been sent an Our Heroes award';
-				$sendEmail->Bcc = '';
 				$sendEmail->Content = "<p>Hi</p>
 										<p>".$_SESSION['user']->Fname." has nominated ".$_SESSION['nominee']->full_name()." to receive a Thank you card as part of an Our Heroes Award.</p>
 										<p>Below is the content of the card:</p>

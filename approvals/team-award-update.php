@@ -75,7 +75,6 @@
 					$sendEmail = new StdClass();
 					$sendEmail->emailTo = $award->nominator()->Eaddress;
 					$sendEmail->subject = 'Congratulations, your nomination has been approved';
-					$sendEmail->Bcc = '';
 					$sendEmail->Content = "<p>Dear ".$award->nominator()->Fname."</p>
 											<p>Good news!</p>
 											<p>Your nomination of ".$award->teamEmailList." for an Our Heroes Extraordinary People, Extraordinary Effort Award has been approved by ".$approver_name.".</p>
@@ -97,7 +96,6 @@
 				$sendEmail = new StdClass();
 				$sendEmail->emailTo = $approver_email;
 				$sendEmail->subject = "Confirmation of your approval for a 'Little Extra' award";
-				$sendEmail->Bcc = '';
 				$sendEmail->Content = "<p>Dear ".$approver_fname."</p>
 										<p>Thank you for approving 'A Little Extra' award for ".$award->teamEmailList.". The details of this award are as follows:<p>
 										<p>Nominator: ".$award->nominator()->full_name."<br>
@@ -132,7 +130,6 @@
 					$sendEmail = new StdClass();
 					$sendEmail->emailTo = $xexecEmail;
 					$sendEmail->subject = 'E-Card Award Notification';
-					$sendEmail->Bcc = '';
 					$sendEmail->Content = "<p>Hi</p>
 											<p>".$award->nominator()->full_name." has nominated ".$award->teamEmailList." to receive a Thank you card as part of an Our Heroes Award.</p>
 											<p>Below is the content of the card:</p>
@@ -184,7 +181,6 @@
 				$sendEmail = new StdClass();
 				$sendEmail->emailTo = $award->nominator()->Eaddress;
 				$sendEmail->subject = "Unfortunately your 'Little Extra' nomination has been declined";
-				$sendEmail->Bcc = '';
 				$sendEmail->Content = "<p>Dear ".$award->nominator()->Fname."</p>
 										<p>You recently nominated your team ".$award->Team." for an Our Heroes Extraordinary People, Extraordinary effort award.</p>
 										<p>The nomination has been reviewed by ".$approver_name." and has unfortunately been declined.</p>
@@ -204,7 +200,6 @@
 				$sendEmail = new StdClass();
 				$sendEmail->emailTo = $approver_email;
 				$sendEmail->subject = "Confirmation that you declined a 'Little Extra' award";
-				$sendEmail->Bcc = '';
 				$sendEmail->Content = "<p>Dear ".$approver_fname."</p>
 										<p>This is confirmation that you declined a nomination made by ".$award->nominator()->full_name." for ".$award->teamEmailList."
 										on the Our Heroes Portal. The reason for this decline was given as:<br>".$_POST['dReason']."<p>

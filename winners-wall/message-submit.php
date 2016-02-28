@@ -23,7 +23,6 @@
 		
 		$sendEmail = new StdClass();
 		$sendEmail->subject = 'Award Notification';
-		$sendEmail->Bcc = '';
 		if(filter_var($recipient->Eaddress, FILTER_VALIDATE_EMAIL)){
 			$sendEmail->emailTo = $recipient->Eaddress;
 			$sendEmail->Content = "<p>Hello ".$recipient->Fname."</p>

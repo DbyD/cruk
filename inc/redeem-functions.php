@@ -511,7 +511,7 @@ function get_content_email( $email_order_code, $tel_number, $delivery_address) {
 				</table>';
 	//add order details here in a table
 	$content .= '';
-	$content .='<p>If you have any questions regarding your order, please email <ahref="mailto:concierge@xexec.com">concierge@xexec.com</a> or<br>call +44 20 8201 6483 quoting your unique order code.</p>';
+	$content .='<p>If you have any questions regarding your order, please email <a href="mailto:concierge@xexec.com">concierge@xexec.com</a> or<br>call +44 20 8201 6483 quoting your unique order code.</p>';
 	return $content;
 }
 ///////////////////////////////////////////////////////////////////////////////////
