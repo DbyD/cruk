@@ -72,9 +72,9 @@
 			</div>
 			<div class="row withPadding noMargin">
 				<div class="medium-12 columns">
-					<textarea name="personalMessage" id="personalMessage" placeholder="Example: Your dedication and passion is infectious, I am proud of you. Keep up the good work."><?=$_SESSION['teamnominee']->personalMessage?></textarea>
+					<textarea name="personalMessage" id="personalMessage" placeholder="Example: Your dedication and passion is infectious, I am proud of you. Keep up the good work." maxlength="300"><?=$_SESSION['teamnominee']->personalMessage?></textarea>
 					<div class="charctersRemaining">
-						Characters remaining: <span id="chars">250</span>
+						Characters remaining: <span id="chars">300</span>
 					</div>
 				</div>
 			</div>

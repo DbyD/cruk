@@ -53,7 +53,7 @@
 		<div class="row withSidePadding valign-middle">
 			<div class="medium-12 columns">
 				Reason:
-				<textarea name="Reason" id="Reason"><?=$_SESSION['teamnominee']->Reason?></textarea>
+				<textarea name="Reason" id="Reason" maxlength="100"><?=$_SESSION['teamnominee']->Reason?></textarea>
 			</div>
 		</div>
 		<div class="row withPadding">

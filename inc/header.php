@@ -45,7 +45,7 @@
 			</li>
 		</ul>
 			<!-- Right Nav Section -->
-			<div class="totalAwardsQuarter">Number of people who have used the Our Heroes scheme this quarter to say thank you to their colleagues: <?php echo getNumberAwardsQuarter() ?></div>
+			<div class="totalAwardsQuarter"><?php echo getNumberAwardsQuarter() ?> people have used the Our Heroes scheme this quarter to say thank you to their colleagues across the charity</div>
 			<ul class="right">
 				<li class="has-dropdown"><a href="#"><span>Options</span> <i class="icon-icons_exit"></i></a>
 					<ul class="dropdown">

@@ -15,7 +15,7 @@ function startEmail(){
 					.largetext {font-size: 17pt;}
 					a {color:#2e008b;}
 					.colorblock a {color:#fff}					
-					.invoice, .details {margin-top: 10px;border-top: 1px solid #666666;border-left: 1px solid #666666;width: 100%;text-align:center;font-size: 11pt;font-family: Calibri;line-height: 14pt;color: #2e008b;width: 600px;}
+					.invoice, .details {margin-top: 10px;border-top: 1px solid #666666;border-left: 1px solid #666666;text-align:center;font-size: 11pt;font-family: Calibri;line-height: 14pt;color: #2e008b;width: 600px;}
 					.mytable td {border:0px}
 					.details{text-align: left;}
 					.invoice td, .invoice th, .details td, .details th {border-right: 1px solid #666666;border-bottom: 1px solid #666666;}
@@ -37,7 +37,7 @@ function startEcardEmail(){
 					a {color: #fff;}
 					.mytable {width: 600px;}
 					.emailText {font-size: 11pt;font-family: Calibri;line-height: 14pt;color: #fff;background: #fff;width: 600px;text-align: left;padding: 20px;color: #fff;}
-					img {display: block;}
+					.mytable img {display: block; width:600px;}
 					.ourheroes {padding: 20px;}
 					.emailCruklogo {padding: 20px;text-align: right;}
 					.emailCruklogo img {display: inline-block;}

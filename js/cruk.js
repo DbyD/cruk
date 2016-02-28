@@ -480,7 +480,7 @@ $('.custom-upload input[type=file]').change(function(){
 $('#personalMessage').keypress(function(e) {
 	var tval = $('#personalMessage').val(),
 	tlength = tval.length,
-	set = 250,
+	set = 300,
 	remain = parseInt(set - tlength);
 	$('#chars').text(remain);
 	if (remain <= 0 && e.which !== 0 && e.charCode !== 0) {

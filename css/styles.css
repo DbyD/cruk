@@ -213,6 +213,7 @@ textarea{
 	border-radius: 8px;
 	line-height: 20px;
 	padding: 10px 15px;
+	resize: none;
 }
 ::-webkit-input-placeholder {
 	color: #a7a8aa;
@@ -448,7 +449,7 @@ li.ui-menu-item { font-size:13px !important; }
 	width: 400px;
 	margin-left: -200px;
 	min-height: 250px;
-	max-height: 600px;
+/*	max-height: 600px; */
 	font-size: 13px;
 	color: #333;
 	background-color: #fff;
