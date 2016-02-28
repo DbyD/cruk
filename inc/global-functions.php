@@ -15,9 +15,10 @@ function startEmail(){
 					.largetext {font-size: 17pt;}
 					a {color:#2e008b;}
 					.colorblock a {color:#fff}					
-					.invoice, .details {margin-top: 10px;border-top: 1px solid #666666;border-left: 1px solid #666666;width: 100%;text-align:center;}
+					.invoice, .details {margin-top: 10px;border-top: 1px solid #666666;border-left: 1px solid #666666;width: 100%;text-align:center;font-size: 11pt;font-family: Calibri;line-height: 14pt;color: #2e008b;width: 600px;}
+					.mytable td {border:0px}
 					.details{text-align: left;}
-					td, th {border-right: 1px solid #666666;border-bottom: 1px solid #666666;}
+					.invoice td, .invoice th, .details td, .details th {border-right: 1px solid #666666;border-bottom: 1px solid #666666;}
 					.details td {padding-left:10px;}
 					.textLeft{text-align:left;padding-left:10px;}
 					.textRight{text-align:right;padding-right:10px;}
@@ -55,6 +56,7 @@ function endEmail($noid){
 						<td class="emailCruklogo"><img src="'.HTTP_PATH.'images/emails/Cancer-Research-UK.png" alt="Cancer Research UK"></td>
 					</tr></table>';
 	$endemail .= '</div></body></html>';
+	return $endemail;
 }
 ////////////////////////////////////////////////////////////////////////////////////
 function endEcardEmail($noid){
