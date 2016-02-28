@@ -433,7 +433,7 @@ li.ui-menu-item { font-size:13px !important; }
 	background-color: rgba(0,0,0,0.7);
 	display: none;
 	z-index: 10;
-	position: fixed;
+	position: absolute;
 	top: 0;
 	left: 0;
 	bottom: 0;
@@ -441,7 +441,7 @@ li.ui-menu-item { font-size:13px !important; }
 }
 #alertbox, #popupbox1, #ecardbox{
 	z-index: 10;
-	position: fixed;
+	position: absolute;
 	left: 50%;
     top: 90px;
 	text-align: left;

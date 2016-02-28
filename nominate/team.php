@@ -106,7 +106,7 @@
 							<div class="medium-3 columns">
 								<a href="#" class="blueButton clickAble" data-type="popup" data-url="team-details.php" data-id="<?=$myteam?>">Edit Team</a>
 							</div>
-							<div class="medium-6 columns textRight ">
+							<div class="medium-6 columns textRight mobileButtonFix">
 								<a href="#" class="pinkButton clickAble" data-type="submit" data-url="nominateTeam">Nominate Team</a>
 							</div>
 						</div>

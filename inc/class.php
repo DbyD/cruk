@@ -72,7 +72,7 @@ class Award {
 	}
 	public function nominee(){
 		global $db;
-		$stmt = $db->prepare('SELECT Fname, Sname, Eaddress, Shop, JobTitle, LMEmpNum FROM tblempall WHERE EmpNum = :NominatedEmpNum');
+		$stmt = $db->prepare('SELECT Fname, Sname, Eaddress, RetailArea, Shop, JobTitle, LMEmpNum FROM tblempall WHERE EmpNum = :NominatedEmpNum');
 		$stmt->execute(array('NominatedEmpNum' => $this->NominatedEmpNum));
 		$result = $stmt->fetch(PDO::FETCH_OBJ);
 		$result->full_name = $result->Fname. ' ' . $result->Sname;
@@ -93,6 +93,17 @@ class Award {
 		global $db;
 		$stmt = $db->prepare('SELECT EmpNum, Fname, Sname, Eaddress FROM tblempall WHERE EmpNum = :LMEmpNum');
 		$stmt->execute(array('LMEmpNum' => $this->nominee()->LMEmpNum));
+		$result = $stmt->fetch(PDO::FETCH_OBJ);
+		$result->full_name = $result->Fname. ' ' . $result->Sname;
+		return $result;
+	}
+	public function shopManager(){
+		global $db;
+		// need to get shopmanager for nominee
+		$jobTitle = 'Shop Mgr';
+		$stmt = $db->prepare('SELECT EmpNum, Fname, Sname, Eaddress FROM tblempall WHERE RetailArea = :RetailArea AND JobTitle= :JobTitle');
+		$stmt->execute(array('RetailArea' => $this->nominee()->RetailArea, 'jobTitle' => $jobTitle));
+		// above works if there is a retail area but might not be one.
 		$result = $stmt->fetch(PDO::FETCH_OBJ);
 		$result->full_name = $result->Fname. ' ' . $result->Sname;
 		return $result;

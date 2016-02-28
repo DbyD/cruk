@@ -306,19 +306,10 @@ ol {
 	padding: 20px 4px;
 }
 .tableReports {
-	font-size: 13px;
-	height: 60px;
-	padding: 0px;
-	text-align: center;
-	background: #2E008B none repeat scroll 0% 0%;
-	color: #FFF;
+	height: auto;
 }
-.tableReportsHead.white {
-	background: #FFF none repeat scroll 0% 0%;
-	color: #2E008B;
-	display: inline-table;
-	padding: 8px 30px;
-	border-right: 1px solid #5833A2;
+.tableReportsHead{
+	width: 32% !important;
 }
 .searchInput {
 	min-height: 50px !important;
@@ -326,18 +317,38 @@ ol {
 .searchInput input[type=text] {
 	width: 100%;
 }
-.searchInput .medium-10 {
+.searchInput .medium-10, #nominateTeam .medium-4, #nominateTeam .medium-6 {
 	width: 70%;
 }
+#nominateTeam .medium-3 {
+	width: 50%;
+}
+
 .searchInput .medium-2 {
 	width: 28%;
 }
 .valign-middle .columns {
-	display: block;
+	display: inline-block;
 }
 .searchResult .medium-2 {
 	float: left;
 	width: 20%;
+}
+#content .leftnp{
+	padding-left: 1%;
+}
+#content .rightnp{
+	padding-right: 1%;
+}
+.mobileButtonFix{
+	width: 100% !important;
+    margin: 30px 0 10px;
+}
+#beliefs .callout{
+	position: relative;
+}
+#beliefs span{
+	width: 100%;
 }
 }
 @media only screen and (max-width: 374px) {
@@ -534,6 +545,11 @@ ol {
 }
 .ourheroes img {
 	height: 30px;
+}
+}
+@media only screen and (max-width: 400px) {
+#alert, #popup1, #ecardPopup{
+	height: 1400px;
 }
 }
 /* @end */

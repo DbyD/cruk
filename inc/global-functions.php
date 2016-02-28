@@ -36,18 +36,6 @@ function endEmail($noid){
 	return $endemail;
 }
 ////////////////////////////////////////////////////////////////////////////////////
-function endEcardEmail($noid){
-	$endemail = '';
-	$endemail .= '<p>Thank you and well done!</p><p><b>Our Heroes Team</b></p>';
-	if($noid != ''){
-			$endemail .= '<p class="small">Xexec ref: '.$noid.'</p></div>';
-	}
-	$endemail .= '<div class="ourheroes"><img class="emailCruklogo" src="'.HTTP_PATH.'images/emails/Cancer-Research-UK.png" alt="Cancer Research UK">
-					<img src="'.HTTP_PATH.'images/emails/our-heroes.png" alt="Cancer Research UK"></div>';
-		$endemail .= '</div></div></body></html>';
-	return $endemail;
-}
-////////////////////////////////////////////////////////////////////////////////////
 // send email
 function sendEmail($email,$noid){
 	global $headers;
@@ -66,6 +54,38 @@ function sendEmail($email,$noid){
 		$reply = "fail";
 	}
 	return $reply;
+}
+////////////////////////////////////////////////////////////////////////////////////
+function startEcardEmail(){
+	$startemail = '<!DOCTYPE HTML><html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    			<title>CRUK Our Heroes</title>
+				<style type=text/css>
+					body, div {margin: 0px;padding: 0px}
+					.small {font-size: 8pt;}
+					.largetext {font-size: 17pt;}
+					a {color: #fff;}
+					.mytable {width: 600px;}
+					.emailText {font-size: 11pt;font-family: Calibri;line-height: 14pt;color: #fff;background: #fff;width: 600px;text-align: left;padding: 20px;color: #fff;}
+					img {display: block;}
+					.ourheroes {padding: 20px;}
+					.emailCruklogo {padding: 20px;text-align: right;}
+					.emailCruklogo img {display: inline-block;}
+				</style></head><body><div align="center"><table border="0" cellpadding="0" cellspacing="0" class="mytable"><tr><td colspan="2">';
+	return  $startemail;
+}
+////////////////////////////////////////////////////////////////////////////////////
+function endEcardEmail($noid){
+	$endemail = '';
+	$endemail .= '<p>Thank you and well done!</p><p><b>Our Heroes Team</b></p>';
+	if($noid != ''){
+			$endemail .= '<p class="small">Xexec ref: '.$noid.'</p></td></tr>';
+	}
+	$endemail .= '	<tr>
+						<td class="ourheroes"><img src="'.HTTP_PATH.'images/emails/our-heroes.png" alt="Cancer Research UK"></td>
+						<td class="emailCruklogo"><img src="'.HTTP_PATH.'images/emails/Cancer-Research-UK.png" alt="Cancer Research UK"></td>
+					</tr></table>';
+	$endemail .= '</div></body></html>';
+	return $endemail;
 }
 ////////////////////////////////////////////////////////////////////////////////////
 // to be used if session declared before class
@@ -92,8 +112,8 @@ function sendEcardEmail($ecard,$ID){
 		}
 	}
 	// need to fully design e-card
-	$message = startEmail();
-	$message .= $ecard->content;
+	$message = startEcardEmail();
+	$message .= str_replace('<div class="colorblock"', '</td></tr><tr><td colspan="2" class="emailText"', $ecard->content);
 	$message .= endEcardEmail($ID);
 	if(isset($ecard->Cc)){
 		$headers .= "Cc: ". $ecard->Cc . "\r\n";
@@ -277,6 +297,8 @@ function ecardTopBar($ecard){
 	$ecardText .= '<div class="colorblock" style="background:'.$backgroundColor.'">';
 	return $ecardText;
 }
+////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////
