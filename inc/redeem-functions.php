@@ -485,7 +485,7 @@ function get_content_email( $email_order_code, $tel_number, $delivery_address) {
 							<th width="125">PRICE</th>
 						</tr>
 						' . $table_body . '
-				</table>&nbsp;';
+				</table><p>&nbsp;</p>';
 	//add shopping basket here in a table
 	$content .= '<table id="table_basket" class="details" border="0" cellpadding="2" cellspacing="0" >
 					<tr>
