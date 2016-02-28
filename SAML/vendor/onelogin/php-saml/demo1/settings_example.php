@@ -1,6 +1,6 @@
 <?php
 
-   $spBaseUrl = 'http://cruk.loc/SAML/vendor/onelogin/php-saml';
+   $spBaseUrl = 'http://cruk.exec.com/SAML/vendor/onelogin/php-saml';
 
 
    $settingsInfo = array (
@@ -20,37 +20,15 @@
             'NameIDFormat' => 'emailAddress',
         ),
         'idp' => array (
-            'entityId' => 'https://app.onelogin.com/saml/metadata/514832',
+            'entityId' => 'https://fs.cancer.org.uk/adfs/ls/',
             'singleSignOnService' => array (
-                'url' => 'https://app.onelogin.com/trust/saml2/http-post/sso/514832',
+                'url' => 'https://fs.cancer.org.uk/adfs/ls/IdpInitiatedSignon.aspx',
             ),
             'singleLogoutService' => array (
-                'url' => 'https://app.onelogin.com/trust/saml2/http-redirect/slo/514832',
+                'url' => 'https://fs.cancer.org.uk/adfs/ls/',
             ),
             'x509cert' => '-----BEGIN CERTIFICATE-----
-MIIECDCCAvCgAwIBAgIUZnt8lWKvm+0PaU9mXIliYYeaxukwDQYJKoZIhvcNAQEF
-BQAwUzELMAkGA1UEBhMCVVMxDDAKBgNVBAoMA1BhYzEVMBMGA1UECwwMT25lTG9n
-aW4gSWRQMR8wHQYDVQQDDBZPbmVMb2dpbiBBY2NvdW50IDc3NDgxMB4XDTE2MDIw
-MzA4MDgxOVoXDTIxMDIwNDA4MDgxOVowUzELMAkGA1UEBhMCVVMxDDAKBgNVBAoM
-A1BhYzEVMBMGA1UECwwMT25lTG9naW4gSWRQMR8wHQYDVQQDDBZPbmVMb2dpbiBB
-Y2NvdW50IDc3NDgxMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAu8u3
-4BzOkQHCzXuSWXD1/jZVBH9MvQNc8Ddos+evjFBKvb9rmJLIUXKFN13YjNVFSCFN
-FyA67eMK7AUHNE1YsPpPo+o73gfGqC9Wktc0a2C29Zhabo1osLRgDsOONJOkd9+l
-PwVhVB9qkcYFSGo1U1RT0gr7CDDR0wJL/RBqzi9kntnGUyXIk/7GO3/bkW7NYby1
-Z5AdRyifLPC187KOrt38PiEYSTQLwyFEsj37QKxbC9zQvw7ex6qS+l7lEPRKMsWv
-3JUROVRAKpKZ/EDtRAQangu81Gf79byYP6SGr6dVX6Nmu9ue0UF7zg93fYWIPjoG
-gOLGQ1NrMu3PG2Ho8wIDAQABo4HTMIHQMAwGA1UdEwEB/wQCMAAwHQYDVR0OBBYE
-FGf6lddkRtYdkenirlHTzu2MnrjNMIGQBgNVHSMEgYgwgYWAFGf6lddkRtYdkeni
-rlHTzu2MnrjNoVekVTBTMQswCQYDVQQGEwJVUzEMMAoGA1UECgwDUGFjMRUwEwYD
-VQQLDAxPbmVMb2dpbiBJZFAxHzAdBgNVBAMMFk9uZUxvZ2luIEFjY291bnQgNzc0
-ODGCFGZ7fJVir5vtD2lPZlyJYmGHmsbpMA4GA1UdDwEB/wQEAwIHgDANBgkqhkiG
-9w0BAQUFAAOCAQEAfb8ZeWVgTdozm/s5z7MIupW4qBDwvjdNe4BrLi9SkhVxwyZp
-xfLD+pIY07HKPalWqoP6WMEwxCBr9AKjQwNdndidQrHk58suCfC6we+DvQ+oR3P+
-xJlPUwtabbD4+od8+DvUunIOFbi5IzP9qQHNIY9/e0ZxhS4D2njrYKS+qoxMlr2z
-40uvGXnELuPVYjbDjJLA83HDvLba5X+ev6HOld8M9fBr4N05XFdzo4LwYb4C5tTM
-R85ex1u42VZpwQvgl9/w58e73xmBuXfCjt0fJRER09crtYw+I1EWPThkyDY3hWRv
-Zs/uzAYH/dkf2Aqsg0gimqoMPWCaTtIjGrbNqA==
------END CERTIFICATE-----
-',
+MIIC3DCCAcSgAwIBAgIQKn/y8lSRGqNEV0sad+KclDANBgkqhkiG9w0BAQsFADAqMSgwJgYDVQQDEx9BREZTIFNpZ25pbmcgLSBmcy5jYW5jZXIub3JnLnVrMB4XDTE1MDgxOTEyNDgyMVoXDTE2MDgxODEyNDgyMVowKjEoMCYGA1UEAxMfQURGUyBTaWduaW5nIC0gZnMuY2FuY2VyLm9yZy51azCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALcXNrAMeJiw60niI380NA9aDc5nZsCbze4gAu3ER+g3CQunvRYD+H+V2TWBkPsa/8hstNnYKcRLZc3bq68qOIvOuAwya43kEkxCXY+YB3fgszDgFZ5jEuSKaTvWh3++HttHB+gs8GwqgyNSTY+wtem0lujE9/I5cN4zpXew0E9UC4letn7l3iR8iuFueCYk+70YK95RTmS5dS1/nTzLYXW7Ctn+VXeX+TmvbsWQax7K72d4734YHMYE9zj+aaerbU812xQq9mqLF+trxGK17SNACECcEpAhhnXywueHjlFfdtBlHSrWnXb39qsWCTQ5SeaOUntLUh/r2GGANDpnLNkCAwEAATANBgkqhkiG9w0BAQsFAAOCAQEADH65xNK/98BMg9ZJ6/+g2LGH/hnIx2Ipok8u+Xq+k73wLWYtJ5jH49zC6Ob2F7xe876ESU1jumtUG/Jt9BiIDT4LmUs2SrtllQ4mXktZWTajcfO98DWmhKawKiCwUbp9mAD/Ii83mbpXMAQXG6njxfXKWo+2m5uBUuoq9pUGp4MKyMDJp1cgKdSiqSXX2fl+RFYUUjwnOieXCoLWYrp8tAxlpxcb5qZgEUNmh/aWUx09AiaMaDmokaMdHeIEPslLZfa8aLAUIxEVPClifYhevpaXEmetu/F5zQxla60LSp/ns8s+K755rvQb5l7zds/6mG4WQTyLQn4AhHkdHAFnBA==
+-----END CERTIFICATE-----',
         ),
     );

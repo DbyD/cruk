@@ -10,9 +10,15 @@ require_once dirname(dirname(__FILE__)).'/_toolkit_loader.php';
 
 require_once 'settings_example.php';
 
+/*
+echo "Settings info ";
+var_dump($settingsInfo);
+*/
+
 $auth = new OneLogin_Saml2_Auth($settingsInfo);
 
-if (isset($_GET['sso'])) {
+if (isset($_GET['sso'])) 
+{
     $auth->login();
 
     # If AuthNRequest ID need to be saved in order to later validate it, do instead
@@ -23,18 +29,28 @@ if (isset($_GET['sso'])) {
     # header('Location: ' . $ssoBuiltUrl);
     # exit();
 
-} else if (isset($_GET['sso2'])) {
+} 
+else 
+if (isset($_GET['sso2'])) 
+{
     $returnTo = $spBaseUrl.'/demo1/attrs.php';
     $auth->login($returnTo);
-} else if (isset($_GET['slo'])) {
+} 
+else 
+if(isset($_GET['slo'])) 
+{
     $returnTo = null;
     $paramters = array();
     $nameId = null;
     $sessionIndex = null;
-    if (isset($_SESSION['samlNameId'])) {
+	
+    if (isset($_SESSION['samlNameId'])) 
+	{
         $nameId = $_SESSION['samlNameId'];
     }
-    if (isset($_SESSION['samlSessionIndex'])) {
+	
+    if (isset($_SESSION['samlSessionIndex'])) 
+	{
         $sessionIndex = $_SESSION['samlSessionIndex'];
     }
 
@@ -48,10 +64,16 @@ if (isset($_GET['sso'])) {
     # header('Location: ' . $sloBuiltUrl);
     # exit();
 
-} else if (isset($_GET['acs'])) {
-    if (isset($_SESSION) && isset($_SESSION['AuthNRequestID'])) {
+} 
+else 
+if (isset($_GET['acs'])) 
+{
+    if (isset($_SESSION) && isset($_SESSION['AuthNRequestID'])) 
+	{
         $requestID = $_SESSION['AuthNRequestID'];
-    } else {
+    } 
+	else 
+	{
         $requestID = null;
     }
 
@@ -59,11 +81,13 @@ if (isset($_GET['sso'])) {
 
     $errors = $auth->getErrors();
 
-    if (!empty($errors)) {
+    if (!empty($errors)) 
+	{
         print_r('<p>'.implode(', ', $errors).'</p>');
     }
 
-    if (!$auth->isAuthenticated()) {
+    if (!$auth->isAuthenticated()) 
+	{
         echo "<p>Not authenticated</p>";
         exit();
     }
@@ -72,21 +96,32 @@ if (isset($_GET['sso'])) {
     $_SESSION['samlNameId'] = $auth->getNameId();
     $_SESSION['samlSessionIndex'] = $auth->getSessionIndex();
     unset($_SESSION['AuthNRequestID']);
-    if (isset($_POST['RelayState']) && OneLogin_Saml2_Utils::getSelfURL() != $_POST['RelayState']) {
+    if (isset($_POST['RelayState']) && OneLogin_Saml2_Utils::getSelfURL() != $_POST['RelayState']) 
+	{
         $auth->redirectTo($_POST['RelayState']);
     }
-} else if (isset($_GET['sls'])) {
-    if (isset($_SESSION) && isset($_SESSION['LogoutRequestID'])) {
+} 
+else 
+if (isset($_GET['sls'])) 
+{
+    if (isset($_SESSION) && isset($_SESSION['LogoutRequestID'])) 
+	{
         $requestID = $_SESSION['LogoutRequestID'];
-    } else {
+    } 
+	else 
+	{
         $requestID = null;
     }
 
     $auth->processSLO(false, $requestID);
     $errors = $auth->getErrors();
-    if (empty($errors)) {
+	
+    if (empty($errors)) 
+	{
         print_r('<p>Sucessfully logged out</p>');
-    } else {
+    } 
+	else 
+	{
         print_r('<p>'.implode(', ', $errors).'</p>');
     }
 }
