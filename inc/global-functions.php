@@ -5,14 +5,15 @@ function startEmail(){
     			<title>CRUK Our Heroes</title>
 				<style type=text/css>
 					body, div {margin: 0px;padding: 0px}
-					.emailText {font-size: 11pt;font-family: Calibri;line-height: 14pt;color: #2e008b;background: #fff;width: 600px;padding: 0 20px;text-align: left}
+					.emailText {font-size: 11pt;font-family: Calibri;line-height: 14pt;color: #2e008b;background: #fff;width: 600px;padding: 0 20px;text-align: left;}
 					.colorblock {padding: 20px;color: #fff;margin-bottom:20px;}
-					img {display: block}
-					.ourheroes {padding: 0 20px}
-					.emailCruklogo {float: right;}
+					img {display: block;}
+					.ourheroes {padding: 20px;}
+					.emailCruklogo {padding: 20px;text-align: right;}
+					.emailCruklogo img {display: inline-block;}
 					.small {font-size: 8pt;}
 					.largetext {font-size: 17pt;}
-					a {color:#2e008b}
+					a {color:#2e008b;}
 					.colorblock a {color:#fff}					
 					.invoice, .details {margin-top: 10px;border-top: 1px solid #666666;border-left: 1px solid #666666;width: 100%;text-align:center;}
 					.details{text-align: left;}
@@ -20,7 +21,26 @@ function startEmail(){
 					.details td {padding-left:10px;}
 					.textLeft{text-align:left;padding-left:10px;}
 					.textRight{text-align:right;padding-right:10px;}
-				</style></head><body><div align="center"><div class="emailText">';
+				</style></head><body><div align="center">
+				<table border="0" cellpadding="0" cellspacing="0" class="mytable"><tr><td colspan="2" class="emailText">';
+	return  $startemail;
+}
+////////////////////////////////////////////////////////////////////////////////////
+function startEcardEmail(){
+	$startemail = '<!DOCTYPE HTML><html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    			<title>CRUK Our Heroes</title>
+				<style type=text/css>
+					body, div {margin: 0px;padding: 0px}
+					.small {font-size: 8pt;}
+					.largetext {font-size: 17pt;}
+					a {color: #fff;}
+					.mytable {width: 600px;}
+					.emailText {font-size: 11pt;font-family: Calibri;line-height: 14pt;color: #fff;background: #fff;width: 600px;text-align: left;padding: 20px;color: #fff;}
+					img {display: block;}
+					.ourheroes {padding: 20px;}
+					.emailCruklogo {padding: 20px;text-align: right;}
+					.emailCruklogo img {display: inline-block;}
+				</style></head><body><div align="center"><table border="0" cellpadding="0" cellspacing="0" class="mytable"><tr><td colspan="2">';
 	return  $startemail;
 }
 ////////////////////////////////////////////////////////////////////////////////////
@@ -30,9 +50,24 @@ function endEmail($noid){
 	if($noid != ''){
 			$endemail .= '<p class="small">Xexec ref: '.$noid.'</p>';
 	}
-	$endemail .= '<div class="ourheroes"><img class="emailCruklogo" src="'.HTTP_PATH.'images/emails/Cancer-Research-UK.png" alt="Cancer Research UK">
-					<img src="'.HTTP_PATH.'images/emails/our-heroes.png" alt="Cancer Research UK"></div>';
-		$endemail .= '</div></div></body></html>';
+	$endemail .= '</td></tr><tr>
+						<td class="ourheroes"><img src="'.HTTP_PATH.'images/emails/our-heroes.png" alt="Cancer Research UK"></td>
+						<td class="emailCruklogo"><img src="'.HTTP_PATH.'images/emails/Cancer-Research-UK.png" alt="Cancer Research UK"></td>
+					</tr></table>';
+	$endemail .= '</div></body></html>';
+}
+////////////////////////////////////////////////////////////////////////////////////
+function endEcardEmail($noid){
+	$endemail = '';
+	$endemail .= '<p>Thank you and well done!</p><p><b>Our Heroes Team</b></p>';
+	if($noid != ''){
+			$endemail .= '<p class="small">Xexec ref: '.$noid.'</p>';
+	}
+	$endemail .= '</td></tr><tr>
+						<td class="ourheroes"><img src="'.HTTP_PATH.'images/emails/our-heroes.png" alt="Cancer Research UK"></td>
+						<td class="emailCruklogo"><img src="'.HTTP_PATH.'images/emails/Cancer-Research-UK.png" alt="Cancer Research UK"></td>
+					</tr></table>';
+	$endemail .= '</div></body></html>';
 	return $endemail;
 }
 ////////////////////////////////////////////////////////////////////////////////////
@@ -54,38 +89,6 @@ function sendEmail($email,$noid){
 		$reply = "fail";
 	}
 	return $reply;
-}
-////////////////////////////////////////////////////////////////////////////////////
-function startEcardEmail(){
-	$startemail = '<!DOCTYPE HTML><html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    			<title>CRUK Our Heroes</title>
-				<style type=text/css>
-					body, div {margin: 0px;padding: 0px}
-					.small {font-size: 8pt;}
-					.largetext {font-size: 17pt;}
-					a {color: #fff;}
-					.mytable {width: 600px;}
-					.emailText {font-size: 11pt;font-family: Calibri;line-height: 14pt;color: #fff;background: #fff;width: 600px;text-align: left;padding: 20px;color: #fff;}
-					img {display: block;}
-					.ourheroes {padding: 20px;}
-					.emailCruklogo {padding: 20px;text-align: right;}
-					.emailCruklogo img {display: inline-block;}
-				</style></head><body><div align="center"><table border="0" cellpadding="0" cellspacing="0" class="mytable"><tr><td colspan="2">';
-	return  $startemail;
-}
-////////////////////////////////////////////////////////////////////////////////////
-function endEcardEmail($noid){
-	$endemail = '';
-	$endemail .= '<p>Thank you and well done!</p><p><b>Our Heroes Team</b></p>';
-	if($noid != ''){
-			$endemail .= '<p class="small">Xexec ref: '.$noid.'</p></td></tr>';
-	}
-	$endemail .= '	<tr>
-						<td class="ourheroes"><img src="'.HTTP_PATH.'images/emails/our-heroes.png" alt="Cancer Research UK"></td>
-						<td class="emailCruklogo"><img src="'.HTTP_PATH.'images/emails/Cancer-Research-UK.png" alt="Cancer Research UK"></td>
-					</tr></table>';
-	$endemail .= '</div></body></html>';
-	return $endemail;
 }
 ////////////////////////////////////////////////////////////////////////////////////
 // to be used if session declared before class
