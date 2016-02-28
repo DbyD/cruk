@@ -1,8 +1,9 @@
 <?php
 ////////////////////////////////////////////////////////////////////////////////////
 function startEmail(){
-	$startemail = '<!DOCTYPE HTML><html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	$startemail = '<!DOCTYPE HTML><html ><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     			<title>CRUK Our Heroes</title>
+				<!--[if gte mso 9]><xml><o:OfficeDocumentSettings><o:AllowPNG/><o:PixelsPerInch>96</o:PixelsPerInch></o:OfficeDocumentSettings></xml><![endif]-->
 				<style type=text/css>
 					body, div {margin: 0px;padding: 0px}
 					.emailText {font-size: 11pt;font-family: Calibri;line-height: 14pt;color: #2e008b;background: #fff;width: 600px;padding: 0 20px;text-align: left;}
@@ -28,7 +29,7 @@ function startEmail(){
 }
 ////////////////////////////////////////////////////////////////////////////////////
 function startEcardEmail(){
-	$startemail = '<!DOCTYPE HTML><html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	$startemail = '<!DOCTYPE HTML><html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     			<title>CRUK Our Heroes</title>
 				<style type=text/css>
 					body, div {margin: 0px;padding: 0px}
