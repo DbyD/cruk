@@ -25,6 +25,9 @@ if(isset($_POST['redirectURL'])){
 	$res = $_POST;
  	
  	// updateCreditCardAmount( $res['amount'] ,  $resultCardRequest);
+	
+	$ccobj = $res;
+
 	$insert_data['resultCardRequest'] = json_encode($res);
 	$insert_data['EmpNum'] = $_SESSION["user"]->EmpNum;
 	$insert_data['amount'] = intval(substr( $res["amount"] ,-strlen($res["amount"]),strlen($res["amount"])-2 ));
@@ -418,7 +421,15 @@ if( isset( $email_order_code ) && $_SESSION["thank_you"] == false){
 				</div>
 
 				<?php else: ?>
-					Products for order not!.
+				<div id="formDiv" class="callout panel white">
+					<div class="row">
+						<div class="medium-12 withPadding columns">
+							<h2>Sorry Your Order failed</h2>
+							<p>The transaction process failed with the following error:<b> <?php echo $ccobj['responseMessage'] ?></b></p>
+							<p>Please try again or contact Xexec on <a href="mailto:info@xexec.com">info@xexec.com</a>.</p>
+						</div>
+					</div>
+				</div>
 				<?php endif; ?>
 			<?php else:?>
 			<?php $_SESSION["thank_you"] = true; ?>

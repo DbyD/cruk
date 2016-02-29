@@ -440,7 +440,7 @@ function SendMail($args = array()){
 	$sendEmail->Content = $content;
 	$sendEmail->emailTo = $_SESSION['user']->Eaddress;
 	$sendEmail->subject = 'CRUK Shop Order';
-	$sendEmail->Bcc = 'alec@dbyd.co.za';
+	$sendEmail->Bcc = 'retailvouchers@xexec.com';
 	$email = sendEmail($sendEmail,'');
 }
 ///////////////////////////////////////////////////////////////////////////////////
