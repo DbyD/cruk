@@ -9,9 +9,7 @@
 <link rel="shortcut icon" href="../favicon.ico"> 
 </head>
 <body>
-<?php 
-include '../inc/config.php';
-?>
+
 <div id="wrap" class="container">
 
 	<!-- First Row -->
@@ -36,68 +34,7 @@ include '../inc/config.php';
 				</div>
 				<div class="body">
 					<p> Recent Winners </p>
-					<?php
-						//get last 2 nominees
-						$nominees = $db->prepare('SELECT * FROM tblnominations as n JOIN tblempall as e ON n.NominatedEmpNum = e.EmpNum ORDER BY n.AprDate DESC LIMIT 2');
-						$nominees->execute();
 
-						$index = 0;
-						while($nominee = $nominees->fetch(PDO::FETCH_OBJ))
-						{	
-							//get the nominator by his NominatorEmpNum
-							$nominator = $db->prepare('SELECT * FROM tblempall WHERE EmpNum LIKE :EmpNum');
-							$nominator->execute(array(':EmpNum' => $nominee->NominatorEmpNum));
-
-							$nominator = $nominator->fetch(PDO::FETCH_OBJ);
-
-							if($index == 0)
-							{
-								echo '
-								<div class="person1">
-									<div class="image"></div>
-									<div class="image1" style="background: url(../'.$nominee->Photo.') no-repeat;"></div>
-									<div class="name1">&nbsp;&nbsp; '.$nominee->Fname.' '.$nominee->Sname.' <br> '.$nominee->Department.'</div>
-								</div>
-								<div class="person1_footer">
-									Our Beliefs:
-									<br>
-									<b>'.$nominee->BeliefID.'</b>
-
-									<br><br>
-
-									Nominated by:
-									<br>
-									<b>'.$nominator->Fname.' '.$nominator->Sname.'</b>
-								</div>
-								';
-
-								$index++;
-							}
-							else
-							{
-								echo '
-								<div class="person2">
-									<div class="image"></div>
-									<div class="image2" style="background: url(../'.$nominee->Photo.') no-repeat;"></div>
-									<div class="name2">&nbsp;&nbsp;&nbsp;&nbsp;'.$nominee->Fname.' '.$nominee->Sname.' <br> '.$nominee->Department.'</div>
-								</div>
-
-								<div class="person2_footer">
-									Our Beliefs:
-									<br>
-									<b>'.$nominee->BeliefID.'</b>
-
-									<br><br>
-									
-									Nominated by:
-									<br>
-									<b>'.$nominator->Fname.' '.$nominator->Sname.'</b>
-								</div>
-								';
-							}
-						}
-					?>
-					<!--
 					<div class="person1">
 						<div class="image"></div>
 						<div class="image1"></div>
@@ -133,7 +70,6 @@ include '../inc/config.php';
 						<br>
 						<b>BusinessA A</b>
 					</div>
-					-->
 				</div>
 				<div class="footer"> 
 					<div class="text"> See who else has won and nominate your colleagues

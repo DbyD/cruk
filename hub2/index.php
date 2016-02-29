@@ -55,7 +55,8 @@
 		if(isset($_GET['register']) && !isset($_SESSION['user']))
 		{
 		?>
-		<div class="col-md-2 col-md-offset-3" id="registerBox" <?php if(isset($_GET['alert'])) echo 'style="height: 600px;"'; ?>>
+		<div class="col-md-2 col-md-offset-3" id="registerBox" <?php if(isset($_GET['alert'])) echo 'style="height: 460px;"'; if(isset($_GET['success']) || isset($_GET['notfound']) || isset($_GET['activated']) 
+		|| isset($_GET['notactivated'])) echo 'style="height: 290px;"'; ?>>
 			<p>Register</p>
 			<form method="POST" action="register.php">
 				<?php 
@@ -67,37 +68,94 @@
 						</div>
 					';
 				}
+				else
+				if(isset($_GET['success']))
+				{
+					echo '
+						<div class="alert alert-success">
+						  Thank you for your registration. <br>
+						  A confirmation email has been sent to your CRUK email address. <br>
+						  <strong>Please check your mailbox for an Activation email.</strong>
+						</div>
+					';
+				}
+				else
+				if(isset($_GET['notfound']))
+				{
+					echo '
+						<div class="alert alert-danger">
+						No record found. Please try again or contact <a href="hrservicecentre@cancer">hrservicecentre@cancer</a> or the Xexec helpdesk on 020 8201 6483 for further assistance.</p>
+						</div>
+					';
+				}
+				else
+				if(isset($_GET['activated']))
+				{
+					echo '
+						<div class="alert alert-success">
+						  Thank you for activating your account.<br>
+						  You can now <a href="'.HTTP_PATH.'index.php">click here </a> to log in to access the portal
+						</div>
+					';
+					
+				}
+				else
+				if(isset($_GET['notactivated']))
+				{
+					echo '
+						<div class="alert alert-danger">
+						 We were unable to activate your account. Please contact the help desk on 012345678 or email: <a href="mailto:help@xexec.com">help@xexec.com</a> to assist.
+						</div>
+					';
+					
+				}
+
+				if(!isset($_GET['req_email']))
+				{
 				?>
-				<div class="form-group">
+
+				<div class="form-group" <?php if(isset($_GET['success']) || isset($_GET['notfound']) || isset($_GET['activated']) || isset($_GET['notactivated'])) echo 'style="display:none;"';?>>
 				  <label for="empNum">Employee Number:</label>
 				  <input type="text" class="form-control" name="empNum" id="empNum">
+				</div>			
+
+				<div class="form-group" <?php if(isset($_GET['success']) || isset($_GET['notfound']) || isset($_GET['activated']) || isset($_GET['notactivated'])) echo 'style="display:none;"';?>>
+				  <label for="password">Password:</label>
+				  <input type="password" class="form-control" name="password" id="password">
 				</div>
 
-				<div class="form-group">
-				  <label for="fname">First Name:</label>
-				  <input type="text" class="form-control" name="fname" id="fname">
-				</div>	
+				<div class="form-group" <?php if(isset($_GET['success']) || isset($_GET['notfound']) || isset($_GET['activated']) || isset($_GET['notactivated'])) echo 'style="display:none;"';?>>
+				  <label for="password">Confirm Password:</label>
+				  <input type="password" class="form-control" name="password_confirmation" id="password_confirmation">
+				</div>
 
-				<div class="form-group">
-				  <label for="lname">Last Name:</label>
-				  <input type="text" class="form-control" name="lname" id="lname">
+				<button type="submit" class="btn btn-lg register" <?php if(isset($_GET['success']) || isset($_GET['notfound']) || isset($_GET['activated']) || isset($_GET['notactivated'])) echo 'style="display:none;"';?>>Register</button>
+
+				<?php
+				}
+				else
+				if(isset($_GET['req_email']))
+				{ 
+				?>
+				<div class="alert alert-info">
+						You do not have an email address in the system. Please fill in the field with your email address and press continue.
 				</div>
 
 				<div class="form-group">
 				  <label for="email">Email Address:</label>
 				  <input type="text" class="form-control" name="email" id="email">
-				</div>				
+				  <input type="hidden" name="empNum" id="empNum" value="<?=$_GET['empNum']?>"/>
+				</div>	
 
-				<div class="form-group">
-				  <label for="password">Password:</label>
-				  <input type="text" class="form-control" name="password" id="password">
-				</div>
+				<button type="submit" class="btn btn-lg register">Continue</button>
 
+				<?php 
+				}
+				?>
 
-				<button type="submit" class="btn btn-lg register">Register</button>
 			</form>
 
-			<p style="font-size: 12px"> By registering or signing in you agree to the <br> <b><u>Terms and Conditions</u></b></p>
+			<p style="font-size: 12px" > By registering or signing in you agree to the <br> <b><u>Terms and Conditions</u></b></p>
 		</div>
 		<?php
 		}
@@ -120,7 +178,7 @@
 		{
 		//display the 2 boxes
 		?>
-		<div class="col-md-2 col-md-offset-3" id="discountsBox">
+		<div class="col-md-2 col-md-offset-4" id="discountsBox">
 			<p>Discounts &amp; Benefits</p>
 
 			<div class="image"></div>
