@@ -206,11 +206,11 @@ function getTeamExportSQL($params){
 	$UserTeam = $LoggedIn->Team;
 	$UserIsSuper = $LoggedIn->SuperUser;
 	//Rule 1
-	if(strtoupper($UserIsSuper) == "Y"){
+	//if(strtoupper($UserIsSuper) == "Y"){
 		$filterSQL = "SELECT * FROM (" . $baseSQL . ") AS Temp";
-	} else {
-		$filterSQL = "SELECT * FROM (" . $baseSQL . ") AS Temp WHERE Team = '" . $UserTeam . "'";
-	}
+	//} else {
+	//	$filterSQL = "SELECT * FROM (" . $baseSQL . ") AS Temp WHERE Team = '" . $UserTeam . "'";
+	//}
 
 	if(Trim($params["FromDate"]) != ""){
 		$NewFromDate = getSQLDate($params["FromDate"]) . ' 00:00:00';
@@ -220,7 +220,7 @@ function getTeamExportSQL($params){
 			$dateSQL . " AND NomDate <= '" . $NewEndDate . "' ";
 		}
 	} else {
-		$dateSQL = "SELECT * FROM (" . $filterSQL . ") AS TDates WHERE awardType = 1";
+		$dateSQL = "SELECT * FROM (" . $filterSQL . ") AS TDates WHERE awardType = 2";
 	}
 	return $dateSQL;
 }
@@ -240,19 +240,35 @@ function getRedeemDates($params, $prefix){
 
 function getDepartmentSQL($EmpNum){
 	$LoggedIn = getUser($EmpNum);
-	$filterSQL ='';
-	if($LoggedIn->SuperUser != 'Y'){
-		$UserDepartment = $LoggedIn->Department;
-		if((strtoupper($UserGrade) == "MANAGER 1") || (strtoupper($UserGrade) == "MANAGER 2") ||
-		   (strtoupper($UserGrade) == "MANAGER 3")){
-			if(Trim($UserSection) != ""){
-				$filterSQL = "Section = '" . $UserSection . "'";
-			} else {
-				$filterSQL = "Department = '" . $UserDepartment . "'";
-			}
+	$UserDepartment = $LoggedIn->Department;
+	if((strtoupper($UserGrade) == "MANAGER 1") || (strtoupper($UserGrade) == "MANAGER 2") ||
+	   (strtoupper($UserGrade) == "MANAGER 3")){
+		if(Trim($UserSection) != ""){
+			$filterSQL = "Section = '" . $UserSection . "'";
 		} else {
 			$filterSQL = "Department = '" . $UserDepartment . "'";
 		}
+	} else {
+		$filterSQL = "Department = '" . $UserDepartment . "'";
+	}
+	return $filterSQL;
+}
+
+function getRedeemSQL($EmpNum){
+	$LoggedIn = getUser($EmpNum);
+	$UserDepartment = $LoggedIn->Department;
+	$UserIsSuper = $LoggedIn->SuperUser;
+	if($UserIsSuper == "Y"){
+		$filterSQL = "";
+	} else if((strtoupper($UserGrade) == "MANAGER 1") || (strtoupper($UserGrade) == "MANAGER 2") ||
+			(strtoupper($UserGrade) == "MANAGER 3")){
+				if(Trim($UserSection) != ""){
+					$filterSQL = " AND a.Section = '" . $UserSection . "'";
+				} else {
+					$filterSQL = " AND a.Department = '" . $UserDepartment . "'";
+				}
+	} else {
+		$filterSQL = " AND a.Department = '" . $UserDepartment . "'";
 	}
 	return $filterSQL;
 }
@@ -409,7 +425,7 @@ function createNominationExport($post){
 
 function createTeamNominationExport($post){
 	global $db;
-	print_r($post);
+	
 	setMyCookie($post, 'crukTeamNom');
 	
 	$CSVMaster = "<table>";
@@ -439,8 +455,6 @@ function createTeamNominationExport($post){
 	if($post["ApprovedDate"] == "yes"){$CSVLine .= "<td>Approved Date</td>";}
 	if($post["Decreason"] == "yes"){$CSVLine .= "<td>Decline Reason</td>";}
 	if($post["Amount"] == "yes"){$CSVLine .= "<td>Amount</td>";}
-	if($post["Status"] == "yes"){$CSVLine .= "<td>Status</td>";}
-	if($post["TotalVal"] == "yes"){$CSVLine .= "<td>Total Value</td>";}
 	$CSVLine .= "</tr>";
 	$CSVMaster .= $CSVLine;
 	$CSVLine = "";
@@ -457,7 +471,7 @@ function createTeamNominationExport($post){
 	
 		// We check each field and then add it to the CSV
 		
-		if($post["Team"] == "yes"){$CSVLine .= "<td>" . Trim($Nominee->Team) . "</td>";}
+		if($post["Team"] == "yes"){$CSVLine .= "<td>" . Trim($dbline["Team"]) . "</td>";}
 		if($post["Nominees"] == "yes"){
 			$CSVLine .= "<td>";
 			// The names of the nominees for the award
@@ -483,7 +497,13 @@ function createTeamNominationExport($post){
 		if($post["NomReason"] == "yes"){$CSVLine .= "<td>" . Trim($dbline["Reason"]) . "</td>";}
 		if($post["PMessage"] == "yes"){$CSVLine .= "<td>" . Trim($dbline["personalMessage"]) . "</td>";}
 	
-		if(Trim($dbline["amount"])!=0){
+		if( $dbline["amount"] == '0' ){
+			if($post["Approver"] == "yes"){$CSVLine .= "<td></td>"; }
+			if($post["Approved"] == "yes"){$CSVLine .= "<td></td>"; }
+			if($post["ApprovedDate"] == "yes"){$CSVLine .= "<td></td>"; }
+			if($post["Decreason"] == "yes"){$CSVLine .= "<td></td>"; }
+			if($post["Amount"] == "yes"){$CSVLine .= "<td></td>"; }
+		} else {
 			if($post["Approver"] == "yes"){$CSVLine .= "<td>" . Trim($ApproverDet->Fname) . " " . Trim($ApproverDet->Sname) . "</td>";}
 			//Rules Here
 			if($post["Approved"] == "yes"){
@@ -496,28 +516,16 @@ function createTeamNominationExport($post){
 				}
 			}
 			if($post["ApprovedDate"] == "yes"){$CSVLine .= "<td>" . Trim($dbline["AprDate"]) . "</td>";}
-			if($post["Decreason"] == "yes"){$CSVLine .= "<td>" . Trim($dbline["dReason"]) . "</td>";}
+			if($post["Decreason"] == "yes"){$CSVLine .= "<td>" . Trim($dbline["dReason"]). "</td>";}
 				
 			if($post["Amount"] == "yes"){
-				$CSVLine .= "<td>" . Trim($dbline["amount"]) . "</td>";
-			}
-			// Rules Here
-			if($post["Status"] == "yes"){
-				if($dbline["AwardClaimed"] == "Yes"){
-					$CSVLine .= "<td>Cliamed</td>";
+				if($dbline["amount"] == 'TeamEvent'){
+					$CSVLine .= "<td>Team Event</td>";
 				} else {
-					$CSVLine .= "<td>Not Cliamed</td>";
+					$CSVLine .= "<td>&pound;20</td>";
 				}
 			}
-		} else {
-			if($post["Approver"] == "yes"){$CSVLine .= "<td></td>"; }
-			if($post["Approved"] == "yes"){$CSVLine .= "<td></td>"; }
-			if($post["ApprovedDate"] == "yes"){$CSVLine .= "<td></td>"; }
-			if($post["Decreason"] == "yes"){$CSVLine .= "<td></td>"; }
-			if($post["Amount"] == "yes"){$CSVLine .= "<td></td>"; }
-			if($post["Status"] == "yes"){$CSVLine .= "<td></td>"; }
 		}
-		if($post["TotalVal"] == "yes"){$CSVLine .= "<td>" . $EmpAwards . "</td>";}
 	
 		$CSVLine .= "</tr>";
 		$CSVMaster .= $CSVLine;
@@ -553,14 +561,14 @@ function createRedemptionExport($post){
 	setMyCookie($post, 'crukRed');
 	
 	$CSVMaster = "<table>";
-	$sqlWhere = getDepartmentSQL($post["EmpNum"]);
+	$sqlWhere = getRedeemSQL($post["EmpNum"]);
 	$dateSQL = getRedeemDates($post,"bo."); 
 	$sql = "SELECT *
  			FROM tblbasket b, tblbasketorders bo, tblempall a
  			WHERE b.orderID IS NOT NULL 
 			AND b.orderID = bo.id 
-			AND a.EmpNum = b.EmpNum 
-			AND a." . $sqlWhere . $dateSQL;
+			AND b.EmpNum = a.EmpNum 
+			" . $sqlWhere . $dateSQL. " ORDER BY bo.id DESC";
 	$stmt = $db->prepare($sql);
 	$stmt->execute();
 	
@@ -570,7 +578,7 @@ function createRedemptionExport($post){
 	if($post["Department"] == "yes"){$CSVLine .= "<td>Department</td>";}
 	if($post["NomGrade"] == "yes"){$CSVLine .= "<td>Grade</td>";}
 	if($post["RedeemDate"] == "yes"){$CSVLine .= "<td>Redeem Date</td>";}
-	if($post["TransCode"] == "yes"){$CSVLine .= "<td>Transaction Code</td>";}
+	if($post["TransCode"] == "yes"){$CSVLine .= "<td>Order Ref</td>";}
 	if($post["ProdCat"] == "yes"){$CSVLine .= "<td>Product Category</td>";}
 	if($post["Product"] == "yes"){$CSVLine .= "<td>Product</td>";}
 	if($post["AmountSpent"] == "yes"){$CSVLine .= "<td>Amount Spent</td>";}
@@ -585,6 +593,7 @@ function createRedemptionExport($post){
 		$EmpAwards = getAvailable($dbline["EmpNum"]);
 		$ProdData = getProductByID($dbline["prID"]);
 		$CCTrans = getCCTransaction($dbline["orderID"]);
+		$prodCat = getProductCategory($ProdData["subID"]);
 		
 		// We check each field and then add it to the CSV
 		if($post["NomineeID"] == "yes"){$CSVLine .= "<td>" . $dbline["EmpNum"] . "</td>";}
@@ -592,9 +601,8 @@ function createRedemptionExport($post){
 		if($post["Department"] == "yes"){$CSVLine .= "<td>" . Trim($Nominee->Department) . "</td>";}
 		if($post["NomGrade"] == "yes"){$CSVLine .= "<td>" . Trim($Nominee->Grade) . "</td>";}
 		if($post["RedeemDate"] == "yes"){$CSVLine .= "<td>" . $dbline["date"] . "</td>";}
-
-		if($post["TransCode"] == "yes"){$CSVLine .= "<td>" . "</td>";}
-		if($post["ProdCat"] == "yes"){$CSVLine .= "<td>" . Trim($ProdDat["ProdCode"]) . "</td>";}
+		if($post["TransCode"] == "yes"){$CSVLine .= "<td>CR".$dbline["orderID"]. "</td>";}
+		if($post["ProdCat"] == "yes"){$CSVLine .= "<td>" . Trim($prodCat["label"]) . "</td>";}
 		if($post["Product"] == "yes"){$CSVLine .= "<td>" . Trim($ProdData["aTitle"]) . "</td>";}
 		$totalprice = floatval($dbline["totalPrice"]) + floatval($CCTrans->Amount);
 		if($post["AmountSpent"] == "yes"){$CSVLine .= "<td>" . Trim($totalprice) . "</td>";}
@@ -611,17 +619,17 @@ function createRedemptionExport($post){
 function createXexecRedemptionExport($post){
 	global $db;
 	
-	//setMyCookie($post, 'crukRed');
+	setMyCookie($post, 'crukRed');
 	
 	$CSVMaster = "<table>";
-	$sqlWhere = getDepartmentSQL($post["EmpNum"]);
+	$sqlWhere = getRedeemSQL($post["EmpNum"]);
 	$dateSQL = getRedeemDates($post,"bo."); 
 	$sql = "SELECT *
  			FROM tblbasket b, tblbasketorders bo, tblempall a
  			WHERE b.orderID IS NOT NULL 
 			AND b.orderID = bo.id 
-			AND a.EmpNum = b.EmpNum 
-			AND a." . $sqlWhere . $dateSQL;
+			AND b.EmpNum = a.EmpNum 
+			" . $sqlWhere . $dateSQL. " ORDER BY bo.id DESC";
 	$stmt = $db->prepare($sql);
 	$stmt->execute();
 	
@@ -631,7 +639,7 @@ function createXexecRedemptionExport($post){
 	if($post["Department"] == "yes"){$CSVLine .= "<td>Department</td>";}
 	if($post["NomGrade"] == "yes"){$CSVLine .= "<td>Grade</td>";}
 	if($post["RedeemDate"] == "yes"){$CSVLine .= "<td>Redeem Date</td>";}
-	if($post["TransCode"] == "yes"){$CSVLine .= "<td>Transaction Code</td>";}
+	if($post["TransCode"] == "yes"){$CSVLine .= "<td>Order Ref</td>";}
 	if($post["ProdCat"] == "yes"){$CSVLine .= "<td>Product Category</td>";}
 	if($post["Product"] == "yes"){$CSVLine .= "<td>Product</td>";}
 	if($post["AmountSpent"] == "yes"){$CSVLine .= "<td>Amount Spent</td>";}
@@ -652,6 +660,7 @@ function createXexecRedemptionExport($post){
 		$EmpAwards = getAvailable($dbline["EmpNum"]);
 		$ProdData = getProductByID($dbline["prID"]);
 		$CCTrans = getCCTransaction($dbline["orderID"]);
+		$prodCat = getProductCategory($ProdData["subID"]);
 		
 		// We check each field and then add it to the CSV
 		if($post["NomineeID"] == "yes"){$CSVLine .= "<td>" . $dbline["EmpNum"] . "</td>";}
@@ -659,18 +668,17 @@ function createXexecRedemptionExport($post){
 		if($post["Department"] == "yes"){$CSVLine .= "<td>" . Trim($Nominee->Department) . "</td>";}
 		if($post["NomGrade"] == "yes"){$CSVLine .= "<td>" . Trim($Nominee->Grade) . "</td>";}
 		if($post["RedeemDate"] == "yes"){$CSVLine .= "<td>" . $dbline["date"] . "</td>";}
-
-		if($post["TransCode"] == "yes"){$CSVLine .= "<td>" . "</td>";}
-		if($post["ProdCat"] == "yes"){$CSVLine .= "<td>" . Trim($ProdDat["ProdCode"]) . "</td>";}
+		if($post["TransCode"] == "yes"){$CSVLine .= "<td>CR".$dbline["orderID"]. "</td>";}
+		if($post["ProdCat"] == "yes"){$CSVLine .= "<td>" . Trim($prodCat["label"]) . "</td>";}
 		if($post["Product"] == "yes"){$CSVLine .= "<td>" . Trim($ProdData["aTitle"]) . "</td>";}
 		$totalprice = floatval($dbline["totalPrice"]) + floatval($CCTrans->Amount);
 		if($post["AmountSpent"] == "yes"){$CSVLine .= "<td>" . Trim($totalprice) . "</td>";}
 		if($post["CurrentBalance"] == "yes"){$CSVLine .= "<td>" . $EmpAwards . "</td>";}
 		
-		$CSVLine .= "<td>" . Trim($Nominee->address1) . "</td>";
-		$CSVLine .= "<td>" . Trim($Nominee->address2) . "</td>";
-		$CSVLine .= "<td>" . Trim($Nominee->town) . "</td>";
-		$CSVLine .= "<td>" . Trim($Nominee->postcode) . "</td>";
+		$CSVLine .= "<td>" . Trim($dbline["address1"]) . "</td>";
+		$CSVLine .= "<td>" . Trim($dbline["address2"]) . "</td>";
+		$CSVLine .= "<td>" . Trim($dbline["town"]) . "</td>";
+		$CSVLine .= "<td>" . Trim($dbline["postcode"]) . "</td>";
 		
 		$CSVLine .= "</tr>";
 		$CSVMaster .= $CSVLine;
@@ -679,4 +687,17 @@ function createXexecRedemptionExport($post){
 	$CSVMaster .= $CSVLine . "</table>";
 	return $CSVMaster;
 }
+////////////////////////////////////////////////////////////////////////////////////
+function getProductCategory( $id ){
+	global $db;
+	$sql = 'SELECT * FROM tblmenuleft WHERE id = :id';
+	$stmt = $db->prepare( $sql );
+	$stmt->execute( array('id' => $id) );
+	$arr = array();
+	while($result = $stmt->fetch(PDO::FETCH_ASSOC)){
+		return $result;
+	}
+}
+////////////////////////////////////////////////////////////////////////////////////
+
 ?>

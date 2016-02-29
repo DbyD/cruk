@@ -158,7 +158,7 @@
 				</div>
 				<input type="hidden" name="EmpNum" value="<?=$_SESSION['user']->EmpNum?>" />
 				<?php if($_SESSION['user']->administrator =='YES'){ ?>
-				<input type="hidden" name="eType" value="2" />
+				<input type="hidden" name="eType" value="4" />
 				<?php } else { ?>
 				<input type="hidden" name="eType" value="2" />
 				<?php }  ?>
