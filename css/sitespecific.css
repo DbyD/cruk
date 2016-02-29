@@ -514,7 +514,7 @@ form .row .row {
 /* @end */
 /* @group My Awards */
 .accountHome .image {
-	background: url(../images/nominate-home.jpg);
+	background: url(../images/my-account-home.jpg);
 }
 .awardButton {
 	font-size: 20px;
@@ -625,7 +625,7 @@ form .row .row {
 /* @end */
 /* @group My Approvals */
 .approvalHome .image {
-	background: url(../images/nominate-home.jpg);
+	background: url(../images/approvals-home.jpg);
 }
 .title .smaller {
 	font-size: 12px;

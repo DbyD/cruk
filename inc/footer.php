@@ -117,6 +117,9 @@
 			</div>
 		</section>
 		<a class="exit-off-canvas"></a>
+		<section class="copyright">
+			&copy; Xexec 2016
+		</section>
 	</div>
 </div>
 <script src="<?=HTTP_PATH?>js/vendor/jquery.js"></script>
