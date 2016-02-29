@@ -240,16 +240,19 @@ function getRedeemDates($params, $prefix){
 
 function getDepartmentSQL($EmpNum){
 	$LoggedIn = getUser($EmpNum);
-	$UserDepartment = $LoggedIn->Department;
-	if((strtoupper($UserGrade) == "MANAGER 1") || (strtoupper($UserGrade) == "MANAGER 2") ||
-	   (strtoupper($UserGrade) == "MANAGER 3")){
-		if(Trim($UserSection) != ""){
-			$filterSQL = "Section = '" . $UserSection . "'";
+	$filterSQL ='';
+	if($LoggedIn->SuperUser != 'Y'){
+		$UserDepartment = $LoggedIn->Department;
+		if((strtoupper($UserGrade) == "MANAGER 1") || (strtoupper($UserGrade) == "MANAGER 2") ||
+		   (strtoupper($UserGrade) == "MANAGER 3")){
+			if(Trim($UserSection) != ""){
+				$filterSQL = "Section = '" . $UserSection . "'";
+			} else {
+				$filterSQL = "Department = '" . $UserDepartment . "'";
+			}
 		} else {
 			$filterSQL = "Department = '" . $UserDepartment . "'";
 		}
-	} else {
-		$filterSQL = "Department = '" . $UserDepartment . "'";
 	}
 	return $filterSQL;
 }
@@ -608,7 +611,7 @@ function createRedemptionExport($post){
 function createXexecRedemptionExport($post){
 	global $db;
 	
-	setMyCookie($post, 'crukRed');
+	//setMyCookie($post, 'crukRed');
 	
 	$CSVMaster = "<table>";
 	$sqlWhere = getDepartmentSQL($post["EmpNum"]);
@@ -633,6 +636,12 @@ function createXexecRedemptionExport($post){
 	if($post["Product"] == "yes"){$CSVLine .= "<td>Product</td>";}
 	if($post["AmountSpent"] == "yes"){$CSVLine .= "<td>Amount Spent</td>";}
 	if($post["CurrentBalance"] == "yes"){$CSVLine .= "<td>Current Balance</td>";}
+	
+	$CSVLine .= "<td>Address 1</td>";
+	$CSVLine .= "<td>Address 2</td>";
+	$CSVLine .= "<td>Town</td>";
+	$CSVLine .= "<td>Postcode</td>";
+	
 	$CSVLine .= "</tr>";
 	$CSVMaster .= $CSVLine;
 	
@@ -657,7 +666,12 @@ function createXexecRedemptionExport($post){
 		$totalprice = floatval($dbline["totalPrice"]) + floatval($CCTrans->Amount);
 		if($post["AmountSpent"] == "yes"){$CSVLine .= "<td>" . Trim($totalprice) . "</td>";}
 		if($post["CurrentBalance"] == "yes"){$CSVLine .= "<td>" . $EmpAwards . "</td>";}
-	
+		
+		$CSVLine .= "<td>" . Trim($Nominee->address1) . "</td>";
+		$CSVLine .= "<td>" . Trim($Nominee->address2) . "</td>";
+		$CSVLine .= "<td>" . Trim($Nominee->town) . "</td>";
+		$CSVLine .= "<td>" . Trim($Nominee->postcode) . "</td>";
+		
 		$CSVLine .= "</tr>";
 		$CSVMaster .= $CSVLine;
 	
