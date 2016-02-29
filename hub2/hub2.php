@@ -50,13 +50,26 @@ include '../inc/config.php';
 
 							$nominator = $nominator->fetch(PDO::FETCH_OBJ);
 
+							if($nominee->Photo != '')
+									$photo = $nominee->Photo;
+								else
+									$photo = "images/no_photo.png";
+
+							$nominatorName = $nominator->Fname.' '.$nominator->Sname;
+
+							if (strlen($nominatorName) > 11)
+  								 $nominatorName = substr($nominatorName, 0, 11) . '.';
+
 							if($index == 0)
 							{
+	
+
 								echo '
 								<div class="person1">
 									<div class="image"></div>
-									<div class="image1" style="background: url(../'.$nominee->Photo.') no-repeat;"></div>
-									<div class="name1">&nbsp;&nbsp; '.$nominee->Fname.' '.$nominee->Sname.' <br> '.$nominee->Department.'</div>
+									<div class="image1" style="background: url(../'.$photo.') no-repeat;"></div>
+									<div class="name1">&nbsp;&nbsp; '.$nominee->Fname.' '.$nominee->Sname.'</div>
+									<div class="subname1">'.$nominee->Department.'</div>
 								</div>
 								<div class="person1_footer">
 									Our Beliefs:
@@ -67,7 +80,7 @@ include '../inc/config.php';
 
 									Nominated by:
 									<br>
-									<b>'.$nominator->Fname.' '.$nominator->Sname.'</b>
+									<b>'.$nominatorName.'</b>
 								</div>
 								';
 
@@ -75,11 +88,14 @@ include '../inc/config.php';
 							}
 							else
 							{
+	
+
 								echo '
 								<div class="person2">
 									<div class="image"></div>
-									<div class="image2" style="background: url(../'.$nominee->Photo.') no-repeat;"></div>
-									<div class="name2">&nbsp;&nbsp;&nbsp;&nbsp;'.$nominee->Fname.' '.$nominee->Sname.' <br> '.$nominee->Department.'</div>
+									<div class="image2" style="background: url(../'.$photo.') no-repeat;"></div>
+									<div class="name2">&nbsp;&nbsp;&nbsp;&nbsp;'.$nominee->Fname.' '.$nominee->Sname.'</div>
+									<div class="subname2">'.$nominee->Department.'</div>
 								</div>
 
 								<div class="person2_footer">
@@ -91,7 +107,7 @@ include '../inc/config.php';
 									
 									Nominated by:
 									<br>
-									<b>'.$nominator->Fname.' '.$nominator->Sname.'</b>
+									<b>'.$nominatorName.'</b>
 								</div>
 								';
 							}

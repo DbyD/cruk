@@ -284,7 +284,17 @@
     font-weight: bold;
     font-size: 10px;
     position: relative;
-    left: 15%;
+    left: 7%;
+    top: 9%;
+    font-size: 15px;
+}
+
+#winners .subname1 {
+    color: #eb008b;
+    font-weight: bold;
+    font-size: 10px;
+    position: relative;
+    left: 20%;
     top: 9%;
     font-size: 15px;
 }
@@ -331,7 +341,16 @@
     color: #00b6ec;
     font-weight: bold;
     position: relative;
-    left: 10%;
+    left: 7%;
+    top: 9%;
+    font-size: 15px;
+}
+
+#winners .subname2 {
+    color: #00b6ec;
+    font-weight: bold;
+    position: relative;
+    left: 20%;
     top: 9%;
     font-size: 15px;
 }
