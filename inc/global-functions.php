@@ -108,7 +108,7 @@ function array_to_object($array) {
 function sendEcardEmail($ecard,$ID){
 	// need to fix this so we can email anytime
 	global $headers;
-	if ($emailTo = $ecard->offline == 'YES'){
+	if ($emailTo = $ecard->Offline == 'Y'){
 		$emailTo = $ecard->shopMEaddress;
 	} else {
 		if ($ecard->Eaddress) {
@@ -260,7 +260,7 @@ function indEcardTeamExtraText($ecard){
 	
 	$ecardText .= "<p>Dear ".$ecard->Fname."</p>
 				<p>Congratulations!</p>
-				<p>".$ecard->NomFull_name." says you’ve done something really special and deserve an Our Heroes Extraordinary People, 
+				<p>".$ecard->NomFull_name." says you've done something really special and deserve an Our Heroes Extraordinary People, 
 				Extraordinary Effort award in the ".$ecard->BeliefID." category.</p>
 				<p>".$ecard->personalMessage."</p>";
 				

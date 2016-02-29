@@ -9,7 +9,7 @@
 		<div class="inlineDiv clickAble" data-type="gourl" data-url="index.php">Approvals</div> <i class="icon-icons_thickrightarrow smalli"></i> <span class="subSubTitle">History</span>
 	</div>
 	<div class="row contentFill">
-		<div class="medium-12 columns leftnp rightnp fillHeight">
+		<div id="approvalHistory" class="medium-12 columns leftnp rightnp fillHeight">
 			<div class="callout panel fillHeight white">
 				<div class="tableTitle doubleHeader">
 					<div class="tableColumn-2">

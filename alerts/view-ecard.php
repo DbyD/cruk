@@ -7,7 +7,11 @@
 <div class="ecardPadding">
 	<?php
 		$ecard->Fname = getFirstName($ecard->NominatedEmpNum);
-		$ecard->NomFull_name = getName($ecard->NominatorEmpNum);
+		if ($ecard->Volunteer !='') {
+			$ecard->NomFull_name = $ecard->Volunteer;
+		} else {
+			$ecard->NomFull_name = getName($ecard->NominatorEmpNum);
+		}
 		$ecard->NomFname = getFirstName($ecard->NominatorEmpNum);
 		if($ecard->littleExtra == 'Yes'){
 			echo indEcardExtraText($ecard);

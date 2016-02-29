@@ -18,7 +18,8 @@
 						<div class="medium-12 columns">
 							<h3>Upload New Data File</h3>
 							<p>Click below to upload a new staff data file. The file must be in a .csv format.</p>
-							<p>Please note: Uploading a large data file can sometimes impact system performance whilst the file is uploading. We recommend you upload out of office hours, or request that the file be uploaded by Xexec out of hours on your behalf.</p>
+							<p>Please note: Uploading a large data file can sometimes impact system performance whilst the file is uploading. We recommend you upload out of office hours, or request that the file be uploaded by Xexec out of hours on your behalf.
+							<br>Before uploading any file, please ensure that the column headings in your file match exactly those in the Xexec platform database. If you are unsure, please be in touch with your Xexec Account Manager.</p>
 							<form method="post" action="upload-staff.php" enctype="multipart/form-data" name="uploadStaff" id="uploadStaff">
 								<div class="custom-upload">
 									<input type="file" name="staffFile" id="staffFile">

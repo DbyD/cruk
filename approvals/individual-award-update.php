@@ -114,7 +114,11 @@
 			
 			// send email to nominee
 			$award->Fname = $award->nominee()->Fname;
-			$award->NomFull_name = $award->nominator()->full_name;
+			if ($award->Volunteer !='') {
+				$award->NomFull_name = $award->Volunteer;
+			} else {
+				$award->NomFull_name = $award->nominator()->full_name;
+			}
 			$award->NomFname = $award->nominator()->Fname;
 			$award->content = indEcardExtraText($award);
 			echo $award->content;
@@ -122,8 +126,7 @@
 			
 			//print_r($award);
 			
-			if ($award->nominee()->offline == 'YES'){
-				// they in a shop so considered offline. need to fix email with all requirements. will need to get from Jamie
+			if ($award->nominee()->Offline == 'Y'){
 				$sendEmail = new StdClass();
 				$sendEmail->emailTo = $xexecEmail;
 				$sendEmail->subject = 'E-Card Award Notification';

@@ -180,15 +180,7 @@ ul.off-canvas-list .photo {
 	padding-left: 0 !important;
 	padding-right: 0 !important;
 }
-.title .awardStar{
-	font-size: 14px;
-	display: block;
-	margin-left: -3px;
-}
-.title .awardStar i{
-	margin: 0;
-	float: none;
-}
+
 /*#messageEmployee {
 	padding: 30px;
 }
@@ -210,7 +202,7 @@ ol {
 }
 .right {
 	float: right !important;
-	padding-left: 60px;
+/*	padding-left: 60px; */
 }
 /*.title {
 	padding: 30px 40px;
@@ -281,10 +273,10 @@ ol {
 	background: #2E008B none repeat scroll 0% 0%;
 	color: #FFF;
 }
-.tableColumn-3 {
+/*.tableColumn-3 {
 	display: inline-table;
 	width: 30%;
-}
+}*/
 .closealert {
 	top: -10px;
 	right: -5px;
@@ -293,23 +285,29 @@ ol {
 	padding: 30px 15px;
 }*/
 .withStar.title .right {
-	margin: 0px 20px 0px 0px;
+	margin: 0px;
 }
 .nominateButton {
 	padding: 40px 0;
 	height: auto;
 }
-.tableColumn-4 {
-	width: 60%;
-	margin-right: 20px;
+#myTeam .tableColumn-4 {
 	display: inline-table;
-	padding: 20px 4px;
+	width: 66%;
+/*	margin-right: 20px;
+	padding: 20px 4px;*/
+}
+.tableColumn-4 {
+	display: inline-table;
+}
+.myawards .tableColumn-2{
+	width: 15%;
 }
 .tableReports {
 	height: auto;
 }
 .tableReportsHead{
-	width: 32% !important;
+	width: 24.6% !important;
 }
 .searchInput {
 	min-height: 50px !important;
@@ -334,12 +332,12 @@ ol {
 	float: left;
 	width: 20%;
 }
-#content .leftnp{
+/*#content .leftnp{
 	padding-left: 1%;
 }
 #content .rightnp{
 	padding-right: 1%;
-}
+}*/
 .mobileButtonFix{
 	width: 100% !important;
     margin: 30px 0 10px;
@@ -351,15 +349,46 @@ ol {
 	width: 100%;
 }
 }
-@media only screen and (max-width: 374px) {
+@media only screen and (max-width: 375px) {
 #nominateColleague2 .subSubTitle{
 	display: block;
+}
+.withStar{
+	position: relative;
+}
+.MyAccount .purpleButton{
+	float: none !important;
+    position: absolute;
+    right: 5px;
+    bottom: 8px;
+    z-index: 1;
+}
+.title .awardStar{
+	font-size: 14px;
+	display: block;
+	margin-left: -3px;
+}
+.title .awardStar i{
+	margin: 0;
+	float: none;
+}
+#reports .tableReportsHead{
+	width: 49% !important;
 }
 }
 /* @end */
 /* @group Approvals */
 .greyBox .medium-6{
 	width: 50%;
+}
+@media only screen and (max-width: 375px) {
+#approvalHistory .tableTitle{
+	padding: 0;
+}
+#approvalHistory .tableColumn-2, #approvalHistory .tableColumn-1{
+	width: 32.7%;
+	 padding: 5px 0;
+}
 }
 /* @end */
 
@@ -391,6 +420,12 @@ ol {
 @media only screen and (max-width: 1199px) {
 .sub-menu > li > a {
 	padding: 2px 40px;
+}
+.creditCardView .medium-3{
+	width: 28%;
+}
+.creditCardView .medium-9{
+	width: 72%;
 }
 }
 @media only screen and (max-width: 1023px) {
@@ -469,7 +504,7 @@ ol {
 	min-height: initial;
 }
 }
-@media only screen and (max-width: 479px) {
+/*@media only screen and (max-width: 479px) {
 .tableColumn-3 {
 	display: inline-table;
 	width: 18%;
@@ -483,7 +518,7 @@ ol {
 	width: 24%;
 	font: 8px;
 }
-}
+}*/
 /* @end */
 /* @group Admin */
 @media only screen and (max-width: 1199px) {

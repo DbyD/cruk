@@ -6,6 +6,7 @@ $menu = new MenuGenerator;
 
 $menu_id = $_GET["menu_id"];
 $checkout = $_GET["checkout"];
+$delivery = $_GET['delivery'] == 'yes' ? true : false;
 
 if(isset($_POST) && !empty($_POST)){
 	// var_dump($_POST);die;
@@ -57,7 +58,7 @@ if(isset($_POST['redirectURL'])){
 				$order_insert_id = addBasketOrders( $insert_data );
 				$insert_data["orderID"] = $order_insert_id;
 				insertCreditCard( $insert_data );
-				$last_order_id = $order_insert_id;
+				$last_order_id = 'CR'.$order_insert_id;
 				$email_order_code = $order_insert_id;
 				updateBasketStatus( $_SESSION['user']->EmpNum, $order_insert_id );
 				
@@ -65,13 +66,14 @@ if(isset($_POST['redirectURL'])){
 				
 				$post_email = $insert_data;
 				$args["tel_number"] = $post_email['telephone'];
-				$delivery_address = $post_email['address1'].', ';
-				if ($post_email['address2'] !=''){ 
-					$delivery_address .= $post_email['address2'].', ';
+				if (isset($post_email['address1'])){
+					$delivery_address = $post_email['address1'].', ';
+					if ($post_email['address2'] !=''){ 
+						$delivery_address .= $post_email['address2'].', ';
+					}
+					$delivery_address .= $post_email['town'].', '.$post_email['postcode'];
+					$args["delivery_address"] = $delivery_address;
 				}
-				$delivery_address .= $post_email['town'].', '.$post_email['postcode'];
-				$args["delivery_address"] = $delivery_address;
-		
 				$args["email_order_code"] = $email_order_code;
 				SendMail( $args );
 
@@ -116,7 +118,8 @@ $basket = getBasket( $_SESSION["user"]->EmpNum );
 			}
 		}
 	
-		if( isset( $_POST[ "address1" ] ) && isset($_POST[ "town" ] ) && isset( $_POST[ "postcode" ] ) && isset( $_POST[ "read" ] ) ){			
+		if( !isset($_POST['no_delivery']) && isset( $_POST[ "address1" ] ) && isset($_POST[ "town" ] ) && isset( $_POST[ "postcode" ] ) && isset( $_POST[ "read" ] ) )
+		{			
 			$error = false;
 			$post = $_POST;
 
@@ -135,8 +138,19 @@ $basket = getBasket( $_SESSION["user"]->EmpNum );
 			if( $_POST["read"] != "on" ){
 				$error = true;
 			}
-
 		}
+		else
+		if(isset($_POST['no_delivery']) && isset($_POST['telephone']))
+		{
+			$error = false;
+			$post = $_POST;
+
+			if( empty( $_POST["telephone"] ) )
+			{
+				$error = true;
+			}
+		}
+
 	} else if( isset($_POST['redirectURL'])  ){
 		$postForUpload = array();
 	}
@@ -192,15 +206,16 @@ if( isset( $email_order_code ) && $_SESSION["thank_you"] == false){
 		
 		$post_email = unserialize($_POST['post']);
 		$args["tel_number"] = $post_email['telephone'];
-		$delivery_address = $post_email['address1'].', ';
-		if ($post_email['address2'] !=''){ 
-			$delivery_address .= $post_email['address2'].', ';
+		if (isset($post_email['address1'])){
+			$delivery_address = $post_email['address1'].', ';
+			if ($post_email['address2'] !=''){ 
+				$delivery_address .= $post_email['address2'].', ';
+			}
+			$delivery_address .= $post_email['town'].', '.$post_email['postcode'];
+			$args["delivery_address"] = $delivery_address;
 		}
-		$delivery_address .= $post_email['town'].', '.$post_email['postcode'];
-		$args["delivery_address"] = $delivery_address;
-		
 		$email_order_code = $args["email_order_code"];
-		$last_order_id = $email_order_code;
+		$last_order_id = 'CR'.$email_order_code;
 		SendMail( $args );
 	}
 }
@@ -334,7 +349,7 @@ if( isset( $email_order_code ) && $_SESSION["thank_you"] == false){
 				<div id="formDiv" >
 					<div class="row">
 						<div class="medium-12 withPadding columns">
-							If your order includes an e-voucher code,this will be delivered by email using your work email adress,if you have also made a charity donation, this will automatically be made on your behalf.
+							If your order includes an e-voucher code, this will be delivered by email.
 						</div>
 					</div>
 					<?php foreach ($post as $key => $value):?>
@@ -360,7 +375,7 @@ if( isset( $email_order_code ) && $_SESSION["thank_you"] == false){
 							<label class="inline">
 								<?php 
 												if( $key != 'read' ){ 
-													echo ( $value == '' )?'<i>(Empty)</i>':$value;
+													echo ( $value == '' )?'<i></i>':$value;
 												}
 											?>
 							</label>
@@ -383,7 +398,7 @@ if( isset( $email_order_code ) && $_SESSION["thank_you"] == false){
 					</div>
 					<div class="row">
 						<div class="medium-12 withPadding columns">
-							If you require any assistance completing this transaction please contact the Xexec Helpdesk by email at <a href="info@xexec.com">info@xexec.com</a> or by telephone on 0845 230 9393
+							If you require any assistance completing this transaction please contact the Xexec Helpdesk by email at <a href="mailto:info@xexec.com">info@xexec.com</a> or by telephone on 0845 230 9393
 						</div>
 					</div>
 				</div>
@@ -395,8 +410,7 @@ if( isset( $email_order_code ) && $_SESSION["thank_you"] == false){
 					<div class="row">
 						<div class="medium-12 withPadding columns">
 							<h2>Thank you</h2>
-							<p>Thank you for your purchase. Your voucher will be delivered within the next 5-7 working days 
-								(Additional delay may be experienced over the official holidays).</p>
+							<p>Thank you for your purchase. Your voucher will be delivered within the next 5-7 working days. (Additional delay may be experienced over a public holiday period.)</p>
 							<p>Your Reference for this order is: <?php echo $last_order_id?></p>
 							<p>Confirmation of this order has been sent to your email address.</p>
 						</div>
@@ -412,27 +426,32 @@ if( isset( $email_order_code ) && $_SESSION["thank_you"] == false){
 					<form action="<?php echo HTTP_PATH . 'redeem/checkout.php?menu_id=' . $menu_id . "&checkout=true" ?>" method="post">
 						<div class="row">
 							<div class="medium-12 withPadding columns">
-								If your order includes an e-voucher code,this will be delivered by email using your work email adress,if you have also made a charity donation, this will automatically be made on your behalf.
-								</p>
+								If your order includes an e-voucher code, this will be delivered by email
 							</div>
 						</div>
 						<div class="row">
 							<div class="medium-3 columns textRight">
-								<label for="right-label" class="right inline">Telephone Number: <span class="required">&nbsp;</span>
+								<label for="right-label" class="right inline">Telephone Number: <span class="required">*</span>
 								</label>
 							</div>
 							<div class="medium-9 columns">
-								<input type="text" id="right-label" name="telephone" value="<?php echo (isset($form["telephone"]))?$form["telephone"]:"";?>">
+								<input type="text" id="right-label" name="telephone" value="<?php echo (isset($form["telephone"]))?$form["telephone"]:"";?>" required>
 							</div>
 						</div>
+						<?php
+						if($delivery) //start delivery check
+						{ 
+						?>
 						<div class="row">
 							<div class="medium-3 columns textRight">
-								<label for="right-label" class="right inline">Address Line 1: <span class="required">*</span>
+							<p>&nbsp;</p>
+								<label for="right-label" class="right inline smallTopMargin">Address Line 1: <span class="required">*</span>
 									<br />
 									<small>(or company name)</small></label>
 							</div>
 							<div class="medium-9 columns">
-								<input type="text" id="right-label" name="address1" value="<?php echo (isset($form["address1"]))?$form["address1"]:"";?>" required>
+								<div class="smallTopMargin">Please supply a fully inclusive delivery address as this will be the<br>address we will be delivering your products to.</div>
+								<input type="text" class="smallTopMargin" id="right-label" name="address1" value="<?php echo (isset($form["address1"]))?$form["address1"]:"";?>" required>
 								<small>House name/number and street, P.O. box,company name, c/o</small>
 							</div>
 						</div>
@@ -465,13 +484,17 @@ if( isset( $email_order_code ) && $_SESSION["thank_you"] == false){
 								<input type="text" id="right-label" name="postcode" value="<?php echo (isset($form["postcode"]))?$form["postcode"]:"";?>" required>
 							</div>
 						</div>
+						<?php 
+						} //end delivery check
+						else
+						echo '<input type="hidden" name="no_delivery" value="" />'; ?> 
+
 						<div class="row withPadding">
 							<div class="medium-3 columns textRight">
 								<span class="right inline required small">* Required Fields</span>
 							</div>
 							<div class="medium-9 columns">
-								<p>Please supply a fully inclusive delivery address as this will be the address we will be delivering your products to.</p>
-								I have read the Terms & Conditions <span class="required">*</span>
+								I have read the <a href="<?=HTTP_PATH?>terms.php" target="_blank">Terms & Conditions</a> <span class="required">*</span>
 								<input type="checkbox" name="read" <?php echo ( isset( $form ) )?'checked':"";?> >
 							</div>
 						</div>
@@ -483,7 +506,7 @@ if( isset( $email_order_code ) && $_SESSION["thank_you"] == false){
 						</div>
 						<div class="row">
 							<div class="medium-12 withPadding columns">
-								If you require any assistance completing this transaction please contact the Xexec Helpdesk by email at <a href="info@xexec.com">info@xexec.com</a> or by telephone on 0845 230 9393
+								If you require any assistance completing this transaction please contact the Xexec Helpdesk by email at <a href="mailto:info@xexec.com">info@xexec.com</a> or by telephone on 0845 230 9393
 							</div>
 						</div>
 					</form>

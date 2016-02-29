@@ -9,8 +9,8 @@
 	<form action="nominate-submit.php" method="post" name="nominateColleague2" id="nominateColleague2">
 		<input type="hidden" name="formName" value="nominateColleague2">
 		<div class="title">
-			Nominate <i class="icon-icons_thickrightarrow smalli"></i> <span class="subTitle">Colleague</span>
-			<i class="icon-icons_thickrightarrow smalli"></i> <span class="subSubTitle"><?=$_SESSION['nominee']->full_name();?></span>
+			<div class="inlineDiv clickAble" data-type="gourl" data-url="index.php">Nominate</div> <i class="icon-icons_thickrightarrow smalli"></i>
+			<span class="subTitle clickAble" data-type="goback">Colleague</span> <i class="icon-icons_thickrightarrow smalli"></i> <span class="subSubTitle"><?=$_SESSION['nominee']->full_name();?></span>
 			<div class="titlePhoto">
 				<img src="<?=HTTP_PATH.$_SESSION['nominee']->Photo?>" alt="" onerror="this.src='<?=HTTP_PATH?>images/no-photo.png'"/>
 			</div>

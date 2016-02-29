@@ -16,10 +16,15 @@ function getTotalProducts(){
 function getMenuProducts( $menu_id , $sub_id ){
 	global $db;
 	$where = 'menuID = :menuID AND subID = :subID';
-	if( $sub_id === null ){
+	if( $sub_id === null )
+	{
 		$where = 'menuID = :menuID AND subID IS NULL';
 	}
-	$stmt = $db->prepare('SELECT * FROM tblproducts WHERE ' . $where);
+
+	if($_SESSION['user']->administrator == 'NO')
+		$where .= " AND showID = 'yes'";
+
+	$stmt = $db->prepare("SELECT * FROM tblproducts WHERE " . $where);
 	$stmt->bindValue(':menuID',$menu_id, PDO::PARAM_INT);
 	if( $sub_id !== null ){
 		$stmt->bindValue(':subID', $sub_id, PDO::PARAM_INT);
@@ -35,26 +40,37 @@ function getMenuProducts( $menu_id , $sub_id ){
 	return $arr;
 }
 
+/*
+	Insert a product into shop 
+*/
 function insertProduct( $data ){
 	global $db;
 	$sub_key = $sub_value = '';
-	if($data["subID"] != 'other'){
+
+	if($data["subID"] != 'other')
+	{
 		$sub_key = 'subID,';
 		$sub_value = ':subID,';
 	}
+
 	$stmt = $db->prepare("
 		INSERT INTO tblproducts 
-			(aTitle, aPrice, delivery, aContent, menuID, " . $sub_key . " Image_name) 
+			(aTitle, aPrice, showID, delivery, aContent, menuID, " . $sub_key . " Image_name) 
 		VALUES 
-			(:aTitle, :aPrice, :delivery, :aContent, :menuID, " . $sub_value . " :Image_name )");
+			(:aTitle, :aPrice, :showID, :delivery, :aContent, :menuID, " . $sub_value . " :Image_name )");
+
 	$stmt->bindValue(':aTitle',$data["aTitle"], PDO::PARAM_STR);
 	$stmt->bindValue(':aPrice', $data["aPrice"], PDO::PARAM_STR);
+	$stmt->bindValue(':showID', $data["showID"], PDO::PARAM_STR);
 	$stmt->bindValue(':delivery',$data["delivery"] , PDO::PARAM_STR);
 	$stmt->bindValue(':aContent',$data["aContent"] , PDO::PARAM_STR);
 	$stmt->bindValue(':menuID',$data["menuID"] , PDO::PARAM_INT);
-	if($data["subID"] != 'other'){
+
+	if($data["subID"] != 'other')
+	{
 		$stmt->bindValue(':subID',$data["subID"] , PDO::PARAM_INT);
 	}
+
 	$stmt->bindValue(':Image_name',$data["Image_name"] , PDO::PARAM_STR);
 	$stmt->execute();
 } 
@@ -71,6 +87,7 @@ function updateProduct( $data ){
 		SET aTitle = :aTitle,
 			aPrice = :aPrice,
 			delivery = :delivery,
+			showID = :showID,
 			aContent = :aContent,
 			menuID = :menuID,
 			subID = :subID " . $image_update . "
@@ -80,6 +97,7 @@ function updateProduct( $data ){
 	$stmt->bindValue(':aTitle',$data["aTitle"], PDO::PARAM_STR);
 	$stmt->bindValue(':aPrice', $data["aPrice"], PDO::PARAM_STR);
 	$stmt->bindValue(':delivery',$data["delivery"] , PDO::PARAM_STR);
+	$stmt->bindValue(':showID',$data["showID"] , PDO::PARAM_STR);
 	$stmt->bindValue(':aContent',$data["aContent"] , PDO::PARAM_STR);
 	$stmt->bindValue(':menuID',$data["menuID"] , PDO::PARAM_INT);
 	$stmt->bindValue(':subID', $data["subID"] , PDO::PARAM_INT);
@@ -466,14 +484,14 @@ function get_content_email( $email_order_code, $tel_number, $delivery_address) {
 								<td>' . $b['QTY'] .'</td>
 								<td class="textLeft">' . $b['aTitle'] . '</td>
 								<td>&pound;' . $b['aPrice'] . '</td>
-							</tr>
-							<tr>
-								<td></td>
-								<td class="textRight"><b>Total</b></td>
-								<td><b>&pound;' . $total_price . '</b></td>
 							</tr>';
 			$i++;
 		}
+		$table_body .= '<tr>
+							<td></td>
+							<td class="textRight"><b>Total</b></td>
+							<td><b>&pound;' . $total_price . '</b></td>
+						</tr>';
 	// you need to add content here.
 	$content =	'<p>Dear '.$_SESSION['user']->Fname.'</p>
 				<p>Thank you for your recent purchase.</p>
@@ -485,12 +503,12 @@ function get_content_email( $email_order_code, $tel_number, $delivery_address) {
 							<th width="125">PRICE</th>
 						</tr>
 						' . $table_body . '
-				</table><p>&nbsp;</p>';
+				</table><br>&nbsp;';
 	//add shopping basket here in a table
 	$content .= '<table id="table_basket" class="details" border="0" cellpadding="2" cellspacing="0" >
 					<tr>
 						<td width="150"><b>Your order code:</b></td>
-						<td> ' . $email_order_code .  ' </td>
+						<td> CR' . $email_order_code .  ' </td>
 					</tr>
 					<tr>
 						<td><b>Name:</b></td>
@@ -503,12 +521,14 @@ function get_content_email( $email_order_code, $tel_number, $delivery_address) {
 					<tr>
 						<td><b>Telephone Number:</b></td>
 						<td>' . $tel_number . '</td>
-					</tr>
-					<tr>
+					</tr>';
+		if($delivery_address!=''){
+		$content .= '<tr>
 						<td><b>Delivery address:</b></td>
 						<td>' . $delivery_address . '</td>
-					</tr>
-				</table>';
+					</tr>';
+		}
+		$content .= '</table>';
 	//add order details here in a table
 	$content .= '';
 	$content .='<p>If you have any questions regarding your order, please email <a href="mailto:concierge@xexec.com">concierge@xexec.com</a> or<br>call +44 20 8201 6483 quoting your unique order code.</p>';

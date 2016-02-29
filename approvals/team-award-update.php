@@ -107,7 +107,11 @@
 			}
 			
 			
-			$award->NomFull_name = $award->nominator()->full_name;
+			if ($award->Volunteer !='') {
+				$award->NomFull_name = $award->Volunteer;
+			} else {
+				$award->NomFull_name = $award->nominator()->full_name;
+			}
 			$award->NomFname = $award->nominator()->Fname;
 			$award->firstPerson = $firstPerson;
 			//print_r($award);
@@ -118,14 +122,14 @@
 				$award->full_name = $list->Fname.' '.$list->Sname;
 				
 				//need to get offline...
-				//$award->teamNominees()->offline = ;
+				//$award->teamNominees()->Offline = ;
 				
 				//also need to send to LM
 				
 				$award->content = indEcardTeamExtraText($award);
 				echo $award->content;
 			// check if offline
-				if ($award->teamNominees()->offline == 'YES'){
+				if ($award->teamNominees()->Offline == 'Y'){
 					// they in a shop so considered offline. need to fix email with all requirements. will need to get from Jamie
 					$sendEmail = new StdClass();
 					$sendEmail->emailTo = $xexecEmail;

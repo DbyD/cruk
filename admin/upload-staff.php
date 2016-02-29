@@ -45,12 +45,12 @@
 			$stmt->execute();
 			$check = $stmt->fetchAll(PDO::FETCH_OBJ);
 			if($check[0]->Cnt == 0){
-				$SQL = "INSERT INTO tblempall(EmpNum,Fname,Sname,PreferredFname,Eaddress,JobTitle,Grade,Shop,
-				   		Team,Section,Department,Directorate,LocationName,LocationAddress,SuperUser,LMEmpNum,LMFname,
-				   		LMSname,LMEaddress,AppEmpNum,eligible)
-				   		VALUES(:EmpNum,:Fname,:Sname,:PreferredFname,:Eaddress,:JobTitle,:Grade,:Shop,
-				   		:Team,:Section,:Department,:Directorate,:LocationName,:LocationAddress,:SuperUser,
-				   		:LMEmpNum,:LMFname,:LMSname,:LMEaddress,:APPEnum,:eligable)";
+				$SQL = "INSERT INTO tblempall(EmpNum,Fname,Sname,PreferredFname,Eaddress,JobTitle,Grade,Shop,RetailArea
+				   		Team,Section,Department,Directorate,DirectorateInitials,LocationName,LocationAddress,Offline,SuperUser,
+						LMEmpNum,LMFname,LMSname,LMEaddress,LMGrade,AppEmpNum,AppFname,AppSname,AppEaddresseligible)
+				   		VALUES(:EmpNum,:Fname,:Sname,:PreferredFname,:Eaddress,:JobTitle,:Grade,:Shop,:RetailArea,
+				   		:Team,:Section,:Department,:Directorate,:DirectorateInitials,:LocationName,:LocationAddress,:Offline,:SuperUser,
+				   		:LMEmpNum,:LMFname,:LMSname,:LMEaddress,:,LMGrade:AppEmpNum,:AppFname,:AppSname,:AppEaddress,:eligable)";
 					
 				$stmt = $db->prepare($SQL);
 				$stmt->bindParam(':EmpNum', $linearray[0]);
@@ -61,27 +61,34 @@
 				$stmt->bindParam(':JobTitle', $linearray[5]);
 				$stmt->bindParam(':Grade', $linearray[6]);
 				$stmt->bindParam(':Shop', $linearray[7]);
-				$stmt->bindParam(':Team', $linearray[8]);
-				$stmt->bindParam(':Section', $linearray[9]);
-				$stmt->bindParam(':Department', $linearray[10]);
-				$stmt->bindParam(':Directorate', $linearray[11]);
-				$stmt->bindParam(':LocationName', $linearray[12]);
-				$stmt->bindParam(':LocationAddress', $linearray[13]);
-				$stmt->bindParam(':SuperUser', $linearray[14]);
-				$stmt->bindParam(':LMEmpNum', $linearray[15]);
-				$stmt->bindParam(':LMFname', $linearray[16]);
-				$stmt->bindParam(':LMSname', $linearray[17]);
-				$stmt->bindParam(':LMEaddress', $linearray[18]);
-				$stmt->bindParam(':APPEnum', $linearray[20]);
-				$stmt->bindParam(':eligable', $linearray[21]);
+				$stmt->bindParam(':RetailArea', $linearray[8]);
+				$stmt->bindParam(':Team', $linearray[9]);
+				$stmt->bindParam(':Section', $linearray[10]);
+				$stmt->bindParam(':Department', $linearray[11]);
+				$stmt->bindParam(':Directorate', $linearray[12]);
+				$stmt->bindParam(':DirectorateInitials', $linearray[13]);
+				$stmt->bindParam(':LocationName', $linearray[14]);
+				$stmt->bindParam(':LocationAddress', $linearray[15]);
+				$stmt->bindParam(':Offline', $linearray[16]);
+				$stmt->bindParam(':SuperUser', $linearray[17]);
+				$stmt->bindParam(':LMEmpNum', $linearray[18]);
+				$stmt->bindParam(':LMFname', $linearray[19]);
+				$stmt->bindParam(':LMSname', $linearray[20]);
+				$stmt->bindParam(':LMEaddress', $linearray[21]);
+				$stmt->bindParam(':LMGrade', $linearray[22]);
+				$stmt->bindParam(':AppEmpNum', $linearray[23]);
+				$stmt->bindParam(':AppFname', $linearray[24]);
+				$stmt->bindParam(':AppSname', $linearray[25]);
+				$stmt->bindParam(':AppEaddress', $linearray[26]);
+				$stmt->bindParam(':eligable', $linearray[27]);
 				$stmt->execute();
 			} else {
 				$SQL = "UPDATE tblempall SET Fname = :FName, Sname = :Sname, 
 						PreferredFname = :PreferredFname, Eaddress = :Eaddress, JobTitle = :JobTitle, 
-						Grade = :Grade, Shop = :Shop, Team = :Team, Section = :Section, Department = :Department, 
-						Directorate = :Directorate, LocationName = :LocationName, LocationAddress = :LocationAddress, 
-						SuperUser = :SuperUser, LMEmpNum = :LMEmpNum, LMFname = :LMFname,
-				   		LMSname  = :LMSname, LMEaddress = :LMEaddress, AppEmpNum = :AppEmpNum, eligible = :eligible
+						Grade = :Grade, Shop = :Shop, RetailArea = :RetailArea, Team = :Team, Section = :Section, Department = :Department, 
+						Directorate = :Directorate, DirectorateInitials = :DirectorateInitials, LocationName = :LocationName, LocationAddress = :LocationAddress, 
+						Offline = :Offline, SuperUser = :SuperUser, LMEmpNum = :LMEmpNum, LMFname = :LMFname,LMSname  = :LMSname,LMEaddress = :LMEaddress,  
+				   		AppEmpNum = :AppEmpNum, AppFname = :AppFname, AppSname = :AppSname, AppEaddress = :AppEaddress, eligible = :eligible
 				   		WHERE EmpNum = :EmpNum";
 					
 				$stmt = $db->prepare($SQL);
@@ -93,19 +100,26 @@
 				$stmt->bindParam(':JobTitle', $linearray[5]);
 				$stmt->bindParam(':Grade', $linearray[6]);
 				$stmt->bindParam(':Shop', $linearray[7]);
-				$stmt->bindParam(':Team', $linearray[8]);
-				$stmt->bindParam(':Section', $linearray[9]);
-				$stmt->bindParam(':Department', $linearray[10]);
-				$stmt->bindParam(':Directorate', $linearray[11]);
-				$stmt->bindParam(':LocationName', $linearray[12]);
-				$stmt->bindParam(':LocationAddress', $linearray[13]);
-				$stmt->bindParam(':SuperUser', $linearray[14]);
-				$stmt->bindParam(':LMEmpNum', $linearray[15]);
-				$stmt->bindParam(':LMFname', $linearray[16]);
-				$stmt->bindParam(':LMSname', $linearray[17]);
-				$stmt->bindParam(':LMEaddress', $linearray[18]);
-				$stmt->bindParam(':APPEnum', $linearray[20]);
-				$stmt->bindParam(':eligable', $linearray[21]);
+				$stmt->bindParam(':RetailArea', $linearray[8]);
+				$stmt->bindParam(':Team', $linearray[9]);
+				$stmt->bindParam(':Section', $linearray[10]);
+				$stmt->bindParam(':Department', $linearray[11]);
+				$stmt->bindParam(':Directorate', $linearray[12]);
+				$stmt->bindParam(':DirectorateInitials', $linearray[13]);
+				$stmt->bindParam(':LocationName', $linearray[14]);
+				$stmt->bindParam(':LocationAddress', $linearray[15]);
+				$stmt->bindParam(':Offline', $linearray[16]);
+				$stmt->bindParam(':SuperUser', $linearray[17]);
+				$stmt->bindParam(':LMEmpNum', $linearray[18]);
+				$stmt->bindParam(':LMFname', $linearray[19]);
+				$stmt->bindParam(':LMSname', $linearray[20]);
+				$stmt->bindParam(':LMEaddress', $linearray[21]);
+				$stmt->bindParam(':LMGrade', $linearray[22]);
+				$stmt->bindParam(':AppEmpNum', $linearray[23]);
+				$stmt->bindParam(':AppFname', $linearray[24]);
+				$stmt->bindParam(':AppSname', $linearray[25]);
+				$stmt->bindParam(':AppEaddress', $linearray[26]);
+				$stmt->bindParam(':eligable', $linearray[27]);
 				$stmt->execute();
 			}
 		}

@@ -6,8 +6,7 @@ function createNominee($empnum){
 	$stmt->execute(array('EmpNum' => $empnum));
 	$stmt->setFetchMode(PDO::FETCH_CLASS, 'User');
 	if ($result = $stmt->fetch()){
-		if ($result->Shop != ''  && $result->JobTitle != 'Shop Mgr'){
-			$result->offline = 'YES';
+		if ($result->Offline == 'Y'){
 			// find Shop Mgr
 			$stmt = $db->prepare('SELECT * FROM tblempall WHERE Shop = :Shop AND JobTitle= :JobTitle');
 			$stmt->execute(array('Shop' => $result->Shop, 'JobTitle' => 'Shop Mgr' ));

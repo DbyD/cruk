@@ -16,7 +16,7 @@
 		</div>
 		<i class="icon-icons_thickrightarrow smalli"></i> <span class="subSubTitle">Redemption</span>
 	</div>
-	<div class="row contentFill">
+	<div id="reports" class="row contentFill">
 		<div class="medium-12 columns leftnp rightnp">
 			<div class="callout panel white">
 				<div class="tableReports">
@@ -157,7 +157,11 @@
 					</div>
 				</div>
 				<input type="hidden" name="EmpNum" value="<?=$_SESSION['user']->EmpNum?>" />
+				<?php if($_SESSION['user']->administrator =='YES'){ ?>
+				<input type="hidden" name="eType" value="4" />
+				<?php } else { ?>
 				<input type="hidden" name="eType" value="2" />
+				<?php }  ?>
 			</form>
 		</div>
 	</div>

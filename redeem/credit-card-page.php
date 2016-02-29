@@ -134,7 +134,7 @@ if(count($basket) > 0 && is_array($basket)){
 							</div>
 							<div class="medium-9 columns">
 								<p>Please supply a fully inclusive delivery address as this will be the address we will be delivering your products to.</p>
-								I have read the Terms & Conditions <span class="required">*</span>
+								I have read the <a href="<?=HTTP_PATH?>terms.php" target="_blank">Terms & Conditions</a> <span class="required">*</span>
 								<input type="checkbox" name="read" <?php echo ( isset( $form ) )?'checked':"";?> >
 							</div>
 						</div>

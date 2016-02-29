@@ -11,6 +11,14 @@
 			$filename = "Redemption_" . date("Ymd") . ".xls";
 			$dataLine = createRedemptionExport($_POST);
 			break;
+		case 3:
+			$filename = "TeamNominations_" . date("Ymd") . ".xls";
+			$dataLine = createTeamNominationExport($_POST);
+			break;
+		case 4:
+			$filename = "Redemption_" . date("Ymd") . ".xls";
+			$dataLine = createXexecRedemptionExport($_POST);
+			break;
 	}
 	
 	header("Cache-Control: must-revalidate, post-check=0, pre-check=0");

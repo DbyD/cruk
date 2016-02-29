@@ -197,7 +197,7 @@
 					
 					//echo $_SESSION['teamnominee']->content;
 					// test if offline
-					if ($list->offline == 'YES'){
+					if ($list->Offline == 'Y'){
 						// they in a shop so considered offline. need to fix email with all requirements. will need to get wording from Jamie
 						$sendEmail = new StdClass();
 						$sendEmail->emailTo = $xexecEmail;

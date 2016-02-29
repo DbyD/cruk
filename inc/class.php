@@ -72,13 +72,10 @@ class Award {
 	}
 	public function nominee(){
 		global $db;
-		$stmt = $db->prepare('SELECT Fname, Sname, Eaddress, RetailArea, Shop, JobTitle, LMEmpNum FROM tblempall WHERE EmpNum = :NominatedEmpNum');
+		$stmt = $db->prepare('SELECT Fname, Sname, Eaddress, RetailArea, Shop, JobTitle, Offline, LMEmpNum FROM tblempall WHERE EmpNum = :NominatedEmpNum');
 		$stmt->execute(array('NominatedEmpNum' => $this->NominatedEmpNum));
 		$result = $stmt->fetch(PDO::FETCH_OBJ);
 		$result->full_name = $result->Fname. ' ' . $result->Sname;
-		if ($result->Shop != '' && $result->JobTitle != 'Shop Mgr'){
-			$result->offline = 'YES';
-		}
 		return $result;
 	}
 	public function approver(){

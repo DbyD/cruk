@@ -3,8 +3,9 @@
 	include_once('../inc/header.php');
 	unset($_SESSION['alreadydone']);
 	unset($_SESSION['nominee']);
-	$teamid =$_POST['myTeamName'];
+	$teamid = $_POST['myTeamName'];
 	$_SESSION['TeamMembers'] =  getAllTeamsMembers($teamid);
+	$_SESSION['teamnominee'] = new stdClass();
 	$_SESSION['teamnominee']->teamID = $teamid;
 ?>
 
@@ -12,7 +13,8 @@
 	<form action="nominate-team-submit.php" method="post" name="nominateColleague2" id="nominateColleague2">
 		<input type="hidden" name="formName" value="nominateColleague2">
 		<div class="title">
-			Nominate <i class="icon-icons_thickrightarrow smalli"></i> <span class="subTitle">Team</span>
+			<div class="inlineDiv clickAble" data-type="gourl" data-url="index.php">Nominate</div> <i class="icon-icons_thickrightarrow smalli"></i>
+			<span class="subTitle clickAble" data-type="goback">Team</span>
 			<i class="icon-icons_thickrightarrow smalli"></i> <span class="subSubTitle"><?=getmyTeamName($_SESSION['teamnominee']->teamID);?></span>
 		</div>
 		<div class="row selectBelief">

@@ -45,7 +45,7 @@
 			// send LM and Shop Manger email 
 			$sendEmail->emailTo = $sendEmail->lineManager()->Eaddress;
 			$sendEmail->subject = 'Award Redemption';
-			if($sendEmail->nominee()->offline == 'Yes'){
+			if($sendEmail->nominee()->Offline != 'Y' || $sendEmail->nominee()->JobTitle == 'Shop Mgr'){
 				//if online  LM only
 				$sendEmail->Content ='<p>Dear '.$sendEmail->lineManager()->Fname.'</p>
 										<p>'.$sendEmail->nominee()->full_name.' has chosen to redeem their Our Heroes Extraordinary People, Extraordinary Effort award for a 
@@ -58,25 +58,39 @@
 				}
 			} else {
 				// else if offline email LM
-				$sendEmail->Content ='<p>Dear '.$sendEmail->lineManager()->Fname.'</p>
-										<p>'.$sendEmail->nominee()->full_name.' has chosen to redeem their Our Heroes Extraordinary People, Extraordinary Effort award for a 
-										'. $sendEmail->amount.' voucher. This email serves as confirmation of the award.</p>
-										<p>Notification of their award has also been sent to their Shop Manager with whom they must discuss arrangements for the award.</p>
-										<p>Kind regards</p>';
-				if(filter_var($sendEmail->lineManager()->Eaddress, FILTER_VALIDATE_EMAIL)){
-					$email = sendEmail($sendEmail,$ID);
-					echo $email;
-				}
-				// email shop manager
-				$sendEmail->emailTo = $sendEmail->shopManager()->Eaddress;
-				$sendEmail->Content ='<p>Dear '.$sendEmail->shopManager()->Fname.'</p>
-										<p>'.$sendEmail->nominee()->full_name.' has chosen to redeem their Our Heroes Extraordinary People, Extraordinary Effort award for a 
-										'. $sendEmail->amount.' voucher. This email serves as confirmation of the award.</p>
-										<p>They have been asked to discuss arrangements for this award with you.</p>
-										<p>Kind regards</p>';
-				if(filter_var($sendEmail->shopManager()->Eaddress, FILTER_VALIDATE_EMAIL)){
-					$email = sendEmail($sendEmail,$ID);
-					echo $email;
+				// if in a shop
+				if($sendEmail->nominee()->Shop != ''){
+					$sendEmail->Content ='<p>Dear '.$sendEmail->lineManager()->Fname.'</p>
+											<p>'.$sendEmail->nominee()->full_name.' has chosen to redeem their Our Heroes Extraordinary People, Extraordinary Effort award for a 
+											'. $sendEmail->amount.' voucher. This email serves as confirmation of the award.</p>
+											<p>Notification of their award has also been sent to their Shop Manager with whom they must discuss arrangements for the award.</p>
+											<p>Kind regards</p>';
+					if(filter_var($sendEmail->lineManager()->Eaddress, FILTER_VALIDATE_EMAIL)){
+						$email = sendEmail($sendEmail,$ID);
+						echo $email;
+					}
+					// email shop manager
+					$sendEmail->emailTo = $sendEmail->shopManager()->Eaddress;
+					$sendEmail->Content ='<p>Dear '.$sendEmail->shopManager()->Fname.'</p>
+											<p>'.$sendEmail->nominee()->full_name.' has chosen to redeem their Our Heroes Extraordinary People, Extraordinary Effort award for a 
+											'. $sendEmail->amount.' voucher. This email serves as confirmation of the award.</p>
+											<p>They have been asked to discuss arrangements for this award with you.</p>
+											<p>Kind regards</p>';
+					if(filter_var($sendEmail->shopManager()->Eaddress, FILTER_VALIDATE_EMAIL)){
+						$email = sendEmail($sendEmail,$ID);
+						echo $email;
+					}
+				} else {
+					//if offline but only have a  LM only
+					$sendEmail->Content ='<p>Dear '.$sendEmail->lineManager()->Fname.'</p>
+											<p>'.$sendEmail->nominee()->full_name.' has chosen to redeem their Our Heroes Extraordinary People, Extraordinary Effort award for a 
+											'. $sendEmail->amount.' voucher.</p>
+											<p>They have been asked to discuss arrangements for this award with you.</p>
+											<p>Kind regards</p>';
+					if(filter_var($sendEmail->lineManager()->Eaddress, FILTER_VALIDATE_EMAIL)){
+						$email = sendEmail($sendEmail,$ID);
+						echo $email;
+					}
 				}
 				
 			}

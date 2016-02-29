@@ -482,7 +482,7 @@
 	margin: 1rem 0 0;
 }
 .noRightBorder {
-	border-right: 0;
+	border-right: 0 !important;
 }
 .searchTeamInput input[type=text] {
 	padding: 5px 15px 5px 32px;
@@ -681,7 +681,7 @@ form .row .row {
 }
 .tableReportsHead {
 	padding: 14px 0;
-	border-right: 1px solid #5833a2;
+/*	border-right: 1px solid #5833a2; */
 }
 .tableReportsHead.white, .white {
 	background: #fff;
@@ -1538,6 +1538,9 @@ button:hover, button:focus, .button:hover, .button:focus {
 }
 .checkoutform{
 	display: inline;
+}
+.smallTopMargin{
+	margin-top: 5px !important;
 }
 /* @end*/
 /* @group FAQs/our beliefs */

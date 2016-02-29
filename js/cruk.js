@@ -102,7 +102,8 @@ $(function(){
 					$("#alert").css('display', 'block');
 				}
 			});
-		}
+		},
+		onkeyup:false
 	});
 	$("#updateStaffForm").validate({
 		rules: {EmpNum: "required",
@@ -125,7 +126,8 @@ $(function(){
 					$("#alert").css('display', 'block');
 				}
 			});
-		}
+		},
+		onkeyup:false
 	});
 	$("#nominateColleague").validate({
 		rules: {EmpNum: "required"},
@@ -239,6 +241,8 @@ $(function(){
 			$("#alert").css('display', 'block');
 		},
 		submitHandler: function(form) { 
+			/*$("#alertContent").load("../approvals/confirm.php", {});
+			$("#alert").css('display', 'block');*/
 			if (confirm("Are you sure. This action cannot be undone.")) {
 				$.post('../approvals/individual-award-update.php', $("#approveAward").serialize(), function(data) {
 					if (data = 'declined') {
@@ -609,7 +613,7 @@ $(document).ready(function(){
 				url:"action.php",
 				data:{del_id:del_id},
 				success:function(d){
-					
+					location.reload();
 				}
 			});
 		el.value = "";
@@ -671,6 +675,7 @@ $(document).ready(function(){
 				success:function(d){
 					console.log(d);
 					_byId("menu_container").innerHTML = d;
+					location.reload();
 				}
 			});
 		el.value = "";

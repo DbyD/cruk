@@ -18,7 +18,8 @@
 				
 		}
 
-		if( isset( $_POST["submit"] ) ){
+		if( isset( $_POST["submit"] ) )
+		{
 			$content = trim($_POST["content"]);
 
 			if( empty( $_POST["title"] ) || empty( $_POST["point"] ) || empty( $_POST["Delivery"] ) || empty( $content ) ){
@@ -37,27 +38,38 @@
 					'aPrice' => $_POST["point"],
 					'delivery' => $_POST["Delivery"],
 					'aContent' => $_POST["content"],
+					'showID' => $_POST["showID"],
 					'menuID' => $_POST["menu_id"],
 					'subID' => $sub_id_insert
 				);
 
 				
-				if( !empty( $_FILES["fileImage"]['name'] ) ){
+				if( !empty( $_FILES["fileImage"]['name'] ) )
+				{
 					$file_path = insertFile(  $_POST["menu_id"], $sub_id_insert );
 					$data['Image_name'] = $file_path;
 				}
 
 
-				if( isset( $_POST["prID"] ) ) {
+				if(isset( $_POST["prID"] )) 
+				{
 					$data['prID'] = $_POST["prID"];
 
-					if( $sub_id_insert == 'other'){
+					if( $sub_id_insert == 'other')
+					{
 						$data['subID'] = NULL;
 					}
 
 					updateProduct( $data );
-				} else {
-					insertProduct( $data );
+				} 
+				else 
+				{
+					/*
+					var_dump($_POST);
+					echo "<br><br><br><br>";
+					var_dump($data);
+					*/
+					insertProduct($data);
 				}
 				
 			}
@@ -206,6 +218,17 @@
 							<input type="radio" name="Delivery" value="no" id="pokemonRed" <?php echo ( isset( $pr['delivery'] ) && $pr['delivery'] == 'no') ? 'checked' : ''; ?> >
 							<label for="pokemonRed">No</label>
 							<input type="radio" name="Delivery" value="yes" id="pokemonBlue" <?php echo ( isset( $pr['delivery'] ) && $pr['delivery'] == 'yes') ? 'checked' : ''; ?> >
+							<label for="pokemonBlue">Yes</label>
+						</div>
+					</div>				
+					<div class="row">
+						<div class="large-3 columns">
+							<label>Show Product: </label>
+						</div>
+						<div class="large-9 columns">
+							<input type="radio" name="showID" value="no" id="pokemonRed" <?php echo ( isset( $pr['showID'] ) && $pr['showID'] == 'no') ? 'checked' : ''; ?> >
+							<label for="pokemonRed">No</label>
+							<input type="radio" name="showID" value="yes" id="pokemonBlue" <?php echo ( isset( $pr['showID'] ) && $pr['showID'] == 'yes') ? 'checked' : ''; ?> >
 							<label for="pokemonBlue">Yes</label>
 						</div>
 					</div>

@@ -214,18 +214,22 @@ $val = $_SESSION['user']->administrator;
 											
 											$arr = array();
 											$i = 0;
-												
+											$delivery = 'no';
+
 											if(!empty($basket)){
 												foreach ($basket as $pr_b){		
 													$pr_info = getProductByID( $pr_b["prID"] );
 													$total_price += $pr_b['aPrice'];
 													
+													if($pr_info['delivery'] == 'yes')
+														$delivery = 'yes';
 
 													if( $i == 0 ){
 														$arr[ $i ]['baID'] = $pr_b['baID'];
 														$arr[ $i ]['aPrice'] = $pr_b['aPrice'];
 														$arr[ $i ]['aTitle'] = $pr_info['aTitle'];
 														$arr[ $i ]['prID'] = $pr_b["prID"];
+														$arr[ $i ]['delivery'] = $pr_info["delivery"];
 														$arr[ $i ]['QTY'] = 1;
 														$i++;
 													} else {
@@ -243,6 +247,7 @@ $val = $_SESSION['user']->administrator;
 															$arr[ $i ]['aPrice'] = $pr_b['aPrice'];
 															$arr[ $i ]['aTitle'] = $pr_info['aTitle'];
 															$arr[ $i ]['prID'] = $pr_b["prID"];
+															$arr[ $i ]['delivery'] = $pr_info["delivery"];
 															$arr[ $i ]['QTY'] = 1;
 															$i++;
 														}
@@ -290,7 +295,7 @@ $val = $_SESSION['user']->administrator;
 									<h2 id="modalTitle">Delete Item</h2>
 									<div class="row">
 										<div class="large-12 columns">
-											<p>Are you sure you would like to delete this item?</p><p>This action is irreversible!</p>
+											<p>Are you sure you want to remove this item from your basket?</p><p>This action is irreversible!</p>
 										</div>
 									</div>
 									<div class="row">
@@ -338,7 +343,7 @@ $val = $_SESSION['user']->administrator;
 								<div class="small-12 medium-12 columns textRight">
 								<a href="<?php echo HTTP_PATH . "redeem"?>"><button class="purpleButton">CONTINUE SHOPPING</button></a>
 								<button class="blueButton" id="updateButton">UPDATE QUANTITY</button>
-								<button class="pinkButton" id="checkOutButton" linkGo="<?php echo HTTP_PATH . "redeem/checkout.php?menu_id=" . $menu_id . "&checkout=true"; ?>'">CHECK OUT</button>
+								<button class="pinkButton" id="checkOutButton" linkGo="<?php echo HTTP_PATH . "redeem/checkout.php?menu_id=" . $menu_id . "&checkout=true&delivery=".$delivery; ?>">CHECK OUT</button>
 								</div>
 							</div>
 

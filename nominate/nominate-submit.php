@@ -148,11 +148,11 @@
 			}
 					
 			// test if offline
-			if ($_SESSION['nominee']->offline == 'YES'){
-				// they in a shop so considered offline. need to fix email with all requirements. will need to get wording from Jamie
+			if ($_SESSION['nominee']->Offline == 'Y'){
+
 				$sendEmail = new StdClass();
 				$sendEmail->emailTo = $xexecEmail;
-				$sendEmail->subject = 'Congratulations, you’ve been sent an Our Heroes award';
+				$sendEmail->subject = "Congratulations, you've been sent an Our Heroes award";
 				$sendEmail->Content = "<p>Hi</p>
 										<p>".$_SESSION['user']->Fname." has nominated ".$_SESSION['nominee']->full_name()." to receive a Thank you card as part of an Our Heroes Award.</p>
 										<p>Below is the content of the card:</p>
@@ -163,7 +163,7 @@
 				if(filter_var($_SESSION['nominee']->Eaddress, FILTER_VALIDATE_EMAIL)){
 					$email = sendEcardEmail($_SESSION['nominee'],$id);
 				} else {
-					$email = "fail xexec";
+					$email = "fail";
 				}
 				echo "email sent to nominee";
 			}
