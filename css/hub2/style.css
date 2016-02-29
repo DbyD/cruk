@@ -1,3 +1,24 @@
+/* @index.php coded by Alec */
+.index { 
+  background: url(../../images/login-bg.jpg) no-repeat fixed center center; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+.row{
+	margin-left: auto;
+	margin-right: auto;
+}
+.footer{
+	position: fixed;
+	bottom: 0;
+	background: #fff;
+	width: 100%;
+}
+.col-md-2 {
+    width: auto;
+}
 /* @login.php coded by Adrian */
 .white {
     background-color: white;
@@ -13,8 +34,10 @@
 
 .branding{
     padding: 10px;
-    font-size: 18px;
-    margin-left: 60%;
+/*    font-size: 18px;
+    margin-left: 60%; */
+    margin-left: 10%;
+    font-size: 12px;
 }
 
 .logo {
@@ -24,16 +47,18 @@
 }
 
 .bigImage {
-    background: url(../../images/hub2/bigImage.png) no-repeat;
+ /*   background: url(../../images/hub2/bigImage.png) no-repeat;
     height: 680px;
     width: 100%;
-    background-position: center; 
+	background: none center;*/
 }
 
 #optionBox {
     background-color: white;
-    height: 200px;
-    margin-top: 5%;
+/*    height: 200px; 
+    margin-top: 5%; */
+    margin-top: 10%;
+    padding: 3%;
 }
 
 #optionBox p{

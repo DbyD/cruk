@@ -1,5 +1,5 @@
 <?php 
-	include '../inc/config.php';
+	include 'inc/config.php';
 	
 	$sUsername = $_POST['username'];
 	$sPassword = $_POST['password'];	

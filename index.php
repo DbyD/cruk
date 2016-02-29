@@ -4,93 +4,220 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Our Heroes</title>
-<link rel="stylesheet" href="css/foundation.css" />
-<link rel="stylesheet" href="css/styles.css">
-<link rel="stylesheet" href="css/sitespecific.css">
-<script src="js/vendor/modernizr.js"></script>
-<link rel="shortcut icon" href="favicon.ico">
+<link rel="stylesheet" href="css/hub2/bootstrap/bootstrap.css" />
+<link rel="stylesheet" href="css/hub2/style.css">
+<link rel="shortcut icon" href="favicon.ico"> 
 </head>
-<body id="login">
-<nav class="top-bar" data-topbar role="navigation">
-	<ul class="title-area">
-		<li class="name">
-			<h1><a href="#"><img src="images/Cancer-Research-UK-Logo.svg" alt="Cancer Research UK" /></a></h1>
-		</li>
-	</ul>
-	<!-- <section class="top-bar-section">
-		Right Nav Section 
-		<ul class="right">
-			<li><a href="logout.php">Logout</a></li>
-			<li class="has-dropdown"> </li>
-		</ul>
-	</section>--> 
-</nav>
-<div class="row">
-	<div id="left-column" class="large-2 columns">
-		<div id="payoff" class="callout panel">
-			<span class="helper"></span>
-			<img src="images/our-heroes.svg" alt="Cancer Research UK" />
-		</div>
-	</div>
-	<div id="content" class="large-10 columns">
-		<div class="row">
-			<div class="large-12 columns">
-				<h1 class="title">Recognition Portal</h1>
-				<p>We encourage everyone to show their appreciation for colleagues and celebrate success.</p>
-			</div>
-		</div>
-		<div class="row">
-			<div class="medium-12 columns">
-				<div class="medium-6 columns leftnp">
-					<div class="callout panel colleaguelogin">
-						<div class="row">
-							<form action="inc/login.php" method="post" name="login" id="login">
-								<h1>Employee Login</h1>
-								<p>Login below to send a 'Thank you' card or a gift to a colleague.</p>
-								<?php if(isset( $_GET['alert'] ) ) echo '<p class="alert">You have entered an incorrect Username or Password</p>'; ?>
-								<div class="medium-6 columns">
-									Username: (Emp ID/Email)
-									<input type="text" name="sUsername" autocomplete="off"  placeholder="Employee ID or Email Address"/>
-								</div>
-								<div class="medium-6 columns">
-									Password:
-									<input type="password" name="sPassword" autocomplete="off" placeholder="Password" />
-								</div>
-								<div class="medium-9 columns small">
-									By logging in, you agree to abide by CRUK<br>
-									Terms and Conditions.
-								</div>
-								<div class="medium-3 columns">
-									<p><input type="submit" value="Submit"></p>
-								</div>
-							</form>
+<body class="index">
+<?php require_once 'inc/config.php'; ?>
+
+<div class="row white">
+	<div class="logo"></div>
+</div>
+
+<div class="container bigImage">
+	<div class="row">
+		<?php 
+		if(isset($_GET['login']) && !isset($_SESSION['user']))
+		{
+			//show the login box
+		?>
+		<div class="col-md-2 col-md-offset-3" id="loginBox" <?php if(isset($_GET['alert'])) echo 'style="height: 400px;"'; ?>>
+			<p>Sign In</p>
+			<form method="POST" action="login.php">
+				<?php 
+				if(isset($_GET['alert']))
+				{
+					echo '
+						<div class="alert alert-danger">
+						  <strong>'.$_GET['alert'].'</strong> 
 						</div>
-					</div>
+					';
+				}
+				?>
+				<div class="form-group">
+				  <label for="username">Username:</label>
+				  <input type="text" class="form-control" name="username" id="username">
 				</div>
-				<div class="medium-6 columns rightnp">
-					<div class="callout panel firsttime">
-						<div class="row">
-							<form>
-								<h1>First Time Users</h1>
-								<p>If you are new to the Recognition portal, register here.</p>
-								<div class="medium-6 columns LoginPadding">
-									<a href="forgotten_password.php" class="lightBlueButton">Forgot password?</a>
-								</div>
-								<div class="medium-6 columns LoginPadding">
-									<p><a href="register.php" class="lightBlueButton LoginPadding">Register now</a></p>
-								</div>
-							</form>
-						</div>
-					</div>
+
+				<div class="form-group">
+				  <label for="password">Password:</label>
+				  <input type="password" class="form-control" name="password" id="password">
 				</div>
-			</div>
+
+				<button type="submit" class="btn btn-lg signin">Login</button>
+			</form>
+			<p style="font-size: 12px"> By registering or signing in you agree to the <br> <b><u><a href="terms-conditions.php" target="_default">Terms and Conditions</a></u></b></p>
 		</div>
+		<?php
+		}
+		else
+		if(isset($_GET['register']) && !isset($_SESSION['user']))
+		{
+		?>
+		<div class="col-md-2 col-md-offset-3" id="registerBox" <?php if(isset($_GET['alert'])) echo 'style="height: 460px;"'; if(isset($_GET['success']) || isset($_GET['notfound']) || isset($_GET['activated']) 
+		|| isset($_GET['notactivated'])) echo 'style="height: 290px;"'; ?>>
+			<p>Register</p>
+			<form method="POST" action="register.php">
+				<?php 
+				if(isset($_GET['alert']))
+				{
+					echo '
+						<div class="alert alert-danger">
+						  <strong>'.$_GET['alert'].'</strong> 
+						</div>
+					';
+				}
+				else
+				if(isset($_GET['success']))
+				{
+					echo '
+						<div class="alert alert-success">
+						  Thank you for your registration. <br>
+						  A confirmation email has been sent to your CRUK email address. <br>
+						  <strong>Please check your mailbox for an Activation email.</strong>
+						</div>
+					';
+				}
+				else
+				if(isset($_GET['notfound']))
+				{
+					echo '
+						<div class="alert alert-danger">
+						No record found. Please try again or contact <a href="hrservicecentre@cancer">hrservicecentre@cancer</a> or the Xexec helpdesk on 020 8201 6483 for further assistance.</p>
+						</div>
+					';
+				}
+				else
+				if(isset($_GET['activated']))
+				{
+					echo '
+						<div class="alert alert-success">
+						  Thank you for activating your account.<br>
+						  You can now <a href="'.HTTP_PATH.'index.php">click here </a> to log in to access the portal
+						</div>
+					';
+					
+				}
+				else
+				if(isset($_GET['notactivated']))
+				{
+					echo '
+						<div class="alert alert-danger">
+						 We were unable to activate your account. Please contact the help desk on 012345678 or email: <a href="mailto:help@xexec.com">help@xexec.com</a> to assist.
+						</div>
+					';
+					
+				}
+
+				if(!isset($_GET['req_email']))
+				{
+				?>
+
+				<div class="form-group" <?php if(isset($_GET['success']) || isset($_GET['notfound']) || isset($_GET['activated']) || isset($_GET['notactivated'])) echo 'style="display:none;"';?>>
+				  <label for="empNum">Employee Number:</label>
+				  <input type="text" class="form-control" name="empNum" id="empNum">
+				</div>			
+
+				<div class="form-group" <?php if(isset($_GET['success']) || isset($_GET['notfound']) || isset($_GET['activated']) || isset($_GET['notactivated'])) echo 'style="display:none;"';?>>
+				  <label for="password">Password:</label>
+				  <input type="password" class="form-control" name="password" id="password">
+				</div>
+
+				<div class="form-group" <?php if(isset($_GET['success']) || isset($_GET['notfound']) || isset($_GET['activated']) || isset($_GET['notactivated'])) echo 'style="display:none;"';?>>
+				  <label for="password">Confirm Password:</label>
+				  <input type="password" class="form-control" name="password_confirmation" id="password_confirmation">
+				</div>
+
+				<button type="submit" class="btn btn-lg register" <?php if(isset($_GET['success']) || isset($_GET['notfound']) || isset($_GET['activated']) || isset($_GET['notactivated'])) echo 'style="display:none;"';?>>Register</button>
+
+				<?php
+				}
+				else
+				if(isset($_GET['req_email']))
+				{ 
+				?>
+				<div class="alert alert-info">
+						You do not have an email address in the system. Please fill in the field with your email address and press continue.
+				</div>
+
+				<div class="form-group">
+				  <label for="email">Email Address:</label>
+				  <input type="text" class="form-control" name="email" id="email">
+				  <input type="hidden" name="empNum" id="empNum" value="<?=$_GET['empNum']?>"/>
+				</div>	
+
+				<button type="submit" class="btn btn-lg register">Continue</button>
+
+				<?php 
+				}
+				?>
+
+			</form>
+
+			<p style="font-size: 12px" > By registering or signing in you agree to the <br> <b><u><a href="terms-conditions.php" target="_default">Terms and Conditions</a></u></b></p>
+		</div>
+		<?php
+		}
+		else
+		if(!isset($_SESSION['user'])) 
+		{
+		//display the login / register box
+		?>
+		<div class="col-md-2 col-md-offset-3" id="optionBox">
+			<p>Welcome to the Cancer Research UK <br> Benefits and Recognition portals</p>
+
+			<button class="btn btn-lg register clickable" href="?register">Register</button>
+			<button class="btn btn-lg signin clickable" href="?login">Sign In</button>
+
+			<p style="font-size: 12px"> By registering or signing in you agree to the <br> <b><u><a href="terms-conditions.php" target="_default">Terms and Conditions</a></u></b></p>
+		</div>
+		<?php
+		}
+		else
+		{
+		//display the 2 boxes
+		?>
+		<div class="col-md-2 col-md-offset-4" id="discountsBox">
+			<p>Discounts &amp; Benefits</p>
+
+			<div class="image"></div>
+			<?php 
+				$secret = '49%wAjqQYHF5v(S@';
+				//prepare signature
+				$signature = md5(date("YmdHis").'|'.$_SESSION['user']->Eaddress.'|'.$secret);
+			?>
+			<button class="btn btn-lg go clickable" href="https://cruk3.xexec.com/sso/simple?id=<?php echo $_SESSION['user']->Eaddress; ?>&date=<?php echo date("YmdHis"); ?>&sig=<?php echo $signature; ?>">Go!</button>
+		</div>
+
+		<div class="col-md-2" id="heroesBox">
+			<p>Colleague Recognition Portal</p>
+
+			<div class="image"></div>
+
+			<button class="btn btn-lg go clickable" href="home.php">Go!</button>
+		</div>
+		<?php
+		}
+		?>
 	</div>
 </div>
-<script src="js/vendor/jquery.js"></script> 
-<script src="js/foundation.min.js"></script> 
-<script>
-	$(document).foundation();
-</script>
+
+<div class="row footer">
+<!--    <ul class="_footer nav navbar-nav">
+      <li><a href="#">PRIVACY</a></li>
+      <li><a href="#">TERMS</a></li>
+      <li><a href="#">HELP</a></li> 
+      <li><a href="#">CONTACT</a></li> 
+    </ul> -->
+
+    <div class="branding">
+  		&copy; Xexec 2016
+    </div>
+</div>
+
+<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="js/jquery.validate.min.js"></script>
+<script src="js/hub2.js"></script>
 </body>
 </html>

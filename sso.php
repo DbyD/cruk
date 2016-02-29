@@ -1,6 +1,6 @@
 <?php
 
-include '../inc/config.php';
+include 'inc/config.php';
 
 $secret = '6wpq3rQ92VdA06NO';
 
