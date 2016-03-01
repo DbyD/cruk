@@ -15,7 +15,7 @@ include '../inc/config.php';
 <div id="wrap" class="container">
 
 	<!-- First Row -->
-	<div class="row fixedWidth">
+	<div class="row">
 		<div class="col-md-6">
 			<div id="benefits">
 				<p>Benefits at <br> CRUK  <br> Overview</p>
@@ -32,7 +32,7 @@ include '../inc/config.php';
 		<div class="col-md-6">
 			<div class="callout panel" id="winners">
 				<div class="header">
-					The Our Heroes recognition portal<div class="image"></div>
+					The our heroes recognition schemes<div class="image"></div>
 				</div>
 				<div class="body">
 					<p> Recent Winners </p>
@@ -153,7 +153,7 @@ include '../inc/config.php';
 				</div>
 				<div class="footer"> 
 					<div class="text"> See who else has won and nominate your colleagues
-					<div class="plus clickable" href="https://cruk3.xexec.com/Pages/Rewards"><div class="image"></div></div>
+					<div class="plus"><div class="image"></div></div>
 					</div>
 				</div>
 			</div>
@@ -162,7 +162,7 @@ include '../inc/config.php';
 	<!-- End First Row -->
 
 	<!-- Start Second Row -->
-	<div class="row fixedWidth">
+	<div class="row">
 		<div id="hrquestions" class="col-md-3">
 			<div class="boxed">			
 				<div class="header">
@@ -198,7 +198,7 @@ include '../inc/config.php';
 	<br>
 
 	<!-- Start Third Row -->
-	<div class="row fixedWidth">
+	<div class="row">
 		<div class="col-md-6" id="financial">
 				<p>Financial Advice <br> and  <br> Information</p>
 				<div class="image"></div>
@@ -229,8 +229,6 @@ include '../inc/config.php';
 	</div>
 	<!-- End Third Row -->
 </div>
-
-<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-<script src="../js/hub2.js"></script>	
+		
 </body>
 </html>

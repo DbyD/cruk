@@ -1,25 +1,10 @@
-/* @index.php coded by Alec */
-.index { 
-  background: url(../../images/login-bg.jpg) no-repeat fixed center center; 
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-.row{
-	margin-left: auto;
-	margin-right: auto;
-}
-.footer{
-	position: fixed;
-	bottom: 0;
-	background: #fff;
-	width: 100%;
-}
-.col-md-2 {
-    width: auto;
-}
 /* @login.php coded by Adrian */
+@media only screen and (min-width: 1024px) 
+{
+    .fixedWidth {
+        width: 1000px;
+    }
+}
 .white {
     background-color: white;
 }
@@ -34,10 +19,8 @@
 
 .branding{
     padding: 10px;
-/*    font-size: 18px;
-    margin-left: 60%; */
-    margin-left: 10%;
-    font-size: 12px;
+    font-size: 18px;
+    margin-left: 60%;
 }
 
 .logo {
@@ -47,18 +30,16 @@
 }
 
 .bigImage {
- /*   background: url(../../images/hub2/bigImage.png) no-repeat;
+    background: url(../../images/hub2/bigImage.png) no-repeat;
     height: 680px;
     width: 100%;
-	background: none center;*/
+    background-position: center; 
 }
 
 #optionBox {
     background-color: white;
-/*    height: 200px; 
-    margin-top: 5%; */
-    margin-top: 10%;
-    padding: 3%;
+    height: 200px;
+    margin-top: 5%;
 }
 
 #optionBox p{
@@ -214,14 +195,14 @@
 
 #pensions .image {
     background: url(../../images/hub2/pensions.png) no-repeat;
-    height: 175px;
+    background-position: center;
+    height: 161px;
     width: 100%;
-    position: relative;
-    margin: 1%;
-    left: 9%;
 }
 
 #pensions p {
+    margin-left: 20px;
+    margin-top: 15px;
     font-weight: bold;
     font-size: 15px;
 }
@@ -362,17 +343,18 @@
 
 #winners .footer .text{
     color: #2e008b;
-    font-size: 19px;
+    font-size: 16px;
     padding: 16px;
 }
 
 #winners .footer .plus {
+    cursor: pointer;
     background-color: #e3e3e3;
     width: 54px;
     height: 54px;
     position: relative;
-    left: 93%;
-    top: -44px;
+    left: 91.5%;
+    top: -37px;
 }
 
 #winners .footer .plus .image{
@@ -408,9 +390,7 @@
 #hrquestions .phone {
     height: 100px;
     background: url(../../images/hub2/phone.png) no-repeat;
-    position: relative;
-    left: 65px;
-    top: 20px;
+    background-position: center; 
 }
 
 #hrquestions .subheader {
@@ -426,11 +406,12 @@
     height: 200px;
     padding: 20px;
     margin: 1%;
-    position: relative;
-    left: 7%;
+    background-position: center; 
 }
 
 #health p {
+    margin-left: 20px;
+    margin-top: 15px;
     font-weight: bold;
     font-size: 15px;
     color: black;
@@ -448,13 +429,14 @@
 
 #childcare .image {
     background: url(../../images/hub2/childcare.png) no-repeat;
+    background-position: center;
     height: 200px;
     padding: 20px;
-    position: relative;
-    left: 10%;
 }
 
 #childcare p {
+    margin-left: 20px;
+    margin-top: 15px;
     font-weight: bold;
     font-size: 15px;
     color: black;
@@ -498,15 +480,15 @@
 
 #cycle .image {
     background: url(../../images/hub2/cycle.png) no-repeat;
+    background-position: center;
     height: 167px;
     padding: 20px;
     margin: 1%;
-    position: relative;
-    left: 9%;
-    top: 22px;
 }
 
 #cycle p {
+    margin-left: 20px;
+    margin-top: 15px;
     font-weight: bold;
     font-size: 15px;
     color: black;
@@ -539,8 +521,6 @@
 
 #tastecard .image {
     background: url(../../images/hub2/tastecard.png) no-repeat;
+    background-position: center;
     height: 122px;
-    position: relative;
-    left: 18%;
-    top: 31px;;
 }
