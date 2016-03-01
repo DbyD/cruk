@@ -178,7 +178,7 @@
 		{
 		//display the 2 boxes
 		?>
-		<div class="col-md-2 col-md-offset-4" id="discountsBox">
+		<div class="col-md-2 col-md-offset-3" id="discountsBox">
 			<p>Discounts &amp; Benefits</p>
 
 			<div class="image"></div>
