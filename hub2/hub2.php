@@ -56,9 +56,13 @@ include '../inc/config.php';
 									$photo = "images/no_photo.png";
 
 							$nominatorName = $nominator->Fname.' '.$nominator->Sname;
-
+							$nomineeName = $nominee->Fname.' '.$nominee->Sname;
+							
 							if (strlen($nominatorName) > 11)
   								 $nominatorName = substr($nominatorName, 0, 11) . '.';
+
+  							if (strlen($nomineeName) > 11)
+  								 $nomineeName = substr($nomineeName, 0, 11) . '.';
 
 							if($index == 0)
 							{
@@ -68,7 +72,7 @@ include '../inc/config.php';
 								<div class="person1">
 									<div class="image"></div>
 									<div class="image1" style="background: url(../'.$photo.') no-repeat;"></div>
-									<div class="name1">&nbsp;&nbsp; '.$nominee->Fname.' '.$nominee->Sname.'</div>
+									<div class="name1">&nbsp;&nbsp; '.$nomineeName.'</div>
 									<div class="subname1">'.$nominee->Department.'</div>
 								</div>
 								<div class="person1_footer">
@@ -94,7 +98,7 @@ include '../inc/config.php';
 								<div class="person2">
 									<div class="image"></div>
 									<div class="image2" style="background: url(../'.$photo.') no-repeat;"></div>
-									<div class="name2">&nbsp;&nbsp;&nbsp;&nbsp;'.$nominee->Fname.' '.$nominee->Sname.'</div>
+									<div class="name2">&nbsp;&nbsp;&nbsp;&nbsp;'.$nomineeName.'</div>
 									<div class="subname2">'.$nominee->Department.'</div>
 								</div>
 
