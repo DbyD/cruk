@@ -27,11 +27,15 @@ function sendActivation($email, $EmpNum)
 	}
 }
 
-if($_POST["empNum"] && isset($_POST['password']))
+if($_POST["empNum"] && isset($_POST['password']) && isset($_POST['password_confirmation']))
 {
 	//first let's check if the user has an email attached
 	$EmpNum = $_POST["empNum"];
 	$password = $_POST['password'];
+	$password_confirmation = $_POST['password_confirmation'];
+
+	if($password != $password_confirmation)
+		header('Location: index.php?register&alert=Password mismatch!');
 
 	$stmt = $db->prepare("SELECT * FROM tblempall WHERE EmpNum = :EmpNum and eligible=1");
 	$stmt->execute(array('EmpNum' => $EmpNum));
