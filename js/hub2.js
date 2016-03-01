@@ -5,7 +5,7 @@ $(document).ready(function(){
 
 		if (typeof url !== typeof undefined && url !== false) 
 		{
-   	 		window.location.href = url;
+   	 		window.top.location  = url;
 		}
 	});
 });
