@@ -48,7 +48,7 @@
 				<button type="submit" class="btn btn-lg signin">Sign In</button>
 			</form>
 			<div class="col-md-6 noPadding"><a href="?register" class="signRegister">Register</a></div>
-			<div class="col-md-6 noPadding"><a href="?forgot" class="signRegister">Forgot Password</a></div>
+			<div class="col-md-6 noPadding"><a href="?forgotten_password" class="signRegister">Forgot Password</a></div>
 			<p style="font-size: 12px"> By registering or signing in you agree to the <br> <b><u><a href="terms-conditions.php" target="_default">Terms and Conditions</a></u></b></p>
 		</div>
 		<?php
@@ -165,8 +165,9 @@
 		if(isset($_GET['forgotten_password']))
 		{
 		?>
-			<div class="col-md-2 col-md-offset-3" id="forgotBox" <?php if(isset($_GET['success'])) echo 'style="height: 150px;"'; ?>>
-				<p>Forgot Password</p>
+			<div class="col-md-2 col-md-offset-3" id="forgotBox">
+				<h4>Forgotten Password</h4>
+				<p>Please enter the email address you used when registering. Your password will automatically be emailed to you.</p>
 				<form method="POST" action="forgotten_password.php">
 					<?php
 						if(isset($_GET['alert']))
@@ -195,7 +196,7 @@
 					  <input type="text" class="form-control" name="email" id="email">
 					</div>	
 
-					<button type="submit" class="btn btn-lg btn-block recover">Recover</button>
+					<button type="submit" class="btn btn-lg recover">Send</button>
 					<?php } ?>
 				</form>
 			</div>

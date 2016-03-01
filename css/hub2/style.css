@@ -81,14 +81,19 @@ label{
     margin-top: 10%;
     padding: 3%;
 }
-
+#forgotBox{
+    margin-top: 10%;
+    padding: 3%;
+    background-color: white;
+    width: 350px;
+}
 #optionBox p{
     color: black;
     font-size: 16px;
     padding: 10px 0;
 }
 
-#optionBox .register{
+#optionBox .register, #forgotBox .recover{
     background-color: black;
     color: white;
     border-radius: 0px;
@@ -556,7 +561,7 @@ a.signRegister{
     cursor: pointer;
     background-color: #040605;
     height: 107px;
-    margin-top: 20px;
+    margin-top: 18px;
 }
 
 #tastecard .image {
