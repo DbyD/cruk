@@ -206,6 +206,7 @@
     left: 3%;*/
 }
 #benefits {
+    cursor: pointer;
     background-color: #ec008c;
 }
 
@@ -225,6 +226,10 @@
     top: 3%;
     font-weight: bold;
     color: white;
+}
+
+#pensions {
+    cursor: pointer;
 }
 
 #pensions .image {
@@ -254,6 +259,7 @@
     color: white;
     font-size: 8px;
     line-height: 29px;
+    padding-left: 2px;
 }
 
 #winners .header {
@@ -441,6 +447,10 @@
     padding-top: 5px;
 }
 
+#hrquestions {
+    cursor: pointer;
+}
+
 #hrquestions .header {
     background-color: #2e008b;
     color: #ffffff;
@@ -464,6 +474,10 @@
     padding: 10px;
 }
 
+#health {
+    cursor: pointer;
+}
+
 #health .image {
     background: url(../../images/hub2/health.png) no-repeat;
     height: 200px;
@@ -478,6 +492,10 @@
     font-weight: bold;
     font-size: 15px;
     color: black;
+}
+
+#childcare {
+    cursor: pointer;
 }
 
 #childcare .corner_image {
@@ -506,6 +524,7 @@
 }
 
 #financial {
+    cursor: pointer;
     background-color: #eb008b;
     height: 204px;
 }
@@ -538,7 +557,7 @@
 }
 
 #cycle {
-    cursor: auto;
+    cursor: pointer;
 }
 
 #cycle .image {
@@ -559,6 +578,7 @@
 
 #tickets {
     height: 77px;
+    cursor: pointer;
 }
 
 #tickets .image {
@@ -578,6 +598,7 @@
 }
 
 #tastecard {
+    cursor: pointer;
     background-color: #040605;
     height: 107px;
 }

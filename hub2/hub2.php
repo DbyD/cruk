@@ -17,12 +17,12 @@ include '../inc/config.php';
 	<!-- First Row -->
 	<div class="row fixedWidth">
 		<div class="col-md-6">
-			<div id="benefits">
+			<div id="benefits" class="clickable" href="https://crukip.cancerresearchuk.org/portal/server.pt/community/Benefits%20including%20Rewards%20Gateway/2045">
 				<p>Benefits at <br> CRUK  <br> Overview</p>
 				<div class="image"></div>
 			</div>
 
-			<div class="boxed" style="margin-top: 20px;" id="pensions">
+			<div class="boxed clickable" href="https://crukip.cancerresearchuk.org/portal/server.pt/community/People/592" style="margin-top: 20px;" id="pensions">
 				<p>Pensions and Retirement</p>
 					<div class="image">
 				</div>
@@ -158,7 +158,7 @@ include '../inc/config.php';
 				</div>
 				<div class="footer"> 
 					<div class="text"> See who else has won and nominate your colleagues
-					<div class="plus clickable" href="https://cruk3.xexec.com/Pages/Rewards"><div class="image"></div></div>
+					<div class="plus clickable" href="../winners-wall/index.php"><div class="image"></div></div>
 					</div>
 				</div>
 			</div>
@@ -168,7 +168,7 @@ include '../inc/config.php';
 
 	<!-- Start Second Row -->
 	<div class="row fixedWidth">
-		<div id="hrquestions" class="col-md-3">
+		<div id="hrquestions" class="col-md-3 clickable" href="mailto:info@hr.cruk.com">
 			<div class="boxed">			
 				<div class="header">
 					Any Questions <br>
@@ -185,14 +185,14 @@ include '../inc/config.php';
 		</div>
 
 		<div id="health" class="col-md-3">
-			<div class="boxed">
+			<div class="boxed clickable" href="https://crukip.cancerresearchuk.org/portal/server.pt/community/Health%20and%20Wellbeing/601">
 				<p>Health and Wellbeing</p>
 				<div class="image"></div>
 			</div>
 		</div>
 
 		<div id="childcare" class="col-md-6">
-			<div class="boxed">
+			<div class="boxed clickable" href="https://crukip.cancerresearchuk.org/portal/server.pt/community/benefits_including_rewards_gateway/2045/childcare_vouchers/21954 ">
 				<div class="corner_image"></div>
 				<p>Childcare Vouchers</p>
 				<div class="image"></div>
@@ -205,7 +205,7 @@ include '../inc/config.php';
 	<!-- Start Third Row -->
 	<div class="row fixedWidth">
 		<div class="col-md-6">
-			<div id="financial">
+			<div id="financial" class="clickable" href="https://crukip.cancerresearchuk.org/portal/server.pt/community/benefits_and_your_finance%2C_health_and_wellbeing/594/financial_advice_and_information/35069">
 				<p>Financial Advice <br> and  <br> Information</p>
 				<div class="image"></div>
 				<div class="icon"></div>
@@ -213,21 +213,21 @@ include '../inc/config.php';
 		</div>
 
 		<div class="col-md-3" id="cycle">
-			<div class="boxed">
+			<div class="boxed clickable" href="https://crukip.cancerresearchuk.org/portal/server.pt/community/benefits_including_rewards_gateway/2045/cycle2work/21955 ">
 				<p>Cycle to Work</p>
 				<div class="image"></div>
 			</div>
 		</div>
 
 		<div class="col-md-3">
-			<div id="tickets">
+			<div class="clickable" href="https://crukip.cancerresearchuk.org/portal/server.pt/community/season_ticket_loan/599" id="tickets">
 
 					<p>Season Ticket Loan</p>
 					<div class="image"></div>
 
 			</div>
 			<br>
-			<div id="tastecard">
+			<div class="clickable" href="https://crukip.cancerresearchuk.org/portal/server.pt/community/benefits_including_rewards_gateway/2045/tastecards/21959" id="tastecard">
 
 					<div class="image"></div>
 
