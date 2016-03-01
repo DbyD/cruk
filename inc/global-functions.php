@@ -75,7 +75,7 @@ function endEcardEmail($noid){
 }
 ////////////////////////////////////////////////////////////////////////////////////
 // send email
-function sendEmail($email,$noid){
+function sendEmail($email,$noid = ""){
 	global $headers;
 	$message = startEmail();
 	$message .= $email->Content;

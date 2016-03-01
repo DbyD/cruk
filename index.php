@@ -162,6 +162,46 @@
 		<?php
 		}
 		else
+		if(isset($_GET['forgotten_password']))
+		{
+		?>
+			<div class="col-md-2 col-md-offset-3" id="forgotBox" <?php if(isset($_GET['success'])) echo 'style="height: 150px;"'; ?>>
+				<p>Forgot Password</p>
+				<form method="POST" action="forgotten_password.php">
+					<?php
+						if(isset($_GET['alert']))
+						{
+							echo '
+								<div class="alert alert-danger">
+								  <strong>'.$_GET['alert'].'</strong> 
+								</div>
+							';
+						}
+
+						if(isset($_GET['success']))
+						{
+							echo '
+								<div class="alert alert-success">
+									Your password has been sent by email. <a href="'.HTTP_PATH.'index.php" class="">Click here</a> to return to the login page.
+								</div>
+								';
+
+						}
+						else
+						{
+					?>
+					<div class="form-group">
+					  <label for="email">Email Address:</label>
+					  <input type="text" class="form-control" name="email" id="email">
+					</div>	
+
+					<button type="submit" class="btn btn-lg btn-block recover">Recover</button>
+					<?php } ?>
+				</form>
+			</div>
+		<?php
+		}
+		else
 		if(!isset($_SESSION['user'])) 
 		{
 		//display the login / register box
