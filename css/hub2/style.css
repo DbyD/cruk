@@ -26,6 +26,15 @@
         width: 1000px;
     }
 }
+
+@media only screen and (max-width: 1024px)
+{
+    #winners .person1_footer
+    {
+        left: 14.4% !important;
+    }
+}
+
 .white {
     background-color: white;
 }
@@ -221,7 +230,7 @@
 #pensions .image {
     background: url(../../images/hub2/pensions.png) no-repeat;
     background-position: center;
-    height: 161px;
+    height: 164px;
     width: 100%;
 }
 
@@ -232,13 +241,28 @@
     font-size: 15px;
 }
 
+#winners .star {
+    background: url(../../images/hub2/star.png) no-repeat;
+    background-size: 25px 25px;
+    background-position: center;
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    top: 11%;
+    right: 8%;
+    text-align: center;
+    color: white;
+    font-size: 8px;
+    line-height: 29px;
+}
+
 #winners .header {
     background-color: #2e008b;
     color: #ffffff;
     font-weight: bold;
-    font-size: 20px;
+    font-size: 17px;
     text-align: left;
-    padding: 10px;
+    padding: 13px;
 }
 
 #winners .header .image {
@@ -254,6 +278,9 @@
     height: 180px;
     position: relative;
     left: 70px;
+    border-right: 2px solid #ebebeb;
+    border-left: 2px solid #ebebeb;
+    border-top: 2px solid #ebebeb;
 }
 
 #winners .person1_footer{
@@ -265,6 +292,9 @@
     text-align: left;
     padding: 11px;
     font-size: 15px;
+    border-right: 2px solid #ebebeb;
+    border-left: 2px solid #ebebeb;
+    border-bottom: 2px solid #ebebeb;
 }
 
 #winners .person1 .image {
@@ -308,22 +338,28 @@
 #winners .person2 {
     position: relative;
     background-color: #ffffff;
-    bottom: 86.3%;
+    bottom: 87%;
     width: 150px;
     height: 180px;
     left: 59%;
+    border-right: 2px solid #ebebeb;
+    border-left: 2px solid #ebebeb;
+    border-top: 2px solid #ebebeb;
 }
 
 #winners .person2_footer{
     position: relative;
     left: 59%;
-    bottom: 86.3%;
+    bottom: 87%;
     background-color: #00b6ec;
     color: #ffffff;
     width: 149px;
     text-align: left;
     padding: 11px;
     font-size: 15px;
+    border-right: 2px solid #ebebeb;
+    border-left: 2px solid #ebebeb;
+    border-bottom: 2px solid #ebebeb;
 }
 
 #winners .person2 .image {
@@ -402,6 +438,7 @@
     font-weight: bold;
     font-size: 15px;
     margin-left: 21px;
+    padding-top: 5px;
 }
 
 #hrquestions .header {
@@ -414,7 +451,7 @@
 }
 
 #hrquestions .phone {
-    height: 100px;
+    height: 111px;
     background: url(../../images/hub2/phone.png) no-repeat;
     background-position: center; 
 }
@@ -478,7 +515,7 @@
     height: 204px;
     width: 100%;
     position: relative;
-    left: -15px;
+    /* left: -15px; */
 }
 
 #financial .icon{
@@ -486,16 +523,16 @@
     height: 50px;
     width: 100%;
     position: absolute;
-    top: 8px;
-    left: 87%;
+    top: 9px;
+    left: 84%
 }
 
 #financial p{
-    font-size: 17px;
+    font-size: 16px;
     text-align: center;
     position: absolute;
-    left: 69%;
-    top: 43%;
+    left: 70.5%;
+    top: 45%;
     font-weight: bold;
     color: white;
 }
@@ -507,7 +544,7 @@
 #cycle .image {
     background: url(../../images/hub2/cycle.png) no-repeat;
     background-position: center;
-    height: 167px;
+    height: 153px;
     padding: 20px;
     margin: 1%;
 }

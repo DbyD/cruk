@@ -36,6 +36,7 @@ include '../inc/config.php';
 				</div>
 				<div class="body">
 					<p> Recent Winners </p>
+					<div class="star">20</div>
 					<?php
 						//get last 2 nominees
 						$nominees = $db->prepare('SELECT * FROM tblnominations as n JOIN tblempall as e ON n.NominatedEmpNum = e.EmpNum ORDER BY n.AprDate DESC LIMIT 2');
@@ -203,10 +204,12 @@ include '../inc/config.php';
 
 	<!-- Start Third Row -->
 	<div class="row fixedWidth">
-		<div class="col-md-6" id="financial">
+		<div class="col-md-6">
+			<div id="financial">
 				<p>Financial Advice <br> and  <br> Information</p>
 				<div class="image"></div>
 				<div class="icon"></div>
+			</div>
 		</div>
 
 		<div class="col-md-3" id="cycle">
