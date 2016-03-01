@@ -31,7 +31,7 @@ if(count($basket) > 0 && is_array($basket)){
 								<div class="small-6 large-6 columns leftnp">
 									<div class="callout panel clickAble" data-type="gourl" data-url="<?=HTTP_PATH?>redeem/products.php?menu_id=1">
 										<div class="prodTitle">
-											Shop
+											Vouchers
 										</div>
 										<img src="img/vouchers.jpg" alt="Shop">
 									</div>
@@ -39,7 +39,7 @@ if(count($basket) > 0 && is_array($basket)){
 								<div class="small-6 large-6 columns rightnp">
 									<div class="callout panel clickAble" data-type="gourl" data-url="<?=HTTP_PATH?>redeem/products.php?menu_id=4">
 										<div class="prodTitle">
-											Experience
+											Experiences
 										</div>
 										<img src="img/experience.jpg" alt="Experience">
 									</div>

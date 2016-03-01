@@ -6,6 +6,7 @@
 <title>Our Heroes</title>
 <link rel="stylesheet" href="../css/hub2/bootstrap/bootstrap.css" />
 <link rel="stylesheet" href="../css/hub2/style.css">
+<link rel="stylesheet" href="../css/icomoon.css">
 <link rel="shortcut icon" href="../favicon.ico"> 
 </head>
 <body>
@@ -30,7 +31,7 @@ include '../inc/config.php';
 		</div>
 
 		<div class="col-md-6">
-			<div class="callout panel" id="winners">
+			<div class="callout panel clickable" href="../winners-wall/index.php" id="winners">
 				<div class="header">
 					The Our Heroes recognition portal<div class="image"></div>
 				</div>
@@ -59,33 +60,35 @@ include '../inc/config.php';
 							$nominatorName = $nominator->Fname.' '.$nominator->Sname;
 							$nomineeName = $nominee->Fname.' '.$nominee->Sname;
 							
-							if (strlen($nominatorName) > 11)
+							/*if (strlen($nominatorName) > 11)
   								 $nominatorName = substr($nominatorName, 0, 11) . '.';
 
   							if (strlen($nomineeName) > 11)
-  								 $nomineeName = substr($nomineeName, 0, 11) . '.';
+  								 $nomineeName = substr($nomineeName, 0, 11) . '.';*/
+								 
+								 $class = str_replace(' ','',$nominee->BeliefID);
 
 							if($index == 0)
 							{
 	
 
 								echo '
-								<div class="person1">
-									<div class="image"></div>
-									<div class="image1" style="background: url(../'.$photo.') no-repeat; background-size: 100px 100px;"></div>
-									<div class="name1">'.$nomineeName.'</div>
-									<div class="subname1">'.$nominee->Department.'</div>
-								</div>
-								<div class="person1_footer">
-									Our Beliefs:
-									<br>
-									<b>'.$nominee->BeliefID.'</b>
-
-									<br><br>
-
-									Nominated by:
-									<br>
-									<b>'.$nominatorName.'</b>
+								<div class="person1 '.$class.'">
+									<div class="person1_header">
+										<div class="image"><i class="icon-icons_mail"></i></div>
+										<div class="image1" style="background: url(../'.$photo.') no-repeat; background-size: 100px 100px;"></div>
+										<div class="name1">'.$nomineeName.'</div>
+										<div class="subname1">'.$nominee->DirectorateInitials.'</div>
+									</div>
+									<div class="person1_footer">
+										Our Beliefs: <b>'.$nominee->BeliefID.'</b>
+	
+										<br><br>
+	
+										Nominated by:
+										<br>
+										<b>'.$nominatorName.'</b>
+									</div>
 								</div>
 								';
 
@@ -96,69 +99,31 @@ include '../inc/config.php';
 	
 
 								echo '
-								<div class="person2">
-									<div class="image"></div>
-									<div class="image2" style="background: url(../'.$photo.') no-repeat; background-size: 100px 100px;"></div>
-									<div class="name2">'.$nomineeName.'</div>
-									<div class="subname2">'.$nominee->Department.'</div>
-								</div>
-
-								<div class="person2_footer">
-									Our Beliefs:
-									<br>
-									<b>'.$nominee->BeliefID.'</b>
-
-									<br><br>
-									
-									Nominated by:
-									<br>
-									<b>'.$nominatorName.'</b>
+								<div class="person1 '.$class.'">
+									<div class="person1_header">
+										<div class="image"><i class="icon-icons_mail"></i></div>
+										<div class="image1" style="background: url(../'.$photo.') no-repeat; background-size: 100px 100px;"></div>
+										<div class="name1">'.$nomineeName.'</div>
+										<div class="subname1">'.$nominee->DirectorateInitials.'</div>
+									</div>
+									<div class="person1_footer">
+										Our Beliefs: <b>'.$nominee->BeliefID.'</b>
+	
+										<br><br>
+										
+										Nominated by:
+										<br>
+										<b>'.$nominatorName.'</b>
+									</div>
 								</div>
 								';
 							}
 						}
 					?>
-					<!--
-					<div class="person1">
-						<div class="image"></div>
-						<div class="image1"></div>
-						<div class="name1">&nbsp;&nbsp; Lucia Rose <br> Accountability</div>
-					</div>
-
-					<div class="person1_footer">
-						Our Beliefs:
-						<br>
-						<b>Delivering</b>
-
-						<br><br>
-
-						Nominated by:
-						<br>
-						<b>BusinessA A</b>
-					</div>
-
-					<div class="person2">
-						<div class="image"></div>
-						<div class="image2"></div>
-						<div class="name2">&nbsp;&nbsp;&nbsp;&nbsp; Paul Hansen <br> Human Resources</div>
-					</div>
-
-					<div class="person2_footer">
-						Our Beliefs:
-						<br>
-						<b>Delivering</b>
-
-						<br><br>
-						
-						Nominated by:
-						<br>
-						<b>BusinessA A</b>
-					</div>
-					-->
 				</div>
 				<div class="footer"> 
 					<div class="text"> See who else has won and nominate your colleagues
-					<div class="plus clickable" href="../winners-wall/index.php"><div class="image"></div></div>
+					<div class="plus"><div class="image"></div></div>
 					</div>
 				</div>
 			</div>
@@ -206,7 +171,7 @@ include '../inc/config.php';
 	<div class="row fixedWidth">
 		<div class="col-md-6">
 			<div id="financial" class="clickable" href="https://crukip.cancerresearchuk.org/portal/server.pt/community/benefits_and_your_finance%2C_health_and_wellbeing/594/financial_advice_and_information/35069">
-				<p>Financial Advice <br> and  <br> Information</p>
+				<p>Financial Advice<br>and<br>Information</p>
 				<div class="image"></div>
 				<div class="icon"></div>
 			</div>
@@ -220,13 +185,12 @@ include '../inc/config.php';
 		</div>
 
 		<div class="col-md-3">
-			<div class="clickable" href="https://crukip.cancerresearchuk.org/portal/server.pt/community/season_ticket_loan/599" id="tickets">
+			<div class="clickable boxed" href="https://crukip.cancerresearchuk.org/portal/server.pt/community/season_ticket_loan/599" id="tickets">
 
 					<p>Season Ticket Loan</p>
 					<div class="image"></div>
 
 			</div>
-			<br>
 			<div class="clickable" href="https://crukip.cancerresearchuk.org/portal/server.pt/community/benefits_including_rewards_gateway/2045/tastecards/21959" id="tastecard">
 
 					<div class="image"></div>
