@@ -73,7 +73,7 @@
 				// need to fix modal not what we want.
 				?>
 				</div>
-				<a href="#" data-reveal-id="myModal" id="modalForSendMail">Click Me For A Modal</a>
+				<a href="#" data-reveal-id="myModal" id="modalForSendMail"></a>
 				<div id="myModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
 					<h2 id="modalTitle">Send message</h2>
 					<div class="withPadding">
@@ -102,7 +102,7 @@
 				</div>
 				
 				
-				<a href="#" data-reveal-id="myTeamModal" id="modalForsendTeamMail">Click Me For A Modal</a>
+				<a href="#" data-reveal-id="myTeamModal" id="modalForsendTeamMail"></a>
 				<div id="myTeamModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
 					<h2 id="modalTitle">Send message</h2>
 					<div class="withPadding">

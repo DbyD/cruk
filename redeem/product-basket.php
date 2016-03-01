@@ -174,7 +174,7 @@ $val = $_SESSION['user']->administrator;
 												<button id="addBasket" class="pinkButton">Add to Basket</button>
 											</form>
 										</div>
-										<a href="#" data-reveal-id="myModalPrice" class="hidden" id="emptyPriceButton">Click Me For A Modal</a>
+										<a href="#" data-reveal-id="myModalPrice" class="hidden" id="emptyPriceButton"></a>
 										<div id="myModalPrice" class="reveal-modal hidden" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
 										  <h2 id="modalTitle">Price</h2>
 										  <div class="withPadding">
@@ -289,7 +289,7 @@ $val = $_SESSION['user']->administrator;
 									</form>
 								</div>
 
-								<a href="#" data-reveal-id="myModalbasket" id="modalButton" class="hide">Click Me For A Modal</a>
+								<a href="#" data-reveal-id="myModalbasket" id="modalButton" class="hide"></a>
 
 								<div id="myModalbasket" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
 									<h2 id="modalTitle">Delete Item</h2>
@@ -313,7 +313,7 @@ $val = $_SESSION['user']->administrator;
 									<a class="close-reveal-modal" aria-label="Close"><i class="icon-icons_close"></i></a>
 								</div>
 
-								<a href="#" data-reveal-id="myModalcheck" id="modalCheckButton" class="hidden">Click Me For A Modal</a>
+								<a href="#" data-reveal-id="myModalcheck" id="modalCheckButton" class="hidden"></a>
 
 								<div id="myModalcheck" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
 									<h2 id="modalTitle">Credit or Debit Card</h2>
