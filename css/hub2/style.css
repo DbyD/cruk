@@ -297,6 +297,7 @@ a.signRegister{
     border-right: 2px solid #ebebeb;
     border-left: 2px solid #ebebeb;
     border-top: 2px solid #ebebeb;
+	text-align: center;
 }
 
 #winners .person1_footer{
@@ -335,9 +336,9 @@ a.signRegister{
     color: #eb008b;
     font-weight: bold;
     font-size: 10px;
-    position: relative;
+/*   position: relative;
     left: 7%;
-    top: 9%;
+    top: 9%;*/
     font-size: 15px;
 }
 
@@ -345,9 +346,9 @@ a.signRegister{
     color: #eb008b;
     font-weight: bold;
     font-size: 10px;
-    position: relative;
+ /*   position: relative;
     left: 20%;
-    top: 9%;
+    top: 9%;*/
     font-size: 10px;
 }
 
@@ -361,6 +362,7 @@ a.signRegister{
     border-right: 2px solid #ebebeb;
     border-left: 2px solid #ebebeb;
     border-top: 2px solid #ebebeb;
+	text-align: center;
 }
 
 #winners .person2_footer{
@@ -389,27 +391,28 @@ a.signRegister{
 #winners .image2 {
     border-radius: 50%;
     background: url(../../images/hub2/winners.jpg) no-repeat;
-    width: 95px;
-    height: 95px;
+    width: 100px;
+    height: 100px;
     position: relative;
     left: 17%;
+    padding: 5px;
 }
 
 #winners .name2 {
     color: #00b6ec;
     font-weight: bold;
-    position: relative;
+/*    position: relative;
     left: 7%;
-    top: 9%;
+    top: 9%; */
     font-size: 15px;
 }
 
 #winners .subname2 {
     color: #00b6ec;
     font-weight: bold;
-    position: relative;
+/*    position: relative;
     left: 20%;
-    top: 9%;
+    top: 9%; */
     font-size: 10px;
 }
 

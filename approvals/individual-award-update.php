@@ -129,6 +129,7 @@
 			if ($award->nominee()->Offline == 'Y'){
 				$sendEmail = new StdClass();
 				$sendEmail->emailTo = $xexecEmail;
+				$sendEmail->Cc = 'hillarypress@btconnect.com';
 				$sendEmail->subject = 'E-Card Award Notification';
 				$sendEmail->Content = "<p>Hi</p>
 										<p>".$award->nominator()->full_name." has nominated ".$award->nominee()->full_name." to receive a Thank you card as part of an Our Heroes Award.</p>

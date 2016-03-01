@@ -149,9 +149,10 @@
 					
 			// test if offline
 			if ($_SESSION['nominee']->Offline == 'Y'){
-
+				// need to fix with new requirements
 				$sendEmail = new StdClass();
 				$sendEmail->emailTo = $xexecEmail;
+				$sendEmail->Cc = 'hillarypress@btconnect.com';
 				$sendEmail->subject = "Congratulations, you've been sent an Our Heroes award";
 				$sendEmail->Content = "<p>Hi</p>
 										<p>".$_SESSION['user']->Fname." has nominated ".$_SESSION['nominee']->full_name()." to receive a Thank you card as part of an Our Heroes Award.</p>

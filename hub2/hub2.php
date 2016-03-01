@@ -73,7 +73,7 @@ include '../inc/config.php';
 								<div class="person1">
 									<div class="image"></div>
 									<div class="image1" style="background: url(../'.$photo.') no-repeat; background-size: 100px 100px;"></div>
-									<div class="name1">&nbsp;&nbsp; '.$nomineeName.'</div>
+									<div class="name1">'.$nomineeName.'</div>
 									<div class="subname1">'.$nominee->Department.'</div>
 								</div>
 								<div class="person1_footer">
@@ -99,7 +99,7 @@ include '../inc/config.php';
 								<div class="person2">
 									<div class="image"></div>
 									<div class="image2" style="background: url(../'.$photo.') no-repeat; background-size: 100px 100px;"></div>
-									<div class="name2">&nbsp;&nbsp;&nbsp;&nbsp;'.$nomineeName.'</div>
+									<div class="name2">'.$nomineeName.'</div>
 									<div class="subname2">'.$nominee->Department.'</div>
 								</div>
 

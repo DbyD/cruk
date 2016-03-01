@@ -201,6 +201,7 @@
 						// they in a shop so considered offline. need to fix email with all requirements. will need to get wording from Jamie
 						$sendEmail = new StdClass();
 						$sendEmail->emailTo = $xexecEmail;
+						$sendEmail->Cc = 'hillarypress@btconnect.com';
 						$sendEmail->subject = 'E-Card Award Notification';
 						$sendEmail->Content = "<p>Hi</p>
 												<p>".$_SESSION['user']->Fname." has nominated ".$_SESSION['teamnominee']->full_name." to receive a Thank you card as part of an Our Heroes Award.</p>
