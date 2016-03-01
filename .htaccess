@@ -1,0 +1,6 @@
+Options +FollowSymLinks
+RewriteEngine On
+
+#RewriteCond %{HTTP_HOST}
+RewriteCond %{HTTP_HOST} !^ourheroes.cruk.org$ [NC]
+RewriteRule ^(.*)$ https://ourheroes.cruk.org:9443/$1 [L,R=301]
