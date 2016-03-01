@@ -12,7 +12,7 @@
 <?php require_once 'inc/config.php'; ?>
 
 <div class="row white">
-	<div class="logo"></div>
+	<div class="logo clickable" href="/"></div>
 </div>
 
 <div class="container bigImage">
@@ -36,7 +36,7 @@
 				}
 				?>
 				<div class="form-group">
-				  <label for="username">Username:</label>
+				  <label for="username">Username (employee number or email address)</label>
 				  <input type="text" class="form-control" name="username" id="username">
 				</div>
 
@@ -45,8 +45,10 @@
 				  <input type="password" class="form-control" name="password" id="password">
 				</div>
 
-				<button type="submit" class="btn btn-lg signin">Login</button>
+				<button type="submit" class="btn btn-lg signin">Sign In</button>
 			</form>
+			<div class="col-md-6 noPadding"><a href="?register" class="signRegister">Register</a></div>
+			<div class="col-md-6 noPadding"><a href="?forgot" class="signRegister">Forgot Password</a></div>
 			<p style="font-size: 12px"> By registering or signing in you agree to the <br> <b><u><a href="terms-conditions.php" target="_default">Terms and Conditions</a></u></b></p>
 		</div>
 		<?php
@@ -74,7 +76,7 @@
 					echo '
 						<div class="alert alert-success">
 						  Thank you for your registration. <br>
-						  A confirmation email has been sent to your CRUK email address. <br>
+						  A confirmation email has been sent to your email address. (If you do not have a CRUK email address, the email will have been sent to the address you entered on registration).<br>
 						  <strong>Please check your mailbox for an Activation email.</strong>
 						</div>
 					';

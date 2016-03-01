@@ -67,7 +67,10 @@
     width: 100%;
 	background: none center;*/
 }
-
+label{
+	font-weight: normal;
+	font-style: normal;
+}
 #optionBox {
     background-color: white;
 /*    height: 200px; 
@@ -79,14 +82,14 @@
 #optionBox p{
     color: black;
     font-size: 16px;
-    padding: 10px;
+    padding: 10px 0;
 }
 
 #optionBox .register{
     background-color: black;
     color: white;
     border-radius: 0px;
-    width: 40%;
+    width: 45%;
 }
 
 #optionBox .signin{
@@ -94,7 +97,7 @@
     color: black;
     border-radius: 0px;
     border: 1px solid black;
-    width: 40%;
+    width: 45%;
 }
 
 #discountsBox {
@@ -165,16 +168,23 @@
 #loginBox p{
     color: black;
     font-size: 25px;
-    padding: 10px;
+    padding: 10px 0;
 }
 
 #loginBox .signin{
     background-color: black;
     color: white;
     border-radius: 0px;
-    width: 40%;
+    width: 100%;
 }
-
+.noPadding{
+	padding: 2px 0 10px;
+}
+a.signRegister{
+	color: #000;
+	font-size: 11px;
+	text-decoration: underline;
+}
 #registerBox {
     background-color: white;
     height: 400px;
