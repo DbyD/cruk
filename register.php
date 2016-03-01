@@ -14,7 +14,7 @@ function sendActivation($email, $EmpNum)
 	$sendEmail->emailTo = $email;
 	$sendEmail->subject = "CRUK Website activation";
 	$sendEmail->Content ='<p>Hi,<p>
-					<p>Please click on the link to activate your account. Please <a href="'.HTTP_PATH.'hub2/activate.php?activate=yes&EmpNum='.$encrypt->encode($EmpNum).'">click here</a> to activate your account</p>' ;
+					<p>Please click on the link to activate your account. Please <a href="'.HTTP_PATH.'activate.php?activate=yes&EmpNum='.$encrypt->encode($EmpNum).'">click here</a> to activate your account</p>' ;
 	$reply = sendEmail($sendEmail,'');
 
 	if($reply == "success")
@@ -64,7 +64,7 @@ if($_POST["empNum"] && isset($_POST['password']))
 		echo "Sending activation email";
 
 		// update password and send email to activate
-		$stmt = $db->prepare('UPDATE tblempall SET sPassword = :sPassword, Eaddress = :email WHERE EmpNum = :EmpNum');
+		$stmt = $db->prepare('UPDATE tblempall SET sPassword = :sPassword WHERE EmpNum = :EmpNum');
 		$stmt->execute(array(':EmpNum' => $EmpNum,':sPassword' => $password));
 
 		sendActivation($user->Eaddress, $EmpNum);
@@ -73,6 +73,10 @@ if($_POST["empNum"] && isset($_POST['password']))
 else 
 if(isset($_POST['email']) && isset($_POST['empNum']))
 {
+	// update the email and send email to activate
+	$stmt = $db->prepare('UPDATE tblempall SET Eaddress = :email WHERE EmpNum = :EmpNum');
+	$stmt->execute(array(':EmpNum' => $EmpNum,':email' => $_POST['email']));
+
 	echo "Sending activation 2";
 	sendActivation($_POST['email'], $_POST['empNum']);
 }

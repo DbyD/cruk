@@ -9,11 +9,11 @@
 		$stmt = $db->prepare('UPDATE tblempall SET activated=1 WHERE EmpNum = :EmpNum');
 		if($stmt->execute(array(':EmpNum' => $retrunEmpNum)))
 		{
-			header( 'Location: ?activated');
+			header( 'Location: index.php?activated');
 		}
 		 else 
 		 {
-			header( 'Location: ?notactivated');
+			header( 'Location: index.php?notactivated');
 		}
 	}
 ?>
