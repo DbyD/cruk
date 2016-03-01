@@ -1,3 +1,24 @@
+/* @index.php coded by Alec */
+.index { 
+  background: url(../../images/login-bg.jpg) no-repeat fixed center center; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+.row{
+	margin-left: auto;
+	margin-right: auto;
+}
+.footer{
+	position: fixed;
+	bottom: 0;
+	background: #fff;
+	width: 100%;
+}
+.col-md-2 {
+    width: auto;
+}
 /* @login.php coded by Adrian */
 @media only screen and (min-width: 1024px) 
 {
@@ -19,8 +40,10 @@
 
 .branding{
     padding: 10px;
-    font-size: 18px;
-    margin-left: 60%;
+/*    font-size: 18px;
+    margin-left: 60%; */
+    margin-left: 10%;
+    font-size: 12px;
 }
 
 .logo {
@@ -30,22 +53,23 @@
 }
 
 .bigImage {
-    background: url(../../images/hub2/bigImage.png) no-repeat;
+ /*   background: url(../../images/hub2/bigImage.png) no-repeat;
     height: 680px;
     width: 100%;
-    background-position: center; 
+	background: none center;*/
 }
 
 #optionBox {
     background-color: white;
-    height: 200px;
-    margin-top: 5%;
+/*    height: 200px; 
+    margin-top: 5%; */
+    margin-top: 10%;
+    padding: 3%;
 }
 
 #optionBox p{
     color: black;
-    font-weight: bold;
-    font-size: 15px;
+    font-size: 16px;
     padding: 10px;
 }
 
@@ -68,28 +92,29 @@
     background-color: white;
     height: 200px;
     margin-top: 10%;
+    width: 25%;
+	text-align: center;
 }
 
 #discountsBox .image{
     width: 100%;
     height: 83px;
-    background: url(../../images/hub2/your_rewards.png) no-repeat;
-    margin-left: 20%;
+    background: url(../../images/Your-Rewards.png) no-repeat center 15px;
+    background-size: 180px
 }
 
 #discountsBox .go{
     background-color: black;
     color: white;
     border-radius: 0px;
-    width: 40%;
-    margin-left: 25%;
+    width: 60%;
 }
 
 #discountsBox p{
     color: black;
-    font-weight: bold;
-    font-size: 15px;
+    font-size: 16px;
     padding: 10px;
+	text-align: left;
 }
 
 #heroesBox {
@@ -97,28 +122,29 @@
     height: 200px;
     margin-top: 10%;
     margin-left: 20px;
+    width: 25%;
+	text-align: center;
 }
 
 #heroesBox .image{
     width: 100%;
     height: 83px;
-    background: url(../../images/hub2/our_heroes.png) no-repeat;
-    margin-left: 20%;
+    background: url(../../images/our-heroes.svg) no-repeat center top;
+    background-size: 140px
 }
 
 #heroesBox .go{
     background-color: black;
     color: white;
     border-radius: 0px;
-    width: 40%;
-    margin-left: 25%;
+    width: 60%;
 }
 
 #heroesBox p{
     color: black;
-    font-weight: bold;
-    font-size: 15px;
+    font-size: 16px;
     padding: 10px;
+	text-align: left;
 }
 
 #loginBox {
@@ -129,7 +155,6 @@
 
 #loginBox p{
     color: black;
-    font-weight: bold;
     font-size: 25px;
     padding: 10px;
 }
@@ -149,7 +174,6 @@
 
 #registerBox p{
     color: black;
-    font-weight: bold;
     font-size: 25px;
     padding: 10px;
 }
@@ -169,8 +193,9 @@
 
 #wrap {
     margin-top: 2%;
+    position: relative;
+    left: 3%;
 }
-
 #benefits {
     background-color: #ec008c;
 }
@@ -233,7 +258,7 @@
 
 #winners .person1_footer{
     position: relative;
-    left: 12%;
+    left: 15%;
     background-color: #eb008b;
     color: #ffffff;
     width: 149px;
@@ -277,7 +302,7 @@
     position: relative;
     left: 20%;
     top: 9%;
-    font-size: 15px;
+    font-size: 10px;
 }
 
 #winners .person2 {
@@ -333,8 +358,9 @@
     position: relative;
     left: 20%;
     top: 9%;
-    font-size: 15px;
+    font-size: 10px;
 }
+
 
 #winners .footer {
     background-color: #ffffff;
