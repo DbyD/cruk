@@ -10,7 +10,7 @@
 	margin-left: auto;
 	margin-right: auto;
 }
-.footer{
+.loginfooter{
 	position: fixed;
 	bottom: 0;
 	background: #fff;
@@ -193,8 +193,8 @@
 
 #wrap {
     margin-top: 2%;
-    position: relative;
-    left: 3%;
+/*    position: relative;
+    left: 3%;*/
 }
 #benefits {
     background-color: #ec008c;

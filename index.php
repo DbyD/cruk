@@ -203,7 +203,7 @@
 	</div>
 </div>
 
-<div class="row footer">
+<div class="row loginfooter">
 <!--    <ul class="_footer nav navbar-nav">
       <li><a href="#">PRIVACY</a></li>
       <li><a href="#">TERMS</a></li>
