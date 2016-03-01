@@ -75,7 +75,7 @@ if(isset($_POST['email']) && isset($_POST['empNum']))
 {
 	// update the email and send email to activate
 	$stmt = $db->prepare('UPDATE tblempall SET Eaddress = :email WHERE EmpNum = :EmpNum');
-	$stmt->execute(array(':EmpNum' => $EmpNum,':email' => $_POST['email']));
+	$stmt->execute(array(':EmpNum' => $_POST['empNum'],':email' => $_POST['email']));
 
 	echo "Sending activation 2";
 	sendActivation($_POST['email'], $_POST['empNum']);
