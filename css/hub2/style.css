@@ -588,11 +588,22 @@ top: 60px;
     top: 45%;
     color: white;
 }
+@media only screen and (max-width: 1024px) 
+{}
+@media only screen and (min-width:990px) and (max-width: 1024px) {
+#financial p{
+	right: 8% !important;
+}
+	#financial .image{
+	    width: 62%;
+}
+}
 @media only screen and (max-width: 400px) 
 {
 	#financial .image{
 	    width: 62%;
 }
+
 #financial p{
 	right: 3%;
 }
@@ -607,9 +618,6 @@ top: 60px;
     top: -40px;
 }
 	}
-#cycle {
-    cursor: pointer;
-}
 
 #cycle .image {
     background: url(../../images/hub2/cycle.png) no-repeat;
@@ -620,7 +628,9 @@ top: 60px;
     background-size: cover;
     background-repeat: no-repeat;
 }
-
+#cycle {
+    cursor: pointer;
+}
 #cycle p {
     margin-left: 20px;
     margin-top: 15px;
