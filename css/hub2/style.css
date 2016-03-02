@@ -9,6 +9,8 @@
 .row{
 	margin-left: auto;
 	margin-right: auto;
+}
+#wrap .row{	
 	margin-bottom: 10px;
 }
 .loginfooter{
@@ -32,7 +34,7 @@
     .fixedWidth {
         width: 1000px;
     }
-}
+   }
 
 .white {
     background-color: white;
@@ -207,7 +209,59 @@ a.signRegister{
     border-radius: 0px;
     width: 40%;
 }
+@media only screen and (max-width: 1024px) 
+{
+	.logo{
+	margin-left: 0;
+}
+    #discountsBox, #heroesBox{
+	width: 40%;
+	display: inline-block;
+	margin-top: 5%;
+	margin-left: 2%;
+}
+#optionBox{
+	margin-top: 5%;
+	    width: 60%;
+}
+#loginBox{
+	height: auto;
+}
+#loginBox .col-md-6{
+	display: inline-block;
+	width: 48%;
+}
+#wrap .col-md-6{
+	margin-bottom: 10px;
+}
+}
+@media only screen and (min-width:480px) and (max-width: 1024px) {
 
+.form-group {
+    width: 49%;
+    display: inline-block;
+}
+#financial p{
+	right: 16% !important;
+}
+}
+@media only screen and (max-width: 480px){
+	
+	.logo{
+	background-size: 98%;
+    background-position: 0 5px;
+    height: 60px;
+}
+	#optionBox{
+	margin-top: 10%;
+	    width: 90%;
+}
+
+    #discountsBox, #heroesBox{
+	width: 80%;
+	margin-top: 10%;
+}
+}
 /* @hub2.php coded by Adrian */
 .boxed {
     border: 1px solid #d8d8d8;
@@ -265,18 +319,18 @@ a.signRegister{
 
 #winners .star {
     background: url(../../images/hub2/star.png) no-repeat;
-background-size: 30px 30px;
-background-position: center;
-width: 30px;
-height: 30px;
-position: absolute;
-top: 11%;
-right: 8%;
-text-align: center;
-color: white;
-font-size: 10px;
-line-height: 30px;
-padding-left: 0px;
+	background-size: 30px 30px;
+	background-position: center;
+	width: 30px;
+	height: 30px;
+	position: absolute;
+	top: 11%;
+	right: 8%;
+	text-align: center;
+	color: white;
+	font-size: 10px;
+	line-height: 30px;
+	padding-left: 0px;
 }
 #winners .header {
     background-color: #2e008b;
@@ -402,7 +456,7 @@ padding-left: 0px;
 	display: none;
 	}
 	#winners .star {
-top: 12%;
+top: 60px;
 }
 }
     
@@ -541,6 +595,16 @@ top: 12%;
 }
 #financial p{
 	right: 3%;
+}
+#winners .footer{
+	clear: both;
+}
+#winners .footer .text{
+	    padding: 5px 40px 5px 5px;
+}
+#winners .footer .plus {
+    left: 95%;
+    top: -40px;
 }
 	}
 #cycle {
