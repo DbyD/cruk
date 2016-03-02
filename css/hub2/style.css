@@ -9,6 +9,7 @@
 .row{
 	margin-left: auto;
 	margin-right: auto;
+	margin-bottom: 10px;
 }
 .loginfooter{
 	position: fixed;
@@ -23,7 +24,7 @@
 	cursor: pointer;
 }
 .panel{
-	margin-bottom: 10px;
+	margin-bottom: 0px;
 }
 /* @login.php coded by Adrian */
 @media only screen and (min-width: 1024px) 
@@ -250,9 +251,9 @@ a.signRegister{
     background: url(../../images/hub2/pensions.png) no-repeat;
     background-position: center;
     height: 164px;
-    width: 100%;
     background-size: cover;
     background-repeat: no-repeat;
+    margin: 0 1% 1%;
 }
 
 #pensions p {
@@ -488,7 +489,7 @@ top: 12%;
 #childcare .image {
     background: url(../../images/hub2/childcare.png) no-repeat;
     background-position: center;
-    height: 200px;
+    height: 204px;
     padding: 20px;
     background-size: cover;
     background-repeat: no-repeat;
@@ -510,7 +511,7 @@ top: 12%;
 
 #financial .image {
     background: url(../../images/hub2/financial_advice.png) no-repeat;
-    height: 204px;
+    height: 202px;
     width: 100%;
     position: relative;
     /* left: -15px; */

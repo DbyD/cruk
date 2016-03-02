@@ -168,7 +168,7 @@ include '../inc/config.php';
 	<!-- Start Third Row -->
 	<div class="row fixedWidth">
 		<div class="col-md-6">
-			<div id="financial" class="clickable" href="https://crukip.cancerresearchuk.org/portal/server.pt/community/benefits_and_your_finance%2C_health_and_wellbeing/594/financial_advice_and_information/35069">
+			<div id="financial" class="boxed clickable" href="https://crukip.cancerresearchuk.org/portal/server.pt/community/benefits_and_your_finance%2C_health_and_wellbeing/594/financial_advice_and_information/35069">
 				<p>Financial Advice<br>and<br>Information</p>
 				<div class="image"></div>
 				<div class="icon"></div>
