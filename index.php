@@ -218,6 +218,7 @@
 		<?php
 		}
 		else
+		if(isset($_SESSION['user']))
 		{
 		//display the 2 boxes
 		?>

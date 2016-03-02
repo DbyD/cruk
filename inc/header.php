@@ -1,4 +1,4 @@
-<?php if(isset($_SESSION['user']) === false){ header("Location: ".HTTP_PATH."index.php"); } ?>
+<?php if(!isset($_SESSION['user'])){ header("Location: ".HTTP_PATH."index.php"); } ?>
 <!doctype html>
 <html class="no-js" lang="en">
 <head>
