@@ -133,7 +133,7 @@ include '../inc/config.php';
 
 	<!-- Start Second Row -->
 	<div class="row fixedWidth">
-		<div id="hrquestions" class="col-md-3 clickable" href="mailto:info@hr.cruk.com">
+		<div id="hrquestions" class="col-md-3 clickable" href="mailto:hrservicecentre@cancer.org.uk">
 			<div class="boxed">			
 				<div class="header">
 					Any Questions <br>
@@ -143,8 +143,7 @@ include '../inc/config.php';
 				<div class="phone"></div>
 
 				<div class="subheader">
-					Call 0202251866 <br>
-					or Email info@hr.cruk.com
+					Call 0203 469 8220 <br>or Email<br>hrservicecentre@cancer.org.uk
 				</div>
 			</div>
 		</div>
@@ -165,7 +164,6 @@ include '../inc/config.php';
 		</div>
 	</div>
 	<!-- End Second Row -->
-	<br>
 
 	<!-- Start Third Row -->
 	<div class="row fixedWidth">

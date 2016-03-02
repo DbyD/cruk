@@ -22,6 +22,9 @@
 .clickable{
 	cursor: pointer;
 }
+.panel{
+	margin-bottom: 10px;
+}
 /* @login.php coded by Adrian */
 @media only screen and (min-width: 1024px) 
 {
@@ -31,13 +34,6 @@
 }
 
 @media only screen and (max-width: 1024px)
-{
-    #winners .person1_footer
-    {
-        left: 14.4% !important;
-    }
-}
-
 .white {
     background-color: white;
 }
@@ -229,11 +225,11 @@ a.signRegister{
 }
 
 #benefits .image {
-    background: url(../../images/hub2/benefits.png) no-repeat;
+    background: url(../../images/hub2/benefits.png) no-repeat right;
     height: 229px;
     width: 100%;
     position: relative;
-    left: 50%;
+    right: 0;
     /* border-right: 1px solid #959595; */
 }
 
@@ -244,6 +240,7 @@ a.signRegister{
     top: 3%;
     font-weight: bold;
     color: white;
+    z-index: 1;
 }
 
 #pensions {
@@ -255,6 +252,8 @@ a.signRegister{
     background-position: center;
     height: 164px;
     width: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 #pensions p {
@@ -266,33 +265,35 @@ a.signRegister{
 
 #winners .star {
     background: url(../../images/hub2/star.png) no-repeat;
-    background-size: 25px 25px;
-    background-position: center;
-    width: 25px;
-    height: 25px;
-    position: absolute;
-    top: 11%;
-    right: 8%;
-    text-align: center;
-    color: white;
-    font-size: 8px;
-    line-height: 29px;
-    padding-left: 2px;
+background-size: 30px 30px;
+background-position: center;
+width: 30px;
+height: 30px;
+position: absolute;
+top: 11%;
+right: 8%;
+text-align: center;
+color: white;
+font-size: 10px;
+line-height: 30px;
+padding-left: 0px;
 }
 #winners .header {
     background-color: #2e008b;
     color: #ffffff;
-    font-weight: bold;
     font-size: 17px;
     text-align: left;
     padding: 13px;
+    position: relative;
 }
 
 #winners .header .image {
     background: url(../../images/hub2/our_heroes.png) no-repeat;
     height: 38px;
     width: 86px;
-    float: right;
+    position: absolute;
+    top: 8px;
+    right: 0;
 }
 
 #winners .person1 {
@@ -383,12 +384,28 @@ a.signRegister{
 
 #winners .body p{
     color: #2f008c;
-    font-weight: bold;
     font-size: 15px;
     margin-left: 21px;
     padding-top: 5px;
 }
 
+@media only screen and (max-width: 400px) 
+{
+    #winners .person1 {
+    width: 100%;
+        margin: 0 0 10px;
+    }
+    #winners .header{
+	margin-bottom: 10px;
+}
+    #winners .header .image {
+	display: none;
+	}
+	#winners .star {
+top: 12%;
+}
+}
+    
 .BeBrave i,.BeBrave .name1, .BeBrave .subname1 {
 	color: #ec008c !important;
 }
@@ -421,17 +438,16 @@ a.signRegister{
 }
 
 #hrquestions .phone {
-    height: 111px;
+    height: 100px;
     background: url(../../images/hub2/phone.png) no-repeat;
     background-position: center; 
 }
 
 #hrquestions .subheader {
     color: #2e008b;
-    font-weight: bold;
     font-size: 14px;
     text-align: center;
-    padding: 10px;
+	padding: 7px 0;
 }
 
 #health {
@@ -444,6 +460,8 @@ a.signRegister{
     padding: 20px;
     margin: 1%;
     background-position: center; 
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 #health p {
@@ -473,6 +491,8 @@ a.signRegister{
     background-position: center;
     height: 200px;
     padding: 20px;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 #childcare p {
@@ -498,23 +518,31 @@ a.signRegister{
 }
 
 #financial .icon{
-    background: url(../../images/hub2/financial_icon.png) no-repeat;
+    background: url(../../images/hub2/financial_icon.png) no-repeat right;
     height: 50px;
     width: 100%;
     position: absolute;
     top: 9px;
-    left: 84%
+    right: 20px
 }
 
 #financial p{
     font-size: 16px;
     text-align: center;
     position: absolute;
-    left: 70.5%;
+    right: 6%;
     top: 45%;
     color: white;
 }
-
+@media only screen and (max-width: 400px) 
+{
+	#financial .image{
+	    width: 62%;
+}
+#financial p{
+	right: 3%;
+}
+	}
 #cycle {
     cursor: pointer;
 }
@@ -525,6 +553,8 @@ a.signRegister{
     height: 153px;
     padding: 20px;
     margin: 1%;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 #cycle p {
@@ -568,4 +598,8 @@ a.signRegister{
     background: url(../../images/hub2/tastecard.png) no-repeat;
     background-position: center;
     height: 122px;
+}
+.col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12{
+	padding-right: 5px;
+	padding-left: 5px;
 }
