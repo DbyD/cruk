@@ -49,7 +49,7 @@
 			<ul class="right">
 				<li class="has-dropdown"><a href="#"><span>Options</span> <i class="icon-icons_exit"></i></a>
 					<ul class="dropdown">
-						<li class="yourrewards"><a href="http://yourrewards.cruk.org">Your Rewards</a></li>
+						<li class="yourrewards"><a href="https://cruk3.xexec.com">Your Rewards</a></li>
 						<li><a href="<?=HTTP_PATH?>terms.php">Terms & Conditions</a></li>
 						<li><a href="<?=HTTP_PATH?>inc/logout.php">Logout</a></li>
 					</ul>
@@ -71,7 +71,7 @@
 			<ul class="off-canvas-list">
 				<li><?php include 'portfolio.php'; ?></li>
 				<?php include 'menu.php'; ?>
-				<li class="yourrewards clickAble" data-type="gourl" data-url="http://yourrewards.cruk.org">Your Rewards</li>
+				<li class="yourrewards clickAble" data-type="gourl" data-url="https://cruk3.xexec.com">Your Rewards</li>
 				<li class="clickAble" data-type="gourl" data-url="<?=HTTP_PATH?>terms.php">Terms & Conditions</li>
 				<li class="clickAble" data-type="gourl" data-url="<?=HTTP_PATH?>inc/logout.php">Logout</li>
 			</ul>
