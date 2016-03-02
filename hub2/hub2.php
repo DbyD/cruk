@@ -31,7 +31,7 @@ include '../inc/config.php';
 		</div>
 
 		<div class="col-md-6">
-			<div class="callout panel clickable" href="../winners-wall/index.php" id="winners">
+			<div class="callout panel clickable" href="https://ourheroes.cruk.org/home.php" id="winners">
 				<div class="header">
 					The Our Heroes recognition portal<div class="image"></div>
 				</div>
