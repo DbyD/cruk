@@ -16,7 +16,7 @@
 	<?php
 	if(isset($_SESSION['user']))
 	{
-		echo '<button class="btn btn-lg go clickable" href="logout.php">Logout</button>';
+		echo '<button class="btn btn-lg go clickable" style="display:none;" href="inc/logout.php">Logout</button>';
 	}
 	?>
 	</div>
