@@ -62,13 +62,13 @@
     margin-left: 20%;
 }
 
-.logo button{
-    margin-left: 42%;
-    margin-top: 1%;
-    width: 12% !important;
+.logout {
     background-color: black;
     color: white !important;
     border-radius: 0px;
+    float: right;
+    margin-top: 1.5%;
+    margin-right: 54%;
 }
 
 .bigImage {
@@ -220,30 +220,42 @@ a.signRegister{
 }
 @media only screen and (max-width: 1024px) 
 {
-	.logo{
-	margin-left: 0;
+	.logo
+    {
+	   margin-left: 0;
+    }
+
+    #discountsBox, #heroesBox
+    {
+    	width: 40%;
+    	display: inline-block;
+    	margin-top: 5%;
+    	margin-left: 2%;
+    }
+
+    #optionBox
+    {
+    	margin-top: 5%;
+    	width: 60%;
+    }
+
+    #loginBox
+    {
+    	height: auto;
+    }
+
+    #loginBox .col-md-6
+    {
+    	display: inline-block;
+    	width: 48%;
+    }
+
+    #wrap .col-md-6
+    {
+	   margin-bottom: 10px;
+    }
 }
-    #discountsBox, #heroesBox{
-	width: 40%;
-	display: inline-block;
-	margin-top: 5%;
-	margin-left: 2%;
-}
-#optionBox{
-	margin-top: 5%;
-	    width: 60%;
-}
-#loginBox{
-	height: auto;
-}
-#loginBox .col-md-6{
-	display: inline-block;
-	width: 48%;
-}
-#wrap .col-md-6{
-	margin-bottom: 10px;
-}
-}
+
 @media only screen and (min-width:480px) and (max-width: 1024px) {
 
 .form-group {
@@ -256,21 +268,26 @@ a.signRegister{
 }
 @media only screen and (max-width: 480px){
 	
-	.logo{
-	background-size: 98%;
-    background-position: 0 5px;
-    height: 60px;
-}
-	#optionBox{
-	margin-top: 10%;
-	    width: 90%;
+	.logo
+    {
+    	background-size: 98%;
+        background-position: 0 5px;
+        height: 60px;
+    }
+
+	#optionBox
+    {
+	   margin-top: 10%;
+	   width: 90%;
+    }
+
+    #discountsBox, #heroesBox
+    {
+    	width: 80%;
+    	margin-top: 10%;
+    }
 }
 
-    #discountsBox, #heroesBox{
-	width: 80%;
-	margin-top: 10%;
-}
-}
 /* @hub2.php coded by Adrian */
 .boxed {
     border: 1px solid #d8d8d8;
@@ -597,6 +614,42 @@ top: 60px;
     top: 45%;
     color: white;
 }
+@media only screen and (max-width: 1834px) 
+{
+     .logout {
+        background-color: black;
+        color: white !important;
+        border-radius: 0px;
+        float: right;
+        margin-top: 1.5%;
+        margin-right: 37%;
+    }   
+}
+
+@media only screen and (max-width: 1281px) 
+{
+     .logout {
+        background-color: black;
+        color: white !important;
+        border-radius: 0px;
+        float: right;
+        margin-top: 1.5%;
+        margin-right: 30%;
+    }   
+}
+
+@media only screen and (max-width: 1163px) 
+{
+     .logout {
+        background-color: black;
+        color: white !important;
+        border-radius: 0px;
+        float: right;
+        margin-top: 1.5%;
+        margin-right: 25%;
+    }   
+}
+
 @media only screen and (max-width: 1024px) 
 {}
 @media only screen and (min-width:990px) and (max-width: 1024px) {

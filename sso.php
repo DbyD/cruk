@@ -19,7 +19,14 @@ if(isset($_GET['id']) && isset($_GET['date']) && isset($_GET['sig']))
 		$stmt->setFetchMode(PDO::FETCH_CLASS, 'User');
 
 		if ($user = $stmt->fetch())
-		{
+		{	
+			//if the user is not activated, let's activate him
+			if($user->activated == 0)
+			{
+				$rs = $db->prepare("UPDATE tblempall SET activated = '1' WHERE EmpNum LIKE :EmpNum");
+				$rs->execute(array(":EmpNum" => $user->EmpNum));
+			}
+			
 			$_SESSION['user'] = $user;
 			header( 'Location: ../home.php');
 		}

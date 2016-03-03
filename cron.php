@@ -171,9 +171,9 @@ if(isset($_POST['su_approver']))
 
 		$email = new StdClass();
 		$email->emailTo = $SuperUsers;
-		$email->subject = "CRUK Website password reminder";
+		$email->subject = "SU Update Approver column";
 		$email->Content = '<p>Hi '.$employee->Fname.'<p>
-							<pYou have money in your account to spend!</p>';
+							<p>Update Approver column in Staff Data list!</p>';
 
 		sendEmail($email);
 	}
@@ -186,6 +186,6 @@ if(isset($_POST['budget_notifications']))
 {
 	if(quarterCheck())
 	{
-		
+
 	}
 }

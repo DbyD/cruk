@@ -13,12 +13,14 @@
 
 <div class="row white">
 	<div class="logo">
-	<?php
-	if(isset($_SESSION['user']))
-	{
-		echo '<button class="btn btn-lg go clickable" style="display:none;" href="inc/logout.php">Logout</button>';
-	}
-	?>
+		<?php
+		if(isset($_SESSION['user']))
+		{
+			echo '
+				<button class="btn logout clickable" href="inc/logout.php">Logout</button>
+			';
+		}
+		?>
 	</div>
 
 </div>
@@ -232,14 +234,34 @@
 		?>
 		<div class="col-md-2 col-md-offset-3" id="discountsBox">
 			<p>Discounts &amp; Benefits</p>
-
 			<div class="image"></div>
 			<?php 
-				$secret = '49%wAjqQYHF5v(S@';
-				//prepare signature
-				$signature = md5(date("YmdHis").'|'.$_SESSION['user']->Eaddress.'|'.$secret);
+				$version = 1;
+				if($version == 2)
+				{
+					$id = $_SESSION['user']->EmpNum;
+					$firstname = $_SESSION['user']->Fname;
+					$lastnme = $_SESSION['user']->Sname;
+					$email = $_SESSION['user']->Eaddress;
+					$date = date("YmdHis");
+					$secret = '49%wAjqQYHF5v(S@';
+					$signature = md5(date("YmdHis").'|'.$id.'|'.$secret.'|'.$email.'|'.$firstname.'|'.$lastname);
+
+					$call = "?id=$id&firstname=$firstname&lastname=$lastname&email=$email&date=$date&sig=$signature";
+				}
+				else
+				if($version == 1)
+				{
+					$email = $_SESSION['user']->Eaddress;
+					$date = date("YmdHis");
+					$secret = '49%wAjqQYHF5v(S@';
+					$signature = md5(date("YmdHis").'|'.$email.'|'.$secret);
+
+					$call = "?id=$email&date=$date&sig=$signature";
+				}
+				
 			?>
-			<button class="btn btn-lg go clickable" href="https://cruk3.xexec.com/sso/simple?id=<?php echo $_SESSION['user']->Eaddress; ?>&date=<?php echo date("YmdHis"); ?>&sig=<?php echo $signature; ?>">Go!</button>
+			<button class="btn btn-lg go clickable" href="https://yourrewards.cruk.org/sso/simple<?=$call?>">Go!</button>
 		</div>
 
 		<div class="col-md-2" id="heroesBox">

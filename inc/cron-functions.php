@@ -7,6 +7,15 @@ function autoApproveIndividualAward($id)
 	$rs = $db->prepare("UPDATE tblnominations WHERE id LIKE :id SET AprStatus = '1', AprDate = NOW()");
 	$rs->execute(array(":id" => $id));
 
+	//Add all the work awards to the nominee
+	for($i=1; $i<=3; $i++)
+	{
+		$stmt = $db->prepare("INSERT INTO tblworknominations(nominationID, workawardsID) VALUES (:nominationID, :workawardsID)");
+		$stmt->bindParam(':nominationID', $id);
+		$stmt->bindParam(':workawardsID', $i);
+		$stmt->execute();
+	}
+
 	//let's get all details we need for this nomination
 	$nomination = $db->prepare(
 		"SELECT n.BeliefID as BeliefID,
@@ -125,7 +134,6 @@ function function autoApproveTeamAward($id)
 
 	// loop to add awards to each person
 	$TeamMembers = $award->teamNominees();
-	print_r($TeamMembers);
 	foreach ($TeamMembers as $list)
 	{
 		$stmt = $db->prepare("INSERT INTO tblnominations(
