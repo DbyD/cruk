@@ -14,7 +14,7 @@ if(isset($_GET['id']) && isset($_GET['date']) && isset($_GET['sig']))
 	if($sig == md5($date.'|'.$email.'|'.$secret))
 	{
 		//log the user in
-		$stmt = $db->prepare('SELECT * FROM tblempall WHERE (EmpNum = :sUsername OR  Eaddress = :sUsername) AND activated=1 AND eligible=1');
+		$stmt = $db->prepare('SELECT * FROM tblempall WHERE (EmpNum = :sUsername OR  Eaddress = :sUsername)');
 		$stmt->execute(array('sUsername' => $email));
 		$stmt->setFetchMode(PDO::FETCH_CLASS, 'User');
 
@@ -26,7 +26,7 @@ if(isset($_GET['id']) && isset($_GET['date']) && isset($_GET['sig']))
 				$rs = $db->prepare("UPDATE tblempall SET activated = '1' WHERE EmpNum LIKE :EmpNum");
 				$rs->execute(array(":EmpNum" => $user->EmpNum));
 			}
-			
+
 			$_SESSION['user'] = $user;
 			header( 'Location: ../home.php');
 		}
