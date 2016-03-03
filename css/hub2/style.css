@@ -62,6 +62,15 @@
     margin-left: 20%;
 }
 
+.logo button{
+    margin-left: 42%;
+    margin-top: 1%;
+    width: 12% !important;
+    background-color: black;
+    color: white !important;
+    border-radius: 0px;
+}
+
 .bigImage {
  /*   background: url(../../images/hub2/bigImage.png) no-repeat;
     height: 680px;

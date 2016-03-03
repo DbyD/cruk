@@ -7,14 +7,19 @@
 		$award = getTeamNomination($ID);
 		print_r($award);
 		echo '<br><br>';
-		if($_POST['dReason'] == '') {
+		if($_POST['dReason'] == '') 
+		{
 			// update award
-			if($_SESSION['user']->EmpNum != $award->ApproverEmpNum){
+			if($_SESSION['user']->EmpNum != $award->ApproverEmpNum)
+			{
 				$stmt = $db->prepare("UPDATE tblnominations_team SET AprDate = NOW(), AprStatus = :AprStatus, AprSUEmpNum = :AprSUEmpNum WHERE ID = :ID");
 				$stmt->bindParam(':AprSUEmpNum', $_SESSION['user']->EmpNum);
-			} else {
+			} 
+			else 
+			{
 				$stmt = $db->prepare("UPDATE tblnominations_team SET AprDate = NOW(), AprStatus = :AprStatus WHERE ID = :ID");
 			}
+
 			$stmt->bindParam(':AprStatus', $a = 1);
 			$stmt->bindParam(':ID', $ID);
 			$stmt->execute();
@@ -22,7 +27,8 @@
 			// loop to add awards to each person
 			$TeamMembers = $award->teamNominees();
 			print_r($TeamMembers);
-			foreach ($TeamMembers as $list){
+			foreach ($TeamMembers as $list)
+			{
 				$stmt = $db->prepare("INSERT INTO tblnominations(
 								awardType, NominatorEmpNum, NominatedEmpNum, nomination_teamID, Volunteer, personalMessage, ApproverEmpNum,
 								littleExtra, amount, NomDate, AprDate, AprStatus, AwardClaimed, DateClaimed) 
@@ -36,11 +42,16 @@
 				$stmt->bindParam(':personalMessage', $award->personalMessage);
 				$stmt->bindParam(':ApproverEmpNum', $award->ApproverEmpNum);
 				$stmt->bindParam(':littleExtra', $award->littleExtra);
-				if($award->amount=='20pound'){
+
+				if($award->amount=='20pound')
+				{
 					$amount = 20;
-				} else {
+				} 
+				else 
+				{
 					$amount = 'Team Event';
 				}
+
 				$stmt->bindParam(':amount', $amount);
 				$stmt->bindValue(':NomDate', $award->NomDate, PDO::PARAM_NULL);
 				$stmt->bindParam(':AprStatus', $a = 1);
@@ -48,30 +59,37 @@
 				$stmt->execute();
 				
 				$teamEmailList .= getName($list->EmpNum).", ";
-				if(!isset($firstPerson)){
+				if(!isset($firstPerson))
+				{
 					$firstPerson = getName($list->EmpNum);
 				}
 			}
+
 			$teamEmailList = chop($teamEmailList,", ");
 			$teamEmailList = strrev(implode(strrev(' and'), explode(',', strrev($teamEmailList), 2)));
 			$award->teamEmailList = $teamEmailList;
 			echo $teamEmailList;
-//			exit;
+			//exit;
 			
 			// set approver if approver is SU
-			if($_SESSION['user']->EmpNum != $award->ApproverEmpNum){
+			if($_SESSION['user']->EmpNum != $award->ApproverEmpNum)
+			{
 				$approver_name = $_SESSION['user']->Fname.' '.$_SESSION['user']->Sname;
 				$approver_fname = $_SESSION['user']->Fname;
 				$approver_email = $_SESSION['user']->Eaddress;
-			} else {
+			} 
+			else 
+			{
 				$approver_name = $award->approver()->full_name;
 				$approver_fname = $award->approver()->Fname;
 				$approver_email = $award->approver()->Eaddress;
 			}
 				
 			// send email to nominator
-			if($award->ApproverEmpNum != $award->NominatorEmpNum){
-				if(filter_var($award->nominator()->Eaddress, FILTER_VALIDATE_EMAIL)){
+			if($award->ApproverEmpNum != $award->NominatorEmpNum)
+			{
+				if(filter_var($award->nominator()->Eaddress, FILTER_VALIDATE_EMAIL))
+				{
 					$sendEmail = new StdClass();
 					$sendEmail->emailTo = $award->nominator()->Eaddress;
 					$sendEmail->subject = 'Congratulations, your nomination has been approved';
@@ -85,14 +103,17 @@
 					$email = sendEmail($sendEmail,'T'.$ID);
 					$_SESSION['alreadydone'] = 'yes';
 					echo $sendEmail->Content;
-				} else {
+				} 
+				else 
+				{
 					$email = "fail";
 				}
 			} 
 			echo $email;
 			
 			// email to approver
-			if(filter_var($approver_email, FILTER_VALIDATE_EMAIL)){
+			if(filter_var($approver_email, FILTER_VALIDATE_EMAIL))
+			{
 				$sendEmail = new StdClass();
 				$sendEmail->emailTo = $approver_email;
 				$sendEmail->subject = "Confirmation of your approval for a 'Little Extra' award";
@@ -107,16 +128,22 @@
 			}
 			
 			
-			if ($award->Volunteer !='') {
+			if ($award->Volunteer !='') 
+			{
 				$award->NomFull_name = $award->Volunteer;
-			} else {
+			} 
+			else 
+			{
 				$award->NomFull_name = $award->nominator()->full_name;
 			}
+
 			$award->NomFname = $award->nominator()->Fname;
 			$award->firstPerson = $firstPerson;
+
 			//print_r($award);
 			// send email to nominee
-			foreach ($TeamMembers as $list){
+			foreach ($TeamMembers as $list)
+			{
 				$award->teamEmailList = $teamEmailList;
 				$award->Fname = $list->Fname;
 				$award->full_name = $list->Fname.' '.$list->Sname;
@@ -128,8 +155,10 @@
 				
 				$award->content = indEcardTeamExtraText($award);
 				echo $award->content;
-			// check if offline
-				if ($award->teamNominees()->Offline == 'Y'){
+
+				// check if offline
+				if ($award->teamNominees()->Offline == 'Y')
+				{
 					// they in a shop so considered offline. need to fix email with all requirements. will need to get from Jamie
 					$sendEmail = new StdClass();
 					$sendEmail->emailTo = $xexecEmail;
@@ -142,13 +171,18 @@
 					$email = sendEmail($sendEmail,'T'.$ID);
 					echo "offline email sent to xxexec";
 					$_SESSION['alreadydone'] = 'yes';
-				} else {
+				} 
+				else 
+				{
 					$award->Eaddress = $list->Eaddress;
-					if(filter_var($award->Eaddress, FILTER_VALIDATE_EMAIL)){
+					if(filter_var($award->Eaddress, FILTER_VALIDATE_EMAIL))
+					{
 						$award->subject = "Congratulations, your team has been sent an Our Heroes award with 'A Little Extra'";
 						$email = sendEcardEmail($award,'T'.$ID);
 						$_SESSION['alreadydone'] = 'yes';
-					} else {
+					} 
+					else 
+					{
 						$email = "fail";
 					}
 					echo $email;
@@ -156,24 +190,31 @@
 			}
 			
 			//return "approved";
-		} else {
-			
+		}
+		else 
+		{
 			// set approver if approver is SU
-			if($_SESSION['user']->EmpNum != $award->ApproverEmpNum){
+			if($_SESSION['user']->EmpNum != $award->ApproverEmpNum)
+			{
 				$approver_name = $_SESSION['user']->Fname.' '.$_SESSION['user']->Sname;
 				$approver_fname = $_SESSION['user']->Fname;
 				$approver_email = $_SESSION['user']->Eaddress;
-			} else {
+			} 
+			else 
+			{
 				$approver_name = $award->approver()->full_name;
 				$approver_fname = $award->approver()->Fname;
 				$approver_email = $award->approver()->Eaddress;
 			}
 			
 			// update award
-			if($_SESSION['user']->EmpNum != $award->ApproverEmpNum){
+			if($_SESSION['user']->EmpNum != $award->ApproverEmpNum)
+			{
 				$stmt = $db->prepare("UPDATE tblnominations_team SET dReason = :dReason, AprDate = NOW(), AprStatus = :AprStatus, AprSUEmpNum = :AprSUEmpNum WHERE ID = :ID");
 				$stmt->bindParam(':AprSUEmpNum', $_SESSION['user']->EmpNum);
-			} else {
+			} 
+			else 
+			{
 				$stmt = $db->prepare("UPDATE tblnominations_team SET dReason = :dReason, AprDate = NOW(), AprStatus = :AprStatus WHERE ID = :ID");
 			}
 			
@@ -182,7 +223,8 @@
 			$stmt->bindParam(':ID', $ID);
 			$stmt->execute();
 			
-			if(filter_var($award->nominator()->Eaddress, FILTER_VALIDATE_EMAIL)){
+			if(filter_var($award->nominator()->Eaddress, FILTER_VALIDATE_EMAIL))
+			{
 				$sendEmail = new StdClass();
 				$sendEmail->emailTo = $award->nominator()->Eaddress;
 				$sendEmail->subject = "Unfortunately your 'Little Extra' nomination has been declined";
@@ -197,11 +239,15 @@
 				$email = sendEmail($sendEmail,'T'.$ID);
 				//echo $sendEmail->Content;
 				$_SESSION['alreadydone'] = 'yes';
-			} else {
+			} 
+			else
+			{
 				$email = "fail";
 			}
+
 			// email to approver
-			if(filter_var($approver_email, FILTER_VALIDATE_EMAIL)){
+			if(filter_var($approver_email, FILTER_VALIDATE_EMAIL))
+			{
 				$sendEmail = new StdClass();
 				$sendEmail->emailTo = $approver_email;
 				$sendEmail->subject = "Confirmation that you declined a 'Little Extra' award";

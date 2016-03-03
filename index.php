@@ -12,7 +12,15 @@
 <?php require_once 'inc/config.php'; ?>
 
 <div class="row white">
-	<div class="logo clickable" href="/"></div>
+	<div class="logo">
+	<?php
+	if(isset($_SESSION['user']))
+	{
+		echo '<button class="btn btn-lg go clickable" href="logout.php">Logout</button>';
+	}
+	?>
+	</div>
+
 </div>
 
 <div class="container bigImage">
